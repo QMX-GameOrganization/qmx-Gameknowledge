@@ -1,0 +1,13 @@
+:root {
+  --sl-color-accent-low: #172554;
+  --sl-color-accent: #2563eb;
+  --sl-color-accent-high: #dbeafe;
+  --sl-font: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+[data-theme="light"] {
+  --sl-color-bg: #f8fafc;
+}
+
+.hero { padding-block: 3rem; }
+.sl-markdown-content img { border-radius: 0.75rem; }

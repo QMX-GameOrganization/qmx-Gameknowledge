@@ -1,13 +1,5 @@
 ---
-title: 欢迎来到游戏知识库
-date: 2026-10-02
-authors:
-  - studio
-categories:
-  - 公告
-tags:
-  - 知识库
-  - 工作室
+title: "欢迎来到游戏知识库"
 ---
 
 这里是工作室共同维护的游戏知识库。
