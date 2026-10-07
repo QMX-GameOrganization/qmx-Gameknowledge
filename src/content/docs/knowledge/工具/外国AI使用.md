@@ -1,4 +1,5 @@
-﻿title: 国外AI使用
+﻿---
+title: 国外AI使用
 description: 国外AI使用
 sidebar:
   label: 国外AI使用
