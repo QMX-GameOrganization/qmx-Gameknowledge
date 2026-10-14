@@ -1,6 +1,6 @@
 ---
-title: Minecraft 世界生成汇总
-description: Minecraft 世界生成源码学习与程序化生成记录
+title: Minecraft学习目录
+description: Minecraft主要整理章节，或者吐槽
 ---
 
 ## 系列目录
