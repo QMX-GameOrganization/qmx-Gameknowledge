@@ -72,7 +72,7 @@ body { background: var(--qmx-bg); background-image: linear-gradient(135deg, colo
 :root[data-qmx-theme="miku"] .sl-markdown-content a { color: var(--qmx-accent); text-shadow: 0 0 12px #39c5bb55; }
 :root[data-qmx-theme="miku"] .sl-markdown-content h1,
 :root[data-qmx-theme="miku"] .sl-markdown-content h2,
-:root[data-qmx-theme="miku"] .sl-markdown-content h3 { text-shadow: 2px 0 #ff6fae44; }
+:root[data-qmx-theme="miku"] .sl-markdown-content h3 { text-shadow: none; }
 :root[data-qmx-theme="miku"] .sl-markdown-content blockquote { border-inline-start-color: var(--qmx-accent-2); background: linear-gradient(90deg, #39c5bb14, #ff6fae10); }
 :root[data-qmx-theme="miku"] .sl-markdown-content pre { border-color: #39c5bb66; box-shadow: 0 0 28px #39c5bb18; }
 :root[data-qmx-theme="miku"] .sl-markdown-content::after { content: "♫  ♪  ♫"; display: block; margin: 3rem auto 0; color: var(--qmx-accent); font-size: 1.25rem; letter-spacing: .8rem; text-align: center; opacity: .65; }
