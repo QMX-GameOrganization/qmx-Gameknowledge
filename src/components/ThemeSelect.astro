@@ -1,9 +1,9 @@
 ---
 const presets = [
-  { id: "aurora", label: "极光", accent: "#38bdf8", accent2: "#a78bfa", radius: "18px", density: "comfortable" },
-  { id: "forest", label: "松林", accent: "#34d399", accent2: "#14b8a6", radius: "14px", density: "comfortable" },
-  { id: "sunset", label: "落日", accent: "#fb923c", accent2: "#f43f5e", radius: "12px", density: "compact" },
-  { id: "mono", label: "极简", accent: "#a1a1aa", accent2: "#52525b", radius: "8px", density: "compact" },
+  { id: "starry", label: "星夜", accent: "#71d7ff", accent2: "#9b8cff", radius: "18px", density: "comfortable" },
+  { id: "sakura", label: "春樱", accent: "#f472b6", accent2: "#fb7185", radius: "20px", density: "comfortable" },
+  { id: "summer", label: "夏日天气", accent: "#38bdf8", accent2: "#fbbf24", radius: "16px", density: "comfortable" },
+  { id: "pixel", label: "像素终端", accent: "#a3e635", accent2: "#22c55e", radius: "4px", density: "compact" },
 ];
 ---
 
@@ -48,7 +48,7 @@ const presets = [
 
 <script>
   const KEY = 'qmx-appearance-v2';
-  const defaults = { preset: 'aurora', accent: '#38bdf8', radius: '18px', density: 'comfortable', surface: 'solid', button: 'solid', width: 'narrow', wallpaper: '' };
+  const defaults = { preset: 'starry', accent: '#71d7ff', radius: '18px', density: 'comfortable', surface: 'solid', button: 'solid', width: 'narrow', wallpaper: '' };
   const root = document.documentElement;
   const load = () => { try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { ...defaults }; } };
   const state = load();
@@ -58,6 +58,7 @@ const presets = [
     root.style.setProperty('--qmx-accent', state.accent || selected.accent || defaults.accent);
     root.style.setProperty('--qmx-accent-2', selected.accent2 || '#a78bfa');
     root.style.setProperty('--qmx-radius', state.radius || selected.radius || '18px');
+    root.dataset.qmxTheme = state.preset || 'starry';
     root.dataset.qmxDensity = state.density || 'comfortable';
     root.dataset.qmxSurface = state.surface || 'solid';
     root.dataset.qmxButton = state.button || 'solid';

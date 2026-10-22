@@ -19,6 +19,10 @@
 
 body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-bg) 88%, transparent), color-mix(in srgb, var(--sl-color-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; }
 :root[data-qmx-wallpaper="on"] body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: color-mix(in srgb, var(--sl-color-bg) 52%, transparent); pointer-events: none; }
+:root[data-qmx-theme="starry"] body { background-color: #070d1b; background-image: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, #070d1b, #111a36 62%, #1b1738), var(--qmx-wallpaper); background-size: 180px 180px, 240px 240px, 130px 130px, auto, cover; }
+:root[data-qmx-theme="sakura"] body { background-color: #fff7fb; background-image: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, #fff7fb, #fff1f2 55%, #fce7f3), var(--qmx-wallpaper); background-size: 170px 170px, 230px 230px, auto, cover; }
+:root[data-qmx-theme="summer"] body { background-color: #effbff; background-image: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, #effbff, #dff6ff 52%, #fef3c7), var(--qmx-wallpaper); background-size: auto, auto, cover; }
+:root[data-qmx-theme="pixel"] body { background-color: #08100b; background-image: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, #08100b, #0c1b12), var(--qmx-wallpaper); background-size: 18px 18px, 18px 18px, auto, cover; image-rendering: pixelated; }
 .qmx-theme-select { display: flex; align-items: center; gap: .45rem; position: relative; }
 .qmx-mode-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .qmx-mode, .qmx-customizer summary { min-height: 2.1rem; border: 1px solid var(--sl-color-gray-5); border-radius: .55rem; padding: .35rem .55rem; background: var(--sl-color-bg-nav); color: inherit; font: inherit; font-size: .78rem; cursor: pointer; }
@@ -31,3 +35,6 @@ body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-col
 :root[data-qmx-button="outline"] .sl-link-button { background: transparent; border-color: var(--qmx-accent); color: var(--qmx-accent); }
 :root[data-qmx-button="glow"] .sl-link-button { box-shadow: 0 0 24px color-mix(in srgb, var(--qmx-accent) 42%, transparent); }
 :root[data-qmx-surface="glass"] .sl-markdown-content pre, :root[data-qmx-surface="glass"] .sl-markdown-content img { border-radius: var(--qmx-radius); box-shadow: 0 16px 50px #0003; }
+:root[data-qmx-theme="sakura"] .sl-markdown-content a { color: #db2777; }
+:root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 4px; }
+:root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
