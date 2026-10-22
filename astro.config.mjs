@@ -1,8 +1,5 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import { readFileSync } from "node:fs";
-
-const themeEnhancer = readFileSync(new URL("./src/scripts/theme-enhancer.js", import.meta.url), "utf8");
 
 export default defineConfig({
   site: "https://qmx-gameorganization.github.io",
@@ -16,7 +13,10 @@ export default defineConfig({
         root: { label: "简体中文", lang: "zh-CN" }
       },
       customCss: ["./src/styles/custom.css"],
-      head: [{ tag: "script", attrs: { type: "module" }, content: themeEnhancer }],
+      components: {
+        ThemeSelect: "./src/components/ThemeSelect.astro",
+        MobileMenuFooter: "./src/components/MobileMenuFooter.astro"
+      },
       social: [{
         icon: "github",
         label: "GitHub",

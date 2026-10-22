@@ -1,0 +1,75 @@
+---
+const presets = [
+  { id: "aurora", label: "极光", accent: "#38bdf8", accent2: "#a78bfa", radius: "18px", density: "comfortable" },
+  { id: "forest", label: "松林", accent: "#34d399", accent2: "#14b8a6", radius: "14px", density: "comfortable" },
+  { id: "sunset", label: "落日", accent: "#fb923c", accent2: "#f43f5e", radius: "12px", density: "compact" },
+  { id: "mono", label: "极简", accent: "#a1a1aa", accent2: "#52525b", radius: "8px", density: "compact" },
+];
+---
+
+<div class="qmx-theme-select">
+  <label class="qmx-mode-label" for="qmx-mode">外观</label>
+  <select id="qmx-mode" class="qmx-mode" aria-label="外观模式">
+    <option value="auto">跟随系统</option>
+    <option value="light">浅色</option>
+    <option value="dark">深色</option>
+  </select>
+  <details class="qmx-customizer">
+    <summary aria-label="打开自定义主题">自定义</summary>
+    <div class="qmx-popover" role="dialog" aria-label="自定义主题">
+      <div class="qmx-popover-head"><div><span class="qmx-eyebrow">APPEARANCE</span><strong>自定义主题</strong></div><span class="qmx-live-dot">LIVE</span></div>
+      <p class="qmx-popover-copy">选择一个基底，再按你的阅读习惯微调。</p>
+      <fieldset>
+        <legend>主题基底</legend>
+        <div class="qmx-presets">
+          {presets.map((preset) => <button type="button" class="qmx-preset" data-preset={preset.id} data-accent={preset.accent} data-accent2={preset.accent2} data-radius={preset.radius} data-density={preset.density}><i style={`--swatch:${preset.accent};--swatch-2:${preset.accent2}`}></i><span>{preset.label}</span></button>)}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>强调色</legend>
+        <div class="qmx-color-line"><input type="color" id="qmx-accent" aria-label="选择强调色" value="#38bdf8"><output for="qmx-accent">#38bdf8</output></div>
+      </fieldset>
+      <fieldset>
+        <legend>界面密度</legend>
+        <div class="qmx-segmented"><button type="button" data-density-value="compact">紧凑</button><button type="button" data-density-value="comfortable">舒适</button></div>
+      </fieldset>
+      <fieldset>
+        <label for="qmx-wallpaper"><legend>背景图片 URL</legend></label>
+        <input id="qmx-wallpaper" class="qmx-text-input" type="url" placeholder="https://… 或 /images/bg.webp" autocomplete="off">
+        <small>图片只保存在当前浏览器，不会上传到服务器。</small>
+      </fieldset>
+      <button type="button" class="qmx-reset">恢复默认</button>
+    </div>
+  </details>
+</div>
+
+<script>
+  const KEY = 'qmx-appearance-v2';
+  const defaults = { preset: 'aurora', accent: '#38bdf8', radius: '18px', density: 'comfortable', wallpaper: '' };
+  const root = document.documentElement;
+  const load = () => { try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { ...defaults }; } };
+  const state = load();
+  const all = (selector) => [...document.querySelectorAll(selector)];
+  function apply() {
+    const selected = document.querySelector(`.qmx-preset[data-preset="${state.preset}"]`)?.dataset || {};
+    root.style.setProperty('--qmx-accent', state.accent || selected.accent || defaults.accent);
+    root.style.setProperty('--qmx-accent-2', selected.accent2 || '#a78bfa');
+    root.style.setProperty('--qmx-radius', state.radius || selected.radius || '18px');
+    root.dataset.qmxDensity = state.density || 'comfortable';
+    root.style.setProperty('--qmx-wallpaper', state.wallpaper ? `url("${state.wallpaper.replaceAll('"', '')}")` : 'none');
+    root.dataset.qmxWallpaper = state.wallpaper ? 'on' : 'off';
+    all('.qmx-color-line input').forEach((input) => { input.value = state.accent; });
+    all('.qmx-color-line output').forEach((output) => { output.value = state.accent; output.textContent = state.accent; });
+    all('.qmx-wallpaper').forEach((input) => { input.value = state.wallpaper; });
+    all('.qmx-preset').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.preset === state.preset));
+    all('[data-density-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.densityValue === state.density));
+  }
+  function save() { localStorage.setItem(KEY, JSON.stringify(state)); apply(); }
+  all('.qmx-mode').forEach((select) => { select.value = localStorage.getItem('starlight-theme') || 'auto'; select.addEventListener('change', () => { const value = select.value; document.documentElement.dataset.theme = value === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : value; localStorage.setItem('starlight-theme', value === 'auto' ? '' : value); all('.qmx-mode').forEach((other) => { other.value = value; }); }); });
+  all('.qmx-preset').forEach((button) => button.addEventListener('click', () => { state.preset = button.dataset.preset; state.accent = button.dataset.accent; state.radius = button.dataset.radius; state.density = button.dataset.density; save(); }));
+  all('.qmx-color-line input').forEach((input) => input.addEventListener('input', () => { state.accent = input.value; save(); }));
+  all('[data-density-value]').forEach((button) => button.addEventListener('click', () => { state.density = button.dataset.densityValue; save(); }));
+  all('.qmx-wallpaper').forEach((input) => input.addEventListener('change', () => { state.wallpaper = input.value.trim(); save(); }));
+  all('.qmx-reset').forEach((button) => button.addEventListener('click', () => { Object.assign(state, defaults); save(); }));
+  apply();
+</script>
