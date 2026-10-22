@@ -1,88 +1,35 @@
 ---
-const presets = [
-  { id: "starry", label: "星夜", accent: "#71d7ff", accent2: "#9b8cff", radius: "18px", density: "comfortable" },
-  { id: "sakura", label: "春樱", accent: "#f472b6", accent2: "#fb7185", radius: "20px", density: "comfortable" },
-  { id: "summer", label: "夏日天气", accent: "#38bdf8", accent2: "#fbbf24", radius: "16px", density: "comfortable" },
-  { id: "pixel", label: "像素终端", accent: "#a3e635", accent2: "#22c55e", radius: "4px", density: "compact" },
+const themes = [
+  { id: 'starry', label: '星夜', accent: '#7dd3fc', accent2: '#a78bfa', bg: '#070d1b', nav: '#0b1427', sidebar: '#0a1324', panel: '#101d33', text: '#e5f3ff', muted: '#9db1c9', border: '#29415f', code: '#07101f' },
+  { id: 'sakura', label: '春樱', accent: '#ec4899', accent2: '#fb7185', bg: '#fff7fb', nav: '#fffafd', sidebar: '#fff1f5', panel: '#ffffff', text: '#3d2432', muted: '#876878', border: '#f4c9d9', code: '#fff1f5' },
+  { id: 'summer', label: '夏日天气', accent: '#0284c7', accent2: '#f59e0b', bg: '#eefaff', nav: '#f7fdff', sidebar: '#e4f6ff', panel: '#ffffff', text: '#173449', muted: '#587487', border: '#b9e4f5', code: '#e6f7ff' },
+  { id: 'pixel', label: '像素终端', accent: '#a3e635', accent2: '#22c55e', bg: '#07100a', nav: '#0a170d', sidebar: '#09150c', panel: '#0d1d12', text: '#d9f99d', muted: '#8fb48d', border: '#285b35', code: '#050b07' },
+  { id: 'github', label: 'GitHub 经典', accent: '#0969da', accent2: '#8250df', bg: '#ffffff', nav: '#f6f8fa', sidebar: '#f6f8fa', panel: '#ffffff', text: '#1f2328', muted: '#656d76', border: '#d0d7de', code: '#f6f8fa' },
 ];
 ---
 
-<div class="qmx-theme-select">
-  <label class="qmx-mode-label" for="qmx-mode">外观</label>
-  <select id="qmx-mode" class="qmx-mode" aria-label="外观模式">
-    <option value="auto">跟随系统</option>
-    <option value="light">浅色</option>
-    <option value="dark">深色</option>
+<label class="qmx-theme-select" for="qmx-theme">
+  <span class="qmx-theme-select__label">主题</span>
+  <select id="qmx-theme" aria-label="选择主题">
+    {themes.map((theme) => <option value={theme.id}>{theme.label}</option>)}
   </select>
-  <details class="qmx-customizer">
-    <summary aria-label="打开自定义主题">自定义</summary>
-    <div class="qmx-popover" role="dialog" aria-label="自定义主题">
-      <div class="qmx-popover-head"><div><span class="qmx-eyebrow">APPEARANCE</span><strong>自定义主题</strong></div><span class="qmx-live-dot">LIVE</span></div>
-      <p class="qmx-popover-copy">选择一个基底，再按你的阅读习惯微调。</p>
-      <fieldset>
-        <legend>主题基底</legend>
-        <div class="qmx-presets">
-          {presets.map((preset) => <button type="button" class="qmx-preset" data-preset={preset.id} data-accent={preset.accent} data-accent2={preset.accent2} data-radius={preset.radius} data-density={preset.density}><i style={`--swatch:${preset.accent};--swatch-2:${preset.accent2}`}></i><span>{preset.label}</span></button>)}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>强调色</legend>
-        <div class="qmx-color-line"><input type="color" id="qmx-accent" aria-label="选择强调色" value="#38bdf8"><output for="qmx-accent">#38bdf8</output></div>
-      </fieldset>
-      <fieldset>
-        <legend>界面密度</legend>
-        <div class="qmx-segmented"><button type="button" data-density-value="compact">紧凑</button><button type="button" data-density-value="comfortable">舒适</button></div>
-      </fieldset>
-      <fieldset><legend>面板风格</legend><div class="qmx-segmented"><button type="button" data-surface-value="solid">实体</button><button type="button" data-surface-value="glass">玻璃</button></div></fieldset>
-      <fieldset><legend>按钮风格</legend><div class="qmx-segmented"><button type="button" data-button-value="solid">填充</button><button type="button" data-button-value="outline">描边</button><button type="button" data-button-value="glow">发光</button></div></fieldset>
-      <fieldset><legend>阅读宽度</legend><div class="qmx-segmented"><button type="button" data-width-value="narrow">窄</button><button type="button" data-width-value="wide">宽</button></div></fieldset>
-      <fieldset>
-        <label for="qmx-wallpaper"><legend>背景图片 URL</legend></label>
-        <input id="qmx-wallpaper" class="qmx-text-input" type="url" placeholder="https://… 或 /images/bg.webp" autocomplete="off">
-        <small>图片只保存在当前浏览器，不会上传到服务器。</small>
-      </fieldset>
-      <button type="button" class="qmx-reset">恢复默认</button>
-    </div>
-  </details>
-</div>
+</label>
 
-<script>
-  const KEY = 'qmx-appearance-v2';
-  const defaults = { preset: 'starry', accent: '#71d7ff', radius: '18px', density: 'comfortable', surface: 'solid', button: 'solid', width: 'narrow', wallpaper: '' };
+<script define:vars={{ themes }}>
+  const key = 'qmx-theme';
   const root = document.documentElement;
-  const load = () => { try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { ...defaults }; } };
-  const state = load();
-  const all = (selector) => [...document.querySelectorAll(selector)];
-  function apply() {
-    const selected = document.querySelector(`.qmx-preset[data-preset="${state.preset}"]`)?.dataset || {};
-    root.style.setProperty('--qmx-accent', state.accent || selected.accent || defaults.accent);
-    root.style.setProperty('--qmx-accent-2', selected.accent2 || '#a78bfa');
-    root.style.setProperty('--qmx-radius', state.radius || selected.radius || '18px');
-    root.dataset.qmxTheme = state.preset || 'starry';
-    root.dataset.qmxDensity = state.density || 'comfortable';
-    root.dataset.qmxSurface = state.surface || 'solid';
-    root.dataset.qmxButton = state.button || 'solid';
-    root.dataset.qmxWidth = state.width || 'narrow';
-    root.style.setProperty('--qmx-wallpaper', state.wallpaper ? `url("${state.wallpaper.replaceAll('"', '')}")` : 'none');
-    root.dataset.qmxWallpaper = state.wallpaper ? 'on' : 'off';
-    all('.qmx-color-line input').forEach((input) => { input.value = state.accent; });
-    all('.qmx-color-line output').forEach((output) => { output.value = state.accent; output.textContent = state.accent; });
-    all('.qmx-wallpaper').forEach((input) => { input.value = state.wallpaper; });
-    all('.qmx-preset').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.preset === state.preset));
-    all('[data-density-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.densityValue === state.density));
-    all('[data-surface-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.surfaceValue === state.surface));
-    all('[data-button-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.buttonValue === state.button));
-    all('[data-width-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.widthValue === state.width));
+  const selects = [...document.querySelectorAll('.qmx-theme-select select')];
+  const byId = Object.fromEntries(themes.map((theme) => [theme.id, theme]));
+  function apply(id) {
+    const theme = byId[id] || byId.starry;
+    root.dataset.qmxTheme = theme.id;
+    for (const [name, value] of Object.entries(theme)) {
+      if (name !== 'id' && name !== 'label') root.style.setProperty(`--qmx-${name}`, value);
+    }
+    selects.forEach((select) => { select.value = theme.id; });
+    localStorage.setItem(key, theme.id);
   }
-  function save() { localStorage.setItem(KEY, JSON.stringify(state)); apply(); }
-  all('.qmx-mode').forEach((select) => { select.value = localStorage.getItem('starlight-theme') || 'auto'; select.addEventListener('change', () => { const value = select.value; document.documentElement.dataset.theme = value === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : value; localStorage.setItem('starlight-theme', value === 'auto' ? '' : value); all('.qmx-mode').forEach((other) => { other.value = value; }); }); });
-  all('.qmx-preset').forEach((button) => button.addEventListener('click', () => { state.preset = button.dataset.preset; state.accent = button.dataset.accent; state.radius = button.dataset.radius; state.density = button.dataset.density; save(); }));
-  all('.qmx-color-line input').forEach((input) => input.addEventListener('input', () => { state.accent = input.value; save(); }));
-  all('[data-density-value]').forEach((button) => button.addEventListener('click', () => { state.density = button.dataset.densityValue; save(); }));
-  all('[data-surface-value]').forEach((button) => button.addEventListener('click', () => { state.surface = button.dataset.surfaceValue; save(); }));
-  all('[data-button-value]').forEach((button) => button.addEventListener('click', () => { state.button = button.dataset.buttonValue; save(); }));
-  all('[data-width-value]').forEach((button) => button.addEventListener('click', () => { state.width = button.dataset.widthValue; save(); }));
-  all('.qmx-wallpaper').forEach((input) => input.addEventListener('change', () => { state.wallpaper = input.value.trim(); save(); }));
-  all('.qmx-reset').forEach((button) => button.addEventListener('click', () => { Object.assign(state, defaults); save(); }));
-  apply();
+  apply(localStorage.getItem(key) || 'starry');
+  selects.forEach((select) => select.addEventListener('change', () => apply(select.value)));
 </script>
+

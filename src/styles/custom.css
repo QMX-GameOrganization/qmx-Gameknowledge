@@ -38,3 +38,25 @@ body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-col
 :root[data-qmx-theme="sakura"] .sl-markdown-content a { color: #db2777; }
 :root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 4px; }
 :root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
+
+/* Theme packs: map one selected design directly onto Starlight surfaces. */
+:root {
+  --qmx-bg: #070d1b; --qmx-nav: #0b1427; --qmx-sidebar: #0a1324; --qmx-panel: #101d33;
+  --qmx-text: #e5f3ff; --qmx-muted: #9db1c9; --qmx-border: #29415f; --qmx-code: #07101f;
+  --sl-color-bg: var(--qmx-bg); --sl-color-bg-nav: var(--qmx-nav); --sl-color-bg-sidebar: var(--qmx-sidebar);
+  --sl-color-bg-inline-code: var(--qmx-code); --sl-color-text: var(--qmx-text); --sl-color-text-accent: var(--qmx-accent);
+  --sl-color-gray-1: var(--qmx-text); --sl-color-gray-2: var(--qmx-muted); --sl-color-gray-3: color-mix(in srgb, var(--qmx-muted) 82%, transparent);
+  --sl-color-gray-4: var(--qmx-border); --sl-color-gray-5: color-mix(in srgb, var(--qmx-border) 72%, transparent); --sl-color-gray-6: color-mix(in srgb, var(--qmx-border) 48%, transparent);
+  --sl-color-accent: var(--qmx-accent); --sl-color-accent-high: color-mix(in srgb, var(--qmx-accent) 20%, white); --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 18%, var(--qmx-bg));
+}
+body { background: var(--qmx-bg); background-image: linear-gradient(135deg, color-mix(in srgb, var(--qmx-bg) 89%, transparent), color-mix(in srgb, var(--qmx-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; color: var(--qmx-text); }
+:root[data-qmx-theme="starry"] body { background-image: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, var(--qmx-bg), #111a36 62%, #1b1738), var(--qmx-wallpaper); background-size: 180px 180px, 240px 240px, 130px 130px, auto, cover; }
+:root[data-qmx-theme="sakura"] body { background-image: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, var(--qmx-bg), #fff1f2 55%, #fce7f3), var(--qmx-wallpaper); background-size: 170px 170px, 230px 230px, auto, cover; }
+:root[data-qmx-theme="summer"] body { background-image: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, var(--qmx-bg), #dff6ff 52%, #fef3c7), var(--qmx-wallpaper); background-size: auto, auto, cover; }
+:root[data-qmx-theme="pixel"] body { background-image: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, var(--qmx-bg), #0c1b12), var(--qmx-wallpaper); background-size: 18px 18px, 18px 18px, auto, cover; }
+.qmx-theme-select { display: inline-flex; align-items: center; gap: .45rem; color: var(--qmx-muted); font-size: .75rem; }
+.qmx-theme-select select { min-height: 2rem; border: 1px solid var(--qmx-border); border-radius: .5rem; padding: .3rem .55rem; background: var(--qmx-panel); color: var(--qmx-text); font: inherit; cursor: pointer; }
+.qmx-theme-select select:focus-visible { outline: 2px solid var(--qmx-accent); outline-offset: 2px; }
+:root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 3px; }
+:root[data-qmx-theme="sakura"] .sl-markdown-content a { color: var(--qmx-accent); }
+:root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
