@@ -33,6 +33,9 @@ const presets = [
         <legend>界面密度</legend>
         <div class="qmx-segmented"><button type="button" data-density-value="compact">紧凑</button><button type="button" data-density-value="comfortable">舒适</button></div>
       </fieldset>
+      <fieldset><legend>面板风格</legend><div class="qmx-segmented"><button type="button" data-surface-value="solid">实体</button><button type="button" data-surface-value="glass">玻璃</button></div></fieldset>
+      <fieldset><legend>按钮风格</legend><div class="qmx-segmented"><button type="button" data-button-value="solid">填充</button><button type="button" data-button-value="outline">描边</button><button type="button" data-button-value="glow">发光</button></div></fieldset>
+      <fieldset><legend>阅读宽度</legend><div class="qmx-segmented"><button type="button" data-width-value="narrow">窄</button><button type="button" data-width-value="wide">宽</button></div></fieldset>
       <fieldset>
         <label for="qmx-wallpaper"><legend>背景图片 URL</legend></label>
         <input id="qmx-wallpaper" class="qmx-text-input" type="url" placeholder="https://… 或 /images/bg.webp" autocomplete="off">
@@ -45,7 +48,7 @@ const presets = [
 
 <script>
   const KEY = 'qmx-appearance-v2';
-  const defaults = { preset: 'aurora', accent: '#38bdf8', radius: '18px', density: 'comfortable', wallpaper: '' };
+  const defaults = { preset: 'aurora', accent: '#38bdf8', radius: '18px', density: 'comfortable', surface: 'solid', button: 'solid', width: 'narrow', wallpaper: '' };
   const root = document.documentElement;
   const load = () => { try { return { ...defaults, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return { ...defaults }; } };
   const state = load();
@@ -56,6 +59,9 @@ const presets = [
     root.style.setProperty('--qmx-accent-2', selected.accent2 || '#a78bfa');
     root.style.setProperty('--qmx-radius', state.radius || selected.radius || '18px');
     root.dataset.qmxDensity = state.density || 'comfortable';
+    root.dataset.qmxSurface = state.surface || 'solid';
+    root.dataset.qmxButton = state.button || 'solid';
+    root.dataset.qmxWidth = state.width || 'narrow';
     root.style.setProperty('--qmx-wallpaper', state.wallpaper ? `url("${state.wallpaper.replaceAll('"', '')}")` : 'none');
     root.dataset.qmxWallpaper = state.wallpaper ? 'on' : 'off';
     all('.qmx-color-line input').forEach((input) => { input.value = state.accent; });
@@ -63,12 +69,18 @@ const presets = [
     all('.qmx-wallpaper').forEach((input) => { input.value = state.wallpaper; });
     all('.qmx-preset').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.preset === state.preset));
     all('[data-density-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.densityValue === state.density));
+    all('[data-surface-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.surfaceValue === state.surface));
+    all('[data-button-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.buttonValue === state.button));
+    all('[data-width-value]').forEach((button) => button.toggleAttribute('aria-pressed', button.dataset.widthValue === state.width));
   }
   function save() { localStorage.setItem(KEY, JSON.stringify(state)); apply(); }
   all('.qmx-mode').forEach((select) => { select.value = localStorage.getItem('starlight-theme') || 'auto'; select.addEventListener('change', () => { const value = select.value; document.documentElement.dataset.theme = value === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : value; localStorage.setItem('starlight-theme', value === 'auto' ? '' : value); all('.qmx-mode').forEach((other) => { other.value = value; }); }); });
   all('.qmx-preset').forEach((button) => button.addEventListener('click', () => { state.preset = button.dataset.preset; state.accent = button.dataset.accent; state.radius = button.dataset.radius; state.density = button.dataset.density; save(); }));
   all('.qmx-color-line input').forEach((input) => input.addEventListener('input', () => { state.accent = input.value; save(); }));
   all('[data-density-value]').forEach((button) => button.addEventListener('click', () => { state.density = button.dataset.densityValue; save(); }));
+  all('[data-surface-value]').forEach((button) => button.addEventListener('click', () => { state.surface = button.dataset.surfaceValue; save(); }));
+  all('[data-button-value]').forEach((button) => button.addEventListener('click', () => { state.button = button.dataset.buttonValue; save(); }));
+  all('[data-width-value]').forEach((button) => button.addEventListener('click', () => { state.width = button.dataset.widthValue; save(); }));
   all('.qmx-wallpaper').forEach((input) => input.addEventListener('change', () => { state.wallpaper = input.value.trim(); save(); }));
   all('.qmx-reset').forEach((button) => button.addEventListener('click', () => { Object.assign(state, defaults); save(); }));
   apply();
