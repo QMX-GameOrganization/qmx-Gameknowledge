@@ -54,7 +54,6 @@ body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-col
   --sl-color-bg-inline-code: var(--qmx-code); --sl-color-text: var(--qmx-text); --sl-color-text-accent: var(--qmx-accent);
   --sl-color-gray-1: var(--qmx-text); --sl-color-gray-2: var(--qmx-muted); --sl-color-gray-3: color-mix(in srgb, var(--qmx-muted) 82%, transparent);
   --sl-color-gray-4: var(--qmx-border); --sl-color-gray-5: color-mix(in srgb, var(--qmx-border) 72%, transparent); --sl-color-gray-6: color-mix(in srgb, var(--qmx-border) 48%, transparent);
-  --sl-color-white: var(--qmx-text); --sl-color-black: var(--qmx-bg);
   --sl-color-accent: var(--qmx-accent); --sl-color-accent-high: color-mix(in srgb, var(--qmx-accent) 20%, white); --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 18%, var(--qmx-bg));
 }
 body { background: var(--qmx-bg); background-image: linear-gradient(135deg, color-mix(in srgb, var(--qmx-bg) 89%, transparent), color-mix(in srgb, var(--qmx-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; color: var(--qmx-text); }
@@ -66,12 +65,10 @@ body { background: var(--qmx-bg); background-image: linear-gradient(135deg, colo
 .qmx-theme-select { display: inline-flex; align-items: center; gap: .45rem; color: var(--qmx-muted); font-size: .75rem; }
 .qmx-theme-select select { min-height: 2rem; border: 1px solid var(--qmx-border); border-radius: .5rem; padding: .3rem .55rem; background: var(--qmx-panel); color: var(--qmx-text); font: inherit; cursor: pointer; }
 .qmx-theme-select select:focus-visible { outline: 2px solid var(--qmx-accent); outline-offset: 2px; }
-.sl-markdown-content :is(h1, h2, h3, h4, h5, h6), .hero :is(h1, h2, h3, h4, h5, h6) { color: var(--qmx-text) !important; }
-.sl-markdown-content h1, .hero h1 { text-shadow: 0 1px 0 color-mix(in srgb, var(--qmx-bg) 38%, transparent); }
-:root[data-qmx-theme="sakura"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6), :root[data-qmx-theme="summer"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6), :root[data-qmx-theme="github"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) { color: color-mix(in srgb, var(--qmx-text) 88%, var(--qmx-accent)) !important; }
 :root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 3px; }
 :root[data-qmx-theme="sakura"] .sl-markdown-content a { color: var(--qmx-accent); }
 :root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
+:root[data-qmx-theme="miku"] :is(h1, h2, h3, h4, h5, h6) { color: var(--qmx-text) !important; }
 :root[data-qmx-theme="miku"] .sl-markdown-content a { color: var(--qmx-accent); text-shadow: 0 0 12px #39c5bb55; }
 :root[data-qmx-theme="miku"] .sl-markdown-content h1,
 :root[data-qmx-theme="miku"] .sl-markdown-content h2,
