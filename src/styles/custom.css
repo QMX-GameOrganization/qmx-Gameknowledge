@@ -61,12 +61,20 @@ body { background: var(--qmx-bg); background-image: linear-gradient(135deg, colo
 :root[data-qmx-theme="sakura"] body { background-image: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, var(--qmx-bg), #fff1f2 55%, #fce7f3), var(--qmx-wallpaper); background-size: 170px 170px, 230px 230px, auto, cover; }
 :root[data-qmx-theme="summer"] body { background-image: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, var(--qmx-bg), #dff6ff 52%, #fef3c7), var(--qmx-wallpaper); background-size: auto, auto, cover; }
 :root[data-qmx-theme="pixel"] body { background-image: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, var(--qmx-bg), #0c1b12), var(--qmx-wallpaper); background-size: 18px 18px, 18px 18px, auto, cover; }
+:root[data-qmx-theme="miku"] body { background-color: var(--qmx-bg); background-image: linear-gradient(135deg, #39c5bb12 25%, transparent 25%) 0 0 / 34px 34px, linear-gradient(315deg, #ff6fae10 25%, transparent 25%) 0 0 / 34px 34px, linear-gradient(145deg, #071c22, #0c3038 55%, #261a35), var(--qmx-wallpaper); }
 .qmx-theme-select { display: inline-flex; align-items: center; gap: .45rem; color: var(--qmx-muted); font-size: .75rem; }
 .qmx-theme-select select { min-height: 2rem; border: 1px solid var(--qmx-border); border-radius: .5rem; padding: .3rem .55rem; background: var(--qmx-panel); color: var(--qmx-text); font: inherit; cursor: pointer; }
 .qmx-theme-select select:focus-visible { outline: 2px solid var(--qmx-accent); outline-offset: 2px; }
 :root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 3px; }
 :root[data-qmx-theme="sakura"] .sl-markdown-content a { color: var(--qmx-accent); }
 :root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
+:root[data-qmx-theme="miku"] .sl-markdown-content a { color: var(--qmx-accent); text-shadow: 0 0 12px #39c5bb55; }
+:root[data-qmx-theme="miku"] .sl-markdown-content h1,
+:root[data-qmx-theme="miku"] .sl-markdown-content h2,
+:root[data-qmx-theme="miku"] .sl-markdown-content h3 { text-shadow: 2px 0 #ff6fae44; }
+:root[data-qmx-theme="miku"] .sl-markdown-content blockquote { border-inline-start-color: var(--qmx-accent-2); background: linear-gradient(90deg, #39c5bb14, #ff6fae10); }
+:root[data-qmx-theme="miku"] .sl-markdown-content pre { border-color: #39c5bb66; box-shadow: 0 0 28px #39c5bb18; }
+:root[data-qmx-theme="miku"] .sl-markdown-content::after { content: "♫  ♪  ♫"; display: block; margin: 3rem auto 0; color: var(--qmx-accent); font-size: 1.25rem; letter-spacing: .8rem; text-align: center; opacity: .65; }
 :root[data-qmx-theme="starry"] body::after,
 :root[data-qmx-theme="sakura"] body::after,
 :root[data-qmx-theme="summer"] body::after,

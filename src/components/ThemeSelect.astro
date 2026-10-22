@@ -5,6 +5,7 @@ const themes = [
   { id: 'summer', label: '夏日天气', accent: '#0284c7', accent2: '#f59e0b', bg: '#eefaff', nav: '#f7fdff', sidebar: '#e4f6ff', panel: '#ffffff', text: '#173449', muted: '#587487', border: '#b9e4f5', code: '#e6f7ff' },
   { id: 'pixel', label: '像素终端', accent: '#a3e635', accent2: '#22c55e', bg: '#07100a', nav: '#0a170d', sidebar: '#09150c', panel: '#0d1d12', text: '#d9f99d', muted: '#8fb48d', border: '#285b35', code: '#050b07' },
   { id: 'github', label: 'GitHub 经典', accent: '#0969da', accent2: '#8250df', bg: '#ffffff', nav: '#f6f8fa', sidebar: '#f6f8fa', panel: '#ffffff', text: '#1f2328', muted: '#656d76', border: '#d0d7de', code: '#f6f8fa' },
+  { id: 'miku', label: '初音未来', accent: '#39c5bb', accent2: '#ff6fae', bg: '#071c22', nav: '#0b2830', sidebar: '#08232b', panel: '#10323a', text: '#e1fffb', muted: '#9bd8d2', border: '#23626a', code: '#06161c' },
 ];
 ---
 
@@ -28,6 +29,22 @@ const themes = [
     }
     selects.forEach((select) => { select.value = theme.id; });
     localStorage.setItem(key, theme.id);
+    syncMiku(theme.id);
+  }
+  function syncMiku(id) {
+    const existing = document.querySelector('[data-qmx-miku-script]');
+    if (id !== 'miku') {
+      if (window.qmxMiku?.remove) window.qmxMiku.remove();
+      window.qmxMiku = null;
+      existing?.remove();
+      return;
+    }
+    if (existing || window.qmxMiku) return;
+    const script = document.createElement('script');
+    script.dataset.qmxMikuScript = 'true';
+    script.src = 'https://cdn.jsdelivr.net/gh/samiulalim1/Hatsune-Miku-Web-Pet@v1.0.0/miku.min.js';
+    script.onload = () => { if (window.Miku) window.qmxMiku = new window.Miku(); };
+    document.head.appendChild(script);
   }
   apply(localStorage.getItem(key) || 'starry');
   selects.forEach((select) => select.addEventListener('change', () => apply(select.value)));

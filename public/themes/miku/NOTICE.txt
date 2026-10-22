@@ -1,0 +1,4 @@
+Hatsune Miku Web Pet integration
+Source: https://github.com/samiulalim1/Hatsune-Miku-Web-Pet
+Code license: MIT (Copyright (c) 2025 samiulalim1)
+The source project credits the sprite to Shimeji Sprite Directory and Hatsune Miku to Crypton Future Media, INC.
