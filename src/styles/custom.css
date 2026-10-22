@@ -16,6 +16,13 @@
 
 .hero { padding-block: 3rem; }
 .sl-markdown-content img { border-radius: 0.75rem; }
+.sl-markdown-content pre,
+.expressive-code .frame,
+.expressive-code pre,
+.sl-markdown-content .astro-code {
+  border-radius: 14px !important;
+  overflow: hidden;
+}
 
 body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-bg) 88%, transparent), color-mix(in srgb, var(--sl-color-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; }
 :root[data-qmx-wallpaper="on"] body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: color-mix(in srgb, var(--sl-color-bg) 52%, transparent); pointer-events: none; }
@@ -60,3 +67,12 @@ body { background: var(--qmx-bg); background-image: linear-gradient(135deg, colo
 :root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 3px; }
 :root[data-qmx-theme="sakura"] .sl-markdown-content a { color: var(--qmx-accent); }
 :root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
+:root[data-qmx-theme="starry"] body::after,
+:root[data-qmx-theme="sakura"] body::after,
+:root[data-qmx-theme="summer"] body::after,
+:root[data-qmx-theme="pixel"] body::after { content: ""; position: fixed; right: 2rem; top: 5rem; width: 118px; height: 118px; z-index: 0; pointer-events: none; background-repeat: no-repeat; background-position: center; background-size: contain; opacity: .78; filter: drop-shadow(0 12px 24px #0002); }
+:root[data-qmx-theme="starry"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/star.svg'); }
+:root[data-qmx-theme="sakura"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/cherry-blossom.svg'); }
+:root[data-qmx-theme="summer"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/sun.svg'); }
+:root[data-qmx-theme="pixel"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/star.svg'); image-rendering: pixelated; }
+@media (max-width: 50rem) { :root[data-qmx-theme] body::after { right: .75rem; top: 4.25rem; width: 76px; height: 76px; opacity: .55; } }

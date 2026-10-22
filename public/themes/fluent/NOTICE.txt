@@ -1,0 +1,4 @@
+Fluent Emoji assets
+Source: https://github.com/microsoft/fluentui-emoji
+License: MIT
+Files: cloud.svg, rain.svg, sun.svg, snowflake.svg, cherry-blossom.svg, star.svg
