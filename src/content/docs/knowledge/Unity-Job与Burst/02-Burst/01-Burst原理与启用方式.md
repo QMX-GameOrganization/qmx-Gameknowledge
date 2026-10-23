@@ -78,7 +78,7 @@ public struct MyJob : IJob
 | 静态方法 | 方法和它所在的类型都要标 `[BurstCompile]` |
 | 类 / 普通 struct | 仅当其中含有同样标记了的静态方法时才需要标；Burst 不编译类本身，只编译成员方法 |
 | 函数指针 | 用 `BurstCompiler.CompileFunctionPointer` 获取，后续函数指针章节详述 |
-| 程序集 | 程序集级 `[assembly: BurstCompile(...)]` 为整个程序集的 Job 和函数指针设置选项 |
+| 程序集 | 程序集级 `[assembly: BurstCompile(...)]` 为整个程序集的 Job 和函数指针设置选项，与菜单、Job 上属性的优先级见 2.10 编译器提示与别名 末尾的小节 |
 
 手册还强调：从托管代码切换到 Burst 代码的方法叫 Burst 入口点（entry point）。如果静态入口点方法标了 `[BurstCompile]`，它调用的其它方法即使没标也会被一起编译。
 
@@ -103,6 +103,65 @@ public static class DensityMath
 - `OptimizeFor = OptimizeFor.FastCompilation`：编译更快、优化更少。
 
 这些选项的完整讨论放在后续的编译选项章节，这里只需知道它们存在。
+
+## 从托管代码直接调用 Burst 静态方法
+
+除了 Job，你还可以从普通托管代码（比如 `MonoBehaviour`）直接调用一个标了 `[BurstCompile]` 的静态方法，不必手写函数指针。手册（Calling Burst-compiled code）的描述是：可以直接从托管代码调用 Burst 编译的方法，规则与函数指针相同，但不需要函数指针那套额外的样板代码。
+
+### 写法
+
+方法和它所在的类型都要标 `[BurstCompile]`。手册示例：
+
+```csharp
+using Unity.Burst;
+using Unity.Mathematics;
+
+[BurstCompile]
+public static class MyBurstUtilityClass
+{
+    [BurstCompile]
+    public static void BurstCompiled_MultiplyAdd(in float4 mula, in float4 mulb, in float4 add, out float4 result)
+    {
+        result = mula * mulb + add;
+    }
+}
+
+// 在 MonoBehaviour.Start 等托管代码里：
+// MyBurstUtilityClass.BurstCompiled_MultiplyAdd(mula, mulb, add, out var result);
+```
+
+手册说明运行这个示例会在日志里打印 `float4(98f, 2f, -3f, 4f)`。这段调用在托管代码里看起来就是一次普通的静态方法调用。
+
+### 原理：IL 后处理
+
+手册写明：Burst 通过 IL 后处理（IL Post Processing）自动把这类调用改写成"函数指针加调用"。也就是说，托管代码调用这个静态方法时，实际走的是 Burst 编译出来的原生版本，而不是方法体本身的托管 IL。细节可对照 2.7 函数指针与间接调用 里的 `CompileFunctionPointer` 流程，两者共享同一套机制和限制。
+
+### 限制
+
+- 泛型方法不支持，声明方法的类型本身是泛型时也不支持。
+- 其余规则与函数指针相同，所以参数和返回值类型受 `DllImport` 与内部调用同一套限制（见 2.7 函数指针与间接调用 的"DllImport 与内部调用允许的参数类型"）。
+- 手册示例里的 `in` 与 `out`：手册说明因为用了结构体（`float4`），按函数指针的规则要通过引用传递。结构体不能按值传，所以示例用 `in` 传输入、`out` 传输出，而不是直接返回一个 `float4`。（单字段的句柄结构体是例外，见 2.7。）
+- 因为经过一层原生互操作，函数体很小时调用开销可能抵消 Burst 的收益，2.7 里对此有说明；手册这一页没有给出具体数据。
+
+### 用 `DisableDirectCall` 关闭改写
+
+在 `[BurstCompile]` 上加 `DisableDirectCall = true`，后处理器就不再处理这个方法，托管代码调用它时走原来的托管版本：
+
+```csharp
+[BurstCompile]
+public static class MyBurstUtilityClass
+{
+    [BurstCompile(DisableDirectCall = true)]
+    public static void BurstCompiled_MultiplyAdd(in float4 mula, in float4 mulb, in float4 add, out float4 result)
+    {
+        result = mula * mulb + add;
+    }
+}
+```
+
+手册的原话是这会阻止后处理器在这段代码上运行，也就是托管调用不再被自动改写成 Burst 版本。典型用途是：想让某个方法在托管代码里保持托管行为（比如做 Burst 与托管结果对比，见 2.5 Burst Inspector 与调试），或者排查直接调用带来的问题。2.10 编译器提示与别名 的 `[BurstCompile]` 参数表里也有这一项。
+
+本项目目前的 `Density` 代码不是 Burst 代码，这一节是为之后把采样函数迁到 Burst 后，从托管侧（例如一次性的初始化或测试）调用做准备。
 
 ## 菜单与设置
 
@@ -273,6 +332,7 @@ public static class SumBench
 
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/compilation-burstcompile.html
+- https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-calling-burst-code.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/compilation-synchronous.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/compilation-burstdiscard.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-menu.html

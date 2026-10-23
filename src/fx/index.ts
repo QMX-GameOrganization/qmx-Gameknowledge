@@ -25,9 +25,21 @@ export interface FxModule {
 
 type Loader = () => Promise<{ default: FxModule }>;
 
+// 没有登记的主题(例如「高对比度」)没有任何动态特效，这是有意为之。
 const registry: Record<string, Loader> = {
   starry: () => import('./starry'),
   rhodes: () => import('./rhodes'),
+  sakura: () => import('./sakura'),
+  summer: () => import('./summer'),
+  pixel: () => import('./pixel'),
+  miku: () => import('./miku'),
+  blocks: () => import('./blocks'),
+  neon: () => import('./neon'),
+  nord: () => import('./nord'),
+  github: () => import('./github'),
+  paper: () => import('./paper'),
+  mocha: () => import('./cat').then((m) => ({ default: m.mochaCat })),
+  latte: () => import('./cat').then((m) => ({ default: m.latteCat })),
 };
 
 const KEY = 'qmx-fx';
@@ -52,6 +64,7 @@ export function initFx(base: string) {
     const mine = ++token;
     current?.stop();
     current = null;
+    audio.stopLoops();
     delete root.dataset.qmxFxActive;
 
     const load = registry[themeId];

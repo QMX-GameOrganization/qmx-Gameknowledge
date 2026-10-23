@@ -46,7 +46,7 @@ a.xz = new float2(9f, 8f);     // swizzle 也可以赋值（分量不重复时�
 float3 f = a * b + d;          // 运算符都是逐分量的
 ```
 
-注意：`float4x4` 的 `*` 是逐分量乘法，矩阵乘法要用 `math.mul(m, v)`（手册 Unity Mathematics APIs 里明确写了这一点）。
+注意：`float4x4` 的 `*` 是逐分量乘法，矩阵乘法要用 `math.mul(m, v)`（手册 Unity Mathematics APIs 里明确写了这一点），详见下一节"矩阵、四元数与变换"。
 
 ### 与 UnityEngine 类型互转
 
@@ -60,6 +60,120 @@ transform.position = p + new float3(0, 1, 0);
 
 该隐式转换的细节没有在本次读过的页面里逐项核对（待核实）；使用时以编译器提示为准。
 
+## 矩阵、四元数与变换
+
+本节内容取自 Unity 手册 Unity Mathematics APIs 页，以及 Mathematics 1.3.2 的 API 页（`RigidTransform`、`MinMaxAABB`、`math` 的重载列表）。体素生成里最常见的用途是区块包围盒、实体或相机变换，本项目目前的 `WorldGen/Density` 代码没有用到这些类型，这一节是为之后的网格与实体部分准备。
+
+### 构造 `float4x4`
+
+手册的做法是用 `float4x4` 的构造函数：可以把一个值赋给全部元素，也可以逐个设置 16 个元素；示例里把四个 `float4`（变量名 `c0` 到 `c3`）传进构造函数：
+
+```csharp
+using Unity.Mathematics;
+
+// 手册示例：四个 float4 构造单位矩阵
+var c0 = new float4(1f, 0f, 0f, 0f);
+var c1 = new float4(0f, 1f, 0f, 0f);
+var c2 = new float4(0f, 0f, 1f, 0f);
+var c3 = new float4(0f, 0f, 0f, 1f);
+var m = new float4x4(c0, c1, c2, c3);
+```
+
+示例没有逐个说明各构造重载的参数顺序，涉及非对称矩阵时以 API 页和实测为准（待核实）。
+
+### `*` 是逐分量乘，`math.mul` 才是矩阵乘
+
+手册明确写道：`Unity.Mathematics` 与 `UnityEngine` 对 `*` 的定义不同，`float4x4` 的 `*` 实现的是逐分量（componentwise）乘法。手册的例子：全 1 矩阵乘以对角线为 0.5 的矩阵，结果只剩对角线上的 0.5，其余位置与 0 相乘变成 0。
+
+```csharp
+float4x4 result = f4x4_Ones * f4x4_HalfIdentity;   // 手册示例，两个变量是手册里预设的矩阵
+// result 对角线为 0.5，其余为 0：这是逐分量乘，不是矩阵乘
+```
+
+做矩阵乘法必须用 `math.mul`。这是从 `Matrix4x4` 迁移过来时最容易踩的坑：`a * b` 能编译，但结果完全不同。
+
+### `math.mul` 的列向量与行向量约定
+
+手册对 `math.mul` 的描述：
+
+- `math.mul(float4x4, float4)`：把 `float4` 当成 4x1 的列向量，做 4x4 乘 4x1，返回 4x1 的列向量（还是 `float4`）。
+- `math.mul(float4, float4x4)`：把 `float4` 当成 1x4 的行向量，做 1x4 乘 4x4，返回 1x4 的行向量。手册说明 Unity Mathematics 把行向量存放在 `float4` 里，没有单独的行向量类型。
+
+```csharp
+float4 result1 = math.mul(f4x4, f4);   // 4x4 * 4x1 = 4x1，矩阵在左，列向量
+float4 result2 = math.mul(f4, f4x4);   // 1x4 * 4x4 = 1x4，向量在左，行向量
+```
+
+所以同一个 `float4` 放在左边还是右边，意义不同，两种写法结果一般不同。参数顺序就是数学上的乘法顺序。
+
+### 四元数：`AxisAngle`、`Euler` 与 `math.mul`
+
+- `quaternion.AxisAngle(float3 axis, float angle)`：先给旋转轴，再给角度，角度单位是弧度而不是度。
+- `quaternion.Euler(x, y, z)`：三个角度同样是弧度，手册示例里每个参数都用 `math.radians(...)` 转换。
+- 四元数与四元数相乘用 `math.mul`，和矩阵、向量一样，不用 `*`。
+
+```csharp
+var axis = new float3(0f, 1f, 0f);
+var q = quaternion.AxisAngle(axis, math.radians(45f));
+var orientation = quaternion.Euler(
+    math.radians(45f),
+    math.radians(90f),
+    math.radians(180f));
+var result = math.mul(q, orientation);   // 手册示例：四元数相乘
+```
+
+手册没有在这一页说明 `math.mul(q1, q2)` 表示"先应用哪一个"的组合顺序，也没有说明 `Euler` 三参数重载的默认旋转顺序（待核实）。需要确定顺序时，到 `quaternion` 与 `math` 的 API 页查对应方法的说明，或用已知例子实测。
+
+向量旋转可用 `math.rotate(quaternion, float3)`（API 页描述为"用单位四元数旋转一个向量"）。四元数插值用 `math.slerp` 与 `math.nlerp`，见下面的函数表。
+
+### `RigidTransform`
+
+`Unity.Mathematics.RigidTransform` 是"刚体变换"结构体（只含旋转与平移，API 页描述为 a rigid transformation type），标了 `[Serializable]`。
+
+| 成员 | 说明 |
+| --- | --- |
+| 字段 `rot`、`pos` | 旋转部分（`quaternion`）、平移部分（`float3`） |
+| 字段 `identity` | 单位变换 |
+| 构造 `RigidTransform(quaternion, float3)` | 单位四元数加平移 |
+| 构造 `RigidTransform(float3x3, float3)` | 旋转矩阵加平移 |
+| 构造 `RigidTransform(float4x4)` | 从矩阵构造，API 页写明假定矩阵是正交归一的（orthonormal） |
+| 静态方法 | `AxisAngle(float3, float)`、`Euler(...)` 与 `EulerXYZ`、`EulerZXY` 等各旋转顺序版本、`RotateX/Y/Z(float)`、`Translate(float3)` |
+
+API 页对 `AxisAngle` 的描述：围绕单位轴旋转，角度是弧度，从旋转轴方向朝原点看为顺时针。`EulerZXY` 的描述里写着"这是 Unity 的默认旋转顺序"。
+
+配套的 `math` 函数：`math.transform(RigidTransform, float3)`（变换一个点）、`math.rotate(RigidTransform, float3)`（只旋转向量）、`math.inverse(RigidTransform)`（求逆）。API 页对 `math.transform` 的描述是"transforming a float3 point by a RigidTransform"。
+
+不含缩放，所以不适合需要非均匀缩放的情形，那时仍用 `float4x4`。
+
+### `MinMaxAABB`
+
+`MinMaxAABB` 在命名空间 `Unity.Mathematics.Geometry` 下，不在 `Unity.Mathematics` 本体里，需要 `using Unity.Mathematics.Geometry;`（也要注意 1.3 的 API 路径是 `Unity.Mathematics.Geometry.MinMaxAABB`，`Unity.Mathematics.MinMaxAABB` 的页面不存在）。API 页描述它是以最小点和最大点存储的轴对齐包围盒（AABB）。
+
+| 成员 | 说明 |
+| --- | --- |
+| 构造 `MinMaxAABB(float3 min, float3 max)` | 用最小点和最大点构造 |
+| 字段 `Min`、`Max` | 包围盒最小点、最大点 |
+| 属性 `Center`、`Extents`、`HalfExtents`、`SurfaceArea`、`IsValid` | 中心、全尺寸、半尺寸、表面积、是否有效 |
+| `Contains(float3)`、`Contains(MinMaxAABB)` | 点或另一个包围盒是否被完全包含 |
+| `Overlaps(MinMaxAABB)` | 是否与另一个包围盒重叠 |
+| `Encapsulate(float3)`、`Encapsulate(MinMaxAABB)` | 扩大包围盒以容纳点或包围盒 |
+| `Expand(float)` | 按给定的带符号距离扩张 |
+| `CreateFromCenterAndExtents`、`CreateFromCenterAndHalfExtents` | 从中心与（半）尺寸创建 |
+
+```csharp
+using Unity.Mathematics;
+using Unity.Mathematics.Geometry;
+
+// 一个 16x16x16 区块在世界坐标里的包围盒（教学示意，未在 Unity 内编译）
+static MinMaxAABB ChunkBounds(int3 chunkCoord)
+{
+    var min = new float3(chunkCoord.x * 16, chunkCoord.y * 16, chunkCoord.z * 16);
+    return new MinMaxAABB(min, min + new float3(16f));
+}
+```
+
+`Contains` 等方法对"边界上的点算不算在内"的细节，API 页没有展开，做边界判断前先用小测试确认（待核实）。本项目用的 Unity 7000.0.0a8 中 `Unity.Mathematics.Geometry` 是否仍在同一命名空间没有在该版本核对（待核实），1.3.2 文档是依据。
+
 ## `math` 函数分类
 
 | 类别 | 函数 |
@@ -71,9 +185,32 @@ transform.position = p + new float3(0, 1, 0);
 | 向量 | `dot` `cross` `length` `lengthsq` `normalize` `distance` |
 | 乘加 / 倒数 | `mad` `rcp` `rsqrt` `sqrt` |
 | 超越函数 | `sin` `cos` `tan` `exp` `log` `pow` |
-| 位运算 | `tzcnt` `lzcnt` `countbits` `bitmask` |
+| 位运算 | `tzcnt` `lzcnt` `countbits` `bitmask` `reversebits` `rol` `ror` |
+| 位模式重解释 | `asuint` `asint` `asfloat` `aslong` `asulong` `asdouble` |
+| 正弦余弦 | `sincos` |
+| 分量重排 | `shuffle` |
+| 四元数插值 | `slerp` `nlerp` |
+| 2 的幂与对数 | `ceilpow2` `ceillog2` `floorlog2` |
+| 矩阵与变换 | `mul` `transpose` `inverse` `determinant` `transform` `rotate` |
 | 归约 | `csum` `cmin` `cmax` |
 | 哈希 | `hash` |
+
+#### 本次对照 1.3.2 API 页核实的函数
+
+下面这些已在 `Unity.Mathematics.math` 的 API 页（1.3.2）里确认存在，签名取自页面上的重载列表：
+
+- 位模式重解释（不是数值转换，只是把同样的位当成另一种类型）：`asuint(float)`、`asuint(int)`、`asint(float)`、`asint(uint)`、`asfloat(int)`、`asfloat(uint)`，以及对应的 2/3/4 分量向量重载（如 `asuint(float2)` 返回 `uint2`）；64 位的有 `aslong(double)`、`aslong(ulong)`、`asulong(double)`、`asulong(long)`、`asdouble(long)`、`asdouble(ulong)`。常用于把浮点结果按位取出做哈希或 golden test（见 2.6 浮点模式与确定性）。
+- `sincos(float x, out float s, out float c)`：一次得到正弦与余弦；API 页还有 `double2`、`float3` 等向量重载，向量版返回逐分量结果。
+- `shuffle(float4 left, float4 right, ShuffleComponent x, ShuffleComponent y, ShuffleComponent z, ShuffleComponent w)`：从两个 `float4` 的分量里按指定顺序挑选，返回 `float4`；另有只给 1、2、3 个 `ShuffleComponent` 的重载（返回标量或对应宽度的向量），以及 `int`、`uint` 等类型的版本。`ShuffleComponent` 是 `math` 里的嵌套枚举，具体成员名没有逐个核对（待核实）。
+- `slerp(quaternion q1, quaternion q2, float t)`：球面线性插值；`nlerp(quaternion q1, quaternion q2, float t)`：归一化线性插值。API 页的描述均只说明"使用插值参数 t 在两个四元数之间插值"，没有给出 `t` 是否钳制（待核实）。
+- `ceilpow2`：大于等于输入的最小 2 的幂，重载覆盖 `int`、`long`、`uint`、`ulong` 以及 `int2/3/4`、`uint2/3/4`。适合把容量向上取整到 2 的幂。
+- `ceillog2`、`floorlog2`：以 2 为底对数的向上、向下取整，重载覆盖 `int`、`uint` 与对应向量。
+- `reversebits(uint)`、`rol(uint, int)`、`ror(uint, int)`、`lzcnt(uint)`、`countbits(uint)`：位反转、循环左右移、前导零计数、置位计数。
+- 矩阵与变换：`transpose(float4x4)`、`determinant(float4x4)`、`inverse`（有 `float2x2`、`float3x3`、`float4x4`、`double` 版本、`quaternion`、`RigidTransform` 等重载）、`transform(float4x4, float3)`、`rotate(float4x4, float3)`、`rotate(quaternion, float3)`。
+
+其余没有列在这里的函数名是 HLSL 惯例名，或此前核实过但不在本次范围，使用时以 IDE 补全为准。
+
+#### 此前核实过的函数
 
 我核实过存在的函数：`remap`（`remap(srcStart, srcEnd, dstStart, dstEnd, x)`，非钳制线性重映射）、`bitmask(bool4)`（返回 `int`，每分量 1 位、LSB 在前，`x` 在第 0 位）、`tzcnt`（`int/uint/long/ulong` 及向量重载，返回尾部 0 的个数）、`hash`（返回 `uint`，对各种向量、矩阵类型有重载，另有 `hash(void* pBuffer, int numBytes, uint seed = 0)`）、`select(falseValue, trueValue, test)`、`smoothstep(xMin, xMax, x)`、`unlerp(start, end, x)`、`sign`。其余函数名是 HLSL 惯例名，我没有逐个查阅 API 页，使用时以 IDE 补全为准。
 
@@ -282,6 +419,9 @@ public struct ValueNoiseBurst
 - 以为 `math.select` 会短路：两个分支都会算。
 - 在大坐标上直接用 `float` 采样噪声，远处出现块状抖动。
 - 把 `noise.cnoise` 当作 `ValueNoiseFunction` 的"更快版本"，实际上换了地形。
+- 用 `*` 乘两个 `float4x4`：得到的是逐分量乘，不是矩阵乘；要用 `math.mul`。
+- `quaternion.AxisAngle` 与 `quaternion.Euler` 直接传角度值：参数是弧度，要先 `math.radians`。
+- `math.mul(m, v)` 与 `math.mul(v, m)` 随手互换：前者把 `v` 当列向量，后者当行向量，结果不同。
 
 ## 小结
 
@@ -303,11 +443,16 @@ public struct ValueNoiseBurst
    答：`-1 / 16 == 0`（向零截断），`-1 >> 4 == -1`（算术右移即 floor）。该用 `>> 4`。
 5. 为什么不能直接把 `ValueNoiseFunction` 换成 `noise.cnoise`？
    答：前者是整数哈希值噪声，后者是梯度噪声，算法和值域都不同，换了会改变地形。
+6. `float4x4 c = a * b;` 和 `float4x4 c = math.mul(a, b);` 有什么区别？`math.mul(m, v)` 与 `math.mul(v, m)` 呢？
+   答：前者是逐分量乘，后者才是矩阵乘；`math.mul(m, v)` 把 `float4` 当列向量（4x4 乘 4x1），`math.mul(v, m)` 把它当行向量（1x4 乘 4x4）。
 
 ## 参考
 
 - https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html
 - https://docs.unity3d.com/Manual/unity-mathematics.html
+- https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.math.html
+- https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.RigidTransform.html
+- https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.Geometry.MinMaxAABB.html
 - https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.noise.html
 - https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.Random.html
 - https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.math.remap.html

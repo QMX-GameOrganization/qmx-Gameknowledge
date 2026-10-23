@@ -217,6 +217,61 @@ Output.ReinterpretStore(outputIndex, packed);
 outputIndex += popcnt_u32((uint)m);
 ```
 
+### `Unity.Burst.Intrinsics.Common`：跨平台共享的内部函数
+
+上面的 `X86`、`Arm.Neon` 是针对具体处理器的。除此之外，`Unity.Burst.Intrinsics.Common` 放的是各个硬件目标共享的功能（API 页描述为 "Common intrinsics that are exposed across all Burst targets"），不需要 `IsXXXSupported` 分支保护。手册（Burst Intrinsics Common class）列出四项：
+
+| 内部函数 | 状态 | 作用 |
+| --- | --- | --- |
+| `Common.Pause()` | 正式 | 提示 CPU 暂停当前线程一下。x86 上映射为 `pause` 指令，ARM 上映射为 `yield` 指令 |
+| `Common.umul128(ulong a, ulong b, out ulong high)` | 正式 | 128 位无符号乘法：返回乘积的低 64 位，高 64 位通过 `out` 参数给出 |
+| `Common.Prefetch` | 实验性 | 提示 Burst 把某个内存位置预取到缓存里 |
+| `Common.InterlockedAnd` / `Common.InterlockedOr` | 实验性 | 对 `int`、`uint`、`long`、`ulong` 做原子与、原子或 |
+
+#### `Pause`
+
+用于自旋锁一类的循环。手册说明：它帮助避免在紧密循环里对原子访问的过度争用（contention），降低这段代码的争用和功耗。API 页补充：这不是操作系统层面的线程让出（yield），只是给 CPU 一个"当前线程可以暂时歇一下"的提示。
+
+```csharp
+using System.Threading;
+using Unity.Burst.Intrinsics;
+
+// 教学示意，未在 Unity 内编译：自旋等待一个标志位
+static unsafe void SpinUntilSet(int* flag)
+{
+    while (Volatile.Read(ref *flag) == 0)
+        Common.Pause();
+}
+```
+
+多数体素 Job 靠 Job 系统的依赖和 `NativeArray` 分区避免共享写，不需要自旋锁；用到自旋锁的场景请先考虑能否改成每线程各写各的区间再合并。
+
+#### `umul128`
+
+128 位无符号乘法。手册说明这类乘法对哈希函数有用，并且在 x86 和 ARM 目标上与硬件指令一一对应。它可以用来写 64 位混合哈希（例如把两个 64 位值相乘，再把高低两半异或），用于种子派生。这类哈希是纯整数运算，不受 2.6 浮点模式与确定性 里讲的浮点漂移影响。
+
+```csharp
+using Unity.Burst.Intrinsics;
+
+// 教学示意，未在 Unity 内编译：高低两半异或，得到 64 位混合值
+static ulong MixMul(ulong a, ulong b)
+{
+    ulong low = Common.umul128(a, b, out ulong high);
+    return low ^ high;
+}
+```
+
+这个混合函数只是示意写法，质量没有评估，真要用来做世界种子，先写 golden test 并检查分布。
+
+#### 实验性：`Prefetch`、`InterlockedAnd`、`InterlockedOr`
+
+手册把这三个标为实验性（experimental），要定义对应的预处理符号才能使用：
+
+- `Common.Prefetch`：需要定义 `UNITY_BURST_EXPERIMENTAL_PREFETCH_INTRINSIC`。它只是提示（hint），Burst 会尝试把该内存位置预取进缓存；手册没有给出签名和性能数据，API 页的方法列表里也没有它，所以签名和收益都待核实，用之前先用 Inspector 和计时验证。
+- `Common.InterlockedAnd` / `Common.InterlockedOr`：需要定义 `UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS`。提供对 `int`、`uint`、`long`、`ulong` 的原子与、原子或，例如多个线程往同一个位掩码里置位或清位。具体签名手册没有写出（待核实）。
+
+实验性接口在后续版本里可能改名、改行为或移除，不要把它们放进需要长期维护的核心代码里。预处理符号怎么定义（Player Settings 的 Scripting Define Symbols，或 asmdef 的 Define Constraints 等）取决于项目，本项目目前没有用到。
+
 建议顺序：先用 `float4`/`int4` + `math` 写；Inspector 里确认没有生成预期指令时，再考虑 intrinsics。
 
 ## 对齐与加载存储
@@ -328,6 +383,8 @@ static bool IsSolid(in NativeArray<byte> mask, int k)
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/optimization-overview.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-burst-intrinsics.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-burst-intrinsics-processors.html
+- https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-burst-intrinsics-common.html
+- https://docs.unity3d.com/Packages/com.unity.burst@1.8/api/Unity.Burst.Intrinsics.Common.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html
 - https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/csharp-type-support.html
 - https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/api/Unity.Mathematics.math.bitmask.html

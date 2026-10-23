@@ -141,3 +141,86 @@
   background: color-mix(in srgb, var(--qmx-accent-2) 7%, transparent);
 }
 :root[data-qmx-theme="rhodes"] .sidebar-content a[aria-current="page"] { box-shadow: inset 4px 0 0 var(--qmx-accent-2); }
+
+/* ───────── 通用画布层（春樱、夏日、像素、初音、霓虹、Nord、GitHub、纸张、方块世界） ───────── */
+.qmx-fx-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; }
+.qmx-fx-layer--under { z-index: -1; } /* 在页面背景之上、所有内容之下 */
+.qmx-fx-layer--over { z-index: 30; } /* 在内容之上，但低于桌宠(40)；不拦截鼠标 */
+
+/* 阅读进度墨线(护眼纸张)：不是动画，所以「减少动态效果」时也保留 */
+.qmx-read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--qmx-accent);
+  pointer-events: none;
+}
+
+/* 赛博霓虹：点击时标题短暂「故障」 */
+:root[data-qmx-glitch] :is(h1, h2) { animation: qmx-glitch 0.26s steps(2) 1; }
+@keyframes qmx-glitch {
+  0% { text-shadow: 2px 0 #ff4fd8, -2px 0 #00f0ff; transform: translateX(1px); }
+  50% { text-shadow: -2px 0 #ff4fd8, 2px 0 #00f0ff; transform: translateX(-1px); }
+  100% { text-shadow: none; transform: none; }
+}
+
+/* ───────── 方块世界：史莱姆 ───────── */
+.qmx-pet[data-pet="slime"] .pet-body { transform-box: fill-box; transform-origin: 50% 100%; }
+.qmx-pet[data-pet="slime"] .pet-bob { animation: qmx-slime-idle 2.2s ease-in-out infinite; }
+.qmx-pet[data-pet="slime"]:is([data-state="walk"], [data-state="enter"]) .pet-bob { animation: qmx-slime-hop 0.75s ease-in-out infinite; }
+.qmx-pet[data-pet="slime"][data-state="wave"] .pet-bob { animation: qmx-slime-hop 0.38s ease-in-out infinite; }
+.qmx-pet[data-pet="slime"][data-state="sleep"] .pet-bob { animation: qmx-slime-idle 4.4s ease-in-out infinite; }
+.qmx-pet[data-pet="slime"][data-state="drag"] .pet-bob { animation: qmx-slime-stretch 0.5s ease-in-out infinite alternate; }
+@keyframes qmx-slime-idle { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.04, 0.95); } }
+@keyframes qmx-slime-hop {
+  0%, 100% { transform: translateY(0) scale(1.1, 0.88); }
+  45%, 70% { transform: translateY(-16px) scale(0.93, 1.09); }
+}
+@keyframes qmx-slime-stretch { from { transform: scale(0.92, 1.1); } to { transform: scale(1.06, 0.94); } }
+.qmx-pet-bubble[data-pet="slime"] { border-radius: 0; border-width: 3px; border-color: #5fa02e; }
+.qmx-pet-bubble[data-pet="slime"]::before { color: #e8b339; }
+
+/* ───────── 摩卡 / 拿铁：猫 ───────── */
+.qmx-pet[data-pet="cat"] {
+  --pet-fur: #bac2de;
+  --pet-shade: #9399b2;
+  --pet-inner: #f5c2e7;
+  --pet-accent: #cba6f7;
+  --pet-outline: #6c7086;
+}
+:root[data-qmx-theme="latte"] .qmx-pet[data-pet="cat"] {
+  --pet-fur: #ecd2ab;
+  --pet-shade: #cfa77a;
+  --pet-inner: #f2a7b8;
+  --pet-accent: #8839ef;
+  --pet-outline: #8c6c4c;
+}
+.cat-fur { fill: var(--pet-fur); stroke: var(--pet-outline); stroke-width: 1.2; }
+.cat-shade { fill: var(--pet-shade); }
+.cat-inner { fill: var(--pet-inner); }
+.cat-accent { fill: var(--pet-accent); }
+.cat-stroke { stroke: var(--pet-fur); }
+.pet-tail { transform-box: fill-box; transform-origin: 0% 100%; animation: qmx-cat-tail 2.4s ease-in-out infinite alternate; }
+.qmx-pet[data-pet="cat"]:is([data-state="walk"], [data-state="enter"]) .pet-tail { animation-duration: 0.9s; }
+.qmx-pet[data-pet="cat"][data-state="sleep"] .pet-tail { animation: none; transform: rotate(22deg); }
+@keyframes qmx-cat-tail { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+.qmx-pet-bubble[data-pet="cat"] { border-radius: 14px; border-width: 1px; font-family: inherit; }
+.qmx-pet-bubble[data-pet="cat"]::before { content: ""; }
+
+/* ───────── 各主题的选中文字配色 ───────── */
+:root[data-qmx-theme="sakura"] ::selection { background: #f9a8c9; color: #3d2432; }
+:root[data-qmx-theme="summer"] ::selection { background: #0369a1; color: #ffffff; }
+:root[data-qmx-theme="pixel"] ::selection { background: #a3e635; color: #07100a; }
+:root[data-qmx-theme="miku"] ::selection { background: #39c5bb; color: #071c22; }
+:root[data-qmx-theme="blocks"] ::selection { background: #7cc242; color: #14130f; }
+:root[data-qmx-theme="mocha"] ::selection { background: #cba6f7; color: #1e1e2e; }
+:root[data-qmx-theme="nord"] ::selection { background: #88c0d0; color: #2e3440; }
+:root[data-qmx-theme="neon"] ::selection { background: #ff4fd8; color: #0d0221; }
+:root[data-qmx-theme="github"] ::selection { background: #b6e3ff; color: #1f2328; }
+:root[data-qmx-theme="latte"] ::selection { background: #7c2ee0; color: #ffffff; }
+:root[data-qmx-theme="paper"] ::selection { background: #e7c98f; color: #3b2f22; }

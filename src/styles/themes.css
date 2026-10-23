@@ -256,6 +256,7 @@
   --qmx-accent: #b45309;
   --qmx-accent-2: #4d7c0f;
   --qmx-link: #9a3412;
-  --qmx-deco: radial-gradient(circle at 20% 10%, #fff8e644, transparent 40%), linear-gradient(180deg, #f4ecd8, #efe5cc);
-  --qmx-deco-size: auto, auto;
+  /* 第一层是细细的纸张纤维噪点(内联 SVG，不额外请求)，其余是柔和的光斑和渐变 */
+  --qmx-deco: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), radial-gradient(circle at 20% 10%, #fff8e644, transparent 40%), linear-gradient(180deg, #f4ecd8, #efe5cc);
+  --qmx-deco-size: 160px 160px, auto, auto;
 }

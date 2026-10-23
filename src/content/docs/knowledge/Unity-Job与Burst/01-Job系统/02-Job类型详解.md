@@ -210,7 +210,7 @@ new IsSolidFilter { Solid = solid }.ScheduleAppend(indices, solid.Length).Comple
 
 ### Collections 里已移除的 HashMap 遍历 Job
 
-`IJobNativeMultiHashMapVisitKeyValue`、`IJobNativeMultiHashMapMergedSharedKeyIndices`、`IJobUnsafeMultiHashMapVisitKeyValue` 等一批 Job 类型，在 Collections 的 CHANGELOG 中记录于 0.12.0（2020-08-04）的 Removed 列表里。本项目的 Collections 6.7.0 的 `AssemblyTypeForwarders.cs` 里也找不到它们，所以不要再使用，旧教程里出现的这些名字属于过时内容。遍历哈希表请直接用迭代器，或用 `GetKeyArray` 等取出数组再配合 `IJobFor`（待核实具体最佳实践）。
+`IJobNativeMultiHashMapVisitKeyValue`、`IJobNativeMultiHashMapMergedSharedKeyIndices`、`IJobUnsafeMultiHashMapVisitKeyValue` 等一批 Job 类型，在 Collections 的 CHANGELOG 中记录于 0.12.0（2020-08-04）的 Removed 列表里。本项目的 Collections 6.7.0 的 `AssemblyTypeForwarders.cs` 里也找不到它们，所以不要再使用，旧教程里出现的这些名字属于过时内容。遍历哈希表有两条路，均已按 Collections 2.5 的 `NativeParallelHashMap<K,V>` API 页核实：一是直接用枚举器，`GetEnumerator()` 返回 `NativeParallelHashMap<K,V>.Enumerator`，在单个 Job 或主线程里顺序遍历键值对（枚举器是视图，容器释放或扩容后失效，见 1.4 容器枚举器与 GetEnumerator）；二是用 `GetKeyArray(allocator)`、`GetValueArray(allocator)` 或 `GetKeyValueArrays(allocator)` 把键值复制成数组（顺序不确定），再配合 `IJobFor` / `IJobParallelFor` 并行处理。官方没有给出"哪种更适合并行遍历"的结论，这一点仍待核实；复制数组要多一次分配与拷贝。
 
 ### ECS 的 Job
 

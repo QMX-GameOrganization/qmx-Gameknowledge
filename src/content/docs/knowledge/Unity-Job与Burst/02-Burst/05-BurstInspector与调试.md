@@ -246,6 +246,59 @@ public void BurstMatchesManaged()
 7. 编译慢：开 `Show Timings` 看前端、中端、后端耗时；必要时 `OptimizeFor = OptimizeFor.FastCompilation` 换编译速度。
 8. 最后在 Profiler 里实测，用 `ProfilerMarker` 给 Burst 代码打点。汇编只能说明"看起来"，不能代替测量。
 
+## 外部性能分析工具
+
+手册（Debugging and profiling tools）的"Profiling Burst-compiled code"部分分两块：用独立的外部性能分析工具，以及用 Unity Profiler 的标记。
+
+### 独立分析工具：Instruments、Superluminal
+
+可以用 Instruments、Superluminal 这类工具，对 Player 构建里的 Burst 代码做性能分析（手册写的是 "such as Instruments or Superluminal"，并明确说明针对 Player 构建）。因为 Unity 构建 Player 代码的方式，需要告诉分析工具去哪里找符号：把工具指向存放 `lib_burst_generated` 文件的文件夹，通常是 `Plugins` 文件夹。这与上面原生调试器在 Player 里找符号的做法一致。
+
+要点：
+
+- 符号要先生成出来：Development Build，或在 Burst AOT 设置里开 `Force Debug Information`（见前面"原生调试"一节和 2.11 构建发布与平台差异）。手册在这一段只说明了指向 `lib_burst_generated` 目录，没有逐工具的设置步骤，具体怎么配置请看工具自己的文档（待核实）。
+- 原生分析器看到的是 CPU 热点函数和调用栈，适合回答"时间花在哪个 Burst 函数里"；"哪个 Job 在哪个线程上跑、什么时候跑"仍然用 Unity Profiler 的时间线。
+- 为了让热点分析贴近真实，别把 `Enable Optimizations` 关掉，也别留着 `Debug = true`，否则看到的是关闭优化的代码。
+
+### Unity Profiler 标记：`ProfilerMarker`
+
+想让 Unity Profiler 里 Burst 代码的数据更清晰（无论是编辑器里还是连接的 Player），可以在 Burst 代码里创建 `ProfilerMarker`，写法是 `new ProfilerMarker("MarkerName")`。手册给的示例，既用静态标记配 `Auto()`，也演示了在方法内创建标记并手动 `Begin`/`End`：
+
+```csharp
+using Unity.Burst;
+using Unity.Profiling;
+
+[BurstCompile]
+private static class ProfilerMarkerWrapper
+{
+    private static readonly ProfilerMarker StaticMarker = new ProfilerMarker("TestStaticBurst");
+
+    [BurstCompile(CompileSynchronously = true)]
+    public static int CreateAndUseProfilerMarker(int start)
+    {
+        using (StaticMarker.Auto())
+        {
+            var p = new ProfilerMarker("TestBurst");
+            p.Begin();
+            var result = 0;
+            for (var i = start; i < start + 100000; i++)
+            {
+                result += i;
+            }
+            p.End();
+            return result;
+        }
+    }
+}
+```
+
+对照示例可知：
+
+- `static readonly ProfilerMarker` 字段在 Burst 里是允许的（静态只读，见 2.2 支持的 C# 子集）。
+- `using (marker.Auto())` 会在作用域结束时自动结束标记，比手动 `Begin`/`End` 不容易漏掉 `End`（尤其是有多个 `return` 的函数）。手动配对时，每个 `Begin` 都必须有对应的 `End`。
+- 手册示例的 `using` 声明没有给出，`ProfilerMarker` 在 `Unity.Profiling` 命名空间下，示例里的 `using Unity.Profiling;` 是补上的。
+- 标记本身有开销，放在区块级或 Job 级，不要放在最内层的逐体素循环里。
+
 ## 常见坑
 
 - 在 Release 脚本编译模式下调试，断点被跳过。先切到 Debug。

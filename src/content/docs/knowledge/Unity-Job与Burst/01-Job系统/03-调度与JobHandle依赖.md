@@ -114,6 +114,12 @@ Profiler 里主线程上的等待类标记（常见名字如 `WaitForJobGroupID`
 - 规避方式：把 `Complete` 推后；把长 Job 拆成相互依赖的小 Job；用 `IsCompleted` 轮询，完成了再 `Complete`。
 - 手册提示：Job 不会让出执行权，worker 一旦开始 Job 就会做完，所以过长的 Job 会阻塞别的独立 Job，进一步拖长主线程等待。
 
+### 官方设计准则：Job 应在一帧内完成
+
+Unity 手册 Create and run a job 页（6000.6 版核对）有一句设计准则：Job System 从队列取出 Job 后，在单个线程上把 `Execute` 运行一次；通常在后台线程上跑，但主线程空闲时也可能被选来运行 Job。"因此，你应该把 Job 设计成在一帧以内完成"（原文大意，用自己的话转述）。同一页的 "Avoid using long running jobs" 一节进一步解释：Job 不像线程那样会让出执行权，worker 开始后必须做完才能处理别的 Job；所以应把耗时长的 Job 拆成彼此依赖的多个小 Job，这样 Job System 同时运行的多条依赖链才有机会都推进；若 worker 全被长 Job 占满，会把主线程显式等待的重要 Job 推迟，造成本不该有的主线程停顿。对 `IJobParallelFor`，官方还建议：无法拆分时增大批大小，限制有多少 worker 参与这个长 Job。
+
+与本项目跨帧流水线的关系（以下是我的推断，不是官方原话）：3.5 的流水线让区块生成跨多帧完成，这和"一个 Job 在一帧内完成"并不冲突。区别在于单位：一帧内完成的约束针对单个 Job，而跨帧的是"一条 Job 依赖链"或"一个区块的整个生产过程"。所以做法应是把一个区块的任务拆成"采样密度 -> 面可见性 -> 建网格数据"等多个小 Job，用 `JobHandle` 串起来，再用 `IsCompleted` 轮询跨帧收割，而不是写一个要跑很多帧的大 Job。"每个小 Job 到底该多小才算'一帧内'"，官方没有给数字，需要用 Profiler 实测（见 1.8）。
+
 ## 分配器与释放
 
 ### Allocator.TempJob 与 Persistent

@@ -1,6 +1,7 @@
 // 特效里的纯逻辑测试(星星物理、桌宠状态机)。用法：node scripts/test-fx.mjs
 import assert from "node:assert/strict";
 import { createStars, stepStars, shockwave, homePosition, drawPosition } from "../src/fx/star-physics.mjs";
+import { addParticle, stepParticles, burst, pushAway, life01 } from "../src/fx/particles.mjs";
 import { createPet, stepPet, noteActivity, grab, dragTo, release, poke, maxX, groundY, PET_DEFAULTS } from "../src/fx/pet-logic.mjs";
 
 // 固定随机序列，结果可复现
@@ -85,6 +86,56 @@ test("滚动产生视差：近层比远层移动得更多，且纵向循环不�
     const y = homePosition(s, 1280, 800, 99999).y;
     assert.ok(y >= 0 && y < 800);
   }
+});
+
+// ───────── 粒子工具 ─────────
+test("burst 生成指定数量的粒子，并且不超过上限", () => {
+  const list = [];
+  burst(list, 100, 100, 20, { cap: 500 }, seeded(9));
+  assert.equal(list.length, 20);
+  burst(list, 100, 100, 600, { cap: 50 }, seeded(9));
+  assert.equal(list.length, 50, "数量有界");
+  assert.ok(list.every((p) => p.life > 0 && p.life === p.max && Number.isFinite(p.vx)));
+});
+
+test("粒子受重力下落，寿命耗尽后被移除", () => {
+  const list = [];
+  burst(list, 0, 0, 30, { speed: [0, 0], life: [0.5, 0.5] }, seeded(2));
+  const y0 = list[0].y;
+  for (let i = 0; i < 20; i++) stepParticles(list, dt, { gravity: 900 });
+  assert.ok(list[0].y > y0 + 10, "应当下落");
+  for (let i = 0; i < 60; i++) stepParticles(list, dt, { gravity: 900 });
+  assert.equal(list.length, 0, "寿命耗尽后全部移除");
+});
+
+test("地面：不反弹的粒子停在地面，反弹的粒子会向上弹起", () => {
+  const rest = [];
+  addParticle(rest, { x: 0, y: 90, vx: 50, vy: 400, life: 5, max: 5, size: 4, rot: 0, vr: 0, color: "#fff" });
+  for (let i = 0; i < 120; i++) stepParticles(rest, dt, { gravity: 900, floor: 100 });
+  assert.equal(rest[0].y, 100);
+  assert.equal(rest[0].vy, 0);
+  const bouncy = [];
+  addParticle(bouncy, { x: 0, y: 90, vx: 0, vy: 600, life: 5, max: 5, size: 4, rot: 0, vr: 0, color: "#fff" });
+  let sawUp = false;
+  for (let i = 0; i < 60; i++) { stepParticles(bouncy, dt, { gravity: 900, floor: 100, bounce: 0.5 }); if (bouncy[0].vy < 0) sawUp = true; }
+  assert.ok(sawUp);
+});
+
+test("pushAway 只推半径内的粒子，方向远离中心", () => {
+  const list = [];
+  addParticle(list, { x: 110, y: 100, vx: 0, vy: 0, life: 1, max: 1, size: 1, rot: 0, vr: 0, color: "#fff" });
+  addParticle(list, { x: 500, y: 100, vx: 0, vy: 0, life: 1, max: 1, size: 1, rot: 0, vr: 0, color: "#fff" });
+  pushAway(list, 100, 100, 120, 2000, dt);
+  assert.ok(list[0].vx > 0, "右边的粒子被向右推");
+  assert.equal(list[1].vx, 0);
+});
+
+test("极端输入下粒子数值保持有限（掉帧、零距离）", () => {
+  const list = [];
+  burst(list, 5, 5, 100, {}, seeded(4));
+  addParticle(list, { x: 50, y: 50, vx: 0, vy: 0, life: 2, max: 2, size: 1, rot: 0, vr: 0, color: "#fff" });
+  for (let i = 0; i < 50; i++) { pushAway(list, 50, 50, 100, 5000, 0.5); stepParticles(list, 0.5, { gravity: 900, drag: 0.5, windX: 40 }); }
+  assert.ok(list.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y) && Number.isFinite(p.vx) && Number.isFinite(p.vy)));
 });
 
 // ───────── 桌宠状态机 ─────────

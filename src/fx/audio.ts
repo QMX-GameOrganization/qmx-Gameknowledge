@@ -49,6 +49,8 @@ export class AudioManager {
     if (value) {
       await this.resume();
       this.blip(); // 给用户一个「已开启」的反馈
+    } else {
+      this.stopLoops(); // 关掉正在播放的环境音(比如雨声)
     }
   }
 
@@ -140,5 +142,190 @@ export class AudioManager {
   tick() {
     if (!this.allowed('tick', 45)) return;
     this.tone({ freq: 1200 + Math.random() * 200, dur: 0.025, type: 'square', gain: 0.008 });
+  }
+
+  // ───── 噪声与循环音 ─────
+
+  private noiseBuffer: AudioBuffer | null = null;
+  private loops = new Map<string, () => void>();
+
+  private getNoise(): AudioBuffer | null {
+    const ctx = this.ctx;
+    if (!ctx) return null;
+    if (!this.noiseBuffer) {
+      const length = ctx.sampleRate * 2;
+      const buf = ctx.createBuffer(1, length, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
+      this.noiseBuffer = buf;
+    }
+    return this.noiseBuffer;
+  }
+
+  /** 一小段滤波后的噪声：碎裂声、纸张沙沙声。 */
+  private noise(opts: { dur: number; filter: BiquadFilterType; freq: number; gain: number; q?: number; delay?: number }) {
+    const ctx = this.ctx;
+    const buf = this.getNoise();
+    if (!ctx || !buf || !this.master) return;
+    const t0 = ctx.currentTime + (opts.delay ?? 0);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const filter = ctx.createBiquadFilter();
+    filter.type = opts.filter;
+    filter.frequency.value = opts.freq;
+    filter.Q.value = opts.q ?? 0.7;
+    const amp = ctx.createGain();
+    amp.gain.setValueAtTime(0.0001, t0);
+    amp.gain.exponentialRampToValueAtTime(opts.gain, t0 + 0.01);
+    amp.gain.exponentialRampToValueAtTime(0.0001, t0 + opts.dur);
+    src.connect(filter).connect(amp).connect(this.master);
+    src.start(t0, Math.random());
+    src.stop(t0 + opts.dur + 0.05);
+  }
+
+  /** 环境雨声：淡入淡出的循环噪声。on=false 时淡出并停止。 */
+  rain(on: boolean) {
+    const key = 'rain';
+    if (!on) {
+      this.loops.get(key)?.();
+      this.loops.delete(key);
+      return;
+    }
+    if (this.loops.has(key) || !this.enabled || !this.ctx || this.ctx.state !== 'running' || !this.master) return;
+    const ctx = this.ctx;
+    const buf = this.getNoise();
+    if (!buf) return;
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.loop = true;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 1500;
+    filter.Q.value = 0.5;
+    const amp = ctx.createGain();
+    amp.gain.setValueAtTime(0.0001, ctx.currentTime);
+    amp.gain.exponentialRampToValueAtTime(0.02, ctx.currentTime + 1.5);
+    src.connect(filter).connect(amp).connect(this.master);
+    src.start();
+    this.loops.set(key, () => {
+      const now = ctx.currentTime;
+      amp.gain.cancelScheduledValues(now);
+      amp.gain.setValueAtTime(Math.max(amp.gain.value, 0.0001), now);
+      amp.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+      src.stop(now + 1.3);
+    });
+  }
+
+  /** 切换主题或关闭特效时调用：停掉所有循环音。 */
+  stopLoops() {
+    this.loops.forEach((stop) => stop());
+    this.loops.clear();
+  }
+
+  // ───── 春樱 / 夏日 ─────
+
+  /** 日式五声音阶(平调子)的筝拨弦。 */
+  pluck() {
+    if (!this.allowed('pluck', 140)) return;
+    const scale = [587.33, 659.25, 698.46, 880.0, 932.33, 1174.66];
+    const f = scale[Math.floor(Math.random() * scale.length)];
+    this.tone({ freq: f, dur: 0.9, type: 'triangle', gain: 0.05 });
+    this.tone({ freq: f * 2, dur: 0.45, gain: 0.012 });
+  }
+
+  /** 水滴。 */
+  plink() {
+    if (!this.allowed('plink', 90)) return;
+    this.tone({ freq: 1100, slideTo: 420, dur: 0.13, gain: 0.04 });
+  }
+
+  // ───── 像素终端 ─────
+
+  /** 8 位风格：click 是上行三连音，key 是极短的按键声。 */
+  retro(kind: 'click' | 'key') {
+    if (kind === 'key') {
+      if (!this.allowed('retro-key', 40)) return;
+      this.tone({ freq: 760 + Math.random() * 240, dur: 0.03, type: 'square', gain: 0.012 });
+      return;
+    }
+    if (!this.allowed('retro-click', 120)) return;
+    [523.25, 659.25, 783.99].forEach((freq, i) => this.tone({ freq, dur: 0.06, type: 'square', gain: 0.022, delay: i * 0.05 }));
+  }
+
+  // ───── 初音 ─────
+
+  private melodyIndex = 0;
+  /** 按固定旋律逐个弹出音符，连续点击就是一小段曲调。 */
+  melody() {
+    if (!this.allowed('melody', 90)) return;
+    const tune = [659.25, 783.99, 880.0, 783.99, 987.77, 880.0, 783.99, 659.25, 587.33, 659.25, 783.99, 1046.5];
+    const f = tune[this.melodyIndex++ % tune.length];
+    this.tone({ freq: f, dur: 0.45, type: 'triangle', gain: 0.045 });
+    this.tone({ freq: f * 2, dur: 0.3, gain: 0.012, delay: 0.005 });
+  }
+
+  // ───── 方块世界 ─────
+
+  /** 方块破碎。 */
+  crack() {
+    if (!this.allowed('crack', 80)) return;
+    this.noise({ dur: 0.14, filter: 'lowpass', freq: 900, gain: 0.09 });
+    this.tone({ freq: 120, slideTo: 55, dur: 0.12, gain: 0.05 });
+  }
+
+  /** 史莱姆弹跳。 */
+  boing() {
+    if (!this.allowed('boing', 150)) return;
+    this.tone({ freq: 180, slideTo: 440, dur: 0.1, gain: 0.05 });
+    this.tone({ freq: 440, slideTo: 200, dur: 0.12, gain: 0.04, delay: 0.09 });
+  }
+
+  // ───── 赛博霓虹 ─────
+
+  /** 激光「咻」。 */
+  zap() {
+    if (!this.allowed('zap', 100)) return;
+    this.tone({ freq: 1400, slideTo: 180, dur: 0.14, type: 'sawtooth', gain: 0.018 });
+  }
+
+  // ───── Nord ─────
+
+  /** 冰晶一样的清脆长音。 */
+  icy() {
+    if (!this.allowed('icy', 200)) return;
+    this.tone({ freq: 1318.5, dur: 1.1, gain: 0.03 });
+    this.tone({ freq: 1975.5, dur: 0.8, gain: 0.014, delay: 0.02 });
+  }
+
+  // ───── 猫 ─────
+
+  /** 喵。low 为低沉版本(夜晚的摩卡猫)。 */
+  mew(low = false) {
+    if (!this.allowed('mew', 300)) return;
+    const k = low ? 0.82 : 1;
+    this.tone({ freq: 700 * k, slideTo: 960 * k, dur: 0.16, gain: 0.035 });
+    this.tone({ freq: 960 * k, slideTo: 600 * k, dur: 0.24, gain: 0.03, delay: 0.15 });
+  }
+
+  // ───── GitHub / 护眼纸张 ─────
+
+  /** 提交成功的轻点两下。 */
+  commit() {
+    if (!this.allowed('commit', 60)) return;
+    this.tone({ freq: 1000, dur: 0.04, type: 'square', gain: 0.012 });
+    this.tone({ freq: 1500, dur: 0.05, type: 'square', gain: 0.012, delay: 0.04 });
+  }
+
+  /** 翻纸的沙沙声。 */
+  paper() {
+    if (!this.allowed('paper', 150)) return;
+    this.noise({ dur: 0.14, filter: 'highpass', freq: 3000, gain: 0.025 });
+  }
+
+  /** 读完一页的清亮铃声。 */
+  bell() {
+    if (!this.allowed('bell', 3000)) return;
+    this.tone({ freq: 880, dur: 1.2, gain: 0.03 });
+    this.tone({ freq: 1760, dur: 0.8, gain: 0.012, delay: 0.01 });
   }
 }

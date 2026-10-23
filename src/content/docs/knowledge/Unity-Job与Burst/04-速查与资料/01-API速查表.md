@@ -42,6 +42,11 @@ sidebar:
 - 批次总数 `ceil(arrayLength / batch)` 应明显多于 worker 数，否则吃不满核心。批大小取 64 的倍数只能降低相邻批次共享缓存行的概率，不是保证。
 - 本项目 `BuildWithJobs` 默认批大小 64，只是起点，要用扫描实验验证。见 1.2、1.8。
 
+### Job 粒度与 ECS 的关系
+
+- 官方设计准则：把 Job 设计成在一帧以内完成。Job 不会让出执行权，worker 开始后必须做完；过长的 Job 应拆成彼此依赖的多个小 Job，否则会推迟主线程显式等待的重要 Job。无法拆分的 `IJobParallelFor` 可增大批大小来限制参与的 worker 数。跨帧流水线是"一条 Job 依赖链"跨帧，与"单个 Job 一帧内完成"不冲突（这一点是 1.3 的推断，不是官方原话）；多小才算"一帧内"官方没给数字，需 Profiler 实测。见 1.3、1.8。
+- DOTS 五个主要部分：Entities、Job system、Burst、Collections、Mathematics；本项目未引用 Entities。ECS 系统里的 `Dependency` 按组件读写自动推导，容器依赖仍要手动 `JobHandle.CombineDependencies`；Job 内的结构性变更要用 `EntityCommandBuffer`。见 0.4。
+
 ## 2 JobHandle 与 JobsUtility
 
 | 名称 | 作用与签名要点 | 注意 | 见 |
@@ -75,10 +80,15 @@ sidebar:
 | `NativeHashMap<K,V>`、`NativeHashSet<T>` | 单线程场景，内存开销较低（2.x 新增，名字与旧名相同但实现不同） | 无；官方 API 注明不适合并行写入 | 并行写请用 `NativeParallelHashMap` | 1.4 |
 | `NativeParallelHashMap<K,V>` | 多线程场景，内存开销较高 | 有：`AsParallelWriter()`，`TryAdd`（key 已存在返回 false）；2.6.0-pre.3 起补充 `Add` | 不扩容，容器已满时写入抛异常；不要依赖带线程下标参数的重载 | 1.4、1.7 |
 | `NativeParallelHashSet<T>`、`NativeParallelMultiHashMap<K,V>` | 并行集合 / 一键多值 | 有 | 读取与删除放在另一个 Job 阶段 | 1.4 |
-| `UnsafeList<T>`、`UnsafeHashMap`、`UnsafeParallelHashMap`、`UnsafeStream`、`UnsafeBitArray`、`UnsafeText` 等 | 无 `AtomicSafetyHandle`，可嵌套、可放进别的 unmanaged 结构 | `UnsafeParallelHashMap.ParallelWriter` 存在；其余资料未逐个核对 | 不检查读写冲突与释放后使用；`TempJob` 超 4 帧也不提醒；释放时嵌套容器要逐个 `Dispose` | 1.4、1.6 |
+| `UnsafeList<T>`、`UnsafeHashMap`、`UnsafeParallelHashMap`、`UnsafeStream`、`UnsafeBitArray`、`UnsafeText` 等 | 无 `AtomicSafetyHandle`，可嵌套、可放进别的 unmanaged 结构；与 `Native*` 一一对应（`NativeList` 对应 `UnsafeList`），多数 `Native*` 是对 `Unsafe*` 加安全句柄的封装 | `UnsafeParallelHashMap.ParallelWriter` 存在；其余资料未逐个核对 | 不检查读写冲突与释放后使用；`TempJob` 超 4 帧也不提醒；释放时嵌套容器要逐个 `Dispose`；关闭安全检查后两类性能无显著差别，优先 `Native*`，必须嵌套时才用 `Unsafe*`（`NativeList<UnsafeList<T>>` 可以，`NativeList<NativeList<T>>` 不行）；用 `Unsafe*` 别名 `Native*` 会绕开冲突检查 | 1.4、1.5、1.6 |
 | `UnsafeAtomicCounter32`/`64` | 指向一个整数的原子计数器；`Add`/`Sub` 返回原值，`AddSat`/`SubSat`，`Reset` 非原子 | 不适用 | 通常比分块部分和慢得多，只适合冲突很少的场合 | 1.7 |
 | `FixedString32Bytes` 等 | 固定大小字符串，32/64/128/512/4096 字节，含 3 字节开销 | 无；值类型 | 内联在结构体里，不需要 `Dispose`；容量固定，超出会失败 | 1.4 |
 | `FixedList32Bytes<T>` 等 | 固定大小列表，32/64/128/512/4096 字节，含 2 字节开销 | 无；值类型 | 同上；大型栈结构有栈溢出风险 | 1.4、2.12 |
+| `NativeSortExtension`（`Sort`、`SortJob`、`SortJobDefer`、`BinarySearch`） | `Unity.Collections` 下的扩展方法：同步 `Sort<T>()` / `Sort<T, U>(comp)`，可调度的 `SortJob`，列表长度运行时才定的 `SortJobDefer`，二分查找；有 `NativeArray`/`NativeList`/`NativeSlice`/`UnsafeList`/指针重载 | 不适用；是官方"确定性读写"三手段之一（写后排序） | 默认比较要求 `T : unmanaged, IComparable`（待核实）；`SortJob` 的调度方式与是否内部并行未核对（待核实）；排序键不唯一时相同键的顺序仍不确定 | 1.4、1.7 |
+| `NativeArrayExtensions` | `ArraysEqual`、`Contains`、`IndexOf`（找不到返回 -1）、`CopyFrom`（长度不等抛 `ArgumentException`）、`Reinterpret<T, U>()` | 不适用 | `Reinterpret<T, U>()` 两个类型都要 `unmanaged`，容量不能被 `sizeof(U)` 整除时抛 `InvalidOperationException`；别名机制见第 4 节 | 1.4、1.5 |
+| `ListExtensions`（托管 `List<T>`） | `RemoveAtSwapBack`、`RemoveSwapBack`、`ToNativeArray`、`ToNativeList` | 不适用 | 针对托管 `List<T>`，不是 `NativeList`；`SwapBack` 会打乱顺序 | 1.4 |
+| 容器枚举器 `GetEnumerator()` | 返回 `MoveNext` / `Current` 的枚举器；第一次 `MoveNext` 才移到第一个元素；哈希表另有 `GetKeyArray`、`GetValueArray`、`GetKeyValueArrays`（复制成新数组，顺序不确定） | 不适用 | 枚举器属于"视图"：容器 `Dispose` 或大小变化后失效；枚举期间不要增删、扩容；失效时抛哪种异常官方没写（待核实） | 1.4、1.6 |
+| `ParallelWriter` / `ParallelReader` | 容器的嵌套类型，用于并行 Job 读或写；`NativeList<T>.ParallelWriter` 共享原列表的安全句柄，只能 `AddNoResize` | 见各容器 | 只支持集合功能的子集；顺序不确定。官方页只给了 `ParallelWriter` 示例，哪些容器有名为 `ParallelReader` 的类型没有列出（待核实）；只读访问通常用 `[ReadOnly]` 或 `AsReadOnly()` | 1.7 |
 
 ### 按场景选容器
 
@@ -94,7 +104,7 @@ sidebar:
 | 计数、求和 | 分块部分和，再由一个合并 Job 汇总 | 1.7 |
 | 需要嵌套或放进别的 unmanaged 结构 | `Unsafe*` 系列，或展平加偏移表 | 1.4 |
 
-`NativeArray<NativeArray<T>>` 不能用（具体异常文本待核实）。
+`NativeArray<NativeArray<T>>` 不能用于 Job：容器本身可以被创建，被安全系统拒绝的是"调度使用它的 Job"（`AtomicSafetyHandle.SetNestedContainer` 的作用），具体异常类型与文本待核实。见 1.4、1.11。
 
 ## 4 Allocator 速查
 
@@ -106,7 +116,9 @@ sidebar:
 | `Allocator.Invalid` | 无 | 默认值；`AsDeferredJobArray()` 返回的数组用它标记列表模式 | 不适用 | 不适用 | 1.5 |
 | `Allocator.None` | 无 | 不拥有内存，用于包装别人分配的内存 | 不适用 | `Dispose` 不会释放 | 1.5 |
 | `Allocator.AudioKernel` | 无 | 音频内核专用，具体用途与可用范围（待核实） | 不适用 | 不适用 | 1.5 |
-| 自定义分配器 | 视实现 | 通过 `AllocatorManager` 注册，句柄隐式转换为 `Allocator`；`RewindableAllocator` 是线性分配器，只能整体 `Rewind()` | 视实现 | 概念性示例中的 `AllocatorHelper`、`Initialize` 签名待核实 | 1.5 |
+| 自定义分配器 | 视实现 | 通过 `AllocatorManager` 注册，句柄隐式转换为 `Allocator`；结构需含 `AllocatorManager.AllocatorHandle` 字段并实现 `AllocatorManager.IAllocator`；怎样把自定义分配器注册进全局表官方在另一页讲，资料未读到（待核实） | 视实现 | 销毁顺序：先释放分配器自己的内存块，再 `AllocatorHelper.Dispose()` 注销并释放本体 | 1.5 |
+| `RewindableAllocator` | 类似线性分配器，快、线程安全；预分配块，最小对齐 64 字节；块用完再分配，块大小翻倍到上限后线性增长；`Rewind()` 一次性释放所有分配（保留用过的块） | 视容器 | 单个 `Free` / `Dispose` 默认是空操作；创建时开启 enable block free 后，才在释放某块的最后一个分配时回绕该块。创建推荐 `AllocatorHelper<RewindableAllocator>`，`Initialize(int initialBlockSize, bool enableBlockFree = false)`；`NativeArray` 必须经 `CollectionHelper.CreateNativeArray` 创建，`NativeList` 用 `rwd.Handle` 构造；`Rewind` 后旧容器访问抛 `ObjectDisposedException`（需检查开启的构建）；`Rewind` 前必须保证没有 Job 还在用 | 1.5 |
+| 别名（alias）与 `Reinterpret<T, U>()` | 别名共享另一个集合的分配，不自己分配；`Reinterpret<T, U>()` 是数组重解释这种特殊别名（10 个 `int` 变 20 个 `short`） | 不适用 | 别名无需释放，对别名 `Dispose` 什么也不做；原件释放后别名不能再用（`ObjectDisposedException`）；`Unsafe*` 别名 `Native*` 绕开安全检查，别名最好仍用 `Native*` 视图 | 1.4、1.5 |
 
 ### Dispose 的几种写法
 
@@ -118,6 +130,7 @@ sidebar:
 | 池化 `Persistent` 缓冲 | 区块缓冲复用 | 归还须在对应 `JobHandle` 完成之后；`UninitializedMemory` 的缓冲带旧数据 | 1.5 |
 
 - `IsCreated` 只反映被调用的那份拷贝，对同一容器的两个拷贝都 `Dispose` 会二次释放。
+- 容器是值类型，拷贝的是"指针加 `AtomicSafetyHandle`"而不是数据，所有拷贝指向同一块内存和同一条安全中心记录。对任一份拷贝 `Dispose`，`Release()` 把中心记录的版本号加一，其它拷贝下次访问时抛 `ObjectDisposedException`。见 1.6。
 - 退出 Play Mode、`OnDestroy`、Domain Reload 之前，先 `Complete` 在途 Job，再释放容器。见 1.3、1.5。
 
 ## 5 Job 与安全相关特性
@@ -131,8 +144,29 @@ sidebar:
 | `[NativeDisableUnsafePtrRestriction]` | 允许 Job 字段持有裸指针 | 绕过安全系统 | 1.6、1.7 |
 | `[NativeSetThreadIndex]` | 把当前工作线程下标注入 Job 里的 `int` 字段 | 下标与其它并行运行的 Job 不重复；不保证从 0 连续；槽间距要隔开缓存行 | 1.6、1.7 |
 | `[DeallocateOnJobCompletion]` | Job 完成时自动释放容器 | 见第 4 节 | 1.5 |
-| `[NativeContainer]`、`[NativeContainerSupportsMinMaxWriteRestriction]`、`[NativeContainerIsReadOnly]`、`[NativeContainerIsAtomicWriteOnly]`、`[NativeContainerSupportsDeferredConvertListToArray]` | 自定义容器声明自己的安全特性 | 资料只点名，不展开 | 1.6 |
+| `[NativeContainer]` | 标记自定义 native container 类型 | 必须内嵌名为 `m_Safety` 的 `AtomicSafetyHandle`（启用检查时）；调用 `MallocTracked` 时泄漏跟踪自动生效；实现不当可能直接让 Unity 崩溃，要为所有场景补测试 | 1.11 |
+| `[NativeContainerSupportsMinMaxWriteRestriction]` | 声明容器可把可写范围限制在最小/最大下标之间；要在 `IJobParallelFor` 里写入容器必须标 | 必须有 `int m_Length`、`int m_MinIndex`、`int m_MaxIndex` 三个成员，按此顺序且中间不能有别的成员；容器自己对范围外写入抛异常 | 1.11、1.6 |
+| `[NativeContainerIsReadOnly]` | 标记容器类型只读，去掉调度时"读还是写"的歧义 | 不会阻止代码去写，约束要容器自己执行 | 1.11 |
+| `[NativeContainerIsAtomicWriteOnly]` | 声明容器只允许写，且只在安全的并行上下文里写；可作可写参数传给并行 Job，不限制下标，表示各部分互不重叠 | 容器必须强制只写；具体哪些内置类型采用（待核实） | 1.11 |
+| `[NativeContainerSupportsDeferredConvertListToArray]` | 声明容器可传给 `IJobParallelForDefer` 的 `Schedule` | 页面只有这一句，没有其它字段要求 | 1.11、1.4 |
+| `[NativeContainerSupportsDeallocateOnJobCompletion]` | 声明容器可配合 `[DeallocateOnJobCompletion]` 在 Job 完成时自动释放 | 必须有名为 `m_Buffer` 的指针字段和名为 `m_AllocatorLabel` 的 `Allocator` 字段 | 1.11、1.5 |
+| `[NativeSetClassTypeToNullOnSchedule]` | 用在 Job 结构的字段上：传给 Job 的拷贝里该类引用被置为 null | 官方示例是旧版容器的 `DisposeSentinel` 字段（类，Job 不能带托管引用） | 1.11 |
+| `[JobProducerType(typeof(...))]` | 标在 Job 接口上，指明包含静态 `Execute` 方法的 producer 类型；所有 Job 接口都必须标，Burst 靠它编译 `Execute` | 自定义新的 Job 类型才用得到；`JobsUtility.CreateJobReflectionData` 等用法未核对（待核实） | 1.11 |
 | `[Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]` | 保护 Burst 代码里的 `throw` | 否则触发 `BC1370`；Player 里 `throw` 会变成 abort | 2.2、2.10 |
+
+### 自定义容器用到的 AtomicSafetyHandle 与分配 API
+
+| 名称 | 作用 | 注意 | 见 |
+| --- | --- | --- | --- |
+| `AtomicSafetyHandle.CheckReadAndThrow` / `CheckWriteAndThrow` | 读、写之前检查当前上下文是否有权限且容器未释放 | 不满足抛 `InvalidOperationException`（官方示例注释）；已释放时 Rewindable 页测试抛的是 `ObjectDisposedException`，两处不一致，以实测为准（待核实）；代码要用 `ENABLE_UNITY_COLLECTIONS_CHECKS` 包起来 | 1.11、1.6 |
+| `AtomicSafetyHandle.Create()` / `Release()` / `CheckDeallocateAndThrow` | 创建句柄 / 释放时递增版本号使所有拷贝失效 / 检查是否还有 Job 占用 | 当前示例不再用 `DisposeSentinel`（旧写法） | 1.11、1.6 |
+| `AtomicSafetyHandle.UseSecondaryVersion`、`CheckWriteAndBumpSecondaryVersion`、`SetBumpSecondaryVersionOnScheduleWrite`、`CheckGetSecondaryDataPointerAndThrow` | 次级版本号：让视图（枚举器、`AsArray()`）在扩容或调度写 Job 后失效 | 改变大小的操作用 `CheckWriteAndBumpSecondaryVersion` 代替 `CheckWriteAndThrow` | 1.6、1.11 |
+| `AtomicSafetyHandle.NewStaticSafetyId`、`SetStaticSafetyId` | 把容器类型名登记到安全系统，让报错带上容器名 | 安全 ID 创建一次复用，存静态字段 | 1.11 |
+| `AtomicSafetyHandle.SetCustomErrorMessage` | 对特定违反安全约束的情形覆盖报错文本 | 参数形式未逐个核对（待核实） | 1.11 |
+| `AtomicSafetyHandle.SetNestedContainer(handle, true)` | 把含其它 `NativeContainer` 的容器标记为嵌套容器 | 拦的是"调度使用它的 Job"，不是创建 | 1.11、1.4 |
+| `AtomicSafetyHandle.GetTempMemoryHandle`、`GetTempUnsafePtrSliceHandle` | 临时容器的特殊句柄：前者随临时内存作用域结束自动失效，后者是全局句柄 | 用后者的容器不能传进 Job | 1.6 |
+| `UnsafeUtility.MallocTracked` / `FreeTracked` | 带泄漏跟踪的分配与释放 | 用 `Malloc` 则泄漏跟踪不生效 | 1.11 |
+| `NativeLeakDetection.Mode` | 控制是否记录分配栈，对应 `Preferences > Jobs > Leak Detection Level` | | 1.11、1.5 |
 
 读写规则：多个只读可并行；任何写与同一容器上的其它读写冲突，必须用 `JobHandle` 依赖排序；主线程在 Job 未完成时访问被占用的容器会抛 `InvalidOperationException`，先 `Complete()`。检查在编辑器中启用，发布版没有；开发构建是否保留这些检查，1.6 称启用，1.1 与 2.11 标为待核实（待核实）。见 1.6。
 
@@ -145,9 +179,14 @@ sidebar:
 | Job 的 struct | 标在 struct 上，Burst 编译其中所有内容 | 2.1 |
 | 静态方法 | 方法和它所在的类型都要标 | 2.1 |
 | 函数指针目标 | 同静态方法，再用 `BurstCompiler.CompileFunctionPointer<T>` 取得指针 | 2.1、2.7 |
-| 程序集 | `[assembly: BurstCompile(...)]` 为整个程序集设默认选项 | 2.1、2.6 |
+| 程序集 | `[assembly: BurstCompile(...)]` 为整个程序集的 Job 与函数指针设默认选项，如 `OptimizeFor = OptimizeFor.FastCompilation`、`FloatMode = FloatMode.Deterministic` | 2.1、2.6、2.10 |
+| 托管代码直接调用 | 方法和所在类型都标 `[BurstCompile]`，从 `MonoBehaviour` 等托管代码直接调用，IL 后处理改写成函数指针调用 | 2.1、2.7 |
 
-`AttributeUsage` 为 `Assembly`、`Class`、`Struct`、`Method`；构造函数有无参与 `(FloatPrecision, FloatMode)` 两个。程序集级写法见手册 Defining Burst options for an assembly，示例未逐字核实（待核实）。
+`AttributeUsage` 为 `Assembly`、`Class`、`Struct`、`Method`；构造函数有无参与 `(FloatPrecision, FloatMode)` 两个。程序集级写法取自手册 Defining Burst options for an assembly（2.10 第 17 节）。
+
+设置优先级（手册原文给出的顺序）：编辑器菜单设置（如 `Native Debug Compilation`）最优先；其次是 Job 或函数指针上的 `BurstCompile` 特性（如 `CompileSynchronously = true`）；其余设置才从程序集级特性取。其它程序集不受影响，可逐个程序集控制。见 2.10。
+
+从托管代码直接调用 Burst 静态方法：泛型方法与泛型类型中的方法不支持；参数和返回值受与函数指针相同的 `DllImport` / 内部调用类型限制，结构体不能按值传，所以手册示例用 `in float4` 输入、`out float4` 输出；函数体很小时互操作开销可能抵消收益；`DisableDirectCall = true` 可关闭该转换。见 2.1、2.7、2.10。
 
 ### `[BurstCompile]` 的全部参数
 
@@ -172,7 +211,7 @@ sidebar:
 | `FloatMode` | `Default` | 等同 `Strict` | 2.6 |
 | | `Strict` | 不重排计算，遵守 NaN、非规格化数 | 2.6 |
 | | `Fast` | 允许重排、乘加融合、假定无 NaN 与 Inf | 2.6、2.10 |
-| | `Deterministic` | 跨平台一致，仅 64 位架构；非规格化数刷成 0，不保证 NaN 位模式；有性能代价 | 2.6 |
+| | `Deterministic` | 跨平台一致，仅 64 位架构；非规格化数刷成 0，不保证 NaN 位模式；有性能代价；自 Burst 1.8.25（2025-09-16）起正式支持，此前只是早期预览 | 2.6 |
 | `OptimizeFor` | `Default`（0） | 等同 `Balanced` | 2.10 |
 | | `Performance`（1） | 追求最优二进制 | 2.10 |
 | | `Size`（2） | 追求最小二进制 | 2.10 |
@@ -201,6 +240,13 @@ sidebar:
 | `RegisterGenericJobType` | 位于 `Unity.Jobs`：`[assembly: RegisterGenericJobType(typeof(MyJob<int>))]` | 登记的是 Job 反射数据，不是 Burst 编译清单；官方补救办法只有用完全确定的类型实参直接调度泛型 Job | 2.9 |
 | `BurstCompiler.IsEnabled` | 静态属性，Burst 开关是否打开 | 不能证明某个具体 Job 编译成功 | 2.1 |
 | `X86.*.IsXxxSupported`、`Arm.Neon.IsNeonSupported` | 编译期求值的特性检测，用来分支 | 从新到旧排列；Burst 关闭时全返回 `false` | 2.4 |
+| `Common.Pause()` | `Unity.Burst.Intrinsics.Common`，各目标共享，不需要 `IsXXXSupported` 保护；提示 CPU 暂停当前线程一下，x86 映射 `pause`、ARM 映射 `yield` | 用于自旋锁一类循环；不是操作系统层面的线程让出 | 2.4 |
+| `Common.umul128(ulong a, ulong b, out ulong high)` | 128 位无符号乘法，返回低 64 位，高 64 位通过 `out` 给出 | 可用于 64 位混合哈希；示意写法质量未评估，真用来做世界种子先写 golden test | 2.4 |
+| `Common.Prefetch`、`Common.InterlockedAnd` / `InterlockedOr` | 预取内存到缓存 / 对 `int`、`uint`、`long`、`ulong` 的原子与、原子或 | 均为实验性 | 2.4 |
+| System 命名空间支持 | `Interlocked` 全部方法有原子指令，`Volatile` 只支持 `Read` / `Write` 的非泛型版本，`Thread.MemoryBarrier`，`HashCode` 除 `Add<T>(T, IEqualityComparer<T>)` 外都支持 | `Interlocked` 目标地址必须自然对齐，否则未定义行为；不要用泛型 `Volatile.Read<T>`；`HashCode` 结果不保证与 .NET / Mono 一致，不要用来派生种子（用自己写的整数哈希或 `math.hash` 并加 golden test） | 2.2、2.6 |
+| `DllImport` 与内部调用的允许类型 | 内置整数 / `float` / `double` / `IntPtr` / `UIntPtr` / `v64` / `v128` / `v256`，指向它们的指针与 `ref`，以及只含一个指针字段或一个整数字段的句柄结构体 | `bool` 不在清单里，用 `byte` 或 `int` 表示真假；`char`、`decimal`、`string`、`enum`、多字段结构体也不在清单（`enum` 为保守处理）；多字段结构体不能按值传，用指针或 `ref`；`DllImport` 只支持原生插件 | 2.7、2.1 |
+| `ProfilerMarker.Auto()` | Burst 代码里用静态 `ProfilerMarker` 配 `using (marker.Auto())`，或手动 `Begin` / `End` | 外部原生分析工具（Instruments、Superluminal）针对 Player 构建，要指向存放 `lib_burst_generated` 的 `Plugins` 文件夹找符号，符号需 Development Build 或 `Force Debug Information` | 2.5 |
+| `BurstRuntime.LoadAdditionalLibrary(path)` | 运行时加载额外的 Burst 编译库（Modding），要在第一次用到 Burst 方法之前加载 | 仅 Play 模式或独立 Player；手册正文一处写成 `LoadAdditionalLibraries`，以示例代码的单数为准；编译这些库仍需编辑器；本项目用不到 | 2.11 |
 
 ## 7 Unity.Mathematics 常用函数分类速查
 
@@ -224,7 +270,11 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | 名称 | 要点 | 注意 | 见 |
 | --- | --- | --- | --- |
 | 向量类型 | `float2/3/4`、`double2/3/4`、`int2/3/4`、`uint2/3/4`、`bool2/3/4`、`half`/`half2/3/4`；运算符逐分量；标量隐式广播；支持 swizzle（`a.zyx`） | `half` 向量不能用于字符串插值 | 2.2、2.3 |
-| 矩阵与旋转 | `float2x2`、`float3x3`、`float4x4`（及 double 版）、`quaternion` | `float4x4` 的 `*` 是逐分量乘，矩阵乘法用 `math.mul` | 2.3 |
+| 矩阵与旋转 | `float2x2`、`float3x3`、`float4x4`（及 double 版）、`quaternion` | `float4x4` 的 `*` 是逐分量乘，矩阵乘法用 `math.mul`；`math.mul(float4x4, float4)` 把 `float4` 当列向量，`math.mul(float4, float4x4)` 当行向量 | 2.3 |
+| `quaternion` 构造与运算 | `quaternion.AxisAngle(float3 axis, float angle)`、`quaternion.Euler(x, y, z)`，角度都是弧度；四元数相乘用 `math.mul`；`math.rotate(quaternion, float3)` 旋转向量；`math.slerp`、`math.nlerp` 插值 | 手册没说明 `math.mul(q1, q2)` 的组合顺序与 `Euler` 三参数重载的默认旋转顺序（待核实）；`slerp` / `nlerp` 的 `t` 是否钳制未给出（待核实） | 2.3 |
+| `RigidTransform` | 只含旋转与平移（字段 `rot`、`pos`、`identity`），构造 `(quaternion, float3)`、`(float3x3, float3)`、`(float4x4)`；静态方法 `AxisAngle`、`Euler*`、`RotateX/Y/Z`、`Translate`；配套 `math.transform`、`math.rotate`、`math.inverse` | 不含缩放，非均匀缩放仍用 `float4x4`；`float4x4` 构造假定矩阵正交归一 | 2.3 |
+| `MinMaxAABB` | 在 `Unity.Mathematics.Geometry` 命名空间；构造 `(float3 min, float3 max)`；字段 `Min`、`Max`；`Center`、`Extents`、`HalfExtents`、`SurfaceArea`、`IsValid`；`Contains`、`Overlaps`、`Encapsulate`、`Expand`、`CreateFromCenterAndExtents` | 需要 `using Unity.Mathematics.Geometry;`；边界点是否算包含未展开（待核实）；7000.0.0a8 中命名空间是否不变未核对（待核实） | 2.3 |
+| 位模式重解释与位运算 | `asuint`、`asint`、`asfloat`、`aslong`、`asulong`、`asdouble`（只重解释位，不做数值转换）；`reversebits`、`rol`、`ror`、`ceilpow2`、`ceillog2`、`floorlog2`、`sincos`、`shuffle` | 已对照 1.3.2 API 页；`ShuffleComponent` 成员名未逐个核对（待核实） | 2.3 |
 | 与 UnityEngine 类型互转 | `float3` 与 `Vector3` 等之间有隐式转换 | 细节未逐项核对（待核实） | 2.3 |
 | `noise` | `cnoise`（Perlin）、`pnoise`（周期版）、`snoise`（Simplex）、`srnoise`/`srdnoise`、`psrnoise`/`psrdnoise`、`cellular`、`cellular2x2`、`cellular2x2x2`（Worley，返回 `float2`，F1 在 `x`，F2 在 `y`） | 无种子参数，给坐标加偏移；各函数返回值区间 API 页未给出（待核实）；与 `ValueNoiseFunction` 不是同一算法，换用会改变地形 | 2.3 |
 | `Random` | 32 位状态 xorshift；`new Random(uint seed)` 种子须非零；`CreateFromIndex(uint)` 先哈希，index 不能是 `uint.MaxValue`；`NextFloat()` 在 `[0, 1)` | 是 struct，按值复制会得到相同序列，传递用 `ref`；与 `using UnityEngine;` 并用时要写全名 | 1.9、2.3 |
@@ -321,6 +371,8 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | --- | --- | --- |
 | Inspector 视图 | `Assembly`、`.NET IL`、`LLVM IR (Unoptimized)`、`LLVM IR (Optimized)`、`LLVM IR Optimization Diagnostics` | 2.5 |
 | Inspector 选项 | Output 下拉、`Safety Checks`（评估性能时关闭）、`Show Branch Flow`、`Highlight SIMD Scalar vs Packed`；Architecture 下拉的完整选项名（待核实） | 2.4、2.5 |
+| 设置优先级 | 编辑器菜单设置 > Job / 函数指针上的 `BurstCompile` 特性 > 程序集级 `[assembly: BurstCompile]`；`Optimize For` 的 AOT 全局默认被程序集级与 Job 级覆盖 | 2.10、2.11 |
+| 构建产物路径 | Windows 独立 Player 的 Burst 库：`<名>_Data/Plugins/x86_64/lib_burst_generated.dll`，托管程序集在 `<名>_Data/Managed/`；其它架构的子目录名手册未给出（待核实）；外部分析工具与原生调试器都指向存放 `lib_burst_generated` 的 `Plugins` 文件夹 | 2.5、2.11 |
 | 命令行 | `--burst-disable-compilation`、`--burst-force-sync-compilation`；环境变量 `UNITY_BURST_DISABLE_COMPILATION`（1.8.18 加入，1.8.22 起同时关闭 IL 后处理） | 2.11 |
 | 命令行 | `-job-worker-count value`；`-diag-job-temp-memory-leak-validation` 打印泄漏的 TempJob 分配调用栈（来自论坛，待核实） | 1.1、1.5 |
 | 脚本符号 | `ENABLE_UNITY_COLLECTIONS_CHECKS`（容器检查，具体宏列表待核实）、`UNITY_BURST_EXPERIMENTAL_LOOP_INTRINSICS`、`UNITY_BURST_EXPERIMENTAL_ALIAS_ATTRIBUTE` | 1.6、2.4、2.10 |
@@ -334,6 +386,13 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 
 | 报错或症状 | 常见原因 | 处理 | 见 |
 | --- | --- | --- | --- |
+| `ObjectDisposedException`（已释放），但自己明明没再 `Dispose` | 通过另一份拷贝 `Dispose` 过：所有拷贝共享同一条安全中心记录，释放使版本号加一 | 找到所有持有同一容器的拷贝，谁创建谁释放；`IsCreated` 只反映被调用的那份拷贝 | 1.6 |
+| 访问 `AsArray()`、枚举器等视图时抛异常 | 视图创建后容器扩容，或调度了写该容器的 Job，次级版本号已变化（异常措辞待核实） | 变更后重新取视图，不要长期保存视图 | 1.4、1.6 |
+| 嵌套容器（如 `NativeArray<NativeArray<T>>`）的 Job 无法调度 | 安全系统无法给内层容器单独配置 `AtomicSafetyHandle`，`SetNestedContainer` 拦截调度（异常文本待核实） | 展平加偏移表，或用 `Unsafe*`，或 `NativeStream` | 1.4、1.11 |
+| 已 `Rewind()` 的 `RewindableAllocator` 之后访问旧容器抛 `ObjectDisposedException` | `Rewind` 使所有子安全句柄失效 | `Rewind` 之前保证没有 Job 还在用，之后不要再访问 | 1.5 |
+| 自定义容器在 Player 构建里编译失败，或带着不该有的开销 | 安全代码没用 `ENABLE_UNITY_COLLECTIONS_CHECKS` 包起来 | 把 `m_Safety` 相关代码都包进去 | 1.11 |
+| 自定义容器内存泄漏没有警告 | 用了 `Malloc` 而不是 `MallocTracked`，或释放没配 `FreeTracked` | 改用 `MallocTracked` / `FreeTracked` | 1.11 |
+| 并行 Job 里对自定义容器写入越界无报错 | 标了 `[NativeContainerSupportsMinMaxWriteRestriction]` 却没有按序相邻的 `m_Length`、`m_MinIndex`、`m_MaxIndex`，或没在范围外抛异常 | 补齐字段并在容器里检查范围 | 1.11 |
 | `InvalidOperationException: The previously scheduled job A writes to ... You are trying to schedule the new job B ...` | A 还没完成，B 就读或写同一容器，缺依赖 | `B.Schedule(..., handleOfA)`，或先 `A.Complete()` | 1.3、1.6 |
 | `InvalidOperationException: ... You must call JobHandle.Complete() on the job A, before you can read from the ... safely.` | 主线程在 Job 完成前读写被占用的容器 | 先 `Complete()` | 1.6 |
 | `... has not been assigned or constructed. All containers must be valid when scheduling a job.` | Job 字段里有没赋值或默认构造的容器 | 给每个字段赋值，可选字段也用空容器；检查 `IsCreated` | 1.6、3.1 |

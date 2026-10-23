@@ -14,7 +14,9 @@ sidebar:
 - 最常用的三个：`NativeArray<T>`（定长）、`NativeList<T>`（可变长）、`NativeParallelHashMap<K,V>`（并行写哈希表）。
 - Collections 2.1 起哈希容器改名：原 `NativeHashMap` 变成 `NativeParallelHashMap`，新的 `NativeHashMap` 是单线程友好的版本。读旧教程时要特别注意。
 - `Unsafe*` 容器没有安全检查，但可以嵌套、可以放进别的 unmanaged 结构，适合底层实现，代价是出错没有提示。
-- 容器内不能再放 `NativeContainer`（`NativeArray<NativeArray<T>>` 不行），用 `UnsafeList<T>` 或"展平 + 偏移表"替代。
+- 容器内不能再放 `NativeContainer`（`NativeArray<NativeArray<T>>` 不行；官方的说法是安全系统不支持 Job 里的嵌套容器，违规在"调度 Job"时被拒绝），用 `UnsafeList<T>` 或"展平 + 偏移表"替代。
+- 多数 `Native*` 容器只是对 `Unsafe*` 版本的封装外加安全句柄；关掉检查后两者性能没有显著差别，所以优先选 `Native*`，只有嵌套等必须场景才用 `Unsafe*`。
+- 排序、查找、拷贝等常用操作在扩展类 `NativeSortExtension`、`NativeArrayExtensions`、`ListExtensions` 里；多数容器有 `GetEnumerator`，但枚举器属于"视图"，容器扩容或释放后即失效。
 
 ## 为什么 Job 里只能用它们
 
@@ -197,6 +199,18 @@ for (int i = 0; i < lists.Length; i++)
 // 释放时要逐个 Dispose 内层，再 Dispose 外层
 ```
 
+## Native 容器与 Unsafe 容器的关系
+
+Collections 手册的 Collections overview 页把这两类容器的关系讲得很明确（2.5 版核实）：
+
+- 命名空间与前缀：带安全检查的在 `Unity.Collections`，名字以 `Native` 开头；不带检查的在 `Unity.Collections.LowLevel.Unsafe`，名字以 `Unsafe` 开头。另有一批不分配内存也不含指针的小类型（如 `FixedString*`、`BitField32`），释放与线程安全都不是问题。
+- 检查内容：`Native*` 会检查释放与线程安全，并检查传入方法的下标是否越界；`Unsafe*` 没有这些检查。
+- 一一对应：`NativeList` 对应 `UnsafeList`，`NativeHashMap` 对应 `UnsafeHashMap`，依此类推。
+- 建议：优先用 `Native*`。只有在必须嵌套时才用 `Unsafe*`，例如 `NativeList<UnsafeList<T>>` 或 `UnsafeList<UnsafeList<T>>` 可以，`NativeList<NativeList<T>>` 不行。
+- 性能：如果关闭了安全检查，`Native*` 与对应 `Unsafe*` 没有显著性能差别；多数 `Native*` 容器本身就是对 `Unsafe*` 的封装，例如 `NativeList` 由一个 `UnsafeList` 加上安全检查用的句柄组成。
+
+这解释了前面"误以为 `Unsafe*` 更快"那条坑：差别只在检查，而检查在 Release 构建里本来就被去掉了（见 1.6 安全系统与竞争条件）。开发阶段保持 `Native*`，才能让编辑器替你抓竞争条件。
+
 ## bool 在 NativeArray 中
 
 `NativeArray<bool>` 可以编译并在 Job/Burst 中使用，bool 在 Unity 的 Job 与 Burst 里按 1 字节处理。但 .NET 层面 `bool` 不是严格的 blittable 类型，而且在 `Reinterpret`、写 GPU 缓冲、跨语言交换数据时容易出现取值不是 0/1 的问题。建议（经验性，Burst 对 bool 的官方说明待核实）：
@@ -207,11 +221,94 @@ for (int i = 0; i < lists.Length; i++)
 
 ## 容器不能嵌套 NativeContainer
 
-`NativeArray<NativeArray<T>>` 不能用：每个 `Native*` 容器带安全句柄，嵌套后安全系统无法给内层独立跟踪，实际会在创建时被拒绝（具体异常文本待核实）。替代方案：
+`NativeArray<NativeArray<T>>` 不能用于 Job：每个 `Native*` 容器带安全句柄，嵌套后安全系统无法给内层容器单独配置 `AtomicSafetyHandle`。
+
+这里要区分"创建"与"调度"。官方自定义容器手册的说法是：安全系统不支持 Job 中的嵌套容器，用 `AtomicSafetyHandle.SetNestedContainer` 把"装着别的 NativeContainer 的容器"标记为嵌套容器，目的是阻止调度使用它的 Job。官方示例 `NativeAppendOnlyList<T>` 的构造函数里，当 `T` 本身是 NativeContainer 类型时调用 `SetNestedContainer(m_Safety, true)`，说明容器本身是可以被创建出来的，被拒绝的是"把它交给 Job 调度"这一步（见 1.11 自定义 NativeContainer）。所以旧稿里"创建时被拒绝"不准确，应理解为"调度时被安全系统拒绝"；具体异常类型与文本待核实。Collections 手册另有一句："`Native` 容器不能包含其它 `Native` 容器，因为 Unity 实现 `Native` 安全检查的方式如此"，并举例 `NativeList<UnsafeList<T>>` 与 `UnsafeList<UnsafeList<T>>` 可以，`NativeList<NativeList<T>>` 不行。替代方案：
 
 - 展平加偏移表：一个大 `NativeArray<T>` 存全部数据，另一个 `NativeArray<int2>`（start, length）记录每段位置。适合只读/一次写入的静态数据。
 - `UnsafeList<T>` 数组：外层 `NativeArray<UnsafeList<T>>`，如上例。Collections 2.1 更新日志提到加入了对嵌套容器的支持（面向 Unsafe 容器）。
 - `NativeStream` / `NativeParallelMultiHashMap`：本质是"一键多值/多段缓冲"，天然表达嵌套关系。
+
+## 排序与扩展方法
+
+Collection types 页末尾点名了三个扩展类：`NativeArrayExtensions`、`ListExtensions`、`NativeSortExtension`，都在 `Unity.Collections` 命名空间。下面的签名来自 Collections 2.5 的 API 页（逐个核对过）。
+
+### NativeSortExtension
+
+静态类，提供排序、并行排序用的 Job 和二分查找。要点：
+
+| 方法（均为扩展方法） | 说明 |
+|---|---|
+| `Sort<T>(this NativeArray<T> array)` | 同步排序，用默认比较；另有 `NativeList<T>`、`NativeSlice<T>`、`UnsafeList<T>` 和 `Sort<T>(T* array, int length)` 重载 |
+| `Sort<T, U>(this NativeArray<T> array, U comp)` | 用自定义比较器 `comp` 排序，同样有 `NativeList` / `NativeSlice` / `UnsafeList` / 指针重载 |
+| `SortJob<T>(this NativeArray<T> array)` | 返回 `SortJob<T, DefaultComparer<T>>`，一个可以调度的排序 Job；同样有 `NativeList` / `NativeSlice` / `UnsafeList` / 指针重载 |
+| `SortJob<T, U>(this NativeArray<T> array, U comp)` | 带自定义比较器的 `SortJob` |
+| `SortJobDefer<T>(this NativeList<T> list)` | 返回 `SortJobDefer<T, DefaultComparer<T>>`，用于列表长度要到 Job 执行时才确定的场景；另有带比较器 `U comp` 的重载 |
+| `BinarySearch<T>(...)`、`BinarySearch<T, U>(...)` | 在已排序容器里二分查找，有多个重载，这里不逐个展开 |
+
+约束：默认比较的重载要求 `T : unmanaged, IComparable`（泛型参数的具体形式以 API 页为准，待核实）。`SortJob` 返回的只是 Job 结构，怎么调度（`Schedule` 的签名与是否内部并行）我没有逐项核对，待核实，使用前请查对应的 `SortJob` API 页。
+
+用法示意（教学用，未在 Unity 内编译）：
+
+```csharp
+using Unity.Collections;
+
+var ids = new NativeArray<int>(1024, Allocator.TempJob);
+// ... 填充 ...
+
+// 同步排序：在主线程或 Job 内直接调用
+ids.Sort();
+
+// 作为 Job 排序：返回的 SortJob 是一个 Job 结构，调度方式见 API 页（待核实）
+var sortJob = ids.SortJob();
+```
+
+对应本项目：想让网格输出"按稳定顺序"而不是 `ParallelWriter` 的随机顺序时，可以在写完之后对结果排序，这是官方列出的三种确定性手段之一（见 1.7 并行写入与归约模式）。
+
+### NativeArrayExtensions
+
+针对 `NativeArray<T>` 的辅助方法：
+
+- `ArraysEqual<T>(this NativeArray<T> container, NativeArray<T> other)`：长度与内容都相等才返回 true，`T : unmanaged, IEquatable<T>`。
+- `Contains<T, U>(this NativeArray<T> array, U value)`：是否包含某个值；另有 `NativeArray<T>.ReadOnly` 与 `void* ptr, int length` 版本。
+- `IndexOf<T, U>(this NativeArray<T> array, U value)`：第一次出现的下标，找不到返回 -1；同样有 `ReadOnly` 与指针版本。
+- `CopyFrom<T>(this ref NativeArray<T> container, NativeList<T> other)`：把容器内容复制进数组，另有 `NativeHashSet<T>`、`UnsafeHashSet<T>` 版本；数组与容器长度不等时抛 `ArgumentException`。
+- `Reinterpret<T, U>(this NativeArray<T> array)`：按另一种元素类型重新解释，容量不能被 `sizeof(U)` 整除时抛 `InvalidOperationException`（别名机制见 1.5 内存分配器与生命周期）。
+
+### ListExtensions
+
+注意这里的 `List<T>` 是托管的 `System.Collections.Generic.List<T>`，不是 `NativeList`：
+
+- `RemoveAtSwapBack<T>(this List<T> list, int index)`：用最后一个元素覆盖该下标并把长度减一，O(1) 但会打乱顺序。
+- `RemoveSwapBack<T>(this List<T> list, T value)` 与 `RemoveSwapBack<T>(this List<T> list, Predicate<T> matcher)`：找到第一个匹配项并用同样方式删除，返回是否删除成功。
+- `ToNativeArray<T>(this List<T> list, AllocatorManager.AllocatorHandle allocator)` 与 `ToNativeList<T>(...)`：把托管列表复制成 Native 容器，`T : unmanaged`。
+
+## 容器枚举器与 GetEnumerator
+
+Collection types 页说明：大多数集合都有 `GetEnumerator`，返回 `IEnumerator<T>` 的实现，`MoveNext` 前进、`Current` 取当前元素；第一次 `MoveNext` 才会移到第一个元素，越过末尾后返回 false。官方示例：
+
+```csharp
+NativeList<int> nums = new NativeList<int>(10, Allocator.Temp);
+
+int sum = 0;
+var enumerator = nums.GetEnumerator();
+while (enumerator.MoveNext())
+{
+    sum += enumerator.Current;
+}
+
+// 容器释放后，枚举器不能再用
+nums.Dispose();
+```
+
+哈希表也有：`NativeParallelHashMap<K,V>` 的 2.5 API 页列出 `GetEnumerator()`，返回 `NativeParallelHashMap<K,V>.Enumerator`，遍历键值对；还有 `GetKeyArray(allocator)`、`GetValueArray(allocator)`、`GetKeyValueArrays(allocator)`，会把键或值复制成新数组（顺序不确定）。
+
+什么时候枚举器会失效。官方在 Copying NativeContainer structures 里把枚举器归为"视图"（view，即不拷贝、不持有数据的别名访问），并说明：
+
+- 容器被 `Dispose` 后，枚举器和其它视图都不能再用。
+- 动态容器（`NativeList` 这类可变长容器）的大小改变时，Unity 会把数据搬到别处，视图里存的指针随之无效，所以视图在大小变化时"通常不是线程安全的"；安全系统靠次级版本号让旧视图失效（见 1.6 的"容器拷贝语义与 AtomicSafetyHandle 版本号机制"）。
+
+据此的使用规则：枚举期间不要对同一容器增删、扩容；不要把枚举器带出当前作用域长期保存；在 Job 里遍历就让 Job 独占读，不要同时有别的 Job 写它。枚举器失效时具体抛哪种异常、哈希表在枚举中插入的确切行为，官方页面没有写明，待核实。
 
 ## 选型表
 
@@ -233,7 +330,7 @@ for (int i = 0; i < lists.Length; i++)
 
 ## 自定义 NativeContainer（概述）
 
-当现有容器不够用，可以自己写：给结构标 `[NativeContainer]`，内含 `AtomicSafetyHandle`（仅在启用检查时编译），并按需用 `[NativeContainerSupportsMinMaxWriteRestriction]` 等属性声明能力，在构造与 `Dispose` 里创建和释放安全句柄、注册泄漏跟踪。完整步骤见 Unity 手册 "Implement a custom native container"，本系列不展开。
+当现有容器不够用，可以自己写：给结构标 `[NativeContainer]`，内含名为 `m_Safety` 的 `AtomicSafetyHandle`（仅在启用检查时编译），并按需用 `[NativeContainerSupportsMinMaxWriteRestriction]` 等属性声明能力，在构造与 `Dispose` 里创建和释放安全句柄、用 `MallocTracked` 分配以便泄漏跟踪。完整步骤、官方示例和各特性的作用见 1.11 自定义 NativeContainer。
 
 ## 对应本项目：VoxelChunk
 
@@ -280,12 +377,24 @@ for (int i = 0; i < lists.Length; i++)
    答：容量事先足够，因为它不会扩容。
 5. `NativeArray<T>.GetSubArray` 与 `ToArray` 的区别？
    答：前者是共享内存的视图，不拷贝；后者拷贝成托管数组。
+6. 关闭安全检查后，`NativeList<T>` 和 `UnsafeList<T>` 的性能有明显差别吗？
+   答：官方说没有显著差别，`NativeList` 本身就是 `UnsafeList` 加安全句柄的封装。
+7. `NativeList` 的枚举器在什么情况下失效？
+   答：容器被释放，或容器大小变化导致数据被搬走时；枚举期间不要增删、扩容。
+8. `NativeArray<NativeArray<int>>` 是在创建时还是调度时被拒绝？
+   答：按官方自定义容器手册，被拒绝的是调度使用它的 Job（`SetNestedContainer` 的作用）；具体异常文本待核实。
 
 ## 参考
 
 - https://docs.unity3d.com/Manual/job-system-native-container.html
 - https://docs.unity3d.com/Packages/com.unity.collections@2.5/manual/collection-types.html
 - https://docs.unity3d.com/Packages/com.unity.collections@2.5/manual/allocator-overview.html
+- https://docs.unity3d.com/Packages/com.unity.collections@2.5/manual/collections-overview.html （Native 与 Unsafe 对比）
+- https://docs.unity3d.com/Packages/com.unity.collections@2.5/api/Unity.Collections.NativeSortExtension.html
+- https://docs.unity3d.com/Packages/com.unity.collections@2.5/api/Unity.Collections.NativeArrayExtensions.html
+- https://docs.unity3d.com/Packages/com.unity.collections@2.5/api/Unity.Collections.ListExtensions.html
+- https://docs.unity3d.com/Packages/com.unity.collections@2.5/api/Unity.Collections.NativeParallelHashMap-2.html （GetEnumerator 与 GetKeyArray 等）
+- https://docs.unity3d.com/Manual/job-system-custom-nativecontainer.html （SetNestedContainer）
 - 本地：D:\UnityHub\Project\程序化生成\Library\PackageCache\com.unity.collections@28abc463ca66\CHANGELOG.md（改名与嵌套容器条目）
 - 本地：D:\UnityHub\Project\程序化生成\Library\PackageCache\com.unity.collections@28abc463ca66\Unity.Collections\AssemblyTypeForwarders.cs（确认类型存在）
 - 本地：D:\UnityHub\Project\程序化生成\Assets\Scripts\WorldGen\Voxels\VoxelChunk.cs
