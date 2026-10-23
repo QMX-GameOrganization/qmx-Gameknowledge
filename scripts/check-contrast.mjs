@@ -11,9 +11,19 @@ const css = readFileSync(cssPath, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
 
 // 解析：每个 :root[data-qmx-theme="id"] 块里的 --qmx-* 十六进制颜色
 const tokens = {};
+const decos = {}; // 每个主题自己的 --qmx-deco 原文，用来检查背景装饰的明暗
+let failures = 0;
 for (const [, selector, body] of css.matchAll(/([^{}]+)\{([^}]*)\}/g)) {
+  // 兜底块(裸 :root)里不能放可选的装饰令牌，否则所有没定义它们的主题都会继承
+  const bareRoot = selector.split(",").some((s) => s.trim() === ":root");
+  if (bareRoot && /--qmx-(deco|deco-size|float)\s*:/.test(body)) {
+    console.error("✗ themes.css 的兜底 :root 块里定义了 --qmx-deco / --qmx-float，会被所有主题继承，请挪到具体主题的块里");
+    failures++;
+  }
   const ids = [...selector.matchAll(/data-qmx-theme="([\w-]+)"/g)].map((m) => m[1]);
   if (ids.length === 0) continue;
+  const deco = body.match(/--qmx-deco\s*:\s*([^;]+);/);
+  if (deco) for (const id of ids) decos[id] = deco[1];
   const colors = {};
   for (const [, name, hex] of body.matchAll(/--qmx-([\w-]+):\s*(#[0-9a-fA-F]{6})\s*;/g)) {
     colors[name] = hex.toLowerCase();
@@ -37,7 +47,6 @@ const ratio = (a, b) => {
 };
 
 const required = ["bg", "nav", "sidebar", "panel", "text", "strong", "muted", "border", "code", "accent", "accent-2", "link"];
-let failures = 0;
 const rows = [];
 
 for (const theme of themes) {
@@ -76,6 +85,17 @@ for (const theme of themes) {
   if (!modeOk) {
     console.error(`✗ ${theme.id}: 登记为 ${theme.mode}，但背景亮度是 ${bgLum.toFixed(2)}`);
     failures++;
+  }
+
+  // 背景装饰里不透明的颜色(6 位十六进制)必须和主题明暗一致：
+  // 亮色主题里出现深色渐变，就会得到「深色底配深色字」
+  for (const [hex] of (decos[theme.id] ?? "").matchAll(/#[0-9a-fA-F]{6}(?![0-9a-fA-F])/g)) {
+    const l = lum(hex);
+    const bad = theme.mode === "dark" ? l > 0.3 : l < 0.5;
+    if (bad) {
+      console.error(`✗ ${theme.id}: --qmx-deco 里的 ${hex}（亮度 ${l.toFixed(2)}）和 ${theme.mode} 模式不符`);
+      failures++;
+    }
   }
 
   const bad = [];

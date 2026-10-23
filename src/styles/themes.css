@@ -10,7 +10,11 @@
 
 /* ───────── 暗色 ───────── */
 
-/* 星夜（同时作为未设置主题时的兜底） */
+/*
+ * 星夜的颜色同时作为未设置主题时的兜底。
+ * 注意：兜底块里只能放颜色令牌。--qmx-deco / --qmx-float 这类可选令牌必须写在主题自己的块里，
+ * 否则没有定义它们的主题会继承星夜的深色背景和星星图标（亮色主题上就是深色底配深色字）。
+ */
 :root,
 :root[data-qmx-theme="starry"] {
   --qmx-bg: #070d1b;
@@ -25,6 +29,10 @@
   --qmx-accent: #7dd3fc;
   --qmx-accent-2: #a78bfa;
   --qmx-link: #7dd3fc;
+}
+
+/* 星夜的背景装饰与右上角星星 */
+:root[data-qmx-theme="starry"] {
   --qmx-float: var(--qmx-icon-star);
   --qmx-deco: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, #070d1b, #111a36 62%, #1b1738);
   --qmx-deco-size: 180px 180px, 240px 240px, 130px 130px, auto;
