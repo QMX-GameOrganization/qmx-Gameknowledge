@@ -53,6 +53,7 @@ export const MAX_MODELS = 500;
 
 // 配置按平台分开存：每个平台有自己的接口地址、模型名、Key 和上次获取的模型列表，
 // 切换平台不会覆盖别的平台的 Key。
+/** @returns {{ baseUrl: string, model: string, key: string, models: string[] }} */
 export function defaultProfile(id) {
   const p = PRESETS[id] ?? PRESETS.custom;
   return { baseUrl: p.baseUrl, model: p.model, key: '', models: [] };
@@ -174,7 +175,7 @@ const SYSTEM_PROMPT =
  * 拼出发给模型的 messages。
  * history 是之后的追问记录（{role, content}[]），首轮传空数组。
  */
-export function buildMessages({ selection, pageTitle = '', context = '', history = [] }) {
+export function buildMessages(/** @type {{ selection: string, pageTitle?: string, context?: string, history?: { role: string, content: string }[] }} */ { selection, pageTitle = '', context = '', history = [] }) {
   const sel = clip(selection, MAX_SELECTION);
   const ctx = clip(context, MAX_CONTEXT);
   const recent = history.slice(-MAX_HISTORY);
@@ -201,7 +202,7 @@ export function buildMessages({ selection, pageTitle = '', context = '', history
 }
 
 /** 失败时给用户复制到网页版 DeepSeek 的提示词。 */
-export function buildFallbackPrompt({ selection, pageTitle = '', context = '', history = [] }) {
+export function buildFallbackPrompt(/** @type {{ selection: string, pageTitle?: string, context?: string, history?: { role: string, content: string }[] }} */ { selection, pageTitle = '', context = '', history = [] }) {
   if (!clip(selection, MAX_SELECTION)) {
     // 直接提问模式：复制最近一次提问
     const last = [...history].reverse().find((m) => m.role === 'user');

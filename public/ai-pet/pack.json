@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "name": "DeepSeek 大肥鱼",
+  "cell": [
+    200,
+    175
+  ],
+  "still": "still.webp",
+  "clips": {
+    "idle": {
+      "src": "clips/idle.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "look": {
+      "src": "clips/look.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "yawn": {
+      "src": "clips/yawn.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "stretch": {
+      "src": "clips/stretch.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "hum": {
+      "src": "clips/hum.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "pace": {
+      "src": "clips/pace.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "thinking": {
+      "src": "clips/thinking.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "working": {
+      "src": "clips/working.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "coding": {
+      "src": "clips/coding.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "filing": {
+      "src": "clips/filing.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "cheer": {
+      "src": "clips/cheer.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "sigh": {
+      "src": "clips/sigh.webp",
+      "cols": 10,
+      "rows": 12,
+      "frames": 118,
+      "fps": 24,
+      "loop": false
+    },
+    "poke_happy": {
+      "src": "clips/poke_happy.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "poke_shy": {
+      "src": "clips/poke_shy.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "poke_angry": {
+      "src": "clips/poke_angry.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "poke_tickle": {
+      "src": "clips/poke_tickle.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "poke_wave": {
+      "src": "clips/poke_wave.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "curtsy": {
+      "src": "clips/curtsy.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "nap": {
+      "src": "clips/nap.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "wake": {
+      "src": "clips/wake.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    },
+    "drag": {
+      "src": "clips/drag.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": true
+    },
+    "scare": {
+      "src": "clips/scare.webp",
+      "cols": 15,
+      "rows": 17,
+      "frames": 241,
+      "fps": 24,
+      "loop": false
+    }
+  },
+  "moods": {
+    "idle": [
+      "idle"
+    ],
+    "thinking": [
+      "thinking"
+    ],
+    "talking": [
+      "working",
+      "coding",
+      "filing"
+    ],
+    "happy": [
+      "cheer"
+    ],
+    "sad": [
+      "sigh"
+    ],
+    "wave": [
+      "curtsy"
+    ],
+    "sleep": [
+      "nap"
+    ],
+    "wake": [
+      "wake"
+    ],
+    "drag": [
+      "drag"
+    ],
+    "scare": [
+      "scare"
+    ],
+    "poke": [
+      "poke_happy",
+      "poke_shy",
+      "poke_angry",
+      "poke_tickle",
+      "poke_wave"
+    ],
+    "waiting": [
+      "pace"
+    ]
+  },
+  "extras": [
+    "look",
+    "yawn",
+    "stretch",
+    "hum",
+    "pace",
+    "wake"
+  ],
+  "credit": "https://github.com/PC2005-cloud/dsh-pet"
+}

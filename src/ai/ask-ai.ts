@@ -7,8 +7,9 @@ import {
 } from './core.mjs';
 import { parseMarkdown } from './markdown.mjs';
 import {
-  initPet, loadSheet, importSheet, resetSheet, makeAvatar, setMood, say, petRect, isPetEnabled, setPetEnabled, poke,
+  initPet, loadPack, importSheet, resetSheet, setBase, react, activity, setChatOpen, petRect, isPetEnabled, setPetEnabled,
 } from './companion';
+import { createChatUI } from './chat-ui';
 
 type Msg = { role: 'system' | 'user' | 'assistant'; content: string };
 type Ask = { selection: string; pageTitle: string; context: string };
@@ -86,26 +87,14 @@ function updateTrigger() {
   trigger.style.top = `${top + window.scrollY}px`;
 }
 
-// ---------- 回答面板 ----------
-const panel = el('aside', { class: 'qmx-ask-panel', role: 'dialog', 'aria-label': 'AI 助手', hidden: '' });
-const head = el('div', { class: 'qmx-ask-head' });
-const headTitle = el('div', { class: 'qmx-ask-head__text' });
-const headSub = el('span', { class: 'qmx-ask-sub' });
-headTitle.append(el('strong', {}, '鲸鱼助手'), headSub);
-head.append(makeAvatar(), headTitle);
-const quote = el('blockquote', { class: 'qmx-ask-quote' });
-const answer = el('div', { class: 'qmx-ask-answer', 'aria-live': 'polite' });
-const status = el('p', { class: 'qmx-ask-status' });
-const follow = el('form', { class: 'qmx-ask-follow' });
-const followInput = el('input', { type: 'text', placeholder: '继续追问…', 'aria-label': '继续追问', maxlength: '300' });
-const followSend = el('button', { type: 'submit' }, '发送');
-follow.append(followInput, followSend);
-const bar = el('div', { class: 'qmx-ask-bar' });
-const btnSettings = el('button', { type: 'button' }, '设置');
-const btnFallback = el('button', { type: 'button', hidden: '' }, '复制提示词并打开 DeepSeek');
-const btnClose = el('button', { type: 'button', 'aria-label': '关闭' }, '关闭');
-bar.append(btnSettings, btnFallback, btnClose);
-panel.append(head, quote, answer, status, follow, bar);
+// ---------- 对话界面：透明背景，回答是桌宠旁边的气泡 ----------
+const ui = createChatUI({
+  submit: (text) => submitQuestion(text),
+  close: () => closePanel(),
+  settings: () => openSettings(),
+  clear: () => clearChat(),
+  fallback: () => { void copyFallback(); },
+});
 
 // ---------- Markdown 渲染 ----------
 // 语法树 → DOM。全程 createElement + textContent，不使用 innerHTML，模型输出里的 HTML 只会当文字显示。
@@ -192,12 +181,9 @@ function renderMarkdown(target: HTMLElement, text: string) {
   target.replaceChildren(frag);
 }
 
-function setStatus(text: string, isError = false) {
-  status.textContent = text;
-  status.classList.toggle('is-error', isError);
-}
+const setStatus = (text: string, isError = false) => ui.setStatus(text, isError);
 
-// 面板标题下的小字：当前平台、模型，以及 DeepSeek 官方平台的余额
+// 工具条左侧的小字：当前平台、模型，以及 DeepSeek 官方平台的余额
 let balanceText = '';
 let balanceAt = 0;
 let balanceFor = '';
@@ -205,7 +191,7 @@ let balanceFor = '';
 function updateHead() {
   const label = PRESETS[config.active as keyof typeof PRESETS]?.label.replace(/（.*?）/, '') ?? '';
   const model = activeProfile(config).model.trim() || '未选择模型';
-  headSub.textContent = `${label} · ${model}${balanceText ? ` · 余额 ${balanceText}` : ''}`;
+  ui.setMeta(`${label} · ${model}${balanceText ? ` · 余额 ${balanceText}` : ''}`);
 }
 
 async function fetchBalance(baseUrl: string, key: string): Promise<string> {
@@ -230,53 +216,61 @@ async function refreshBalance() {
   updateHead();
 }
 
-/** 桌宠在右侧时，面板放在它上面，避免盖住它。 */
-function placePanel() {
-  const r = petRect();
-  let gap = 16;
-  if (r && r.left + r.width / 2 > window.innerWidth / 2) {
-    const above = window.innerHeight - r.top + 8;
-    if (window.innerHeight - above > 240) gap = above;
-  }
-  panel.style.setProperty('--qmx-ask-bottom', `${gap}px`);
-}
+/** 对话气泡跟着桌宠走：放在它上面（空间不够就放下面），尾巴指向它。 */
+const placePanel = () => ui.place(petRect());
 
 function openPanel() {
   config = loadConfig(store);
   updateHead();
   void refreshBalance();
+  setChatOpen(true); // 先让桌宠露面，才能量出它的位置
   placePanel();
-  panel.hidden = false;
+  ui.open();
   trigger.hidden = true;
 }
 
 function closePanel() {
   abort?.abort();
   abort = null;
-  panel.hidden = true;
-  setStatus('');
-  setMood('idle');
+  ui.close();
+  ui.setStatus('');
+  ui.showTyping(false);
+  ui.setBusy(false);
+  setChatOpen(false);
+  setBase('idle');
 }
 
-async function send(messages: Msg[]) {
+/** 清空对话：回到只有一句提示的空白状态，桌宠回到待机。 */
+function clearChat() {
+  abort?.abort();
+  abort = null;
+  history = [];
+  current = current && { ...current, selection: '' };
+  ui.clear();
+  ui.showTyping(false);
+  ui.setBusy(false);
+  ui.showEmpty('对话已清空。想问点什么？直接输入，或者先在文章里划词。');
+  setBase('idle');
+}
+
+async function send(messages: { role: string; content: string }[]) {
   config = loadConfig(store); // 每次发送都读最新的，多个标签页改了设置也能生效
   const profile = activeProfile(config);
   const url = chatCompletionsUrl(profile.baseUrl);
   if (!url || !profile.model.trim()) {
     setStatus('还没有配置接口地址或模型名，请先点「设置」。', true);
-    btnFallback.hidden = false;
+    ui.showFallback(true);
     return;
   }
   abort?.abort();
   abort = new AbortController();
   const signal = abort.signal;
-  const bubble = el('div', { class: 'qmx-ask-reply' });
-  bubble.dataset.who = 'ai';
-  answer.append(bubble);
-  setStatus('思考中…');
-  setMood('thinking');
-  followSend.disabled = true;
-  btnFallback.hidden = true;
+  let bubble: HTMLElement | null = null; // 第一个字到了才创建回答气泡，在那之前显示「思考中」的小点点
+  ui.showTyping(true);
+  ui.setStatus('');
+  ui.setBusy(true);
+  ui.showFallback(false);
+  setBase('thinking');
 
   try {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
@@ -302,14 +296,13 @@ async function send(messages: Msg[]) {
       const parsed = parseSseChunk(buffer);
       buffer = parsed.rest;
       if (parsed.deltas.length) {
-        if (!text) { setStatus(''); setMood('talking'); }
+        if (!text) { ui.showTyping(false); bubble = ui.addReply(); setBase('talking'); }
         text += parsed.deltas.join('');
         // 流式时每帧最多重绘一次，避免长回答卡顿
         if (!raf) {
           raf = requestAnimationFrame(() => {
             raf = 0;
-            renderMarkdown(bubble, text);
-            answer.scrollTop = answer.scrollHeight;
+            if (bubble) { renderMarkdown(bubble, text); ui.scrollToEnd(); }
           });
         }
       }
@@ -317,51 +310,61 @@ async function send(messages: Msg[]) {
     }
     if (raf) cancelAnimationFrame(raf);
     raf = 0;
-    if (!text) throw new Error('empty');
+    if (!text || !bubble) throw new Error('empty');
     renderMarkdown(bubble, text);
-    answer.scrollTop = answer.scrollHeight;
+    ui.endReply(bubble);
+    ui.scrollToEnd();
     history.push({ role: 'assistant', content: text });
     setStatus('');
-    setMood('happy', 3500);
-    say('答完啦');
+    setBase('idle');
+    react('happy');
   } catch (err) {
     if (signal.aborted) return;
     const code = (err as { httpStatus?: number }).httpStatus;
-    bubble.remove();
-    setMood('sad', 4000);
-    say('出错了…');
+    ui.showTyping(false);
+    if (bubble) ui.removeReply(bubble);
+    setBase('idle');
+    react('sad');
     setStatus(
       code ? describeHttpError(code)
         : '无法连接到接口：可能是网络不通、浏览器跨域限制，或回答为空。可以改用下面的方式。',
       true,
     );
-    btnFallback.hidden = false;
+    ui.showFallback(true);
   } finally {
-    if (abort?.signal === signal) followSend.disabled = false;
+    if (abort?.signal === signal) ui.setBusy(false);
   }
 }
 
 function ask(target: Ask) {
   current = target;
   history = [];
-  answer.replaceChildren();
-  quote.textContent = target.selection.length > 120 ? `${target.selection.slice(0, 120)}…` : target.selection;
+  ui.clear();
+  ui.setQuote(target.selection);
   openPanel();
   void send(buildMessages(target));
 }
 
 /** 点桌宠：不带选中文字，直接提问。已经在直接提问时保留之前的对话。 */
 function openFree() {
-  if (!panel.hidden) { followInput.focus(); return; }
+  if (ui.isOpen()) { ui.input.focus(); return; }
   if (!current || current.selection) {
     current = { selection: '', pageTitle: document.querySelector('h1')?.textContent?.trim() ?? document.title, context: '' };
     history = [];
-    answer.replaceChildren(el('p', { class: 'qmx-ask-empty' }, '想问点什么？直接输入，或者先在文章里划词。'));
-    quote.textContent = '';
+    ui.clear();
+    ui.showEmpty('想问点什么？直接输入，或者先在文章里划词。');
   }
   setStatus('');
   openPanel();
-  followInput.focus();
+}
+
+/** 输入框里提交了一个问题（追问或直接提问）。 */
+function submitQuestion(q: string) {
+  if (!current) return;
+  history.push({ role: 'user', content: q });
+  ui.addUser(q);
+  activity();
+  void send(buildMessages({ ...current, history }));
 }
 
 // ---------- 设置对话框 ----------
@@ -538,43 +541,36 @@ function openSettings() {
 
 // ---------- 事件与初始化 ----------
 trigger.addEventListener('mousedown', (e) => e.preventDefault()); // 点按钮不要清掉选区
-trigger.addEventListener('click', () => { if (pending) { poke(); ask(pending); } });
-btnClose.addEventListener('click', closePanel);
-btnSettings.addEventListener('click', openSettings);
-btnFallback.addEventListener('click', async () => {
+trigger.addEventListener('click', () => { if (pending) { activity(); ask(pending); } });
+
+/** 请求失败时的退路：把提示词复制到剪贴板，去网页版 DeepSeek 粘贴。 */
+async function copyFallback() {
   if (!current) return;
   try {
     await navigator.clipboard.writeText(buildFallbackPrompt({ ...current, history }));
     setStatus('提示词已复制，在新打开的页面里粘贴即可。');
   } catch {
-    setStatus('无法自动复制，请手动选中上面的文字后到 DeepSeek 提问。', true);
+    setStatus('无法自动复制，请手动选中文字后到 DeepSeek 提问。', true);
   }
   window.open('https://chat.deepseek.com/', '_blank', 'noopener,noreferrer');
-});
-follow.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const q = followInput.value.trim();
-  if (!q || !current || followSend.disabled) return;
-  followInput.value = '';
-  answer.querySelector('.qmx-ask-empty')?.remove();
-  history.push({ role: 'user', content: q });
-  answer.append(el('div', { class: 'qmx-ask-user' }, q));
-  poke();
-  void send(buildMessages({ ...current, history }));
-});
+}
 
 export function initAskAi(base = '/') {
   if (started) return;
   started = true;
   siteBase = base;
-  document.body.append(trigger, panel, dialog);
-  void loadSheet(base);
-  initPet(openFree);
+  document.body.append(trigger, ui.root, dialog);
+  void loadPack(base);
+  initPet({ onOpen: openFree, isOpen: () => ui.isOpen() });
+  // 桌宠被拖动或窗口变化时，气泡跟着走
+  const follow = () => { if (ui.isOpen()) placePanel(); };
+  window.addEventListener('qmx-pet-move', follow);
+  window.addEventListener('resize', follow);
   document.querySelectorAll('[data-qmx-ai-settings]').forEach((b) => b.addEventListener('click', openSettings));
   const refresh = () => requestAnimationFrame(updateTrigger);
   document.addEventListener('mouseup', refresh);
   document.addEventListener('keyup', (e) => { if (e.key.startsWith('Arrow') || e.key === 'Shift') refresh(); });
   document.addEventListener('touchend', () => setTimeout(updateTrigger, 250));
   document.addEventListener('selectionchange', () => { if (!window.getSelection()?.toString().trim()) trigger.hidden = true; });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden && !dialog.open) closePanel(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ui.isOpen() && !dialog.open) closePanel(); });
 }

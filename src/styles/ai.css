@@ -1,12 +1,19 @@
-/* 划词问 AI 的界面。只使用主题令牌（--qmx-*），所有主题自动适配。 */
+/* AI 助手的界面。只使用主题令牌（--qmx-*），所有主题自动适配。
+ *
+ * 对话没有不透明的面板：气泡、输入框和工具条悬浮在桌宠旁边，其余区域完全透明，
+ * 点击会穿过空白处落到页面上。气泡自己有半透明的底色加模糊，保证压在正文上也读得清。 */
 
 .qmx-ask-trigger[hidden],
-.qmx-ask-panel[hidden] { display: none; }
+.qmx-chat[hidden] { display: none; }
 
+/* ───────── 划词按钮 ───────── */
 .qmx-ask-trigger {
   position: absolute;
   z-index: 60;
-  padding: 0.3rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
   border: 1px solid var(--qmx-border);
   border-radius: 999px;
   background: var(--qmx-link);
@@ -17,186 +24,276 @@
   cursor: pointer;
   box-shadow: 0 4px 14px color-mix(in srgb, var(--qmx-bg) 55%, transparent);
 }
+.qmx-ask-trigger__icon { display: none; }
+/* 有动作包时，从待机静止图里截出头像 */
+:root[data-qmx-whale] .qmx-ask-trigger__icon {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-inline-start: -0.45rem;
+  border-radius: 50%;
+  /* 待机静止图（200×175）里脸大约在横向 51%、纵向 50% 的位置，放大到 280% 后让脸落在圆形正中 */
+  background: var(--qmx-whale-still) 52% 50% / 280% auto no-repeat, var(--qmx-panel);
+}
 
-.qmx-ask-panel {
+/* ───────── 对话 ───────── */
+.qmx-chat {
   position: fixed;
   z-index: 70;
-  right: 1rem;
-  bottom: var(--qmx-ask-bottom, 1rem);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  width: min(26rem, calc(100vw - 2rem));
-  max-height: min(34rem, calc(100vh - 2rem));
-  padding: 0.9rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: var(--qmx-radius);
-  background: var(--qmx-panel);
+  gap: 0.5rem;
   color: var(--qmx-text);
-  box-shadow: 0 12px 36px color-mix(in srgb, var(--qmx-bg) 60%, transparent);
+  pointer-events: none; /* 空白处不挡页面，只有气泡、输入框和按钮接收鼠标 */
 }
-
-.qmx-ask-quote {
-  margin: 0;
-  padding: 0.3rem 0.7rem;
-  border-inline-start: 3px solid var(--qmx-accent);
-  color: var(--qmx-muted);
-  font-size: 0.85rem;
-  overflow-wrap: anywhere;
-}
-
-.qmx-ask-answer {
-  flex: 1;
-  min-height: 3rem;
+.qmx-chat__scroll {
   overflow-y: auto;
-  overflow-wrap: anywhere;
-  line-height: 1.65;
-  font-size: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  /* 往上滚出去的内容渐隐，而不是被硬生生切掉 */
+  mask-image: linear-gradient(to bottom, transparent 0, #000 1.4rem);
 }
+.qmx-chat__scroll::-webkit-scrollbar { display: none; }
+.qmx-chat__log { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.4rem 0.2rem 0.7rem; }
+
+/* 气泡 */
+.qmx-msg,
+.qmx-typing,
+.qmx-chat__quote,
+.qmx-chat__status:not(:empty) {
+  pointer-events: auto;
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--qmx-bg) 50%, transparent);
+}
+.qmx-msg {
+  position: relative;
+  max-width: 94%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.qmx-msg--ai,
+.qmx-typing {
+  border: 1px solid var(--qmx-border);
+  background: color-mix(in srgb, var(--qmx-panel) 94%, transparent);
+  backdrop-filter: blur(10px) saturate(1.2);
+}
+.qmx-msg--user {
+  background: var(--qmx-link);
+  color: var(--qmx-bg); /* 链接色与背景色的对比度由 check-contrast 保证 ≥ 4.5 */
+  white-space: pre-wrap;
+}
+.qmx-msg--hint { color: var(--qmx-muted); }
+
+/* AI 的气泡靠近桌宠一侧，你的追问在另一侧 */
+.qmx-chat[data-side="right"] :is(.qmx-msg--ai, .qmx-typing) { align-self: flex-end; }
+.qmx-chat[data-side="right"] .qmx-msg--user { align-self: flex-start; }
+.qmx-chat[data-side="left"] :is(.qmx-msg--ai, .qmx-typing) { align-self: flex-start; }
+.qmx-chat[data-side="left"] .qmx-msg--user { align-self: flex-end; }
+
+/* 最后一条 AI 气泡的尾巴，指向桌宠的头 */
+.has-tail::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--qmx-border);
+  border-top: 0;
+  border-left: 0;
+  background: color-mix(in srgb, var(--qmx-panel) 94%, transparent);
+  transform: rotate(45deg);
+  border-bottom-right-radius: 3px;
+}
+.qmx-chat[data-side="right"] .has-tail::after { right: calc(var(--qmx-tail, 60px) - 7px); }
+.qmx-chat[data-side="left"] .has-tail::after { left: calc(var(--qmx-tail, 60px) - 7px); }
+.qmx-chat[data-pos="below"] .has-tail::after { display: none; }
+
+/* 思考中的三个点 */
+.qmx-typing { position: relative; display: inline-flex; gap: 0.32rem; padding: 0.8rem 1rem; border-radius: 18px; }
+.qmx-typing i { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--qmx-accent); opacity: 0.8; }
+
+/* 选中的原文 */
+.qmx-chat__quote {
+  align-self: stretch;
+  margin: 0;
+  padding: 0.45rem 0.8rem;
+  border-inline-start: 3px solid var(--qmx-accent);
+  border-radius: 6px 12px 12px 6px;
+  background: color-mix(in srgb, var(--qmx-panel) 88%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--qmx-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.qmx-chat__quote-label { display: block; margin-bottom: 0.1rem; color: var(--qmx-link); font-size: 0.72rem; }
+
+/* 状态行 */
+.qmx-chat__status {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--qmx-panel) 94%, transparent);
+  color: var(--qmx-muted);
+  font-size: 0.82rem;
+}
+.qmx-chat__status:empty { display: none; }
+.qmx-chat__status.is-error { border-color: var(--qmx-accent); color: var(--qmx-strong); }
+
+/* 输入框：一颗胶囊 */
+.qmx-chat__input {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  padding: 0.3rem 0.3rem 0.3rem 1rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--qmx-panel) 95%, transparent);
+  backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--qmx-bg) 50%, transparent);
+}
+.qmx-chat__input:focus-within {
+  border-color: var(--qmx-link);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--qmx-link) 35%, transparent), 0 6px 22px color-mix(in srgb, var(--qmx-bg) 50%, transparent);
+}
+.qmx-chat__input textarea {
+  flex: 1;
+  min-width: 0;
+  max-height: 112px;
+  padding: 0.45rem 0;
+  border: 0;
+  outline: 0;
+  resize: none;
+  background: transparent;
+  color: var(--qmx-text);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.qmx-chat__input textarea::placeholder { color: var(--qmx-muted); }
+.qmx-chat__send {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--qmx-link);
+  color: var(--qmx-bg);
+  cursor: pointer;
+}
+.qmx-chat__send:disabled { opacity: 0.4; cursor: default; }
+
+/* 工具条 */
+.qmx-chat__tools { pointer-events: auto; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; justify-content: flex-end; }
+.qmx-chat__tools :is(button, .qmx-chat__meta) {
+  padding: 0.15rem 0.65rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--qmx-panel) 92%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--qmx-text);
+  font: inherit;
+  font-size: 0.78rem;
+}
+.qmx-chat__tools button { cursor: pointer; }
+.qmx-chat__tools button[hidden] { display: none; }
+.qmx-chat__meta { flex: 1 1 9rem; min-width: 0; overflow: hidden; color: var(--qmx-muted); text-overflow: ellipsis; white-space: nowrap; }
+.qmx-chat__meta:empty { display: none; }
+
+/* 每条回答右上角的复制按钮：鼠标悬停或键盘聚焦时出现，触屏设备常驻 */
+.qmx-msg__copy {
+  position: absolute;
+  top: -0.75rem; /* 压在气泡上边框上，不会盖住正文 */
+  right: 0.7rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 999px;
+  background: var(--qmx-panel);
+  color: var(--qmx-muted);
+  font: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.qmx-msg:hover .qmx-msg__copy,
+.qmx-msg__copy:focus-visible { opacity: 1; }
+@media (hover: none) { .qmx-msg__copy { opacity: 0.7; } }
+
+.qmx-chat :is(button, textarea):focus-visible,
+.qmx-ask-trigger:focus-visible,
+.qmx-ai-settings-btn:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+.qmx-chat__input textarea:focus-visible { outline: 0; } /* 胶囊自己有聚焦环 */
 
 /* 回答里的 Markdown。Starlight 的正文样式只作用于 .sl-markdown-content，这里需要自己写。 */
-.qmx-ask-reply > :first-child { margin-top: 0; }
-.qmx-ask-reply > :last-child { margin-bottom: 0; }
-.qmx-ask-reply :is(p, ul, ol, blockquote, pre, .qmx-md-table) { margin: 0 0 0.7rem; }
-.qmx-ask-reply :is(h3, h4, h5, h6) {
-  margin: 0.9rem 0 0.4rem;
-  color: var(--qmx-strong);
-  font-size: 1rem;
-  line-height: 1.35;
-}
-.qmx-ask-reply :is(ul, ol) { padding-inline-start: 1.3rem; }
-.qmx-ask-reply li { margin: 0.2rem 0; }
-.qmx-ask-reply li > :is(ul, ol) { margin: 0.2rem 0 0; }
-.qmx-ask-reply strong { color: var(--qmx-strong); }
-.qmx-ask-reply a { color: var(--qmx-link); text-decoration: underline; }
-.qmx-ask-reply hr { margin: 0.8rem 0; border: 0; border-top: 1px solid var(--qmx-border); }
-.qmx-ask-reply blockquote {
-  padding: 0.1rem 0.7rem;
-  border-inline-start: 3px solid var(--qmx-accent);
-  color: var(--qmx-muted);
-}
-.qmx-ask-reply code {
+.qmx-msg__body > :first-child { margin-top: 0; }
+.qmx-msg__body > :last-child { margin-bottom: 0; }
+.qmx-msg__body :is(p, ul, ol, blockquote, pre, .qmx-md-table) { margin: 0 0 0.7rem; }
+.qmx-msg__body :is(h3, h4, h5, h6) { margin: 0.9rem 0 0.4rem; color: var(--qmx-strong); font-size: 1rem; line-height: 1.35; }
+.qmx-msg__body :is(ul, ol) { padding-inline-start: 1.3rem; }
+.qmx-msg__body li { margin: 0.2rem 0; }
+.qmx-msg__body li > :is(ul, ol) { margin: 0.2rem 0 0; }
+.qmx-msg__body strong { color: var(--qmx-strong); }
+.qmx-msg__body a { color: var(--qmx-link); text-decoration: underline; }
+.qmx-msg__body hr { margin: 0.8rem 0; border: 0; border-top: 1px solid var(--qmx-border); }
+.qmx-msg__body blockquote { padding: 0.1rem 0.7rem; border-inline-start: 3px solid var(--qmx-accent); color: var(--qmx-muted); }
+.qmx-msg__body code {
   padding: 0.1em 0.35em;
   border-radius: 5px;
   background: var(--qmx-code);
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
   font-size: 0.88em;
 }
-.qmx-ask-reply pre {
-  overflow-x: auto;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: 10px;
-  background: var(--qmx-code);
-  line-height: 1.5;
-}
-.qmx-ask-reply pre code { padding: 0; background: none; font-size: 0.85rem; white-space: pre; overflow-wrap: normal; }
-.qmx-ask-reply pre:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+.qmx-msg__body pre { overflow-x: auto; padding: 0.65rem 0.8rem; border: 1px solid var(--qmx-border); border-radius: 10px; background: var(--qmx-code); line-height: 1.5; }
+.qmx-msg__body pre code { padding: 0; background: none; font-size: 0.85rem; white-space: pre; overflow-wrap: normal; }
+.qmx-msg__body pre:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
 .qmx-md-table { overflow-x: auto; }
-.qmx-ask-reply table { border-collapse: collapse; font-size: 0.88rem; }
-.qmx-ask-reply :is(th, td) { padding: 0.3rem 0.6rem; border: 1px solid var(--qmx-border); text-align: start; }
-.qmx-ask-reply th { color: var(--qmx-strong); background: var(--qmx-code); }
+.qmx-msg__body table { border-collapse: collapse; font-size: 0.88rem; }
+.qmx-msg__body :is(th, td) { padding: 0.3rem 0.6rem; border: 1px solid var(--qmx-border); text-align: start; }
+.qmx-msg__body th { color: var(--qmx-strong); background: var(--qmx-code); }
 
-.qmx-ask-empty { margin: 0; color: var(--qmx-muted); }
-
-.qmx-ask-reply {
-  align-self: flex-start;
-  max-width: 100%;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: 4px 14px 14px 14px;
-  background: color-mix(in srgb, var(--qmx-accent) 9%, var(--qmx-panel));
-}
-.qmx-ask-user {
-  align-self: flex-end;
-  max-width: 85%;
-  padding: 0.4rem 0.8rem;
-  border-radius: 14px 4px 14px 14px;
+/* 流式输出时，最后一行末尾的光标 */
+.is-streaming .qmx-msg__body > :last-child:not(pre):not(.qmx-md-table)::after {
+  content: "";
+  display: inline-block;
+  width: 0.5ch;
+  height: 1.05em;
+  margin-inline-start: 2px;
+  vertical-align: text-bottom;
   background: var(--qmx-link);
-  color: var(--qmx-bg); /* 链接色与背景色的对比度由 check-contrast 保证 ≥ 4.5 */
-  white-space: pre-wrap;
 }
 
-.qmx-ask-status { margin: 0; font-size: 0.85rem; color: var(--qmx-muted); }
-.qmx-ask-status:empty { display: none; }
-.qmx-ask-status.is-error { color: var(--qmx-strong); }
-
-.qmx-ask-follow { display: flex; gap: 0.4rem; }
-.qmx-ask-follow input { flex: 1; min-width: 0; }
-
-.qmx-ask-panel input,
-.qmx-ask-settings input,
-.qmx-ask-settings select {
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: 8px;
-  background: var(--qmx-code);
-  color: var(--qmx-text);
-  font: inherit;
+/* 动效：气泡弹出、思考的点点跳动、光标闪烁。系统要求减少动态效果时一律不动。 */
+@media (prefers-reduced-motion: no-preference) {
+  .qmx-msg,
+  .qmx-typing { animation: qmx-bubble-in 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.2); }
+  .qmx-typing i { animation: qmx-dot 1s ease-in-out infinite; }
+  .qmx-typing i:nth-child(2) { animation-delay: 0.15s; }
+  .qmx-typing i:nth-child(3) { animation-delay: 0.3s; }
+  .is-streaming .qmx-msg__body > :last-child::after { animation: qmx-blink 1s steps(1) infinite; }
+  .qmx-whale-say:not([hidden]) { animation: qmx-whale-pop 0.2s ease-out; }
+  @keyframes qmx-bubble-in { from { opacity: 0; transform: translateY(8px) scale(0.96); } }
+  @keyframes qmx-dot { 50% { transform: translateY(-0.28rem); opacity: 1; } }
+  @keyframes qmx-blink { 50% { opacity: 0; } }
+  @keyframes qmx-whale-pop { from { opacity: 0; transform: translate(-50%, -90%); } }
 }
-
-.qmx-ask-panel button,
-.qmx-ask-settings button {
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--qmx-text);
-  font: inherit;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.qmx-ask-panel button:disabled { opacity: 0.5; cursor: default; }
-
-.qmx-ask-panel button:focus-visible,
-.qmx-ask-settings :is(button, input, select):focus-visible,
-.qmx-ask-trigger:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
-
-.qmx-ask-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
-.qmx-ask-bar [hidden] { display: none; }
-
-.qmx-ask-settings {
-  width: min(28rem, calc(100vw - 2rem));
-  padding: 1.1rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: var(--qmx-radius);
-  background: var(--qmx-panel);
-  color: var(--qmx-text);
-}
-.qmx-ask-settings::backdrop { background: color-mix(in srgb, var(--qmx-bg) 70%, transparent); }
-.qmx-ask-settings h2 { margin: 0 0 0.8rem; font-size: 1.1rem; color: var(--qmx-strong); }
-.qmx-ask-settings label { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.65rem; font-size: 0.85rem; }
-.qmx-ask-hint { margin: 0 0 0.6rem; font-size: 0.8rem; color: var(--qmx-muted); }
-.qmx-ask-hint.is-error { color: var(--qmx-strong); }
-.qmx-ask-hint:empty { display: none; }
-.qmx-ask-row { display: flex; gap: 0.4rem; }
-.qmx-ask-row input { flex: 1; min-width: 0; }
-.qmx-ask-settings select[hidden] { display: none; }
-.qmx-ask-settings select { max-width: 100%; margin-top: 0.4rem; }
-.qmx-ask-settings button:disabled { opacity: 0.5; cursor: default; }
-.qmx-ask-settings { max-height: calc(100vh - 2rem); overflow-y: auto; }
-
-@media print { .qmx-ask-trigger, .qmx-ask-panel, .qmx-ask-settings { display: none; } }
-.qmx-ai-settings-btn:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
 
 /* ───────── 鲸鱼形象 ───────── */
 .qmx-sprite { flex: none; background-repeat: no-repeat; }
 .qmx-sprite svg { width: 100%; height: 100%; }
 
-.qmx-ask-head { display: flex; align-items: center; gap: 0.6rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--qmx-border); }
-.qmx-ask-head__text { display: flex; flex-direction: column; min-width: 0; }
-.qmx-ask-head__text strong { color: var(--qmx-strong); }
-.qmx-ask-sub { font-size: 0.78rem; color: var(--qmx-muted); overflow-wrap: anywhere; }
-.qmx-ask-quote:empty { display: none; }
-
-.qmx-pet {
+.qmx-whale {
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 0.5rem;
   z-index: 55;
   padding: 0;
   border: 0;
@@ -205,12 +302,12 @@
   touch-action: none;
   filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--qmx-bg) 60%, transparent));
 }
-.qmx-pet.is-placed { right: auto; bottom: auto; }
-.qmx-pet:active { cursor: grabbing; }
-.qmx-pet[hidden] { display: none; }
-.qmx-pet:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; border-radius: 12px; }
+.qmx-whale.is-placed { right: auto; bottom: auto; }
+.qmx-whale:active { cursor: grabbing; }
+.qmx-whale[hidden] { display: none; }
+.qmx-whale:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; border-radius: 12px; }
 
-.qmx-pet-bubble {
+.qmx-whale-say {
   position: fixed;
   z-index: 56;
   max-width: 12rem;
@@ -223,27 +320,52 @@
   transform: translate(-50%, -100%);
   pointer-events: none;
 }
-.qmx-pet-bubble[hidden] { display: none; }
+.qmx-whale-say[hidden] { display: none; }
 
-/* 划词按钮里的小头像：有图集时才显示，从图集第一帧截取脸部 */
-.qmx-ask-trigger { display: inline-flex; align-items: center; gap: 0.35rem; }
-.qmx-ask-trigger__icon { display: none; }
-:root[data-qmx-whale] .qmx-ask-trigger__icon {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-inline-start: -0.35rem;
-  border-radius: 50%;
-  background: var(--qmx-whale-sheet) -0.3rem 0 / 21rem auto no-repeat, var(--qmx-panel);
+/* ───────── 设置对话框 ───────── */
+.qmx-ask-settings button,
+.qmx-ask-settings input,
+.qmx-ask-settings select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 8px;
+  background: var(--qmx-code);
+  color: var(--qmx-text);
+  font: inherit;
 }
+.qmx-ask-settings button { padding: 0.35rem 0.8rem; background: transparent; font-size: 0.85rem; cursor: pointer; }
+.qmx-ask-settings :is(button, input, select):focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+.qmx-ask-settings button:disabled { opacity: 0.5; cursor: default; }
+
+.qmx-ask-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.qmx-ask-bar [hidden] { display: none; }
+.qmx-ask-bar--start { justify-content: flex-start; margin: 0.4rem 0; }
+
+.qmx-ask-settings {
+  /* Starlight 的重置样式把所有元素的 margin 清零，模态对话框靠 margin:auto 居中，所以要写回来 */
+  margin: auto;
+  width: min(28rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 1.1rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: var(--qmx-radius);
+  background: var(--qmx-panel);
+  color: var(--qmx-text);
+}
+.qmx-ask-settings::backdrop { background: color-mix(in srgb, var(--qmx-bg) 70%, transparent); }
+.qmx-ask-settings h2 { margin: 0 0 0.8rem; font-size: 1.1rem; color: var(--qmx-strong); }
+.qmx-ask-settings label { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.65rem; font-size: 0.85rem; }
+.qmx-ask-settings select[hidden] { display: none; }
+.qmx-ask-settings select { max-width: 100%; margin-top: 0.4rem; }
+.qmx-ask-hint { margin: 0 0 0.6rem; font-size: 0.8rem; color: var(--qmx-muted); }
+.qmx-ask-hint.is-error { color: var(--qmx-strong); }
+.qmx-ask-hint:empty { display: none; }
+.qmx-ask-row { display: flex; gap: 0.4rem; }
+.qmx-ask-row input { flex: 1; min-width: 0; }
 
 .qmx-ask-pet-set { margin: 0.6rem 0 0; padding: 0.6rem 0.8rem; border: 1px solid var(--qmx-border); border-radius: 10px; }
 .qmx-ask-pet-set legend { padding: 0 0.4rem; font-size: 0.85rem; color: var(--qmx-strong); }
 .qmx-ask-settings .qmx-ask-check { flex-direction: row; align-items: center; gap: 0.5rem; }
-.qmx-ask-bar--start { justify-content: flex-start; margin: 0.4rem 0; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .qmx-pet-bubble:not([hidden]) { animation: qmx-pop 0.2s ease-out; }
-  @keyframes qmx-pop { from { opacity: 0; transform: translate(-50%, -90%); } }
-}
-@media print { .qmx-pet, .qmx-pet-bubble { display: none; } }
+@media print { .qmx-ask-trigger, .qmx-chat, .qmx-ask-settings, .qmx-whale, .qmx-whale-say { display: none; } }

@@ -76,6 +76,41 @@ description: 文章摘要
 
 只有 `idle` 是必须的，缺少的状态会用 `idle`。`size` 是单帧的像素尺寸，`faceRight` 表示图片里的角色是否朝右，文件名只能包含字母、数字、下划线、点和连字符。素材的版权和授权由放入者负责，并请在同目录的 `NOTICE.txt` 里写明来源。注意：Spine 官方运行时要求集成者持有 Spine 编辑器授权，所以这里使用普通精灵图，没有引入 Spine 运行时。
 
+## AI 助手（划词提问与鲸鱼）
+
+在正文里选中文字会出现「问 AI」按钮；右下角常驻一只鲸鱼，点击可以直接提问。回答是悬浮在鲸鱼旁边的透明背景气泡。请求从读者自己的浏览器直接发给他们在「AI」设置里选的接口（OpenAI 兼容格式），Key 只存在读者本机，不经过本站。
+
+代码在 `src/ai/`：
+
+| 文件 | 作用 |
+| --- | --- |
+| `core.mjs` | 平台预设、配置读写、提示词、流式响应解析、余额（纯逻辑，可测试） |
+| `markdown.mjs` | 回答的 Markdown 解析，只产出语法树，不生成 HTML |
+| `sprite.mjs` | 动作包的校验与帧计算（纯逻辑，可测试） |
+| `companion.ts` | 鲸鱼：下载图集、按状态播放、待机小动作、拖动 |
+| `chat-ui.ts` | 对话气泡、输入框、工具条的外观和布局 |
+| `ask-ai.ts` | 把上面串起来：划词、请求、设置对话框 |
+
+测试：`node scripts/test-ai.mjs`（同时会校验 `public/ai-pet/` 里每张图集的尺寸和清单对得上）。
+
+新增一个平台预设：在 `core.mjs` 的 `PRESETS` 里加一项（地址、默认模型、Key 提示）。预设只是少填几项，读者仍可手动改。
+
+### 鲸鱼的动画
+
+动画来自 [dsh-pet](https://github.com/PC2005-cloud/dsh-pet)（素材允许开源使用、禁止商用，二创须附上原仓库地址，已写在 `public/ai-pet/NOTICE.txt`）。仓库里放的是导出好的精灵图序列：
+
+```bash
+python3 scripts/export-pet-sprites.py            # 重新导出：原始 24 帧、单格 200px
+python3 scripts/export-pet-sprites.py --fps 12   # 总体积减半
+python3 scripts/export-pet-sprites.py --cell 160 # 缩小单格
+```
+
+需要 Python 3、Pillow，以及带 `libvpx-vp9` 解码器的 ffmpeg（解透明通道必须用它）。脚本会下载源视频、统一裁剪、拼成 `public/ai-pet/clips/*.webp`，并生成清单 `pack.json`。每张图集有几十 MB 的解码内存，所以浏览器只会下载当前用到的那几个。在脚本开头的 `CLIPS`、`MOODS`、`EXTRAS` 里增删动作或调整状态对应。
+
+读者也可以在 AI 设置里导入自己的 8 列 × 11 行图集（Codex 桌宠 V2 版式），只保存在他们自己的浏览器里。
+
+注意：鲸鱼用的类名是 `qmx-whale*`，不要改回 `qmx-pet*`，那是主题桌宠（`src/fx/`）的类名，样式会互相污染。
+
 ## 提交规范
 
 提交信息建议使用以下前缀：

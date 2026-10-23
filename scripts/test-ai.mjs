@@ -6,7 +6,8 @@ import {
 } from "../src/ai/core.mjs";
 import { parseInline, parseMarkdown, safeUrl } from "../src/ai/markdown.mjs";
 import { MAX_HISTORY, balanceUrl, parseBalance, formatBalance } from "../src/ai/core.mjs";
-import { MOODS, ROWS, COLS, frameAt, isValidSheet, framePosition } from "../src/ai/sprite.mjs";
+import { readFileSync, existsSync } from "node:fs";
+import { clipFrame, clipDurationMs, framePosition, pickClip, pickExtra, validatePack, legacyPack, isValidSheet, isLoopMood } from "../src/ai/sprite.mjs";
 
 let passed = 0;
 const test = (name, fn) => { fn(); passed++; console.log("✓", name); };
@@ -260,35 +261,101 @@ test("余额：解析与格式化", () => {
   assert.equal(parseBalance({ is_available: false }).available, false);
 });
 
-test("精灵图：帧循环、不循环的动作停在最后一帧、睡觉从第 3 帧回头", () => {
-  assert.equal(frameAt("idle", 0), 0);
-  assert.equal(frameAt("idle", 1000), 5);
-  assert.equal(frameAt("idle", 1400), 0); // 7 帧 5fps，7 帧后回到 0
-  assert.equal(frameAt("sad", 60_000), 7);
-  assert.equal(frameAt("wave", 60_000), 3);
-  assert.equal(frameAt("sleep", 2000), 3 + ((6 - 6) % 3)); // 第 6 帧：回到 loopFrom
+test("动作帧：循环、不循环停在最后一帧并报告播完、loopFrom 回头", () => {
+  const loop = { frames: 10, fps: 10, loop: true };
+  assert.deepEqual(clipFrame(loop, 0), { frame: 0, done: false });
+  assert.deepEqual(clipFrame(loop, 550), { frame: 5, done: false });
+  assert.deepEqual(clipFrame(loop, 1000), { frame: 0, done: false }); // 播满一轮回到 0
+  assert.deepEqual(clipFrame(loop, 1250), { frame: 2, done: false });
+  const once = { frames: 10, fps: 10, loop: false };
+  assert.deepEqual(clipFrame(once, 950), { frame: 9, done: false });
+  assert.deepEqual(clipFrame(once, 60_000), { frame: 9, done: true });
+  const sleep = { frames: 6, fps: 3, loop: true, loopFrom: 3 };
+  assert.equal(clipFrame(sleep, 2000).frame, 3); // 第 6 帧：回到 loopFrom
+  assert.equal(clipFrame(sleep, 3400).frame, 4); // 第 10 帧：3 + (10 − 6) % 3
+  assert.equal(clipFrame(sleep, 3000).frame, 3); // 第 9 帧：转满一圈又回到 loopFrom
   for (let ms = 0; ms < 20_000; ms += 137) {
-    for (const [name, m] of Object.entries(MOODS)) assert.ok(frameAt(name, ms) >= 0 && frameAt(name, ms) < m.frames, name);
+    const f = clipFrame(sleep, ms).frame;
+    assert.ok(f >= 0 && f < 6);
   }
-  assert.equal(frameAt("不存在", 0), 0);
+  assert.equal(clipFrame(loop, -50).frame, 0);
+  assert.equal(clipDurationMs({ frames: 241, fps: 24 }).toFixed(0), "10042");
 });
 
-test("精灵图：所有动作的行和帧数都在 8×11 范围内", () => {
-  for (const [name, m] of Object.entries(MOODS)) {
-    assert.ok(m.row >= 0 && m.row < ROWS, name);
-    assert.ok(m.frames >= 1 && m.frames <= COLS, name);
-    assert.ok(m.still >= 0 && m.still < m.frames, name);
-    assert.ok(m.loopFrom >= 0 && m.loopFrom < m.frames, name);
+test("帧位置：行优先网格、row0 偏移、缩放", () => {
+  const clip = { cols: 4, rows: 3, frames: 10 };
+  const p = framePosition(clip, [200, 100], 6, 0.5); // 第 6 帧：第 2 列、第 1 行
+  assert.deepEqual([p.x, p.y, p.w, p.h, p.sheetW, p.sheetH], [-200, -50, 100, 50, 400, 150]);
+  const legacy = framePosition({ cols: 8, rows: 11, frames: 6, row0: 7 }, [192, 208], 2, 1);
+  assert.deepEqual([legacy.x, legacy.y], [-384, -7 * 208]);
+});
+
+test("挑选动作：不连续重复、没有候选时退回待机、没有待机返回 null", () => {
+  const pack = { clips: { idle: {}, a: {}, b: {}, x: {} }, moods: { idle: ["idle"], talking: ["a", "b"], ghost: ["nope"] }, extras: ["x", "a"] };
+  for (let i = 0; i < 50; i++) assert.equal(pickClip(pack, "talking", "a"), "b");
+  assert.equal(pickClip(pack, "idle", "idle"), "idle"); // 只有一个候选时允许重复
+  assert.equal(pickClip(pack, "不存在"), "idle");
+  assert.equal(pickClip(pack, "ghost"), null); // 候选都不存在，且 ghost 本身有定义，不退回
+  assert.equal(pickExtra(pack, "x"), "a");
+  assert.equal(pickExtra({ clips: {}, moods: {}, extras: [] }), null);
+  assert.equal(pickClip({ clips: {}, moods: {} }, "idle"), null);
+});
+
+test("动作包校验：拒绝路径穿越、协议、缺待机和乱数字", () => {
+  const good = { cell: [200, 175], still: "still.webp", clips: { idle: { src: "clips/idle.webp", cols: 4, rows: 4, frames: 10, fps: 24, loop: true } }, moods: { idle: ["idle"] } };
+  assert.ok(validatePack(good));
+  const bad = (patch) => validatePack({ ...good, clips: { idle: { ...good.clips.idle, ...patch } } });
+  assert.equal(bad({ src: "../secret.webp" }), null);
+  assert.equal(bad({ src: "https://evil.example/x.webp" }), null);
+  assert.equal(bad({ src: "/etc/passwd" }), null);
+  assert.equal(bad({ frames: 99 }), null); // 帧数超过网格
+  assert.equal(bad({ fps: 0 }), null);
+  assert.equal(validatePack({ ...good, clips: {} }), null); // 没有待机
+  assert.equal(validatePack({ ...good, cell: [0, 5] }), null);
+  assert.equal(validatePack(null), null);
+  assert.equal(validatePack({ ...good, still: "../x.webp" }).still, null);
+  assert.deepEqual(validatePack({ ...good, moods: { idle: ["idle"], poke: ["不存在"] } }).moods, { idle: ["idle"] });
+});
+
+test("自带的动作包：清单合法，引用的图集都存在且尺寸和网格对得上", () => {
+  const dir = new URL("../public/ai-pet/", import.meta.url);
+  const raw = JSON.parse(readFileSync(new URL("pack.json", dir), "utf8"));
+  const pack = validatePack(raw);
+  assert.ok(pack, "pack.json 不合法");
+  assert.equal(Object.keys(pack.clips).length, Object.keys(raw.clips).length, "有动作被校验丢弃");
+  for (const list of Object.values(pack.moods)) assert.ok(list.every((id) => pack.clips[id]));
+  assert.ok(pack.extras.length > 0);
+  assert.ok(existsSync(new URL(pack.still, dir)));
+  for (const [id, c] of Object.entries(pack.clips)) {
+    const buf = readFileSync(new URL(c.src, dir));
+    assert.equal(buf.toString("ascii", 0, 4), "RIFF", id);
+    assert.equal(buf.toString("ascii", 8, 12), "WEBP", id);
+    assert.equal(buf.toString("ascii", 12, 16), "VP8X", id); // 带透明通道的 WebP
+    const w = 1 + buf.readUIntLE(24, 3);
+    const h = 1 + buf.readUIntLE(27, 3);
+    assert.equal(w, c.cols * pack.cell[0], `${id} 宽度`);
+    assert.equal(h, c.rows * pack.cell[1], `${id} 高度`);
+    assert.ok(c.cols * c.rows - c.frames < c.cols, `${id} 最后一行不该空整行`);
   }
 });
 
-test("精灵图：尺寸校验允许整体缩放，拒绝别的比例", () => {
+test("旧版 8×11 图集：尺寸校验允许整体缩放，转成的包能被播放器直接使用", () => {
   assert.ok(isValidSheet(1536, 2288));
   assert.ok(isValidSheet(1152, 1716));
   assert.ok(!isValidSheet(1024, 1024));
   assert.ok(!isValidSheet(0, 0));
-  const p = framePosition("talking", 2, 0.5);
-  assert.deepEqual([p.x, p.y, p.w, p.h], [-192, -7 * 104, 96, 104]);
+  const pack = legacyPack("blob:x");
+  assert.deepEqual(pack.cell, [192, 208]);
+  assert.equal(pack.clips.talking.row0, 7);
+  assert.equal(pickClip(pack, "poke"), "wave");
+  assert.equal(pickClip(pack, "drag"), "runRight");
+  assert.equal(pickClip(pack, "scare"), "idle"); // 旧图集没有的状态退回待机
+  for (const c of Object.values(pack.clips)) assert.ok(c.frames <= c.cols && c.row0 < c.rows);
+});
+
+test("状态分类：一直在做的和播一遍的", () => {
+  for (const m of ["idle", "thinking", "talking", "sleep", "drag", "waiting"]) assert.ok(isLoopMood(m), m);
+  for (const m of ["happy", "sad", "wave", "poke", "scare", "wake"]) assert.ok(!isLoopMood(m), m);
 });
 
 console.log(`\n${passed} 项通过`);

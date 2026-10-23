@@ -1,9 +1,13 @@
-spritesheet.webp 来源：
-  https://github.com/gmskywalker/deepseek-fat-fish-codex-pet  （作者 gmskywalker）
-  "DeepSeek 大肥鱼" 蓝色大肥鱼女仆形象的非官方、非商业同人桌宠图集。
-  原仓库没有声明许可证，并写明「仅用于个人桌面定制与技术学习，不授予商业使用权」。
-  这里为适配网页做了等比缩小到 75%（1152x1716）并重新编码为 webp，内容未改动。
+clips/*.webp、still.webp 来源：
+  https://github.com/PC2005-cloud/dsh-pet （作者 PC2005-cloud）
+  "DeepSeek 大肥鱼" 桌宠的透明动画（dsh-pet/assets/webm）。
+  按该项目的约定：素材允许开源使用，禁止商用；二创作品须在任何介绍、展示、分发的地方
+  附上原作者地址（即上面这一行）。
+
+  这里的改动：用 scripts/export-pet-sprites.py 把其中 22 段透明 webm 逐帧解码，
+  按统一范围裁剪、缩放到单格 200×175，拼成精灵图并编码为 webp；动画内容没有改动。
+  想换帧率或尺寸，重新运行该脚本即可（见脚本开头的说明）。
 
 DeepSeek 及其鲸鱼标志的权利归 DeepSeek 所有，本站与其没有隶属关系。
-本站仅作个人学习笔记之用。如需公开发布或商用，请先取得原作者授权，
+本站仅作个人学习笔记之用。如需商用，请先取得原作者授权，
 或删除本目录：站点会自动改用内置的简易小鲸鱼，也可以在设置里导入自己的图集。
