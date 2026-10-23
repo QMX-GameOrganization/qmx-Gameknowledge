@@ -117,8 +117,8 @@ sidebar:
 | `Allocator.None` | 无 | 不拥有内存，用于包装别人分配的内存 | 不适用 | `Dispose` 不会释放 | 1.5 |
 | `Allocator.AudioKernel` | 无 | 音频内核专用，具体用途与可用范围（待核实） | 不适用 | 不适用 | 1.5 |
 | 自定义分配器 | 视实现 | 通过 `AllocatorManager` 注册，句柄隐式转换为 `Allocator`；结构需含 `AllocatorManager.AllocatorHandle` 字段并实现 `AllocatorManager.IAllocator`；怎样把自定义分配器注册进全局表官方在另一页讲，资料未读到（待核实） | 视实现 | 销毁顺序：先释放分配器自己的内存块，再 `AllocatorHelper.Dispose()` 注销并释放本体 | 1.5 |
-| `RewindableAllocator` | 类似线性分配器，快、线程安全；预分配块，最小对齐 64 字节；块用完再分配，块大小翻倍到上限后线性增长；`Rewind()` 一次性释放所有分配（保留用过的块） | 视容器 | 单个 `Free` / `Dispose` 默认是空操作；创建时开启 enable block free 后，才在释放某块的最后一个分配时回绕该块。创建推荐 `AllocatorHelper<RewindableAllocator>`，`Initialize(int initialBlockSize, bool enableBlockFree = false)`；`NativeArray` 必须经 `CollectionHelper.CreateNativeArray` 创建，`NativeList` 用 `rwd.Handle` 构造；`Rewind` 后旧容器访问抛 `ObjectDisposedException`（需检查开启的构建）；`Rewind` 前必须保证没有 Job 还在用 | 1.5 |
-| 别名（alias）与 `Reinterpret<T, U>()` | 别名共享另一个集合的分配，不自己分配；`Reinterpret<T, U>()` 是数组重解释这种特殊别名（10 个 `int` 变 20 个 `short`） | 不适用 | 别名无需释放，对别名 `Dispose` 什么也不做；原件释放后别名不能再用（`ObjectDisposedException`）；`Unsafe*` 别名 `Native*` 绕开安全检查，别名最好仍用 `Native*` 视图 | 1.4、1.5 |
+| `RewindableAllocator` | 快（类似线性分配器），线程安全 | 预分配块，最小对齐 64 字节；块用完再分配，块大小翻倍到上限后线性增长；`Rewind()` 一次性释放所有分配（保留用过的块）；`Rewind` 前必须保证没有 Job 还在用 | 视容器；`NativeArray` 必须经 `CollectionHelper.CreateNativeArray` 创建，`NativeList` 用 `rwd.Handle` 构造 | 单个 `Free` / `Dispose` 默认是空操作；创建时开启 enable block free 后，才在释放某块的最后一个分配时回绕该块；`Rewind` 后旧容器访问抛 `ObjectDisposedException`（需检查开启的构建）；推荐 `AllocatorHelper<RewindableAllocator>`，`Initialize(int initialBlockSize, bool enableBlockFree = false)` | 1.5 |
+| 别名（alias）与 `Reinterpret<T, U>()` | 无额外分配 | 别名共享另一个集合的分配；`Reinterpret<T, U>()` 是数组重解释这种特殊别名（10 个 `int` 变 20 个 `short`）；原件释放后别名不能再用（`ObjectDisposedException`） | 视别名所用容器；`Unsafe*` 别名 `Native*` 会绕开安全检查，别名最好仍用 `Native*` 视图 | 别名无需释放，对别名 `Dispose` 什么也不做，只释放原件 | 1.4、1.5 |
 
 ### Dispose 的几种写法
 
@@ -408,6 +408,7 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | `FaceMask` 在区块接缝处多出面 | 现有 Job 的边界判断基于整个体积，邻居被当成空气 | 用带邻居边界的单区块版本 | 3.1 |
 | 渲染错乱或崩溃，`SetSubMesh` 无报错 | `indexCount` 与实际写入量不符，Apply 路径几乎不校验 | 核对面数与掩码中 1 的个数 | 1.9、3.4 |
 | `new Random(0)` 永远输出同一个值 | 种子为零，状态为 0 | 用非零种子或 `CreateFromIndex` | 2.3 |
+| 同一世界种子在编辑器、Burst、Player 里生成不同地形 | 用了 `System.HashCode` 派生种子，Burst 不保证结果与 .NET / Mono 一致 | 改用自己写的整数哈希或 `math.hash`，放进 golden test | 2.2、2.6 |
 | 浮点求和每次结果不同 | 浮点加法不满足结合律，每线程槽位或 `Fast` 改变了求和顺序 | 固定块划分与合并顺序；分块部分和天然满足 | 1.7、2.6 |
 
 ### Burst 编译错误与构建问题
@@ -428,6 +429,9 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | `BC1054`、`BC1055` | 编译器内部问题（泛型加指针字段、含 `in` 参数的方法），日志称已修复 | 升级 Burst | 2.12 |
 | `Can't call the method ... on the generic interface object type ...` | 参数为 `T : IEnumerable<U>` 的泛型方法里 `foreach` | 用具体集合类型或自己写索引循环 | 2.2、2.12 |
 | `InvalidOperationException: Burst failed to compile the function pointer ...` | 函数指针目标编译失败，真因在它之前的 `Burst error` | 先修前面的错误；泛型委托不能用于函数指针 | 2.7、2.9、2.12 |
+| 函数指针或直接调用的 Burst 静态方法签名里写了 `bool`、多字段结构体按值传、`NativeArray` 等 | 这些类型不在 `DllImport` 与内部调用的允许清单里 | `bool` 改 `byte` 或 `int`；多字段结构体用指针或 `ref`（`in` / `out`）；容器取出指针和长度再传；具体报错文本未核对（待核实） | 2.1、2.7 |
+| `Interlocked` 在错位字段上读到异常值或行为不稳定 | 目标地址没有自然对齐（如 `Explicit` 布局里偏移为 5 的 `long`），属未定义行为 | 先确认地址对齐，别把字节缓冲区里任意偏移当 `long*` 去原子操作 | 2.2 |
+| 想从托管代码直接调用泛型的 Burst 静态方法 | 手册写明泛型方法、声明方法的类型本身是泛型时都不支持 | 改用非泛型方法；不支持时的具体表现手册未写（待核实） | 2.1 |
 | `The type initializer for 'X$BurstDirectCall' threw an exception` | 内层异常就是上一行的函数指针编译失败 | 看内层异常和它之前的 `Burst error` | 2.12 |
 | 泛型 Job 编辑器里很快，Player 里很慢 | 类型实参来自泛型方法或泛型类的参数，构建时 Burst 发现不了该实例 | 用完全确定的类型实参直接创建并调度；`RegisterGenericJobType` 不是官方补救办法 | 2.9、2.12 |
 | `AotLinkerException: The native link step failed` | 平台链接器、NDK、Xcode 或 SDK 问题 | 检查平台工具链；桌面上先关掉 `Use Platform SDK Linker` | 2.11、2.12 |
@@ -471,7 +475,9 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | `NativeArray<T>` 的 `T : struct` | `T : unmanaged` | Collections 2.1 起收紧 | 1.4 |
 | 带线程下标参数的 `TryAdd` | 曾公开后改为 internal，`m_ThreadIndex` 改名为 `ThreadIndex` | CHANGELOG；直接调用 `TryAdd(key, value)` | 1.7 |
 | `NativeParallelHashMap.ParallelWriter` 无 `Add` | 2.6.0-pre.3 起补充 `Add` | CHANGELOG | 1.4、1.7 |
-| 嵌套容器 | 2.1 更新日志提到加入嵌套容器支持（面向 Unsafe 容器） | `NativeArray<NativeArray<T>>` 仍不可用 | 1.4 |
+| 嵌套容器 | 2.1 更新日志提到加入嵌套容器支持（面向 Unsafe 容器） | `NativeArray<NativeArray<T>>` 仍不可用：被拒绝的是"调度使用它的 Job"（旧稿"创建时被拒绝"的说法已纠正） | 1.4、1.11 |
+| 自定义容器泄漏跟踪 | 较早版本用 `DisposeSentinel`，当前官方示例用 `AtomicSafetyHandle.Create()` / `Release` 加 `MallocTracked` / `FreeTracked` | 读旧教程遇到 `DisposeSentinel` 属旧写法；官方示例注释里仍写"DisposeSentinel"是遗留，以代码为准 | 1.11 |
+| `RewindableAllocator` 的释放语义 | 单个 `Free` 默认是 no-op（旧稿"不能单独释放"不准确）；创建时开启 enable block free 后按块回收；`Initialize(int initialBlockSize, bool enableBlockFree = false)` | Collections 2.5 手册；在 Unity 6.x / 7000 里是否变化未核实（待核实） | 1.5 |
 | `FixedString128`（手册示例写法） | `FixedString128Bytes` | 较新 Collections 的名称，以项目里存在的类型为准 | 2.5 |
 
 ### Burst 变化
@@ -488,6 +494,9 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | 1.8.30 / 1.8.31 | 最低编辑器版本提高到 6.0，默认 LLVM 升到 21 / 23 | 2.12 |
 | Burst 2.0.0 | 相对 1.8.x 的变更说明（What's new、升级指南）没能核实到，行为变化、错误码增删（待核实）；升级编辑器后要重跑性能基线与结果对比 | 2.12 |
 | `[assembly: RegisterGenericJobType]` | 属 `Unity.Jobs`（6.7 Scripting API 页面确认），不属 `Unity.Burst` | 2.9 |
+| `bool` 作函数指针参数 | 结论：`bool` 不在 `DllImport` 与内部调用允许清单里，用 `byte` 或 `int` | 2.7 |
+| Windows 构建的 Burst 库路径 | 已纠正为 `<名>_Data/Plugins/x86_64/lib_burst_generated.dll` | 2.11 |
+| Burst 运行时加载额外库 | Unity 2021.1 起可用 `BurstRuntime.LoadAdditionalLibrary` 加载运行时额外库（Modding） | 2.11 |
 
 ### BC 错误码来源
 
@@ -501,3 +510,5 @@ Mathematics 从 Unity 6.5 起是内置模块，`Unity.Mathematics` 命名空间�
 | Collections | 6.7 之后看 Unity Manual 的 Collections 章节；较低版本用包手册，如 `Packages/com.unity.collections@2.5/manual/index.html`；`Manual/collections/collections.html` 线上返回 404 | 0.1 |
 | Burst | `Packages/com.unity.burst@1.8/manual/index.html` 最全；新版本在 Unity Manual 的 `burst/` 路径下 | 0.1、2.11 |
 | Mathematics | 6.5 之前看包手册 1.3；6.5 起看 Scripting API 的 `Unity.Mathematics.math` 与 Manual 的 Unity Mathematics APIs | 0.1 |
+| Entities（ECS） | `Packages/com.unity.entities@1.4/manual/` 下的 ECS packages、concepts、systems 等页；本项目未引用 `com.unity.entities`，Entities 在 7000.0.0a8 上的版本与状态（待核实） | 0.4 |
+| 自定义 NativeContainer | Unity Manual 的 Implement a custom native container 与 Custom NativeContainer example、Copying NativeContainer structures；`NativeContainerAttribute` 等的 ScriptReference 页 | 1.11、1.6 |
