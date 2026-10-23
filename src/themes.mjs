@@ -25,6 +25,7 @@ export const themes = [
   { id: 'rhodes', label: '罗德岛', mode: 'dark' },
   { id: 'mocha', label: 'Catppuccin 摩卡', mode: 'dark' },
   { id: 'nord', label: 'Nord 极光', mode: 'dark' },
+  { id: 'deepsea', label: '深海蓝（鲸鱼）', mode: 'dark' },
   { id: 'neon', label: '赛博霓虹', mode: 'dark' },
   { id: 'contrast', label: '高对比度', mode: 'dark' },
   // 亮色

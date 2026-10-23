@@ -22,7 +22,7 @@
   position: fixed;
   z-index: 70;
   right: 1rem;
-  bottom: 1rem;
+  bottom: var(--qmx-ask-bottom, 1rem);
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -52,6 +52,9 @@
   overflow-wrap: anywhere;
   line-height: 1.65;
   font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 /* 回答里的 Markdown。Starlight 的正文样式只作用于 .sl-markdown-content，这里需要自己写。 */
@@ -97,13 +100,24 @@
 .qmx-ask-reply :is(th, td) { padding: 0.3rem 0.6rem; border: 1px solid var(--qmx-border); text-align: start; }
 .qmx-ask-reply th { color: var(--qmx-strong); background: var(--qmx-code); }
 
-.qmx-ask-reply + .qmx-ask-user,
-.qmx-ask-user + .qmx-ask-reply { margin-top: 0.6rem; }
+.qmx-ask-empty { margin: 0; color: var(--qmx-muted); }
 
+.qmx-ask-reply {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 4px 14px 14px 14px;
+  background: color-mix(in srgb, var(--qmx-accent) 9%, var(--qmx-panel));
+}
 .qmx-ask-user {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 0.4rem 0.8rem;
+  border-radius: 14px 4px 14px 14px;
+  background: var(--qmx-link);
+  color: var(--qmx-bg); /* 链接色与背景色的对比度由 check-contrast 保证 ≥ 4.5 */
   white-space: pre-wrap;
-  color: var(--qmx-strong);
-  font-weight: 600;
 }
 
 .qmx-ask-status { margin: 0; font-size: 0.85rem; color: var(--qmx-muted); }
@@ -168,3 +182,68 @@
 
 @media print { .qmx-ask-trigger, .qmx-ask-panel, .qmx-ask-settings { display: none; } }
 .qmx-ai-settings-btn:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+
+/* ───────── 鲸鱼形象 ───────── */
+.qmx-sprite { flex: none; background-repeat: no-repeat; }
+.qmx-sprite svg { width: 100%; height: 100%; }
+
+.qmx-ask-head { display: flex; align-items: center; gap: 0.6rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--qmx-border); }
+.qmx-ask-head__text { display: flex; flex-direction: column; min-width: 0; }
+.qmx-ask-head__text strong { color: var(--qmx-strong); }
+.qmx-ask-sub { font-size: 0.78rem; color: var(--qmx-muted); overflow-wrap: anywhere; }
+.qmx-ask-quote:empty { display: none; }
+
+.qmx-pet {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 55;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--qmx-bg) 60%, transparent));
+}
+.qmx-pet.is-placed { right: auto; bottom: auto; }
+.qmx-pet:active { cursor: grabbing; }
+.qmx-pet[hidden] { display: none; }
+.qmx-pet:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; border-radius: 12px; }
+
+.qmx-pet-bubble {
+  position: fixed;
+  z-index: 56;
+  max-width: 12rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 12px;
+  background: var(--qmx-panel);
+  color: var(--qmx-text);
+  font-size: 0.82rem;
+  transform: translate(-50%, -100%);
+  pointer-events: none;
+}
+.qmx-pet-bubble[hidden] { display: none; }
+
+/* 划词按钮里的小头像：有图集时才显示，从图集第一帧截取脸部 */
+.qmx-ask-trigger { display: inline-flex; align-items: center; gap: 0.35rem; }
+.qmx-ask-trigger__icon { display: none; }
+:root[data-qmx-whale] .qmx-ask-trigger__icon {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-inline-start: -0.35rem;
+  border-radius: 50%;
+  background: var(--qmx-whale-sheet) -0.3rem 0 / 21rem auto no-repeat, var(--qmx-panel);
+}
+
+.qmx-ask-pet-set { margin: 0.6rem 0 0; padding: 0.6rem 0.8rem; border: 1px solid var(--qmx-border); border-radius: 10px; }
+.qmx-ask-pet-set legend { padding: 0 0.4rem; font-size: 0.85rem; color: var(--qmx-strong); }
+.qmx-ask-settings .qmx-ask-check { flex-direction: row; align-items: center; gap: 0.5rem; }
+.qmx-ask-bar--start { justify-content: flex-start; margin: 0.4rem 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .qmx-pet-bubble:not([hidden]) { animation: qmx-pop 0.2s ease-out; }
+  @keyframes qmx-pop { from { opacity: 0; transform: translate(-50%, -90%); } }
+}
+@media print { .qmx-pet, .qmx-pet-bubble { display: none; } }

@@ -5,6 +5,8 @@ import {
   clearConfig, clip, buildMessages, buildFallbackPrompt, parseSseChunk, describeHttpError,
 } from "../src/ai/core.mjs";
 import { parseInline, parseMarkdown, safeUrl } from "../src/ai/markdown.mjs";
+import { MAX_HISTORY, balanceUrl, parseBalance, formatBalance } from "../src/ai/core.mjs";
+import { MOODS, ROWS, COLS, frameAt, isValidSheet, framePosition } from "../src/ai/sprite.mjs";
 
 let passed = 0;
 const test = (name, fn) => { fn(); passed++; console.log("✓", name); };
@@ -210,6 +212,71 @@ test("Markdown：空输入与超长输入不会崩", () => {
   assert.deepEqual(parseMarkdown(""), []);
   assert.deepEqual(parseMarkdown(null), []);
   assert.ok(parseMarkdown("*".repeat(5000) + "\n" + "[".repeat(3000)).length > 0);
+});
+
+// ---------- 直接提问、余额、精灵图 ----------
+test("直接提问模式：没有选中文字时只带系统提示和对话，并限制历史长度", () => {
+  const history = Array.from({ length: 30 }, (_, i) => ({ role: i % 2 ? "assistant" : "user", content: `m${i}` }));
+  const m = buildMessages({ selection: "", pageTitle: "Burst", history });
+  assert.equal(m[0].role, "system");
+  assert.match(m[0].content, /Burst/);
+  assert.equal(m.length, 1 + MAX_HISTORY);
+  assert.equal(m.at(-1).content, "m29");
+  // 划词模式同样限制
+  assert.equal(buildMessages({ selection: "x", history }).length, 2 + MAX_HISTORY);
+});
+
+test("直接提问时的回退提示词取最近一次提问", () => {
+  const p = buildFallbackPrompt({ selection: "", history: [{ role: "user", content: "什么是 Job？" }, { role: "assistant", content: "…" }] });
+  assert.match(p, /什么是 Job/);
+  assert.ok(buildFallbackPrompt({ selection: "" }).length > 0);
+});
+
+test("余额：只有 DeepSeek 官方域名有地址，且去掉 /v1", () => {
+  assert.equal(balanceUrl("https://api.deepseek.com"), "https://api.deepseek.com/user/balance");
+  assert.equal(balanceUrl("https://api.deepseek.com/v1/"), "https://api.deepseek.com/user/balance");
+  assert.equal(balanceUrl("https://opencode.ai/inference/openai/v1"), "");
+  assert.equal(balanceUrl("https://api.deepseek.com.evil.com"), "");
+  assert.equal(balanceUrl("乱写"), "");
+});
+
+test("余额：解析与格式化", () => {
+  const parsed = parseBalance({ is_available: true, balance_infos: [{ currency: "CNY", total_balance: "110.50" }, { currency: "USD", total_balance: "x" }] });
+  assert.equal(parsed.items.length, 1);
+  assert.equal(formatBalance(parsed), "¥110.50");
+  assert.equal(formatBalance(parseBalance({})), "");
+  assert.equal(parseBalance({ is_available: false }).available, false);
+});
+
+test("精灵图：帧循环、不循环的动作停在最后一帧、睡觉从第 3 帧回头", () => {
+  assert.equal(frameAt("idle", 0), 0);
+  assert.equal(frameAt("idle", 1000), 5);
+  assert.equal(frameAt("idle", 1400), 0); // 7 帧 5fps，7 帧后回到 0
+  assert.equal(frameAt("sad", 60_000), 7);
+  assert.equal(frameAt("wave", 60_000), 3);
+  assert.equal(frameAt("sleep", 2000), 3 + ((6 - 6) % 3)); // 第 6 帧：回到 loopFrom
+  for (let ms = 0; ms < 20_000; ms += 137) {
+    for (const [name, m] of Object.entries(MOODS)) assert.ok(frameAt(name, ms) >= 0 && frameAt(name, ms) < m.frames, name);
+  }
+  assert.equal(frameAt("不存在", 0), 0);
+});
+
+test("精灵图：所有动作的行和帧数都在 8×11 范围内", () => {
+  for (const [name, m] of Object.entries(MOODS)) {
+    assert.ok(m.row >= 0 && m.row < ROWS, name);
+    assert.ok(m.frames >= 1 && m.frames <= COLS, name);
+    assert.ok(m.still >= 0 && m.still < m.frames, name);
+    assert.ok(m.loopFrom >= 0 && m.loopFrom < m.frames, name);
+  }
+});
+
+test("精灵图：尺寸校验允许整体缩放，拒绝别的比例", () => {
+  assert.ok(isValidSheet(1536, 2288));
+  assert.ok(isValidSheet(1152, 1716));
+  assert.ok(!isValidSheet(1024, 1024));
+  assert.ok(!isValidSheet(0, 0));
+  const p = framePosition("talking", 2, 0.5);
+  assert.deepEqual([p.x, p.y, p.w, p.h], [-192, -7 * 104, 96, 104]);
 });
 
 console.log(`\n${passed} 项通过`);

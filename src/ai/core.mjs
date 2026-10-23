@@ -151,6 +151,13 @@ export function clip(text, max) {
   return flat.length > max ? `${flat.slice(0, max)}…` : flat;
 }
 
+/** 追问记录最多带最近 20 条，避免对话越长请求越大。 */
+export const MAX_HISTORY = 20;
+
+const FREE_PROMPT =
+  '你是游戏开发知识库的阅读助手，回答用户关于游戏开发、编程和这个知识库内容的问题。' +
+  '用简体中文，回答准确、简洁；不确定时直接说明，不要编造。';
+
 const SYSTEM_PROMPT =
   '你是游戏开发知识库的阅读助手。用户在文章里选中了一段文字，请用简体中文解释它的含义、' +
   '在上下文中的作用，必要时给一个简短例子。回答要准确、简洁；不确定时直接说明，不要编造。';
@@ -162,6 +169,17 @@ const SYSTEM_PROMPT =
 export function buildMessages({ selection, pageTitle = '', context = '', history = [] }) {
   const sel = clip(selection, MAX_SELECTION);
   const ctx = clip(context, MAX_CONTEXT);
+  const recent = history.slice(-MAX_HISTORY);
+
+  // 没有选中文字：直接提问模式，history 里就是对话本身
+  if (!sel) {
+    const title = pageTitle ? `用户正在阅读的文章：${clip(pageTitle, 120)}。` : '';
+    return [
+      { role: 'system', content: `${FREE_PROMPT}${title}` },
+      ...recent,
+    ];
+  }
+
   const lines = [];
   if (pageTitle) lines.push(`文章标题：${clip(pageTitle, 120)}`);
   if (ctx) lines.push(`所在段落：${ctx}`);
@@ -170,14 +188,48 @@ export function buildMessages({ selection, pageTitle = '', context = '', history
   return [
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: lines.join('\n') },
-    ...history,
+    ...recent,
   ];
 }
 
 /** 失败时给用户复制到网页版 DeepSeek 的提示词。 */
-export function buildFallbackPrompt({ selection, pageTitle = '', context = '' }) {
+export function buildFallbackPrompt({ selection, pageTitle = '', context = '', history = [] }) {
+  if (!clip(selection, MAX_SELECTION)) {
+    // 直接提问模式：复制最近一次提问
+    const last = [...history].reverse().find((m) => m.role === 'user');
+    return last ? `${FREE_PROMPT}\n\n${last.content}` : FREE_PROMPT;
+  }
   const [, user] = buildMessages({ selection, pageTitle, context });
   return `${SYSTEM_PROMPT}\n\n${user.content}`;
+}
+
+// ---------- DeepSeek 余额 ----------
+
+/** 只有 DeepSeek 官方域名提供 /user/balance；其他平台返回空串。注意它不在 /v1 路径下。 */
+export function balanceUrl(baseUrl) {
+  const base = normalizeBaseUrl(baseUrl);
+  if (!base) return '';
+  try {
+    if (new URL(base).hostname !== 'api.deepseek.com') return '';
+  } catch {
+    return '';
+  }
+  return `${base.replace(/\/v1$/i, '')}/user/balance`;
+}
+
+/** 解析余额接口的返回：{is_available, balance_infos:[{currency, total_balance}]}。 */
+export function parseBalance(json) {
+  const infos = Array.isArray(json?.balance_infos) ? json.balance_infos : [];
+  const items = infos
+    .map((i) => ({ currency: String(i?.currency ?? ''), total: Number.parseFloat(i?.total_balance) }))
+    .filter((i) => i.currency && Number.isFinite(i.total));
+  return { available: json?.is_available !== false, items };
+}
+
+export function formatBalance(parsed) {
+  if (!parsed.items.length) return '';
+  const symbol = { CNY: '¥', USD: '$' };
+  return parsed.items.map((i) => `${symbol[i.currency] ?? `${i.currency} `}${i.total.toFixed(2)}`).join('  ');
 }
 
 /**

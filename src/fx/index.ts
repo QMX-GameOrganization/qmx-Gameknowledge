@@ -36,6 +36,7 @@ const registry: Record<string, Loader> = {
   blocks: () => import('./blocks'),
   neon: () => import('./neon'),
   nord: () => import('./nord'),
+  deepsea: () => import('./deepsea'),
   github: () => import('./github'),
   paper: () => import('./paper'),
   mocha: () => import('./cat').then((m) => ({ default: m.mochaCat })),

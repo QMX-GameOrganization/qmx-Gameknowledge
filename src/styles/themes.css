@@ -143,6 +143,23 @@
   --qmx-link: #88c0d0;
 }
 
+/* 深海蓝：配合 AI 鲸鱼助手的主题，深蓝底 + 天蓝强调 */
+:root[data-qmx-theme="deepsea"] {
+  --qmx-bg: #06182b;
+  --qmx-nav: #0a2540;
+  --qmx-sidebar: #081f38;
+  --qmx-panel: #0e2d4d;
+  --qmx-text: #e6f3ff;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #a7c4e0;
+  --qmx-border: #3b6a96;
+  --qmx-code: #051322;
+  --qmx-accent: #38bdf8;
+  --qmx-accent-2: #60a5fa;
+  --qmx-link: #7dd3fc;
+  --qmx-deco: linear-gradient(180deg, #06182b, #082744 55%, #0a3358);
+}
+
 /* 赛博霓虹：深紫底 + 品红 + 青色 */
 :root[data-qmx-theme="neon"] {
   --qmx-bg: #0d0221;
