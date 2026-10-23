@@ -22,6 +22,7 @@ const groups = [
       ))}
     </select>
   </label>
+  <button type="button" class="qmx-ai-settings-btn" data-qmx-ai-settings title="划词问 AI 的设置（接口与 Key）">AI</button>
   <!-- 只有带特效的主题才会显示这两个开关，见 fx.css -->
   <span class="qmx-fx-controls">
     <button type="button" data-qmx-fx-toggle aria-pressed="true" title="开关当前主题的动态特效">特效</button>
@@ -33,6 +34,7 @@ const groups = [
   // 主题的恢复与持久化由 astro.config.mjs 注入到 <head> 的脚本完成（window.QMXTheme）。
   // 这里只负责：下拉框与当前主题保持同步、响应用户切换、按需加载初音桌宠。
   import { initFx } from '../fx/index';
+  import { initAskAi } from '../ai/ask-ai';
 
   type MikuPet = { remove?: () => void };
   const w = window as unknown as {
@@ -98,4 +100,7 @@ const groups = [
   // 主题专属的动态特效(星夜的星空、罗德岛的桌宠)，见 src/fx/。
   const base = document.querySelector<HTMLElement>('[data-qmx-base]')?.dataset.qmxBase ?? '/';
   initFx(base);
+
+  // 划词问 AI，见 src/ai/。只在浏览器里运行，key 只存本机。
+  initAskAi();
 </script>
