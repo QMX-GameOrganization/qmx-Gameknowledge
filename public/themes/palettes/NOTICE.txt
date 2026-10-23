@@ -1,0 +1,11 @@
+Color palettes
+
+Catppuccin (Mocha / Latte themes)
+Source: https://github.com/catppuccin/catppuccin
+License: MIT
+
+Nord (Nord theme)
+Source: https://github.com/nordtheme/nord
+License: MIT
+
+Only the color values are used; the "Block World" and "Rhodes Island" themes are original palettes inspired by their subjects and use no third-party assets.

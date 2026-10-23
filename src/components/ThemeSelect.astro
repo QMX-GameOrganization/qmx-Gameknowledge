@@ -1,52 +1,85 @@
 ---
-const themes = [
-  { id: 'starry', label: '星夜', accent: '#7dd3fc', accent2: '#a78bfa', bg: '#070d1b', nav: '#0b1427', sidebar: '#0a1324', panel: '#101d33', text: '#e5f3ff', muted: '#9db1c9', border: '#29415f', code: '#07101f' },
-  { id: 'sakura', label: '春樱', accent: '#ec4899', accent2: '#fb7185', bg: '#fff7fb', nav: '#fffafd', sidebar: '#fff1f5', panel: '#ffffff', text: '#3d2432', muted: '#876878', border: '#f4c9d9', code: '#fff1f5' },
-  { id: 'summer', label: '夏日天气', accent: '#0284c7', accent2: '#f59e0b', bg: '#eefaff', nav: '#f7fdff', sidebar: '#e4f6ff', panel: '#ffffff', text: '#173449', muted: '#587487', border: '#b9e4f5', code: '#e6f7ff' },
-  { id: 'pixel', label: '像素终端', accent: '#a3e635', accent2: '#22c55e', bg: '#07100a', nav: '#0a170d', sidebar: '#09150c', panel: '#0d1d12', text: '#d9f99d', muted: '#8fb48d', border: '#285b35', code: '#050b07' },
-  { id: 'github', label: 'GitHub 经典', accent: '#0969da', accent2: '#8250df', bg: '#ffffff', nav: '#f6f8fa', sidebar: '#f6f8fa', panel: '#ffffff', text: '#1f2328', muted: '#656d76', border: '#d0d7de', code: '#f6f8fa' },
-  { id: 'miku', label: '初音未来', accent: '#39c5bb', accent2: '#ff6fae', bg: '#071c22', nav: '#0b2830', sidebar: '#08232b', panel: '#10323a', text: '#e1fffb', muted: '#9bd8d2', border: '#23626a', code: '#06161c' },
+import { themes } from '../themes.mjs';
+
+// 暗色、亮色分组显示，方便在十几个主题里快速找到想要的明暗类型。
+const groups = [
+  { label: '暗色', items: themes.filter((theme) => theme.mode === 'dark') },
+  { label: '亮色', items: themes.filter((theme) => theme.mode === 'light') },
 ];
 ---
 
-<label class="qmx-theme-select" for="qmx-theme">
+<label class="qmx-theme-select">
   <span class="qmx-theme-select__label">主题</span>
-  <select id="qmx-theme" aria-label="选择主题">
-    {themes.map((theme) => <option value={theme.id}>{theme.label}</option>)}
+  <select data-qmx-theme-select aria-label="选择主题">
+    {groups.map((group) => (
+      <optgroup label={group.label}>
+        {group.items.map((theme) => <option value={theme.id}>{theme.label}</option>)}
+      </optgroup>
+    ))}
   </select>
 </label>
 
-<script define:vars={{ themes }}>
-  const key = 'qmx-theme';
+<script>
+  // 主题的恢复与持久化由 astro.config.mjs 注入到 <head> 的脚本完成（window.QMXTheme）。
+  // 这里只负责：下拉框与当前主题保持同步、响应用户切换、按需加载初音桌宠。
+  type MikuPet = { remove?: () => void };
+  const w = window as unknown as {
+    QMXTheme?: { apply(id: string): string };
+    Miku?: new () => MikuPet;
+    qmxMiku?: MikuPet | null;
+  };
+
+  const MIKU_SRC = 'https://cdn.jsdelivr.net/gh/samiulalim1/Hatsune-Miku-Web-Pet@v1.0.0/miku.min.js';
   const root = document.documentElement;
-  const selects = [...document.querySelectorAll('.qmx-theme-select select')];
-  const byId = Object.fromEntries(themes.map((theme) => [theme.id, theme]));
-  function apply(id) {
-    const theme = byId[id] || byId.starry;
-    root.dataset.qmxTheme = theme.id;
-    for (const [name, value] of Object.entries(theme)) {
-      if (name !== 'id' && name !== 'label') root.style.setProperty(`--qmx-${name}`, value);
-    }
-    selects.forEach((select) => { select.value = theme.id; });
-    localStorage.setItem(key, theme.id);
-    syncMiku(theme.id);
+  let mikuLoading = false;
+
+  function syncSelects(id: string) {
+    document
+      .querySelectorAll<HTMLSelectElement>('select[data-qmx-theme-select]')
+      .forEach((select) => { select.value = id; });
   }
-  function syncMiku(id) {
-    const existing = document.querySelector('[data-qmx-miku-script]');
+
+  function createMiku() {
+    if (root.dataset.qmxTheme === 'miku' && w.Miku && !w.qmxMiku) w.qmxMiku = new w.Miku();
+  }
+
+  function syncMiku(id: string) {
     if (id !== 'miku') {
-      if (window.qmxMiku?.remove) window.qmxMiku.remove();
-      window.qmxMiku = null;
-      existing?.remove();
+      w.qmxMiku?.remove?.();
+      w.qmxMiku = null;
       return;
     }
-    if (existing || window.qmxMiku) return;
+    if (w.qmxMiku || mikuLoading) return;
+    // 桌宠会持续播放动画，系统要求减少动态效果时不加载。
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (w.Miku) {
+      createMiku();
+      return;
+    }
+    mikuLoading = true;
     const script = document.createElement('script');
     script.dataset.qmxMikuScript = 'true';
-    script.src = 'https://cdn.jsdelivr.net/gh/samiulalim1/Hatsune-Miku-Web-Pet@v1.0.0/miku.min.js';
-    script.onload = () => { if (window.Miku) window.qmxMiku = new window.Miku(); };
+    script.src = MIKU_SRC;
+    script.onload = () => { mikuLoading = false; createMiku(); };
+    // CDN 访问失败时静默跳过，不影响页面阅读。
+    script.onerror = () => { mikuLoading = false; script.remove(); };
     document.head.appendChild(script);
   }
-  apply(localStorage.getItem(key) || 'starry');
-  selects.forEach((select) => select.addEventListener('change', () => apply(select.value)));
-</script>
 
+  document.addEventListener('qmx-themechange', (event) => {
+    const { id } = (event as CustomEvent<{ id: string }>).detail;
+    syncSelects(id);
+    syncMiku(id);
+  });
+
+  document.addEventListener('change', (event) => {
+    const target = event.target;
+    if (target instanceof HTMLSelectElement && target.hasAttribute('data-qmx-theme-select')) {
+      w.QMXTheme?.apply(target.value);
+    }
+  });
+
+  const initial = root.dataset.qmxTheme ?? 'starry';
+  syncSelects(initial);
+  syncMiku(initial);
+</script>

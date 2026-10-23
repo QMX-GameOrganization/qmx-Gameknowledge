@@ -1,17 +1,58 @@
+/*
+ * 站点通用样式 + 主题令牌到 Starlight 变量的映射。
+ *
+ * 分工：
+ *   themes.css  每个主题自己的颜色令牌（--qmx-*）和背景装饰
+ *   custom.css  把 --qmx-* 映射到 --sl-color-*，以及与具体主题无关的外观
+ *
+ * 主题令牌（每个主题都必须提供）：
+ *   --qmx-bg        页面背景            --qmx-nav      顶栏背景
+ *   --qmx-sidebar   侧边栏背景          --qmx-panel    浮层 / 下拉框背景
+ *   --qmx-text      正文                --qmx-strong   标题与强调文字
+ *   --qmx-muted     次要文字            --qmx-border   分隔线与边框
+ *   --qmx-code      代码块 / 行内代码背景
+ *   --qmx-accent    装饰性强调色（按钮底色、边框高亮）
+ *   --qmx-accent-2  第二强调色
+ *   --qmx-link      链接与当前导航项底色，必须在 --qmx-bg 上达到 4.5:1 对比度
+ */
+
 :root {
-  --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 16%, #07111f);
-  --sl-color-accent: var(--qmx-accent, #38bdf8);
-  --sl-color-accent-high: color-mix(in srgb, var(--qmx-accent) 20%, white);
   --sl-font: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  --qmx-accent: #38bdf8;
-  --qmx-accent-2: #a78bfa;
-  --qmx-radius: 18px;
-  --qmx-content-width: 760px;
-  --qmx-wallpaper: none;
+  --qmx-radius: 14px;
+
+  /* 映射到 Starlight。这里是未分层样式，会覆盖 Starlight 在亮 / 暗两种模式下的默认值。 */
+  --sl-color-white: var(--qmx-strong);
+  --sl-color-gray-1: var(--qmx-text);
+  --sl-color-gray-2: var(--qmx-muted);
+  --sl-color-gray-3: color-mix(in srgb, var(--qmx-muted) 85%, var(--qmx-bg));
+  --sl-color-gray-4: var(--qmx-border);
+  --sl-color-gray-5: color-mix(in srgb, var(--qmx-border) 72%, var(--qmx-bg));
+  --sl-color-gray-6: color-mix(in srgb, var(--qmx-border) 48%, var(--qmx-bg));
+  --sl-color-black: var(--qmx-bg);
+
+  --sl-color-text: var(--qmx-text);
+  --sl-color-text-accent: var(--qmx-link);
+  --sl-color-text-invert: var(--qmx-bg);
+  --sl-color-bg: var(--qmx-bg);
+  --sl-color-bg-nav: var(--qmx-nav);
+  --sl-color-bg-sidebar: var(--qmx-sidebar);
+  --sl-color-bg-inline-code: var(--qmx-code);
+  --sl-color-bg-accent: var(--qmx-link);
+  --sl-color-hairline-shade: var(--qmx-border);
+  --sl-color-backdrop-overlay: color-mix(in srgb, var(--qmx-bg) 72%, transparent);
+
+  --sl-color-accent: var(--qmx-accent);
+  --sl-color-accent-high: var(--qmx-link);
+  --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 16%, var(--qmx-bg));
 }
 
-[data-theme="light"] {
-  --sl-color-bg: #f8fafc;
+body {
+  background-color: var(--qmx-bg);
+  background-image: var(--qmx-deco, none);
+  background-size: var(--qmx-deco-size, auto);
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--qmx-text);
 }
 
 .hero { padding-block: 3rem; }
@@ -20,68 +61,100 @@
 .expressive-code .frame,
 .expressive-code pre,
 .sl-markdown-content .astro-code {
-  border-radius: 14px !important;
+  border-radius: var(--qmx-radius) !important;
   overflow: hidden;
 }
 
-body { background-image: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-bg) 88%, transparent), color-mix(in srgb, var(--sl-color-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; }
-:root[data-qmx-wallpaper="on"] body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: color-mix(in srgb, var(--sl-color-bg) 52%, transparent); pointer-events: none; }
-:root[data-qmx-theme="starry"] body { background-color: #070d1b; background-image: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, #070d1b, #111a36 62%, #1b1738), var(--qmx-wallpaper); background-size: 180px 180px, 240px 240px, 130px 130px, auto, cover; }
-:root[data-qmx-theme="sakura"] body { background-color: #fff7fb; background-image: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, #fff7fb, #fff1f2 55%, #fce7f3), var(--qmx-wallpaper); background-size: 170px 170px, 230px 230px, auto, cover; }
-:root[data-qmx-theme="summer"] body { background-color: #effbff; background-image: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, #effbff, #dff6ff 52%, #fef3c7), var(--qmx-wallpaper); background-size: auto, auto, cover; }
-:root[data-qmx-theme="pixel"] body { background-color: #08100b; background-image: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, #08100b, #0c1b12), var(--qmx-wallpaper); background-size: 18px 18px, 18px 18px, auto, cover; image-rendering: pixelated; }
-.qmx-theme-select { display: flex; align-items: center; gap: .45rem; position: relative; }
-.qmx-mode-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.qmx-mode, .qmx-customizer summary { min-height: 2.1rem; border: 1px solid var(--sl-color-gray-5); border-radius: .55rem; padding: .35rem .55rem; background: var(--sl-color-bg-nav); color: inherit; font: inherit; font-size: .78rem; cursor: pointer; }
-.qmx-customizer summary { list-style: none; display: inline-flex; align-items: center; }.qmx-customizer summary::-webkit-details-marker { display: none; }.qmx-customizer summary::before { content: "✦"; margin-right: .35rem; color: var(--qmx-accent); }.qmx-customizer[open] summary { border-color: var(--qmx-accent); }
-.qmx-popover { position: absolute; right: 0; top: calc(100% + .7rem); z-index: 30; width: min(350px, calc(100vw - 2rem)); padding: 1.1rem; border: 1px solid color-mix(in srgb, var(--qmx-accent) 28%, var(--sl-color-gray-5)); border-radius: var(--qmx-radius); background: color-mix(in srgb, var(--sl-color-bg) 94%, transparent); box-shadow: 0 24px 70px #0006; backdrop-filter: blur(18px); }
-.qmx-popover-head { display: flex; justify-content: space-between; align-items: flex-start; }.qmx-popover-head strong { display: block; margin-top: .15rem; font-size: 1.05rem; }.qmx-eyebrow { color: var(--qmx-accent); font-size: .62rem; letter-spacing: .16em; font-weight: 800; }.qmx-live-dot { color: var(--qmx-accent); font-size: .6rem; font-weight: 800; }.qmx-popover-copy { margin: .55rem 0 1rem; color: var(--sl-color-gray-3); font-size: .78rem; line-height: 1.5; }.qmx-popover fieldset { margin: 0 0 1rem; padding: 0; border: 0; }.qmx-popover legend { margin-bottom: .45rem; color: var(--sl-color-gray-2); font-size: .73rem; font-weight: 700; }.qmx-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: .45rem; }.qmx-preset, .qmx-segmented button { border: 1px solid var(--sl-color-gray-5); border-radius: .55rem; padding: .55rem .35rem; background: color-mix(in srgb, var(--sl-color-bg) 62%, transparent); color: inherit; font: inherit; font-size: .72rem; cursor: pointer; }.qmx-preset[aria-pressed="true"], .qmx-segmented button[aria-pressed="true"] { border-color: var(--qmx-accent); box-shadow: inset 0 0 0 1px var(--qmx-accent); }.qmx-preset i { display: block; width: 1.4rem; height: 1.4rem; margin: 0 auto .35rem; border-radius: 50%; background: linear-gradient(135deg, var(--swatch), var(--swatch-2)); }.qmx-color-line { display: flex; align-items: center; gap: .55rem; }.qmx-color-line input { width: 2.3rem; height: 2rem; padding: .15rem; border: 1px solid var(--sl-color-gray-5); border-radius: .45rem; background: transparent; }.qmx-color-line output { color: var(--qmx-accent); font: 700 .78rem ui-monospace, monospace; }.qmx-segmented { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }.qmx-text-input { width: 100%; box-sizing: border-box; border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; padding: .58rem .65rem; background: var(--sl-color-bg); color: inherit; font: inherit; font-size: .78rem; }.qmx-popover small { display: block; margin-top: .4rem; color: var(--sl-color-gray-3); font-size: .66rem; }.qmx-reset { width: 100%; border: 0; border-radius: .5rem; padding: .55rem; background: color-mix(in srgb, var(--qmx-accent) 12%, transparent); color: inherit; cursor: pointer; font: inherit; font-size: .75rem; }.qmx-reset:hover { background: color-mix(in srgb, var(--qmx-accent) 22%, transparent); }
-:root[data-qmx-density="compact"] { --sl-nav-height: 3.5rem; --sl-content-gap-y: 1.4rem; }.qmx-theme-select:focus-within :is(select, summary), .qmx-popover :is(button, input):focus-visible { outline: 2px solid var(--qmx-accent); outline-offset: 2px; }
-:root[data-qmx-width="wide"] { --sl-content-width: 900px; }
-:root[data-qmx-surface="glass"] .content-panel, :root[data-qmx-surface="glass"] .sl-markdown-content > :is(blockquote, table), :root[data-qmx-surface="glass"] .qmx-popover { background: color-mix(in srgb, var(--sl-color-bg) 68%, transparent); backdrop-filter: blur(18px); }
-:root[data-qmx-button="outline"] .sl-link-button { background: transparent; border-color: var(--qmx-accent); color: var(--qmx-accent); }
-:root[data-qmx-button="glow"] .sl-link-button { box-shadow: 0 0 24px color-mix(in srgb, var(--qmx-accent) 42%, transparent); }
-:root[data-qmx-surface="glass"] .sl-markdown-content pre, :root[data-qmx-surface="glass"] .sl-markdown-content img { border-radius: var(--qmx-radius); box-shadow: 0 16px 50px #0003; }
-:root[data-qmx-theme="sakura"] .sl-markdown-content a { color: #db2777; }
-:root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 4px; }
-:root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
-
-/* Theme packs: map one selected design directly onto Starlight surfaces. */
-:root {
-  --qmx-bg: #070d1b; --qmx-nav: #0b1427; --qmx-sidebar: #0a1324; --qmx-panel: #101d33;
-  --qmx-text: #e5f3ff; --qmx-muted: #9db1c9; --qmx-border: #29415f; --qmx-code: #07101f;
-  --sl-color-bg: var(--qmx-bg); --sl-color-bg-nav: var(--qmx-nav); --sl-color-bg-sidebar: var(--qmx-sidebar);
-  --sl-color-bg-inline-code: var(--qmx-code); --sl-color-text: var(--qmx-text); --sl-color-text-accent: var(--qmx-accent);
-  --sl-color-gray-1: var(--qmx-text); --sl-color-gray-2: var(--qmx-muted); --sl-color-gray-3: color-mix(in srgb, var(--qmx-muted) 82%, transparent);
-  --sl-color-gray-4: var(--qmx-border); --sl-color-gray-5: color-mix(in srgb, var(--qmx-border) 72%, transparent); --sl-color-gray-6: color-mix(in srgb, var(--qmx-border) 48%, transparent);
-  --sl-color-accent: var(--qmx-accent); --sl-color-accent-high: color-mix(in srgb, var(--qmx-accent) 20%, white); --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 18%, var(--qmx-bg));
+/* 代码块：背景和边框跟随主题，语法高亮配色由 data-theme（亮 / 暗）决定。 */
+:root[data-qmx-theme][data-theme] .expressive-code {
+  --ec-codeBg: var(--qmx-code);
+  --ec-brdCol: color-mix(in srgb, var(--qmx-border) 80%, var(--qmx-bg));
+  --ec-frm-edBg: var(--qmx-code);
+  --ec-frm-edTabBarBg: var(--qmx-panel);
+  --ec-frm-edActTabBg: var(--qmx-code);
+  --ec-frm-trmBg: var(--qmx-code);
+  --ec-frm-trmTtbBg: var(--qmx-panel);
 }
-body { background: var(--qmx-bg); background-image: linear-gradient(135deg, color-mix(in srgb, var(--qmx-bg) 89%, transparent), color-mix(in srgb, var(--qmx-bg) 76%, transparent)), var(--qmx-wallpaper); background-attachment: fixed; background-position: center; background-size: cover; color: var(--qmx-text); }
-:root[data-qmx-theme="starry"] body { background-image: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, var(--qmx-bg), #111a36 62%, #1b1738), var(--qmx-wallpaper); background-size: 180px 180px, 240px 240px, 130px 130px, auto, cover; }
-:root[data-qmx-theme="sakura"] body { background-image: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, var(--qmx-bg), #fff1f2 55%, #fce7f3), var(--qmx-wallpaper); background-size: 170px 170px, 230px 230px, auto, cover; }
-:root[data-qmx-theme="summer"] body { background-image: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, var(--qmx-bg), #dff6ff 52%, #fef3c7), var(--qmx-wallpaper); background-size: auto, auto, cover; }
-:root[data-qmx-theme="pixel"] body { background-image: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, var(--qmx-bg), #0c1b12), var(--qmx-wallpaper); background-size: 18px 18px, 18px 18px, auto, cover; }
-:root[data-qmx-theme="miku"] body { background-color: var(--qmx-bg); background-image: linear-gradient(135deg, #39c5bb12 25%, transparent 25%) 0 0 / 34px 34px, linear-gradient(315deg, #ff6fae10 25%, transparent 25%) 0 0 / 34px 34px, linear-gradient(145deg, #071c22, #0c3038 55%, #261a35), var(--qmx-wallpaper); }
-.qmx-theme-select { display: inline-flex; align-items: center; gap: .45rem; color: var(--qmx-muted); font-size: .75rem; }
-.qmx-theme-select select { min-height: 2rem; border: 1px solid var(--qmx-border); border-radius: .5rem; padding: .3rem .55rem; background: var(--qmx-panel); color: var(--qmx-text); font: inherit; cursor: pointer; }
-.qmx-theme-select select:focus-visible { outline: 2px solid var(--qmx-accent); outline-offset: 2px; }
-:root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button) { border-radius: 3px; }
-:root[data-qmx-theme="sakura"] .sl-markdown-content a { color: var(--qmx-accent); }
+
+/* 右上角的装饰图标；主题里没有设置 --qmx-float 时不显示。 */
+body::after {
+  content: "";
+  position: fixed;
+  right: 2rem;
+  top: 5rem;
+  width: 118px;
+  height: 118px;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--qmx-float, none) center / contain no-repeat;
+  opacity: 0.78;
+  filter: drop-shadow(0 12px 24px #0002);
+}
+@media (max-width: 50rem) {
+  body::after { right: 0.75rem; top: 4.25rem; width: 76px; height: 76px; opacity: 0.55; }
+}
+
+/* 主题下拉框 */
+.qmx-theme-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--qmx-muted);
+  font-size: 0.75rem;
+}
+.qmx-theme-select select {
+  min-height: 2rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.55rem;
+  background: var(--qmx-panel);
+  color: var(--qmx-text);
+  font: inherit;
+  cursor: pointer;
+}
+.qmx-theme-select select:focus-visible {
+  outline: 2px solid var(--qmx-link);
+  outline-offset: 2px;
+}
+
+/* 方块感主题：控件用小圆角，行内代码用高亮色。 */
+:root[data-qmx-theme="pixel"] :is(button, select, input, .sl-link-button),
+:root[data-qmx-theme="blocks"] :is(button, select, input, .sl-link-button) {
+  border-radius: 3px;
+}
 :root[data-qmx-theme="pixel"] .sl-markdown-content code { color: #bef264; }
-:root[data-qmx-theme="miku"] :is(h1, h2, h3, h4, h5, h6) { color: var(--qmx-text) !important; }
-:root[data-qmx-theme="miku"] .sl-markdown-content a { color: var(--qmx-accent); text-shadow: 0 0 12px #39c5bb55; }
-:root[data-qmx-theme="miku"] .sl-markdown-content h1,
-:root[data-qmx-theme="miku"] .sl-markdown-content h2,
-:root[data-qmx-theme="miku"] .sl-markdown-content h3 { text-shadow: none; }
-:root[data-qmx-theme="miku"] .sl-markdown-content blockquote { border-inline-start-color: var(--qmx-accent-2); background: linear-gradient(90deg, #39c5bb14, #ff6fae10); }
-:root[data-qmx-theme="miku"] .sl-markdown-content pre { border-color: #39c5bb66; box-shadow: 0 0 28px #39c5bb18; }
-:root[data-qmx-theme="miku"] .sl-markdown-content::after { content: "♫  ♪  ♫"; display: block; margin: 3rem auto 0; color: var(--qmx-accent); font-size: 1.25rem; letter-spacing: .8rem; text-align: center; opacity: .65; }
-:root[data-qmx-theme="starry"] body::after,
-:root[data-qmx-theme="sakura"] body::after,
-:root[data-qmx-theme="summer"] body::after,
-:root[data-qmx-theme="pixel"] body::after { content: ""; position: fixed; right: 2rem; top: 5rem; width: 118px; height: 118px; z-index: 0; pointer-events: none; background-repeat: no-repeat; background-position: center; background-size: contain; opacity: .78; filter: drop-shadow(0 12px 24px #0002); }
-:root[data-qmx-theme="starry"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/star.svg'); }
-:root[data-qmx-theme="sakura"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/cherry-blossom.svg'); }
-:root[data-qmx-theme="summer"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/sun.svg'); }
-:root[data-qmx-theme="pixel"] body::after { background-image: url('/qmx-Gameknowledge/themes/fluent/star.svg'); image-rendering: pixelated; }
-@media (max-width: 50rem) { :root[data-qmx-theme] body::after { right: .75rem; top: 4.25rem; width: 76px; height: 76px; opacity: .55; } }
+:root[data-qmx-theme="pixel"] body::after { image-rendering: pixelated; }
+
+/* 初音：保持标题和链接干净，不加文字阴影，避免青色底上出现重影。 */
+:root[data-qmx-theme="miku"] .sl-markdown-content blockquote {
+  border-inline-start-color: var(--qmx-accent-2);
+  background: linear-gradient(90deg, #39c5bb14, #ff6fae10);
+}
+:root[data-qmx-theme="miku"] .sl-markdown-content pre {
+  border-color: #39c5bb66;
+  box-shadow: 0 0 28px #39c5bb18;
+}
+:root[data-qmx-theme="miku"] .sl-markdown-content::after {
+  content: "♫  ♪  ♫";
+  display: block;
+  margin: 3rem auto 0;
+  color: var(--qmx-accent);
+  font-size: 1.25rem;
+  letter-spacing: 0.8rem;
+  text-align: center;
+  opacity: 0.65;
+}
+
+/* 霓虹：给链接和代码块一点发光。只改 box-shadow，不碰文字。 */
+:root[data-qmx-theme="neon"] .sl-markdown-content pre {
+  border-color: color-mix(in srgb, var(--qmx-accent) 55%, transparent);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--qmx-accent) 16%, transparent);
+}
+:root[data-qmx-theme="neon"] .sl-markdown-content blockquote {
+  border-inline-start-color: var(--qmx-accent-2);
+}
+
+/* 高对比度：加粗边框和下划线，不依赖颜色区分链接。 */
+:root[data-qmx-theme="contrast"] .sl-markdown-content a { text-decoration: underline; text-underline-offset: 0.18em; }
+:root[data-qmx-theme="contrast"] .sl-markdown-content :is(pre, table, blockquote) { border: 1px solid var(--qmx-border); }
+:root[data-qmx-theme="contrast"] :focus-visible { outline: 3px solid var(--qmx-accent-2); outline-offset: 2px; }

@@ -23,6 +23,14 @@ description: 文章摘要
 
 图片放在 `public/assets/`，正文中使用 `/qmx-Gameknowledge/assets/文件名.png` 引用。
 
+## 新增主题
+
+1. 在 `src/themes.mjs` 里登记：`id`、显示名称、`mode`（`light` 或 `dark`，必须和主题实际明暗一致）。
+2. 在 `src/styles/themes.css` 里复制一个同明暗模式的主题块，改颜色。令牌含义见 `src/styles/custom.css` 顶部。
+3. 运行 `node scripts/check-contrast.mjs`，所有主题文字对比度需达到 4.5:1 以上。
+
+使用第三方调色板或素材时，请在 `public/themes/` 下对应目录的 `NOTICE.txt` 里写明来源和协议。
+
 ## 提交规范
 
 提交信息建议使用以下前缀：

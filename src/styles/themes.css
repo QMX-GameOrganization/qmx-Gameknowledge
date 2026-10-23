@@ -1,0 +1,261 @@
+/*
+ * 主题调色板。每个主题一个块，令牌含义见 custom.css 顶部说明。
+ * 新增主题时复制同明暗模式的块、改颜色，并在 src/themes.mjs 里登记。
+ * 颜色请每行一个令牌、用 6 位十六进制，scripts/check-contrast.mjs 靠这个格式读取。
+ *
+ * 可选令牌：
+ *   --qmx-deco / --qmx-deco-size  页面背景装饰（多层渐变及对应的平铺尺寸）
+ *   --qmx-float                   右上角装饰图标，取值见 astro.config.mjs 里的 --qmx-icon-*
+ */
+
+/* ───────── 暗色 ───────── */
+
+/* 星夜（同时作为未设置主题时的兜底） */
+:root,
+:root[data-qmx-theme="starry"] {
+  --qmx-bg: #070d1b;
+  --qmx-nav: #0b1427;
+  --qmx-sidebar: #0a1324;
+  --qmx-panel: #101d33;
+  --qmx-text: #e5f3ff;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #a9bbd3;
+  --qmx-border: #3a5478;
+  --qmx-code: #07101f;
+  --qmx-accent: #7dd3fc;
+  --qmx-accent-2: #a78bfa;
+  --qmx-link: #7dd3fc;
+  --qmx-float: var(--qmx-icon-star);
+  --qmx-deco: radial-gradient(circle at 12% 18%, #8be9ff22 0 1px, transparent 2px), radial-gradient(circle at 76% 22%, #c4b5fd33 0 1px, transparent 2px), radial-gradient(circle at 48% 76%, #ffffff22 0 1px, transparent 2px), linear-gradient(145deg, #070d1b, #111a36 62%, #1b1738);
+  --qmx-deco-size: 180px 180px, 240px 240px, 130px 130px, auto;
+}
+
+/* 像素终端 */
+:root[data-qmx-theme="pixel"] {
+  --qmx-bg: #07100a;
+  --qmx-nav: #0a170d;
+  --qmx-sidebar: #09150c;
+  --qmx-panel: #0d1d12;
+  --qmx-text: #d9f99d;
+  --qmx-strong: #ecfccb;
+  --qmx-muted: #9cc79a;
+  --qmx-border: #357a46;
+  --qmx-code: #050b07;
+  --qmx-accent: #a3e635;
+  --qmx-accent-2: #22c55e;
+  --qmx-link: #a3e635;
+  --qmx-float: var(--qmx-icon-star);
+  --qmx-deco: linear-gradient(#84cc1620 1px, transparent 1px), linear-gradient(90deg, #84cc1620 1px, transparent 1px), linear-gradient(145deg, #07100a, #0c1b12);
+  --qmx-deco-size: 18px 18px, 18px 18px, auto;
+}
+
+/* 初音未来：正文和标题都用接近白色的青白，次要文字也保持高亮度 */
+:root[data-qmx-theme="miku"] {
+  --qmx-bg: #071c22;
+  --qmx-nav: #0b2830;
+  --qmx-sidebar: #08232b;
+  --qmx-panel: #10323a;
+  --qmx-text: #e8fffc;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #b4e8e2;
+  --qmx-border: #3c8c94;
+  --qmx-code: #06161c;
+  --qmx-accent: #39c5bb;
+  --qmx-accent-2: #ff6fae;
+  --qmx-link: #5eead4;
+  --qmx-deco: linear-gradient(135deg, #39c5bb12 25%, transparent 25%), linear-gradient(315deg, #ff6fae10 25%, transparent 25%), linear-gradient(145deg, #071c22, #0c3038 55%, #261a35);
+  --qmx-deco-size: 34px 34px, 34px 34px, auto;
+}
+
+/* 方块世界：泥土底色 + 草地绿 + 金矿黄 */
+:root[data-qmx-theme="blocks"] {
+  --qmx-bg: #1b1a17;
+  --qmx-nav: #24221d;
+  --qmx-sidebar: #201e1a;
+  --qmx-panel: #2c2a24;
+  --qmx-text: #ece7d8;
+  --qmx-strong: #fffaf0;
+  --qmx-muted: #bdb59f;
+  --qmx-border: #5e594a;
+  --qmx-code: #14130f;
+  --qmx-accent: #7cc242;
+  --qmx-accent-2: #e8b339;
+  --qmx-link: #8fd14f;
+  --qmx-deco: linear-gradient(#ffffff09 2px, transparent 2px), linear-gradient(90deg, #ffffff09 2px, transparent 2px), linear-gradient(180deg, #1b1a17, #211f19 70%, #1d2414);
+  --qmx-deco-size: 32px 32px, 32px 32px, auto;
+}
+
+/* 罗德岛：深灰底 + 冷蓝 + 警示黄 */
+:root[data-qmx-theme="rhodes"] {
+  --qmx-bg: #111316;
+  --qmx-nav: #171a1f;
+  --qmx-sidebar: #14171b;
+  --qmx-panel: #1e2228;
+  --qmx-text: #e6e9ee;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #aeb6c3;
+  --qmx-border: #4a5361;
+  --qmx-code: #0c0e11;
+  --qmx-accent: #35b7f3;
+  --qmx-accent-2: #ffd23f;
+  --qmx-link: #5cc8f8;
+  --qmx-deco: repeating-linear-gradient(135deg, #ffffff06 0 2px, transparent 2px 16px), linear-gradient(160deg, #111316, #151a21 60%, #101a22);
+  --qmx-deco-size: auto, auto;
+}
+
+/* Catppuccin 摩卡（调色板 MIT 协议，见 public/themes/palettes/NOTICE.txt） */
+:root[data-qmx-theme="mocha"] {
+  --qmx-bg: #1e1e2e;
+  --qmx-nav: #181825;
+  --qmx-sidebar: #181825;
+  --qmx-panel: #313244;
+  --qmx-text: #cdd6f4;
+  --qmx-strong: #f2f5ff;
+  --qmx-muted: #a6adc8;
+  --qmx-border: #585b70;
+  --qmx-code: #11111b;
+  --qmx-accent: #cba6f7;
+  --qmx-accent-2: #f5c2e7;
+  --qmx-link: #cba6f7;
+}
+
+/* Nord 极光（调色板 MIT 协议） */
+:root[data-qmx-theme="nord"] {
+  --qmx-bg: #2e3440;
+  --qmx-nav: #3b4252;
+  --qmx-sidebar: #2a303b;
+  --qmx-panel: #3b4252;
+  --qmx-text: #eceff4;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #b7c0d3;
+  --qmx-border: #5e6a82;
+  --qmx-code: #252a33;
+  --qmx-accent: #88c0d0;
+  --qmx-accent-2: #b48ead;
+  --qmx-link: #88c0d0;
+}
+
+/* 赛博霓虹：深紫底 + 品红 + 青色 */
+:root[data-qmx-theme="neon"] {
+  --qmx-bg: #0d0221;
+  --qmx-nav: #150634;
+  --qmx-sidebar: #110429;
+  --qmx-panel: #1d0a45;
+  --qmx-text: #f4e9ff;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #cbb5ec;
+  --qmx-border: #6a3fb0;
+  --qmx-code: #080117;
+  --qmx-accent: #ff4fd8;
+  --qmx-accent-2: #00f0ff;
+  --qmx-link: #ff7ae5;
+  --qmx-deco: linear-gradient(#ff4fd814 1px, transparent 1px), linear-gradient(90deg, #00f0ff12 1px, transparent 1px), radial-gradient(ellipse at 50% 0%, #4b1a8c55, transparent 60%), linear-gradient(180deg, #0d0221, #14043a);
+  --qmx-deco-size: 40px 40px, 40px 40px, auto, auto;
+}
+
+/* 高对比度：纯黑底、纯白字、黄色链接 */
+:root[data-qmx-theme="contrast"] {
+  --qmx-bg: #000000;
+  --qmx-nav: #000000;
+  --qmx-sidebar: #000000;
+  --qmx-panel: #111111;
+  --qmx-text: #ffffff;
+  --qmx-strong: #ffffff;
+  --qmx-muted: #e5e7eb;
+  --qmx-border: #9ca3af;
+  --qmx-code: #0a0a0a;
+  --qmx-accent: #ffd60a;
+  --qmx-accent-2: #5ce1ff;
+  --qmx-link: #ffd60a;
+}
+
+/* ───────── 亮色 ───────── */
+
+/* 春樱 */
+:root[data-qmx-theme="sakura"] {
+  --qmx-bg: #fff7fb;
+  --qmx-nav: #fffafd;
+  --qmx-sidebar: #fff1f5;
+  --qmx-panel: #ffffff;
+  --qmx-text: #3d2432;
+  --qmx-strong: #2a1220;
+  --qmx-muted: #6b4659;
+  --qmx-border: #e8b4ca;
+  --qmx-code: #ffeaf1;
+  --qmx-accent: #ec4899;
+  --qmx-accent-2: #fb7185;
+  --qmx-link: #be185d;
+  --qmx-float: var(--qmx-icon-sakura);
+  --qmx-deco: radial-gradient(circle at 15% 20%, #fda4af32 0 5px, transparent 6px), radial-gradient(circle at 82% 68%, #f9a8d433 0 4px, transparent 5px), linear-gradient(145deg, #fff7fb, #fff1f2 55%, #fce7f3);
+  --qmx-deco-size: 170px 170px, 230px 230px, auto;
+}
+
+/* 夏日天气 */
+:root[data-qmx-theme="summer"] {
+  --qmx-bg: #eefaff;
+  --qmx-nav: #f7fdff;
+  --qmx-sidebar: #e4f6ff;
+  --qmx-panel: #ffffff;
+  --qmx-text: #173449;
+  --qmx-strong: #0b2233;
+  --qmx-muted: #3e5d71;
+  --qmx-border: #9fd3ea;
+  --qmx-code: #e0f4ff;
+  --qmx-accent: #0284c7;
+  --qmx-accent-2: #f59e0b;
+  --qmx-link: #0369a1;
+  --qmx-float: var(--qmx-icon-sun);
+  --qmx-deco: radial-gradient(circle at 76% 16%, #fbbf2440 0 38px, transparent 39px), linear-gradient(160deg, #eefaff, #dff6ff 52%, #fef3c7);
+  --qmx-deco-size: auto, auto;
+}
+
+/* GitHub 经典 */
+:root[data-qmx-theme="github"] {
+  --qmx-bg: #ffffff;
+  --qmx-nav: #f6f8fa;
+  --qmx-sidebar: #f6f8fa;
+  --qmx-panel: #ffffff;
+  --qmx-text: #1f2328;
+  --qmx-strong: #000000;
+  --qmx-muted: #4f5963;
+  --qmx-border: #d0d7de;
+  --qmx-code: #eff1f3;
+  --qmx-accent: #0969da;
+  --qmx-accent-2: #8250df;
+  --qmx-link: #0969da;
+}
+
+/* Catppuccin 拿铁（调色板 MIT 协议） */
+:root[data-qmx-theme="latte"] {
+  --qmx-bg: #eff1f5;
+  --qmx-nav: #e6e9ef;
+  --qmx-sidebar: #e6e9ef;
+  --qmx-panel: #ffffff;
+  --qmx-text: #4c4f69;
+  --qmx-strong: #232538;
+  --qmx-muted: #50536b;
+  --qmx-border: #acb0be;
+  --qmx-code: #e6e9ef;
+  --qmx-accent: #8839ef;
+  --qmx-accent-2: #ea76cb;
+  --qmx-link: #7c2ee0;
+}
+
+/* 护眼纸张：米黄底、深褐字、衬线正文，适合长篇阅读 */
+:root[data-qmx-theme="paper"] {
+  --sl-font: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --qmx-bg: #f4ecd8;
+  --qmx-nav: #efe5cc;
+  --qmx-sidebar: #ece1c5;
+  --qmx-panel: #faf5e6;
+  --qmx-text: #3b2f22;
+  --qmx-strong: #1f1710;
+  --qmx-muted: #5a4a34;
+  --qmx-border: #c9b78e;
+  --qmx-code: #ebe0c4;
+  --qmx-accent: #b45309;
+  --qmx-accent-2: #4d7c0f;
+  --qmx-link: #9a3412;
+  --qmx-deco: radial-gradient(circle at 20% 10%, #fff8e644, transparent 40%), linear-gradient(180deg, #f4ecd8, #efe5cc);
+  --qmx-deco-size: auto, auto;
+}
