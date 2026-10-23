@@ -1,6 +1,9 @@
 ---
 import { themes } from '../themes.mjs';
 
+// 站点 base，末尾保证带斜杠，传给主题特效去加载自定义素材。
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+
 // 暗色、亮色分组显示，方便在十几个主题里快速找到想要的明暗类型。
 const groups = [
   { label: '暗色', items: themes.filter((theme) => theme.mode === 'dark') },
@@ -8,20 +11,29 @@ const groups = [
 ];
 ---
 
-<label class="qmx-theme-select">
-  <span class="qmx-theme-select__label">主题</span>
-  <select data-qmx-theme-select aria-label="选择主题">
-    {groups.map((group) => (
-      <optgroup label={group.label}>
-        {group.items.map((theme) => <option value={theme.id}>{theme.label}</option>)}
-      </optgroup>
-    ))}
-  </select>
-</label>
+<span class="qmx-theme-select-group" data-qmx-base={base}>
+  <label class="qmx-theme-select">
+    <span class="qmx-theme-select__label">主题</span>
+    <select data-qmx-theme-select aria-label="选择主题">
+      {groups.map((group) => (
+        <optgroup label={group.label}>
+          {group.items.map((theme) => <option value={theme.id}>{theme.label}</option>)}
+        </optgroup>
+      ))}
+    </select>
+  </label>
+  <!-- 只有带特效的主题才会显示这两个开关，见 fx.css -->
+  <span class="qmx-fx-controls">
+    <button type="button" data-qmx-fx-toggle aria-pressed="true" title="开关当前主题的动态特效">特效</button>
+    <button type="button" data-qmx-sound-toggle aria-pressed="false" title="开关音效，默认关闭">音效</button>
+  </span>
+</span>
 
 <script>
   // 主题的恢复与持久化由 astro.config.mjs 注入到 <head> 的脚本完成（window.QMXTheme）。
   // 这里只负责：下拉框与当前主题保持同步、响应用户切换、按需加载初音桌宠。
+  import { initFx } from '../fx/index';
+
   type MikuPet = { remove?: () => void };
   const w = window as unknown as {
     QMXTheme?: { apply(id: string): string };
@@ -82,4 +94,8 @@ const groups = [
   const initial = root.dataset.qmxTheme ?? 'starry';
   syncSelects(initial);
   syncMiku(initial);
+
+  // 主题专属的动态特效(星夜的星空、罗德岛的桌宠)，见 src/fx/。
+  const base = document.querySelector<HTMLElement>('[data-qmx-base]')?.dataset.qmxBase ?? '/';
+  initFx(base);
 </script>

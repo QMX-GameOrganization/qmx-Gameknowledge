@@ -40,7 +40,7 @@ export default defineConfig({
       locales: {
         root: { label: "简体中文", lang: "zh-CN" }
       },
-      customCss: ["./src/styles/custom.css", "./src/styles/themes.css"],
+      customCss: ["./src/styles/custom.css", "./src/styles/themes.css", "./src/styles/fx.css"],
       head: [
         { tag: "script", content: themeBootstrap },
         { tag: "style", content: themeAssets }

@@ -94,7 +94,8 @@ body::after {
   body::after { right: 0.75rem; top: 4.25rem; width: 76px; height: 76px; opacity: 0.55; }
 }
 
-/* 主题下拉框 */
+/* 主题下拉框与特效开关 */
+.qmx-theme-select-group { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
 .qmx-theme-select {
   display: inline-flex;
   align-items: center;
