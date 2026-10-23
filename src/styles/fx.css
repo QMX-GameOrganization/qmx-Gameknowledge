@@ -6,7 +6,8 @@
 /* ───────── 特效 / 音效开关 ───────── */
 .qmx-fx-controls { display: inline-flex; gap: 0.35rem; }
 :root:not([data-qmx-has-fx]) .qmx-fx-controls { display: none; }
-.qmx-fx-controls button {
+.qmx-fx-controls button,
+.qmx-ai-settings-btn {
   min-height: 2rem;
   border: 1px solid var(--qmx-border);
   border-radius: 0.5rem;

@@ -1,0 +1,119 @@
+/* 划词问 AI 的界面。只使用主题令牌（--qmx-*），所有主题自动适配。 */
+
+.qmx-ask-trigger[hidden],
+.qmx-ask-panel[hidden] { display: none; }
+
+.qmx-ask-trigger {
+  position: absolute;
+  z-index: 60;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 999px;
+  background: var(--qmx-link);
+  color: var(--qmx-bg);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--qmx-bg) 55%, transparent);
+}
+
+.qmx-ask-panel {
+  position: fixed;
+  z-index: 70;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: min(26rem, calc(100vw - 2rem));
+  max-height: min(34rem, calc(100vh - 2rem));
+  padding: 0.9rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: var(--qmx-radius);
+  background: var(--qmx-panel);
+  color: var(--qmx-text);
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--qmx-bg) 60%, transparent);
+}
+
+.qmx-ask-quote {
+  margin: 0;
+  padding: 0.3rem 0.7rem;
+  border-inline-start: 3px solid var(--qmx-accent);
+  color: var(--qmx-muted);
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+
+.qmx-ask-answer {
+  flex: 1;
+  min-height: 3rem;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.qmx-ask-reply + .qmx-ask-user,
+.qmx-ask-user + .qmx-ask-reply { margin-top: 0.6rem; }
+
+.qmx-ask-user {
+  color: var(--qmx-strong);
+  font-weight: 600;
+}
+
+.qmx-ask-status { margin: 0; font-size: 0.85rem; color: var(--qmx-muted); }
+.qmx-ask-status:empty { display: none; }
+.qmx-ask-status.is-error { color: var(--qmx-strong); }
+
+.qmx-ask-follow { display: flex; gap: 0.4rem; }
+.qmx-ask-follow input { flex: 1; min-width: 0; }
+
+.qmx-ask-panel input,
+.qmx-ask-settings input,
+.qmx-ask-settings select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 8px;
+  background: var(--qmx-code);
+  color: var(--qmx-text);
+  font: inherit;
+}
+
+.qmx-ask-panel button,
+.qmx-ask-settings button {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--qmx-text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.qmx-ask-panel button:disabled { opacity: 0.5; cursor: default; }
+
+.qmx-ask-panel button:focus-visible,
+.qmx-ask-settings :is(button, input, select):focus-visible,
+.qmx-ask-trigger:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+
+.qmx-ask-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.qmx-ask-bar [hidden] { display: none; }
+
+.qmx-ask-settings {
+  width: min(28rem, calc(100vw - 2rem));
+  padding: 1.1rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: var(--qmx-radius);
+  background: var(--qmx-panel);
+  color: var(--qmx-text);
+}
+.qmx-ask-settings::backdrop { background: color-mix(in srgb, var(--qmx-bg) 70%, transparent); }
+.qmx-ask-settings h2 { margin: 0 0 0.8rem; font-size: 1.1rem; color: var(--qmx-strong); }
+.qmx-ask-settings label { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.65rem; font-size: 0.85rem; }
+.qmx-ask-hint { margin: 0 0 0.6rem; font-size: 0.8rem; color: var(--qmx-muted); }
+
+@media print { .qmx-ask-trigger, .qmx-ask-panel, .qmx-ask-settings { display: none; } }
+.qmx-ai-settings-btn:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
