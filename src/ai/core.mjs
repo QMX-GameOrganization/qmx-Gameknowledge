@@ -27,6 +27,14 @@ export const PRESETS = {
     model: 'deepseek-ai/DeepSeek-V3',
     keyHint: '在 siliconflow.cn 创建',
   },
+  bailian: {
+    label: '阿里云百炼',
+    // 官方文档：北京地域旧域名仍可用，也推荐迁移到「业务空间专属域名」
+    // https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1，换域名后在设置里改 Base URL 即可。
+    baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+    model: 'qwen3.8-max',
+    keyHint: '在百炼控制台创建 API Key。Key 按地域绑定：北京地域的 Key 只能用北京的地址，国际站请改用 dashscope-intl.aliyuncs.com',
+  },
   ollama: {
     label: '本地 Ollama',
     baseUrl: 'http://localhost:11434/v1',

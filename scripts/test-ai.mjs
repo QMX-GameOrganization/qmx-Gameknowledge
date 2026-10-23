@@ -84,6 +84,18 @@ test("存储不可用时 saveConfig 返回 false 而不是抛错", () => {
   assert.equal(saveConfig(broken, defaultConfig()), false);
 });
 
+test("阿里云百炼预设：OpenAI 兼容地址、有默认模型，旧配置自动补上这一项", () => {
+  assert.equal(chatCompletionsUrl(PRESETS.bailian.baseUrl), "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions");
+  assert.equal(modelsUrl(PRESETS.bailian.baseUrl), "https://dashscope.aliyuncs.com/compatible-mode/v1/models");
+  assert.ok(PRESETS.bailian.model);
+  assert.equal(balanceUrl(PRESETS.bailian.baseUrl), ""); // 余额只对 DeepSeek 官方提供
+  const s = memory();
+  s.setItem(CONFIG_KEY, JSON.stringify({ active: "deepseek", profiles: { deepseek: { baseUrl: "https://api.deepseek.com", model: "deepseek-chat", key: "k", models: [] } } }));
+  const cfg = loadConfig(s);
+  assert.deepEqual(cfg.profiles.bailian, defaultProfile("bailian"));
+  assert.equal(cfg.profiles.deepseek.key, "k");
+});
+
 test("预设都有 label，且除自定义外有可用的 Base URL", () => {
   for (const [id, p] of Object.entries(PRESETS)) {
     assert.ok(p.label);
