@@ -49,16 +49,59 @@
   flex: 1;
   min-height: 3rem;
   overflow-y: auto;
-  white-space: pre-wrap;
   overflow-wrap: anywhere;
   line-height: 1.65;
   font-size: 0.95rem;
 }
 
+/* 回答里的 Markdown。Starlight 的正文样式只作用于 .sl-markdown-content，这里需要自己写。 */
+.qmx-ask-reply > :first-child { margin-top: 0; }
+.qmx-ask-reply > :last-child { margin-bottom: 0; }
+.qmx-ask-reply :is(p, ul, ol, blockquote, pre, .qmx-md-table) { margin: 0 0 0.7rem; }
+.qmx-ask-reply :is(h3, h4, h5, h6) {
+  margin: 0.9rem 0 0.4rem;
+  color: var(--qmx-strong);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+.qmx-ask-reply :is(ul, ol) { padding-inline-start: 1.3rem; }
+.qmx-ask-reply li { margin: 0.2rem 0; }
+.qmx-ask-reply li > :is(ul, ol) { margin: 0.2rem 0 0; }
+.qmx-ask-reply strong { color: var(--qmx-strong); }
+.qmx-ask-reply a { color: var(--qmx-link); text-decoration: underline; }
+.qmx-ask-reply hr { margin: 0.8rem 0; border: 0; border-top: 1px solid var(--qmx-border); }
+.qmx-ask-reply blockquote {
+  padding: 0.1rem 0.7rem;
+  border-inline-start: 3px solid var(--qmx-accent);
+  color: var(--qmx-muted);
+}
+.qmx-ask-reply code {
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+  background: var(--qmx-code);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88em;
+}
+.qmx-ask-reply pre {
+  overflow-x: auto;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--qmx-border);
+  border-radius: 10px;
+  background: var(--qmx-code);
+  line-height: 1.5;
+}
+.qmx-ask-reply pre code { padding: 0; background: none; font-size: 0.85rem; white-space: pre; overflow-wrap: normal; }
+.qmx-ask-reply pre:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }
+.qmx-md-table { overflow-x: auto; }
+.qmx-ask-reply table { border-collapse: collapse; font-size: 0.88rem; }
+.qmx-ask-reply :is(th, td) { padding: 0.3rem 0.6rem; border: 1px solid var(--qmx-border); text-align: start; }
+.qmx-ask-reply th { color: var(--qmx-strong); background: var(--qmx-code); }
+
 .qmx-ask-reply + .qmx-ask-user,
 .qmx-ask-user + .qmx-ask-reply { margin-top: 0.6rem; }
 
 .qmx-ask-user {
+  white-space: pre-wrap;
   color: var(--qmx-strong);
   font-weight: 600;
 }
@@ -114,6 +157,14 @@
 .qmx-ask-settings h2 { margin: 0 0 0.8rem; font-size: 1.1rem; color: var(--qmx-strong); }
 .qmx-ask-settings label { display: flex; flex-direction: column; gap: 0.2rem; margin-bottom: 0.65rem; font-size: 0.85rem; }
 .qmx-ask-hint { margin: 0 0 0.6rem; font-size: 0.8rem; color: var(--qmx-muted); }
+.qmx-ask-hint.is-error { color: var(--qmx-strong); }
+.qmx-ask-hint:empty { display: none; }
+.qmx-ask-row { display: flex; gap: 0.4rem; }
+.qmx-ask-row input { flex: 1; min-width: 0; }
+.qmx-ask-settings select[hidden] { display: none; }
+.qmx-ask-settings select { max-width: 100%; margin-top: 0.4rem; }
+.qmx-ask-settings button:disabled { opacity: 0.5; cursor: default; }
+.qmx-ask-settings { max-height: calc(100vh - 2rem); overflow-y: auto; }
 
 @media print { .qmx-ask-trigger, .qmx-ask-panel, .qmx-ask-settings { display: none; } }
 .qmx-ai-settings-btn:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 2px; }

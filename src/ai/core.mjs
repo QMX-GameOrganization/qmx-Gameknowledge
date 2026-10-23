@@ -41,12 +41,56 @@ export const PRESETS = {
   },
 };
 
-export const DEFAULT_CONFIG = Object.freeze({
-  preset: 'opencode',
-  baseUrl: PRESETS.opencode.baseUrl,
-  model: PRESETS.opencode.model,
-  key: '',
-});
+export const MAX_MODELS = 500;
+
+// 配置按平台分开存：每个平台有自己的接口地址、模型名、Key 和上次获取的模型列表，
+// 切换平台不会覆盖别的平台的 Key。
+export function defaultProfile(id) {
+  const p = PRESETS[id] ?? PRESETS.custom;
+  return { baseUrl: p.baseUrl, model: p.model, key: '', models: [] };
+}
+
+export function defaultConfig() {
+  return {
+    active: 'opencode',
+    profiles: Object.fromEntries(Object.keys(PRESETS).map((id) => [id, defaultProfile(id)])),
+  };
+}
+
+export function activeProfile(config) {
+  return config.profiles[config.active] ?? defaultProfile(config.active);
+}
+
+function cleanModels(list) {
+  if (!Array.isArray(list)) return [];
+  return [...new Set(list.filter((x) => typeof x === 'string' && x.trim()).map((x) => x.trim()))].slice(0, MAX_MODELS);
+}
+
+function cleanProfile(id, data) {
+  const base = defaultProfile(id);
+  if (!data || typeof data !== 'object') return base;
+  return {
+    baseUrl: typeof data.baseUrl === 'string' ? data.baseUrl : base.baseUrl,
+    model: typeof data.model === 'string' ? data.model : base.model,
+    key: typeof data.key === 'string' ? data.key : '',
+    models: cleanModels(data.models),
+  };
+}
+
+export function modelsUrl(baseUrl) {
+  const base = normalizeBaseUrl(baseUrl);
+  return base ? `${base}/models` : '';
+}
+
+/**
+ * 解析 GET /models 的返回。OpenAI 兼容接口是 {data:[{id}]}，
+ * 也兼容 {models:[{name}]} 和纯字符串数组。结果去重并排序。
+ */
+export function parseModelList(json) {
+  const arr = Array.isArray(json?.data) ? json.data : Array.isArray(json?.models) ? json.models : Array.isArray(json) ? json : [];
+  const ids = arr.map((x) => (typeof x === 'string' ? x : x?.id ?? x?.name));
+  return cleanModels(ids).sort((a, b) => a.localeCompare(b));
+}
 
 /** 去掉末尾斜杠，只接受 http(s)。不合法返回空串。 */
 export function normalizeBaseUrl(value) {
@@ -60,21 +104,31 @@ export function chatCompletionsUrl(baseUrl) {
   return base ? `${base}/chat/completions` : '';
 }
 
-/** 从 storage 读取配置；损坏或缺字段时回退默认值。 */
+/**
+ * 从 storage 读取配置；损坏或缺字段时回退默认值。
+ * 兼容第一版的单份配置 {preset, baseUrl, model, key}：迁移成对应平台的一份，其余平台用默认值。
+ */
 export function loadConfig(storage) {
+  const config = defaultConfig();
   try {
     const raw = storage.getItem(CONFIG_KEY);
-    if (!raw) return { ...DEFAULT_CONFIG };
+    if (!raw) return config;
     const data = JSON.parse(raw);
-    const preset = Object.hasOwn(PRESETS, data.preset) ? data.preset : 'custom';
-    return {
-      preset,
-      baseUrl: typeof data.baseUrl === 'string' ? data.baseUrl : DEFAULT_CONFIG.baseUrl,
-      model: typeof data.model === 'string' ? data.model : DEFAULT_CONFIG.model,
-      key: typeof data.key === 'string' ? data.key : '',
-    };
+    if (!data || typeof data !== 'object') return config;
+
+    if (data.profiles && typeof data.profiles === 'object') {
+      for (const id of Object.keys(PRESETS)) config.profiles[id] = cleanProfile(id, data.profiles[id]);
+      if (Object.hasOwn(PRESETS, data.active)) config.active = data.active;
+      return config;
+    }
+
+    // 旧格式迁移
+    const id = Object.hasOwn(PRESETS, data.preset) ? data.preset : 'custom';
+    config.profiles[id] = cleanProfile(id, data);
+    config.active = id;
+    return config;
   } catch {
-    return { ...DEFAULT_CONFIG };
+    return defaultConfig();
   }
 }
 
