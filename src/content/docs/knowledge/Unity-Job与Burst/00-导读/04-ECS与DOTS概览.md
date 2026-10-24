@@ -5,16 +5,16 @@ sidebar:
   order: 4
 ---
 
-> 适用版本：以 Entities 1.4.x（手册页显示 1.4.8）与 Unity 6000.x 手册为主线。本项目 Unity 7000.0.0a8 的 `Packages/manifest.json` 与 `packages-lock.json` 中都没有 `com.unity.entities`，即本项目未引用 Entities；Entities 在 7000.0.0a8 上的版本与状态（待核实）。涉及版本差异处会写明，核实不了的标"待核实"。
+> 适用版本：以 Entities 1.x 与 Unity 6000.x 手册为主线。本项目 Unity 7000.0.0a8 的 `Packages/manifest.json` 已声明 `com.unity.entities` 与 `com.unity.entities.graphics` 为 1.5.0；本地 PackageCache 显示 Entities 6.7.0 的 Unity 7 内置实现。深入章节见 `05-Entities`，版本差异处会写明，核实不了的标“待核实”。
 
 ## 要点
 
-- 官方 Entities 手册的 "ECS packages" 页写道：DOTS 需要使用的 Unity 主要部分有五个，即 Entities（ECS 模式的实现）、作业系统（Job system）、Burst 编译器、Collections、Mathematics。本资料详细覆盖后四个，Entities 只做概览。
+- 官方 Entities 手册的 "ECS packages" 页写道：DOTS 需要使用的 Unity 主要部分有五个，即 Entities（ECS 模式的实现）、作业系统（Job system）、Burst 编译器、Collections、Mathematics。本资料详细覆盖后四个，Entities 见第 05 部分。
 - 在这五者之上构建的 ECS 包有 Unity Physics、Havok Physics for Unity、Netcode for Entities、Entities Graphics、Character Controller。Entities 手册首页说，通常不会单独使用 Entities 包，一般会配合 Entities Graphics、Unity Physics 和/或 Netcode for Entities。
 - ECS 的三个角色：实体（Entity）是唯一标识，不含代码；组件（Component）存数据；系统（System）写逻辑，每帧在主线程执行 `OnUpdate`，需要多线程时再调度 Job。
 - 拥有相同组件类型组合的实体属于同一个原型（Archetype）。手册说同原型的实体与组件存放在 16 KiB 的内存块（chunk）里。
 - 创建或销毁实体、增删组件、设置共享组件的值，都是结构性变更（Structural change）。它们只能在主线程做，不能在 Job 里做；Job 里要用 `EntityCommandBuffer` 记录命令，之后回放。
-- 对本项目的判断：体素区块生成是"每区块一大块数组"的批处理流水线，不是大量带不同组件的小实体，目前没有上 ECS 的理由。以后做大量生物、掉落物、方块实体时再深入学。
+- 对本项目的判断：体素区块生成是"每区块一大块数组"的批处理流水线，不是大量带不同组件的小实体，项目已接入 Entities；是否把体素区块迁移到 ECS 仍需按实体数量和数据布局评估。以后做大量生物、掉落物、方块实体时再深入学。
 
 ## 原理
 
@@ -42,7 +42,7 @@ sidebar:
 
 | 部分 | 手册里的定位 | 在本资料中 | 本项目 |
 | --- | --- | --- | --- |
-| Entities | ECS（Entity、Component、System）模式的实现 | 仅概览（本页） | 未引用 |
+| Entities | ECS（Entity、Component、System）模式的实现 | 第 05 部分；本页做总览 | 已声明 1.5.0（本地内置 6.7.0） |
 | Job system | 快速、安全的多线程代码方案 | 第 1 部分 | 使用 |
 | Burst compiler | 生成高度优化代码的 C# 编译器 | 第 2 部分 | 使用 |
 | Collections | 非托管集合类型（列表、哈希表等），Job 与 Burst 代码只能访问非托管数据，所以需要它 | 1.4、1.5 等 | 使用 |
@@ -235,7 +235,7 @@ public partial class RotateSystem : SystemBase
 - `ChunkGenerationPipeline` 的实体数量就是区块数（`TotalChunks = chunksX * chunksZ`），每个区块是一大块连续数组，不是成千上万个带不同组件的小对象。
 - 调度逻辑是：后台 `Task.Run` 采样，主线程 `Pump` 回收结果，区块自身加 ±X/±Z 四邻居都采样完才派发建网格，用 `loaded` 字典、计数器与 `maxLoadedChunks` 等做背压和释放。
 
-判断：这条流水线的特征是"少量对象、每个对象数据量巨大、处理逻辑一致、有邻居依赖和背压"，本质是批处理，不是"大量同构小实体"。性能瓶颈在采样与建网格的计算量和数据布局，Job + Burst + `NativeArray` 已经对准了它。引入 Entities 要多学一整套概念，而且手册也说通常不会单独使用 Entities 包。因此当前阶段不建议上 ECS，继续按 3.5 的路线用 Job 链替换 `Task.Run`。
+判断：这条流水线的特征是"少量对象、每个对象数据量巨大、处理逻辑一致、有邻居依赖和背压"，本质是批处理，不是"大量同构小实体"。性能瓶颈在采样与建网格的计算量和数据布局，Job + Burst + `NativeArray` 已经对准了它。引入 Entities 要多学一整套概念，而且手册也说通常不会单独使用 Entities 包。因此当前阶段不建议把体素区块整体迁移到 ECS；项目虽然已经接入 Entities，体素生成仍应继续按 3.5 的路线用 Job 链替换 `Task.Run`，ECS 先用于工厂等大量同构实体。
 
 什么时候再回头深入学 ECS：以后要做大量生物、掉落物、方块实体（成千上万个小对象，每个只带少量不同组件）时。这类负载更接近手册描述的 ECS 主场。
 
@@ -264,7 +264,7 @@ public partial class RotateSystem : SystemBase
 - DOTS 有五个主要部分：Entities、Job system、Burst、Collections、Mathematics；ECS 包（Physics、Netcode 等）建立在它们之上。本资料覆盖后四个。
 - ECS 的核心：实体是 ID，组件是数据，系统是逻辑；原型决定 chunk 内的数据布局；结构性变更只能在主线程，Job 里用 ECB。
 - 系统里调度 Job 时，依赖按组件读写自动推导，容器依赖仍要手动合并。
-- 本项目是"每区块一大块数组"的批处理，当前不需要 ECS；将来做大量小实体时再学。
+- 本项目的体素生成仍是"每区块一大块数组"的批处理，暂不需要把区块整体 ECS 化；工厂、掉落物等大量小实体可以使用新增的 05-Entities 路线。
 
 ## 自测题
 
