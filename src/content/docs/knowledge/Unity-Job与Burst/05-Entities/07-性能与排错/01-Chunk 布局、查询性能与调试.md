@@ -51,3 +51,27 @@ Burst Inspector         是否真的生成 Burst 代码
 ## 性能结论的证据
 
 不要只看“用了 ECS”就下结论。固定实体数量、输入、时间步和构建设置，分别比较主线程 Query、`IJobEntity`、Burst Job，并记录主线程、Worker、同步点和内存。
+
+## 系统没效果：按链路逐层定位
+
+| 顺序 | 检查位置 | 要确认的事实 |
+| --- | --- | --- |
+| 1 | 当前 World | 数据和系统是否在同一个运行 World，不是 Baking 或测试 World |
+| 2 | Systems 窗口 | 系统是否已创建、属于哪个组、组是否实际更新 |
+| 3 | 更新条件 | Enabled、RequireForUpdate、RequireMatchingQueriesForUpdate 是否允许更新 |
+| 4 | Entities Hierarchy / 实体 Inspector | 目标实体存在吗，组件是否齐全且处于正确启用状态 |
+| 5 | 数据入口 | 普通场景 Authoring 是否根本未进入 Baking；SubScene 是否加载完成 |
+| 6 | 时序边界 | 请求是在消费前创建的吗，ECB 是否回放，Job 依赖是否完成 |
+| 7 | 表现入口 | 数据变化了吗，是否有渲染组件或 GameObject 桥接读取它 |
+
+窗口名称和菜单位置随版本变化；Entity Debugger 是旧版本常见称呼，当前优先找 Entities Hierarchy、实体 Inspector 和 Systems。
+
+三个容易混淆的现象：
+
+- 系统存在，但 RequireForUpdate 不满足，所以 OnUpdate 没执行。
+- OnUpdate 执行了，但查询匹配数量为零，所以循环没有处理对象。
+- 数据已经变化，但没有表现层，所以 Game 画面没有变化。
+
+以占格为例，能看到绿色预览只说明 FactoryGridView 在显示；还需查询是否产生 GridOccupancyRequest、Result 是否成功、目标是否有 GridOccupancyState。不要通过预览颜色推断占格已经提交。
+
+可先按 [00.2 完整链路与最小示例](/qmx-Gameknowledge/knowledge/unity-job与burst/05-entities/00-导读/02-从场景到运行时ecs的完整链路/) 运行最小接收器示例，将“数据入口、系统运行、数据变化、显示结果”逐项观察，确认环境正常后再排查项目业务。

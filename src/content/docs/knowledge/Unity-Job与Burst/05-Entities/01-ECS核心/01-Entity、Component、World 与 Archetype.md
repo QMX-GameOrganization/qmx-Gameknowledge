@@ -9,7 +9,7 @@ sidebar:
 
 ```text
 Entity     身份句柄
-Component  纯数据
+Component  状态数据（本系列主要使用非托管组件）
 System     数据转换逻辑
 World      Entity 的容器和系统运行环境
 Archetype  相同组件组合的实体集合
@@ -47,7 +47,7 @@ Health[]
 
 ## 结构改变为什么昂贵
 
-增删组件、创建/销毁实体、修改共享组件值都可能让实体迁移到另一个 Archetype。普通组件字段赋值不是结构改变。
+增删组件可能使实体迁移到另一个 Archetype；创建/销毁实体改变实体集合，修改共享组件值可能使实体换到其它 chunk。这些操作属于结构性变更，但不一定都改变组件类型组合。普通组件字段赋值不是结构改变。
 
 ```text
 SetComponentData      普通写入
@@ -73,3 +73,11 @@ BeltPath + DynamicBuffer<BeltItem>
 - Entity 不是 GameObject 的轻量版实例，它不包含方法。
 - ECS chunk 不是体素世界的 `VoxelChunk`。
 - ECS 不会自动让每个系统并行；并行来自 Job 调度。
+
+## World 把数据侧和执行侧接到一起
+
+一个 World 同时包含 EntityManager 管理的数据和属于该 World 的系统实例。系统用当前 World 的查询访问当前 World 的实体；把另一个 World 的 Entity 句柄传过来，不能据此访问另一个 World 的数据。
+
+同一系统类型可以在不同 World 中分别拥有实例，缓存和生命周期也分开。定义 `struct Receiver : IComponentData` 只是定义数据类型；必须在实体创建、烘焙加载或添加组件时才有数据实例。
+
+Archetype/Chunk 解释“数据如何存”，不决定“系统何时运行”。系统组解释调度关系，组件查询解释匹配关系。将这两条线连起来，见 [00.2 完整链路与最小示例](/qmx-Gameknowledge/knowledge/unity-job与burst/05-entities/00-导读/02-从场景到运行时ecs的完整链路/)。

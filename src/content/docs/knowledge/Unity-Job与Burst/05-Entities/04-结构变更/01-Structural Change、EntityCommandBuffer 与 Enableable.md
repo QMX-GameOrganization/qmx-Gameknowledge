@@ -39,7 +39,7 @@ public partial struct SpawnJob : IJobEntity
 
 - 每个并行 Job 使用自己的 `ParallelWriter` 或由系统组提供的 ECB。
 - 回放时机要明确，通常放在 Simulation 组的末端或专用 ECB System。
-- `EntityCommandBuffer` 只延迟结构改变，不能代替普通组件数据同步。
+- `EntityCommandBuffer` 延迟执行已记录的命令，也可记录普通组件写入；它不能代替 Job 依赖和业务数据同步。
 - 回放前必须保证写入命令的 Job 已完成或依赖已正确连接。
 
 ## Enableable Component
@@ -62,3 +62,23 @@ public struct Paused : IComponentData, IEnableableComponent {}
 ```
 
 创建/销毁物品属于结构改变；改变路径中 `BeltItem` 的数量是 Buffer 数据更新，不是 Archetype 迁移。
+
+## 把 ECB 放回系统时序里看
+
+```text
+SpawnSystem.OnUpdate 记录 CreateEntity + AddComponent
+  → 此时真实 Entity 和组件还没有出现
+EndSimulationEntityCommandBufferSystem 回放
+  → 真实 Entity 和组件现在存在
+下一个有机会执行的 ConsumerSystem 查询到它们
+```
+
+若消费者本帧已经在回放前执行过，它通常要到下一帧或下一模拟 tick 才处理新数据；若消费者配置在回放之后，则可能同一轮处理。ECB 不会自动让先前执行的系统重新运行。
+
+CreateEntity 返回的临时实体只用于关联该 ECB 内后续命令，不是回放前可供 EntityManager 任意访问的真实实体。
+
+ECB 也能记录 SetComponent 等普通写入；它不只是结构变更命令容器。但“记录命令”始终不等于“立即提交”。主线程初始化和低频拓扑操作，在安全位置可直接使用 EntityManager，不必为了 ECS 形式一律套 ECB。
+
+并行写入需要兼容的 ParallelWriter、排序键和生产 Job 的完成依赖；它不替多个生产者解决业务容量竞争。现代 ECB 单例流程与旧式 AddJobHandleForProducer 用法不要混抄，按当前包 API 配置。
+
+关联阅读：[00.2 完整链路与最小示例](/qmx-Gameknowledge/knowledge/unity-job与burst/05-entities/00-导读/02-从场景到运行时ecs的完整链路/) 说明数据从哪里来；系统章节说明回放前后谁执行；Job 章节说明写命令的工作什么时候完成。

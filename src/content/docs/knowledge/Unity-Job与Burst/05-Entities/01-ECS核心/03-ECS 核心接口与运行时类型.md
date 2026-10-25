@@ -155,7 +155,7 @@ public sealed class ReceiverBaker : Baker<ReceiverAuthoring>
 }
 ```
 
-`Baker` 不是运行时系统，也不是 `EntityManager` 的替代品。它只在编辑器 Baking 阶段读取 Authoring 数据并写入运行时实体。
+`Baker` 不是运行时系统，也不是 `EntityManager` 的替代品。它在编辑器或构建所需的烘焙流程中读取 Authoring，生成运行所需的实体数据；Player 加载这些数据，不会在游戏更新中调用 Baker。
 
 ## `EntityCommandBuffer`：延迟结构改变
 
@@ -167,7 +167,7 @@ Job / System 记录 ECB 命令
 → ECB System 回放
 ```
 
-普通字段写入可以直接由查询或 Job 完成；ECB 主要解决结构改变的时机和线程安全。
+普通字段写入可以直接由查询或 Job 完成；ECB 主要用于集中安排结构改变，也能记录普通组件写入；它不替代 JobHandle 或业务仲裁。
 
 ## 工厂项目的接口对应
 
@@ -205,7 +205,7 @@ ReceiverSystem 查询 ReceiverData 并消费库存
 PresentationSystem 查询 FactoryViewRef 并更新模型
 ```
 
-这里每个类型只承担一段责任：`Entity` 提供身份，组件提供数据，Query 找到数据，System 执行业务，ECB 修改实体结构，Presentation 显示结果。`Baker` 只参与场景初始对象转换；运行时放置不再回头调用 Authoring。
+这里每个类型只承担一段责任：`Entity` 提供身份，组件提供数据，Query 找到数据，System 执行业务，ECB 修改实体结构，Presentation 显示结果。`Baker` 参与 Authoring 与 Prefab 的烘焙；运行时放置直接创建或实例化已烘焙实体，不在游戏更新中调用 Baker。
 
 ## 一个接口如何连接到另一个接口
 
@@ -235,3 +235,16 @@ public sealed class ReceiverBaker : Baker<ReceiverAuthoring>
 3. `EntityManager` 和 `SystemAPI.Query` 各适合什么频率的工作？
 4. `Baker` 为什么不能替代运行时 System？
 5. 为什么创建物品 Entity 通常要通过 ECB？
+
+## 类型之间的联系还需要运行条件
+
+上面的职责片段并不意味着定义了类就有数据流。要使它们真正工作，还要满足：
+
+- 系统已在正确 World 创建，加入正在更新的系统组。
+- Entity 已创建，目标组件已经实际写入或 ECB 已经回放。
+- 更新条件满足，Query 签名、组件启用状态和 World 均匹配。
+- 系统产出的数据由后续系统读取；需要模型时另有表现入口。
+
+本章的 `ReceiverAuthoring`、`ReceiverData`、`ReceiverSystem` 等片段用于解释角色，不应当作同一份可直接复制的工程。[00.2 完整链路与最小示例](/qmx-Gameknowledge/knowledge/unity-job与burst/05-entities/00-导读/02-从场景到运行时ecs的完整链路/) 提供名称统一的完整代码与两种运行入口。
+
+ISystem 若要接收启停回调，需额外实现 `ISystemStartStop`；实现 ISystem 本身不会自动获得 OnStartRunning / OnStopRunning。SystemBase 则提供对应虚方法。
