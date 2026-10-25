@@ -182,6 +182,52 @@ FactoryProducerSystem SystemBase / ISystem
 
 这张对应关系就是最小工厂链的 ECS 骨架：组件定义数据，Entity 保存身份，Baker 完成转换，System 批量推进状态。
 
+## 把所有类型串成一次完整操作
+
+以“运行时放置一个接收器”为例：
+
+```text
+Input System
+  ↓
+PlaceDeviceCommand（描述位置、方向、设备类型）
+  ↓
+BuildValidationSystem（查询 GridPosition / Occupancy）
+  ↓
+EntityCommandBuffer.CreateEntity()
+  ↓
+ECB.AddComponent(entity, GridPosition)
+ECB.AddComponent(entity, ReceiverData)
+  ↓ Playback
+Receiver Entity 进入 World
+  ↓
+ReceiverSystem 查询 ReceiverData 并消费库存
+  ↓
+PresentationSystem 查询 FactoryViewRef 并更新模型
+```
+
+这里每个类型只承担一段责任：`Entity` 提供身份，组件提供数据，Query 找到数据，System 执行业务，ECB 修改实体结构，Presentation 显示结果。`Baker` 只参与场景初始对象转换；运行时放置不再回头调用 Authoring。
+
+## 一个接口如何连接到另一个接口
+
+```csharp
+public struct ReceiverData : IComponentData
+{
+    public int Capacity;
+    public int Stored;
+}
+
+public sealed class ReceiverBaker : Baker<ReceiverAuthoring>
+{
+    public override void Bake(ReceiverAuthoring authoring)
+    {
+        Entity entity = GetEntity(TransformUsageFlags.None);
+        AddComponent(entity, new ReceiverData { Capacity = authoring.capacity });
+    }
+}
+```
+
+`Baker<T>` 把 Inspector 字段写入 `IComponentData`；之后 `SystemBase`/`ISystem` 用 `SystemAPI.Query<RefRW<ReceiverData>>()` 找到它。需要创建或删除实体时，System 通过 `EntityCommandBuffer` 记录结构变化；需要大量执行时，再把同一段组件处理提取为 `IJobEntity` 并交给 Burst。
+
 ## 自测题
 
 1. `IComponentData` 和 `IBufferElementData` 的数据形态有什么区别？

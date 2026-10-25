@@ -54,3 +54,19 @@ public partial struct MoveJob : IJobEntity
 ## 系统组
 
 默认世界包含 `InitializationSystemGroup`、`SimulationSystemGroup`、`PresentationSystemGroup`。用 `[UpdateInGroup]`、`[UpdateBefore]`、`[UpdateAfter]` 表达顺序。工厂项目应把生产、运输、统计放进固定步模拟组，避免渲染帧率改变产量。
+
+## 从 Query 到完整业务链
+
+`SystemAPI.Query` 不是孤立的遍历语法。它读取的是 Baker 或 ECB 写入的组件：
+
+```text
+Baker / ECB
+  ↓ 写入组件
+SystemAPI.Query
+  ↓ 读取 RefRO / RefRW / DynamicBuffer
+业务计算
+  ↓ 必须改变实体结构时
+EntityCommandBuffer
+```
+
+例如传送带系统用 `RefRO<ConveyorData>` 得到速度，用 `DynamicBuffer<ConveyorItem>` 得到物品列表；拓扑系统先写入 `Source`/`Destination`，运输系统再读取它们。查询负责找到数据，系统负责逻辑，连接关系由拓扑系统维护。
