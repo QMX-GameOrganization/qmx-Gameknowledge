@@ -1,0 +1,135 @@
+{
+  "TARGET": "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\ECS学习\\工厂游戏的实现\\00-导读\\02-世界单位、网格坐标与方向约定.md",
+  "changed_field": "new article: title / world-units and stage-0 sections",
+  "baseline": "empty bytes for new article; existing 12 notes unchanged",
+  "roles": {
+    "MODIFIED_FILE": "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\ECS学习\\工厂游戏的实现\\00-导读\\02-世界单位、网格坐标与方向约定.md",
+    "DIFF_FILE": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\DIFF.patch",
+    "VERIFICATION": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\VERIFICATION.txt",
+    "ROLLBACK": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\ROLLBACK.sh"
+  },
+  "events": [
+    {
+      "label": "BASELINE",
+      "command": [
+        "python",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\inspect_note.py",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\BASELINE.md"
+      ],
+      "stdout": "{\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"world_units_note_present\": false}\r\n",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "MODIFIED",
+      "command": [
+        "python",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\inspect_note.py",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\ECS学习\\工厂游戏的实现\\00-导读\\02-世界单位、网格坐标与方向约定.md"
+      ],
+      "stdout": "{\"bytes\": 9990, \"sha256\": \"f087d200f456b975e1feaa340fe566bc2539e2944f1cb2889dae2a13de95ca47\", \"world_units_note_present\": true}\r\n",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "EXECUTE_ROLLBACK",
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\ROLLBACK.sh",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\rollback-copy.md"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "ROLLBACK",
+      "command": [
+        "python",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\inspect_note.py",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\rollback-copy.md"
+      ],
+      "stdout": "{\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"world_units_note_present\": false}\r\n",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "PATCH_RECONSTRUCT",
+      "command": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "apply",
+        "--",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\DIFF.patch"
+      ],
+      "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\patch-check",
+      "stdout": "",
+      "stderr": "",
+      "exit_status": 0,
+      "reconstructed_hash_matches_modified": true
+    },
+    {
+      "label": "FINAL_EXECUTE_ROLLBACK",
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\ROLLBACK.sh",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\rollback-copy.md"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "FINAL_MODIFIED",
+      "command": [
+        "python",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\inspect_note.py",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\ECS学习\\工厂游戏的实现\\00-导读\\02-世界单位、网格坐标与方向约定.md"
+      ],
+      "stdout": "{\"bytes\": 9990, \"sha256\": \"efd9b3c1832b749d76e57a0efcf674f17a333922bd527bca4ccbe1c4027d661d\", \"world_units_note_present\": true}\r\n",
+      "stderr": "",
+      "exit_status": 0
+    },
+    {
+      "label": "FINAL_ROLLBACK",
+      "command": [
+        "python",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\inspect_note.py",
+        "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ecs-world-units\\rollback-copy.md"
+      ],
+      "stdout": "{\"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"world_units_note_present\": false}\r\n",
+      "stderr": "",
+      "exit_status": 0
+    }
+  ],
+  "restored_hash_matches_baseline": true,
+  "existing_notes_unchanged": 12,
+  "prior_errors": [
+    {
+      "command": "Python urllib.request fetch from raw.githubusercontent.com",
+      "exit_status": 1,
+      "error": "URLError: WinError 10054 connection reset",
+      "resolution": "git clone --depth 1 --filter=blob:none --sparse succeeded; HEAD verified"
+    },
+    {
+      "command": "patch reconstruction assertion after git apply",
+      "exit_status": 1,
+      "error": "core.autocrlf produced CRLF instead of source LF",
+      "resolution": "repeat git apply with core.autocrlf=false"
+    },
+    {
+      "command": "git apply --check on already patched copy",
+      "exit_status": 1,
+      "error": "patch does not apply",
+      "resolution": "reset disposable copy to empty baseline"
+    }
+  ],
+  "build": {
+    "command": "npm run build",
+    "exit_status": 0,
+    "result": "81 pages built; new note page generated",
+    "diagnostics": "Existing # filenames triggered loader ENOENT messages; existing duplicate IDs warned. Build completed successfully."
+  },
+  "final_modified_sha256": "efd9b3c1832b749d76e57a0efcf674f17a333922bd527bca4ccbe1c4027d661d"
+}
