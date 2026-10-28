@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <rect width="900" height="430" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">证据分级：每个结论必须说明自己站在哪一级</text>
+
+  <rect x="30" y="56" width="840" height="52" rx="8" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="48" y="80" fill="#7f1d1d" font-weight="bold">⑤ 原作对照 / Unity 实测</text>
+  <text x="48" y="98" fill="#7f1d1d" font-size="13">在原游戏或 Unity 中运行并对比。本项目绝大多数结论尚未到达这一级，因此都标“待验收”。</text>
+
+  <rect x="30" y="116" width="840" height="52" rx="8" fill="#ffedd5" stroke="#ea580c"/>
+  <text x="48" y="140" fill="#7c2d12" font-weight="bold">④ 机器码 oracle（带 mock 回调）</text>
+  <text x="48" y="158" fill="#7c2d12" font-size="13">把原函数字节复制到独立进程执行，虚调用指向 Python 回调；证明条件组合，不证明世界查询。</text>
+
+  <rect x="30" y="176" width="840" height="52" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="48" y="200" fill="#78350f" font-weight="bold">③ 独立内核验证</text>
+  <text x="48" y="218" fill="#78350f" font-size="13">教学 C# 与独立 Python/NumPy 复写逐位对比（例如 binary32 逐步舍入、512 组随机状态）。</text>
+
+  <rect x="30" y="236" width="840" height="52" rx="8" fill="#ecfccb" stroke="#65a30d"/>
+  <text x="48" y="260" fill="#365314" font-weight="bold">② 静态消费核对</text>
+  <text x="48" y="278" fill="#365314" font-size="13">找到消费该字段的反编译函数或当前 DLL 指令，核对表达式、偏移、调用链。仍不等于游戏中真的那样跑。</text>
+
+  <rect x="30" y="296" width="840" height="52" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="48" y="320" fill="#14532d" font-weight="bold">① 原声明</text>
+  <text x="48" y="338" fill="#14532d" font-size="13">.scr / .xml / .def 里写着什么，带文件、行号、SHA256。只证明“声明了”，不证明“运行时最终值”。</text>
+
+  <text x="450" y="378" text-anchor="middle" fill="#334155" font-size="13">另有第六类标签：教学设计（自己的实现选择）。它必须与上面五级分开写，不能冒充原作行为。</text>
+  <text x="450" y="400" text-anchor="middle" fill="#64748b" font-size="12">本分级对应原教材的“原声明 / 静态消费核对 / 独立内核验证 / Unity 实测 / 原作对照”</text>
+</svg>

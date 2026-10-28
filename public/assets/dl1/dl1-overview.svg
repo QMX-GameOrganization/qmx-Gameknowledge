@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="470" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">DL1 逆向工程全景：三类输入，四层产出</text>
+
+  <!-- inputs -->
+  <text x="30" y="62" font-weight="bold" fill="#334155">原始输入</text>
+  <rect x="30" y="72" width="210" height="64" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="135" y="98" text-anchor="middle" fill="#0c4a6e">资源包 *.rpack / *.mp</text>
+  <text x="135" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">网格 / 动画 ANM2 / 贴图</text>
+
+  <rect x="30" y="152" width="210" height="64" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="135" y="178" text-anchor="middle" fill="#0c4a6e">Data0 脚本数据</text>
+  <text x="135" y="200" text-anchor="middle" fill="#0c4a6e" font-size="12">.scr / .def / .xml 声明</text>
+
+  <rect x="30" y="232" width="210" height="64" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="135" y="258" text-anchor="middle" fill="#0c4a6e">三个可执行体的反编译 C</text>
+  <text x="135" y="280" text-anchor="middle" fill="#0c4a6e" font-size="12">gamedll 约 72MB / engine 约 40MB</text>
+
+  <rect x="30" y="312" width="210" height="64" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="135" y="338" text-anchor="middle" fill="#0c4a6e">音频银行 *.csb (FSB5)</text>
+  <text x="135" y="360" text-anchor="middle" fill="#0c4a6e" font-size="12">5107 个效果样本</text>
+
+  <!-- tools -->
+  <text x="330" y="62" font-weight="bold" fill="#334155">逆向工具层</text>
+  <rect x="320" y="72" width="230" height="304" rx="10" fill="#fef3c7" stroke="#d97706"/>
+  <text x="435" y="100" text-anchor="middle" fill="#78350f" font-weight="bold">格式解码 + 证据提取</text>
+  <text x="435" y="130" text-anchor="middle" fill="#78350f" font-size="13">rpack_extract / MeshDump</text>
+  <text x="435" y="156" text-anchor="middle" fill="#78350f" font-size="13">Anm2Dump / AnimationAudit</text>
+  <text x="435" y="182" text-anchor="middle" fill="#78350f" font-size="13">export_audio (csb + fmod)</text>
+  <text x="435" y="208" text-anchor="middle" fill="#78350f" font-size="13">native_functions 函数索引</text>
+  <text x="435" y="234" text-anchor="middle" fill="#78350f" font-size="13">export_*_evidence 摘录 + SHA256</text>
+  <text x="435" y="270" text-anchor="middle" fill="#78350f" font-size="13">独立 oracle：Python 复写 / 机器码执行</text>
+  <text x="435" y="296" text-anchor="middle" fill="#78350f" font-size="13">conformance：正例 + 损坏负例</text>
+  <text x="435" y="340" text-anchor="middle" fill="#92400e" font-size="12">首错保留，不放宽断言</text>
+
+  <!-- outputs -->
+  <text x="640" y="62" font-weight="bold" fill="#334155">产出</text>
+  <rect x="620" y="72" width="250" height="64" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="745" y="98" text-anchor="middle" fill="#14532d">可视成品</text>
+  <text x="745" y="120" text-anchor="middle" fill="#14532d" font-size="12">GLB / blend / 视频 / 音频浏览器</text>
+
+  <rect x="620" y="152" width="250" height="64" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="745" y="178" text-anchor="middle" fill="#14532d">格式笔记</text>
+  <text x="745" y="200" text-anchor="middle" fill="#14532d" font-size="12">Notes/ 网格、动画 ANM2 逆向</text>
+
+  <rect x="620" y="232" width="250" height="64" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="745" y="258" text-anchor="middle" fill="#14532d">教学 C# 内核（Teach/）</text>
+  <text x="745" y="280" text-anchor="middle" fill="#14532d" font-size="12">10 专题 + 5 深化课程 + 音频</text>
+
+  <rect x="620" y="312" width="250" height="64" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="745" y="338" text-anchor="middle" fill="#14532d">证据 JSON + verification.json</text>
+  <text x="745" y="360" text-anchor="middle" fill="#14532d" font-size="12">行号 / 哈希 / 通过项</text>
+
+  <line x1="240" y1="104" x2="318" y2="130" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="240" y1="184" x2="318" y2="184" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="240" y1="264" x2="318" y2="240" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="240" y1="344" x2="318" y2="300" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="550" y1="104" x2="618" y2="104" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="550" y1="184" x2="618" y2="184" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="550" y1="264" x2="618" y2="264" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="550" y1="344" x2="618" y2="344" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <rect x="30" y="396" width="840" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5 4"/>
+  <text x="450" y="420" text-anchor="middle" fill="#334155">学习主线：先看“声明数据”，再找“消费它的函数”，最后用教学 C# 内核独立复写并验证</text>
+  <text x="450" y="440" text-anchor="middle" fill="#64748b" font-size="12">反编译 C 与当前安装版 DLL 不是同一版本，地址和偏移不能互换</text>
+</svg>

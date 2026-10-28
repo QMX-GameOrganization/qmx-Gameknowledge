@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="400" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">动画事件时钟：用区间 (prev, now] 派发，不用“当前帧 == 事件帧”</text>
+
+  <!-- axis: x = 60 + frame * 17.22 (0..45) -->
+  <line x1="60" y1="150" x2="840" y2="150" stroke="#334155" stroke-width="2"/>
+  <g stroke="#334155" stroke-width="1.5">
+    <line x1="60" y1="144" x2="60" y2="156"/>
+    <line x1="318" y1="144" x2="318" y2="156"/>
+    <line x1="404" y1="144" x2="404" y2="156"/>
+    <line x1="422" y1="144" x2="422" y2="156"/>
+    <line x1="680" y1="144" x2="680" y2="156"/>
+    <line x1="835" y1="144" x2="835" y2="156"/>
+  </g>
+  <g fill="#334155" font-size="12" text-anchor="middle">
+    <text x="60" y="176">局部帧 0</text>
+    <text x="318" y="176">15</text>
+    <text x="396" y="176">20</text>
+    <text x="430" y="176">21</text>
+    <text x="680" y="176">36</text>
+    <text x="835" y="176">45</text>
+  </g>
+
+  <circle cx="60" cy="150" r="7" fill="#0284c7"/>
+  <text x="60" y="124" text-anchor="middle" fill="#0c4a6e" font-size="12">声音 begin</text>
+  <circle cx="318" cy="150" r="7" fill="#0284c7"/>
+  <text x="318" y="124" text-anchor="middle" fill="#0c4a6e" font-size="12">声音 hit</text>
+  <circle cx="404" cy="150" r="7" fill="#dc2626"/>
+  <text x="380" y="96" text-anchor="middle" fill="#7f1d1d" font-size="12">GIVE_GRAB_DAMAGE</text>
+  <circle cx="422" cy="150" r="7" fill="#0284c7"/>
+  <text x="470" y="124" text-anchor="middle" fill="#0c4a6e" font-size="12">声音 end</text>
+  <circle cx="680" cy="150" r="7" fill="#16a34a"/>
+  <text x="680" y="96" text-anchor="middle" fill="#14532d" font-size="12">GRAB_RELEASE</text>
+  <text x="680" y="124" text-anchor="middle" fill="#14532d" font-size="12">CAN_WALK</text>
+
+  <!-- tick jump -->
+  <path d="M 60 232 L 440 232" stroke="#d97706" stroke-width="3" marker-end="url(#a)"/>
+  <line x1="440" y1="162" x2="440" y2="226" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="250" y="256" text-anchor="middle" fill="#78350f" font-size="13">一次 Update 从 prev 直接跳到 now≈第 22 帧</text>
+  <text x="250" y="276" text-anchor="middle" fill="#78350f" font-size="13">期望：begin、hit、伤害、end 全部按序派发一次</text>
+
+  <rect x="500" y="212" width="340" height="86" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="515" y="236" fill="#78350f" font-size="13">派发条件：prev &lt; eventFrame ≤ now</text>
+  <text x="515" y="258" fill="#78350f" font-size="13">游标 NextEvent 只前进：同一事件只派一次</text>
+  <text x="515" y="280" fill="#78350f" font-size="13">同帧事件按源文件行号稳定排序</text>
+
+  <rect x="40" y="316" width="800" height="64" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5 4"/>
+  <text x="440" y="342" text-anchor="middle" fill="#334155" font-size="13">事件帧是片段局部帧；采样源动画时才加 StartFrame；FPS 取自各 SeqTrack，不能全写死 30</text>
+  <text x="440" y="364" text-anchor="middle" fill="#64748b" font-size="12">示例数据来自 m_fpp_grab.scr 的 FinisherBackFast（源帧 5..45，30 FPS，横轴按帧数等比例）</text>
+</svg>

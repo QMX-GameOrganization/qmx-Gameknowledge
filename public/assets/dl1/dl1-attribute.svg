@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="430" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">属性重算：每次“清零再累加”，撤销就是少加一项</text>
+
+  <rect x="30" y="56" width="180" height="70" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="120" y="82" text-anchor="middle" fill="#0c4a6e" font-weight="bold">① 清空临时槽</text>
+  <text x="120" y="104" text-anchor="middle" fill="#0c4a6e" font-size="12">AddValue=0 · MulDelta=0</text>
+  <text x="120" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">布尔 bit0 ← bit1（默认值）</text>
+
+  <rect x="250" y="56" width="180" height="70" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="340" y="82" text-anchor="middle" fill="#0c4a6e" font-weight="bold">② 应用无期限列表</text>
+  <text x="340" y="104" text-anchor="middle" fill="#0c4a6e" font-size="12">PermanentList（+0xf0）</text>
+  <text x="340" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">逐项 Apply(add, mul, stack)</text>
+
+  <rect x="470" y="56" width="180" height="70" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="560" y="82" text-anchor="middle" fill="#0c4a6e" font-weight="bold">③ 应用限时列表</text>
+  <text x="560" y="104" text-anchor="middle" fill="#0c4a6e" font-size="12">TimedList（+0x108）</text>
+  <text x="560" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">与前者共同累计</text>
+
+  <rect x="690" y="56" width="180" height="70" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="780" y="82" text-anchor="middle" fill="#14532d" font-weight="bold">④ 得到当前值</text>
+  <text x="780" y="104" text-anchor="middle" fill="#14532d" font-size="12">Value=(MulDelta+1)·Base+Add</text>
+  <text x="780" y="120" text-anchor="middle" fill="#14532d" font-size="12">倍率增量相加，不连乘</text>
+
+  <line x1="210" y1="91" x2="248" y2="91" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="430" y1="91" x2="468" y2="91" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="650" y1="91" x2="688" y2="91" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- expiry -->
+  <rect x="30" y="160" width="410" height="120" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="235" y="186" text-anchor="middle" fill="#78350f" font-weight="bold">到期：稳定压缩（单次扫描）</text>
+  <text x="48" y="212" fill="#78350f" font-size="13">ReadIndex 读全部条目，剩余时间 ≤ 0 的记下名字</text>
+  <text x="48" y="234" fill="#78350f" font-size="13">WriteIndex 只在条目存活时递增，存活项按原顺序写回</text>
+  <text x="48" y="256" fill="#78350f" font-size="13">最后一次 RemoveRange 清尾部，再触发一次重算</text>
+
+  <rect x="480" y="160" width="390" height="120" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="675" y="186" text-anchor="middle" fill="#334155" font-weight="bold">算例（基础 100）</text>
+  <text x="498" y="212" fill="#334155" font-size="13">Painkillers：+120 → 220；25 秒后 → 100</text>
+  <text x="498" y="234" fill="#334155" font-size="13">mul 0.25 + add 20 → 145；再叠药 → 265</text>
+  <text x="498" y="256" fill="#334155" font-size="13">再一个 mul 0.25：增量 0.5 → 170</text>
+
+  <rect x="30" y="306" width="840" height="100" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5 4"/>
+  <text x="450" y="332" text-anchor="middle" fill="#334155" font-weight="bold">为什么不用“加上去再减回来”</text>
+  <text x="450" y="356" text-anchor="middle" fill="#334155" font-size="13">乘性加成无法用减法精确还原，浮点误差还会随次数累积；清零重算始终从权威输入出发</text>
+  <text x="450" y="378" text-anchor="middle" fill="#334155" font-size="13">代价是每次重算与（属性数 + 修改条目数）线性相关，所以到期清理必须避免逐项 memmove 的二次复杂度</text>
+</svg>

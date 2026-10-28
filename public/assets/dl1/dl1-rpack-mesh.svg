@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="430" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">RP6L 容器 与 网格资源的 5 个 part</text>
+
+  <!-- container -->
+  <text x="30" y="62" font-weight="bold" fill="#334155">RP6L 容器（四张表 + 数据段）</text>
+  <rect x="30" y="72" width="360" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="210" y="97" text-anchor="middle" fill="#0c4a6e">头：'RP6L' + 8 个 u32（version…blockSize）</text>
+  <rect x="30" y="118" width="360" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="210" y="143" text-anchor="middle" fill="#0c4a6e">sectionInfo × N（20 字节：offset/大小/压缩）</text>
+  <rect x="30" y="164" width="360" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="210" y="189" text-anchor="middle" fill="#0c4a6e">partInfo × N（16 字节：索引、offset、size）</text>
+  <rect x="30" y="210" width="360" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="210" y="235" text-anchor="middle" fill="#0c4a6e">fileInfo × N（12 字节：partAmount/firstPart）</text>
+  <rect x="30" y="256" width="360" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="210" y="281" text-anchor="middle" fill="#0c4a6e">名字偏移表 u32 × nameAmount + 名字串区</text>
+  <rect x="30" y="302" width="360" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="210" y="327" text-anchor="middle" fill="#1e3a8a">各 section 的数据（可能压缩）</text>
+  <text x="210" y="368" text-anchor="middle" fill="#64748b" font-size="12">指针字段为 1 基，使用前需 −1；version 1 时 offset 乘数为 1</text>
+
+  <!-- mesh parts -->
+  <text x="450" y="62" font-weight="bold" fill="#334155">一个网格文件 = 恰好 5 个 part</text>
+  <rect x="440" y="72" width="430" height="44" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="455" y="90" fill="#78350f" font-weight="bold">part0 网格树</text>
+  <text x="455" y="108" fill="#78350f" font-size="12">128B 头 + 名字串 + 节点表（每节点 208B）+ 声明表 + LOD/MeshInfo</text>
+  <rect x="440" y="122" width="430" height="36" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="455" y="145" fill="#78350f" font-weight="bold">part1</text>
+  <text x="515" y="145" fill="#78350f">120B 小结构：表面/外观 SkinDefinitions</text>
+  <rect x="440" y="164" width="430" height="36" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="455" y="187" fill="#78350f" font-weight="bold">part2</text>
+  <text x="515" y="187" fill="#78350f">MeshFixups：指出 part0 内哪些偏移是 1 基指针</text>
+  <rect x="440" y="206" width="430" height="36" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="455" y="229" fill="#78350f" font-weight="bold">part3</text>
+  <text x="515" y="229" fill="#78350f">顶点缓冲（多个节点缓冲串联）</text>
+  <rect x="440" y="248" width="430" height="36" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="455" y="271" fill="#78350f" font-weight="bold">part4</text>
+  <text x="515" y="271" fill="#78350f">u16 索引缓冲（每节点局部）</text>
+
+  <!-- decode chain -->
+  <rect x="440" y="300" width="430" height="100" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="455" y="322" fill="#14532d" font-weight="bold">读顶点的正确顺序</text>
+  <text x="455" y="344" fill="#14532d" font-size="13">声明表 → 元素 format/semantic → 累计偏移得到步长</text>
+  <text x="455" y="364" fill="#14532d" font-size="13">MeshInfo 给出顶点字节偏移、顶点数、索引偏移</text>
+  <text x="455" y="384" fill="#14532d" font-size="13">步长不能从节点 type 猜，UV 必须按每顶点跨距取</text>
+
+  <line x1="390" y1="322" x2="438" y2="350" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+</svg>

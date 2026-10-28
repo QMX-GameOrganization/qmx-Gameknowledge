@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker>
+  </defs>
+  <rect width="900" height="470" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="450" y="30" text-anchor="middle" font-size="17" font-weight="bold" fill="#0f172a">感染者 AI：规则 ID × 模块 vtable 的“条件查询”结构</text>
+
+  <rect x="30" y="56" width="250" height="150" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="155" y="80" text-anchor="middle" fill="#0c4a6e" font-weight="bold">ai_main_goal_rules.def</text>
+  <text x="155" y="102" text-anchor="middle" fill="#0c4a6e" font-size="12">ShouldDie = 3</text>
+  <text x="155" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">ShouldReactOnHit = 15</text>
+  <text x="155" y="138" text-anchor="middle" fill="#0c4a6e" font-size="12">ShouldAttack = 31</text>
+  <text x="155" y="156" text-anchor="middle" fill="#0c4a6e" font-size="12">ShouldReactOnLight = 48</text>
+  <text x="155" y="174" text-anchor="middle" fill="#0c4a6e" font-size="12">… ID 最大 77（23、38 空缺），与 C++ 同步</text>
+  <text x="155" y="194" text-anchor="middle" fill="#64748b" font-size="11">注释：Keep this synchronized with EAIMainGoalRule</text>
+
+  <rect x="320" y="56" width="250" height="150" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="445" y="80" text-anchor="middle" fill="#0c4a6e" font-weight="bold">ai_modules.def</text>
+  <text x="445" y="102" text-anchor="middle" fill="#0c4a6e" font-size="12">ATTACK_MODULE = 7</text>
+  <text x="445" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">LIGHT_REACTION_MODULE = 11</text>
+  <text x="445" y="138" text-anchor="middle" fill="#0c4a6e" font-size="12">DEATH_MODULE = 21</text>
+  <text x="445" y="156" text-anchor="middle" fill="#0c4a6e" font-size="12">ZOMBIE_LOGIC_MODULE = 37</text>
+  <text x="445" y="174" text-anchor="middle" fill="#0c4a6e" font-size="12">INFECTED_LOGIC_MODULE = 38</text>
+  <text x="445" y="194" text-anchor="middle" fill="#64748b" font-size="11">注释：keep synchronized with EModuleType</text>
+
+  <rect x="610" y="56" width="260" height="150" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="740" y="80" text-anchor="middle" fill="#0c4a6e" font-weight="bold">zombie_data*.scr 参数预设</text>
+  <text x="740" y="102" text-anchor="middle" fill="#0c4a6e" font-size="12">sight_range = 10 [m]</text>
+  <text x="740" y="120" text-anchor="middle" fill="#0c4a6e" font-size="12">sight_angle_at_min_dist = 160</text>
+  <text x="740" y="138" text-anchor="middle" fill="#0c4a6e" font-size="12">!include 逐级覆盖（preset 继承）</text>
+  <text x="740" y="156" text-anchor="middle" fill="#0c4a6e" font-size="12">health_mul / damage_mul 等调参</text>
+  <text x="740" y="194" text-anchor="middle" fill="#64748b" font-size="11">数据决定“多强”，代码决定“怎么判”</text>
+
+  <!-- native path -->
+  <text x="30" y="240" font-weight="bold" fill="#334155">二进制里的调用路径（当前安装版 DLL，静态证据）</text>
+  <rect x="30" y="252" width="190" height="64" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="125" y="278" text-anchor="middle" fill="#78350f" font-weight="bold">规则对象</text>
+  <text x="125" y="298" text-anchor="middle" fill="#78350f" font-size="12">+8 = 规则 ID（工厂写入）</text>
+  <rect x="260" y="252" width="190" height="64" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="355" y="278" text-anchor="middle" fill="#78350f" font-weight="bold">wrapper</text>
+  <text x="355" y="298" text-anchor="middle" fill="#78350f" font-size="12">从状态 +0xd58 取模块</text>
+  <rect x="490" y="252" width="190" height="64" rx="8" fill="#fef3c7" stroke="#d97706"/>
+  <text x="585" y="278" text-anchor="middle" fill="#78350f" font-weight="bold">模块虚槽</text>
+  <text x="585" y="298" text-anchor="middle" fill="#78350f" font-size="12">死亡 +0xd20 · 光照 +0xd70</text>
+  <rect x="720" y="252" width="150" height="64" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="795" y="278" text-anchor="middle" fill="#14532d" font-weight="bold">bool 结果</text>
+  <text x="795" y="298" text-anchor="middle" fill="#14532d" font-size="12">短路顺序必须保留</text>
+  <line x1="220" y1="284" x2="258" y2="284" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="450" y1="284" x2="488" y2="284" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <line x1="680" y1="284" x2="718" y2="284" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- predicate -->
+  <rect x="30" y="344" width="410" height="100" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="235" y="368" text-anchor="middle" fill="#334155" font-weight="bold">ShouldDie（Zombie / Infected）</text>
+  <text x="48" y="392" fill="#334155" font-size="13">c = actor.虚槽368()；若 (uint)(c−7) ≤ 9 则返回 false</text>
+  <text x="48" y="412" fill="#334155" font-size="13">Zombie：区间外调用一次 F20 并返回</text>
+  <text x="48" y="432" fill="#334155" font-size="13">Infected：F20 为真时再调用第二次 F20</text>
+
+  <rect x="480" y="344" width="390" height="100" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="675" y="368" text-anchor="middle" fill="#334155" font-weight="bold">ShouldReactOnLight（Infected）</text>
+  <text x="498" y="392" fill="#334155" font-size="13">AiData(0x250) 为假 → false；Goal+0x84 == 0x26 → true</text>
+  <text x="498" y="412" fill="#334155" font-size="13">否则 4C4≠0 ∧ 9F8=假 ∧ 嵌套byte=0 ∧ F28=真</text>
+  <text x="498" y="432" fill="#334155" font-size="13">最后 182/183/184 任一非零才为 true</text>
+</svg>
