@@ -40,14 +40,15 @@ export default defineConfig({
       locales: {
         root: { label: "简体中文", lang: "zh-CN" }
       },
-      customCss: ["./src/styles/custom.css", "./src/styles/themes.css", "./src/styles/fx.css", "./src/styles/ai.css"],
+      customCss: ["./src/styles/custom.css", "./src/styles/themes.css", "./src/styles/fx.css", "./src/styles/ai.css", "./src/styles/lightbox.css"],
       head: [
         { tag: "script", content: themeBootstrap },
         { tag: "style", content: themeAssets }
       ],
       components: {
         ThemeSelect: "./src/components/ThemeSelect.astro",
-        MobileMenuFooter: "./src/components/MobileMenuFooter.astro"
+        MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
+        Footer: "./src/components/Footer.astro"
       },
       social: [{
         icon: "github",

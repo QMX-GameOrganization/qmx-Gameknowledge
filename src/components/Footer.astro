@@ -1,0 +1,12 @@
+---
+// 覆盖 Starlight 的页脚组件：保持原来的页脚不变，只额外启动文章配图的点击放大预览。
+// 页脚会出现在每个文档页上，放在这里就不用改任何文章。
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default {...Astro.props}><slot /></Default>
+
+<script>
+  import { initLightbox } from '../lightbox/lightbox';
+  initLightbox();
+</script>
