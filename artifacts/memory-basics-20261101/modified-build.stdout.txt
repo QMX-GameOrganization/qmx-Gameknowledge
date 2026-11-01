@@ -1,0 +1,307 @@
+
+> qmx-gameknowledge@1.0.0 build
+> astro build
+
+16:05:47 [content] Syncing content
+16:05:47 [WARN] [starlight-docs-loader] No contents found for knowledge/八股/c#.md
+16:05:47 [WARN] [starlight-docs-loader] No contents found for knowledge/Unity-Job与Burst/02-Burst/02-支持的C#子集.md
+16:05:48 [content] Synced content
+16:05:48 [types] Generated 760ms
+16:05:48 [build] output: "static"
+16:05:48 [build] mode: "static"
+16:05:48 [build] directory: D:\QMX-Studio\qmx-Gameknowledge\dist\
+16:05:48 [build] Collecting build info...
+16:05:48 [build] ✓ Completed in 958ms.
+16:05:48 [build] Building static entrypoints...
+16:05:49 [vite] ✓ built in 1.57s
+16:05:49 [build] ✓ Completed in 1.60s.
+
+ building client (vite) 
+16:05:49 [vite] transforming...
+16:05:50 [vite] ✓ 48 modules transformed.
+16:05:50 [vite] rendering chunks...
+16:05:50 [vite] computing gzip size...
+16:05:50 [vite] dist/_astro/ec.0vx5m.js                                                              2.52 kB
+16:05:50 [vite] dist/_astro/ec.v4551.css                                                            18.22 kB │ gzip:  3.96 kB
+16:05:50 [vite] dist/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.C181hMzK.js   0.67 kB │ gzip:  0.40 kB
+16:05:50 [vite] dist/_astro/rhodes.BnQr4Ulh.js                                                       0.75 kB │ gzip:  0.63 kB
+16:05:50 [vite] dist/_astro/pixel.Di2AkKQ9.js                                                        0.98 kB │ gzip:  0.60 kB
+16:05:50 [vite] dist/_astro/cat.Dgw1sCFy.js                                                          1.00 kB │ gzip:  0.64 kB
+16:05:50 [vite] dist/_astro/particles.Dhhyfo7A.js                                                    1.05 kB │ gzip:  0.65 kB
+16:05:50 [vite] dist/_astro/preload-helper.ChfuucnF.js                                               1.13 kB │ gzip:  0.67 kB
+16:05:50 [vite] dist/_astro/paper.yhkFvnvn.js                                                        1.49 kB │ gzip:  0.85 kB
+16:05:50 [vite] dist/_astro/deepsea.RoKxB1Vs.js                                                      1.49 kB │ gzip:  0.84 kB
+16:05:50 [vite] dist/_astro/github.DIhBku1w.js                                                       1.63 kB │ gzip:  0.87 kB
+16:05:50 [vite] dist/_astro/TableOfContents.astro_astro_type_script_index_0_lang.CKWWgpjV.js         1.67 kB │ gzip:  0.86 kB
+16:05:50 [vite] dist/_astro/neon.DxKcS3QW.js                                                         1.75 kB │ gzip:  0.86 kB
+16:05:50 [vite] dist/_astro/blocks.BiL-4VT_.js                                                       1.76 kB │ gzip:  1.18 kB
+16:05:50 [vite] dist/_astro/Search.astro_astro_type_script_index_0_lang.CX2zTuhP.js                  1.83 kB │ gzip:  0.94 kB
+16:05:50 [vite] dist/_astro/miku.CVNCegFO.js                                                         1.87 kB │ gzip:  1.06 kB
+16:05:50 [vite] dist/_astro/sakura.FpuehhFE.js                                                       1.95 kB │ gzip:  1.09 kB
+16:05:50 [vite] dist/_astro/page.B1D-nYk3.js                                                         2.24 kB │ gzip:  1.01 kB
+16:05:50 [vite] dist/_astro/nord.C9q6ah0K.js                                                         2.30 kB │ gzip:  1.24 kB
+16:05:50 [vite] dist/_astro/layer.gnJ16KSg.js                                                        2.67 kB │ gzip:  1.13 kB
+16:05:50 [vite] dist/_astro/summer.BniW5DAb.js                                                       2.81 kB │ gzip:  1.47 kB
+16:05:50 [vite] dist/_astro/starry.CafcCnnV.js                                                       5.51 kB │ gzip:  2.45 kB
+16:05:50 [vite] dist/_astro/Footer.astro_astro_type_script_index_0_lang.DS91FiIS.js                 10.86 kB │ gzip:  4.52 kB
+16:05:50 [vite] dist/_astro/pet-art.D6Eg0-FY.js                                                     12.97 kB │ gzip:  4.60 kB
+16:05:50 [vite] dist/_astro/ThemeSelect.astro_astro_type_script_index_0_lang.BGuhh7Kq.js            47.13 kB │ gzip: 18.56 kB
+16:05:50 [vite] dist/_astro/ui-core.47avbLyh.js                                                     94.16 kB │ gzip: 27.32 kB
+16:05:50 [vite] ✓ built in 345ms
+
+ generating static routes 
+16:05:50 ▶ @astrojs/starlight/routes/static/404.astro
+16:05:50   └─ /404.html (+23ms) 
+16:05:50 ▶ @astrojs/starlight/routes/static/index.astro
+16:05:50   ├─ /projects/amiya-words/index.html (+18ms) 
+16:05:50   ├─ /projects/playablegraph-visualizer-unity6/index.html (+13ms) 
+16:05:50   ├─ /projects/welcome/index.html (+13ms) 
+16:05:50   ├─ /guide/getting-started/index.html (+13ms) 
+16:05:50   ├─ /knowledge/minecraft源码学习/overview/index.html (+11ms) 
+16:05:50   ├─ /knowledge/工具/如何探索外面的世界/index.html (+14ms) 
+16:05:50   ├─ /knowledge/git使用指南/github-入门指南/index.html (+11ms) 
+16:05:50   ├─ /knowledge/工具/外国ai使用/index.html (+12ms) 
+16:05:50   ├─ /knowledge/自我忏悔/之后学习大致规划1015/index.html (+15ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/目录/index.html (+11ms) 
+16:05:50   ├─ /knowledge/自我忏悔/忏悔目录/index.html (+8ms) 
+16:05:50   ├─ /knowledge/八股/c/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/00-导读/01-学习路线与版本说明/index.html (+11ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/00-导读/03-术语表/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/00-导读/02-为什么需要job与burst/index.html (+10ms) 
+16:05:50   ├─ /knowledge/八股/首页/index.html (+7ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/01-job系统架构与工作线程/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/02-job类型详解/index.html (+14ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/03-调度与jobhandle依赖/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/04-nativecontainer容器/index.html (+11ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/05-内存分配器与生命周期/index.html (+12ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/06-安全系统与竞争条件/index.html (+12ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/08-调度粒度与性能调优/index.html (+6ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/07-并行写入与归约模式/index.html (+11ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/09-job与unity-api交互/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/10-job之外的并发方案/index.html (+10ms) 
+16:05:50   ├─ /knowledge/minecraft源码学习/y轴渐变/index.html (+15ms) 
+16:05:50   ├─ /knowledge/minecraft源码学习/密度函数扩展/index.html (+13ms) 
+16:05:50   ├─ /knowledge/minecraft源码学习/生成优化/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/01-burst原理与启用方式/index.html (+11ms) 
+16:05:50   ├─ /knowledge/minecraft源码学习/组合函数/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/03-unitymathematics/index.html (+11ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/05-burstinspector与调试/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/04-simd与自动向量化/index.html (+7ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/07-函数指针与间接调用/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/06-浮点模式与确定性/index.html (+15ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/08-静态数据与sharedstatic/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/09-泛型与接口/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/10-编译器提示与别名/index.html (+11ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/12-常见编译错误与排错/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/02-burst/11-构建发布与平台差异/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/04-速查与资料/01-api速查表/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/04-速查与资料/02-常见问题与八股/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/04-速查与资料/03-学习目标清单/index.html (+7ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/03-项目实践/01-区块面可见性job/index.html (+17ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/04-速查与资料/04-参考资料/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/03-项目实践/02-噪声与密度函数的burst化/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/03-项目实践/03-cell插值与同号填充job/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/03-项目实践/05-调度管线与profiling/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/03-项目实践/04-mesh构建与meshdata/index.html (+9ms) 
+16:05:50   ├─ /knowledge/八股/计算机/补码/index.html (+9ms) 
+16:05:50   ├─ /knowledge/八股/计算机/计算机/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/00-导读/04-ecs与dots概览/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/01-job系统/11-自定义nativecontainer/index.html (+15ms) 
+16:05:50   ├─ /knowledge/认识unity/菜单栏/一file-文件/index.html (+8ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/开端/index.html (+7ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/00-导读/01-源码地图与阅读方法/index.html (+8ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/01-实体与组件/01-entitycomponent-与建筑组合/index.html (+8ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/02-拓扑与连接/01-端口方向连接缓存与拓扑变化/index.html (+7ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/03-传送带/01-beltpath连续传送带的核心抽象/index.html (+6ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/04-输入与输出/01-itemacceptoritemejector-与交付协议/index.html (+9ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/03-传送带/02-物品运动速率与阻塞/index.html (+7ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/07-性能与存档/01-路径合并背压存档与性能/index.html (+7ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/05-生产与处理/01-生产器与处理器状态机/index.html (+12ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/06-系统与时序/01-system-更新顺序与单-tick-数据流/index.html (+6ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/08-unity-ecs映射/01-映射到-unity-entities-1x/index.html (+5ms) 
+16:05:50   ├─ /knowledge/ecs学习/工厂游戏的实现/09-实践路线/01-最小生产链实践路线/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/目录/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/00-导读/01-学习路线版本与术语/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/01-ecs核心/01-entitycomponentworld-与-archetype/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/01-ecs核心/02-component-类型与数据设计/index.html (+8ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/05-job与burst集成/01-ecs-job-依赖burst-与安全系统/index.html (+9ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/03-baking与场景/01-authoringbakersubscene-与-prefab/index.html (+10ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/04-结构变更/01-structural-changeentitycommandbuffer-与-enableable/index.html (+16ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/06-项目实践/01-工厂游戏的实体连接与运输/index.html (+7ms) 
+16:05:50   ├─ /knowledge/unity-job与burst/05-entities/02-系统与查询/01-systemsystemapiquery-与-entityquery/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity-job与burst/05-entities/07-性能与排错/01-chunk-布局查询性能与调试/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity-job与burst/05-entities/08-速查/01-entities-api-速查自测与资料/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity-job与burst/05-entities/01-ecs核心/03-ecs-核心接口与运行时类型/index.html (+7ms) 
+16:05:51   ├─ /knowledge/ecs学习/工厂游戏的实现/00-导读/02-世界单位网格坐标与方向约定/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity-job与burst/05-entities/00-导读/02-从场景到运行时ecs的完整链路/index.html (+8ms) 
+16:05:51   ├─ /knowledge/自我忏悔/速度推进的思考/index.html (+10ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/00-实现总览与填写方法/index.html (+8ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/01-实体与组件建模/index.html (+14ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/02-初始化与实体生命周期/index.html (+9ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/03-库存生产与压缩/index.html (+7ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/04-坐标占格与清理/index.html (+7ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/05-端口路由与交付/index.html (+7ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/06-传送带相对距离队列/index.html (+6ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/07-路径合并与拓扑迁移/index.html (+6ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/08-系统时序与ecs访问/index.html (+5ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/09-建造旋转与拆除/index.html (+6ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/10-表现与配置边界/index.html (+5ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/11-验证性能与完成度/index.html (+13ms) 
+16:05:51   ├─ /knowledge/ecs学习/个人实现记录/12-闭卷复盘与下一步/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/目录/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/目录/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/目录/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/01-类型系统/01-值类型与引用类型的内存布局/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/02-托管与非托管/01-clr执行模型与jit/index.html (+12ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/02-托管与非托管/03-unsafe指针fixed与gchandle/index.html (+8ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/02-托管与非托管/05-dispose终结器与safehandle/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/02-托管与非托管/04-span与ref-struct/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/02-托管与非托管/02-pinvoke与marshal/index.html (+11ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/01-类型系统/02-装箱拆箱与il实现/index.html (+7ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/01-类型系统/04-对象头methodtable与字段布局/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/01-类型系统/03-struct的拷贝语义与防御性复制/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/01-类型系统/05-相等性gethashcode与值类型默认实现/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/02-loh-poh-卡表与写屏障/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/01-gc基础与分代回收/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/04-gc-alloc来源与零gc写法/index.html (+7ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/03-unity-boehm-gc与增量gc/index.html (+8ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/05-对象池与结构体化/index.html (+7ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/03-gc/06-gc调优与诊断工具/index.html (+13ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/04-mono与il2cpp/01-mono与il2cpp差异/index.html (+7ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/04-mono与il2cpp/02-泛型共享与aot限制/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/06-隐藏分配/01-委托与闭包/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/05-与c对照/03-内存模型与原子操作/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/05-与c对照/02-raii所有权与gc/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/05-与c对照/01-对象模型与虚调用/index.html (+5ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/07-八股速查/01-类型与内存高频题/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/06-隐藏分配/02-迭代器async与linq/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/07-八股速查/02-gc与托管非托管高频题/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp底层专栏/07-八股速查/03-c对照高频题/index.html (+13ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/00-导读/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/02-总览/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/01-源码地图/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/04-样条函数/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/06-finaldensity洞穴与含水层/index.html (+5ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/05-sloped_cheese地形主体/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/03-密度函数基础/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/07-噪声与随机数/index.html (+5ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/09-地表雕刻与特征/index.html (+5ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/08-气候与群系/index.html (+11ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/12-建筑与结构/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/11-练习与自测/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/10-优化专题/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/13-方块更新红石与流体/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/14-实体刷新/index.html (+7ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/15-光照更新/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/18-地物造型算法/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/17-区块加载与调度/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/16-客户端区块网格/index.html (+6ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/19-下界与末地/index.html (+13ms) 
+16:05:51   ├─ /knowledge/minecraft源码学习/源码专栏/20-扩散类机制与爆炸/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/01-总览与选型/01-热更新要解决什么问题/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/01-总览与选型/02-平台限制与方案选型/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/04-hybridclr/02-接入流程与加载热更程序集/index.html (+5ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/04-hybridclr/01-原理与架构/index.html (+4ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/01-总览与选型/03-版本清单与更新流程/index.html (+5ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/04-hybridclr/03-aot泛型限制性能与常见坑/index.html (+5ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/02-assetbundle/01-构建与打包策略/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/02-assetbundle/01-assetbundle构建与打包策略/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/02-assetbundle/02-assetbundle加载与依赖管理/index.html (+12ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/02-assetbundle/02-加载卸载与依赖管理/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/02-assetbundle/03-内存问题与排查/index.html (+8ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/03-addressables/02-远程目录与内容更新/index.html (+9ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/06-ilruntime与解释器/01-ilruntime原理与跨域/index.html (+12ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/03-addressables/01-核心概念与分组/index.html (+8ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/03-addressables/03-引用计数与内存释放/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/06-ilruntime与解释器/02-代码热更方案对比与迁移/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/05-lua方案/01-xlua与tolua原理/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/05-lua方案/02-wrap生成gc与性能优化/index.html (+7ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/07-工程实践/01-回滚灰度与版本兼容/index.html (+13ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/07-工程实践/02-校验加密与安全/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/08-八股速查/01-资源热更高频题/index.html (+6ms) 
+16:05:51   ├─ /knowledge/unity热更新专栏/08-八股速查/02-代码热更高频题/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/00-导读/02-证据分级与逆向方法论/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/00-导读/01-项目全貌与素材地图/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/01-数据驱动架构/01-data0脚本体系/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/01-数据驱动架构/02-声明与消费分离/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/03-动画事件与音频/03-双人处决的同步/index.html (+10ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/03-动画事件与音频/01-seqtrack与事件时钟/index.html (+8ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/03-动画事件与音频/02-音频资源链与调度器/index.html (+15ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/02-资源格式/04-骨骼合成与blender坐标补偿/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/02-资源格式/03-anm2动画解码/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/02-资源格式/01-rp6l容器与网格资源/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/02-资源格式/02-声明表驱动的顶点解码/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/04-运动与物理/02-局部轴加减速与速度反馈/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/02-资源格式/05-外观系统材质与贴图/index.html (+4ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/04-运动与物理/01-运动请求的提供者与接收者/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/04-运动与物理/03-物理配置接触与攀爬边界/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/05-属性战斗与装备/01-属性重算内核/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/05-属性战斗与装备/02-buff定义与到期的稳定压缩/index.html (+15ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/05-属性战斗与装备/03-随机核与伤害乘法/index.html (+13ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/05-属性战斗与装备/05-技能依赖图/index.html (+13ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/05-属性战斗与装备/04-装备实例与耐久/index.html (+12ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/06-ai/01-规则表与模块结构/index.html (+10ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/06-ai/03-感知与追逐记忆/index.html (+9ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/06-ai/02-原生条件函数的逆向方法/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/09-总结/01-值得学习的设计清单/index.html (+6ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/09-总结/02-迁移到unity-ecs项目/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/07-任务与背包/02-任务叶条件/index.html (+5ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/07-任务与背包/01-任务阶段图/index.html (+10ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/08-逆向方法/01-巨型反编译文本的定位/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/07-任务与背包/03-背包制作事务/index.html (+7ms) 
+16:05:51   ├─ /knowledge/消失的光芒逆向学习/08-逆向方法/02-验证体系与负例设计/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/05-containers-and-layout/index.html (+10ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/04-gc-and-allocation/index.html (+8ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/01-memory-map/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/03-managed-and-unmanaged/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/02-types-and-copy/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/06-ownership-and-disposal/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/08-jobs-and-safety/index.html (+11ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/09-density-lab/index.html (+6ms) 
+16:05:51   ├─ /knowledge/csharp与unity内存基础/07-native-and-allocator/index.html (+5ms) 
+16:05:51   └─ /knowledge/csharp与unity内存基础/目录/index.html (+6ms) 
+16:05:51 ✓ Completed in 1.83s.
+
+ generating optimized images 
+16:05:51   ▶ /_astro/image.CiYcUo4B_Z1fHghU.webp (reused cache entry) (+2ms) (1/12)
+16:05:51   ▶ /_astro/image-3.LjywReCd_22TEmd.webp (reused cache entry) (+2ms) (2/12)
+16:05:51   ▶ /_astro/image-4.BEbNYt2w_hgXtb.webp (reused cache entry) (+2ms) (3/12)
+16:05:51   ▶ /_astro/image-1.CSJqARvO_Z12rY7w.webp (reused cache entry) (+2ms) (4/12)
+16:05:51   ▶ /_astro/image-2.Duv5fYow_ZEdSON.webp (reused cache entry) (+2ms) (5/12)
+16:05:51   ▶ /_astro/image-5.BiHMKy3U_1E89QW.webp (reused cache entry) (+2ms) (6/12)
+16:05:51   ▶ /_astro/image-5.CY5_EOjO_nrnwY.webp (reused cache entry) (+3ms) (7/12)
+16:05:51   ▶ /_astro/image-4.CAfNlEdq_ZI1nOr.webp (reused cache entry) (+3ms) (8/12)
+16:05:51   ▶ /_astro/image.NFBoyvae_1zkEPD.webp (reused cache entry) (+3ms) (9/12)
+16:05:51   ▶ /_astro/image-1.DuPWlRXJ_vgcDu.webp (reused cache entry) (+3ms) (10/12)
+16:05:51   ▶ /_astro/image-3.BX9u0V92_2qXG9X.webp (reused cache entry) (+3ms) (11/12)
+16:05:51   ▶ /_astro/image-2.CS7msg5B_2wJTfx.webp (reused cache entry) (+3ms) (12/12)
+16:05:51 ✓ Completed in 6ms.
+
+
+Running Pagefind v1.5.2 (Extended)
+Running from: "D:\\QMX-Studio\\qmx-Gameknowledge\\node_modules\\@astrojs\\starlight"
+Source:       "..\\..\\..\\dist"
+Output:       "..\\..\\..\\dist\\pagefind"
+
+[Walking source directory]
+Found 208 files matching **/*.{html}
+
+[Parsing files]
+Found a data-pagefind-body element on the site.
+↳ Ignoring pages without this tag.
+
+[Reading languages]
+Discovered 1 language: zh-cn
+
+[Building search indexes]
+Total: 
+  Indexed 1 language
+  Indexed 207 pages
+  Indexed 14520 words
+  Indexed 0 filters
+  Indexed 0 sorts
+
+Finished in 0.800 seconds
+16:05:53 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+16:05:53 [build] 208 page(s) built in 6.79s
+16:05:53 [build] Complete!

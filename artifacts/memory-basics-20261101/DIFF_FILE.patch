@@ -1,0 +1,704 @@
+--- /dev/null
++++ b/01-memory-map.md
+@@ -0,0 +1,63 @@
++---
++title: "1. 变量、存储与内存地图"
++description: "用变量、对象和引用建立内存模型，区分栈、托管堆、原生内存与显存。"
++sidebar:
++  order: 1
++---
++
++## 要点
++
++变量是程序中保存值的位置；对象是运行时创建的数据实体；引用是访问对象的方式。容器负责组织元素，内存是这些内容占用的存储空间。
++
++```csharp
++float[] density = new float[4];
++float[] other = density;
++other[0] = 0.75f;
++// density[0] 也是 0.75f：两个变量引用同一个数组。
++```
++
++这里有两个引用变量、一个数组对象、四个浮点元素。变量名不同不代表数据有两份。
++
++## 常见存储区域
++
++| 名称 | 入门理解 | 不能据此推断的事 |
++| --- | --- | --- |
++| 线程栈 | 保存调用过程中的部分局部状态；有些值可能被优化到寄存器 | 不能说所有 struct 都在栈上 |
++| 托管堆 | 运行时管理的对象存储，GC 跟踪其可达性 | 不能说变量离开作用域就立即回收 |
++| 原生内存 | 通过原生分配机制获得的空间，通常由明确所有者管理 | 不能说 C# 代码无法访问 |
++| GPU 资源 | 图形系统维护的缓冲、纹理等 | 不能用 GC.Alloc 代表其占用 |
++
++这是帮助读代码的模型，不是每个后端的精确物理布局。编译器可能省略某些分配，地址和布局也不属于普通 C# 代码应依赖的契约。
++
++## 类型与位置分开看
++
++```csharp
++class ChunkInfo
++{
++    public int Seed;
++}
++
++var info = new ChunkInfo();
++var samples = new float[256];
++```
++
++`Seed` 是值类型字段，内联在 `ChunkInfo` 对象中；`samples` 是数组引用，256 个 float 存在数组对象内部。不要给每个 float 想象一个独立堆对象。
++
++局部变量也不意味着始终在栈上：被闭包捕获、进入异步状态机，或被编译器优化，都会改变实际存储方式。
++
++## 分配、使用、回收是不同事件
++
++1. 分配：为数组取得存储。
++2. 使用：通过引用读取或写入。
++3. 不再需要：业务结束。
++4. 回收：运行时或所有者真正归还存储。
++
++第 3 步不会自动等于第 4 步。后面讨论的 GC、Dispose、Job 依赖，主要是在解释这两个时刻如何衔接。
++
++## 自测
++
++**问：两个引用变量各有一个名字，是否存在两个数组？** 答：不一定，上例只有一个。
++
++**问：函数返回时，其中创建的数组一定销毁吗？** 答：不会；若返回值或其他对象仍引用它，数组仍可达。
++
++继续：[类型、赋值与参数传递](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/02-types-and-copy/)。深入：[值类型与引用类型的内存布局](/qmx-Gameknowledge/knowledge/csharp底层专栏/01-类型系统/01-值类型与引用类型的内存布局/)。
+--- /dev/null
++++ b/02-types-and-copy.md
+@@ -0,0 +1,83 @@
++---
++title: "2. 类型、赋值与参数传递"
++description: "区分值复制、引用复制、浅拷贝、装箱与 ref 参数，理解 Native 句柄复制的前置知识。"
++sidebar:
++  order: 2
++---
++
++## 值类型复制值，引用类型复制引用
++
++```csharp
++struct Sample
++{
++    public float Density;
++}
++
++var a = new Sample { Density = 1f };
++var b = a;
++b.Density = 2f;
++// a.Density 仍为 1f。
++
++var x = new float[] { 1f };
++var y = x;
++y[0] = 2f;
++// x[0] 为 2f。
++```
++
++值类型包括数值、枚举和结构体；引用类型包括类、数组、字符串和委托。字符串不可变，不代表它是值类型。
++
++## 结构体包含引用时，不会递归深拷贝
++
++```csharp
++struct Samples
++{
++    public float[] Values;
++}
++
++var a = new Samples { Values = new float[] { 1f } };
++var b = a;
++b.Values[0] = 3f; // a.Values[0] 也是 3f。
++b.Values = new float[] { 9f }; // 只替换 b 的字段。
++```
++
++复制的是字段值；数组字段的值是引用。所以“结构体复制后完全独立”只有在内部数据也没有共享关系时才成立。NativeArray 的句柄复制同样需要分析共享关系。
++
++## 按值传参不等于复制整个对象
++
++普通参数默认按值传递：结构体参数取得结构体副本，类或数组参数取得引用副本。
++
++```csharp
++// 修改共享数组的元素，但替换局部参数不影响调用者的变量。
++static void Edit(float[] values)
++{
++    values[0] = 5f;
++    values = new float[1];
++}
++```
++
++| 参数形式 | 语义重点 |
++| --- | --- |
++| 普通参数 | 复制参数值；这个值可能是引用 |
++| ref | 允许直接读写调用者的变量位置 |
++| out | 被调用方负责赋值后返回 |
++| in | 通过只读引用传入；特定结构体成员调用可能触发防御性复制 |
++
++`in` 不是所有结构体的自动性能优化。结构体大小、内联和调用方式都影响成本；需要测量。只读引用也不自动让内部引用的对象不可变。
++
++## 装箱与拆箱
++
++```csharp
++int count = 16;
++object boxed = count; // 将该值装箱为对象。
++int restored = (int)boxed;
++```
++
++装箱通常产生托管分配。将结构体转成接口也可能装箱；泛型约束调用则可能避免，取决于具体写法。拆箱必须匹配实际装箱类型，不能把装箱的 int 直接拆成 float。
++
++## 自测
++
++**问：给 class 参数重新赋值，会替换调用者的引用变量吗？** 答：普通按值参数不会；若要替换变量，需要返回新引用或使用 ref 等方式。
++
++**问：复制含 List 字段的 struct，会复制列表元素吗？** 答：不会，只复制列表引用。
++
++继续：[托管、非托管与运行后端](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/03-managed-and-unmanaged/)。深入：[struct 拷贝与防御性复制](/qmx-Gameknowledge/knowledge/csharp底层专栏/01-类型系统/03-struct的拷贝语义与防御性复制/)、[装箱拆箱](/qmx-Gameknowledge/knowledge/csharp底层专栏/01-类型系统/02-装箱拆箱与il实现/)。
+--- /dev/null
++++ b/03-managed-and-unmanaged.md
+@@ -0,0 +1,60 @@
++---
++title: "3. 托管、非托管与运行后端"
++description: "区分托管执行、托管引用、非托管类型和原生内存，说明 Mono、IL2CPP 与 Burst 的边界。"
++sidebar:
++  order: 3
++---
++
++## “托管”需要结合上下文
++
++讨论托管代码，是在说执行依赖运行时服务；讨论托管对象，是在说对象生命周期受 GC 管理；讨论非托管类型，是在说类型内部不包含托管引用。三句话相关，但不等价。
++
++```csharp
++struct DensitySample
++{
++    public float Value;
++    public int Material;
++}
++
++struct NamedSample
++{
++    public float Value;
++    public string Name;
++}
++```
++
++`DensitySample` 不含托管引用，是非托管类型；`NamedSample` 含 string 引用，不是非托管类型。二者都是值类型。
++
++## unmanaged 不决定存储位置
++
++```csharp
++var samples = new DensitySample[100];
++```
++
++数组仍然是托管对象；其中元素类型满足 unmanaged 并不会让数组自动转入原生分配。
++
++`where T : unmanaged` 是编译期类型约束。它比 `where T : struct` 严格：后者并不排除结构体内部含有对象引用。符合 unmanaged 也不保证能直接用于所有原生互操作接口；ABI、字段布局、布尔表示和对齐还需另行核对。
++
++## Unity 的三个执行概念
++
++| 名称 | 主要职责 | 不代表什么 |
++| --- | --- | --- |
++| Mono | 提供 Unity 某些版本/平台使用的托管运行时 | 不等于所有现代 .NET API 都可用 |
++| IL2CPP | 将 IL 转换为 C++ 并进行 AOT 构建 | 不会消除 C# 对象语义和 GC |
++| Burst | 将受支持的计算代码编译为优化本机代码 | 不会让任意托管对象图都能进入 Job |
++
++具体支持情况以编辑器、目标平台、后端和包版本为准，不要把 CoreCLR 的分代 GC、对象布局或 JIT 行为直接套到所有 Unity 版本。
++
++Native 容器为 Job 提供可访问的原生数据，但“能创建 NativeArray”和“某段代码符合 Burst 限制”仍需分别确认。Job 内通常使用数值、支持的结构体及 Native 容器，而不是 string、List 或任意 class 对象图。
++
++## unsafe 是另一个维度
++
++`unsafe` 允许使用指针等语言特性，不会关闭 GC，也不会自动取得所有权。固定托管对象、调用原生库、自行分配内存，各有不同的生命周期要求。入门阶段不需要用指针代替容器。
++
++## 自测
++
++**问：IL2CPP 生成了 C++，还会有 GC 吗？** 答：会，转换后仍需保持 C# 托管对象的生命周期语义。
++
++**问：结构体只有 float 字段，把它放进普通数组后谁回收数组？** 答：GC；元素非托管与数组的分配方式不同。
++
++继续：[GC、隐藏分配与测量](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/04-gc-and-allocation/)。深入：[Mono 与 IL2CPP 差异](/qmx-Gameknowledge/knowledge/csharp底层专栏/04-mono与il2cpp/01-mono与il2cpp差异/)、[Burst 学习目录](/qmx-Gameknowledge/knowledge/unity-job与burst/目录/)。
+--- /dev/null
++++ b/04-gc-and-allocation.md
+@@ -0,0 +1,59 @@
++---
++title: "4. GC、隐藏分配与测量"
++description: "理解可达性、GC Root、常见临时分配及 Unity 中 GC.Alloc 的实际含义。"
++sidebar:
++  order: 4
++---
++
++## GC 回收不可达对象
++
++GC 从运行时识别的根集合出发追踪引用。静态字段、运行时识别的活动引用、句柄等可能让对象保持可达。对象互相引用但无法从根到达，也可以被回收；GC 不只是简单的引用计数。
++
++```csharp
++float[] values = new float[1024];
++values = null;
++```
++
++第二句仅切断一个引用。若还有其他引用，数组仍可达；即使已不可达，也不保证立刻回收。GC 的对象回收也不保证操作系统看到的进程占用立刻下降。
++
++## 分配量、存活量和回收成本不同
++
++| 现象 | 可能原因 | 应查看什么 |
++| --- | --- | --- |
++| 每帧分配很多，存活量稳定 | 大量临时对象反复创建 | GC.Alloc 调用栈、回收频率与耗时 |
++| 场景切换后托管对象持续存活 | 静态缓存、事件订阅、其他长期引用 | 内存快照与引用链 |
++| GC.Alloc 很低，原生占用上涨 | Native 容器或 Unity 资源未释放 | 原生内存、资源数量、泄漏提示 |
++| 内存稳定但帧耗时高 | 计算、同步、复制或其他系统成本 | CPU Timeline 等性能数据 |
++
++`GC.Alloc` 主要反映托管分配，不是总内存分配量，也不是该帧 GC 回收耗时。零 GC.Alloc 不等于零成本或无泄漏。
++
++## 常见隐藏分配
++
++- 高频字符串拼接、格式化和日志参数构造。
++- 值类型装箱为 object 或接口。
++- 捕获局部变量的 lambda，可能创建闭包对象和委托。
++- LINQ、迭代器、async 状态机，取决于具体写法和执行路径。
++- 每帧新建集合、调用会返回新数组的 API。
++
++不要记成“所有 foreach 都分配”或“所有 lambda 都分配”。例如 List 的具体类型枚举器与通过接口枚举的路径可能不同，缓存委托也与每次捕获不同。用实际调用栈判断。
++
++## Unity GC 与现代 .NET GC 分开学习
++
++CoreCLR 常见的分代回收、LOH、POH 不能自动套用到 Unity Mono/IL2CPP。Unity 具体回收器以编辑器与后端文档为准。增量 GC 将部分工作分散到多个时段，不能消除分配，也不能保证任何场景都没有停顿。
++
++## 一个可重复的观察练习
++
++1. 写两个功能一致的版本：每次新建 float 数组，以及复用已有数组。
++2. 在相同平台、相同输入和相同执行次数下预热。
++3. 在 Profiler 中记录 GC.Alloc、CPU 耗时与 GC 样本；需要时使用 Development Player，区分 Editor 干扰。
++4. 停止任务后比较内存快照中的存活对象与引用链。
++
++数组复用可能降低分配频率，也会长期保留容量。不要仅凭一次帧时间或 Editor 日志得出性能结论，不要把频繁手动 GC.Collect 当作常规修复。
++
++## 自测
++
++**问：两个对象互相引用就永远回收不了吗？** 答：不是，若从 GC 根不可达，仍可回收。
++
++**问：GC.Alloc 为零能证明 NativeArray 都释放了吗？** 答：不能，它不覆盖原生分配的完整生命周期。
++
++继续：[容器、容量与数据布局](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/05-containers-and-layout/)。深入：[Unity GC](/qmx-Gameknowledge/knowledge/csharp底层专栏/03-gc/03-unity-boehm-gc与增量gc/)、[GC 调优与诊断](/qmx-Gameknowledge/knowledge/csharp底层专栏/03-gc/06-gc调优与诊断工具/)。
+--- /dev/null
++++ b/05-containers-and-layout.md
+@@ -0,0 +1,49 @@
++---
++title: "5. 容器、容量与数据布局"
++description: "比较数组、List、Native 容器与借用视图，说明长度、容量、扩容和连续访问。"
++sidebar:
++  order: 5
++---
++
++## 容器管理的是一组元素
++
++| 容器/视图 | 存储特点 | 长度与容量 | 生命周期重点 |
++| --- | --- | --- | --- |
++| `T[]` | 托管数组；元素槽连续 | 长度固定 | GC 管理数组对象 |
++| `List<T>` | 托管对象管理后备数组 | Count 与 Capacity 分开 | 扩容可能分配新数组并复制 |
++| `NativeArray<T>` | 原生元素存储 | 长度固定 | 所有者安排释放 |
++| `NativeList<T>` | 原生可增长列表 | Length 与 Capacity 分开 | 扩容可能使已有视图失效 |
++| `NativeSlice<T>` | 对既有存储的视图，可含步长 | 描述一个区间 | 不拥有底层分配，不延长寿命 |
++| `Span<T>` | 对连续内存的受限视图 | 描述一个区间 | 是 ref struct，不能当普通长期字段使用 |
++
++Span 可以引用不同来源的内存，不意味着一定来自栈。它也不是可直接替代 Job 字段中 NativeArray 的通用方案。
++
++## 连续存储不等于每个对象连续
++
++`float[]` 的浮点元素连续。`SomeClass[]` 连续的是引用槽，各个类对象未必相邻。结构体数组将字段内联在元素中，但结构体的引用字段仍指向别处。
++
++CPU 会按缓存行搬运数据，顺序访问常有较好局部性；不过 NativeArray 并不天然比 float[] 的普通遍历快。Burst、边界检查、算法、调度和数据大小都会影响结果。
++
++## 长度和容量
++
++列表的逻辑元素数量与已分配空间不是一回事。预留足够容量可以减少扩容，但会保留更多内存。`Clear()` 通常清空逻辑内容并保留容量，不等于释放整个容器的存储。
++
++对于 NativeList，从 `AsArray()` 取得的是共享存储的视图。列表扩容会搬迁底层存储；改变列表的结构也可能触发视图安全版本失效。不要长期缓存视图，在结构变化后重新获取，并按具体 API 契约判断有效性。
++
++## 浅复制、深复制和视图
++
++- 普通数组变量赋值：共享同一个数组对象。
++- `Array.Copy`：复制元素；元素若是引用类型，复制的仍是引用。
++- NativeArray 变量赋值：复制句柄，共享底层分配。
++- 创建新 NativeArray 并复制元素：取得独立的元素存储。
++- NativeSlice 或 AsArray：借用已有存储，没有建立独立所有权。
++
++“零拷贝”省去数据复制，同时引入共享关系和有效期要求。
++
++## 自测
++
++**问：List.Clear 后为何内存不一定明显下降？** 答：列表通常保留后备数组容量；引用元素被清除后的对象是否回收还取决于其他引用与 GC。
++
++**问：得到视图后是否可以释放原容器并继续读取？** 答：不可以，视图没有延长原分配的寿命。
++
++继续：[所有权、借用与释放](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/06-ownership-and-disposal/)。深入：[NativeContainer 容器](/qmx-Gameknowledge/knowledge/unity-job与burst/01-job系统/04-nativecontainer容器/)、[Span 与 ref struct](/qmx-Gameknowledge/knowledge/csharp底层专栏/02-托管与非托管/04-span与ref-struct/)。
+--- /dev/null
++++ b/06-ownership-and-disposal.md
+@@ -0,0 +1,54 @@
++---
++title: "6. 所有权、借用与释放"
++description: "建立唯一释放责任，区分 GC、Dispose、using 和 Unity Destroy，并覆盖异常与取消。"
++sidebar:
++  order: 6
++---
++
++## 为每项资源指定唯一所有者
++
++所有者负责决定资源何时不再需要，并安排释放；借用者只能在约定期限内使用。共享访问不等于共享释放责任。C# 普通类型系统不会替你完整证明这些约定，需要接口、封装和审查支持。
++
++| 资源 | 典型所有者 | 借用者 | 释放条件 |
++| --- | --- | --- | --- |
++| 烘焙后的密度图原生数组 | 生成服务 | 多个采样 Job | 全部读者结束且服务不再需要 |
++| 密度采样工作区 | 本次生成操作 | 采样与打包 Job | 最后一个消费者结束 |
++| Section 压缩数据 | 区块数据对象 | 查询与网格操作 | 所有借用结束且区块卸载 |
++| 网格输出缓冲 | 网格操作 | 主线程上传流程 | 上传或复制完成 |
++| 自己创建的 Unity Mesh | 展示组件 | Renderer | 按 Unity 主线程生命周期销毁 |
++
++这是职责示例，不是要求每个项目使用相同类名。
++
++## Dispose 与 using
++
++`IDisposable` 约定资源释放入口；`using` 在作用域退出时执行 Dispose，机制类似 try/finally。它不会自动知道后台 Job 是否还在使用资源。
++
++因此下面的顺序才完整：分配 → 调度 → 等待相关使用者 → 消费结果 → Dispose。把异步资源包在一个过早结束的 using 中，反而会提前释放。
++
++Dispose 不等于让 C# 对象立刻被 GC 回收，也不普遍保证可以重复调用。Native 容器应由唯一所有者按状态释放一次。
++
++## 三类释放机制
++
++| 机制 | 面向的对象 | 关键区别 |
++| --- | --- | --- |
++| GC | 不可达的托管对象 | 时间不由业务精确指定 |
++| Dispose | 实现了释放契约的资源 | 由调用方安排；要先满足依赖 |
++| Unity Destroy | UnityEngine.Object 的原生对象 | 遵循引擎生命周期，通常在主线程调用 |
++
++Unity 对象可能同时有托管包装和原生对象。原生对象销毁后，包装仍可能存在，Unity 重载的 `== null` 也不同于普通引用判空。运行时 Destroy 通常延迟生效，不能简单认为调用后全部存储立刻归还。借来的外部材质也不能因为“我使用了它”就擅自销毁。
++
++终结器不是确定性释放方案，也不适合用来完成 Unity 主线程资源操作。SafeHandle 主要用于特定原生句柄封装，不是 Native 容器与 Unity 对象的统一替代品。
++
++## 异常和取消仍需收尾
++
++取消请求表示业务不再需要结果，并不保证已调度 Job 被抢占终止。需要保留覆盖全部已调度工作的句柄，等待依赖完成，释放中间资源，并避免发布未完成结果。
++
++若第二个 Job 调度失败，第一个 Job 可能已经启动。清理流程必须等待第一个 Job，而不能因为“本次操作失败”就直接释放其输入。
++
++## 自测
++
++**问：只读借用者能否阻止所有者过早释放？** 答：只读声明本身不能；所有者必须跟踪借用或依赖。
++
++**问：GC 能否替你 Dispose 一个被遗忘的 NativeArray？** 答：不能依赖它回收该原生分配，必须明确安排释放。
++
++继续：[Native 容器与 Allocator](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/07-native-and-allocator/)。深入：[Dispose、终结器与 SafeHandle](/qmx-Gameknowledge/knowledge/csharp底层专栏/02-托管与非托管/05-dispose终结器与safehandle/)。
+--- /dev/null
++++ b/07-native-and-allocator.md
+@@ -0,0 +1,55 @@
++---
++title: "7. Native 容器与 Allocator"
++description: "解释 NativeArray 句柄、分配器选择、别名有效期、初始化与常见释放误区。"
++sidebar:
++  order: 7
++---
++
++## NativeArray 是句柄加原生存储
++
++```csharp
++var a = new Unity.Collections.NativeArray<float>(
++    16, Unity.Collections.Allocator.Persistent);
++var b = a;
++b[0] = 4f; // a[0] 也改变。
++a.Dispose();
++// 不再访问或释放 b：共享的底层分配已经失效。
++```
++
++NativeArray 是结构体。赋值时复制长度、访问底层数据所需的信息及相关安全状态，不会深拷贝所有元素，也不自动增加引用计数。
++
++不要把某个副本的 `IsCreated` 当作跨副本的有效性证明。另一个句柄释放底层分配后，旧副本仍可能保留旧状态。正确性依赖所有权与生命周期协议。
++
++## Allocator 选择
++
++| 分配器 | 适用场景 | 生命周期约束 |
++| --- | --- | --- |
++| Temp | 当前线程短时临时工作 | 主线程通常当前帧内；Job 内通常到该 Job 结束，不能将主线程 Temp 容器作为 Job 字段传入 |
++| TempJob | 很快完成的 Job 输入/输出 | 必须在分配后的四帧内释放 |
++| Persistent | 跨帧任务、缓存和服务共享数据 | 无四帧期限，但仍必须由所有者释放 |
++
++四帧不是四个 Job，也不是四次 Schedule。无法保证任务在期限内结束，就应重新设计生命周期或使用适合长期持有的分配方式。
++
++Temp 采用批量回收机制，容器 Dispose 与分配器实际归还单块存储的行为应区分；不要由此推断所有分配器都可以省略清理。TempJob 和 Persistent 必须安排释放。
++
++Persistent 不表示磁盘持久化，不保证性能更好，也不表示容器可以无依赖地跨线程访问。自定义和 Rewindable 分配器适合后续学习：整体回绕同样必须等待所有使用者。
++
++## 初始化、清空和释放
++
++NativeArray 默认清零；选择 `NativeArrayOptions.UninitializedMemory` 可以跳过清零，但必须确保每个将被读取的元素已经写入。不能依赖未初始化数据恰好为零。
++
++`NativeList.Clear()` 保留存储容量；Dispose 结束资源生命周期；重新分配会建立新的生命周期。不要混用这几个操作。
++
++## 视图不取得所有权
++
++NativeSlice、NativeArray 子数组以及 NativeList.AsArray 等入口通常借用既有分配，具体限制以 API 契约为准。底层释放、搬迁或某些结构变化后，视图不能继续使用。不要单独释放借用视图来“帮助”所有者清理。
++
++安全检查可以在开启时发现很多非法访问，但关闭检查不会让错误变正确。`NativeDisableParallelForRestriction` 等属性也不能代替正确的访问证明。
++
++## 自测
++
++**问：为何 b = a 后不能 a、b 各 Dispose 一次？** 答：只有一份底层分配；两个句柄不是两个所有者。
++
++**问：选择 Persistent 后能否无限期不清理？** 答：可以长期持有，但不再需要时仍须释放，否则是泄漏。
++
++继续：[Job 依赖与并发安全](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/08-jobs-and-safety/)。深入：[分配器与生命周期](/qmx-Gameknowledge/knowledge/unity-job与burst/01-job系统/05-内存分配器与生命周期/)。参考：[Collections 2.5 分配器概览](https://docs.unity3d.com/Packages/com.unity.collections@2.5/manual/allocator-overview.html)。
+--- /dev/null
++++ b/08-jobs-and-safety.md
+@@ -0,0 +1,58 @@
++---
++title: "8. Job 依赖与并发安全"
++description: "通过读写矩阵、依赖链和释放顺序解释 Job 如何安全共享 Native 内存。"
++sidebar:
++  order: 8
++---
++
++## Job 可以共享数据，但访问不能冲突
++
++| 同一底层存储上的访问 | 是否能同时进行 |
++| --- | --- |
++| 多个只读者 | 通常可以，需按 API 正确声明只读 |
++| 写者与读者 | 通常需要依赖，保证写入完成后再读 |
++| 多个写者 | 需要依赖，或采用有明确保证的并行写入方式 |
++| 释放与任何访问 | 不可以；先结束全部使用者 |
++
++数据竞争指缺乏适当同步的并发冲突访问。例如一边写密度，一边读取尚未完成的元素，结果随执行时序变化。
++
++## 调度会复制 Job 结构体
++
++普通数值字段复制后，Job 修改自己的字段，不会自动回写主线程的 Job 变量。Native 容器字段也会复制，但它复制的是句柄，因此 Job 可以读写共享的底层数据。输出通常应放在输出容器中。
++
++`[ReadOnly]` 声明 Job 对字段的访问权限，不会生成数据快照，不会延长底层数据寿命。
++
++## 依赖表达先后关系
++
++```csharp
++// 示意：两个 Job 的具体类型和数据字段由调用方定义。
++JobHandle sampled = sampleJob.Schedule();
++JobHandle packed = packJob.Schedule(sampled);
++packed.Complete();
++// 现在才能在主线程读取本条链的结果，或释放不再使用的工作区。
++```
++
++Schedule 提交工作，并不保证返回时已经执行完。Complete 等待该句柄覆盖的工作及其依赖，并完成访问权相关的收尾。仅看到 IsCompleted 为 true，仍应按契约调用 Complete 后再从主线程取回数据。
++
++如果两个分支都借用了同一数据，应合并最后使用者的依赖，或者分别完成。只等待其中一个分支，不足以安全释放共享输入。
++
++## 并行写不同索引也有规则
++
++`IJobParallelFor.Execute(index)` 默认允许写入当前迭代对应的元素。数学上两个任务写不同元素，不代表任意 Native 容器和访问方式都自动被安全系统接受。可使用规定的并行写入接口、分阶段输出再合并，或重新设计数据分区。
++
++随意关闭安全检查并不能消除竞态。原子操作也只解决规定操作的同步，不自动保证整个业务流程正确。
++
++## 两种释放方式
++
++- 同步：完成全部相关 Job，消费结果，然后 Dispose。
++- 调度释放：对支持该重载的容器调用 `Dispose(lastUseHandle)`，得到释放 Job 的句柄；之后原容器和别名都不能继续访问，并应跟踪返回的句柄。
++
++第二种方式适用于已经不需要主线程读取的资源。把释放调度到生产 Job 之后，再尝试读取输出，就是错误的顺序。
++
++## 自测
++
++**问：两个 Job 都读取密度图，是否必须串行？** 答：通常不必，声明只读并保证图在全部读者结束前有效。
++
++**问：完成采样 Job 就能释放打包 Job 的输入吗？** 答：不能，还要等最后一个消费者完成。
++
++继续：[密度采样实践与排错](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/09-density-lab/)。深入：[调度与依赖](/qmx-Gameknowledge/knowledge/unity-job与burst/01-job系统/03-调度与jobhandle依赖/)、[安全系统与竞争条件](/qmx-Gameknowledge/knowledge/unity-job与burst/01-job系统/06-安全系统与竞争条件/)。
+--- /dev/null
++++ b/09-density-lab.md
+@@ -0,0 +1,148 @@
++---
++title: "9. 密度采样实践与排错"
++description: "用一个完整的双 Job 示例练习分配、依赖、读取与释放，并给出观测、自测和进阶路线。"
++sidebar:
++  order: 9
++---
++
++## 练习目标
++
++用同一个简单密度公式先写托管版本，再写 Job 版本。比较结果是否一致，再观察分配和执行时间。公式刻意简单，教学重点是生命周期，不代表真实地形质量。
++
++## 可以放进脚本的完整示例
++
++将下列内容保存为 `DensityMemoryLesson.cs`。项目需要已启用 Job、Collections 和 Burst 支持。在组件菜单执行“运行内存练习”，预期打印 `solid=127`。此处是待自行运行的练习预期，本专题没有实际 Unity 运行记录。
++
++```csharp
++using Unity.Burst;
++using Unity.Collections;
++using Unity.Jobs;
++using UnityEngine;
++
++/// <summary>演示采样、消费与原生工作区的同步释放，不承担世界生成调度。</summary>
++public sealed class DensityMemoryLesson : MonoBehaviour
++{
++    [BurstCompile]
++    private struct SampleJob : IJobParallelFor
++    {
++        public NativeArray<float> Density;
++
++        /// <summary>每次迭代只写当前索引，避免迭代之间争用输出。</summary>
++        public void Execute(int index)
++        {
++            Density[index] = index - 128f;
++        }
++    }
++
++    [BurstCompile]
++    private struct CountJob : IJob
++    {
++        [ReadOnly] public NativeArray<float> Density;
++        public NativeArray<int> SolidCount;
++
++        /// <summary>在完整采样结果上计数；零密度按本练习约定不计入实体。</summary>
++        public void Execute()
++        {
++            int count = 0;
++            for (int i = 0; i < Density.Length; i++)
++            {
++                if (Density[i] > 0f)
++                    count++;
++            }
++            SolidCount[0] = count;
++        }
++    }
++
++    /// <summary>在同次同步调用内完成全部 Job，finally 负责回收已创建资源。</summary>
++    [ContextMenu("运行内存练习")]
++    private void RunLesson()
++    {
++        NativeArray<float> density = default;
++        NativeArray<int> count = default;
++        JobHandle lastUse = default;
++
++        try
++        {
++            density = new NativeArray<float>(256, Allocator.TempJob);
++            count = new NativeArray<int>(1, Allocator.TempJob);
++
++            // 每次成功调度后立即保存句柄；后续调度失败仍能等待已启动的工作。
++            lastUse = new SampleJob { Density = density }.Schedule(256, 32);
++            lastUse = new CountJob
++            {
++                Density = density,
++                SolidCount = count
++            }.Schedule(lastUse);
++
++            lastUse.Complete();
++            Debug.Log($"solid={count[0]}");
++        }
++        finally
++        {
++            // 正常与调度异常路径都先等待，再释放；这些句柄仅由本函数持有。
++            lastUse.Complete();
++            if (count.IsCreated)
++                count.Dispose();
++            if (density.IsCreated)
++                density.Dispose();
++        }
++    }
++}
++```
++
++这个例子在同次调用中同步等待，因此采用 TempJob。真实跨帧流水线不能直接照搬：需要操作对象保存句柄、拥有资源、处理取消，并选择合适分配器。Job 执行本身发生致命错误的恢复也不能仅靠教学示例保证。
++
++日志会有托管分配，不能用这段带日志的演示宣称“零 GC”。两个 Job 很小，调度开销可能超过并行收益，也不能据此宣称性能提升。
++
++## 生命周期图
++
++```text
++主线程分配 density、count
++          ↓
++SampleJob 写 density
++          ↓ 依赖
++CountJob 读 density、写 count
++          ↓ Complete
++主线程读取 count[0]
++          ↓
++Dispose count、density
++```
++
++## 逐步实验与验收
++
++| 实验 | 操作 | 应验证的现象 |
++| --- | --- | --- |
++| 托管基线 | float[256] 按相同公式填充并计数 | 实体数量为 127 |
++| Job 对照 | 运行上面的组件 | 同输入实体数量仍为 127 |
++| 句柄共享 | 独立小例中复制 NativeArray 并通过副本写一个元素 | 原句柄读取到相同写入；只释放一次 |
++| 调度依赖 | 在安全检查开启的独立实验中移除消费者依赖 | 通常在调度或访问时报告冲突；具体报错随版本变化 |
++| 异常清理 | 在成功调度采样后、调度计数前主动抛出托管异常 | finally 等待采样后释放资源 |
++| 性能观察 | 去掉日志，增大输入，预热并重复测量 | 分开记录 GC.Alloc、Job 耗时、等待与总耗时 |
++
++错误实验只在隔离的教学场景和开启安全检查的环境中进行；关闭检查时没有报错不代表代码正确。
++
++## 排错顺序
++
++1. 写资源表：每项分配的所有者、全部读者/写者和最后使用句柄。
++2. 查别名：是否复制过 NativeArray，保存过 AsArray 或 Slice。
++3. 查时序：结果读取、释放、扩容是否发生在使用者结束之前。
++4. 查期限：TempJob 是否跨越四帧，取消后是否仍保留未释放资源。
++5. 查发布：任务失败时是否错误地把部分结果交给展示层。
++6. 最后测性能，区分分配成本、数据复制、计算与同步等待。
++
++## 自测与下一步
++
++**问：为何 count 是 NativeArray<int>，不直接把 int 放进 Job？** 答：Job 结构体按值复制，普通 int 字段不会自动回写调用方；容器提供共享输出。
++
++**问：为什么最后要等 CountJob 才能释放 density？** 答：它是 density 的消费者，采样结束只说明写入完成。
++
++完成后进入 [Job/Burst 学习路线](/qmx-Gameknowledge/knowledge/unity-job与burst/00-导读/01-学习路线与版本说明/)。指针、Marshal、SafeHandle、池化、自定义分配器和原子操作按项目需要学习，不必作为理解 NativeArray 的前置门槛。
++
++## 官方资料
++
++- [C# 类型系统](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/types/)
++- [C# 非托管类型](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/builtin-types/unmanaged-types)
++- [GC 基础](https://learn.microsoft.com/zh-cn/dotnet/standard/garbage-collection/fundamentals)（涉及具体回收器时区分 .NET 与 Unity）
++- [Unity Job System 的 NativeContainer](https://docs.unity3d.com/6000.0/Documentation/Manual/JobSystemNativeContainer.html)
++- [Collections 2.5 分配器概览](https://docs.unity3d.com/Packages/com.unity.collections@2.5/manual/allocator-overview.html)
++- [Burst 1.8 手册](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html)
+--- /dev/null
++++ b/目录.md
+@@ -0,0 +1,45 @@
++---
++title: "C# 与 Unity 内存基础专题"
++description: "从变量和复制开始，串联托管内存、GC、Native 容器、Allocator 与 Job 生命周期。"
++sidebar:
++  order: 0
++---
++
++> 适用范围：C# 基础语义与 Unity Job/Burst 入门。原生容器示例以 Unity 6、Collections 2.x 的常用 API 为参照；不同编辑器、后端和包版本需查对应文档。本文不把 CoreCLR 的实现细节视为所有 Unity 后端的保证。示例是教学代码，本专题未进行 Unity 编译或性能实测。
++
++## 这个专题解决什么问题
++
++看到 `NativeArray<float>`、`Allocator.Persistent` 和 `JobHandle` 时，先不用钻进指针或汇编。先能回答：数据在哪里，赋值复制了什么，谁能读写，什么时候失效，谁负责释放。
++
++这里从基础概念串起完整过程。已有 [C# 底层专栏](/qmx-Gameknowledge/knowledge/csharp底层专栏/目录/) 深入运行时实现；[Unity Job 与 Burst](/qmx-Gameknowledge/knowledge/unity-job与burst/目录/) 深入 API、调度与优化。本专题承担它们的入门前置，章节末尾给出深入链接。
++
++## 阅读路线
++
++| 顺序 | 章节 | 读完要能解释 |
++| --- | --- | --- |
++| 1 | [变量、存储与内存地图](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/01-memory-map/) | 变量、对象、引用、栈、堆分别是什么 |
++| 2 | [类型、赋值与参数传递](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/02-types-and-copy/) | 值类型与引用类型究竟复制什么 |
++| 3 | [托管、非托管与运行后端](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/03-managed-and-unmanaged/) | unmanaged 为什么不等于原生分配 |
++| 4 | [GC、隐藏分配与测量](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/04-gc-and-allocation/) | 不可达、回收和资源释放有什么区别 |
++| 5 | [容器、容量与数据布局](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/05-containers-and-layout/) | 数组、列表、视图和深拷贝如何区分 |
++| 6 | [所有权、借用与释放](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/06-ownership-and-disposal/) | 怎样避免泄漏、重复释放和悬空访问 |
++| 7 | [Native 容器与 Allocator](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/07-native-and-allocator/) | 分配器、容器句柄和底层数据怎样配合 |
++| 8 | [Job 依赖与并发安全](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/08-jobs-and-safety/) | 共享何时安全，为什么 Complete 后再释放 |
++| 9 | [密度采样实践与排错](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/09-density-lab/) | 把分配、计算、消费、释放连成完整生命周期 |
++
++第一轮按顺序读；第二轮结合项目画资源表。指针、fixed、P/Invoke、自定义分配器、无锁算法放到后续扩展。
++
++## 先区分四个维度
++
++| 维度 | 分类例子 | 它回答什么 |
++| --- | --- | --- |
++| 类型与复制语义 | 值类型 / 引用类型 | 赋值和传参复制什么 |
++| 类型内部是否含托管引用 | 非托管类型 / 含托管引用的类型 | 能否满足 unmanaged 约束 |
++| 存储与分配 | 栈、托管堆、原生分配 | 数据实际存放在哪里 |
++| 生命周期与访问权 | GC、所有者释放、借用、Job 依赖 | 谁能用、何时可回收 |
++
++这些维度不能混为一谈：`NativeArray<T>` 是值类型句柄，却共享原生数据；`struct` 可以包含 `string`；`int` 字段也可以位于托管对象内部。
++
++## 学习验收
++
++每章都有自测。完成最后一章后，你应能独立解释三种行为：普通数组赋值共享对象、NativeArray 赋值共享底层分配、Job 完成后由唯一所有者释放资源。再用 Profiler 验证真实项目中的分配和等待，避免把“感觉更底层”当作优化证据。
