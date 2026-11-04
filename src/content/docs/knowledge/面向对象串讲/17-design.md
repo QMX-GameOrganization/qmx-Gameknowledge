@@ -1,8 +1,8 @@
 ---
-title: "8. 从需求变化判断设计好坏"
+title: "17. 从需求变化判断设计好坏"
 description: "让设计原则落在具体修改范围、测试边界和数据导向取舍上，避免过度设计。"
 sidebar:
-  order: 9
+  order: 18
 ---
 
 ## 用三个变更请求检查设计
@@ -38,7 +38,7 @@ sidebar:
 测试时可以传入一个很简单的假技能，检查流程是否真的调用了它：
 
 ```cpp
-// 接口与第 9 章完整例子一致；需要先引入 Skill、Actor、ostream。
+// 接口与第 18 章完整例子一致；需要先引入 Skill、Actor、ostream。
 class CountingSkill final : public Skill {
 public:
     explicit CountingSkill(int& calls) : calls_(calls) {}
@@ -66,4 +66,4 @@ private:
 
 **练习：** 设计一个火球数值配置，要求改伤害不新增类；再设计一个治疗技能，要求不改战斗循环。解释为什么两种需求采用不同扩展方式。
 
-下一章：[完整实践：可扩展战斗技能](../09-battle-lab/)。
+下一章：[完整实践：可扩展战斗技能](../18-battle-lab/)。

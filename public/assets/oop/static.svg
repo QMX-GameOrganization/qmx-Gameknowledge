@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">static：实例独立，共享数据集中一份</title><desc id="desc">累计创建数不是存活数；静态成员函数没有隐含 this。。初始化线程安全不等于修改共享计数线程安全。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">static：实例独立，共享数据集中一份</text>
+<text x="32" y="77" font-size="17" fill="#495b73">累计创建数不是存活数；静态成员函数没有隐含 this。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">Actor a</text>
+<text x="48" y="170" font-size="17" fill="#23364e">独立 id_ = 1</text>
+<text x="48" y="196" font-size="17" fill="#23364e">独立 hp_ = 100</text>
+<text x="48" y="222" font-size="17" fill="#23364e">a 的生命值可单独改变</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">Actor 类型共享</text>
+<text x="374" y="170" font-size="17" fill="#23364e">inline static created_ = 2</text>
+<text x="374" y="196" font-size="17" fill="#23364e">a 与 b 使用同一份计数</text>
+<text x="374" y="222" font-size="17" fill="#23364e">不存入每个实例各一份</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">Actor b</text>
+<text x="700" y="170" font-size="17" fill="#23364e">独立 id_ = 2</text>
+<text x="700" y="196" font-size="17" fill="#23364e">独立 hp_ = 100</text>
+<text x="700" y="222" font-size="17" fill="#23364e">b 销毁不减少累计数</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">普通成员函数</text>
+<text x="48" y="346" font-size="17" fill="#23364e">有隐含 this</text>
+<text x="48" y="372" font-size="17" fill="#23364e">通过当前对象访问成员</text>
+<text x="48" y="398" font-size="17" fill="#23364e">可声明为 const 成员</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">静态成员函数</text>
+<text x="374" y="346" font-size="17" fill="#23364e">Actor::totalCreated()</text>
+<text x="374" y="372" font-size="17" fill="#23364e">没有隐含 this</text>
+<text x="374" y="398" font-size="17" fill="#23364e">不能是 const 或 virtual</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">其他位置的 static</text>
+<text x="700" y="346" font-size="17" fill="#23364e">局部：跨调用保留对象</text>
+<text x="700" y="372" font-size="17" fill="#23364e">文件作用域：内部链接</text>
+<text x="700" y="398" font-size="17" fill="#23364e">不要与类共享成员混淆</text>
+<text x="32" y="512" font-size="16" fill="#495b73">初始化线程安全不等于修改共享计数线程安全。</text></g></svg>

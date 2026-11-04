@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">构造先准备依赖，析构反向结束</title><desc id="desc">普通单继承示例：Elite : public Actor，并组合 Equipment。。存在虚基类或多基类时，应继续按对应规则展开。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">构造先准备依赖，析构反向结束</text>
+<text x="32" y="77" font-size="17" fill="#495b73">普通单继承示例：Elite : public Actor，并组合 Equipment。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">① Actor 基类</text>
+<text x="48" y="170" font-size="17" fill="#23364e">先执行基类构造</text>
+<text x="48" y="196" font-size="17" fill="#23364e">初始化基类状态</text>
+<text x="48" y="222" font-size="17" fill="#23364e">派生体还没开始工作</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">② Equipment 成员</text>
+<text x="374" y="170" font-size="17" fill="#23364e">按成员声明顺序构造</text>
+<text x="374" y="196" font-size="17" fill="#23364e">不按初始化列表排列</text>
+<text x="374" y="222" font-size="17" fill="#23364e">成员已经准备好</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">③ Elite 构造体</text>
+<text x="700" y="170" font-size="17" fill="#23364e">最后执行派生函数体</text>
+<text x="700" y="196" font-size="17" fill="#23364e">可使用基类与成员</text>
+<text x="700" y="222" font-size="17" fill="#23364e">完整派生对象建立</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">④ Elite 析构体</text>
+<text x="48" y="346" font-size="17" fill="#23364e">先执行派生清理代码</text>
+<text x="48" y="372" font-size="17" fill="#23364e">此时成员尚在</text>
+<text x="48" y="398" font-size="17" fill="#23364e">然后进入自动清理</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">⑤ Equipment 析构</text>
+<text x="374" y="346" font-size="17" fill="#23364e">成员按声明逆序销毁</text>
+<text x="374" y="372" font-size="17" fill="#23364e">结束其资源责任</text>
+<text x="374" y="398" font-size="17" fill="#23364e">不手工重复析构成员</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">⑥ Actor 析构</text>
+<text x="700" y="346" font-size="17" fill="#23364e">最后结束基类部分</text>
+<text x="700" y="372" font-size="17" fill="#23364e">基类指针删除另有契约</text>
+<text x="700" y="398" font-size="17" fill="#23364e">需要时使用虚析构</text>
+<text x="32" y="512" font-size="16" fill="#495b73">存在虚基类或多基类时，应继续按对应规则展开。</text></g></svg>

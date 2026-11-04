@@ -1,20 +1,44 @@
 ---
-title: "6. 虚函数、接口与动态多态"
+title: "13. 虚函数与动态多态"
 description: "从真实调用过程理解 virtual、override、纯虚函数、动态类型、虚析构和虚表的边界。"
 sidebar:
-  order: 7
+  order: 14
 ---
 
 ## 调用代码怎么做到不认识每一种技能
 
+现在不急着用纯虚接口，先用一个可实例化基类对比普通调用和虚调用。下面是完整程序：
+
 ```cpp
-// Skill、Actor 的定义沿用前章；这里强调借用和分派。
-void perform(const Skill& skill, Actor& target) {
-    skill.cast(target);
+#include <iostream>
+
+// 普通 label 按静态类型选择；虚 cast 可由实际技能重写。
+class Skill {
+public:
+    virtual ~Skill() = default;
+    const char* label() const { return "Skill"; }
+    virtual void cast() const { std::cout << "Default\n"; }
+};
+
+class Fireball final : public Skill {
+public:
+    const char* label() const { return "Fireball"; }
+    void cast() const override { std::cout << "Fireball\n"; }
+};
+
+// 使用方只借用接口，不检查具体类型名字。
+void perform(const Skill& skill) {
+    std::cout << skill.label() << '\n';
+    skill.cast();
+}
+
+int main() {
+    Fireball fireball;
+    perform(fireball); // 依次输出 Skill、Fireball。
 }
 ```
 
-`perform` 编译时只知道 `Skill` 的接口。传入火球就执行火球的实现，传入治疗就执行治疗的实现。`skill` 的静态类型是 `const Skill&`，它所引用对象的动态类型可以是 `Fireball` 或其他派生类型。**通过基类指针或引用进行虚调用，才是这里要观察的动态多态。**
+`perform` 编译时只知道 Skill 的接口。非虚 label 选择 Skill 版本，虚 cast 进入 Fireball 版本。`skill` 的静态类型是 `const Skill&`，所引用对象的动态类型是 Fireball。**通过基类指针或引用进行虚调用，才是这里观察的动态多态。** 后面增加治疗实现时，调用方仍可使用相同形式。
 
 ![基类引用指向不同派生对象，虚调用进入各自 cast 实现](/qmx-Gameknowledge/assets/oop/dispatch.svg)
 
@@ -59,6 +83,6 @@ std::unique_ptr<Skill> skill = std::make_unique<Fireball>();
 
 动态多态的价值是把“使用行为”与“选择具体实现”分开，不是自动提升性能。若大量同质数据逐项虚调用成为瓶颈，先测量，再考虑按类型分组、批处理或数据布局调整。
 
-**自测：** 把参数写成 `Skill skill` 为什么不行？抽象类不能按值构造；即便基类可实例化，按值接收派生对象也会发生切片。下一章展开。
+**自测：** 将 perform 参数改成 `Skill skill` 会怎样？本章基类可实例化，但按值接收会切片，两次输出都按新的 Skill 对象执行。下一章再把基类改成抽象接口，届时连这种按值创建都不允许。
 
-下一章：[重载、重写与对象模型陷阱](../07-pitfalls/)。
+下一章：[纯虚函数、抽象类与虚析构](../14-abstract-interfaces/)。

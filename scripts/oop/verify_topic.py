@@ -31,11 +31,15 @@ def main():
             checked += 1
     for svg in (ROOT / "public/assets/oop").glob("*.svg"):
         ET.parse(svg)
-    for chapter, source, lang in [("09-battle-lab.md", "battle.cpp", "cpp"), ("10-csharp-bridge.md", "Battle.cs", "csharp")]:
+    for chapter, source, lang in [("18-battle-lab.md", "battle.cpp", "cpp")]:
         text = (DOCS / chapter).read_text(encoding="utf-8")
         expected = (ROOT / "public/examples/oop" / source).read_text(encoding="utf-8").strip()
         assert f"```{lang}\n{expected}\n```" in text, f"example drift: {source}"
-    print(f"PASS: 13 pages, 10 valid SVGs, {checked} local links, 2 synchronized examples")
+    pages = sorted(DOCS.glob("[0-9][0-9]-*.md"))
+    assert [int(p.name[:2]) for p in pages] == list(range(20)), "chapter sequence must be 00 through 19"
+    for current, following in zip(pages, pages[1:]):
+        assert f"../{following.stem}/" in current.read_text(encoding="utf-8"), f"missing next-chapter link: {current.name}"
+    print(f"PASS: {len(pages)+1} pages, {len(list((ROOT / 'public/assets/oop').glob('*.svg')))} valid SVGs, {checked} local links, 1 synchronized example; chapter order 00-19 verified")
 
 
 if __name__ == "__main__":

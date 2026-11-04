@@ -23,20 +23,20 @@
 <text x="700" y="196" font-size="17" fill="#23364e">技能提供可替换行为</text>
 <text x="700" y="222" font-size="17" fill="#23364e">流程控制施放顺序</text>
 <rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
-<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">C++ 语义</text>
-<text x="48" y="346" font-size="17" fill="#23364e">值复制 / 移动</text>
-<text x="48" y="372" font-size="17" fill="#23364e">构造 / 析构 / RAII</text>
-<text x="48" y="398" font-size="17" fill="#23364e">拥有 / 借用</text>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">C++ 语法</text>
+<text x="48" y="346" font-size="17" fill="#23364e">访问控制 / this / const</text>
+<text x="48" y="372" font-size="17" fill="#23364e">构造 / 析构 / static</text>
+<text x="48" y="398" font-size="17" fill="#23364e">复制 / 移动 / 继承</text>
 <path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
 <rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
-<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">用需求检验</text>
-<text x="374" y="346" font-size="17" fill="#23364e">添加治疗技能</text>
-<text x="374" y="372" font-size="17" fill="#23364e">保持战斗循环不变</text>
-<text x="374" y="398" font-size="17" fill="#23364e">检查成本和失败边界</text>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">应用层层推进</text>
+<text x="374" y="346" font-size="17" fill="#23364e">先写明白一个角色</text>
+<text x="374" y="372" font-size="17" fill="#23364e">再用不同技能统一调用</text>
+<text x="374" y="398" font-size="17" fill="#23364e">比较相近写法与坑</text>
 <path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
 <rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
-<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">迁移到 C#</text>
-<text x="700" y="346" font-size="17" fill="#23364e">class 赋值复制引用</text>
-<text x="700" y="372" font-size="17" fill="#23364e">GC 与 Dispose 分开</text>
-<text x="700" y="398" font-size="17" fill="#23364e">再连接 Unity 与 ECS</text>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">用需求检验</text>
+<text x="700" y="346" font-size="17" fill="#23364e">添加治疗或护盾</text>
+<text x="700" y="372" font-size="17" fill="#23364e">分析合理修改范围</text>
+<text x="700" y="398" font-size="17" fill="#23364e">测量前不声称性能提升</text>
 <text x="32" y="512" font-size="16" fill="#495b73">目标：说清每个类为何存在，而不只记住三大特性。</text></g></svg>

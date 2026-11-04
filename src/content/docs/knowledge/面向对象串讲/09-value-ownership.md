@@ -1,8 +1,8 @@
 ---
-title: "4. 复制、移动与所有权"
+title: "9. 复制、移动与所有权"
 description: "把 C++ 的对象语义与 STL 容器连接起来，理解 Rule of Zero、智能指针和悬空引用。"
 sidebar:
-  order: 5
+  order: 10
 ---
 
 ## 赋值到底复制了什么
@@ -20,6 +20,48 @@ b.items[0] = "staff"; // 不会修改 a 的字符串。
 编译器生成的复制操作逐个复制成员；`vector<string>` 的复制创建独立的元素。并不能由此推出“类默认都是深拷贝”：若成员是裸指针，默认复制只复制地址；若是 `shared_ptr`，复制的是共享所有权；若是 `unique_ptr`，复制被禁止。
 
 ![值复制、独占所有权移动与非拥有借用的关系图](/qmx-Gameknowledge/assets/oop/ownership.svg)
+
+## 创建副本和给已有对象赋值不是同一个操作
+
+| 写法（以类型 T 为例） | 何时使用 | 常见声明形式 |
+| --- | --- | --- |
+| `T b = a;` | 新对象从已有对象初始化 | `T(const T& other)`，复制构造 |
+| `b = a;` | b 已存在，替换它的状态 | `T& operator=(const T& other)`，复制赋值 |
+| `T b = std::move(a);` | 新对象从可移动来源初始化 | `T(T&& other)`，移动构造 |
+| `b = std::move(a);` | b 已存在，接收可移动来源 | `T& operator=(T&& other)`，移动赋值 |
+
+`T&&` 是这里用于移动操作的右值引用写法，不能当成两个普通引用。具名变量即使类型为右值引用，作为表达式时也通常是左值，所以移动构造内部转移其成员时仍常需要 std::move。模板转发引用另有推导规则，这一阶段不展开。
+
+赋值时接收方已有资源，需要处理旧资源、自赋值和失败路径；构造时还没有一个已存在的完整接收对象。标准库成员通常已经处理相应细节，优先组合它们，而不是先手写裸指针版本。
+
+下面是独立程序，用背包快照验证默认成员复制与独占转移：
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
+
+// 值快照：vector<string> 的复制保留独立元素，无需手写特殊成员。
+struct InventorySnapshot {
+    std::vector<std::string> items;
+};
+
+int main() {
+    InventorySnapshot first{{"sword"}};
+    InventorySnapshot second = first; // 复制构造。
+    second.items[0] = "staff";
+    InventorySnapshot third;
+    third = second;                   // 复制赋值。
+    std::cout << first.items[0] << ' ' << third.items[0] << '\n';
+    auto owner = std::make_unique<std::string>("shield");
+    auto moved = std::move(owner);
+    std::cout << static_cast<bool>(owner) << ' ' << *moved << '\n';
+}
+```
+
+输出 `sword staff`、`0 shield`，各一行。`static_cast<bool>` 是显式转换，用来观察源独占指针是否仍拥有对象；`*moved` 解引用字符串。不要把 unique_ptr 移动后的空状态推广成所有类型移动后都为空。
 
 ## 先确定对象能否被复制，再写语法
 
@@ -39,10 +81,10 @@ b.items[0] = "staff"; // 不会修改 a 的字符串。
 ## std::move 不是移动发动机
 
 ```cpp
-auto first = std::make_unique<Actor>(100);
+auto first = std::make_unique<std::string>("sword");
 // auto copied = first;        // 编译错误：独占所有者不可复制。
 auto second = std::move(first); // 转移所有权；此后 first 为空。
-// 片段需要 <memory>、<utility> 和上一章的 Actor 定义。
+// 片段需要 <memory>、<utility>、<string>，不依赖自定义类。
 ```
 
 `std::move` 本身只是把表达式转换为可供移动操作选择的值类别。真正的资源转移由被调用的移动构造或移动赋值执行，也可能最终发生复制（例如某些 const 对象）。对 `unique_ptr`，移动后源为空；对很多标准库类型，只能一般地依赖“有效但状态未指定”，不能把字符串或 vector 移动后一定为空当普遍规则。自定义类型还要看它自己的移动后契约。
@@ -57,15 +99,15 @@ auto second = std::move(first); // 转移所有权；此后 first 为空。
 
 ```cpp
 // 示意：只表达移动的资源集合，使用默认操作保持成员自身的语义。
-class SkillBook {
+class Backpack {
 public:
-    SkillBook() = default;
-    SkillBook(const SkillBook&) = delete;
-    SkillBook& operator=(const SkillBook&) = delete;
-    SkillBook(SkillBook&&) noexcept = default;
-    SkillBook& operator=(SkillBook&&) noexcept = default;
+    Backpack() = default;
+    Backpack(const Backpack&) = delete;
+    Backpack& operator=(const Backpack&) = delete;
+    Backpack(Backpack&&) noexcept = default;
+    Backpack& operator=(Backpack&&) noexcept = default;
 private:
-    std::vector<std::unique_ptr<Skill>> skills_; // Skill 需先完整定义。
+    std::vector<std::unique_ptr<std::string>> items_;
 };
 ```
 
@@ -79,6 +121,6 @@ private:
 
 共享所有权也有成本：引用计数和复杂的释放时机。两个对象互持 `shared_ptr` 会形成环，外部所有者全放手仍可能无法释放；应把某个观察方向改成 `weak_ptr`，或重新划分唯一所有者。引用计数安全也不意味着对象内容可被多线程无同步修改。
 
-**自测：** 为什么战斗函数只调用技能一次时通常接收 `Skill&`，而不是按值接收 `shared_ptr<Skill>`？因为它通常只需要借用，不需要参与拥有；接口应表达实际责任。
+**自测：** 为什么查看背包内容时通常接收 `const Backpack&`，而不是按值接收 `shared_ptr<Backpack>`？因为它通常只需要借用，不需要参与拥有；接口应表达实际责任。
 
-下一章：[组合、继承与可替换性](../05-composition/)。
+下一章：[运算符重载与 friend](../10-operators-friends/)。
