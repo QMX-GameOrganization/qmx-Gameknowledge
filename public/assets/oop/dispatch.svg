@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">动态多态：同一个调用点，不同实现</title><desc id="desc">静态类型决定可见接口；虚分派选择实际对象的实现。。虚表是常见实现解释；精确布局、开销与优化必须依实现分析。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">动态多态：同一个调用点，不同实现</text>
+<text x="32" y="77" font-size="17" fill="#495b73">静态类型决定可见接口；虚分派选择实际对象的实现。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">perform(const Skill&amp;)</text>
+<text x="48" y="170" font-size="17" fill="#23364e">只知道 Skill 的契约</text>
+<text x="48" y="196" font-size="17" fill="#23364e">调用 skill.cast(target)</text>
+<text x="48" y="222" font-size="17" fill="#23364e">不检查具体技能名字</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">引用真实 Fireball</text>
+<text x="374" y="170" font-size="17" fill="#23364e">动态类型：Fireball</text>
+<text x="374" y="196" font-size="17" fill="#23364e">进入火球的 cast</text>
+<text x="374" y="222" font-size="17" fill="#23364e">使用目标的受伤规则</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">或引用 HealSkill</text>
+<text x="700" y="170" font-size="17" fill="#23364e">动态类型：HealSkill</text>
+<text x="700" y="196" font-size="17" fill="#23364e">进入治疗的 cast</text>
+<text x="700" y="222" font-size="17" fill="#23364e">使用目标的治疗规则</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">virtual</text>
+<text x="48" y="346" font-size="17" fill="#23364e">声明可重写行为</text>
+<text x="48" y="372" font-size="17" fill="#23364e">= 0 表示纯虚函数</text>
+<text x="48" y="398" font-size="17" fill="#23364e">抽象类不能直接实例化</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">override</text>
+<text x="374" y="346" font-size="17" fill="#23364e">检查是否确实重写</text>
+<text x="374" y="372" font-size="17" fill="#23364e">参数和 const 要匹配</text>
+<text x="374" y="398" font-size="17" fill="#23364e">不是同名就一定重写</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">virtual ~Skill()</text>
+<text x="700" y="346" font-size="17" fill="#23364e">支持通过基类删除</text>
+<text x="700" y="372" font-size="17" fill="#23364e">unique_ptr&lt;Skill&gt; 可拥有</text>
+<text x="700" y="398" font-size="17" fill="#23364e">分派不能修复悬空访问</text>
+<text x="32" y="512" font-size="16" fill="#495b73">虚表是常见实现解释；精确布局、开销与优化必须依实现分析。</text></g></svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">生命周期：先构造，后使用，逆序清理</title><desc id="desc">作用域退出和异常展开，都应由已构造的资源对象承担清理。。局部 vector 的控制对象与动态元素存储可能在不同区域。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">生命周期：先构造，后使用，逆序清理</text>
+<text x="32" y="77" font-size="17" fill="#495b73">作用域退出和异常展开，都应由已构造的资源对象承担清理。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">进入外层</text>
+<text x="48" y="170" font-size="17" fill="#23364e">构造 outer</text>
+<text x="48" y="196" font-size="17" fill="#23364e">资源开始由它负责</text>
+<text x="48" y="222" font-size="17" fill="#23364e">进入内部作用域</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">进入内层</text>
+<text x="374" y="170" font-size="17" fill="#23364e">构造 inner</text>
+<text x="374" y="196" font-size="17" fill="#23364e">执行 work</text>
+<text x="374" y="222" font-size="17" fill="#23364e">准备离开内部作用域</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">正常退出</text>
+<text x="700" y="170" font-size="17" fill="#23364e">先析构 inner</text>
+<text x="700" y="196" font-size="17" fill="#23364e">执行 after</text>
+<text x="700" y="222" font-size="17" fill="#23364e">最后析构 outer</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">某成员构造失败</text>
+<text x="48" y="346" font-size="17" fill="#23364e">当前完整对象尚未完成</text>
+<text x="48" y="372" font-size="17" fill="#23364e">不会执行其完整析构</text>
+<text x="48" y="398" font-size="17" fill="#23364e">异常向外传播</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">已构造部分清理</text>
+<text x="374" y="346" font-size="17" fill="#23364e">已完成的成员逆序析构</text>
+<text x="374" y="372" font-size="17" fill="#23364e">已完成的基类析构</text>
+<text x="374" y="398" font-size="17" fill="#23364e">成员 RAII 接管资源</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">调用方处理失败</text>
+<text x="700" y="346" font-size="17" fill="#23364e">catch 决定是否恢复</text>
+<text x="700" y="372" font-size="17" fill="#23364e">不要依赖手工 delete</text>
+<text x="700" y="398" font-size="17" fill="#23364e">强制终止不是普通退出</text>
+<text x="32" y="512" font-size="16" fill="#495b73">局部 vector 的控制对象与动态元素存储可能在不同区域。</text></g></svg>

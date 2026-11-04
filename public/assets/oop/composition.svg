@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">继承与组合：按契约和变化维度判断</title><desc id="desc">不要仅为了复用字段，把所有特性塞进一棵继承树。。可替换性支持公共继承；独立组合的能力通常适合成员协作。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">继承与组合：按契约和变化维度判断</text>
+<text x="32" y="77" font-size="17" fill="#495b73">不要仅为了复用字段，把所有特性塞进一棵继承树。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">继承堆特性</text>
+<text x="48" y="170" font-size="17" fill="#23364e">Enemy → FlyingEnemy</text>
+<text x="48" y="196" font-size="17" fill="#23364e">→ FireFlyingEnemy</text>
+<text x="48" y="222" font-size="17" fill="#23364e">→ RangedFireFlyingEnemy</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">组合数量增长</text>
+<text x="374" y="170" font-size="17" fill="#23364e">再加冰属性怎么办？</text>
+<text x="374" y="196" font-size="17" fill="#23364e">地面远程又要复制分支</text>
+<text x="374" y="222" font-size="17" fill="#23364e">共同规则容易散落</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">先拆变化维度</text>
+<text x="700" y="170" font-size="17" fill="#23364e">移动方式</text>
+<text x="700" y="196" font-size="17" fill="#23364e">技能与装备</text>
+<text x="700" y="222" font-size="17" fill="#23364e">属性配置</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">Actor has-an Armor</text>
+<text x="48" y="346" font-size="17" fill="#23364e">角色组合护甲</text>
+<text x="48" y="372" font-size="17" fill="#23364e">拥有或借用要说明</text>
+<text x="48" y="398" font-size="17" fill="#23364e">角色不是护甲的一种</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">Actor has Skills</text>
+<text x="374" y="346" font-size="17" fill="#23364e">同一角色替换技能</text>
+<text x="374" y="372" font-size="17" fill="#23364e">独立配置数值</text>
+<text x="374" y="398" font-size="17" fill="#23364e">不靠深继承扩展特性</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">Fireball is-a Skill</text>
+<text x="700" y="346" font-size="17" fill="#23364e">满足施放契约</text>
+<text x="700" y="372" font-size="17" fill="#23364e">可被调用方当技能使用</text>
+<text x="700" y="398" font-size="17" fill="#23364e">不能偷偷加强前置要求</text>
+<text x="32" y="512" font-size="16" fill="#495b73">可替换性支持公共继承；独立组合的能力通常适合成员协作。</text></g></svg>

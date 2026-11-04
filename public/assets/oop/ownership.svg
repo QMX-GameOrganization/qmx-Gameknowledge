@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">所有权与借用：先问谁负责释放</title><desc id="desc">箭头表达语义关系，不代表某个 ABI 的字段布局。。有地址 ≠ 有所有权；能访问 ≠ 可以释放；只读 ≠ 自动延长寿命。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">所有权与借用：先问谁负责释放</text>
+<text x="32" y="77" font-size="17" fill="#495b73">箭头表达语义关系，不代表某个 ABI 的字段布局。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">值复制</text>
+<text x="48" y="170" font-size="17" fill="#23364e">Inventory a</text>
+<text x="48" y="196" font-size="17" fill="#23364e">Inventory b = a</text>
+<text x="48" y="222" font-size="17" fill="#23364e">各自拥有 vector&lt;string&gt;</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">独占移动</text>
+<text x="374" y="170" font-size="17" fill="#23364e">unique_ptr first 拥有对象</text>
+<text x="374" y="196" font-size="17" fill="#23364e">second = move(first)</text>
+<text x="374" y="222" font-size="17" fill="#23364e">此后 first 为空</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">非拥有借用</text>
+<text x="700" y="170" font-size="17" fill="#23364e">Actor&amp; / const Actor&amp;</text>
+<text x="700" y="196" font-size="17" fill="#23364e">不负责 delete</text>
+<text x="700" y="222" font-size="17" fill="#23364e">原对象必须仍然存活</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">vector&lt;Actor&gt;</text>
+<text x="48" y="346" font-size="17" fill="#23364e">扩容可搬移元素</text>
+<text x="48" y="372" font-size="17" fill="#23364e">旧地址可能失效</text>
+<text x="48" y="398" font-size="17" fill="#23364e">不能只看下标没变化</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">vector&lt;unique_ptr&lt;Actor&gt;&gt;</text>
+<text x="374" y="346" font-size="17" fill="#23364e">扩容搬移拥有指针</text>
+<text x="374" y="372" font-size="17" fill="#23364e">角色本体通常不搬移</text>
+<text x="374" y="398" font-size="17" fill="#23364e">删除所有者仍让借用失效</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">共享也有契约</text>
+<text x="700" y="346" font-size="17" fill="#23364e">shared_ptr 延长寿命</text>
+<text x="700" y="372" font-size="17" fill="#23364e">weak_ptr 只观察</text>
+<text x="700" y="398" font-size="17" fill="#23364e">引用计数不保护对象内容</text>
+<text x="32" y="512" font-size="16" fill="#495b73">有地址 ≠ 有所有权；能访问 ≠ 可以释放；只读 ≠ 自动延长寿命。</text></g></svg>

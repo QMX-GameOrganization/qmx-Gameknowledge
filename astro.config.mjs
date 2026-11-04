@@ -56,9 +56,11 @@ export default defineConfig({
         href: "https://github.com/QMX-GameOrganization/qmx-Gameknowledge"
       }],
       sidebar: [
-        { label: "知识库", autogenerate: { directory: "knowledge" } },
-        { label: "项目文章", autogenerate: { directory: "projects" } },
-        { label: "使用指南", autogenerate: { directory: "guide" } }
+        { label: "主页", link: "/" },
+        // 收起自动生成的各级目录；阅读文章时仍展开当前路径，便于定位。
+        { label: "知识库", collapsed: true, autogenerate: { directory: "knowledge" } },
+        { label: "项目文章", collapsed: true, autogenerate: { directory: "projects" } },
+        { label: "使用指南", collapsed: true, autogenerate: { directory: "guide" } }
       ]
     })
   ]

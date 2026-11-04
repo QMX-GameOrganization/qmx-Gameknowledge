@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">先分清名字、类型与对象</title><desc id="desc">从熟悉的变量出发，一次只增加一层语法。。:: 限定名字所属范围；. 访问某个对象的成员。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">先分清名字、类型与对象</text>
+<text x="32" y="77" font-size="17" fill="#495b73">从熟悉的变量出发，一次只增加一层语法。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">int hp = 100</text>
+<text x="48" y="170" font-size="17" fill="#23364e">int：类型</text>
+<text x="48" y="196" font-size="17" fill="#23364e">hp：变量</text>
+<text x="48" y="222" font-size="17" fill="#23364e">100：初始值</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">namespace Game</text>
+<text x="374" y="170" font-size="17" fill="#23364e">给名字划分区域</text>
+<text x="374" y="196" font-size="17" fill="#23364e">Game::Score 指定来源</text>
+<text x="374" y="222" font-size="17" fill="#23364e">不创建游戏对象</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">enum class RoundState</text>
+<text x="700" y="170" font-size="17" fill="#23364e">定义有限选项的类型</text>
+<text x="700" y="196" font-size="17" fill="#23364e">RoundState::Ready 是值</text>
+<text x="700" y="222" font-size="17" fill="#23364e">不自动实现状态行为</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">class Score</text>
+<text x="48" y="346" font-size="17" fill="#23364e">定义自己的类型</text>
+<text x="48" y="372" font-size="17" fill="#23364e">public：可用的操作</text>
+<text x="48" y="398" font-size="17" fill="#23364e">private：内部状态</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">Score a; Score b;</text>
+<text x="374" y="346" font-size="17" fill="#23364e">创建两个独立对象</text>
+<text x="374" y="372" font-size="17" fill="#23364e">a.addOne() 修改 a</text>
+<text x="374" y="398" font-size="17" fill="#23364e">b 的分数不受影响</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">再学习生命周期</text>
+<text x="700" y="346" font-size="17" fill="#23364e">构造：建立初始状态</text>
+<text x="700" y="372" font-size="17" fill="#23364e">析构：结束对象寿命</text>
+<text x="700" y="398" font-size="17" fill="#23364e">后续逐步引入，不预设基础</text>
+<text x="32" y="512" font-size="16" fill="#495b73">:: 限定名字所属范围；. 访问某个对象的成员。</text></g></svg>

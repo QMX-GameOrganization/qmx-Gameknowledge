@@ -1,0 +1,2325 @@
+diff --git a/public/assets/oop/architecture.svg b/public/assets/oop/architecture.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/architecture.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">稳定流程与变化点分开</title><desc id="desc">注册处认识具体类型，使用处依赖行为契约。。开闭原则保护稳定边界，不承诺新增功能零修改。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">稳定流程与变化点分开</text>
++<text x="32" y="77" font-size="17" fill="#495b73">注册处认识具体类型，使用处依赖行为契约。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">组装 main</text>
++<text x="48" y="170" font-size="17" fill="#23364e">选择 DamageSkill</text>
++<text x="48" y="196" font-size="17" fill="#23364e">选择 HealSkill</text>
++<text x="48" y="222" font-size="17" fill="#23364e">用 unique_ptr 持有</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">调度 runRound</text>
++<text x="374" y="170" font-size="17" fill="#23364e">顺序借用每个 Skill</text>
++<text x="374" y="196" font-size="17" fill="#23364e">不按技能名字分支</text>
++<text x="374" y="222" font-size="17" fill="#23364e">不拥有目标和日志流</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">契约 Skill</text>
++<text x="700" y="170" font-size="17" fill="#23364e">cast(Actor&amp;, ostream&amp;)</text>
++<text x="700" y="196" font-size="17" fill="#23364e">具体技能提供效果</text>
++<text x="700" y="222" font-size="17" fill="#23364e">公开虚析构负责正确销毁</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">数值变化</text>
++<text x="48" y="346" font-size="17" fill="#23364e">20 → 50</text>
++<text x="48" y="372" font-size="17" fill="#23364e">修改配置参数</text>
++<text x="48" y="398" font-size="17" fill="#23364e">不新建一个伤害子类</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">行为变化</text>
++<text x="374" y="346" font-size="17" fill="#23364e">攻击 → 治疗</text>
++<text x="374" y="372" font-size="17" fill="#23364e">新增实现 + 组装注册</text>
++<text x="374" y="398" font-size="17" fill="#23364e">不修改稳定调度循环</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">领域规则变化</text>
++<text x="700" y="346" font-size="17" fill="#23364e">生命值上限 / 护甲</text>
++<text x="700" y="372" font-size="17" fill="#23364e">修改 Actor 的规则</text>
++<text x="700" y="398" font-size="17" fill="#23364e">更新规则相关验证</text>
++<text x="32" y="512" font-size="16" fill="#495b73">开闭原则保护稳定边界，不承诺新增功能零修改。</text></g></svg>diff --git a/public/assets/oop/battle-flow.svg b/public/assets/oop/battle-flow.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/battle-flow.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">一回合：用真实数值追踪调用链</title><desc id="desc">目标：最大生命值 100，护甲 8；治疗不受护甲影响。。护甲规则是本例的教学约定；真实项目先明确需求再实现。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">一回合：用真实数值追踪调用链</text>
++<text x="32" y="77" font-size="17" fill="#495b73">目标：最大生命值 100，护甲 8；治疗不受护甲影响。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">开始：hp = 100</text>
++<text x="48" y="170" font-size="17" fill="#23364e">Slash 原始伤害 20</text>
++<text x="48" y="196" font-size="17" fill="#23364e">护甲减去 8</text>
++<text x="48" y="222" font-size="17" fill="#23364e">实际伤害 12</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">斩击后：hp = 88</text>
++<text x="374" y="170" font-size="17" fill="#23364e">Fireball 原始伤害 35</text>
++<text x="374" y="196" font-size="17" fill="#23364e">护甲减去 8</text>
++<text x="374" y="222" font-size="17" fill="#23364e">实际伤害 27</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">火球后：hp = 61</text>
++<text x="700" y="170" font-size="17" fill="#23364e">Heal 请求恢复 25</text>
++<text x="700" y="196" font-size="17" fill="#23364e">空间 100 - 61 = 39</text>
++<text x="700" y="222" font-size="17" fill="#23364e">实际恢复 25</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">技能：表达效果</text>
++<text x="48" y="346" font-size="17" fill="#23364e">DamageSkill / HealSkill</text>
++<text x="48" y="372" font-size="17" fill="#23364e">不直接写生命值字段</text>
++<text x="48" y="398" font-size="17" fill="#23364e">取得实际生效量</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">角色：维护合法状态</text>
++<text x="374" y="346" font-size="17" fill="#23364e">takeDamage / heal</text>
++<text x="374" y="372" font-size="17" fill="#23364e">边界和溢出检查</text>
++<text x="374" y="398" font-size="17" fill="#23364e">最终 hp = 86</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">流程：负责次序</text>
++<text x="700" y="346" font-size="17" fill="#23364e">不区分具体技能类别</text>
++<text x="700" y="372" font-size="17" fill="#23364e">输出施放日志</text>
++<text x="700" y="398" font-size="17" fill="#23364e">断言验证输出与边界</text>
++<text x="32" y="512" font-size="16" fill="#495b73">护甲规则是本例的教学约定；真实项目先明确需求再实现。</text></g></svg>diff --git a/public/assets/oop/boundary.svg b/public/assets/oop/boundary.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/boundary.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">封装：让不变量有一个负责的边界</title><desc id="desc">不变量示例：0 ≤ hp ≤ maxHp；非法输入不能悄悄破坏状态。。private 只是访问控制；真正的封装还需要操作维护业务约束。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">封装：让不变量有一个负责的边界</text>
++<text x="32" y="77" font-size="17" fill="#495b73">不变量示例：0 ≤ hp ≤ maxHp；非法输入不能悄悄破坏状态。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">规则分散</text>
++<text x="48" y="170" font-size="17" fill="#23364e">攻击代码直接写 hp</text>
++<text x="48" y="196" font-size="17" fill="#23364e">陷阱代码直接写 hp</text>
++<text x="48" y="222" font-size="17" fill="#23364e">UI 调试也能写 hp</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">调用方各自检查</text>
++<text x="374" y="170" font-size="17" fill="#23364e">治疗上限可能漏掉</text>
++<text x="374" y="196" font-size="17" fill="#23364e">负伤害可能变成治疗</text>
++<text x="374" y="222" font-size="17" fill="#23364e">修改规则要到处搜索</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">维护成本增长</text>
++<text x="700" y="170" font-size="17" fill="#23364e">每个写入点都要懂内部</text>
++<text x="700" y="196" font-size="17" fill="#23364e">语法能通过不代表合法</text>
++<text x="700" y="222" font-size="17" fill="#23364e">Bug 随修改点扩散</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">外部只表达意图</text>
++<text x="48" y="346" font-size="17" fill="#23364e">takeDamage(amount)</text>
++<text x="48" y="372" font-size="17" fill="#23364e">heal(amount)</text>
++<text x="48" y="398" font-size="17" fill="#23364e">hp() 只读查询</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">Actor 维护规则</text>
++<text x="374" y="346" font-size="17" fill="#23364e">private hp_ / maxHp_</text>
++<text x="374" y="372" font-size="17" fill="#23364e">校验输入</text>
++<text x="374" y="398" font-size="17" fill="#23364e">先比较，再做有界运算</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">得到可靠结果</text>
++<text x="700" y="346" font-size="17" fill="#23364e">返回实际扣血 / 治疗量</text>
++<text x="700" y="372" font-size="17" fill="#23364e">日志与 UI 使用同一结果</text>
++<text x="700" y="398" font-size="17" fill="#23364e">规则变化集中验证</text>
++<text x="32" y="512" font-size="16" fill="#495b73">private 只是访问控制；真正的封装还需要操作维护业务约束。</text></g></svg>diff --git a/public/assets/oop/composition.svg b/public/assets/oop/composition.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/composition.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">继承与组合：按契约和变化维度判断</title><desc id="desc">不要仅为了复用字段，把所有特性塞进一棵继承树。。可替换性支持公共继承；独立组合的能力通常适合成员协作。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">继承与组合：按契约和变化维度判断</text>
++<text x="32" y="77" font-size="17" fill="#495b73">不要仅为了复用字段，把所有特性塞进一棵继承树。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">继承堆特性</text>
++<text x="48" y="170" font-size="17" fill="#23364e">Enemy → FlyingEnemy</text>
++<text x="48" y="196" font-size="17" fill="#23364e">→ FireFlyingEnemy</text>
++<text x="48" y="222" font-size="17" fill="#23364e">→ RangedFireFlyingEnemy</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">组合数量增长</text>
++<text x="374" y="170" font-size="17" fill="#23364e">再加冰属性怎么办？</text>
++<text x="374" y="196" font-size="17" fill="#23364e">地面远程又要复制分支</text>
++<text x="374" y="222" font-size="17" fill="#23364e">共同规则容易散落</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">先拆变化维度</text>
++<text x="700" y="170" font-size="17" fill="#23364e">移动方式</text>
++<text x="700" y="196" font-size="17" fill="#23364e">技能与装备</text>
++<text x="700" y="222" font-size="17" fill="#23364e">属性配置</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">Actor has-an Armor</text>
++<text x="48" y="346" font-size="17" fill="#23364e">角色组合护甲</text>
++<text x="48" y="372" font-size="17" fill="#23364e">拥有或借用要说明</text>
++<text x="48" y="398" font-size="17" fill="#23364e">角色不是护甲的一种</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">Actor has Skills</text>
++<text x="374" y="346" font-size="17" fill="#23364e">同一角色替换技能</text>
++<text x="374" y="372" font-size="17" fill="#23364e">独立配置数值</text>
++<text x="374" y="398" font-size="17" fill="#23364e">不靠深继承扩展特性</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">Fireball is-a Skill</text>
++<text x="700" y="346" font-size="17" fill="#23364e">满足施放契约</text>
++<text x="700" y="372" font-size="17" fill="#23364e">可被调用方当技能使用</text>
++<text x="700" y="398" font-size="17" fill="#23364e">不能偷偷加强前置要求</text>
++<text x="32" y="512" font-size="16" fill="#495b73">可替换性支持公共继承；独立组合的能力通常适合成员协作。</text></g></svg>diff --git a/public/assets/oop/csharp.svg b/public/assets/oop/csharp.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/csharp.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">迁移到 C#：相似语法，先核对语义</title><desc id="desc">尤其区分类赋值、结构体字段复制与资源释放。。封装和契约的思考可以迁移；复制与生命周期规则必须重新确认。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">迁移到 C#：相似语法，先核对语义</text>
++<text x="32" y="77" font-size="17" fill="#495b73">尤其区分类赋值、结构体字段复制与资源释放。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">C++ Actor b = a</text>
++<text x="48" y="170" font-size="17" fill="#23364e">构造一个新 Actor</text>
++<text x="48" y="196" font-size="17" fill="#23364e">按成员复制语义处理</text>
++<text x="48" y="222" font-size="17" fill="#23364e">是否共享看成员类型</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">C# class：b = a</text>
++<text x="374" y="170" font-size="17" fill="#23364e">复制引用</text>
++<text x="374" y="196" font-size="17" fill="#23364e">a 和 b 指向同一角色</text>
++<text x="374" y="222" font-size="17" fill="#23364e">b 修改后 a 能看到</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">C# struct：b = a</text>
++<text x="700" y="170" font-size="17" fill="#23364e">复制字段</text>
++<text x="700" y="196" font-size="17" fill="#23364e">List 字段仍是共享引用</text>
++<text x="700" y="222" font-size="17" fill="#23364e">不保证全部数据独立</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">C++</text>
++<text x="48" y="346" font-size="17" fill="#23364e">作用域析构 / RAII</text>
++<text x="48" y="372" font-size="17" fill="#23364e">unique_ptr 独占拥有</text>
++<text x="48" y="398" font-size="17" fill="#23364e">析构不是自动 GC</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">C#</text>
++<text x="374" y="346" font-size="17" fill="#23364e">GC 按可达性管理内存</text>
++<text x="374" y="372" font-size="17" fill="#23364e">using 安排 Dispose</text>
++<text x="374" y="398" font-size="17" fill="#23364e">终结器不是作用域析构</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">Unity</text>
++<text x="700" y="346" font-size="17" fill="#23364e">还存在引擎原生对象</text>
++<text x="700" y="372" font-size="17" fill="#23364e">Destroy 与 GC 分开</text>
++<text x="700" y="398" font-size="17" fill="#23364e">注意事件解绑和池化复位</text>
++<text x="32" y="512" font-size="16" fill="#495b73">封装和契约的思考可以迁移；复制与生命周期规则必须重新确认。</text></g></svg>diff --git a/public/assets/oop/dispatch.svg b/public/assets/oop/dispatch.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/dispatch.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">动态多态：同一个调用点，不同实现</title><desc id="desc">静态类型决定可见接口；虚分派选择实际对象的实现。。虚表是常见实现解释；精确布局、开销与优化必须依实现分析。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">动态多态：同一个调用点，不同实现</text>
++<text x="32" y="77" font-size="17" fill="#495b73">静态类型决定可见接口；虚分派选择实际对象的实现。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">perform(const Skill&amp;)</text>
++<text x="48" y="170" font-size="17" fill="#23364e">只知道 Skill 的契约</text>
++<text x="48" y="196" font-size="17" fill="#23364e">调用 skill.cast(target)</text>
++<text x="48" y="222" font-size="17" fill="#23364e">不检查具体技能名字</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">引用真实 Fireball</text>
++<text x="374" y="170" font-size="17" fill="#23364e">动态类型：Fireball</text>
++<text x="374" y="196" font-size="17" fill="#23364e">进入火球的 cast</text>
++<text x="374" y="222" font-size="17" fill="#23364e">使用目标的受伤规则</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">或引用 HealSkill</text>
++<text x="700" y="170" font-size="17" fill="#23364e">动态类型：HealSkill</text>
++<text x="700" y="196" font-size="17" fill="#23364e">进入治疗的 cast</text>
++<text x="700" y="222" font-size="17" fill="#23364e">使用目标的治疗规则</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">virtual</text>
++<text x="48" y="346" font-size="17" fill="#23364e">声明可重写行为</text>
++<text x="48" y="372" font-size="17" fill="#23364e">= 0 表示纯虚函数</text>
++<text x="48" y="398" font-size="17" fill="#23364e">抽象类不能直接实例化</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">override</text>
++<text x="374" y="346" font-size="17" fill="#23364e">检查是否确实重写</text>
++<text x="374" y="372" font-size="17" fill="#23364e">参数和 const 要匹配</text>
++<text x="374" y="398" font-size="17" fill="#23364e">不是同名就一定重写</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">virtual ~Skill()</text>
++<text x="700" y="346" font-size="17" fill="#23364e">支持通过基类删除</text>
++<text x="700" y="372" font-size="17" fill="#23364e">unique_ptr&lt;Skill&gt; 可拥有</text>
++<text x="700" y="398" font-size="17" fill="#23364e">分派不能修复悬空访问</text>
++<text x="32" y="512" font-size="16" fill="#495b73">虚表是常见实现解释；精确布局、开销与优化必须依实现分析。</text></g></svg>diff --git a/public/assets/oop/first-types.svg b/public/assets/oop/first-types.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/first-types.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">先分清名字、类型与对象</title><desc id="desc">从熟悉的变量出发，一次只增加一层语法。。:: 限定名字所属范围；. 访问某个对象的成员。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">先分清名字、类型与对象</text>
++<text x="32" y="77" font-size="17" fill="#495b73">从熟悉的变量出发，一次只增加一层语法。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">int hp = 100</text>
++<text x="48" y="170" font-size="17" fill="#23364e">int：类型</text>
++<text x="48" y="196" font-size="17" fill="#23364e">hp：变量</text>
++<text x="48" y="222" font-size="17" fill="#23364e">100：初始值</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">namespace Game</text>
++<text x="374" y="170" font-size="17" fill="#23364e">给名字划分区域</text>
++<text x="374" y="196" font-size="17" fill="#23364e">Game::Score 指定来源</text>
++<text x="374" y="222" font-size="17" fill="#23364e">不创建游戏对象</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">enum class RoundState</text>
++<text x="700" y="170" font-size="17" fill="#23364e">定义有限选项的类型</text>
++<text x="700" y="196" font-size="17" fill="#23364e">RoundState::Ready 是值</text>
++<text x="700" y="222" font-size="17" fill="#23364e">不自动实现状态行为</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">class Score</text>
++<text x="48" y="346" font-size="17" fill="#23364e">定义自己的类型</text>
++<text x="48" y="372" font-size="17" fill="#23364e">public：可用的操作</text>
++<text x="48" y="398" font-size="17" fill="#23364e">private：内部状态</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">Score a; Score b;</text>
++<text x="374" y="346" font-size="17" fill="#23364e">创建两个独立对象</text>
++<text x="374" y="372" font-size="17" fill="#23364e">a.addOne() 修改 a</text>
++<text x="374" y="398" font-size="17" fill="#23364e">b 的分数不受影响</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">再学习生命周期</text>
++<text x="700" y="346" font-size="17" fill="#23364e">构造：建立初始状态</text>
++<text x="700" y="372" font-size="17" fill="#23364e">析构：结束对象寿命</text>
++<text x="700" y="398" font-size="17" fill="#23364e">后续逐步引入，不预设基础</text>
++<text x="32" y="512" font-size="16" fill="#495b73">:: 限定名字所属范围；. 访问某个对象的成员。</text></g></svg>diff --git a/public/assets/oop/lifetime.svg b/public/assets/oop/lifetime.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/lifetime.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">生命周期：先构造，后使用，逆序清理</title><desc id="desc">作用域退出和异常展开，都应由已构造的资源对象承担清理。。局部 vector 的控制对象与动态元素存储可能在不同区域。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">生命周期：先构造，后使用，逆序清理</text>
++<text x="32" y="77" font-size="17" fill="#495b73">作用域退出和异常展开，都应由已构造的资源对象承担清理。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">进入外层</text>
++<text x="48" y="170" font-size="17" fill="#23364e">构造 outer</text>
++<text x="48" y="196" font-size="17" fill="#23364e">资源开始由它负责</text>
++<text x="48" y="222" font-size="17" fill="#23364e">进入内部作用域</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">进入内层</text>
++<text x="374" y="170" font-size="17" fill="#23364e">构造 inner</text>
++<text x="374" y="196" font-size="17" fill="#23364e">执行 work</text>
++<text x="374" y="222" font-size="17" fill="#23364e">准备离开内部作用域</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">正常退出</text>
++<text x="700" y="170" font-size="17" fill="#23364e">先析构 inner</text>
++<text x="700" y="196" font-size="17" fill="#23364e">执行 after</text>
++<text x="700" y="222" font-size="17" fill="#23364e">最后析构 outer</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">某成员构造失败</text>
++<text x="48" y="346" font-size="17" fill="#23364e">当前完整对象尚未完成</text>
++<text x="48" y="372" font-size="17" fill="#23364e">不会执行其完整析构</text>
++<text x="48" y="398" font-size="17" fill="#23364e">异常向外传播</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">已构造部分清理</text>
++<text x="374" y="346" font-size="17" fill="#23364e">已完成的成员逆序析构</text>
++<text x="374" y="372" font-size="17" fill="#23364e">已完成的基类析构</text>
++<text x="374" y="398" font-size="17" fill="#23364e">成员 RAII 接管资源</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">调用方处理失败</text>
++<text x="700" y="346" font-size="17" fill="#23364e">catch 决定是否恢复</text>
++<text x="700" y="372" font-size="17" fill="#23364e">不要依赖手工 delete</text>
++<text x="700" y="398" font-size="17" fill="#23364e">强制终止不是普通退出</text>
++<text x="32" y="512" font-size="16" fill="#495b73">局部 vector 的控制对象与动态元素存储可能在不同区域。</text></g></svg>diff --git a/public/assets/oop/ownership.svg b/public/assets/oop/ownership.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/ownership.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">所有权与借用：先问谁负责释放</title><desc id="desc">箭头表达语义关系，不代表某个 ABI 的字段布局。。有地址 ≠ 有所有权；能访问 ≠ 可以释放；只读 ≠ 自动延长寿命。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">所有权与借用：先问谁负责释放</text>
++<text x="32" y="77" font-size="17" fill="#495b73">箭头表达语义关系，不代表某个 ABI 的字段布局。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">值复制</text>
++<text x="48" y="170" font-size="17" fill="#23364e">Inventory a</text>
++<text x="48" y="196" font-size="17" fill="#23364e">Inventory b = a</text>
++<text x="48" y="222" font-size="17" fill="#23364e">各自拥有 vector&lt;string&gt;</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">独占移动</text>
++<text x="374" y="170" font-size="17" fill="#23364e">unique_ptr first 拥有对象</text>
++<text x="374" y="196" font-size="17" fill="#23364e">second = move(first)</text>
++<text x="374" y="222" font-size="17" fill="#23364e">此后 first 为空</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">非拥有借用</text>
++<text x="700" y="170" font-size="17" fill="#23364e">Actor&amp; / const Actor&amp;</text>
++<text x="700" y="196" font-size="17" fill="#23364e">不负责 delete</text>
++<text x="700" y="222" font-size="17" fill="#23364e">原对象必须仍然存活</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">vector&lt;Actor&gt;</text>
++<text x="48" y="346" font-size="17" fill="#23364e">扩容可搬移元素</text>
++<text x="48" y="372" font-size="17" fill="#23364e">旧地址可能失效</text>
++<text x="48" y="398" font-size="17" fill="#23364e">不能只看下标没变化</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">vector&lt;unique_ptr&lt;Actor&gt;&gt;</text>
++<text x="374" y="346" font-size="17" fill="#23364e">扩容搬移拥有指针</text>
++<text x="374" y="372" font-size="17" fill="#23364e">角色本体通常不搬移</text>
++<text x="374" y="398" font-size="17" fill="#23364e">删除所有者仍让借用失效</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">共享也有契约</text>
++<text x="700" y="346" font-size="17" fill="#23364e">shared_ptr 延长寿命</text>
++<text x="700" y="372" font-size="17" fill="#23364e">weak_ptr 只观察</text>
++<text x="700" y="398" font-size="17" fill="#23364e">引用计数不保护对象内容</text>
++<text x="32" y="512" font-size="16" fill="#495b73">有地址 ≠ 有所有权；能访问 ≠ 可以释放；只读 ≠ 自动延长寿命。</text></g></svg>diff --git a/public/assets/oop/roadmap.svg b/public/assets/oop/roadmap.svg
+new file mode 100644
+--- /dev/null
++++ b/public/assets/oop/roadmap.svg
+@@ -0,0 +1,42 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
++<title id="title">面向对象：把规则、变化与寿命串起来</title><desc id="desc">贯穿例子：角色受伤 → 多种技能 → 统一施放 → 安全释放。。目标：说清每个类为何存在，而不只记住三大特性。</desc>
++<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
++<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
++<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
++<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">面向对象：把规则、变化与寿命串起来</text>
++<text x="32" y="77" font-size="17" fill="#495b73">贯穿例子：角色受伤 → 多种技能 → 统一施放 → 安全释放。</text>
++<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">已有基础</text>
++<text x="48" y="170" font-size="17" fill="#23364e">vector：保存一组数据</text>
++<text x="48" y="196" font-size="17" fill="#23364e">map：按键查询</text>
++<text x="48" y="222" font-size="17" fill="#23364e">算法：完成计算</text>
++<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">对象边界</text>
++<text x="374" y="170" font-size="17" fill="#23364e">哪些状态必须合法？</text>
++<text x="374" y="196" font-size="17" fill="#23364e">谁可以修改它？</text>
++<text x="374" y="222" font-size="17" fill="#23364e">调用方需要知道什么？</text>
++<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">变化与协作</text>
++<text x="700" y="170" font-size="17" fill="#23364e">角色维护数值规则</text>
++<text x="700" y="196" font-size="17" fill="#23364e">技能提供可替换行为</text>
++<text x="700" y="222" font-size="17" fill="#23364e">流程控制施放顺序</text>
++<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
++<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">C++ 语义</text>
++<text x="48" y="346" font-size="17" fill="#23364e">值复制 / 移动</text>
++<text x="48" y="372" font-size="17" fill="#23364e">构造 / 析构 / RAII</text>
++<text x="48" y="398" font-size="17" fill="#23364e">拥有 / 借用</text>
++<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
++<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">用需求检验</text>
++<text x="374" y="346" font-size="17" fill="#23364e">添加治疗技能</text>
++<text x="374" y="372" font-size="17" fill="#23364e">保持战斗循环不变</text>
++<text x="374" y="398" font-size="17" fill="#23364e">检查成本和失败边界</text>
++<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
++<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
++<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">迁移到 C#</text>
++<text x="700" y="346" font-size="17" fill="#23364e">class 赋值复制引用</text>
++<text x="700" y="372" font-size="17" fill="#23364e">GC 与 Dispose 分开</text>
++<text x="700" y="398" font-size="17" fill="#23364e">再连接 Unity 与 ECS</text>
++<text x="32" y="512" font-size="16" fill="#495b73">目标：说清每个类为何存在，而不只记住三大特性。</text></g></svg>diff --git a/public/examples/oop/battle.cpp b/public/examples/oop/battle.cpp
+new file mode 100644
+--- /dev/null
++++ b/public/examples/oop/battle.cpp
+@@ -0,0 +1,135 @@
++// C++17：用角色规则、技能接口与独占所有权演示面向对象协作。
++#include <algorithm>
++#include <cassert>
++#include <iostream>
++#include <limits>
++#include <memory>
++#include <sstream>
++#include <stdexcept>
++#include <string>
++#include <utility>
++#include <vector>
++
++// 维护角色的不变量：最大生命值为正，生命值与护甲始终处于合法范围。
++class Actor {
++public:
++    Actor(std::string name, int maxHp, int armor)
++        : name_(std::move(name)), maxHp_(maxHp), hp_(maxHp), armor_(armor) {
++        if (maxHp <= 0 || armor < 0) {
++            throw std::invalid_argument("invalid actor stats");
++        }
++    }
++
++    const std::string& name() const noexcept { return name_; }
++    int hp() const noexcept { return hp_; }
++
++    // 防御只处理受伤，不修改技能本身；减法前先比较以避免整数溢出。
++    int takeDamage(int raw) {
++        if (raw < 0) throw std::invalid_argument("negative damage");
++        const int damage = raw <= armor_ ? 0 : raw - armor_;
++        const int applied = std::min(hp_, damage);
++        hp_ -= applied;
++        return applied;
++    }
++
++    // 本例允许从零生命值治疗；先算可恢复空间，避免 hp_ + amount 溢出。
++    int heal(int amount) {
++        if (amount < 0) throw std::invalid_argument("negative healing");
++        const int applied = std::min(maxHp_ - hp_, amount);
++        hp_ += applied;
++        return applied;
++    }
++
++private:
++    std::string name_;
++    int maxHp_;
++    int hp_;
++    int armor_;
++};
++
++// 技能只借用目标和输出流，不拥有它们；允许通过接口销毁具体技能。
++class Skill {
++public:
++    virtual ~Skill() = default;
++    virtual void cast(Actor& target, std::ostream& out) const = 0;
++};
++
++// 数值不同但算法相同的攻击共用一种实现，无需每个伤害值建立子类。
++class DamageSkill final : public Skill {
++public:
++    DamageSkill(std::string name, int power) : name_(std::move(name)), power_(power) {
++        if (power < 0) throw std::invalid_argument("negative power");
++    }
++    void cast(Actor& target, std::ostream& out) const override {
++        const int applied = target.takeDamage(power_);
++        out << name_ << " -> " << target.name() << ": damage=" << applied
++            << ", hp=" << target.hp() << '\n';
++    }
++private:
++    std::string name_;
++    int power_;
++};
++
++// 治疗拥有独立行为，通过同一契约参与战斗流程。
++class HealSkill final : public Skill {
++public:
++    explicit HealSkill(int power) : power_(power) {
++        if (power < 0) throw std::invalid_argument("negative power");
++    }
++    void cast(Actor& target, std::ostream& out) const override {
++        const int applied = target.heal(power_);
++        out << "Heal -> " << target.name() << ": healing=" << applied
++            << ", hp=" << target.hp() << '\n';
++    }
++private:
++    int power_;
++};
++
++// 流程只负责顺序调度；技能由调用方持有，目标在本次调用期间必须存活。
++void runRound(const std::vector<std::unique_ptr<Skill>>& skills,
++              Actor& target, std::ostream& out) {
++    for (const auto& skill : skills) {
++        if (!skill) throw std::invalid_argument("null skill");
++        skill->cast(target, out);
++    }
++}
++
++// 同时检查规则边界与统一调度；不依赖执行未定义行为来观察错误。
++void verifyRules() {
++    Actor edge{"Edge", 100, 8};
++    assert(edge.takeDamage(0) == 0);
++    assert(edge.takeDamage(8) == 0);
++    assert(edge.takeDamage(std::numeric_limits<int>::max()) == 100);
++    assert(edge.hp() == 0);
++    assert(edge.heal(std::numeric_limits<int>::max()) == 100);
++    assert(edge.heal(1) == 0);
++    bool rejected = false;
++    try { edge.heal(-1); }
++    catch (const std::invalid_argument&) { rejected = true; }
++    assert(rejected && edge.hp() == 100);
++
++    Actor dummy{"Dummy", 100, 8};
++    std::vector<std::unique_ptr<Skill>> skills;
++    skills.push_back(std::make_unique<DamageSkill>("Slash", 20));
++    skills.push_back(std::make_unique<DamageSkill>("Fireball", 35));
++    skills.push_back(std::make_unique<HealSkill>(25));
++    std::ostringstream captured;
++    runRound(skills, dummy, captured);
++    assert(dummy.hp() == 86);
++    assert(captured.str() ==
++        "Slash -> Dummy: damage=12, hp=88\n"
++        "Fireball -> Dummy: damage=27, hp=61\n"
++        "Heal -> Dummy: healing=25, hp=86\n");
++}
++
++// 组装处知道具体技能；扩展技能时修改这里，而不修改 runRound。
++int main() {
++    verifyRules();
++    Actor dummy{"Dummy", 100, 8};
++    std::vector<std::unique_ptr<Skill>> skills;
++    skills.push_back(std::make_unique<DamageSkill>("Slash", 20));
++    skills.push_back(std::make_unique<DamageSkill>("Fireball", 35));
++    skills.push_back(std::make_unique<HealSkill>(25));
++    runRound(skills, dummy, std::cout);
++    std::cout << "checks: passed\n";
++}
+diff --git a/public/examples/oop/Battle.cs b/public/examples/oop/Battle.cs
+new file mode 100644
+--- /dev/null
++++ b/public/examples/oop/Battle.cs
+@@ -0,0 +1,112 @@
++// C#：与 C++ 完整例子保持相同规则，展示引用类型和接口调用。
++using System;
++using System.Collections.Generic;
++using System.IO;
++
++// 普通托管角色；访问权限与规则约束仍由类自己维护。
++public sealed class Actor
++{
++    public string Name { get; }
++    public int Hp { get; private set; }
++    private readonly int maxHp;
++    private readonly int armor;
++
++    public Actor(string name, int maxHp, int armor)
++    {
++        if (maxHp <= 0 || armor < 0)
++            throw new ArgumentOutOfRangeException(nameof(maxHp));
++        Name = name;
++        this.maxHp = maxHp;
++        Hp = maxHp;
++        this.armor = armor;
++    }
++
++    // 与 C++ 使用相同的比较后减法规则。
++    public int TakeDamage(int raw)
++    {
++        if (raw < 0) throw new ArgumentOutOfRangeException(nameof(raw));
++        int damage = raw <= armor ? 0 : raw - armor;
++        int applied = Math.Min(Hp, damage);
++        Hp -= applied;
++        return applied;
++    }
++
++    // 先计算可恢复空间；不要依赖整数溢出行为维持业务约束。
++    public int Heal(int amount)
++    {
++        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
++        int applied = Math.Min(maxHp - Hp, amount);
++        Hp += applied;
++        return applied;
++    }
++}
++
++// 接口约束行为；本例对象不持有需要确定性释放的外部资源。
++public interface ISkill
++{
++    void Cast(Actor target, TextWriter output);
++}
++
++// 相同算法通过数值配置复用。
++public sealed class DamageSkill : ISkill
++{
++    private readonly string name;
++    private readonly int power;
++    public DamageSkill(string name, int power)
++    {
++        if (power < 0) throw new ArgumentOutOfRangeException(nameof(power));
++        this.name = name;
++        this.power = power;
++    }
++    public void Cast(Actor target, TextWriter output)
++    {
++        int applied = target.TakeDamage(power);
++        output.WriteLine($"{name} -> {target.Name}: damage={applied}, hp={target.Hp}");
++    }
++}
++
++// 新行为独立实现，不要求改变调度函数。
++public sealed class HealSkill : ISkill
++{
++    private readonly int power;
++    public HealSkill(int power)
++    {
++        if (power < 0) throw new ArgumentOutOfRangeException(nameof(power));
++        this.power = power;
++    }
++    public void Cast(Actor target, TextWriter output)
++    {
++        int applied = target.Heal(power);
++        output.WriteLine($"Heal -> {target.Name}: healing={applied}, hp={target.Hp}");
++    }
++}
++
++// 组装、调度与示例断言；普通对象赋值复制引用，不复制角色。
++public static class Program
++{
++    private static void RunRound(IEnumerable<ISkill> skills, Actor target, TextWriter output)
++    {
++        foreach (ISkill skill in skills)
++        {
++            if (skill == null) throw new ArgumentException("null skill");
++            skill.Cast(target, output);
++        }
++    }
++
++    public static void Main()
++    {
++        var target = new Actor("Dummy", 100, 8);
++        var skills = new List<ISkill>
++        {
++            new DamageSkill("Slash", 20),
++            new DamageSkill("Fireball", 35),
++            new HealSkill(25)
++        };
++        RunRound(skills, target, Console.Out);
++        if (target.Hp != 86) throw new Exception("unexpected hp");
++        var alias = target;
++        alias.Heal(int.MaxValue);
++        if (target.Hp != 100) throw new Exception("reference copy check failed");
++        Console.WriteLine("checks: passed");
++    }
++}
+diff --git a/scripts/oop/generate_figures.py b/scripts/oop/generate_figures.py
+new file mode 100644
+--- /dev/null
++++ b/scripts/oop/generate_figures.py
+@@ -0,0 +1,109 @@
++"""生成面向对象专题的语义图，并同步完整示例，避免正文与下载代码漂移。"""
++from html import escape
++from pathlib import Path
++import re
++
++ROOT = Path(__file__).resolve().parents[2]
++ASSETS = ROOT / "public/assets/oop"
++DOCS = ROOT / "src/content/docs/knowledge/面向对象串讲"
++
++
++def diagram(name, title, subtitle, rows, footer):
++    """用固定网格呈现概念关系；限制每格行数以保证手机放大后仍可读。"""
++    height = 180 + 176 * len(rows)
++    colors = [("#eaf2ff", "#285caa"), ("#e8f7f1", "#176951"), ("#fff2df", "#8c5315")]
++    parts = [
++        f'<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="{height}" viewBox="0 0 1000 {height}" role="img" aria-labelledby="title desc">',
++        f'<title id="title">{escape(title)}</title><desc id="desc">{escape(subtitle + "。" + footer)}</desc>',
++        '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>',
++        f'<rect width="1000" height="{height}" rx="18" fill="#f6f8fc"/>',
++        '<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">',
++        f'<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">{escape(title)}</text>',
++        f'<text x="32" y="77" font-size="17" fill="#495b73">{escape(subtitle)}</text>',
++    ]
++    for ri, row in enumerate(rows):
++        for ci, (heading, lines) in enumerate(row):
++            x, y = 32 + ci * 326, 105 + ri * 176
++            bg, ink = colors[ci]
++            parts.extend([
++                f'<rect x="{x}" y="{y}" width="284" height="144" rx="12" fill="{bg}" stroke="{ink}" stroke-opacity=".3"/>',
++                f'<text x="{x+16}" y="{y+32}" font-size="20" font-weight="700" fill="{ink}">{escape(heading)}</text>',
++            ])
++            for li, line in enumerate(lines):
++                parts.append(f'<text x="{x+16}" y="{y+65+li*26}" font-size="17" fill="#23364e">{escape(line)}</text>')
++            if ci < len(row) - 1:
++                parts.append(f'<path d="M{x+290} {y+72}H{x+318}" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>')
++    parts.append(f'<text x="32" y="{height-20}" font-size="16" fill="#495b73">{escape(footer)}</text></g></svg>')
++    (ASSETS / f"{name}.svg").write_text("\n".join(parts), encoding="utf-8")
++
++
++def main():
++    """生成可直接由静态站点发布的 SVG，不依赖前端图表插件。"""
++    ASSETS.mkdir(parents=True, exist_ok=True)
++    figures = [
++        ("first-types", "先分清名字、类型与对象", "从熟悉的变量出发，一次只增加一层语法。", [
++            [("int hp = 100", ["int：类型", "hp：变量", "100：初始值"]), ("namespace Game", ["给名字划分区域", "Game::Score 指定来源", "不创建游戏对象"]), ("enum class RoundState", ["定义有限选项的类型", "RoundState::Ready 是值", "不自动实现状态行为"])],
++            [("class Score", ["定义自己的类型", "public：可用的操作", "private：内部状态"]), ("Score a; Score b;", ["创建两个独立对象", "a.addOne() 修改 a", "b 的分数不受影响"]), ("再学习生命周期", ["构造：建立初始状态", "析构：结束对象寿命", "后续逐步引入，不预设基础"])],
++        ], ":: 限定名字所属范围；. 访问某个对象的成员。"),
++        ("roadmap", "面向对象：把规则、变化与寿命串起来", "贯穿例子：角色受伤 → 多种技能 → 统一施放 → 安全释放。", [
++            [("已有基础", ["vector：保存一组数据", "map：按键查询", "算法：完成计算"]), ("对象边界", ["哪些状态必须合法？", "谁可以修改它？", "调用方需要知道什么？"]), ("变化与协作", ["角色维护数值规则", "技能提供可替换行为", "流程控制施放顺序"])],
++            [("C++ 语义", ["值复制 / 移动", "构造 / 析构 / RAII", "拥有 / 借用"]), ("用需求检验", ["添加治疗技能", "保持战斗循环不变", "检查成本和失败边界"]), ("迁移到 C#", ["class 赋值复制引用", "GC 与 Dispose 分开", "再连接 Unity 与 ECS"])],
++        ], "目标：说清每个类为何存在，而不只记住三大特性。"),
++        ("boundary", "封装：让不变量有一个负责的边界", "不变量示例：0 ≤ hp ≤ maxHp；非法输入不能悄悄破坏状态。", [
++            [("规则分散", ["攻击代码直接写 hp", "陷阱代码直接写 hp", "UI 调试也能写 hp"]), ("调用方各自检查", ["治疗上限可能漏掉", "负伤害可能变成治疗", "修改规则要到处搜索"]), ("维护成本增长", ["每个写入点都要懂内部", "语法能通过不代表合法", "Bug 随修改点扩散"])],
++            [("外部只表达意图", ["takeDamage(amount)", "heal(amount)", "hp() 只读查询"]), ("Actor 维护规则", ["private hp_ / maxHp_", "校验输入", "先比较，再做有界运算"]), ("得到可靠结果", ["返回实际扣血 / 治疗量", "日志与 UI 使用同一结果", "规则变化集中验证"])],
++        ], "private 只是访问控制；真正的封装还需要操作维护业务约束。"),
++        ("lifetime", "生命周期：先构造，后使用，逆序清理", "作用域退出和异常展开，都应由已构造的资源对象承担清理。", [
++            [("进入外层", ["构造 outer", "资源开始由它负责", "进入内部作用域"]), ("进入内层", ["构造 inner", "执行 work", "准备离开内部作用域"]), ("正常退出", ["先析构 inner", "执行 after", "最后析构 outer"])],
++            [("某成员构造失败", ["当前完整对象尚未完成", "不会执行其完整析构", "异常向外传播"]), ("已构造部分清理", ["已完成的成员逆序析构", "已完成的基类析构", "成员 RAII 接管资源"]), ("调用方处理失败", ["catch 决定是否恢复", "不要依赖手工 delete", "强制终止不是普通退出"])],
++        ], "局部 vector 的控制对象与动态元素存储可能在不同区域。"),
++        ("ownership", "所有权与借用：先问谁负责释放", "箭头表达语义关系，不代表某个 ABI 的字段布局。", [
++            [("值复制", ["Inventory a", "Inventory b = a", "各自拥有 vector<string>"]), ("独占移动", ["unique_ptr first 拥有对象", "second = move(first)", "此后 first 为空"]), ("非拥有借用", ["Actor& / const Actor&", "不负责 delete", "原对象必须仍然存活"])],
++            [("vector<Actor>", ["扩容可搬移元素", "旧地址可能失效", "不能只看下标没变化"]), ("vector<unique_ptr<Actor>>", ["扩容搬移拥有指针", "角色本体通常不搬移", "删除所有者仍让借用失效"]), ("共享也有契约", ["shared_ptr 延长寿命", "weak_ptr 只观察", "引用计数不保护对象内容"])],
++        ], "有地址 ≠ 有所有权；能访问 ≠ 可以释放；只读 ≠ 自动延长寿命。"),
++        ("composition", "继承与组合：按契约和变化维度判断", "不要仅为了复用字段，把所有特性塞进一棵继承树。", [
++            [("继承堆特性", ["Enemy → FlyingEnemy", "→ FireFlyingEnemy", "→ RangedFireFlyingEnemy"]), ("组合数量增长", ["再加冰属性怎么办？", "地面远程又要复制分支", "共同规则容易散落"]), ("先拆变化维度", ["移动方式", "技能与装备", "属性配置"])],
++            [("Actor has-an Armor", ["角色组合护甲", "拥有或借用要说明", "角色不是护甲的一种"]), ("Actor has Skills", ["同一角色替换技能", "独立配置数值", "不靠深继承扩展特性"]), ("Fireball is-a Skill", ["满足施放契约", "可被调用方当技能使用", "不能偷偷加强前置要求"])],
++        ], "可替换性支持公共继承；独立组合的能力通常适合成员协作。"),
++        ("dispatch", "动态多态：同一个调用点，不同实现", "静态类型决定可见接口；虚分派选择实际对象的实现。", [
++            [("perform(const Skill&)", ["只知道 Skill 的契约", "调用 skill.cast(target)", "不检查具体技能名字"]), ("引用真实 Fireball", ["动态类型：Fireball", "进入火球的 cast", "使用目标的受伤规则"]), ("或引用 HealSkill", ["动态类型：HealSkill", "进入治疗的 cast", "使用目标的治疗规则"])],
++            [("virtual", ["声明可重写行为", "= 0 表示纯虚函数", "抽象类不能直接实例化"]), ("override", ["检查是否确实重写", "参数和 const 要匹配", "不是同名就一定重写"]), ("virtual ~Skill()", ["支持通过基类删除", "unique_ptr<Skill> 可拥有", "分派不能修复悬空访问"])],
++        ], "虚表是常见实现解释；精确布局、开销与优化必须依实现分析。"),
++        ("architecture", "稳定流程与变化点分开", "注册处认识具体类型，使用处依赖行为契约。", [
++            [("组装 main", ["选择 DamageSkill", "选择 HealSkill", "用 unique_ptr 持有"]), ("调度 runRound", ["顺序借用每个 Skill", "不按技能名字分支", "不拥有目标和日志流"]), ("契约 Skill", ["cast(Actor&, ostream&)", "具体技能提供效果", "公开虚析构负责正确销毁"])],
++            [("数值变化", ["20 → 50", "修改配置参数", "不新建一个伤害子类"]), ("行为变化", ["攻击 → 治疗", "新增实现 + 组装注册", "不修改稳定调度循环"]), ("领域规则变化", ["生命值上限 / 护甲", "修改 Actor 的规则", "更新规则相关验证"])],
++        ], "开闭原则保护稳定边界，不承诺新增功能零修改。"),
++        ("battle-flow", "一回合：用真实数值追踪调用链", "目标：最大生命值 100，护甲 8；治疗不受护甲影响。", [
++            [("开始：hp = 100", ["Slash 原始伤害 20", "护甲减去 8", "实际伤害 12"]), ("斩击后：hp = 88", ["Fireball 原始伤害 35", "护甲减去 8", "实际伤害 27"]), ("火球后：hp = 61", ["Heal 请求恢复 25", "空间 100 - 61 = 39", "实际恢复 25"])],
++            [("技能：表达效果", ["DamageSkill / HealSkill", "不直接写生命值字段", "取得实际生效量"]), ("角色：维护合法状态", ["takeDamage / heal", "边界和溢出检查", "最终 hp = 86"]), ("流程：负责次序", ["不区分具体技能类别", "输出施放日志", "断言验证输出与边界"])],
++        ], "护甲规则是本例的教学约定；真实项目先明确需求再实现。"),
++        ("csharp", "迁移到 C#：相似语法，先核对语义", "尤其区分类赋值、结构体字段复制与资源释放。", [
++            [("C++ Actor b = a", ["构造一个新 Actor", "按成员复制语义处理", "是否共享看成员类型"]), ("C# class：b = a", ["复制引用", "a 和 b 指向同一角色", "b 修改后 a 能看到"]), ("C# struct：b = a", ["复制字段", "List 字段仍是共享引用", "不保证全部数据独立"])],
++            [("C++", ["作用域析构 / RAII", "unique_ptr 独占拥有", "析构不是自动 GC"]), ("C#", ["GC 按可达性管理内存", "using 安排 Dispose", "终结器不是作用域析构"]), ("Unity", ["还存在引擎原生对象", "Destroy 与 GC 分开", "注意事件解绑和池化复位"])],
++        ], "封装和契约的思考可以迁移；复制与生命周期规则必须重新确认。"),
++    ]
++    for fig in figures:
++        diagram(*fig)
++    # 目录页本身也占一个路由段，跳转同级文章需要先返回父级。
++    index = DOCS / "目录.md"
++    index.write_text(index.read_text(encoding="utf-8").replace("](./", "](../"), encoding="utf-8")
++    for chapter, source, marker, lang in [
++        ("09-battle-lab.md", "battle.cpp", "OOP_CPP_SOURCE", "cpp"),
++        ("10-csharp-bridge.md", "Battle.cs", "OOP_CS_SOURCE", "csharp"),
++    ]:
++        path = DOCS / chapter
++        text = path.read_text(encoding="utf-8")
++        code = (ROOT / "public/examples/oop" / source).read_text(encoding="utf-8").rstrip()
++        block = f"<!-- {marker} -->\n\n```{lang}\n{code}\n```\n\n<!-- END_{marker} -->"
++        text = re.sub(rf"<!-- {marker} -->(?:.*?<!-- END_{marker} -->)?", lambda _: block, text, flags=re.S)
++        path.write_text(text, encoding="utf-8")
++    # 目录排第一，其后按编号排序，避免 00 与 01 同序。
++    for path in DOCS.glob("[0-9][0-9]-*.md"):
++        text = path.read_text(encoding="utf-8")
++        text = re.sub(r"order: \d+", f"order: {int(path.name[:2])+1}", text, count=1)
++        path.write_text(text, encoding="utf-8")
++    print(f"generated {len(figures)} SVG figures; synchronized 2 complete examples")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/scripts/oop/verify_topic.py b/scripts/oop/verify_topic.py
+new file mode 100644
+--- /dev/null
++++ b/scripts/oop/verify_topic.py
+@@ -0,0 +1,42 @@
++"""校验新增专题的发布链接、配图和代码同步；不修改其他专题。"""
++from pathlib import Path
++from urllib.parse import unquote, urljoin, urlsplit
++import argparse
++import re
++import xml.etree.ElementTree as ET
++
++ROOT = Path(__file__).resolve().parents[2]
++DOCS = ROOT / "src/content/docs/knowledge/面向对象串讲"
++
++
++def main():
++    """基于实际构建输出验证引用目标，避免把源文件存在误当成发布链接有效。"""
++    parser = argparse.ArgumentParser()
++    parser.add_argument("build", type=Path)
++    args = parser.parse_args()
++    checked = 0
++    for path in sorted(DOCS.glob("*.md")):
++        text = path.read_text(encoding="utf-8")
++        page = args.build / "knowledge/面向对象串讲" / path.stem / "index.html"
++        assert page.is_file(), f"missing built page: {page}"
++        base = f"/qmx-Gameknowledge/knowledge/面向对象串讲/{path.stem}/"
++        for link in re.findall(r"\]\(([^)]+)\)", text):
++            url = urlsplit(urljoin(base, link))
++            if url.scheme or not url.path.startswith("/qmx-Gameknowledge/"):
++                continue
++            target = args.build / unquote(url.path.removeprefix("/qmx-Gameknowledge/"))
++            if url.path.endswith("/"):
++                target /= "index.html"
++            assert target.is_file(), f"broken link in {path.name}: {link} -> {target}"
++            checked += 1
++    for svg in (ROOT / "public/assets/oop").glob("*.svg"):
++        ET.parse(svg)
++    for chapter, source, lang in [("09-battle-lab.md", "battle.cpp", "cpp"), ("10-csharp-bridge.md", "Battle.cs", "csharp")]:
++        text = (DOCS / chapter).read_text(encoding="utf-8")
++        expected = (ROOT / "public/examples/oop" / source).read_text(encoding="utf-8").strip()
++        assert f"```{lang}\n{expected}\n```" in text, f"example drift: {source}"
++    print(f"PASS: 13 pages, 10 valid SVGs, {checked} local links, 2 synchronized examples")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/src/content/docs/knowledge/面向对象串讲/00-first-types.md b/src/content/docs/knowledge/面向对象串讲/00-first-types.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/00-first-types.md
+@@ -0,0 +1,160 @@
++---
++title: "0. 语法起步：命名空间、枚举和第一个类"
++description: "不假设学过 class、namespace 或 enum，从名字、类型、对象和作用域开始搭桥。"
++sidebar:
++  order: 1
++---
++
++## 这一章不要求你已经学过“类”
++
++你能使用 `std::vector<int>`，不代表你已经学过 `namespace`；你能实现链表，也不代表你已经知道 `class` 的成员访问规则。先把这几个词逐个拆开，后面遇到构造、继承和虚函数时才不会同时卡在多层陌生语法上。
++
++本章只解决“这些写法是什么意思”，不急着背设计原则。每段标注为完整程序的代码都可以单独复制运行。编译使用 C++17；编译器选项见第 9 章。
++
++## 1. 类型与变量：先从熟悉的 int 出发
++
++`int hp = 100;` 中，`int` 是类型，`hp` 是变量名，100 是初始值。类型规定了允许保存什么样的数据，以及能对它执行什么操作。
++
++如果一个角色需要名字、生命值和护甲，分别保存三组数组很容易把索引搞错。我们希望定义一种属于自己程序的类型，让一个变量就能表示“这三个数据属于同一个角色”。
++
++![从内置类型、命名空间到枚举和自定义类的语法地图](/qmx-Gameknowledge/assets/oop/first-types.svg)
++
++## 2. namespace：给名字分一个命名区域
++
++想象战斗代码和音频代码都想把一个函数叫 `play`。名字相同，含义不同，需要让编译器区分。
++
++```cpp
++// 完整程序：同名函数可以位于不同命名空间。
++#include <iostream>
++
++namespace Battle {
++    // 战斗模块的演示入口。
++    void play() { std::cout << "battle\n"; }
++}
++
++namespace Audio {
++    // 音频模块的演示入口。
++    void play() { std::cout << "audio\n"; }
++}
++
++int main() {
++    Battle::play();
++    Audio::play();
++    std::cout << "done\n";
++}
++```
++
++输出依次是 `battle`、`audio`、`done`，各一行。`namespace Battle { ... }` 声明一个命名空间；`::` 是作用域解析运算符，`Battle::play` 指定要用哪一个名字。**命名空间不是角色对象，不需要也不能像角色一样创建一个实例。** 同一命名空间可以在多处继续声明，它也不等同于文件夹。
++
++你用过的 `std::vector`、`std::string`、`std::cout`，就是标准库命名空间 `std` 下的名字。`#include <vector>` 引入声明，`std::` 指定名字所属范围，这两件事不同。
++
++`using std::cout;` 可以在当前范围引入这一个名字；`using namespace std;` 则放宽整个命名空间的名字查找。小练习里后者很常见，但公共头文件中尤其容易影响别人的代码。本专题保留 `std::`，让名字来源清晰。不要自己向 `std` 随意添加声明。
++
++## 3. struct：把相关数据放进一种类型
++
++```cpp
++// 完整程序：定义自有类型，再创建两个独立对象。
++#include <iostream>
++
++struct ActorData {
++    int hp = 100;
++    int armor = 8;
++}; // 注意：类型定义结束后有分号。
++
++int main() {
++    ActorData hero;
++    ActorData enemy;
++    hero.hp = 80;
++    std::cout << hero.hp << ' ' << enemy.hp << '\n';
++}
++```
++
++输出 `80 100`。`ActorData` 是新定义的类型；`hero` 和 `enemy` 是该类型的两个对象。对象是这个类型的一次具体实例。`hp`、`armor` 称为成员变量；`.` 用于通过对象访问成员。`int hp = 100` 是成员默认初值，每个对象都有自己的这份普通成员。
++
++不要把类型定义误读成“已经创建了一个角色”。就像 `int` 本身不是某一个整数，`ActorData` 本身也不是某一个角色。把对象放进 `vector<ActorData>` 时，vector 仍然负责存储，类型负责描述每个元素。
++
++## 4. class：先把它当成可以带操作的自定义类型
++
++```cpp
++// 完整程序：一个最小的类，还没有构造函数或继承。
++#include <iostream>
++
++// 仅用于初识成员访问；完整生命值约束将在第 2 章加入。
++class Counter {
++public:
++    // 这是成员函数，通过某个对象调用。
++    void addOne() { value_ += 1; }
++    int value() { return value_; }
++
++private:
++    int value_ = 0;
++};
++
++int main() {
++    Counter a;
++    Counter b;
++    a.addOne();
++    a.addOne();
++    std::cout << a.value() << ' ' << b.value() << '\n';
++    // a.value_ = 99; // 如果取消注释，编译失败：外部不能访问私有成员。
++}
++```
++
++输出 `2 0`。`public:` 后的成员可被外部使用，`private:` 后的成员只允许类自身成员及获授权的友元等访问；这里先只记住外部 `main` 不能直接读写它。访问标签持续到下一个访问标签或类定义结束。
++
++`addOne()` 和 `value()` 是成员函数，与普通函数一样可以有参数和返回值，但通过具体对象调用，因此知道自己要操作哪一份成员数据。`a.addOne()` 改的是 a，不会改 b。`value_` 末尾的下划线只是本专题的命名习惯，不是语言要求。
++
++`struct` 也能写成员函数和 private，`class` 也能写公开字段。两者最先需要记住的差别是默认访问：struct 默认 public，class 默认 private。不要先记成“struct 只能放数据，class 才能写函数”。
++
++## 5. enum：给有限几种选项起类型安全的名字
++
++如果技能类型用整数 0、1、2 表示，读到 `if (kind == 2)` 时就要去查 2 是什么。枚举给这些有限选项明确名字。
++
++```cpp
++// 完整程序：本专题优先使用作用域枚举 enum class。
++#include <iostream>
++
++enum class SkillKind {
++    Slash,
++    Fireball,
++    Heal
++};
++
++int main() {
++    SkillKind kind = SkillKind::Heal;
++    switch (kind) {
++    case SkillKind::Slash:    std::cout << "slash\n"; break;
++    case SkillKind::Fireball: std::cout << "fireball\n"; break;
++    case SkillKind::Heal:     std::cout << "heal\n"; break;
++    }
++}
++```
++
++输出 `heal`。`SkillKind` 是类型，`SkillKind::Heal` 是一个有名字的枚举值，`kind` 是保存该值的变量。这里的 `enum class` 是**作用域枚举的组合语法**，不是在枚举里又创建普通类，也没有继承关系。
++
++传统 `enum` 会把枚举项名字带入外围作用域，且存在到整数的隐式转换；`enum class` 把名字放在枚举作用域里，不会随意隐式变成整数。它仍有底层整数表示，但不应把随便读到的整数强转后就当有效业务值。解析文件或网络输入时要验证是否属于允许集合。
++
++枚举只表达“是哪一种”，不会自动实现这类技能的行为。下一章先展示分支代码为什么会变多，之后才讨论何时需要多态。不要为了使用面向对象而消灭合理的小枚举。
++
++## 6. 后续陌生语法按需学习
++
++| 会遇到的写法 | 现在只需知道 | 正式解释位置 |
++| --- | --- | --- |
++| `Actor(int hp)` | 创建对象时执行的构造函数 | 第 2 章 |
++| `: hp_(hp)` | 构造函数的成员初始化列表 | 第 2 章 |
++| `const Actor&` | 通过只读引用借用现有对象，不复制对象 | 第 2、4 章 |
++| `throw`、`try`、`catch` | 报告失败并在另一个位置处理 | 第 2、3 章 |
++| `~Actor()` | 对象生命周期结束时执行的析构函数 | 第 3 章 |
++| `unique_ptr`、`std::move` | 独占所有权及其转移 | 第 4 章 |
++| `: public Skill` | 公共继承 | 第 5 章 |
++| `virtual`、`override` | 可替换行为与编译器检查 | 第 6 章 |
++
++遇到看不懂的符号，先定位这一层语法，而不是怀疑整段业务规则都不懂。后面的章节会在首次重要使用时解释它。
++
++## 课前验收
++
++自己写一个 `Score` 类，初值 0，提供公开的 `addOne()` 和 `value()`，把分数设为私有。创建两个对象，只修改其中一个，预测输出后运行。再把它放进 `namespace Game`，使用 `Game::Score` 创建对象。最后定义 `enum class RoundState { Ready, Running, Finished };`，保存一个当前回合状态。
++
++能说清“命名空间、类型、对象、成员、枚举值”各指什么，就可以进入主线；不需要在这一章就懂虚函数或设计模式。
++
++下一章：[从过程代码到对象边界](../01-why-oop/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/01-why-oop.md b/src/content/docs/knowledge/面向对象串讲/01-why-oop.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/01-why-oop.md
+@@ -0,0 +1,77 @@
++---
++title: "1. 从过程代码到对象边界"
++description: "从熟悉的 struct、STL 容器与 switch 出发，发现规则分散和需求扩展的问题。"
++sidebar:
++  order: 2
++---
++
++## 先承认：过程式代码完全可以工作
++
++假设我们写一个回合制游戏。最初只有一个角色和普通攻击，用结构体保存数据、函数执行规则，非常清晰：
++
++```cpp
++struct ActorData {
++    int hp = 100;
++    int armor = 8;
++};
++
++// 初版伤害规则；此处先忽略数值边界，下一章补齐。
++void attack(ActorData& target, int damage) {
++    target.hp -= damage;
++}
++```
++
++这里不需要为了“面向对象”立即造一个 `ActorManagerFactory`。程序规模小、规则简单时，直接表达问题通常最好。STL 本身也大量使用值、算法、迭代器和泛型，而不是要求你继承 `vector`。
++
++## 第一次变化：谁都能修改生命值
++
++增加护甲以后，攻击函数开始计算减伤；技能代码可能又自己写一遍；陷阱直接 `target.hp -= 30`；UI 为了调试把生命值设成负数。问题不是 `struct` 这个关键字不好，而是**合法状态没有一个稳定的维护入口**。
++
++```cpp
++ActorData boss;
++boss.hp = -999;         // 语法合法，业务状态却不合法。
++boss.armor = -5;        // 所有调用方都要记住不能这样写。
++```
++
++如果不变量是 `0 <= hp <= maxHp`，那么每个修改点都必须遵守。只靠口头约定，修改点越多，检查成本越高。封装要做的，是把保证规则的责任集中到可以检查的边界。
++
++![过程式修改点分散，与通过对象公开操作维护内部规则的对照](/qmx-Gameknowledge/assets/oop/boundary.svg)
++
++## 第二次变化：分支开始四处生长
++
++```cpp
++enum class SkillKind { Slash, Fireball };
++
++// 示意：不同界面和系统都根据同一个枚举分支。
++// 战斗系统：switch(kind) 决定怎样施放。
++// 提示系统：switch(kind) 决定如何描述。
++// 消耗系统：switch(kind) 决定扣什么资源。
++```
++
++加入 `Heal` 时，要找到所有相关分支。漏改其中一个，编译也许仍通过，运行时才发现治疗技能在 UI 中叫“未知技能”。我们开始寻找一个边界：能否由技能自身提供行为，让战斗循环只负责“发起一次施放”？
++
++这会引出多态，但不能立刻断言“所有 switch 都该删掉”。如果技能只是数值不同，可以用一份配置表和统一公式；如果类型集合固定且希望穷尽检查，可以考虑 `std::variant`；如果行为差异明显且需要独立扩展，虚接口才可能合适。
++
++## 三大特性究竟在帮什么忙
++
++| 概念 | 初学时容易记住的词 | 实际帮助 |
++| --- | --- | --- |
++| 封装 | private、public | 通过公开操作维护规则，让调用方少承担内部细节 |
++| 继承 | 冒号、父类、子类 | 表达可替换的类型关系，复用只是可能的附带效果 |
++| 多态 | virtual | 让调用代码依赖稳定契约，在运行时选择实际行为 |
++
++抽象贯穿其中：调用者知道“它能施放”，不必知道“它怎样施放”。抽象不是越模糊越好，而是保留当前协作所需的信息，隐藏可以独立改变的实现。
++
++## 什么才算一个对象
++
++一个战斗对象可以同时拥有状态（生命值）、行为（受伤、治疗）和约束（生命值不越界）。但不是所有类都必须三者齐全：坐标可以是简单值类型，技能接口可以没有状态，服务可以协调其他对象。
++
++从已有数据结构迁移时，可以这样理解：`vector<Actor>` 仍然负责顺序存储，`Actor` 负责单个角色的规则，战斗流程负责调用时机。它们是不同层次的职责，没有谁替代谁。
++
++## 用需求检验意义
++
++尝试在旧代码中加入“治疗不能超过最大生命值”。搜索所有 `hp` 写入点，并说明每个地方是否都要加判断。下一章把同一规则收进 `Actor::heal`，再比较需要记住的规则数量。
++
++**自测：把 `hp` 改成私有，再提供 `setHp(int)` 原样写入，算完成封装吗？** 只改变了访问形式，未维护不变量。是否封装成功，要看外部能否绕过业务规则，而不只看有没有 getter/setter。
++
++下一章：[类、封装与不变量](../02-encapsulation/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/02-encapsulation.md b/src/content/docs/knowledge/面向对象串讲/02-encapsulation.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/02-encapsulation.md
+@@ -0,0 +1,104 @@
++---
++title: "2. 类、封装与不变量"
++description: "掌握访问控制、构造函数、this、const 成员与接口边界，并实现可靠的生命值规则。"
++sidebar:
++  order: 3
++---
++
++## 把状态和规则放在同一边界里
++
++先认识错误处理语法：`throw std::invalid_argument("...")` 表示输入不符合要求，立即报告失败并离开正常路径。若调用处需要恢复，可以用 `try { ... } catch (const std::invalid_argument& error) { ... }` 捕获并处理；没有匹配处理时，异常继续向外传播。本章正常运行例子不触发异常。第 3 章再解释失败时对象如何清理。
++
++下面是独立可运行程序。所有生命值变化都通过明确操作进行：
++
++```cpp
++#include <algorithm>
++#include <iostream>
++#include <stdexcept>
++
++// 维护角色生命值；每次公开操作结束后都保持生命值范围合法。
++class Actor {
++public:
++    explicit Actor(int maxHp) : maxHp_(maxHp), hp_(maxHp) {
++        if (maxHp <= 0) throw std::invalid_argument("maxHp must be positive");
++    }
++
++    int hp() const noexcept { return hp_; }
++    bool alive() const noexcept { return hp_ > 0; }
++
++    // 返回实际扣除量，便于日志和 UI 使用同一结果。
++    int takeDamage(int amount) {
++        if (amount < 0) throw std::invalid_argument("negative damage");
++        const int applied = std::min(hp_, amount);
++        hp_ -= applied;
++        return applied;
++    }
++
++    // 先计算剩余空间，避免先 hp_ + amount 带来的有符号溢出。
++    int heal(int amount) {
++        if (amount < 0) throw std::invalid_argument("negative healing");
++        const int applied = std::min(maxHp_ - hp_, amount);
++        hp_ += applied;
++        return applied;
++    }
++
++private:
++    int maxHp_;
++    int hp_;
++};
++
++int main() {
++    Actor hero{100};
++    std::cout << hero.takeDamage(130) << ' ' << hero.hp() << '\n';
++    std::cout << hero.heal(500) << ' ' << hero.hp() << '\n';
++}
++```
++
++预期输出：
++
++```text
++100 0
++100 100
++```
++
++这份示例允许从 0 生命值治疗；若游戏禁止治疗死亡角色，应在 `heal` 中增加规则，并同步修改测试。**业务选择应写清楚，语言不会替你决定死亡是否可以逆转。**
++
++## 读懂声明中的每个部分
++
++`Actor{100}` 创建的是对象；`Actor` 是类型。每个对象拥有自己的非静态成员。`this` 表示当前对象的指针，`hp_` 在成员函数中通常等价于 `this->hp_`。普通非静态成员函数属于类型的行为实现，不是每个实例各复制一份机器码。
++
++`public` 是外部允许依赖的接口；`private` 限制普通调用方直接访问成员；`protected` 允许派生类访问，但会把内部表示暴露给更多代码。访问控制是编译期规则，不是加密或内存安全沙箱。
++
++`class` 默认成员和默认继承访问为私有，`struct` 默认公开；二者都能有构造、析构、虚函数和访问控制。常见约定是用 `struct` 表达简单公开数据，用 `class` 表达需要维护不变量的对象，这是一种风格选择。
++
++## 为什么用构造函数而不是先默认构造再 init
++
++构造函数把依赖与初始合法状态绑在一起。`Actor a; a.init(100);` 会引入“尚未初始化”的中间状态，每个使用点都要考虑它。若失败用异常表示，构造失败就不会得到一个可正常使用的完整 `Actor`。
++
++成员初始化列表在进入函数体前初始化成员。实际顺序按**类中声明顺序**，不是初始化列表书写顺序。`explicit` 阻止不希望发生的隐式转换，例如把整数不经说明地当成角色；直接构造 `Actor{100}` 仍合法。
++
++## const 不是“永久不变”的魔法
++
++`Actor&` 是现有角色的引用，可以理解为给同一个对象取别名，传参时不复制角色；`const Actor&` 表示只能通过这个别名进行只读操作。`Actor*` 是保存角色地址的指针，可能为空；通过指针访问成员使用 `->`，通过对象或引用使用 `.`。它们都不自动保证原对象仍然存活。
++
++```cpp
++const Actor& view = hero; // 接在上面 main 内使用。
++int current = view.hp();  // const 成员函数可被只读视图调用。
++// view.heal(1);          // 编译错误：不能通过 const Actor 调用非 const 成员。
++```
++
++`hp() const` 的 `const` 限制经由当前对象修改普通成员，不代表线程安全，也不保证它指向的外部对象完全不能变。`mutable` 和指针间接访问还需要独立理解。`noexcept` 表示函数承诺异常不会逃逸；逃逸会终止程序，因此不能给会抛异常的操作随意加它。
++
++## 把接口设计成动作，而不只是数据通道
++
++`setHp(0)` 不说明发生了什么；`takeDamage(20)` 能统一处理护盾、统计、死亡判定。getter 也需要考虑代价和泄露：返回内部 `vector&` 会让外部绕过所有检查；返回值更安全但可能复制；返回只读引用避免复制但受原对象生命周期限制。
++
++静态成员由类型共享，适合真正共享的常量或操作；把所有角色生命值写成 `static int hp_` 会让所有实例读写同一个生命值。静态函数没有 `this`，不能直接访问某个实例的普通成员。
++
++## 自测与练习
++
++1. 为什么 `hp_ = std::clamp(hp_ + amount, 0, maxHp_)` 仍有问题？先做的有符号加法可能溢出，clamp 无法事后修复未定义行为。
++2. 给角色增加护甲时，把护甲设为公开字段有什么代价？调用方可能制造负护甲，所有公式都需要防御。
++3. 独立增加 `maxHp()` 查询与“更改最大生命值”操作，明确当前生命值如何处理，再写出边界例子：0、负数、极大整数、满血和死亡。
++
++下一章：[对象生命周期与 RAII](../03-lifetime/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/03-lifetime.md b/src/content/docs/knowledge/面向对象串讲/03-lifetime.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/03-lifetime.md
+@@ -0,0 +1,94 @@
++---
++title: "3. 对象生命周期与 RAII"
++description: "区分存储和生命周期，理解构造析构顺序、异常清理与资源管理。"
++sidebar:
++  order: 4
++---
++
++## 变量出了作用域，发生了什么
++
++```cpp
++#include <iostream>
++#include <string>
++#include <utility>
++
++// 用日志观察对象的构造和析构，不代表日志应写进所有生产类。
++class Trace {
++public:
++    explicit Trace(std::string name) : name_(std::move(name)) {
++        std::cout << "+ " << name_ << '\n';
++    }
++    ~Trace() { std::cout << "- " << name_ << '\n'; }
++private:
++    std::string name_;
++};
++
++int main() {
++    Trace outer{"outer"};
++    {
++        Trace inner{"inner"};
++        std::cout << "work\n";
++    }
++    std::cout << "after\n";
++}
++```
++
++预期输出是 `+ outer`、`+ inner`、`work`、`- inner`、`after`、`- outer`，每项一行。可以据此画出作用域时间线：
++
++![构造、工作与逆序析构的时间线，同时展示异常退出仍清理已构造成员](/qmx-Gameknowledge/assets/oop/lifetime.svg)
++
++自动存储期对象通常实现于栈，但“局部变量”和“栈上全部数据”不能直接画等号。局部 `vector` 的控制对象与其动态分配的元素可以位于不同存储区域。C++ 的语义关键是对象何时开始和结束生命周期，而不是背“类一定在堆上”。
++
++## RAII：把资源释放绑到对象寿命
++
++RAII 的全称是 Resource Acquisition Is Initialization。让一个对象在构造过程中取得资源、在析构时释放资源，调用方就能借助作用域安排清理。资源不只是内存，还包括文件、互斥锁、网络句柄等。
++
++```cpp
++#include <fstream>
++#include <stdexcept>
++
++// 使用标准库资源对象；函数提前返回或抛异常时仍会关闭文件。
++void saveBattle() {
++    std::ofstream out{"battle.txt"};
++    if (!out) throw std::runtime_error("cannot open battle.txt");
++    out << "hp=100\n";
++    if (!out) throw std::runtime_error("write failed");
++} // out 的析构负责资源释放；需要确认持久化成功时还应显式检查关闭结果。
++```
++
++没有必要为所有标准库对象再造一个手写析构包装。`string`、`vector`、`unique_ptr` 已经在做资源管理。一个只包含这些成员的类通常可以不写析构函数，这就是后面会说的 Rule of Zero。
++
++## 为什么到处写 new/delete 容易错
++
++```cpp
++// 反例：中间的操作可能抛异常，导致最后的 delete 永远执行不到。
++// auto* p = new Resource;
++// operationThatMayThrow();
++// delete p;
++```
++
++`new` 通常包括取得存储和构造对象，`delete` 包括析构和释放对应存储。构造本身抛异常时，new 表达式取得的存储会得到相应清理；真正的常见漏洞是“构造成功后、手工 delete 之前”的多条退出路径。优先使用局部对象和拥有资源的标准库类型，不要把裸指针默认当所有者。
++
++## 构造与析构顺序
++
++派生对象的构造顺序是：虚基类（如有）→ 直接基类 → 按声明顺序的成员 → 当前构造函数体。析构反向进行：先执行当前析构函数体，再逆序析构成员和基类。
++
++如果某个成员构造失败，已经完整构造的基类和成员会析构；**当前完整对象的析构函数不会执行**，因为它没有构造完成。这正是资源应由成员 RAII 对象接管的原因，不能只指望最外层析构函数补救。
++
++析构函数一般不应让异常逃逸，尤其在另一异常正在展开栈时。把可能失败的业务提交设计成显式操作，并让析构承担可靠清理。`std::exit`、强制终止、进程崩溃等也不等同于正常作用域退出，不能宣称任何退出都会完整析构局部对象。
++
++## 两个特别容易留下悬空访问的接口
++
++```cpp
++// 错误示意：局部对象寿命结束后，返回的引用已悬空。
++// const Actor& makeActor() { Actor a{100}; return a; }
++
++// 正确方向：按值返回，由 C++ 的返回值优化/移动机制配合构造。
++// Actor makeActor() { return Actor{100}; }
++```
++
++返回引用不会自动延长任意局部对象寿命。另一个陷阱是保存 `vector` 元素地址后继续 `push_back`：扩容会让旧地址失效。对象还“在同一个容器”不代表原地址仍然有效。
++
++**练习：** 在上面 `inner` 创建后抛出 `std::runtime_error`，在 `main` 外层的 `try/catch` 中捕获，预测并运行析构日志。区分“已构造对象会清理”和“程序无论如何退出都会清理”。
++
++下一章：[复制、移动与所有权](../04-value-ownership/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/04-value-ownership.md b/src/content/docs/knowledge/面向对象串讲/04-value-ownership.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/04-value-ownership.md
+@@ -0,0 +1,84 @@
++---
++title: "4. 复制、移动与所有权"
++description: "把 C++ 的对象语义与 STL 容器连接起来，理解 Rule of Zero、智能指针和悬空引用。"
++sidebar:
++  order: 5
++---
++
++## 赋值到底复制了什么
++
++```cpp
++struct Inventory {
++    std::vector<std::string> items;
++};
++// 片段需要 <vector>、<string>。
++Inventory a{{"sword"}};
++Inventory b = a;
++b.items[0] = "staff"; // 不会修改 a 的字符串。
++```
++
++编译器生成的复制操作逐个复制成员；`vector<string>` 的复制创建独立的元素。并不能由此推出“类默认都是深拷贝”：若成员是裸指针，默认复制只复制地址；若是 `shared_ptr`，复制的是共享所有权；若是 `unique_ptr`，复制被禁止。
++
++![值复制、独占所有权移动与非拥有借用的关系图](/qmx-Gameknowledge/assets/oop/ownership.svg)
++
++## 先确定对象能否被复制，再写语法
++
++背包快照通常有独立复制的意义；一个代表已打开文件的独占句柄通常不应被默认复制；引用某个世界中角色的句柄又可能只是身份，不代表复制角色本体。复制语义由领域含义决定。
++
++| 形式 | 含义 | 释放责任 |
++| --- | --- | --- |
++| `T` | 直接拥有一个值 | 值的析构负责其成员 |
++| `T&` / `const T&` | 必须绑定一个对象，常用于借用 | 不负责释放，要保证被借用者仍活着 |
++| `T*` | 可以为空，常表达可选借用 | 裸指针本身不表达所有权 |
++| `unique_ptr<T>` | 独占动态对象 | 唯一所有者负责销毁 |
++| `shared_ptr<T>` | 共享动态对象的所有权 | 最后一个共享所有者离开时销毁对象 |
++| `weak_ptr<T>` | 观察共享对象，不延长对象寿命 | 使用前 `lock()` 获取临时所有权 |
++
++裸指针并非一律错误；错误是让调用方猜“这个指针应该 delete 吗”。引用也不是自动安全：不为空不代表不会悬空。
++
++## std::move 不是移动发动机
++
++```cpp
++auto first = std::make_unique<Actor>(100);
++// auto copied = first;        // 编译错误：独占所有者不可复制。
++auto second = std::move(first); // 转移所有权；此后 first 为空。
++// 片段需要 <memory>、<utility> 和上一章的 Actor 定义。
++```
++
++`std::move` 本身只是把表达式转换为可供移动操作选择的值类别。真正的资源转移由被调用的移动构造或移动赋值执行，也可能最终发生复制（例如某些 const 对象）。对 `unique_ptr`，移动后源为空；对很多标准库类型，只能一般地依赖“有效但状态未指定”，不能把字符串或 vector 移动后一定为空当普遍规则。自定义类型还要看它自己的移动后契约。
++
++同样不要把移动当性能保证。小值复制可能更简单；移动不总是 O(1)；是否选到移动操作还受类型、异常保证和容器实现约束。
++
++## Rule of Zero、Three、Five
++
++优先采用 Rule of Zero：资源放进 `vector`、`string`、`unique_ptr` 等成员，自己的业务类不手写析构、复制和移动。
++
++历史上的 Rule of Three 提醒你：若手写析构、复制构造、复制赋值之一来管理资源，另外两项通常也要审视。C++11 后加入移动构造和移动赋值，形成 Rule of Five。它们是设计提示，不是“每个类必须写五个函数”。
++
++```cpp
++// 示意：只表达移动的资源集合，使用默认操作保持成员自身的语义。
++class SkillBook {
++public:
++    SkillBook() = default;
++    SkillBook(const SkillBook&) = delete;
++    SkillBook& operator=(const SkillBook&) = delete;
++    SkillBook(SkillBook&&) noexcept = default;
++    SkillBook& operator=(SkillBook&&) noexcept = default;
++private:
++    std::vector<std::unique_ptr<Skill>> skills_; // Skill 需先完整定义。
++};
++```
++
++手写或声明析构函数会影响隐式移动操作的生成，不能以为“我只加了一个打印析构，其他都不变”。给移动加 `noexcept` 也要建立在成员操作确实不会抛出的前提上。
++
++## 容器、智能指针与地址稳定性
++
++`vector<Actor>` 扩容会移动或复制元素，元素地址可能失效。`vector<unique_ptr<Actor>>` 扩容移动的是智能指针，所拥有的 `Actor` 通常仍留在原处；但删除、reset 或销毁该所有者之后，角色地址仍然失效。智能指针不会修复所有外部裸指针。
++
++长期引用游戏实体时，可以考虑 ID 加代际计数，由注册表验证是否仍有效；这是另一种生命周期协议，并非“换成整数就没有悬空问题”。
++
++共享所有权也有成本：引用计数和复杂的释放时机。两个对象互持 `shared_ptr` 会形成环，外部所有者全放手仍可能无法释放；应把某个观察方向改成 `weak_ptr`，或重新划分唯一所有者。引用计数安全也不意味着对象内容可被多线程无同步修改。
++
++**自测：** 为什么战斗函数只调用技能一次时通常接收 `Skill&`，而不是按值接收 `shared_ptr<Skill>`？因为它通常只需要借用，不需要参与拥有；接口应表达实际责任。
++
++下一章：[组合、继承与可替换性](../05-composition/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/05-composition.md b/src/content/docs/knowledge/面向对象串讲/05-composition.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/05-composition.md
+@@ -0,0 +1,72 @@
++---
++title: "5. 组合、继承与可替换性"
++description: "用护甲和技能关系判断 has-a 与 is-a，避免为了复用代码建立脆弱继承树。"
++sidebar:
++  order: 6
++---
++
++## 角色有护甲，不是护甲的一种
++
++```cpp
++// 局部模型：护甲只负责把原始伤害换算为实际伤害。
++struct Armor {
++    int reduction = 0;
++    int reduce(int raw) const {
++        return raw <= reduction ? 0 : raw - reduction;
++    }
++};
++
++class Actor {
++    Armor armor_; // Actor has-an Armor：组合。
++    int hp_ = 100;
++};
++```
++
++本片段假设原始伤害和护甲非负；实际完整示例会校验。把护甲成员直接改成 `public`，就又让所有调用方承担数值合法性。封装边界可以是整个 `Actor`，也可以进一步是 `Armor` 自身；拆分类应服务于独立规则与复用需求，而不是为了让类数量多起来。
++
++组合表达“由什么构成”或“使用什么协作对象”。成员是值时，生命周期通常跟随外部对象；成员是拥有指针时，由外部对象的所有权策略决定；只是引用时，外部对象并不拥有它。画关系图时，要把拥有与借用分开。
++
++## 火球是一种技能：但必须满足契约
++
++如果调用方只知道“技能可对目标施放”，火球、斩击、治疗都可以提供自己的实现。这里才可能需要公共继承：
++
++```cpp
++class Skill {
++public:
++    virtual ~Skill() = default;
++    virtual void cast(Actor& target) const = 0;
++};
++
++class Fireball final : public Skill {
++public:
++    void cast(Actor& target) const override; // 在类外定义具体行为。
++};
++```
++
++公共继承的关键不是“派生类能访问基类代码”，而是**调用方可以把派生对象当作基类对象使用，仍然得到契约允许的行为**。这通常称为里氏替换原则（LSP）。
++
++如果 `Skill::cast` 承诺“任意合法角色都可以成为目标”，派生类却额外要求目标必须是某个特殊子类，并在其他情形崩溃，就破坏了可替换性。若确实有施放限制，应在接口契约中统一表达，例如 `canCast` 或返回明确失败结果。
++
++![继承树爆炸与组合技能、装备、移动能力的对比](/qmx-Gameknowledge/assets/oop/composition.svg)
++
++## 为什么“飞行且远程且火属性”不宜一直向下继承
++
++如果把特性组合全写进类型名，就会出现 `FlyingFireRangedEnemy`、`GroundIceRangedEnemy`……每个维度多一种取值，组合数都可能增长。共同实现也会散落在不同分支。
++
++更自然的方案通常是：角色拥有移动策略、攻击方式、装备和属性配置。新增“冰属性”修改属性或伤害策略，而不是复制一条继承支系。组合的成本是对象协作、配置和间接调用变多，需要清楚安排所有权，不能假装它没有代价。
++
++## protected、私有继承与多继承放在哪里
++
++- `protected` 数据会让派生类依赖基类内部表示。基类修改字段时，多个派生类可能一起受影响。通常优先公开或受保护的受控操作，而非裸露可写字段。
++- 私有继承不提供普通外部调用方所需的公共可替换关系，常用于实现技术。入门业务建模先用组合，遇到明确理由再研究它。
++- C++ 支持多继承，会引出多份基类子对象、歧义和菱形问题。虚继承可共享某个虚基类子对象，但增加构造与对象模型复杂度。它和“虚函数”不是一件事。
++
++本专题主线使用单继承的行为接口，避免让学习目标被复杂层次淹没。以后遇到多接口或既有框架，再带着真实约束分析。
++
++## 设计练习
++
++需求：怪物可以拿武器，玩家也可以拿武器，有些单位不会战斗。请不要先画 `WeaponActor`、`PlayerWeaponActor`。先回答：武器由谁拥有？装备槽是否允许为空？攻击需要知道角色全部内部状态吗？装备变化时哪些规则需要保持？
++
++**参考方向：** 角色组合可选装备；武器提供攻击相关能力；战斗流程通过明确接口使用它。只有当不同单位确实能遵守同一能力契约时，再抽出共同接口。名词相似不能单独证明继承关系。
++
++下一章：[虚函数、接口与动态多态](../06-polymorphism/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/06-polymorphism.md b/src/content/docs/knowledge/面向对象串讲/06-polymorphism.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/06-polymorphism.md
+@@ -0,0 +1,64 @@
++---
++title: "6. 虚函数、接口与动态多态"
++description: "从真实调用过程理解 virtual、override、纯虚函数、动态类型、虚析构和虚表的边界。"
++sidebar:
++  order: 7
++---
++
++## 调用代码怎么做到不认识每一种技能
++
++```cpp
++// Skill、Actor 的定义沿用前章；这里强调借用和分派。
++void perform(const Skill& skill, Actor& target) {
++    skill.cast(target);
++}
++```
++
++`perform` 编译时只知道 `Skill` 的接口。传入火球就执行火球的实现，传入治疗就执行治疗的实现。`skill` 的静态类型是 `const Skill&`，它所引用对象的动态类型可以是 `Fireball` 或其他派生类型。**通过基类指针或引用进行虚调用，才是这里要观察的动态多态。**
++
++![基类引用指向不同派生对象，虚调用进入各自 cast 实现](/qmx-Gameknowledge/assets/oop/dispatch.svg)
++
++非虚成员调用主要按静态类型选择；虚函数调用按虚调用规则选择动态类型对应的最终重写者。不要把它背成“所有函数都运行时查表”：编译器知道具体类型时可能去虚化，显式限定调用也会绕过虚分派。
++
++## 四个关键字的职责
++
++| 写法 | 表达什么 | 常见误解 |
++| --- | --- | --- |
++| `virtual` | 基类声明可被重写的行为 | 不是每个成员都需要 virtual |
++| `= 0` | 纯虚函数，使类型在相应条件下为抽象类 | 不代表派生类也不能有状态 |
++| `override` | 请求编译器确认确实重写了基类虚函数 | 签名写错时能阻止“以为重写成功” |
++| `final` | 禁止继续派生，或禁止某虚函数继续重写 | 表达边界，不是通用加速开关 |
++
++抽象类不能直接创建完整实例，但可以作为派生对象中的基类部分。基类指针和引用可以指向或引用完整派生对象。C++ 没有独立 `interface` 关键字，常用只含纯虚行为及合适析构的抽象基类表达接口。
++
++## 为什么必须讨论析构函数
++
++```cpp
++std::unique_ptr<Skill> skill = std::make_unique<Fireball>();
++```
++
++这一独占所有者销毁对象时，通过 `Skill*` 删除实际派生对象。对本专题这种普通基类删除方式，`Skill` 必须有可访问的虚析构函数，否则会导致未定义行为，不能只理解成“少打印一行派生析构”。
++
++常用设计是 `public virtual ~Skill() = default;`，允许通过基类销毁。另一种设计是受保护的非虚析构，明确禁止普通外部代码通过基类删除；它不适用于上面这种 `unique_ptr<Skill>` 默认删除器用法。纯虚析构即使写 `= 0`，仍然需要提供定义；入门接口直接使用默认虚析构最清楚。
++
++## 虚表能解释到什么程度
++
++常见 ABI 会为多态对象关联虚表指针，虚表记录相关虚函数入口；一次典型虚调用会经由这些信息找到实现。它帮助理解间接调用、对象可能变大以及为什么需要实际对象仍然存活。
++
++但 C++ 标准不要求所有实现采用完全相同的虚表形状，不保证指针数量、字段偏移和精确开销。多继承、虚继承、优化级别与平台 ABI 都可能影响布局。图中的一条箭头是语义关系，不是可移植的内存偏移。
++
++## 多态也有其他工具
++
++| 方案 | 适合的变化 | 要付出的代价 |
++| --- | --- | --- |
++| 普通函数与配置表 | 算法一致，参数不同 | 数据模式和规则解释器需要保持一致 |
++| 模板 | 编译时已知类型，需要泛型复用 | 编译依赖、错误信息和代码体积 |
++| `std::variant` + `visit` | 类型集合固定，希望显式覆盖 | 添加类型可能修改访问者 |
++| 虚接口 | 运行时选择行为，独立实现可扩展 | 生命周期、间接调用与接口演化 |
++| `std::function` | 把一个可调用行为作为参数保存 | 类型擦除，可能分配和捕获寿命问题 |
++
++动态多态的价值是把“使用行为”与“选择具体实现”分开，不是自动提升性能。若大量同质数据逐项虚调用成为瓶颈，先测量，再考虑按类型分组、批处理或数据布局调整。
++
++**自测：** 把参数写成 `Skill skill` 为什么不行？抽象类不能按值构造；即便基类可实例化，按值接收派生对象也会发生切片。下一章展开。
++
++下一章：[重载、重写与对象模型陷阱](../07-pitfalls/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/07-pitfalls.md b/src/content/docs/knowledge/面向对象串讲/07-pitfalls.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/07-pitfalls.md
+@@ -0,0 +1,92 @@
++---
++title: "7. 重载、重写与对象模型陷阱"
++description: "用短代码识别隐藏、切片、默认参数、构造期虚调用、悬空对象和错误向下转换。"
++sidebar:
++  order: 8
++---
++
++## 先把三个词分开
++
++重载（overload）是在同一名字下提供不同参数列表，调用时参与重载决议。重写（override）是派生类提供基类虚函数的实现，需要匹配相关签名规则。隐藏（hiding）是名字查找阶段，派生类同名声明遮住基类名字，未必与虚函数有关。
++
++```cpp
++struct Base {
++    void log(int) const {}
++    virtual void tick() const {}
++};
++
++struct Derived : Base {
++    using Base::log; // 把基类重载引入查找范围。
++    void log(const char*) const {}
++    void tick() const override {} // const 也必须匹配。
++    // void tick() override {}    // 错误：少 const，没有重写基类函数。
++};
++```
++
++删除 `using Base::log` 后，`Derived d; d.log(3);` 不会自动“再去基类找 int 版”，而会因可见候选不合适而失败。`using` 恢复候选集合，不会自动把非虚函数变成虚函数。
++
++## 坑一：按值保存基类导致切片
++
++```cpp
++#include <iostream>
++
++struct Base {
++    virtual ~Base() = default;
++    virtual const char* name() const { return "Base"; }
++};
++struct Derived : Base {
++    const char* name() const override { return "Derived"; }
++};
++
++int main() {
++    Derived d;
++    Base sliced = d;
++    const Base& borrowed = d;
++    std::cout << sliced.name() << '\n';   // Base
++    std::cout << borrowed.name() << '\n'; // Derived
++}
++```
++
++`sliced` 是一个新的完整 `Base`，只从原对象的基类部分构造，不再包含派生部分。`vector<Base>` 同样不能保留不同派生对象。需要多态所有权时可用 `vector<unique_ptr<Base>>`；需要复制多态对象时应明确设计 `clone` 等协议，不能偷偷共享替代独立复制。
++
++## 坑二：默认参数与虚调用不是同一套绑定规则
++
++```cpp
++struct Base {
++    virtual ~Base() = default;
++    virtual int cost(int n = 1) const { return n; }
++};
++struct Derived : Base {
++    int cost(int n = 2) const override { return n * 10; }
++};
++// Derived d; const Base& b = d;
++// b.cost() == 10；d.cost() == 20。
++```
++
++默认参数按调用点的静态类型选择，虚实现按动态分派选择。于是通过 `b` 调用时，把基类默认值 1 传给派生实现。建议把默认值放在稳定的非虚入口，或在调用处显式传参，避免上下文改变行为。
++
++## 坑三：构造和析构阶段不是完整派生对象的普通运行期
++
++基类构造函数内的虚调用不会进入尚未构造完成的派生层实现；基类析构期间，也不会像完整派生对象仍活着那样分派。不要依靠构造函数调用 `initVirtual()` 初始化派生字段。若需要分阶段创建，使用明确工厂或构造完成后的显式操作，并定义失败时如何清理。
++
++在构造或析构中对当前对象进行纯虚调用存在严格规则和未定义行为风险，本专题不运行这种反例。先遵守更清楚的设计约束：构造只建立自身有效状态，不调用需要完整派生状态的可重写行为。
++
++## 坑四：多态不延长对象寿命
++
++虚函数再正确，也不能对已经销毁的对象调用。`Skill*` 指向局部技能，函数返回后再施放，是悬空访问；技能缓存了 `Actor&`，角色先销毁，同样危险。下一次调用能“碰巧成功”不证明它合法。
++
++构造/析构顺序、容器失效规则和所有权图应该一起检查。异常安全也不能只看是否释放内存：若施放扣了魔法值却抛异常，效果尚未生效，是否要退还？这是业务事务契约，需要另行设计。
++
++## 坑五：强制转换掩盖错误抽象
++
++`static_cast<Derived*>` 不会替你验证运行时对象确实匹配；错误向下转换并使用会造成未定义行为。对多态类型使用 `dynamic_cast<Derived*>` 可以在失败时得到空指针；引用形式失败会抛 `std::bad_cast`。这些操作需要适合的多态基类和 RTTI 配置。
++
++如果每次拿到 `Skill&` 都先判断它是什么子类，再分支调用独有函数，说明你可能没有把调用方真正需要的行为放进契约。类型转换偶尔合理，但不应成为统一接口名义下的新一轮 switch。
++
++## 坑六：空指针、引用返回与整数边界
++
++`unique_ptr` 也可以为空；`vector<unique_ptr<T>>` 中有槽位不代表每个槽位都有对象。`const string&` 返回值的有效期受原对象约束；`string_view` 不拥有字符存储。`max(0, hp - damage)` 也不能修复减法已经发生的溢出。接口要定义空值、寿命和合法数值范围。
++
++**练习：** 为本章每个坑写一句“编译能否发现 / 运行可能怎样 / 推荐修复”。不要用执行未定义行为来证明哪一种现象“必然发生”。
++
++下一章：[从需求变化判断设计好坏](../08-design/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/08-design.md b/src/content/docs/knowledge/面向对象串讲/08-design.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/08-design.md
+@@ -0,0 +1,69 @@
++---
++title: "8. 从需求变化判断设计好坏"
++description: "让设计原则落在具体修改范围、测试边界和数据导向取舍上，避免过度设计。"
++sidebar:
++  order: 9
++---
++
++## 用三个变更请求检查设计
++
++拿到一张 UML 图，类之间箭头很整齐，不代表设计有效。真正的检查是：需求变化时，规则会在哪一处修改，哪几处需要重新验证，调用方需要知道多少内部细节？
++
++| 新需求 | 规则分散时 | 本专题的目标边界 |
++| --- | --- | --- |
++| 生命值不能超过上限 | 所有治疗点都补判断 | `Actor::heal` 维护统一约束 |
++| 添加治疗技能 | 战斗循环追加类型分支 | 新增技能实现，在组装处注册 |
++| 将减伤方式改为比例 | 所有攻击公式逐个修改 | 统一防御规则，验证相关调用 |
++
++“新增行为不改战斗循环”并不等于“不改任何文件”。构造与注册具体技能的地方仍需认识新类型；存档、UI、本地化若要求新信息，也可能要扩展对应数据契约。要讨论的是影响面是否合理，而不是追求零修改的口号。
++
++![组装处选择具体技能，战斗流程只依赖接口，技能再操作角色规则](/qmx-Gameknowledge/assets/oop/architecture.svg)
++
++## 单一职责：按变化原因组织
++
++角色维护生命值和受伤规则是一个合理的职责集合；把文件保存、网络连接、UI 排版、战斗计算全放进角色，会让不相关变化互相牵连。反过来，一个函数只有三行也不一定应拆成三个类。
++
++可以先问：“调整这个规则的人，需要同时理解哪些无关模块？”如果改伤害必须知道按钮颜色，边界很可能值得调整。拆分后还要有明确协作协议，不能只是把一个大文件变成相互调用的很多小文件。
++
++## 开闭原则：保护稳定流程，开放明确的变化点
++
++稳定的战斗循环按顺序调用 `cast`；不稳定的技能效果由实现提供。这是本例的扩展点。但如果真实变化只是 100 种伤害数值，建 100 个派生类就不如配置表。如果每个技能都需要大量特殊访问，原接口可能过窄，不能为保住接口而偷偷暴露全部内部对象。
++
++设计从已观察到的变化出发，避免预先构建万能插件系统。
++
++## 依赖倒置与依赖注入不等于框架
++
++战斗流程依赖 `Skill` 契约，而不是 `Fireball` 具体实现，这体现依赖倒置。由调用方把技能传进来，就是最朴素的依赖注入；不要求容器、反射或配置框架。
++
++测试时可以传入一个很简单的假技能，检查流程是否真的调用了它：
++
++```cpp
++// 接口与第 9 章完整例子一致；需要先引入 Skill、Actor、ostream。
++class CountingSkill final : public Skill {
++public:
++    explicit CountingSkill(int& calls) : calls_(calls) {}
++    void cast(Actor&, std::ostream&) const override { ++calls_; }
++private:
++    int& calls_; // 借用；计数器必须比假技能活得更久。
++};
++```
++
++把日志作为 `ostream&` 参数传入，练习时就能用 `ostringstream` 捕获输出，不必依赖屏幕。接口改变了一点点，却让验证更容易；这比引入一个庞大日志框架更适合当前规模。
++
++## 不要把所有业务都变成继承
++
++冷却、资源消耗和效果可以是独立维度。若每个技能都重复扣资源、查冷却和写日志，可以让施放服务处理共同流程，具体技能只产生效果。此时要定义失败结果、检查和生效顺序，防止半次施放。
++
++设计模式的名字可用于交流，但先说问题：策略用于替换行为，工厂用于集中构造决策，观察者用于订阅变化。观察者还会引出取消订阅、回调顺序和引用寿命，不能只看到“解耦”两个字。
++
++## 与已有 ECS 内容连接
++
++面向对象关注对象边界与协作；数据导向关注数据布局、访问模式和批量执行。在工厂游戏中，单个配方或编辑器服务可以采用对象设计，大量传送带物品的更新则可能按组件和连续数组批处理。它们可以出现在同一个项目中。
++
++虚接口增加间接调用和对象分散的可能性，但“改成 ECS 一定更快”也不成立。比较必须固定输入规模、规则、更新次数与编译条件，测量耗时、分配和缓存相关数据。本专题没有把架构整理当作性能测量。
++
++继续阅读时可在左侧“ECS 学习 → 工厂游戏的实现”和“Unity-Job与Burst”中对照已有专题：重点比较对象如何标识、数据存在哪里、行为由谁批量执行。
++
++**练习：** 设计一个火球数值配置，要求改伤害不新增类；再设计一个治疗技能，要求不改战斗循环。解释为什么两种需求采用不同扩展方式。
++
++下一章：[完整实践：可扩展战斗技能](../09-battle-lab/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/09-battle-lab.md b/src/content/docs/knowledge/面向对象串讲/09-battle-lab.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/09-battle-lab.md
+@@ -0,0 +1,215 @@
++---
++title: "9. 完整实践：可扩展战斗技能"
++description: "编译完整 C++17 战斗例子，跟踪数值与对象寿命，以实际变更验证面向对象的意义。"
++sidebar:
++  order: 10
++---
++
++## 先看运行目标
++
++目标角色有 100 生命值和 8 点固定护甲。按顺序施放原始伤害 20 的斩击、伤害 35 的火球、治疗量 25 的治疗：实际扣血依次为 12 和 27，再恢复 25，最终生命值为 86。
++
++这里火球也受护甲影响，这是为了保持单一、可验证的减伤规则，并不表示所有游戏都应如此。没有施法者、阵营、魔法值、冷却、暴击或异步效果；先把这一小条业务链做清楚。
++
++![完整回合数值轨迹：100 到 88 到 61，再治疗到 86](/qmx-Gameknowledge/assets/oop/battle-flow.svg)
++
++## 下载和编译
++
++[下载完整 battle.cpp](/qmx-Gameknowledge/examples/oop/battle.cpp)。文件包括所有头文件、类型、`main` 和边界断言，无须拼接其他章节。
++
++GCC / Clang：
++
++```bash
++g++ -std=c++17 -Wall -Wextra -Wpedantic battle.cpp -o battle
++./battle
++# 或使用 clang++ 替换 g++。
++```
++
++Windows 的 Visual Studio x64 开发者命令提示符：
++
++```bat
++cl /nologo /std:c++17 /EHsc /W4 /utf-8 battle.cpp /Fe:battle.exe
++battle.exe
++```
++
++预期输出如下；示例日志采用英文，便于在不同终端编码下比较：
++
++```text
++Slash -> Dummy: damage=12, hp=88
++Fireball -> Dummy: damage=27, hp=61
++Heal -> Dummy: healing=25, hp=86
++checks: passed
++```
++
++断言覆盖零伤害、护甲完全挡住攻击、极大伤害、极大治疗、满血治疗、负治疗输入以及整个回合的日志。请勿定义 `NDEBUG` 后误以为仍运行了 `assert` 检查；生产测试通常应使用独立测试框架。
++
++## 完整代码
++
++<!-- OOP_CPP_SOURCE -->
++
++```cpp
++// C++17：用角色规则、技能接口与独占所有权演示面向对象协作。
++#include <algorithm>
++#include <cassert>
++#include <iostream>
++#include <limits>
++#include <memory>
++#include <sstream>
++#include <stdexcept>
++#include <string>
++#include <utility>
++#include <vector>
++
++// 维护角色的不变量：最大生命值为正，生命值与护甲始终处于合法范围。
++class Actor {
++public:
++    Actor(std::string name, int maxHp, int armor)
++        : name_(std::move(name)), maxHp_(maxHp), hp_(maxHp), armor_(armor) {
++        if (maxHp <= 0 || armor < 0) {
++            throw std::invalid_argument("invalid actor stats");
++        }
++    }
++
++    const std::string& name() const noexcept { return name_; }
++    int hp() const noexcept { return hp_; }
++
++    // 防御只处理受伤，不修改技能本身；减法前先比较以避免整数溢出。
++    int takeDamage(int raw) {
++        if (raw < 0) throw std::invalid_argument("negative damage");
++        const int damage = raw <= armor_ ? 0 : raw - armor_;
++        const int applied = std::min(hp_, damage);
++        hp_ -= applied;
++        return applied;
++    }
++
++    // 本例允许从零生命值治疗；先算可恢复空间，避免 hp_ + amount 溢出。
++    int heal(int amount) {
++        if (amount < 0) throw std::invalid_argument("negative healing");
++        const int applied = std::min(maxHp_ - hp_, amount);
++        hp_ += applied;
++        return applied;
++    }
++
++private:
++    std::string name_;
++    int maxHp_;
++    int hp_;
++    int armor_;
++};
++
++// 技能只借用目标和输出流，不拥有它们；允许通过接口销毁具体技能。
++class Skill {
++public:
++    virtual ~Skill() = default;
++    virtual void cast(Actor& target, std::ostream& out) const = 0;
++};
++
++// 数值不同但算法相同的攻击共用一种实现，无需每个伤害值建立子类。
++class DamageSkill final : public Skill {
++public:
++    DamageSkill(std::string name, int power) : name_(std::move(name)), power_(power) {
++        if (power < 0) throw std::invalid_argument("negative power");
++    }
++    void cast(Actor& target, std::ostream& out) const override {
++        const int applied = target.takeDamage(power_);
++        out << name_ << " -> " << target.name() << ": damage=" << applied
++            << ", hp=" << target.hp() << '\n';
++    }
++private:
++    std::string name_;
++    int power_;
++};
++
++// 治疗拥有独立行为，通过同一契约参与战斗流程。
++class HealSkill final : public Skill {
++public:
++    explicit HealSkill(int power) : power_(power) {
++        if (power < 0) throw std::invalid_argument("negative power");
++    }
++    void cast(Actor& target, std::ostream& out) const override {
++        const int applied = target.heal(power_);
++        out << "Heal -> " << target.name() << ": healing=" << applied
++            << ", hp=" << target.hp() << '\n';
++    }
++private:
++    int power_;
++};
++
++// 流程只负责顺序调度；技能由调用方持有，目标在本次调用期间必须存活。
++void runRound(const std::vector<std::unique_ptr<Skill>>& skills,
++              Actor& target, std::ostream& out) {
++    for (const auto& skill : skills) {
++        if (!skill) throw std::invalid_argument("null skill");
++        skill->cast(target, out);
++    }
++}
++
++// 同时检查规则边界与统一调度；不依赖执行未定义行为来观察错误。
++void verifyRules() {
++    Actor edge{"Edge", 100, 8};
++    assert(edge.takeDamage(0) == 0);
++    assert(edge.takeDamage(8) == 0);
++    assert(edge.takeDamage(std::numeric_limits<int>::max()) == 100);
++    assert(edge.hp() == 0);
++    assert(edge.heal(std::numeric_limits<int>::max()) == 100);
++    assert(edge.heal(1) == 0);
++    bool rejected = false;
++    try { edge.heal(-1); }
++    catch (const std::invalid_argument&) { rejected = true; }
++    assert(rejected && edge.hp() == 100);
++
++    Actor dummy{"Dummy", 100, 8};
++    std::vector<std::unique_ptr<Skill>> skills;
++    skills.push_back(std::make_unique<DamageSkill>("Slash", 20));
++    skills.push_back(std::make_unique<DamageSkill>("Fireball", 35));
++    skills.push_back(std::make_unique<HealSkill>(25));
++    std::ostringstream captured;
++    runRound(skills, dummy, captured);
++    assert(dummy.hp() == 86);
++    assert(captured.str() ==
++        "Slash -> Dummy: damage=12, hp=88\n"
++        "Fireball -> Dummy: damage=27, hp=61\n"
++        "Heal -> Dummy: healing=25, hp=86\n");
++}
++
++// 组装处知道具体技能；扩展技能时修改这里，而不修改 runRound。
++int main() {
++    verifyRules();
++    Actor dummy{"Dummy", 100, 8};
++    std::vector<std::unique_ptr<Skill>> skills;
++    skills.push_back(std::make_unique<DamageSkill>("Slash", 20));
++    skills.push_back(std::make_unique<DamageSkill>("Fireball", 35));
++    skills.push_back(std::make_unique<HealSkill>(25));
++    runRound(skills, dummy, std::cout);
++    std::cout << "checks: passed\n";
++}
++```
++
++<!-- END_OOP_CPP_SOURCE -->
++
++## 沿调用链解释每一步
++
++1. `main` 是组装处：创建一个目标和三个技能对象。斩击与火球共享伤害算法，仅配置不同，因此用同一个 `DamageSkill` 类。
++2. `vector<unique_ptr<Skill>>` 负责保存并独占技能；容器不负责技能如何施放。不能复制独占指针，所以用 `make_unique` 创建并转移所有权。
++3. `runRound` 通过基类接口发起调用，不做 `if (name == "Fireball")`。它只借用目标、技能集合和输出流。
++4. `DamageSkill::cast` 请求 `Actor::takeDamage`。角色统一应用护甲和扣血上限，技能拿到实际扣除值后记录日志。
++5. `HealSkill::cast` 调用不同操作，但仍符合统一的施放契约。最大生命值不变量继续由角色维护。
++6. `main` 离开作用域时，技能容器先析构，独占指针通过虚析构销毁实际技能；目标随后析构。技能没有长期保存目标引用。
++
++本例把规则变化集中在角色、把行为变化放进技能、把调度次序留给流程。理解的是这些边界，而不是记住类名。
++
++## 用新需求证明设计是否有用
++
++**任务 A：加一种重击，伤害 50。** 在组装处再加一个 `DamageSkill("Heavy", 50)`。算法相同，无须创建新子类，也无须修改 `runRound`。在现有三个技能后追加时，角色从 86 扣 42，变成 44。
++
++**任务 B：加一个完全恢复生命值的技能。** 新建 `FullHealSkill`，在 `cast` 中调用 `target.heal(std::numeric_limits<int>::max())` 并写日志，然后在组装处注册。角色既有的溢出防护和上限规则仍然适用；不用开放 `hp_`，不用改战斗循环。
++
++**任务 C：生命值为零时禁止普通治疗。** 修改角色规则并更新对应断言，明确满血和死亡治疗的返回值。它是领域规则变化，应该影响使用该规则的所有技能；不要在每个治疗子类偷偷复制一份检查。
++
++## 当前模型的边界
++
++这是教学模型，没有保证整个回合的原子性：若后面的技能为空，前面已经生效的技能不会回滚；若日志流在状态改变后抛异常，数值也已经改变。真实项目需要明确是“每次施放独立提交”、允许部分成功，还是先验证整批并使用事务协议。
++
++不持有目标引用简化了寿命；异步投射物若要跨帧命中，必须重新设计目标标识和有效性校验。接口增长、存档协议、网络同步和线程安全也都需要真实需求驱动，不能由这一份示例推导出已经解决。
++
++下一章：[迁移到 C#，再连接 Unity](../10-csharp-bridge/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/10-csharp-bridge.md b/src/content/docs/knowledge/面向对象串讲/10-csharp-bridge.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/10-csharp-bridge.md
+@@ -0,0 +1,197 @@
++---
++title: "10. 迁移到 C#，再连接 Unity"
++description: "对照 C++ 理解 C# 的 class、struct、接口、虚调用、GC 与 Dispose，并给出同规则完整例子。"
++sidebar:
++  order: 11
++---
++
++## 先迁移设计，再核对语言语义
++
++角色维护数值不变量、技能提供可替换行为、流程依赖契约，这些设计思考仍然适用。但 C# 看起来相似的语法，未必保留 C++ 的复制和生命周期语义。
++
++![C++ 值复制、C# 类引用赋值、C# 结构体内引用成员的对照](/qmx-Gameknowledge/assets/oop/csharp.svg)
++
++| 关注点 | C++ | C# |
++| --- | --- | --- |
++| `class` 与 `struct` | 主要语言差别是默认访问权限 | class 是引用类型，struct 是值类型 |
++| 普通对象赋值 | 通常调用复制/移动相关操作 | class 变量赋值复制引用，struct 赋值复制字段 |
++| 多态入口 | virtual + 基类指针/引用 | virtual/abstract + override，或接口实现 |
++| 继承 | 支持多继承 | 类单继承，可实现多个接口；struct 不继承自定义类 |
++| 资源寿命 | 析构与 RAII 管理确定性清理 | GC 处理托管内存，using/Dispose 处理资源释放 |
++| 销毁语法 | `~T()` 是析构函数 | `~T()` 是终结器，不能当成作用域析构 |
++
++## 最重要的一处差别：赋值是不是独立对象
++
++```csharp
++var a = new Actor("Hero", 100, 8);
++var b = a;
++b.TakeDamage(20);
++Console.WriteLine(a.Hp); // 88：两个变量引用同一个角色。
++```
++
++与 C++ 的 `Actor b = a;` 形成对照。普通 C# 类赋值不会自动创建完整独立副本，也不能从 `new` 推导出“所有内部资源都属于这个变量”。
++
++结构体复制也不等于深拷贝：`struct Bag { public List<int> Items; }` 的两个副本包含同一个列表引用；修改列表内容会共享，替换其中一个副本的 `Items` 字段则不会替换另一个字段。结构体放在哪里与其复制语义是两件事，不要背成“struct 永远在栈上”。
++
++## virtual、override 与 new
++
++C# 普通类成员默认不是虚成员；基类要显式使用 `virtual` 或 `abstract`，派生类使用 `override`。`new` 成员隐藏不是动态重写，通过基类变量调用时行为可能不同。`sealed` 类禁止继续继承，`sealed override` 禁止继续重写该成员。
++
++接口实现提供同样的行为契约，下面完整例子用 `ISkill`。接口类型引用普通类对象不会因此自动复制对象；结构体转换为接口通常涉及装箱，泛型约束调用又可能避免装箱，需要结合具体代码分析，不能只看关键字。
++
++## GC 解决的不是全部生命周期
++
++GC 追踪托管对象可达性，并安排回收；它不会保证一个作用域结束时立刻回收，也不会替你正确安排文件、锁、原生缓冲或引擎资源的业务释放时机。
++
++```csharp
++// 使用完及时关闭文件；using 依据 Dispose 协议清理。
++using (var writer = new System.IO.StreamWriter("battle.txt"))
++{
++    writer.WriteLine("hp=100");
++}
++```
++
++`Dispose` 不等于强制 GC；普通托管类没有外部资源时也不需要为了模仿 C++ 额外实现 `IDisposable`。C# 基类构造期间调用虚成员可能进入派生实现，此时派生对象尚未完成构造，这与 C++ 的分派规则不同，但同样应避免依赖未完成对象的可重写行为。
++
++## 同规则的完整 C# 例子
++
++[下载 Battle.cs](/qmx-Gameknowledge/examples/oop/Battle.cs)。在安装 .NET SDK 的终端中，新建一次性控制台项目，将下载文件替换 `Program.cs`：
++
++```bash
++dotnet new console -o OopBattle
++# 将 Battle.cs 的内容替换到 OopBattle/Program.cs，不要同时保留另一份带 Main 的文件。
++dotnet run --project OopBattle
++```
++
++它与上一章输出相同的三条施放日志和 `checks: passed`。最后额外检查引用赋值：通过别名治疗目标后，原变量观察到生命值变为 100。这里没有使用释放型资源，因此不需要 `Dispose` 或终结器。
++
++<!-- OOP_CS_SOURCE -->
++
++```csharp
++// C#：与 C++ 完整例子保持相同规则，展示引用类型和接口调用。
++using System;
++using System.Collections.Generic;
++using System.IO;
++
++// 普通托管角色；访问权限与规则约束仍由类自己维护。
++public sealed class Actor
++{
++    public string Name { get; }
++    public int Hp { get; private set; }
++    private readonly int maxHp;
++    private readonly int armor;
++
++    public Actor(string name, int maxHp, int armor)
++    {
++        if (maxHp <= 0 || armor < 0)
++            throw new ArgumentOutOfRangeException(nameof(maxHp));
++        Name = name;
++        this.maxHp = maxHp;
++        Hp = maxHp;
++        this.armor = armor;
++    }
++
++    // 与 C++ 使用相同的比较后减法规则。
++    public int TakeDamage(int raw)
++    {
++        if (raw < 0) throw new ArgumentOutOfRangeException(nameof(raw));
++        int damage = raw <= armor ? 0 : raw - armor;
++        int applied = Math.Min(Hp, damage);
++        Hp -= applied;
++        return applied;
++    }
++
++    // 先计算可恢复空间；不要依赖整数溢出行为维持业务约束。
++    public int Heal(int amount)
++    {
++        if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
++        int applied = Math.Min(maxHp - Hp, amount);
++        Hp += applied;
++        return applied;
++    }
++}
++
++// 接口约束行为；本例对象不持有需要确定性释放的外部资源。
++public interface ISkill
++{
++    void Cast(Actor target, TextWriter output);
++}
++
++// 相同算法通过数值配置复用。
++public sealed class DamageSkill : ISkill
++{
++    private readonly string name;
++    private readonly int power;
++    public DamageSkill(string name, int power)
++    {
++        if (power < 0) throw new ArgumentOutOfRangeException(nameof(power));
++        this.name = name;
++        this.power = power;
++    }
++    public void Cast(Actor target, TextWriter output)
++    {
++        int applied = target.TakeDamage(power);
++        output.WriteLine($"{name} -> {target.Name}: damage={applied}, hp={target.Hp}");
++    }
++}
++
++// 新行为独立实现，不要求改变调度函数。
++public sealed class HealSkill : ISkill
++{
++    private readonly int power;
++    public HealSkill(int power)
++    {
++        if (power < 0) throw new ArgumentOutOfRangeException(nameof(power));
++        this.power = power;
++    }
++    public void Cast(Actor target, TextWriter output)
++    {
++        int applied = target.Heal(power);
++        output.WriteLine($"Heal -> {target.Name}: healing={applied}, hp={target.Hp}");
++    }
++}
++
++// 组装、调度与示例断言；普通对象赋值复制引用，不复制角色。
++public static class Program
++{
++    private static void RunRound(IEnumerable<ISkill> skills, Actor target, TextWriter output)
++    {
++        foreach (ISkill skill in skills)
++        {
++            if (skill == null) throw new ArgumentException("null skill");
++            skill.Cast(target, output);
++        }
++    }
++
++    public static void Main()
++    {
++        var target = new Actor("Dummy", 100, 8);
++        var skills = new List<ISkill>
++        {
++            new DamageSkill("Slash", 20),
++            new DamageSkill("Fireball", 35),
++            new HealSkill(25)
++        };
++        RunRound(skills, target, Console.Out);
++        if (target.Hp != 86) throw new Exception("unexpected hp");
++        var alias = target;
++        alias.Heal(int.MaxValue);
++        if (target.Hp != 100) throw new Exception("reference copy check failed");
++        Console.WriteLine("checks: passed");
++    }
++}
++```
++
++<!-- END_OOP_CS_SOURCE -->
++
++## 接到 Unity 时多加一层引擎生命周期
++
++普通 C# `Actor`、`ISkill` 可以作为与引擎无关的规则层；`MonoBehaviour` 负责接收输入、生命周期消息和展示。不要用 `new SomeMonoBehaviour()` 当普通规则对象构造，组件通常由场景、预制体或 `AddComponent` 创建。
++
++`Destroy` 处理 Unity 原生对象，与托管包装的 GC 不是同一个过程；Unity 重载的相等比较也使“被销毁对象”的判空与普通引用有所区别。订阅事件后如果忘记取消，订阅者可能被发布者长期引用。对象池则会引入“对象还存在，但已经代表另一次使用”的状态复位问题。
++
++本章的 .NET 控制台示例不等于已经验证 Unity 生命周期。继续阅读：[类型、赋值与参数传递](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/02-types-and-copy/)、[所有权、借用与释放](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/06-ownership-and-disposal/)。
++
++**练习：** 把 C++ 与 C# 的角色复制各画成一张图，再解释：修改生命值、替换变量引用、把对象移出列表，这三种动作分别影响什么？
++
++下一章：[排坑速查、自测与讲授安排](../11-review/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/11-review.md b/src/content/docs/knowledge/面向对象串讲/11-review.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/11-review.md
+@@ -0,0 +1,102 @@
++---
++title: "11. 排坑速查、自测与讲授安排"
++description: "用具体代码、变更练习和六次串讲安排复盘面向对象，不以背诵术语代替理解。"
++sidebar:
++  order: 12
++---
++
++## 先按四条线复述专题
++
++**规则线：** 数据结构能存数据，但不会自动保证业务合法。公开操作维护不变量，调用方因此少承担细节。
++
++**变化线：** 行为差异明显时可建立稳定接口；参数差异用配置；特性组合优先分析组合关系，不把每个维度扩成继承树。
++
++**寿命线：** 所有者、借用者、对象存储、引用有效期必须分清。C++ 的值复制与 C# 的类引用赋值不可混用。
++
++**取舍线：** 虚调用、对象分散、配置复杂度和测试成本都是真实代价；不凭架构名字宣布更快或更高级。
++
++## 常见坑速查表
++
++| 现象 | 核心原因 | 检查与修复方向 |
++| --- | --- | --- |
++| 生命值有时变成负数 | 写入点绕过统一规则，或算术先溢出 | 收拢修改入口，先比较再做有界运算 |
++| 以为重写，实际没调用 | 签名不匹配，尤其漏 const | 使用 override，区分静态与动态类型 |
++| 派生对象放进容器后“变回基类” | 按值发生对象切片 | 多态借用或明确的多态所有权 |
++| 析构不符合预期 | 基类删除缺少正确虚析构等 | 按删除方式设计析构契约，不运行 UB 猜结果 |
++| 添加析构后不能移动 | 特殊成员生成规则改变 | 审视 Rule of Zero/Five，显式声明需要的语义 |
++| 扩容后旧指针失效 | vector 元素存储变化 | 不跨失效点保存地址，或采用适合的拥有布局 |
++| shared_ptr 全放手却仍泄漏 | 环形共享所有权 | 唯一所有者或 weak_ptr 观察边 |
++| 移动后继续使用原资源 | 误解源对象状态或转移责任 | 遵守该类型的移动后契约 |
++| new 子类被强转后崩溃 | 实际类型不匹配 | 契约设计优先，必要时检查 dynamic_cast |
++| C# 复制后两个角色一起变 | 类赋值只复制引用 | 明确定义独立复制，或承认别名共享 |
++| using 退出仍有对象引用 | 误把 Dispose 当 GC | 分开资源释放与托管内存可达性 |
++| Unity 对象池复用出现旧状态 | 生命周期不等于一次业务使用 | 明确重置、解绑、目标有效性检查 |
++
++## 先作答，再展开答案
++
++<details>
++<summary>1. 只要把字段设为 private，再补全部 getter/setter，就一定封装良好吗？</summary>
++
++不一定。如果 setter 允许任何值或 getter 返回内部可写引用，外部仍可破坏规则。封装的判断依据是不变量是否由稳定边界维护。
++</details>
++
++<details>
++<summary>2. 为什么治疗和攻击可以实现同一接口，但护甲不该继承角色？</summary>
++
++治疗和攻击都能遵守“对目标施放”的契约；护甲与角色是组成关系，不能作为一个完整角色替换进去。继承需要可替换性，不能只为了拿到字段。
++</details>
++
++<details>
++<summary>3. const Skill& 调用了派生实现，说明引用复制了派生对象吗？</summary>
++
++没有。引用借用原对象，虚调用按动态类型选择行为。它不拥有对象，也不延长任意被引用对象的寿命。
++</details>
++
++<details>
++<summary>4. C++ 类里有一个 vector，就必须手写析构吗？</summary>
++
++通常不需要。vector 自己管理资源，生成的析构会销毁成员；优先遵守 Rule of Zero。手写析构反而可能改变隐式移动操作生成。
++</details>
++
++<details>
++<summary>5. 添加治疗技能只改注册代码，算不算违反开闭原则？</summary>
++
++不算。组装处的职责就是选择具体实现。目标是让稳定战斗流程不依赖每种具体技能，而不是新增功能完全不改任何代码。
++</details>
++
++<details>
++<summary>6. C# 的 struct 含 List，复制后列表一定独立吗？</summary>
++
++不一定。复制结构体字段，其中 List 字段是引用，两个副本共享同一个列表对象；替换一个副本中的引用则只改变该字段。
++</details>
++
++## 一次语法预备课 + 六次串讲建议
++
++| 次数 | 讲授主线 | 课堂动手 | 完成标志 |
++| --- | --- | --- | --- |
++| 预备课 | 第 0 章：namespace、struct、class、enum | 创建两个计数器，用作用域限定名字 | 能区分类型、对象和命名空间 |
++| 1 | 第 1～2 章：为什么需要对象边界 | 给受伤和治疗加入合法范围 | 能解释为什么不是机械 setter |
++| 2 | 第 3～4 章：生命周期与所有权 | 预测析构日志、转移 unique_ptr | 能画拥有与借用图 |
++| 3 | 第 5～6 章：组合与多态 | 替换技能实现，保持流程不变 | 能区分组合关系和可替换关系 |
++| 4 | 第 7 章：逐个排坑 | 解释切片与默认参数输出 | 能区分编译错误与未定义行为 |
++| 5 | 第 8～9 章：用变更验证设计 | 完成重击与完整治疗任务 | 能指出合理修改范围和成本 |
++| 6 | 第 10～11 章：C# 对照与复盘 | 运行同规则例子，比较赋值 | 能解释 GC、Dispose 与 RAII 的边界 |
++
++每次可按“10 分钟回顾 → 25 分钟图解 → 20 分钟预测并编码 → 15 分钟讨论需求变更”安排；根据学员指针与异常基础调整，不强行在一次课中堆完所有概念。
++
++## 综合作业：带护盾的目标
++
++要求增加护盾：先扣护盾，再按现有护甲规则处理剩余伤害；治疗只恢复生命值。先写清楚这个顺序，不能把“护甲优先”当成默认。决定护盾属于角色内部状态还是独立组件，并解释原因。
++
++交付：一张对象关系图、公开接口说明、所有权表、可运行代码和边界结果。至少验证无护盾、护盾恰好抵消、部分穿透、零伤害、极大输入、生命值归零与满血治疗。若更改返回值来同时报告护盾吸收和生命损失，应说明日志与调用方如何迁移。
++
++评价时看规则是否集中、状态是否合法、寿命是否清楚、新功能是否迫使无关模块改变，不按类数量或设计模式名称评分。
++
++## 继续深入
++
++- 回看知识库中 C++ 八股，针对本次不熟悉的虚函数、特殊成员和指针题查漏。
++- 学 C# 时继续 [C# 与 Unity 内存基础](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/目录/)，再进入 C# 底层专栏。
++- 做大量实体更新时再对照 Unity Job、Burst 与 ECS：先画数据访问模式，再测性能。
++- 查精确语言规则可阅读 [cppreference：类](https://en.cppreference.com/w/cpp/language/classes)、[虚函数](https://en.cppreference.com/w/cpp/language/virtual)、[智能指针](https://en.cppreference.com/w/cpp/memory) 与 [Microsoft C# 文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/)。
++
++返回：[专题目录](../目录/)。
+diff --git a/src/content/docs/knowledge/面向对象串讲/目录.md b/src/content/docs/knowledge/面向对象串讲/目录.md
+new file mode 100644
+--- /dev/null
++++ b/src/content/docs/knowledge/面向对象串讲/目录.md
+@@ -0,0 +1,52 @@
++---
++title: "面向对象串讲：从 C++ 到 C#"
++description: "面向学过 C++ 基础、STL 和基础数据结构的学员，用战斗系统串起封装、组合、多态、生命周期与设计取舍。"
++sidebar:
++  order: 0
++---
++
++## 学了数据结构，为什么还要学面向对象？
++
++你已经会用 `vector` 保存敌人、用 `unordered_map` 查技能、用队列处理事件。现在的问题变了：**这些数据允许谁修改？怎样保证角色生命值合法？新增一种技能时，为什么战斗、UI、存档都要一起改？对象被移除后，谁还握着它的地址？**
++
++数据结构帮助我们组织数据，算法帮助我们处理数据；面向对象进一步帮助我们组织**状态、规则、协作边界与变化**。它不保证程序更快，也不是把所有函数塞进 `class`。本专题希望你能用具体需求说明“这里为什么需要这个类”，并能在不合适时选择普通函数、值类型或数据导向方案。
++
++![学习地图：从会使用容器，到管理规则、替换行为和控制生命周期](/qmx-Gameknowledge/assets/oop/roadmap.svg)
++
++## 前置知识与约定
++
++默认你学过 C++ 基础、STL 和基础数据结构；**不假设你学过 `class`、`namespace`、`enum`，也不把构造函数、异常、智能指针当成已知知识**。第 0 章先补命名、类型与作用域，后续章节再逐步引入对象语法。引用、指针和 const 会在使用时提醒含义。代码采用 **C++17**，使用标准库，不依赖游戏引擎。图是语义示意，不代表某个编译器的精确内存布局。
++
++各章代码分为两种：带 `main` 和头文件的可运行程序，以及只展示当前概念的局部片段。局部片段需要放进对应上下文，不能逐段当独立文件编译。第 9 章提供独立、可下载的完整战斗示例；错误代码会明确标记，涉及未定义行为的例子只解释，不要求运行。
++
++## 按一条业务线串讲
++
++我们从“角色受到伤害”开始，让需求逐步变化：保证生命值合法 → 增加护甲 → 增加不同技能 → 统一施放 → 明确角色和技能的所有权 → 添加治疗技能而不修改战斗循环。每一步都先看问题，再引出语法和设计，最后检查新方案的成本。
++
++| 顺序 | 章节 | 核心问题与产出 |
++| --- | --- | --- |
++| 0 | [语法起步：命名空间、枚举和第一个类](../00-first-types/) | 不预设 class、namespace、enum 基础，从可运行小程序开始 |
++| 1 | [从过程代码到对象边界](../01-why-oop/) | 为什么 `struct + vector + switch` 会开始难维护？ |
++| 2 | [类、封装与不变量](../02-encapsulation/) | 谁能改生命值？怎样让对象从出生起就合法？ |
++| 3 | [对象生命周期与 RAII](../03-lifetime/) | 构造、析构、异常和资源释放如何连成一条线？ |
++| 4 | [复制、移动与所有权](../04-value-ownership/) | 赋值复制什么？智能指针解决了哪一部分问题？ |
++| 5 | [组合、继承与可替换性](../05-composition/) | “有一个”和“是一种”怎样判断？ |
++| 6 | [虚函数、接口与动态多态](../06-polymorphism/) | 为什么基类引用能调用不同技能？虚表到底解释什么？ |
++| 7 | [重载、重写与对象模型陷阱](../07-pitfalls/) | 隐藏、切片、构造期虚调用等坑怎么识别？ |
++| 8 | [从需求变化判断设计好坏](../08-design/) | 开闭原则、依赖倒置、测试替身究竟有什么实际作用？ |
++| 9 | [完整实践：可扩展战斗技能](../09-battle-lab/) | 编译、运行、观察输出，并独立扩展一个技能 |
++| 10 | [迁移到 C#，再连接 Unity](../10-csharp-bridge/) | 相似语法下，复制、虚调用、资源和引擎生命周期有何不同？ |
++| 11 | [排坑速查、自测与讲授安排](../11-review/) | 用代码判断题与变更任务检验是否真的理解 |
++
++第一轮建议先用一次课学习第 0 章，再分 6 次串讲，每次 60～90 分钟，讲授安排见最后一章。不要只背三大特性；每读一章，画出对象关系、预测一段输出，再动手修改需求。
++
++## 和现有知识库怎么衔接
++
++- C++ 基础与面试查漏：[C++ 八股](/qmx-Gameknowledge/knowledge/八股/c/)。该页面路由由站点 slug 生成，导航中也能找到“八股 → c++”。
++- C# 入门语义：[C# 与 Unity 内存基础](/qmx-Gameknowledge/knowledge/csharp与unity内存基础/目录/)，重点接着读类型复制和所有权章节。
++- 底层深入：[对象模型与虚调用](/qmx-Gameknowledge/knowledge/csharp底层专栏/05-与c对照/01-对象模型与虚调用/)，先掌握语义，再研究实现。
++- 架构对照：[工厂游戏中的实体与组件](/qmx-Gameknowledge/knowledge/ecs学习/工厂游戏的实现/01-实体与组件/01-entitycomponent-与建筑组合/)。ECS 与面向对象解决的问题有交集，但组织数据和执行行为的方式不同。
++
++## 最终验收
++
++读完后，你应能解释每个成员为何公开或私有、每个资源由谁释放、每个基类承诺了什么；在添加新技能时指出哪些文件要改，并说出为什么没有改变战斗循环；还能解释为什么数十万单位的批处理可能需要另一种布局。能完成这些，才是理解了这部分知识的意义。

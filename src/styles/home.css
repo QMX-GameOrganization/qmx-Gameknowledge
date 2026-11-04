@@ -1,0 +1,50 @@
+/* 主页沿用全站主题令牌；不绑定某一种配色，亮暗主题共用同一套层次。 */
+.qmx-home { --home-surface: color-mix(in srgb, var(--qmx-panel) 90%, transparent); }
+.qmx-home :is(h2, h3, p, ul, ol) { margin: 0; }
+.qmx-home a { color: var(--qmx-link); text-decoration: none; }
+.qmx-home a:hover { text-decoration: underline; text-underline-offset: .25em; }
+.qmx-home a:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 5px; border-radius: 3px; }
+.home-summary { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding: 1.4rem 0; margin-bottom: 4rem; border-block: 1px solid var(--qmx-border); color: var(--qmx-muted); font-size: .85rem; }
+.home-summary strong { color: var(--qmx-strong); font-size: 1.4rem; font-variant-numeric: tabular-nums; padding-right: .3rem; }
+.summary-note { margin-inline-start: auto; align-self: center; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.eyebrow { color: var(--qmx-link); font-size: .72rem; letter-spacing: .14em; font-weight: 600; }
+.qmx-home h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.4; margin-top: .5rem; }
+.section-heading > p { color: var(--qmx-muted); font-size: .9rem; }
+.knowledge-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+/* 抵消 Markdown 容器给相邻块添加的段落间距，保持网格顶线一致。 */
+.qmx-home .knowledge-grid > * { margin-top: 0; }
+.knowledge-card { display: flex; flex-direction: column; min-width: 0; padding: 1.6rem; border: 1px solid var(--qmx-border); border-radius: var(--qmx-radius); background: linear-gradient(145deg, color-mix(in srgb, var(--qmx-accent) 5%, var(--qmx-panel)), var(--home-surface)); transition: border-color .2s ease; }
+.knowledge-card:hover { border-color: var(--qmx-link); }
+.card-meta { display: flex; justify-content: space-between; gap: .5rem; color: var(--qmx-muted); font-size: .75rem; letter-spacing: .05em; }
+.card-meta > :first-child { color: var(--qmx-link); font-family: ui-monospace, monospace; }
+.qmx-home h3 { color: var(--qmx-strong); font-size: 1.15rem; line-height: 1.5; }
+.knowledge-card h3 { margin-top: 1.4rem; }
+.knowledge-card > p { color: var(--qmx-muted); font-size: .88rem; line-height: 1.9; margin: .7rem 0 1.6rem; }
+.knowledge-card ul { list-style: none; padding: 0; }
+.knowledge-card .article-preview { margin-top: 1.2rem; }
+.knowledge-card li + li { margin-top: .7rem; }
+.knowledge-card a { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; font-size: .88rem; }
+.category-nav { display: flex; flex-wrap: wrap; gap: .6rem; margin-block: 1.5rem 3rem; }
+.category-nav a { display: flex; gap: .7rem; align-items: center; padding: .65rem .9rem; border: 1px solid var(--qmx-border); border-radius: .5rem; background: var(--home-surface); font-size: .85rem; }
+.category-nav a span { color: var(--qmx-muted); font-size: .75rem; }
+.qmx-home .topic-section { margin-top: 3rem; scroll-margin-top: 6rem; }
+.topic-section .section-heading h2 { font-size: 1.4rem; }
+.knowledge-card h3 a { color: var(--qmx-strong); font-size: 1.05rem; }
+.qmx-home .article-list { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--qmx-border); }
+.article-list summary { cursor: pointer; color: var(--qmx-link); font-size: .82rem; }
+.article-list summary:focus-visible { outline: 2px solid var(--qmx-link); outline-offset: 4px; }
+.article-list ul { margin-top: 1rem; }
+.article-list a { overflow-wrap: anywhere; }
+/* 方块主题沿用其棱角语言，而不是强加圆润卡片。 */
+:root[data-qmx-theme='pixel'] .qmx-home, :root[data-qmx-theme='blocks'] .qmx-home { --qmx-radius: 3px; }
+@media (max-width: 64rem) { .knowledge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .summary-note { margin-inline-start: 0; } }
+@media (max-width: 40rem) {
+  .knowledge-grid { grid-template-columns: minmax(0, 1fr); }
+  .section-heading { align-items: start; flex-direction: column; }
+  .home-summary { gap: .8rem 1.2rem; margin-bottom: 2.5rem; }
+  .knowledge-card { padding: 1.3rem; }
+  .category-nav { gap: .5rem; }
+  .category-nav a { padding: .5rem .7rem; font-size: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) { .knowledge-card { transition: none; } }

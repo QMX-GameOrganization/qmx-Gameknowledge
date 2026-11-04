@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="532" viewBox="0 0 1000 532" role="img" aria-labelledby="title desc">
+<title id="title">稳定流程与变化点分开</title><desc id="desc">注册处认识具体类型，使用处依赖行为契约。。开闭原则保护稳定边界，不承诺新增功能零修改。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="532" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">稳定流程与变化点分开</text>
+<text x="32" y="77" font-size="17" fill="#495b73">注册处认识具体类型，使用处依赖行为契约。</text>
+<rect x="32" y="105" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" font-weight="700" fill="#285caa">组装 main</text>
+<text x="48" y="170" font-size="17" fill="#23364e">选择 DamageSkill</text>
+<text x="48" y="196" font-size="17" fill="#23364e">选择 HealSkill</text>
+<text x="48" y="222" font-size="17" fill="#23364e">用 unique_ptr 持有</text>
+<path d="M322 177H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="105" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="137" font-size="20" font-weight="700" fill="#176951">调度 runRound</text>
+<text x="374" y="170" font-size="17" fill="#23364e">顺序借用每个 Skill</text>
+<text x="374" y="196" font-size="17" fill="#23364e">不按技能名字分支</text>
+<text x="374" y="222" font-size="17" fill="#23364e">不拥有目标和日志流</text>
+<path d="M648 177H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="105" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="137" font-size="20" font-weight="700" fill="#8c5315">契约 Skill</text>
+<text x="700" y="170" font-size="17" fill="#23364e">cast(Actor&amp;, ostream&amp;)</text>
+<text x="700" y="196" font-size="17" fill="#23364e">具体技能提供效果</text>
+<text x="700" y="222" font-size="17" fill="#23364e">公开虚析构负责正确销毁</text>
+<rect x="32" y="281" width="284" height="144" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="313" font-size="20" font-weight="700" fill="#285caa">数值变化</text>
+<text x="48" y="346" font-size="17" fill="#23364e">20 → 50</text>
+<text x="48" y="372" font-size="17" fill="#23364e">修改配置参数</text>
+<text x="48" y="398" font-size="17" fill="#23364e">不新建一个伤害子类</text>
+<path d="M322 353H350" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="358" y="281" width="284" height="144" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="374" y="313" font-size="20" font-weight="700" fill="#176951">行为变化</text>
+<text x="374" y="346" font-size="17" fill="#23364e">攻击 → 治疗</text>
+<text x="374" y="372" font-size="17" fill="#23364e">新增实现 + 组装注册</text>
+<text x="374" y="398" font-size="17" fill="#23364e">不修改稳定调度循环</text>
+<path d="M648 353H676" stroke="#66758d" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="684" y="281" width="284" height="144" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="700" y="313" font-size="20" font-weight="700" fill="#8c5315">领域规则变化</text>
+<text x="700" y="346" font-size="17" fill="#23364e">生命值上限 / 护甲</text>
+<text x="700" y="372" font-size="17" fill="#23364e">修改 Actor 的规则</text>
+<text x="700" y="398" font-size="17" fill="#23364e">更新规则相关验证</text>
+<text x="32" y="512" font-size="16" fill="#495b73">开闭原则保护稳定边界，不承诺新增功能零修改。</text></g></svg>
