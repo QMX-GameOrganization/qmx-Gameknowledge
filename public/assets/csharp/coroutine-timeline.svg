@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">协程：被引擎每帧推进一小段的函数</title><desc id="desc">它不是新线程，仍然在主线程里一段一段地运行。。yield return 就是“先暂停，等条件满足再从这里继续”。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">协程：被引擎每帧推进一小段的函数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">它不是新线程，仍然在主线程里一段一段地运行。</text>
+<rect x="32" y="105" width="936" height="140" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="48" y="133" font-size="16" fill="#495b73" font-weight="700">主线程：每帧都在做的事</text>
+<text x="110" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 1 帧</text>
+<rect x="42.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="110" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<text x="266" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 2 帧</text>
+<rect x="198.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="266" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="266" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<text x="422" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 3 帧</text>
+<rect x="354.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="422" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="422" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<text x="578" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 4 帧</text>
+<rect x="510.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="578" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="578" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<text x="734" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 5 帧</text>
+<rect x="666.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="734" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="734" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<text x="890" y="168" font-size="15" fill="#495b73" text-anchor="middle">第 n 帧</text>
+<rect x="822.0" y="184.0" width="136" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="890" y="201.8" font-size="14" fill="#23364e" text-anchor="middle">Update</text>
+<text x="890" y="220.0" font-size="14" fill="#23364e" text-anchor="middle">渲染</text>
+<rect x="32" y="262" width="936" height="170" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="290" font-size="16" fill="#176951" font-weight="700">协程 CooldownRoutine（StartCoroutine 启动）</text>
+<rect x="42.0" y="312.0" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="348.7" font-size="14" fill="#66758d" font-weight="700" text-anchor="middle">执行到</text>
+<text x="110" y="366.9" font-size="14" fill="#66758d" font-weight="700" text-anchor="middle">yield return</text>
+<text x="110" y="385.1" font-size="14" fill="#66758d" font-weight="700" text-anchor="middle">null</text>
+<rect x="198.0" y="312.0" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="266" y="339.6" font-size="14" fill="#23364e" text-anchor="middle">继续执行</text>
+<text x="266" y="357.8" font-size="14" fill="#23364e" text-anchor="middle">遇到 yield</text>
+<text x="266" y="376.0" font-size="14" fill="#23364e" text-anchor="middle">WaitFor-</text>
+<text x="266" y="394.2" font-size="14" fill="#23364e" text-anchor="middle">Seconds(2)</text>
+<rect x="354" y="312" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="422" y="368" font-size="16" fill="#66758d" text-anchor="middle">休眠</text>
+<rect x="510" y="312" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="578" y="368" font-size="16" fill="#66758d" text-anchor="middle">休眠</text>
+<rect x="666" y="312" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="734" y="368" font-size="16" fill="#66758d" text-anchor="middle">休眠</text>
+<rect x="822.0" y="312.0" width="136" height="100" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="890" y="357.8" font-size="14" fill="#66758d" font-weight="700" text-anchor="middle">2 秒到了</text>
+<text x="890" y="376.0" font-size="14" fill="#66758d" font-weight="700" text-anchor="middle">继续往下执行</text>
+<text x="32" y="470" font-size="16" fill="#495b73">休眠期间协程几乎不占用时间，引擎每帧只检查一下条件是否满足。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">yield return 就是“先暂停，等条件满足再从这里继续”。</text>
+</g></svg>

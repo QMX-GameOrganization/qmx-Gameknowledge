@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">协变与逆变：什么时候子类的泛型能当父类用</title><desc id="desc">判断依据：T 在这个类型里是“只出来”还是“只进去”。。List&lt;T&gt; 既能读又能写，所以不允许互换；只读的 IEnumerable&lt;T&gt; 允许。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">协变与逆变：什么时候子类的泛型能当父类用</text>
+<text x="32" y="77" font-size="17" fill="#495b73">判断依据：T 在这个类型里是“只出来”还是“只进去”。</text>
+<rect x="60.0" y="105.0" width="120" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="130.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Entity</text>
+<rect x="240.0" y="105.0" width="120" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="300" y="130.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Player</text>
+<path d="M238 125L182 125" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="378" y="131" font-size="15" fill="#495b73">Player 是一种 Entity</text>
+<rect x="32" y="170" width="936" height="104" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="52" y="206" font-size="19" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">IEnumerable&lt;Player&gt;  →  IEnumerable&lt;Entity&gt;</text>
+<text x="52" y="240" font-size="16" fill="#23364e">T 只用来返回（读出），不能放入，所以安全。</text>
+<rect x="745.0" y="197.0" width="190" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="840" y="227.6" font-size="16" fill="#66758d" font-weight="700" text-anchor="middle">允许：协变（out）</text>
+<rect x="32" y="290" width="936" height="104" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="52" y="326" font-size="19" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">List&lt;Player&gt;  →  List&lt;Entity&gt;</text>
+<text x="52" y="360" font-size="16" fill="#23364e">否则能 Add(new Enemy()) 把敌人塞进玩家列表。</text>
+<rect x="745.0" y="317.0" width="190" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="840" y="347.6" font-size="16" fill="#66758d" font-weight="700" text-anchor="middle">不允许：不变</text>
+<rect x="32" y="410" width="936" height="104" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="52" y="446" font-size="19" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Action&lt;Entity&gt;  →  Action&lt;Player&gt;</text>
+<text x="52" y="480" font-size="16" fill="#23364e">能处理任何 Entity 的函数，当然能处理 Player。</text>
+<rect x="745.0" y="437.0" width="190" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="840" y="467.6" font-size="16" fill="#66758d" font-weight="700" text-anchor="middle">允许：逆变（in）</text>
+<text x="32" y="540" font-size="16" fill="#495b73">List&lt;T&gt; 既能读又能写，所以不允许互换；只读的 IEnumerable&lt;T&gt; 允许。</text>
+</g></svg>

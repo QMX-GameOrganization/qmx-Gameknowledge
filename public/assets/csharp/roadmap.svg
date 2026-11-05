@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img" aria-labelledby="title desc">
+<title id="title">C# 速通路线：先认识 Unity，再边写边学</title><desc id="desc">每一章都带着 Unity 里的用法，读完就可以动手做小项目。。时间紧：先读 0.3、2.3、3.3、4.3、5.2，再回头补其余。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="690" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">C# 速通路线：先认识 Unity，再边写边学</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每一章都带着 Unity 里的用法，读完就可以动手做小项目。</text>
+<rect x="32" y="110" width="284" height="148" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="46" y="142" font-size="20" fill="#5b3fa0" font-weight="700">0 先认识 Unity</text>
+<text x="46" y="176" font-size="15" fill="#23364e">C#：游戏循环、物体与组件</text>
+<text x="46" y="204" font-size="15" fill="#23364e">Unity：脚本为什么能“自己跑起来”</text>
+<rect x="358" y="110" width="284" height="148" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="372" y="142" font-size="20" fill="#285caa" font-weight="700">1 入门</text>
+<text x="372" y="176" font-size="15" fill="#23364e">C#：类型、转换、字符串</text>
+<text x="372" y="204" font-size="15" fill="#23364e">Unity：Debug.Log、LayerMask</text>
+<rect x="684" y="110" width="284" height="148" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="698" y="142" font-size="20" fill="#176951" font-weight="700">2 基础</text>
+<text x="698" y="176" font-size="15" fill="#23364e">C#：枚举、数组、值/引用类型</text>
+<text x="698" y="204" font-size="15" fill="#23364e">Unity：Inspector 里的数据</text>
+<rect x="32" y="290" width="284" height="148" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="46" y="322" font-size="20" fill="#8c5315" font-weight="700">3 封装</text>
+<text x="46" y="356" font-size="15" fill="#23364e">C#：类、属性、静态</text>
+<text x="46" y="384" font-size="15" fill="#23364e">Unity：脚本就是类，物体上的组件</text>
+<rect x="358" y="290" width="284" height="148" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="372" y="322" font-size="20" fill="#285caa" font-weight="700">4 继承与多态</text>
+<text x="372" y="356" font-size="15" fill="#23364e">C#：继承、接口、装箱</text>
+<text x="372" y="384" font-size="15" fill="#23364e">Unity：IDamageable 统一受伤</text>
+<rect x="684" y="290" width="284" height="148" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="698" y="322" font-size="20" fill="#176951" font-weight="700">5 进阶</text>
+<text x="698" y="356" font-size="15" fill="#23364e">C#：泛型、事件、多线程</text>
+<text x="698" y="384" font-size="15" fill="#23364e">Unity：对象池、事件、UI 回调</text>
+<rect x="358" y="470" width="284" height="148" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="372" y="502" font-size="20" fill="#8c5315" font-weight="700">6 综合与速查</text>
+<text x="372" y="536" font-size="15" fill="#23364e">C#：协程与小项目</text>
+<text x="372" y="564" font-size="15" fill="#23364e">Unity：做出会动会死的小角色</text>
+<path d="M318 184L356 184" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M644 184L682 184" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M318 364L356 364" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M644 364L682 364" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M826 260C826 275 175 270 175 288" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M826 440C826 455 500 452 500 468" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="32" y="670" font-size="16" fill="#495b73">时间紧：先读 0.3、2.3、3.3、4.3、5.2，再回头补其余。</text>
+</g></svg>

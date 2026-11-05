@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">对象池：用完放回去，下次直接复用</title><desc id="desc">子弹、特效、伤害数字每秒创建销毁很多次，复用比反复 new 省得多。。对象池的代价：取出来的对象要重置状态，否则会带着上一次的数据。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">对象池：用完放回去，下次直接复用</text>
+<text x="32" y="77" font-size="17" fill="#495b73">子弹、特效、伤害数字每秒创建销毁很多次，复用比反复 new 省得多。</text>
+<rect x="32" y="110" width="380" height="290" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="142" font-size="18" fill="#285caa" font-weight="700">池（Stack&lt;Bullet&gt;）：空闲的子弹</text>
+<rect x="112.0" y="177.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">空闲子弹 #1</text>
+<rect x="112.0" y="239.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="267.6" font-size="16" fill="#23364e" text-anchor="middle">空闲子弹 #2</text>
+<rect x="112.0" y="301.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="329.6" font-size="16" fill="#23364e" text-anchor="middle">空闲子弹 #3</text>
+<text x="48" y="380" font-size="15" fill="#495b73">用 Stack 保存，后放回的先取出。</text>
+<rect x="588" y="110" width="380" height="290" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="604" y="142" font-size="18" fill="#176951" font-weight="700">场景中：正在使用的子弹</text>
+<rect x="668.0" y="177.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">飞行中的子弹 #4</text>
+<rect x="668.0" y="239.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="267.6" font-size="16" fill="#23364e" text-anchor="middle">飞行中的子弹 #5</text>
+<rect x="668.0" y="301.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="329.6" font-size="16" fill="#23364e" text-anchor="middle">飞行中的子弹 #6</text>
+<text x="604" y="380" font-size="15" fill="#495b73">命中目标或飞出屏幕后就回收。</text>
+<path d="M414 215L586 215" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="500" y="200" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Get()</text>
+<text x="500" y="238" font-size="14" fill="#495b73" text-anchor="middle">弹出一个</text>
+<path d="M586 330L414 330" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="500" y="315" font-size="17" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Release()</text>
+<text x="500" y="353" font-size="14" fill="#495b73" text-anchor="middle">放回池里</text>
+<rect x="32" y="420" width="380" height="70" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="46" y="450" font-size="16" fill="#23364e">池是空的才 new Bullet()</text>
+<text x="46" y="475" font-size="16" fill="#23364e">新建一个，会产生垃圾</text>
+<path d="M414 455L640 402" fill="none" stroke="#a33a3a" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ma33a3a)"/>
+<text x="32" y="550" font-size="16" fill="#495b73">对象池的代价：取出来的对象要重置状态，否则会带着上一次的数据。</text>
+</g></svg>

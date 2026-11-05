@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">脚本与引擎：谁调用谁</title><desc id="desc">你不写 Main，也不写游戏循环：写好类，挂到物体上，剩下的交给引擎。。Inspector 里的字段值保存在场景里，运行时由引擎填进你的脚本。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m5b3fa0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#5b3fa0"/></marker></defs>
+<rect width="1000" height="650" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">脚本与引擎：谁调用谁</text>
+<text x="32" y="77" font-size="17" fill="#495b73">你不写 Main，也不写游戏循环：写好类，挂到物体上，剩下的交给引擎。</text>
+<rect x="32" y="105" width="380" height="380" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="20" fill="#285caa" font-weight="700">Unity 引擎</text>
+<text x="48" y="163" font-size="14" fill="#495b73">持有场景、物体、游戏循环</text>
+<rect x="72.0" y="193.0" width="300" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="220.6" font-size="16" fill="#23364e" text-anchor="middle">游戏循环</text>
+<rect x="72.0" y="255.0" width="300" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="282.6" font-size="16" fill="#23364e" text-anchor="middle">场景里的所有物体</text>
+<rect x="72.0" y="317.0" width="300" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="344.6" font-size="16" fill="#23364e" text-anchor="middle">物理、渲染、输入</text>
+<rect x="72.0" y="379.0" width="300" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="222" y="406.6" font-size="16" fill="#23364e" text-anchor="middle">Inspector 序列化数据</text>
+<rect x="588" y="105" width="380" height="380" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="604" y="137" font-size="17" fill="#5b3fa0" font-weight="700">你的脚本 class Player : MonoBehaviour</text>
+<text x="604" y="163" font-size="14" fill="#495b73">你写的 C# 代码</text>
+<rect x="618.0" y="193.0" width="320" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="220.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">void Awake() / Start()</text>
+<rect x="618.0" y="255.0" width="320" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="282.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">void Update()</text>
+<rect x="618.0" y="317.0" width="320" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="344.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">void OnCollisionEnter(...)</text>
+<rect x="618.0" y="379.0" width="320" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="778" y="406.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[SerializeField] int hp</text>
+<path d="M414 245L586 245" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="500" y="228" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">① 引擎调用</text>
+<text x="500" y="270" font-size="13" fill="#495b73" text-anchor="middle">合适的时机</text>
+<path d="M586 345L414 345" fill="none" stroke="#5b3fa0" stroke-width="2" marker-end="url(#m5b3fa0)"/>
+<text x="500" y="328" font-size="15" fill="#5b3fa0" font-weight="700" text-anchor="middle">② 你调用</text>
+<text x="500" y="370" font-size="13" fill="#495b73" text-anchor="middle">引擎提供的 API</text>
+<rect x="32" y="505" width="450" height="70" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="46" y="535" font-size="14" fill="#23364e">transform、GetComponent、Instantiate、</text>
+<text x="46" y="560" font-size="14" fill="#23364e">Debug.Log、Input、Time 都是引擎的 API</text>
+<rect x="518" y="505" width="450" height="70" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="532" y="535" font-size="14" fill="#23364e">Awake、Start、Update 这些名字固定，</text>
+<text x="532" y="560" font-size="14" fill="#23364e">引擎靠名字找到并调用它们</text>
+<text x="32" y="630" font-size="16" fill="#495b73">Inspector 里的字段值保存在场景里，运行时由引擎填进你的脚本。</text>
+</g></svg>

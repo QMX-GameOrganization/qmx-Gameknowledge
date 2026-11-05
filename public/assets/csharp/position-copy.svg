@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">为什么改 transform.position.y 不生效</title><desc id="desc">position 是属性，取出来的 Vector3 是一份副本。。Vector3 是值类型：改副本不会改原物体，必须写回。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">为什么改 transform.position.y 不生效</text>
+<text x="32" y="77" font-size="17" fill="#495b73">position 是属性，取出来的 Vector3 是一份副本。</text>
+<rect x="32" y="105" width="284" height="330" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="46" y="137" font-size="20" fill="#285caa" font-weight="700">① 取出</text>
+<text x="46" y="166" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Vector3 p = transform.position;</text>
+<text x="174" y="214" font-size="15" fill="#495b73" text-anchor="middle">物体的 position</text>
+<rect x="64.0" y="225.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="174" y="254.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 0, 0)</text>
+<text x="174" y="322" font-size="15" fill="#495b73" text-anchor="middle">局部变量 p（副本）</text>
+<rect x="64.0" y="333.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="174" y="362.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 0, 0)</text>
+<path d="M264 273L264 333" fill="none" stroke="#285caa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m285caa)"/>
+<text x="254" y="297" font-size="14" fill="#285caa" text-anchor="end">get：复制一份</text>
+<rect x="358" y="105" width="284" height="330" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="372" y="137" font-size="20" fill="#8c5315" font-weight="700">② 改副本</text>
+<text x="372" y="166" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">p.y = 5;</text>
+<text x="500" y="214" font-size="15" fill="#495b73" text-anchor="middle">物体的 position</text>
+<rect x="390.0" y="225.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500" y="254.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 0, 0)</text>
+<text x="500" y="322" font-size="15" fill="#495b73" text-anchor="middle">局部变量 p（副本）</text>
+<rect x="390.0" y="333.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500" y="362.3" font-size="18" fill="#66758d" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 5, 0)</text>
+<text x="500" y="412" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">物体没有动</text>
+<rect x="684" y="105" width="284" height="330" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="698" y="137" font-size="20" fill="#176951" font-weight="700">③ 写回</text>
+<text x="698" y="166" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">transform.position = p;</text>
+<text x="826" y="214" font-size="15" fill="#495b73" text-anchor="middle">物体的 position</text>
+<rect x="716.0" y="225.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="826" y="254.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 5, 0)</text>
+<text x="826" y="322" font-size="15" fill="#495b73" text-anchor="middle">局部变量 p（副本）</text>
+<rect x="716.0" y="333.0" width="220" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="826" y="362.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0, 5, 0)</text>
+<path d="M916 333L916 273" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="906" y="297" font-size="14" fill="#176951" text-anchor="end">set：写回</text>
+<text x="32" y="480" font-size="16" fill="#495b73">Vector3 是值类型：改副本不会改原物体，必须写回。</text>
+</g></svg>

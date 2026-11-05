@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">继承：成员的组成与构造顺序</title><desc id="desc">子类 = 父类的成员 + 自己新增的成员；构造时父类先于子类。。父类没有无参构造函数时，子类必须用 : base(...) 指定。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">继承：成员的组成与构造顺序</text>
+<text x="32" y="77" font-size="17" fill="#495b73">子类 = 父类的成员 + 自己新增的成员；构造时父类先于子类。</text>
+<rect x="32" y="105" width="450" height="400" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">继承关系（箭头：子类 → 父类）</text>
+<rect x="130" y="170" width="250" height="110" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="255" y="198" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">class Entity</text>
+<text x="255" y="226" font-size="15" fill="#23364e" text-anchor="middle">name、protected hp</text>
+<text x="255" y="252" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Describe()</text>
+<rect x="52" y="360" width="205" height="110" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="154" y="388" font-size="17" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">class Player</text>
+<text x="154" y="416" font-size="15" fill="#23364e" text-anchor="middle">新增：gold</text>
+<text x="154" y="442" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">新增：Hurt()</text>
+<rect x="272" y="360" width="195" height="110" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="370" y="388" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">class Enemy</text>
+<text x="370" y="416" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">新增：Roar()</text>
+<text x="370" y="442" font-size="13" fill="#23364e" text-anchor="middle">同时拥有 Entity 的全部</text>
+<path d="M154 358L220 283" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M370 358L300 283" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="518" y="105" width="450" height="400" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="137" font-size="19" fill="#176951" font-weight="700">new Player(&quot;勇者&quot;) 的执行顺序</text>
+<rect x="534" y="170" width="418" height="88" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<rect x="548.0" y="196.0" width="36" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="566" y="220.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<text x="596" y="204" font-size="17" fill="#23364e" font-weight="700">进入 Player 构造函数</text>
+<text x="596" y="232" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">public Player(string name) : base(name, 100)</text>
+<path d="M566 260L566 273" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="534" y="275" width="418" height="88" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<rect x="548.0" y="301.0" width="36" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="566" y="325.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<text x="596" y="309" font-size="17" fill="#23364e" font-weight="700">先执行 Entity 构造函数</text>
+<text x="596" y="337" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">this.name = name; this.hp = hp;</text>
+<path d="M566 365L566 378" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="534" y="380" width="418" height="88" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<rect x="548.0" y="406.0" width="36" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="566" y="430.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<text x="596" y="414" font-size="17" fill="#23364e" font-weight="700">回到 Player 构造函数体</text>
+<text x="596" y="442" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Console.WriteLine(&quot;Player 构造完成&quot;);</text>
+<text x="534" y="490" font-size="16" fill="#495b73">先打好地基（父类），再盖楼（子类）。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">父类没有无参构造函数时，子类必须用 : base(...) 指定。</text>
+</g></svg>

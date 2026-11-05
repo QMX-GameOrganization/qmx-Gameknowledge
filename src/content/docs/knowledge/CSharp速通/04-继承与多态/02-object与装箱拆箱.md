@@ -2,7 +2,7 @@
 title: "4.2 万物之父 object、装箱拆箱与密封类"
 description: "所有类型都继承自 object；object 的常用方法；装箱拆箱的含义与代价；sealed 禁止继承。"
 sidebar:
-  order: 2
+  order: 42
 ---
 
 > 适用版本：C# 9.0。装箱的底层实现（IL 指令、对象头）在「C# 底层专栏」1.2 展开，这里只讲使用层面。
@@ -71,6 +71,8 @@ int back = (int)boxed;      // 拆箱：把盒子里的值拷出来，类型必�
 long ok = (int)boxed;          // 先拆成 int 再隐式转 long
 ```
 
+![int 装箱时在堆上新建盒子保存副本，拆箱时必须按原类型取出](/qmx-Gameknowledge/assets/csharp/boxing.svg)
+
 装箱会**分配堆内存**。偶尔一次无所谓，但在每帧执行的循环里，每次装箱都产生垃圾，累积后引发 GC 卡顿。以下是常见的隐藏装箱位置：
 
 ```csharp
@@ -98,6 +100,39 @@ sealed class FinalBoss : Enemy
 2. `sealed` 类在某些情况下虚调用可以被优化，但对一般游戏逻辑来说差别很小。
 
 `struct` 和静态类天然不能被继承。
+
+## 在 Unity 里用到它
+
+- Unity 自己也有一个"万物之父"：`UnityEngine.Object`，`GameObject`、`Component`、`ScriptableObject` 都继承它。它重载了 `==`，对象被销毁后与 `null` 比较会得到 `true`，所以对 Unity 对象判空用 `!= null`。
+- `Debug.Log(obj)` 实际调用的是 `obj.ToString()`，重写 `ToString` 能让日志一眼看懂。
+- 装箱产生的垃圾可以在 Profiler（Window → Analysis → Profiler）的 CPU 模块里，按 GC Alloc 列排序找到。
+
+## 动手试试
+
+```csharp
+using UnityEngine;
+
+public class Item
+{
+    public int id;
+    public string name;
+    public override string ToString() => $"[{id}] {name}";
+}
+
+public class BoxDemo : MonoBehaviour
+{
+    void Start()
+    {
+        Debug.Log(new Item { id = 1, name = "铁剑" });     // 输出 [1] 铁剑，而不是类型名
+
+        object boxed = 100;                                // 装箱
+        Debug.Log((int)boxed);                             // 拆箱：成功
+        Debug.Log((long)boxed);                            // 取消注释试试：InvalidCastException
+    }
+}
+```
+
+先把最后一行注释掉运行，再取消注释，看拆箱类型不匹配时的报错，并改成 `(long)(int)boxed` 修复。
 
 ## 常见坑
 

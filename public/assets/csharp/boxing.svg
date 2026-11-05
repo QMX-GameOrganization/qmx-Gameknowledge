@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">装箱与拆箱：值类型进出堆上的盒子</title><desc id="desc">值类型赋给 object 时，要在堆上新建一个对象保存副本。。频繁装箱会在堆上留下大量小对象，是 GC 卡顿的常见来源。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">装箱与拆箱：值类型进出堆上的盒子</text>
+<text x="32" y="77" font-size="17" fill="#495b73">值类型赋给 object 时，要在堆上新建一个对象保存副本。</text>
+<rect x="40.0" y="160.0" width="160" height="70" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="189.6" font-size="18" fill="#23364e" text-anchor="middle">int hp</text>
+<text x="120" y="213.0" font-size="18" fill="#23364e" text-anchor="middle">100</text>
+<text x="120" y="150" font-size="15" fill="#495b73" text-anchor="middle">局部变量（值类型）</text>
+<rect x="390" y="140" width="220" height="120" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="172" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">堆上的盒子（对象）</text>
+<text x="500" y="205" font-size="15" fill="#23364e" text-anchor="middle">类型信息：Int32</text>
+<text x="500" y="235" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">值：100</text>
+<rect x="800.0" y="160.0" width="160" height="70" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="880" y="189.6" font-size="18" fill="#23364e" text-anchor="middle">int back</text>
+<text x="880" y="213.0" font-size="18" fill="#23364e" text-anchor="middle">100</text>
+<text x="880" y="150" font-size="15" fill="#495b73" text-anchor="middle">局部变量（值类型）</text>
+<path d="M202 180C260 150 310 150 388 170" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="300" y="128" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">装箱：object boxed = hp;</text>
+<path d="M612 190C680 150 740 150 796 178" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="705" y="128" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">拆箱：(int)boxed</text>
+<text x="300" y="232" font-size="15" fill="#495b73" text-anchor="middle">分配堆内存，拷贝值</text>
+<text x="705" y="232" font-size="15" fill="#495b73" text-anchor="middle">类型必须精确匹配</text>
+<rect x="32" y="310" width="450" height="190" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="46" y="340" font-size="19" fill="#a33a3a" font-weight="700">(long)boxed 会失败</text>
+<text x="46" y="368" font-size="17" fill="#23364e">盒子里装的是 int，不是 long。</text>
+<text x="46" y="393" font-size="17" fill="#23364e">拆箱只能拆成原来的类型，</text>
+<text x="46" y="418" font-size="17" fill="#23364e">否则抛 InvalidCastException。</text>
+<rect x="518" y="310" width="450" height="190" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="532" y="340" font-size="19" fill="#176951" font-weight="700">正确写法：先拆再转</text>
+<text x="532" y="368" font-size="17" fill="#23364e">long ok = (int)boxed;</text>
+<text x="532" y="393" font-size="17" fill="#23364e">先拆成 int，再隐式转换成 long。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">频繁装箱会在堆上留下大量小对象，是 GC 卡顿的常见来源。</text>
+</g></svg>

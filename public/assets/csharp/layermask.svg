@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">LayerMask 就是一个整数：每一位对应一层</title><desc id="desc">以第 8 层 Enemy、第 9 层 Wall 为例，只画低 12 位。。射线检测的最后一个参数传 1 &lt;&lt; 层编号，正是因为 mask 是按位表示的。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">LayerMask 就是一个整数：每一位对应一层</text>
+<text x="32" y="77" font-size="17" fill="#495b73">以第 8 层 Enemy、第 9 层 Wall 为例，只画低 12 位。</text>
+<text x="905.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="855.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">1</text>
+<text x="805.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="755.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">3</text>
+<text x="705.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">4</text>
+<text x="655.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">5</text>
+<text x="605.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">6</text>
+<text x="555.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">7</text>
+<text x="505.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">8</text>
+<text x="455.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">9</text>
+<text x="405.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">10</text>
+<text x="355.0" y="118" font-size="14" fill="#495b73" text-anchor="middle">11</text>
+<text x="318" y="118" font-size="14" fill="#495b73" text-anchor="end">位：</text>
+<text x="32" y="178" font-size="17" fill="#285caa" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1 &lt;&lt; 8</text>
+<text x="32" y="206" font-size="15" fill="#495b73">只包含 Enemy 层</text>
+<rect x="330" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="353.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="380" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="403.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="430" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="453.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="480" y="150" width="46" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity="1"/>
+<text x="503.0" y="179" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="530" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="553.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="580" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="603.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="630" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="653.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="680" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="703.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="730" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="753.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="780" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="803.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="830" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="853.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="880" y="150" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="903.0" y="179" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="283" font-size="17" fill="#176951" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(1 &lt;&lt; 8) | (1 &lt;&lt; 9)</text>
+<text x="32" y="311" font-size="15" fill="#495b73">Enemy 和 Wall 两层</text>
+<rect x="330" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="353.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="380" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="403.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="430" y="255" width="46" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="453.0" y="284" font-size="20" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="480" y="255" width="46" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="503.0" y="284" font-size="20" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="530" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="553.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="580" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="603.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="630" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="653.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="680" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="703.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="730" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="753.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="780" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="803.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="830" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="853.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="880" y="255" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="903.0" y="284" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="388" font-size="17" fill="#8c5315" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">~(1 &lt;&lt; 8)</text>
+<text x="32" y="416" font-size="15" fill="#495b73">除了 Enemy 之外的所有层</text>
+<rect x="330" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="353.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="380" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="403.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="430" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="453.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="480" y="360" width="46" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".35"/>
+<text x="503.0" y="389" font-size="20" fill="#66758d" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="530" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="553.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="580" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="603.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="630" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="653.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="680" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="703.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="730" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="753.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="780" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="803.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="830" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="853.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="880" y="360" width="46" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity="1"/>
+<text x="903.0" y="389" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<text x="32" y="462" font-size="16" fill="#495b73">8 号位是 Enemy，9 号位是 Wall；1 表示“包含这一层”。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">射线检测的最后一个参数传 1 &lt;&lt; 层编号，正是因为 mask 是按位表示的。</text>
+</g></svg>

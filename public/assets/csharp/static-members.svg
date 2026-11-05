@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">实例成员与静态成员：谁拥有这份数据</title><desc id="desc">每个对象各有一份实例字段；static 字段只有一份，属于类。。静态方法里没有“当前对象”，所以不能直接访问实例字段。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">实例成员与静态成员：谁拥有这份数据</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个对象各有一份实例字段；static 字段只有一份，属于类。</text>
+<rect x="260" y="105" width="480" height="150" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="280" y="137" font-size="19" fill="#5b3fa0" font-weight="700">class Enemy（类本身）</text>
+<text x="280" y="172" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">public static int aliveCount = 2;</text>
+<text x="280" y="200" font-size="15" fill="#495b73">全体共享，只有一份，用 Enemy.aliveCount 访问</text>
+<text x="280" y="228" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">public static void PrintAlive()</text>
+<rect x="110" y="330" width="290" height="130" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="124" y="360" font-size="17" fill="#285caa" font-weight="700">对象：new Enemy(&quot;史莱姆&quot;)</text>
+<text x="124" y="394" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">name = &quot;史莱姆&quot;</text>
+<text x="124" y="424" font-size="15" fill="#495b73">每个对象各有一份 name</text>
+<path d="M255 328L500 257" fill="none" stroke="#285caa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m285caa)"/>
+<rect x="600" y="330" width="290" height="130" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="614" y="360" font-size="17" fill="#176951" font-weight="700">对象：new Enemy(&quot;哥布林&quot;)</text>
+<text x="614" y="394" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">name = &quot;哥布林&quot;</text>
+<text x="614" y="424" font-size="15" fill="#495b73">每个对象各有一份 name</text>
+<path d="M745 328L500 257" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<text x="500" y="303" font-size="14" fill="#495b73" text-anchor="middle">构造时都执行 aliveCount++</text>
+<text x="32" y="500" font-size="16" fill="#495b73">静态方法里没有“当前对象”，所以不能直接访问实例字段。</text>
+</g></svg>

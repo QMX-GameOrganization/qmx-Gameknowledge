@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="710" viewBox="0 0 1000 710" role="img" aria-labelledby="title desc">
+<title id="title">MonoBehaviour 生命周期：引擎按这个顺序调用你的函数</title><desc id="desc">你只负责写函数，调用时机由引擎决定。。Awake 管自己，Start 管别人；每帧的逻辑写在 Update。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="710" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">MonoBehaviour 生命周期：引擎按这个顺序调用你的函数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">你只负责写函数，调用时机由引擎决定。</text>
+<rect x="32" y="100" width="936" height="150" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="128" font-size="16" fill="#176951" font-weight="700">创建与启用（每个脚本只发生一次，OnEnable 每次启用都会再调用）</text>
+<rect x="52" y="146" width="270" height="92" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="172" font-size="18" fill="#176951" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Awake</text>
+<text x="66" y="198" font-size="14" fill="#23364e">脚本实例刚创建时</text>
+<text x="66" y="222" font-size="14" fill="#495b73">初始化自己、缓存 GetComponent</text>
+<path d="M324 192L350 192" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="354" y="146" width="270" height="92" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="368" y="172" font-size="18" fill="#176951" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnEnable</text>
+<text x="368" y="198" font-size="14" fill="#23364e">脚本被启用时</text>
+<text x="368" y="222" font-size="14" fill="#495b73">订阅事件</text>
+<path d="M626 192L652 192" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="656" y="146" width="270" height="92" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="670" y="172" font-size="18" fill="#176951" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Start</text>
+<text x="670" y="198" font-size="14" fill="#23364e">第一次 Update 之前</text>
+<text x="670" y="222" font-size="14" fill="#495b73">依赖别的对象的初始化</text>
+<path d="M500 252L500 280" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="32" y="282" width="936" height="232" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="310" font-size="16" fill="#285caa" font-weight="700">每一帧重复（直到物体被禁用或销毁）</text>
+<rect x="52" y="328" width="205" height="120" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="64" y="356" font-size="16" fill="#285caa" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">FixedUpdate</text>
+<text x="64" y="384" font-size="13" fill="#23364e">固定间隔，默认 0.02 秒</text>
+<text x="64" y="410" font-size="13" fill="#495b73">物理：加力、刚体</text>
+<path d="M259 388L277 388" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="279" y="328" width="205" height="120" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="291" y="356" font-size="16" fill="#285caa" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Update</text>
+<text x="291" y="384" font-size="13" fill="#23364e">每帧一次</text>
+<text x="291" y="410" font-size="13" fill="#495b73">输入、移动、游戏逻辑</text>
+<path d="M486 388L504 388" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="506" y="328" width="205" height="120" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="518" y="356" font-size="16" fill="#285caa" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">LateUpdate</text>
+<text x="518" y="384" font-size="13" fill="#23364e">所有 Update 之后</text>
+<text x="518" y="410" font-size="13" fill="#495b73">相机跟随</text>
+<path d="M713 388L731 388" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="733" y="328" width="205" height="120" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="745" y="356" font-size="17" fill="#285caa" font-weight="700">渲染</text>
+<text x="745" y="384" font-size="13" fill="#23364e">引擎画出这一帧</text>
+<text x="745" y="410" font-size="13" fill="#495b73">你不需要写代码</text>
+<path d="M850 450C850 476 150 476 150 450" fill="none" stroke="#285caa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m285caa)"/>
+<text x="500" y="496" font-size="14" fill="#495b73" text-anchor="middle">下一帧，回到开头</text>
+<path d="M500 516L500 546" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="32" y="548" width="936" height="120" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="48" y="576" font-size="16" fill="#8c5315" font-weight="700">禁用与销毁</text>
+<rect x="52" y="590" width="270" height="66" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="614" font-size="17" fill="#8c5315" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnDisable</text>
+<text x="66" y="636" font-size="12" fill="#495b73">脚本被禁用或物体停用，取消订阅事件</text>
+<rect x="354" y="590" width="270" height="66" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="368" y="614" font-size="17" fill="#8c5315" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnDestroy</text>
+<text x="368" y="636" font-size="12" fill="#495b73">物体被销毁时，释放资源、清理</text>
+<path d="M324 623L350 623" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="32" y="690" font-size="16" fill="#495b73">Awake 管自己，Start 管别人；每帧的逻辑写在 Update。</text>
+</g></svg>

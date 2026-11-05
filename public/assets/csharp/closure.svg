@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">闭包捕获的是变量，不是当时的值</title><desc id="desc">for 循环里的 lambda 全共享同一个循环变量 i。。修正办法：在循环体内复制一份局部变量，让每个 lambda 捕获自己的那一份。</desc>
+<defs><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">闭包捕获的是变量，不是当时的值</text>
+<text x="32" y="77" font-size="17" fill="#495b73">for 循环里的 lambda 全共享同一个循环变量 i。</text>
+<rect x="32" y="105" width="450" height="360" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#a33a3a" font-weight="700">直接捕获 i：只有一个 i</text>
+<text x="48" y="166" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">actions.Add(() =&gt; Console.WriteLine(i));</text>
+<rect x="45.0" y="194.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="220.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 0</text>
+<path d="M176 215L318 290" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<rect x="45.0" y="252.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 1</text>
+<path d="M176 273L318 290" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<rect x="45.0" y="310.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="336.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 2</text>
+<path d="M176 331L318 290" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<rect x="320" y="250" width="130" height="80" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="385" y="280" font-size="15" fill="#495b73" text-anchor="middle">变量 i</text>
+<text x="385" y="314" font-size="26" fill="#a33a3a" font-weight="700" text-anchor="middle">= 3</text>
+<text x="48" y="410" font-size="16" fill="#23364e">循环结束时 i 已经是 3，</text>
+<text x="48" y="436" font-size="17" fill="#a33a3a" font-weight="700">三个 lambda 都输出：3 3 3</text>
+<rect x="518" y="105" width="450" height="360" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="137" font-size="19" fill="#176951" font-weight="700">每轮复制一份：int copy = i;</text>
+<text x="534" y="166" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">actions.Add(() =&gt; Console.WriteLine(copy));</text>
+<rect x="535.0" y="194.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="600" y="220.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 0</text>
+<path d="M666 215L780 215" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="790.0" y="194.0" width="120" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="850" y="220.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">copy = 0</text>
+<rect x="535.0" y="252.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="600" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 1</text>
+<path d="M666 273L780 273" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="790.0" y="252.0" width="120" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="850" y="278.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">copy = 1</text>
+<rect x="535.0" y="310.0" width="130" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="600" y="336.2" font-size="15" fill="#23364e" text-anchor="middle">lambda 2</text>
+<path d="M666 331L780 331" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="790.0" y="310.0" width="120" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="850" y="336.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">copy = 2</text>
+<text x="534" y="410" font-size="16" fill="#23364e">每轮都有一个新的 copy，</text>
+<text x="534" y="436" font-size="17" fill="#176951" font-weight="700">三个 lambda 分别输出：0 1 2</text>
+<text x="32" y="500" font-size="16" fill="#495b73">修正办法：在循环体内复制一份局部变量，让每个 lambda 捕获自己的那一份。</text>
+</g></svg>

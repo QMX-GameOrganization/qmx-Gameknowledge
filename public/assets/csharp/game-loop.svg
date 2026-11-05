@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">游戏是怎么跑起来的：一帧一帧地循环</title><desc id="desc">画面每秒刷新几十次，每刷新一次叫一帧，每一帧都重复同一套流程。。你写的脚本不是从头跑到尾，而是被这个循环一帧一帧地反复调用。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">游戏是怎么跑起来的：一帧一帧地循环</text>
+<text x="32" y="77" font-size="17" fill="#495b73">画面每秒刷新几十次，每刷新一次叫一帧，每一帧都重复同一套流程。</text>
+<rect x="32" y="105" width="936" height="80" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="138" font-size="17" fill="#176951" font-weight="700">启动一次：加载场景 → 创建场景里的物体 → 依次调用 Awake / OnEnable / Start</text>
+<text x="48" y="166" font-size="15" fill="#495b73">这些只发生一次。之后进入下面的循环，直到你退出游戏。</text>
+<path d="M500 187L500 214" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="32" y="216" width="936" height="212" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="244" font-size="17" fill="#285caa" font-weight="700">每一帧（60 帧每秒时，一帧约 16.7 毫秒）</text>
+<rect x="48" y="262" width="168" height="100" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="132" y="296" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">① 读取输入</text>
+<text x="132" y="326" font-size="13" fill="#23364e" text-anchor="middle">键盘、鼠标、手柄</text>
+<path d="M217 312L233 312" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="234" y="262" width="168" height="100" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="318" y="296" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">② 物理更新</text>
+<text x="318" y="326" font-size="13" fill="#23364e" text-anchor="middle">FixedUpdate 固定步长</text>
+<path d="M403 312L419 312" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="420" y="262" width="168" height="100" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="504" y="296" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">③ 游戏逻辑</text>
+<text x="504" y="326" font-size="13" fill="#23364e" text-anchor="middle">Update：你的主要代码</text>
+<path d="M589 312L605 312" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="606" y="262" width="168" height="100" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="690" y="296" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">④ 收尾</text>
+<text x="690" y="326" font-size="13" fill="#23364e" text-anchor="middle">LateUpdate：相机跟随</text>
+<path d="M775 312L791 312" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="792" y="262" width="168" height="100" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="876" y="296" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">⑤ 渲染画面</text>
+<text x="876" y="326" font-size="13" fill="#23364e" text-anchor="middle">把这一帧画到屏幕上</text>
+<path d="M900 366C900 392 100 392 100 366" fill="none" stroke="#285caa" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m285caa)"/>
+<text x="500" y="410" font-size="14" fill="#495b73" text-anchor="middle">下一帧：回到 ①</text>
+<rect x="32" y="448" width="450" height="100" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="46" y="478" font-size="19" fill="#8c5315" font-weight="700">为什么移动要乘 Time.deltaTime</text>
+<text x="46" y="506" font-size="16" fill="#23364e">帧率不固定，每帧耗时不同。</text>
+<text x="46" y="531" font-size="16" fill="#23364e">距离 = 速度 × 这一帧的耗时。</text>
+<rect x="518" y="448" width="450" height="100" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="532" y="478" font-size="19" fill="#5b3fa0" font-weight="700">“每帧一次”意味着什么</text>
+<text x="532" y="506" font-size="16" fill="#23364e">Update 里的代码一秒会跑几十次，</text>
+<text x="532" y="531" font-size="16" fill="#23364e">所以要避免在里面做重活。</text>
+<text x="32" y="580" font-size="16" fill="#495b73">你写的脚本不是从头跑到尾，而是被这个循环一帧一帧地反复调用。</text>
+</g></svg>

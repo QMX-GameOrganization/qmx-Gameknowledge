@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">事件：发布者只管通知，不认识订阅者</title><desc id="desc">血量变化时，血条、音效、成就各自响应，Player 的代码一行都不用改。。订阅用 +=，不用时必须用 -= 取消订阅。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker><marker id="m5b3fa0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#5b3fa0"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">事件：发布者只管通知，不认识订阅者</text>
+<text x="32" y="77" font-size="17" fill="#495b73">血量变化时，血条、音效、成就各自响应，Player 的代码一行都不用改。</text>
+<rect x="35.0" y="210.0" width="170" height="80" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="120" y="245.5" font-size="15" fill="#23364e" text-anchor="middle">子弹命中</text>
+<text x="120" y="265.0" font-size="15" fill="#23364e" text-anchor="middle">TakeDamage(30)</text>
+<path d="M205 250L330 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="335" y="160" width="290" height="190" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="480" y="192" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">Player（发布者）</text>
+<text x="350" y="226" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">public event Action&lt;int,int&gt;</text>
+<text x="350" y="248" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">    OnHpChanged;</text>
+<text x="350" y="286" font-size="15" fill="#495b73">hp 变化后调用：</text>
+<text x="350" y="312" font-size="13" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnHpChanged?.Invoke(old, hp);</text>
+<rect x="700" y="118" width="268" height="92" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="714" y="148" font-size="17" fill="#176951" font-weight="700">HpBar（血条）</text>
+<text x="714" y="176" font-size="15" fill="#23364e">刷新血条长度</text>
+<text x="714" y="198" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnEnable：+=  OnDisable：-=</text>
+<path d="M627 255L698 164" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="700" y="230" width="268" height="92" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="714" y="260" font-size="17" fill="#8c5315" font-weight="700">AudioPlayer（音效）</text>
+<text x="714" y="288" font-size="15" fill="#23364e">播放受伤音效</text>
+<text x="714" y="310" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnEnable：+=  OnDisable：-=</text>
+<path d="M627 255L698 276" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<rect x="700" y="342" width="268" height="92" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="714" y="372" font-size="17" fill="#5b3fa0" font-weight="700">Achievements（成就）</text>
+<text x="714" y="400" font-size="15" fill="#23364e">统计累计受伤</text>
+<text x="714" y="422" font-size="12" fill="#495b73" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">OnEnable：+=  OnDisable：-=</text>
+<path d="M627 255L698 388" fill="none" stroke="#5b3fa0" stroke-width="2" marker-end="url(#m5b3fa0)"/>
+<rect x="32" y="462" width="450" height="130" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="46" y="492" font-size="19" fill="#176951" font-weight="700">好处：解耦</text>
+<text x="46" y="520" font-size="16" fill="#23364e">Player 不知道有血条存在。</text>
+<text x="46" y="545" font-size="16" fill="#23364e">新增订阅者，不用改 Player。</text>
+<rect x="518" y="462" width="450" height="130" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="532" y="492" font-size="19" fill="#a33a3a" font-weight="700">陷阱：忘记取消订阅</text>
+<text x="532" y="520" font-size="16" fill="#23364e">订阅者销毁后，事件仍持有它的引用。</text>
+<text x="532" y="545" font-size="16" fill="#23364e">下次触发会调用到已销毁的对象。</text>
+<text x="32" y="620" font-size="16" fill="#495b73">订阅用 +=，不用时必须用 -= 取消订阅。</text>
+</g></svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">场景、物体与组件：Unity 世界的三层结构</title><desc id="desc">物体本身什么都不会做，它的能力全部来自挂在上面的组件。。你写的脚本也是一种组件：C# 类的一个实例，挂在物体上。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">场景、物体与组件：Unity 世界的三层结构</text>
+<text x="32" y="77" font-size="17" fill="#495b73">物体本身什么都不会做，它的能力全部来自挂在上面的组件。</text>
+<rect x="32" y="105" width="300" height="440" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">场景 Scene</text>
+<text x="48" y="162" font-size="14" fill="#495b73">一个关卡里所有物体的集合</text>
+<rect x="52" y="184" width="260" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="212" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Main Camera</text>
+<rect x="52" y="240" width="260" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="268" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Directional Light</text>
+<rect x="52" y="296" width="260" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="66" y="324" font-size="16" fill="#8c5315" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">▶ Player</text>
+<rect x="52" y="352" width="260" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="380" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Enemy_1</text>
+<rect x="52" y="408" width="260" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="436" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Enemy_2</text>
+<rect x="52" y="464" width="260" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="66" y="492" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">Ground</text>
+<text x="48" y="530" font-size="14" fill="#495b73">每一项是一个 GameObject（物体）</text>
+<path d="M314 352L388 352" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<rect x="390" y="105" width="578" height="440" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="406" y="137" font-size="19" fill="#8c5315" font-weight="700">GameObject：Player（点开 Inspector 看到的组件）</text>
+<rect x="410" y="168" width="538" height="78" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="426" y="198" font-size="18" fill="#285caa" font-weight="700">Transform</text>
+<text x="426" y="226" font-size="15" fill="#23364e">位置、旋转、缩放。每个物体都有，不能删。</text>
+<rect x="410" y="260" width="538" height="78" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="426" y="290" font-size="18" fill="#176951" font-weight="700">MeshRenderer</text>
+<text x="426" y="318" font-size="15" fill="#23364e">负责把模型画出来，决定外观。</text>
+<rect x="410" y="352" width="538" height="78" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="426" y="382" font-size="18" fill="#495b73" font-weight="700">Rigidbody + Collider</text>
+<text x="426" y="410" font-size="15" fill="#23364e">物理：受重力、会碰撞。</text>
+<rect x="410" y="444" width="538" height="78" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity="1"/>
+<text x="426" y="474" font-size="18" fill="#5b3fa0" font-weight="700">PlayerController（你的脚本）</text>
+<text x="426" y="502" font-size="15" fill="#23364e">你写的 C# 类，决定它怎么动、怎么受伤。</text>
+<text x="406" y="538" font-size="14" fill="#495b73">换一组组件，就是另一种物体：给它不同的脚本，它就有不同的行为。</text>
+<text x="32" y="590" font-size="16" fill="#495b73">类比：GameObject 像空的手办底座，组件像可插拔的零件，脚本是你亲手做的那个零件。</text>
+<text x="32" y="620" font-size="16" fill="#495b73">你写的脚本也是一种组件：C# 类的一个实例，挂在物体上。</text>
+</g></svg>
