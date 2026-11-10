@@ -1,0 +1,16 @@
+TARGET: D:\QMX-Studio\qmx-Gameknowledge\.git\index.lock
+GOAL: remove stale lock file
+BASELINE command: git -C D:\QMX-Studio\qmx-Gameknowledge update-index --refresh
+BASELINE stdout/stderr: fatal: Unable to create 'D:/QMX-Studio/qmx-Gameknowledge/.git/index.lock': File exists. / Another git process seems to be running in this repository, e.g. an editor opened by 'git commit'. Please make sure all processes are terminated then try again. If it still fails, a git process may have crashed in this repository earlier: remove the file manually to continue.
+BASELINE exit: 128
+BASELINE lock SHA256: E3B0C44298FC1C149BF4C8996FB92427AE41E4649B934CA495991B7852B855
+MODIFIED action: deleted .git/index.lock
+MODIFIED command: git -C D:\QMX-Studio\qmx-Gameknowledge update-index --refresh
+MODIFIED stdout/stderr: (empty)
+MODIFIED exit: 0
+ROLLBACK command: ROLLBACK.sh rollback-test/index.lock
+ROLLBACK stdout/stderr: (empty)
+ROLLBACK exit: 0
+ROLLBACK restored SHA256: E3B0C44298FC1C149BF4C8996FB92427AE41E4649B934CA495991B7852B855
+ROLLBACK hash equals baseline: True
+FINAL target state: D:\QMX-Studio\qmx-Gameknowledge\.git\index.lock absent

@@ -1,0 +1,1 @@
+TARGET=.git/index.lock`nGOAL=remove stale lock file`nSTATE=absent
