@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">可撤销并查集：用栈记录每次合并</title><desc id="desc">不做路径压缩，只按大小合并；每次合并记下“谁挂到了谁下面”。。撤销只需弹出栈顶并还原两个值，正好适合按时间线回退的离线题。</desc>
+<defs><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">可撤销并查集：用栈记录每次合并</text>
+<text x="32" y="77" font-size="17" fill="#495b73">不做路径压缩，只按大小合并；每次合并记下“谁挂到了谁下面”。</text>
+<text x="48" y="128" font-size="18" fill="#495b73" font-weight="700">操作栈（栈顶在上）</text>
+<rect x="50.0" y="164.0" width="400" height="52" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="250" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">合并 3：把根 3 挂到根 1</text>
+<rect x="50.0" y="234.0" width="400" height="52" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="250" y="265.9" font-size="17" fill="#23364e" text-anchor="middle">合并 2：把根 4 挂到根 3</text>
+<rect x="50.0" y="304.0" width="400" height="52" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="250" y="335.9" font-size="17" fill="#23364e" text-anchor="middle">合并 1：把根 2 挂到根 1</text>
+<text x="250" y="392" font-size="15" fill="#495b73" text-anchor="middle">栈底</text>
+<text x="250" y="156" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">栈顶</text>
+<path d="M470 190L560 190" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<rect x="570" y="140" width="400" height="330" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="588" y="174" font-size="17" fill="#a33a3a" font-weight="700">撤销栈顶（合并 3）要做两件事</text>
+<text x="588" y="214" font-size="17" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">parent[3] = 3</text>
+<text x="588" y="248" font-size="17" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">size[1] -= size[3]</text>
+<text x="588" y="296" font-size="16" fill="#23364e">根 3 重新成为独立的根，</text>
+<text x="588" y="322" font-size="16" fill="#23364e">根 1 的集合大小恢复。</text>
+<text x="588" y="372" font-size="16" fill="#495b73">因为没有路径压缩，</text>
+<text x="588" y="398" font-size="16" fill="#495b73">树的形状只被这一次合并改动过。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">撤销只需弹出栈顶并还原两个值，正好适合按时间线回退的离线题。</text>
+</g></svg>

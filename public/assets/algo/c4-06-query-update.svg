@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+<title id="title">查询和修改都只走 log n 步</title><desc id="desc">查询时下标不断减去 lowbit；修改时不断加上 lowbit。。两条路径各至多 log n 个节点。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="480" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">查询和修改都只走 log n 步</text>
+<text x="32" y="77" font-size="17" fill="#495b73">查询时下标不断减去 lowbit；修改时不断加上 lowbit。</text>
+<rect x="32" y="100" width="450" height="340" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="132" font-size="19" fill="#285caa" font-weight="700">query(7)：i -= lowbit(i)</text>
+<rect x="60.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="120" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=7 (111)</text>
+<rect x="60.0" y="257.0" width="120" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="120" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c7 = a7</text>
+<path d="M182 200L198 200" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="200.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=6 (110)</text>
+<rect x="200.0" y="257.0" width="120" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="260" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c6 = a5~a6</text>
+<path d="M322 200L338 200" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="340.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="400" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=4 (100)</text>
+<rect x="340.0" y="257.0" width="120" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="400" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c4 = a1~a4</text>
+<text x="48" y="355" font-size="16" fill="#495b73">i=4 再减 lowbit 得 0，结束。</text>
+<text x="48" y="390" font-size="18" fill="#23364e" font-weight="700">sum(7) = c7 + c6 + c4 = a1~a7</text>
+<rect x="518" y="100" width="450" height="340" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="534" y="132" font-size="19" fill="#8c5315" font-weight="700">update(3, d)：i += lowbit(i)</text>
+<rect x="546.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="606" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=3 (011)</text>
+<rect x="546.0" y="257.0" width="120" height="46" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="606" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c3 += d</text>
+<path d="M668 200L684 200" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<rect x="686.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="746" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=4 (100)</text>
+<rect x="686.0" y="257.0" width="120" height="46" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="746" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c4 += d</text>
+<path d="M808 200L824 200" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<rect x="826.0" y="177.0" width="120" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="886" y="205.6" font-size="16" fill="#23364e" text-anchor="middle">i=8 (1000)</text>
+<rect x="826.0" y="257.0" width="120" height="46" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="886" y="285.6" font-size="16" fill="#23364e" text-anchor="middle">c8 += d</text>
+<text x="534" y="355" font-size="16" fill="#495b73">i=8 再加 lowbit 得 16 &gt; n，结束。</text>
+<text x="534" y="390" font-size="18" fill="#23364e" font-weight="700">覆盖 a3 的 c3、c4、c8 都被更新。</text>
+<text x="32" y="460" font-size="16" fill="#495b73">两条路径各至多 log n 个节点。</text>
+</g></svg>

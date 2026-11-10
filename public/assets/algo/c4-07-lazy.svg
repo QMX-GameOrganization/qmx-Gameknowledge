@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">懒标记：先欠着，需要时再还</title><desc id="desc">区间 [1,4] 都加 3：只改最上面的节点，把修改记在 lz 里。。lz 表示“这个节点的整段区间欠着子树一次加 lz 的修改”。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">懒标记：先欠着，需要时再还</text>
+<text x="32" y="77" font-size="17" fill="#495b73">区间 [1,4] 都加 3：只改最上面的节点，把修改记在 lz 里。</text>
+<rect x="30" y="100" width="300" height="340" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="180" y="132" font-size="18" fill="#495b73" font-weight="700" text-anchor="middle">① 初始</text>
+<line x1="180" y1="195" x2="105" y2="320" stroke="#66758d" stroke-width="2"/>
+<line x1="180" y1="195" x2="255" y2="320" stroke="#66758d" stroke-width="2"/>
+<rect x="105.0" y="162.0" width="150" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="180" y="190.5" font-size="15" fill="#23364e" text-anchor="middle">[1,4]</text>
+<text x="180" y="210.0" font-size="15" fill="#23364e" text-anchor="middle">sum=22  lz=0</text>
+<rect x="40.0" y="287.0" width="130" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="105" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[1,2]</text>
+<text x="105" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=8  lz=0</text>
+<rect x="190.0" y="287.0" width="130" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="255" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[3,4]</text>
+<text x="255" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=14  lz=0</text>
+<text x="180" y="385" font-size="15" fill="#23364e" text-anchor="middle">所有 lz 都是 0。</text>
+<rect x="350" y="100" width="300" height="340" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="500" y="132" font-size="18" fill="#495b73" font-weight="700" text-anchor="middle">② add [1,4] +3</text>
+<line x1="500" y1="195" x2="425" y2="320" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="195" x2="575" y2="320" stroke="#66758d" stroke-width="2"/>
+<rect x="425.0" y="162.0" width="150" height="66" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="190.5" font-size="15" fill="#23364e" text-anchor="middle">[1,4]</text>
+<text x="500" y="210.0" font-size="15" fill="#23364e" text-anchor="middle">sum=34  lz=3</text>
+<rect x="360.0" y="287.0" width="130" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="425" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[1,2]</text>
+<text x="425" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=8  lz=0</text>
+<rect x="510.0" y="287.0" width="130" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="575" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[3,4]</text>
+<text x="575" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=14  lz=0</text>
+<text x="500" y="385" font-size="15" fill="#23364e" text-anchor="middle">[1,4] 完全被覆盖：sum 加</text>
+<text x="500" y="409" font-size="15" fill="#23364e" text-anchor="middle"> 3×4，记 lz=3，不再往下。</text>
+<rect x="670" y="100" width="300" height="340" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="820" y="132" font-size="18" fill="#495b73" font-weight="700" text-anchor="middle">③ 查询 [1,2] 时下推</text>
+<line x1="820" y1="195" x2="745" y2="320" stroke="#66758d" stroke-width="2"/>
+<line x1="820" y1="195" x2="895" y2="320" stroke="#66758d" stroke-width="2"/>
+<rect x="745.0" y="162.0" width="150" height="66" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="820" y="190.5" font-size="15" fill="#23364e" text-anchor="middle">[1,4]</text>
+<text x="820" y="210.0" font-size="15" fill="#23364e" text-anchor="middle">sum=34  lz=0</text>
+<rect x="680.0" y="287.0" width="130" height="66" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="745" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[1,2]</text>
+<text x="745" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=14  lz=3</text>
+<rect x="830.0" y="287.0" width="130" height="66" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="895" y="315.5" font-size="15" fill="#23364e" text-anchor="middle">[3,4]</text>
+<text x="895" y="335.0" font-size="15" fill="#23364e" text-anchor="middle">sum=20  lz=3</text>
+<text x="820" y="385" font-size="15" fill="#23364e" text-anchor="middle">走进孩子前先下推：孩子 sum 加</text>
+<text x="820" y="409" font-size="15" fill="#23364e" text-anchor="middle"> 3×长度，lz 加 3。</text>
+<path d="M334 270L366 270" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M654 270L686 270" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="500" font-size="16" fill="#495b73">lz 表示“这个节点的整段区间欠着子树一次加 lz 的修改”。</text>
+</g></svg>

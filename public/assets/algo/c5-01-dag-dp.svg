@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">DAG 上的最长路:按拓扑序递推</title><desc id="desc">dp[v] = max(dp[u] + w),u 是 v 的前驱;每个 dp[u] 在使用时已经定型。。绿色粗线是一条最长路径 1→3→4→6,长度 10。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">DAG 上的最长路:按拓扑序递推</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dp[v] = max(dp[u] + w),u 是 v 的前驱;每个 dp[u] 在使用时已经定型。</text>
+<path d="M87.3 246.4L190.3 165.4" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="122.0" y="199.5" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="133.0" y="215.5" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M87.3 273.6L190.3 354.6" fill="none" stroke="#176951" stroke-width="4" marker-end="url(#m176951)"/>
+<rect x="122.0" y="298.5" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="133.0" y="314.5" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<path d="M230.4 158.2L336.8 200.7" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="266.5" y="166.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="277.5" y="182.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M225.0 354.0L342.9 228.2" fill="none" stroke="#176951" stroke-width="4" marker-end="url(#m176951)"/>
+<rect x="266.5" y="287.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="277.5" y="303.0" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">6</text>
+<path d="M232.0 370.0L335.0 370.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="266.5" y="359.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="277.5" y="375.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M378.7 221.5L468.7 276.9" fill="none" stroke="#176951" stroke-width="4" marker-end="url(#m176951)"/>
+<rect x="407.5" y="235.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="418.5" y="251.0" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<path d="M378.7 358.5L468.7 303.1" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="407.5" y="323.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="418.5" y="339.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<circle cx="70" cy="260" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="70" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="210" cy="150" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="210" y="156.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="210" cy="370" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="210" y="376.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="360" cy="210" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="360" y="216.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<circle cx="360" cy="370" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="360" y="376.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<circle cx="490" cy="290" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="490" y="296.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<text x="70" y="304" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=0</text>
+<text x="210" y="114" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=3</text>
+<text x="210" y="414" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=2</text>
+<text x="360" y="174" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=8</text>
+<text x="360" y="414" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=5</text>
+<text x="490" y="334" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp=10</text>
+<rect x="590" y="105" width="378" height="380" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="606" y="137" font-size="17" fill="#495b73" font-weight="700">按拓扑序 1,2,3,4,5,6 计算</text>
+<text x="606" y="175" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[1] = 0(没有前驱)</text>
+<text x="606" y="207" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[2] = dp[1] + 3 = 3</text>
+<text x="606" y="239" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[3] = dp[1] + 2 = 2</text>
+<text x="606" y="271" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[4] = max(dp[2] + 4, dp[3] + 6)</text>
+<text x="662" y="303" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">= max(7, 8) = 8</text>
+<text x="606" y="335" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[5] = dp[3] + 3 = 5</text>
+<text x="606" y="367" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[6] = max(dp[4] + 2, dp[5] + 4)</text>
+<text x="662" y="399" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">= max(10, 9) = 10</text>
+<text x="606" y="455" font-size="14" fill="#495b73">拓扑序保证:算 dp[v] 时所有前驱都已算完</text>
+<text x="32" y="520" font-size="16" fill="#495b73">绿色粗线是一条最长路径 1→3→4→6,长度 10。</text>
+</g></svg>

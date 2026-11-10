@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">离散化：把数值换成排名</title><desc id="desc">a = [1000, 5, 99999, 5, 70]。先排序去重得到 v，再用 lower_bound 找每个数在 v 里的位置。。重复的数得到相同的编号，大小关系不变。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">离散化：把数值换成排名</text>
+<text x="32" y="77" font-size="17" fill="#495b73">a = [1000, 5, 99999, 5, 70]。先排序去重得到 v，再用 lower_bound 找每个数在 v 里的位置。</text>
+<text x="32" y="128" font-size="17" fill="#495b73" font-weight="700">原数组 a</text>
+<text x="32" y="288" font-size="17" fill="#495b73" font-weight="700">排序去重后的 v（下标 0 到 3）</text>
+<text x="32" y="448" font-size="17" fill="#495b73" font-weight="700">离散化后的结果（v 中的下标）</text>
+<rect x="95.0" y="154.0" width="110" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="150" y="181.3" font-size="18" fill="#23364e" text-anchor="middle">1000</text>
+<path d="M150 197L575 313" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="95.0" y="459.0" width="110" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="150" y="486.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<rect x="265.0" y="154.0" width="110" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="320" y="181.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<path d="M320 197L235 313" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="265.0" y="459.0" width="110" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="320" y="486.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="435.0" y="154.0" width="110" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="490" y="181.3" font-size="18" fill="#23364e" text-anchor="middle">99999</text>
+<path d="M490 197L745 313" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="435.0" y="459.0" width="110" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="490" y="486.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<rect x="605.0" y="154.0" width="110" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="660" y="181.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<path d="M660 197L235 313" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="605.0" y="459.0" width="110" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="660" y="486.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="775.0" y="154.0" width="110" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="830" y="181.3" font-size="18" fill="#23364e" text-anchor="middle">70</text>
+<path d="M830 197L405 313" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<rect x="775.0" y="459.0" width="110" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="830" y="486.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="180.0" y="315.0" width="110" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="235" y="342.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<text x="235" y="374" font-size="14" fill="#495b73" text-anchor="middle">下标 0</text>
+<rect x="350.0" y="315.0" width="110" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="405" y="342.3" font-size="18" fill="#23364e" text-anchor="middle">70</text>
+<text x="405" y="374" font-size="14" fill="#495b73" text-anchor="middle">下标 1</text>
+<rect x="520.0" y="315.0" width="110" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="575" y="342.3" font-size="18" fill="#23364e" text-anchor="middle">1000</text>
+<text x="575" y="374" font-size="14" fill="#495b73" text-anchor="middle">下标 2</text>
+<rect x="690.0" y="315.0" width="110" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="745" y="342.3" font-size="18" fill="#23364e" text-anchor="middle">99999</text>
+<text x="745" y="374" font-size="14" fill="#495b73" text-anchor="middle">下标 3</text>
+<text x="32" y="540" font-size="16" fill="#495b73">重复的数得到相同的编号，大小关系不变。</text>
+</g></svg>

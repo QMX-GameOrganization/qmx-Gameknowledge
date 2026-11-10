@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">倍增法：排序键的长度 1 → 2 → 4，每轮用上一轮的排名拼成二元组</title><desc id="desc">banana 一共只需要两轮：按首 2 个字符、再按首 4 个字符排序，排名就全部不同了。。每轮是两次计数排序，共 O(log n) 轮，所以总复杂度 O(n log n)。</desc>
+<defs></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">倍增法：排序键的长度 1 → 2 → 4，每轮用上一轮的排名拼成二元组</text>
+<text x="32" y="77" font-size="17" fill="#495b73">banana 一共只需要两轮：按首 2 个字符、再按首 4 个字符排序，排名就全部不同了。</text>
+<text x="32" y="156" font-size="15" fill="#495b73">起点 i</text>
+<rect x="282.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="392.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="440" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="502.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="550" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="612.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="660" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="722.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="770" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="832.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="880" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<text x="32" y="208" font-size="15" fill="#495b73">字符</text>
+<rect x="282.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="392.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="440" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="502.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="550" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">n</text>
+<rect x="612.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="660" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="722.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="770" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">n</text>
+<rect x="832.0" y="182.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="880" y="207.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="32" y="260" font-size="15" fill="#495b73">rk（首 1 个字符）</text>
+<rect x="282.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="392.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="440" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="502.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="550" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="612.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="660" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="722.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="770" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="832.0" y="234.0" width="96" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="880" y="259.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="312" font-size="15" fill="#495b73">键 (rk[i], rk[i+1])</text>
+<rect x="282.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(1,0)</text>
+<rect x="392.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="440" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0,2)</text>
+<rect x="502.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="550" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(2,0)</text>
+<rect x="612.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="660" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0,2)</text>
+<rect x="722.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="770" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(2,0)</text>
+<rect x="832.0" y="286.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="880" y="311.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0,-1)</text>
+<text x="32" y="364" font-size="15" fill="#495b73">rk（首 2 个字符）</text>
+<rect x="282.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="330" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="392.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="440" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="502.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="550" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="612.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="660" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="722.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="770" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="832.0" y="338.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="880" y="363.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="416" font-size="15" fill="#495b73">键 (rk[i], rk[i+2])</text>
+<rect x="282.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(2,3)</text>
+<rect x="392.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="440" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(1,1)</text>
+<rect x="502.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="550" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3,3)</text>
+<rect x="612.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="660" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(1,0)</text>
+<rect x="722.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="770" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3,-1)</text>
+<rect x="832.0" y="390.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="880" y="415.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(0,-1)</text>
+<text x="32" y="468" font-size="15" fill="#495b73">rk（首 4 个字符）</text>
+<rect x="282.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="330" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="392.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="440" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="502.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="550" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="612.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="660" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="722.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="770" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="832.0" y="442.0" width="96" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="880" y="467.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="524" font-size="16" fill="#176951" font-weight="700">最后一行 rk 全部不同（0..5 各出现一次），排序结束；rk 就是后缀 i 的排名。</text>
+<text x="32" y="580" font-size="16" fill="#495b73">每轮是两次计数排序，共 O(log n) 轮，所以总复杂度 O(n log n)。</text>
+</g></svg>

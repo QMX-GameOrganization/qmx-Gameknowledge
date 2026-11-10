@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">差分约束:不等式 ⇒ 边,解不等式组 ⇒ 最短路</title><desc id="desc">x_j - x_i ≤ c 等价于 x_j ≤ x_i + c,正是松弛的形式。。超源点 0 向每个点连权 0 的边,保证所有点都能被到达。</desc>
+<defs><marker id="m5b3fa0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#5b3fa0"/></marker><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">差分约束:不等式 ⇒ 边,解不等式组 ⇒ 最短路</text>
+<text x="32" y="77" font-size="17" fill="#495b73">x_j - x_i ≤ c 等价于 x_j ≤ x_i + c,正是松弛的形式。</text>
+<rect x="32" y="105" width="450" height="260" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">不等式组</text>
+<text x="48" y="178" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">x2 - x1 ≤ 3   →  边 1→2,权 3</text>
+<text x="48" y="212" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">x3 - x2 ≤ -2  →  边 2→3,权 -2</text>
+<text x="48" y="246" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">x3 - x1 ≤ 4   →  边 1→3,权 4</text>
+<text x="48" y="280" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">x1 - x3 ≤ 0   →  边 3→1,权 0</text>
+<text x="48" y="330" font-size="16" fill="#285caa" font-weight="700">规则:x_j - x_i ≤ c  ⇒  边 i→j,权 c</text>
+<path d="M586.8 285.8L680.9 206.1" fill="none" stroke="#5b3fa0" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#m5b3fa0)"/>
+<rect x="624.0" y="234.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="635.0" y="250.0" font-size="13" fill="#5b3fa0" font-weight="700" text-anchor="middle">0</text>
+<path d="M590.6 292.2L836.6 198.9" fill="none" stroke="#5b3fa0" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#m5b3fa0)"/>
+<rect x="704.0" y="234.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="715.0" y="250.0" font-size="13" fill="#5b3fa0" font-weight="700" text-anchor="middle">0</text>
+<path d="M589.9 309.5L757.4 389.3" fill="none" stroke="#5b3fa0" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#m5b3fa0)"/>
+<rect x="664.0" y="339.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="675.0" y="355.0" font-size="13" fill="#5b3fa0" font-weight="700" text-anchor="middle">0</text>
+<path d="M722.0 190.0L835.0 190.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="769.0" y="179.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="780.0" y="195.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M852.2 210.6L788.9 376.6" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="805.0" y="284.0" width="30.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="820.0" y="300.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">-2</text>
+<path d="M707.8 210.6Q710.1 306.4 771.1 376.6" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="714.0" y="289.7" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="725.0" y="305.7" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M772.2 379.4Q769.9 283.6 708.9 213.4" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="744.0" y="278.3" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="755.0" y="294.3" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">0</text>
+<circle cx="570" cy="300" r="22" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="570" y="306.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<circle cx="700" cy="190" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="700" y="196.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="860" cy="190" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="860" y="196.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="780" cy="400" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="780" y="406.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="520" y="118" font-size="16" fill="#495b73" font-weight="700">约束图(紫色虚线:超源点)</text>
+<rect x="32" y="385" width="450" height="185" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="417" font-size="19" fill="#176951" font-weight="700">从 0 出发的最短路</text>
+<text x="48" y="450" font-size="15" fill="#23364e">dist[1] = -2   (路径 0→2→3→1)</text>
+<text x="48" y="478" font-size="15" fill="#23364e">dist[2] = 0,   dist[3] = -2</text>
+<text x="48" y="510" font-size="15" fill="#176951" font-weight="700">取 x = (-2, 0, -2),逐条检查:</text>
+<text x="48" y="538" font-size="15" fill="#23364e">2 ≤ 3,  -2 ≤ -2,  0 ≤ 4,  0 ≤ 0  全部成立</text>
+<text x="32" y="620" font-size="16" fill="#495b73">超源点 0 向每个点连权 0 的边,保证所有点都能被到达。</text>
+</g></svg>

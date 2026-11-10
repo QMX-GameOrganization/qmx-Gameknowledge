@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">Manacher 的镜像：右半边的半径可以由左半边推出来</title><desc id="desc">已知以 c=6 为中心的大回文 [0, 13)，求 i=9 的半径：镜像点 j = 2c - i = 3。。p[i] 先取 min(r - i, p[j])，再尝试往右扩；r 只右移，所以整体 O(n)。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Manacher 的镜像：右半边的半径可以由左半边推出来</text>
+<text x="32" y="77" font-size="17" fill="#495b73">已知以 c=6 为中心的大回文 [0, 13)，求 i=9 的半径：镜像点 j = 2c - i = 3。</text>
+<rect x="39.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="71.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="71.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="109.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="141.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="141.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="179.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="211.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="211.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="249.0" y="137.0" width="64" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="281.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="281.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="319.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="351.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="351.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="389.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="421.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="421.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="459.0" y="137.0" width="64" height="46" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="491.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="491.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="529.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="561.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="561.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="599.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="631.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="631.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<rect x="669.0" y="137.0" width="64" height="46" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="701.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="701.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">9</text>
+<rect x="739.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="771.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="771.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">10</text>
+<rect x="809.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="841.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="841.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">11</text>
+<rect x="879.0" y="137.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="911.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="911.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">12</text>
+<rect x="39" y="236" width="904" height="34" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="500" y="259" font-size="15" fill="#5b3fa0" font-weight="700" text-anchor="middle">中心 c=6，半径 7，覆盖 t[0..12]（r = 13）</text>
+<rect x="39" y="288" width="484" height="34" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="281.0" y="311" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">以 j=3 为中心，p[3]=4</text>
+<rect x="459" y="340" width="484" height="34" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="701.0" y="363" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">以 i=9 为中心，p[9]=4</text>
+<text x="36" y="420" font-size="16" fill="#23364e">r - i = 13 - 9 = 4，p[j] = 4，所以 p[9] 先取 min(4, 4) = 4。</text>
+<text x="36" y="450" font-size="16" fill="#23364e">再往右扩：i + 4 = 13 已经越过 t 的末尾，不用比较，p[9] = 4。</text>
+<text x="36" y="480" font-size="16" fill="#23364e">如果 p[j] 比 r - i 小，答案就是 p[j]，一次比较都不用做。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">p[i] 先取 min(r - i, p[j])，再尝试往右扩；r 只右移，所以整体 O(n)。</text>
+</g></svg>

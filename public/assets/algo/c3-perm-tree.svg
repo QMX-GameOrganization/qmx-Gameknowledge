@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">全排列的递归树（n = 3）</title><desc id="desc">每下一层多选一个数；走到第 3 层就是一个完整排列。。绿色是第一条走到底的路径；叶子返回时 pop_back 撤销，回到父节点再试下一个数。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">全排列的递归树（n = 3）</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每下一层多选一个数；走到第 3 层就是一个完整排列。</text>
+<line x1="500" y1="148" x2="230" y2="217" stroke="#176951" stroke-width="4"/>
+<line x1="230" y1="253" x2="165" y2="322" stroke="#176951" stroke-width="4"/>
+<line x1="165" y1="358" x2="165" y2="427" stroke="#176951" stroke-width="4"/>
+<line x1="230" y1="253" x2="295" y2="322" stroke="#66758d" stroke-width="2"/>
+<line x1="295" y1="358" x2="295" y2="427" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="148" x2="500" y2="217" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="253" x2="435" y2="322" stroke="#66758d" stroke-width="2"/>
+<line x1="435" y1="358" x2="435" y2="427" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="253" x2="565" y2="322" stroke="#66758d" stroke-width="2"/>
+<line x1="565" y1="358" x2="565" y2="427" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="148" x2="770" y2="217" stroke="#66758d" stroke-width="2"/>
+<line x1="770" y1="253" x2="705" y2="322" stroke="#66758d" stroke-width="2"/>
+<line x1="705" y1="358" x2="705" y2="427" stroke="#66758d" stroke-width="2"/>
+<line x1="770" y1="253" x2="835" y2="322" stroke="#66758d" stroke-width="2"/>
+<line x1="835" y1="358" x2="835" y2="427" stroke="#66758d" stroke-width="2"/>
+<rect x="454.0" y="112.0" width="92" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="500" y="135.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">[ ]</text>
+<rect x="184.0" y="217.0" width="92" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="230" y="240.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">[1]</text>
+<rect x="119.0" y="322.0" width="92" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="165" y="345.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">[1,2]</text>
+<rect x="119.0" y="427.0" width="92" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="165" y="450.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">123</text>
+<rect x="249.0" y="322.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="295" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">[1,3]</text>
+<rect x="249.0" y="427.0" width="92" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="295" y="450.6" font-size="16" fill="#23364e" text-anchor="middle">132</text>
+<rect x="454.0" y="217.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500" y="240.6" font-size="16" fill="#23364e" text-anchor="middle">[2]</text>
+<rect x="389.0" y="322.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="435" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">[2,1]</text>
+<rect x="389.0" y="427.0" width="92" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="435" y="450.6" font-size="16" fill="#23364e" text-anchor="middle">213</text>
+<rect x="519.0" y="322.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="565" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">[2,3]</text>
+<rect x="519.0" y="427.0" width="92" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="565" y="450.6" font-size="16" fill="#23364e" text-anchor="middle">231</text>
+<rect x="724.0" y="217.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="770" y="240.6" font-size="16" fill="#23364e" text-anchor="middle">[3]</text>
+<rect x="659.0" y="322.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="705" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">[3,1]</text>
+<rect x="659.0" y="427.0" width="92" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="705" y="450.6" font-size="16" fill="#23364e" text-anchor="middle">312</text>
+<rect x="789.0" y="322.0" width="92" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="835" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">[3,2]</text>
+<rect x="789.0" y="427.0" width="92" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="835" y="450.6" font-size="16" fill="#23364e" text-anchor="middle">321</text>
+<text x="32" y="135" font-size="15" fill="#495b73">深度 0</text>
+<text x="32" y="240" font-size="15" fill="#495b73">深度 1</text>
+<text x="32" y="345" font-size="15" fill="#495b73">深度 2</text>
+<text x="32" y="450" font-size="15" fill="#495b73">深度 3</text>
+<text x="32" y="500" font-size="16" fill="#495b73">绿色是第一条走到底的路径；叶子返回时 pop_back 撤销，回到父节点再试下一个数。</text>
+</g></svg>

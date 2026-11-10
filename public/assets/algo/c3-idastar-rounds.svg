@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="418" viewBox="0 0 1000 418" role="img" aria-labelledby="title desc">
+<title id="title">IDA*：逐轮放宽 f 的上限</title><desc id="desc">八数码起点 724506831。每一轮是一次受 f = g + h ≤ limit 约束的深度优先搜索。。搜不到就把上限放宽到“刚好超出的最小 f”，下一轮再来，内存只需要一条路径。</desc>
+<defs></defs>
+<rect width="1000" height="418" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">IDA*：逐轮放宽 f 的上限</text>
+<text x="32" y="77" font-size="17" fill="#495b73">八数码起点 724506831。每一轮是一次受 f = g + h ≤ limit 约束的深度优先搜索。</text>
+<text x="32" y="143" font-size="17" fill="#23364e" font-weight="700">第 1 轮  limit = 14</text>
+<rect x="300" y="115" width="260" height="38" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="572" y="141" font-size="16" fill="#23364e">12 个节点</text>
+<text x="32" y="195" font-size="17" fill="#23364e" font-weight="700">第 2 轮  limit = 16</text>
+<rect x="300" y="167" width="379" height="38" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="691" y="193" font-size="16" fill="#23364e">41 个节点</text>
+<text x="32" y="247" font-size="17" fill="#23364e" font-weight="700">第 3 轮  limit = 18</text>
+<rect x="300" y="219" width="495" height="38" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="807" y="245" font-size="16" fill="#23364e">131 个节点</text>
+<text x="32" y="299" font-size="17" fill="#23364e" font-weight="700">第 4 轮  limit = 20</text>
+<rect x="300" y="271" width="520" height="38" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="832" y="297" font-size="16" fill="#23364e">167 个节点  找到解</text>
+<text x="32" y="343" font-size="15" fill="#495b73">条形长度按节点数取对数画；limit 就是当前轮的最优步数下界，找到解时它等于最少步数。</text>
+<text x="32" y="398" font-size="16" fill="#495b73">搜不到就把上限放宽到“刚好超出的最小 f”，下一轮再来，内存只需要一条路径。</text>
+</g></svg>

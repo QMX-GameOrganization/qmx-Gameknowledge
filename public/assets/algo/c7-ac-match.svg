@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">在自动机上扫描文本 ushers</title><desc id="desc">每读一个字符走一步；到达节点时，它和它 fail 链上的所有模式串结尾都算出现一次。。代码里不是逐步沿 fail 链数，而是先给到达的节点计数，最后按 BFS 逆序把计数累加到 fail 父亲。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">在自动机上扫描文本 ushers</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每读一个字符走一步；到达节点时，它和它 fail 链上的所有模式串结尾都算出现一次。</text>
+<text x="110" y="122" font-size="16" fill="#495b73" text-anchor="middle">读入</text>
+<text x="270" y="122" font-size="16" fill="#495b73" text-anchor="middle">到达节点</text>
+<text x="560" y="122" font-size="16" fill="#495b73" text-anchor="middle">这一步新增的出现</text>
+<rect x="75.0" y="149.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="177.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">u</text>
+<rect x="145.0" y="149.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="175.2" font-size="15" fill="#23364e" text-anchor="middle">根（根上没有 u 边，留在根）</text>
+<rect x="550.0" y="149.0" width="300" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="175.2" font-size="15" fill="#23364e" text-anchor="middle">无</text>
+<rect x="75.0" y="205.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="233.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s</text>
+<rect x="145.0" y="205.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="231.2" font-size="15" fill="#23364e" text-anchor="middle">s</text>
+<rect x="550.0" y="205.0" width="300" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="231.2" font-size="15" fill="#23364e" text-anchor="middle">无</text>
+<rect x="75.0" y="261.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">h</text>
+<rect x="145.0" y="261.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="287.2" font-size="15" fill="#23364e" text-anchor="middle">sh</text>
+<rect x="550.0" y="261.0" width="300" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="287.2" font-size="15" fill="#23364e" text-anchor="middle">无</text>
+<rect x="75.0" y="317.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="345.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">e</text>
+<rect x="145.0" y="317.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="343.2" font-size="15" fill="#23364e" text-anchor="middle">she</text>
+<rect x="550.0" y="317.0" width="300" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="343.2" font-size="15" fill="#23364e" text-anchor="middle">she，再沿 fail 到 he：he</text>
+<rect x="75.0" y="373.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="401.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">r</text>
+<rect x="145.0" y="373.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="399.2" font-size="15" fill="#23364e" text-anchor="middle">her（she 无 r 边，借 he 的 r 边）</text>
+<rect x="550.0" y="373.0" width="300" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="399.2" font-size="15" fill="#23364e" text-anchor="middle">无</text>
+<rect x="75.0" y="429.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="457.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s</text>
+<rect x="145.0" y="429.0" width="330" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310" y="455.2" font-size="15" fill="#23364e" text-anchor="middle">hers</text>
+<rect x="550.0" y="429.0" width="300" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="455.2" font-size="15" fill="#23364e" text-anchor="middle">hers</text>
+<text x="32" y="520" font-size="17" fill="#176951" font-weight="700">合计：he 1 次，she 1 次，hers 1 次，his 0 次。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">代码里不是逐步沿 fail 链数，而是先给到达的节点计数，最后按 BFS 逆序把计数累加到 fail 父亲。</text>
+</g></svg>

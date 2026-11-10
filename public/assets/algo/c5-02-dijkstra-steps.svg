@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="630" viewBox="0 0 1000 630" role="img" aria-labelledby="title desc">
+<title id="title">Dijkstra 逐步执行</title><desc id="desc">每次取出堆里 dist 最小的点,用它的边去松弛邻居;被取出的点距离不再改变。。堆里残留的过期元素 (5,点3)、(6,点4)、(9,点5) 取出时发现 d &gt; dist[u],直接跳过。</desc>
+<defs></defs>
+<rect width="1000" height="630" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Dijkstra 逐步执行</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每次取出堆里 dist 最小的点,用它的边去松弛邻居;被取出的点距离不再改变。</text>
+<path d="M76.8 245.8L173.2 164.2" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="114.0" y="194.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="125.0" y="210.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M76.8 274.2L173.2 355.8" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="114.0" y="304.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="125.0" y="320.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<path d="M190.0 172.0L190.0 348.0" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="179.0" y="249.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="190.0" y="265.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<path d="M207.7 163.0L322.3 247.0" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="254.0" y="194.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="265.0" y="210.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M207.7 357.0L322.3 273.0" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="254.0" y="304.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="265.0" y="320.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<path d="M212.0 370.0L428.0 370.0" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="309.0" y="359.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="320.0" y="375.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">6</text>
+<path d="M355.6 275.6L434.4 354.4" fill="none" stroke="#66758d" stroke-width="2"/>
+<rect x="384.0" y="304.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="395.0" y="320.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<circle cx="60" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="60" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="190" cy="150" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="156.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="190" cy="370" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="376.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="340" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="340" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<circle cx="450" cy="370" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="450" y="376.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="32" y="118" font-size="17" fill="#495b73" font-weight="700">无向图,起点为 1</text>
+<rect x="520" y="125" width="112" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="576.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle"></text>
+<rect x="632" y="125" width="64" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="664.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">dist[1]</text>
+<rect x="696" y="125" width="64" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="728.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">dist[2]</text>
+<rect x="760" y="125" width="64" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="792.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">dist[3]</text>
+<rect x="824" y="125" width="64" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="856.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">dist[4]</text>
+<rect x="888" y="125" width="64" height="36" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="920.0" y="147.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">dist[5]</text>
+<rect x="520" y="161" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="185.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">初始</text>
+<rect x="632" y="161" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="186.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="161" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="186.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="760" y="161" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="792.0" y="186.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="824" y="161" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="856.0" y="186.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="888" y="161" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="186.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="520" y="201" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="225.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">取出 1 (0)</text>
+<rect x="632" y="201" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="226.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="201" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="728.0" y="226.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="760" y="201" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="792.0" y="226.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="824" y="201" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="856.0" y="226.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="888" y="201" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="226.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="520" y="241" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="265.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">取出 2 (2)</text>
+<rect x="632" y="241" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="266.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="241" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="266.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="760" y="241" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="792.0" y="266.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="824" y="241" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="856.0" y="266.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">6</text>
+<rect x="888" y="241" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="266.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="520" y="281" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="305.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">取出 3 (3)</text>
+<rect x="632" y="281" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="306.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="281" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="306.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="760" y="281" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="792.0" y="306.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="824" y="281" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="856.0" y="306.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="888" y="281" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="920.0" y="306.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">9</text>
+<rect x="520" y="321" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="345.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">取出 4 (4)</text>
+<rect x="632" y="321" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="346.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="321" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="346.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="760" y="321" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="792.0" y="346.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="824" y="321" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="856.0" y="346.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="888" y="321" width="64" height="40" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="920.0" y="346.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">6</text>
+<rect x="520" y="361" width="112" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="576.0" y="385.9" font-size="14" fill="#23364e" font-weight="700" text-anchor="middle">取出 5 (6)</text>
+<rect x="632" y="361" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="664.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="696" y="361" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="760" y="361" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="792.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="824" y="361" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="856.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="888" y="361" width="64" height="40" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">6</text>
+<text x="520" y="429" font-size="14" fill="#495b73">绿色格:本步被松弛更新</text>
+<text x="520" y="457" font-size="18" fill="#176951" font-weight="700">最终:0 2 3 4 6</text>
+<rect x="520" y="470" width="448" height="90" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="534" y="498" font-size="15" fill="#23364e">堆中元素是 (距离, 点)。</text>
+<text x="534" y="524" font-size="15" fill="#23364e">点 5 先后以 9、6 入堆,取出 9 时早已过期。</text>
+<text x="534" y="548" font-size="15" fill="#23364e">这就是代码里 if (d &gt; dist[u]) continue; 的用处。</text>
+<text x="32" y="610" font-size="16" fill="#495b73">堆里残留的过期元素 (5,点3)、(6,点4)、(9,点5) 取出时发现 d &gt; dist[u],直接跳过。</text>
+</g></svg>

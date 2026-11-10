@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">归并排序的递归树</title><desc id="desc">每一层所有节点的规模加起来都是 n，一共 log n 层。。总代价 = 每层代价 n × 层数 log n = O(n log n)。</desc>
+<defs></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">归并排序的递归树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每一层所有节点的规模加起来都是 n，一共 log n 层。</text>
+<rect x="48.0" y="110" width="700.0" height="46" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="398.0" y="140" font-size="17" fill="#23364e" text-anchor="middle">n</text>
+<text x="780" y="130" font-size="16" fill="#495b73">1 个子问题</text>
+<text x="780" y="152" font-size="16" fill="#285caa" font-weight="700">本层合计 n</text>
+<rect x="48.0" y="190" width="346.0" height="46" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="221.0" y="220" font-size="17" fill="#23364e" text-anchor="middle">n/2</text>
+<rect x="402.0" y="190" width="346.0" height="46" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="575.0" y="220" font-size="17" fill="#23364e" text-anchor="middle">n/2</text>
+<text x="780" y="210" font-size="16" fill="#495b73">2 个子问题</text>
+<text x="780" y="232" font-size="16" fill="#176951" font-weight="700">本层合计 n</text>
+<rect x="48.0" y="270" width="169.0" height="46" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="132.5" y="300" font-size="17" fill="#23364e" text-anchor="middle">n/4</text>
+<rect x="225.0" y="270" width="169.0" height="46" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="309.5" y="300" font-size="17" fill="#23364e" text-anchor="middle">n/4</text>
+<rect x="402.0" y="270" width="169.0" height="46" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="486.5" y="300" font-size="17" fill="#23364e" text-anchor="middle">n/4</text>
+<rect x="579.0" y="270" width="169.0" height="46" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="663.5" y="300" font-size="17" fill="#23364e" text-anchor="middle">n/4</text>
+<text x="780" y="290" font-size="16" fill="#495b73">4 个子问题</text>
+<text x="780" y="312" font-size="16" fill="#8c5315" font-weight="700">本层合计 n</text>
+<rect x="48.0" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="88.25" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="136.5" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="176.75" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="225.0" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="265.25" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="313.5" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="353.75" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="402.0" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="442.25" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="490.5" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="530.75" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="579.0" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="619.25" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<rect x="667.5" y="350" width="80.5" height="46" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="707.75" y="380" font-size="17" fill="#23364e" text-anchor="middle">n/8</text>
+<text x="780" y="370" font-size="16" fill="#495b73">8 个子问题</text>
+<text x="780" y="392" font-size="16" fill="#5b3fa0" font-weight="700">本层合计 n</text>
+<text x="48" y="450" font-size="17" fill="#495b73">……  继续对半，直到规模为 1（共 log n 层）</text>
+<text x="32" y="520" font-size="16" fill="#495b73">总代价 = 每层代价 n × 层数 log n = O(n log n)。</text>
+</g></svg>

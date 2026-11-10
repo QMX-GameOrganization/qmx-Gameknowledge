@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">二维前缀和：整块减去两条边，再加回重复减去的角</title><desc id="desc">求右下角 (3,3)–(6,6) 的子矩阵和。。S[i][j] 表示左上角 (1,1) 到 (i,j) 的矩形和，预处理时用同样的容斥。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">二维前缀和：整块减去两条边，再加回重复减去的角</text>
+<text x="32" y="77" font-size="17" fill="#495b73">求右下角 (3,3)–(6,6) 的子矩阵和。</text>
+<rect x="60" y="120" width="50" height="50" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="85.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,1</text>
+<rect x="112" y="120" width="50" height="50" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="137.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,2</text>
+<rect x="164" y="120" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="189.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,3</text>
+<rect x="216" y="120" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="241.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,4</text>
+<rect x="268" y="120" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="293.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,5</text>
+<rect x="320" y="120" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="345.0" y="153" font-size="13" fill="#495b73" text-anchor="middle">1,6</text>
+<rect x="60" y="172" width="50" height="50" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="85.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,1</text>
+<rect x="112" y="172" width="50" height="50" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="137.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,2</text>
+<rect x="164" y="172" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="189.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,3</text>
+<rect x="216" y="172" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="241.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,4</text>
+<rect x="268" y="172" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="293.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,5</text>
+<rect x="320" y="172" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="345.0" y="205" font-size="13" fill="#495b73" text-anchor="middle">2,6</text>
+<rect x="60" y="224" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="85.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,1</text>
+<rect x="112" y="224" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="137.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,2</text>
+<rect x="164" y="224" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="189.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,3</text>
+<rect x="216" y="224" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="241.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,4</text>
+<rect x="268" y="224" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="293.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,5</text>
+<rect x="320" y="224" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="345.0" y="257" font-size="13" fill="#495b73" text-anchor="middle">3,6</text>
+<rect x="60" y="276" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="85.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,1</text>
+<rect x="112" y="276" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="137.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,2</text>
+<rect x="164" y="276" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="189.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,3</text>
+<rect x="216" y="276" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="241.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,4</text>
+<rect x="268" y="276" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="293.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,5</text>
+<rect x="320" y="276" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="345.0" y="309" font-size="13" fill="#495b73" text-anchor="middle">4,6</text>
+<rect x="60" y="328" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="85.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,1</text>
+<rect x="112" y="328" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="137.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,2</text>
+<rect x="164" y="328" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="189.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,3</text>
+<rect x="216" y="328" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="241.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,4</text>
+<rect x="268" y="328" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="293.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,5</text>
+<rect x="320" y="328" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="345.0" y="361" font-size="13" fill="#495b73" text-anchor="middle">5,6</text>
+<rect x="60" y="380" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="85.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,1</text>
+<rect x="112" y="380" width="50" height="50" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="137.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,2</text>
+<rect x="164" y="380" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="189.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,3</text>
+<rect x="216" y="380" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="241.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,4</text>
+<rect x="268" y="380" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="293.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,5</text>
+<rect x="320" y="380" width="50" height="50" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="345.0" y="413" font-size="13" fill="#495b73" text-anchor="middle">6,6</text>
+<rect x="420" y="135" width="30" height="30" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="464" y="157" font-size="17" fill="#23364e">目标：行 3–6，列 3–6</text>
+<rect x="420" y="181" width="30" height="30" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="464" y="203" font-size="17" fill="#23364e">S[2][6] 与 S[6][2]：各减一次</text>
+<rect x="420" y="227" width="30" height="30" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="464" y="249" font-size="17" fill="#23364e">S[2][2]：被减了两次，加回一次</text>
+<text x="420" y="320" font-size="17" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">ans = S[x2][y2] - S[x1-1][y2]</text>
+<text x="476" y="350" font-size="17" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">- S[x2][y1-1] + S[x1-1][y1-1]</text>
+<text x="420" y="400" font-size="17" fill="#495b73">代入 (3,3)–(6,6)：</text>
+<text x="420" y="430" font-size="17" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">S[6][6] - S[2][6] - S[6][2] + S[2][2]</text>
+<text x="32" y="540" font-size="16" fill="#495b73">S[i][j] 表示左上角 (1,1) 到 (i,j) 的矩形和，预处理时用同样的容斥。</text>
+</g></svg>

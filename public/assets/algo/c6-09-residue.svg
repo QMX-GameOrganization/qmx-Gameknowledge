@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">多重背包：按余数分组，每组一个滑动窗口</title><desc id="desc">体积 w = 3，数量 c = 2：dp[j] 只和 j、j-3、j-6 这三个同余位置有关。。组内下标 u，g[u] = dp[r+u·w] - u·v；新 dp = u·v + max(g[u-c..u])。</desc>
+<defs></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">多重背包：按余数分组，每组一个滑动窗口</text>
+<text x="32" y="77" font-size="17" fill="#495b73">体积 w = 3，数量 c = 2：dp[j] 只和 j、j-3、j-6 这三个同余位置有关。</text>
+<text x="48" y="128" font-size="17" fill="#495b73">按 j mod 3 分成 3 组（每行一组）：</text>
+<text x="80" y="181" font-size="17" fill="#285caa" font-weight="700">r = 0</text>
+<rect x="180.0" y="150.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="180.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[0]</text>
+<text x="230" y="215" font-size="13" fill="#66758d" text-anchor="middle">u = 0</text>
+<rect x="310.0" y="150.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="360" y="180.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[3]</text>
+<text x="360" y="215" font-size="13" fill="#66758d" text-anchor="middle">u = 1</text>
+<rect x="440.0" y="150.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490" y="180.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[6]</text>
+<text x="490" y="215" font-size="13" fill="#66758d" text-anchor="middle">u = 2</text>
+<rect x="570.0" y="150.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="180.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[9]</text>
+<text x="620" y="215" font-size="13" fill="#66758d" text-anchor="middle">u = 3</text>
+<text x="80" y="256" font-size="17" fill="#176951" font-weight="700">r = 1</text>
+<rect x="180.0" y="225.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="255.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[1]</text>
+<text x="230" y="290" font-size="13" fill="#66758d" text-anchor="middle">u = 0</text>
+<rect x="310.0" y="225.0" width="100" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="360" y="255.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[4]</text>
+<text x="360" y="290" font-size="13" fill="#66758d" text-anchor="middle">u = 1</text>
+<rect x="440.0" y="225.0" width="100" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="490" y="255.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[7]</text>
+<text x="490" y="290" font-size="13" fill="#66758d" text-anchor="middle">u = 2</text>
+<rect x="570.0" y="225.0" width="100" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="620" y="255.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[10]</text>
+<text x="620" y="290" font-size="13" fill="#66758d" text-anchor="middle">u = 3</text>
+<text x="80" y="331" font-size="17" fill="#8c5315" font-weight="700">r = 2</text>
+<rect x="180.0" y="300.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="330.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[2]</text>
+<text x="230" y="365" font-size="13" fill="#66758d" text-anchor="middle">u = 0</text>
+<rect x="310.0" y="300.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="360" y="330.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[5]</text>
+<text x="360" y="365" font-size="13" fill="#66758d" text-anchor="middle">u = 1</text>
+<rect x="440.0" y="300.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490" y="330.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[8]</text>
+<text x="490" y="365" font-size="13" fill="#66758d" text-anchor="middle">u = 2</text>
+<rect x="570.0" y="300.0" width="100" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="330.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[11]</text>
+<text x="620" y="365" font-size="13" fill="#66758d" text-anchor="middle">u = 3</text>
+<rect x="298" y="220" width="384" height="60" rx="12" fill="none" stroke="#176951" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="760" y="232" font-size="16" fill="#8c5315" font-weight="700">当前 j = 10（u = 3）</text>
+<text x="760" y="258" font-size="16" fill="#176951" font-weight="700">窗口 u ∈ [1, 3]</text>
+<text x="760" y="284" font-size="16" fill="#23364e">即 dp[4]、dp[7]、dp[10]</text>
+<text x="760" y="310" font-size="16" fill="#23364e">最多取 2 个物品</text>
+<text x="32" y="450" font-size="16" fill="#495b73">组内下标 u，g[u] = dp[r+u·w] - u·v；新 dp = u·v + max(g[u-c..u])。</text>
+</g></svg>

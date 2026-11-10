@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">n = 10^5 时各复杂度的操作次数</title><desc id="desc">横轴是操作次数取以 10 为底的对数，越靠右越慢。。超过虚线（约 10^8）的写法，一秒内通常跑不完。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">n = 10^5 时各复杂度的操作次数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">横轴是操作次数取以 10 为底的对数，越靠右越慢。</text>
+<text x="32" y="168" font-size="20" fill="#176951" font-weight="700">O(log n)</text>
+<rect x="270" y="140" width="76.28783312545298" height="40" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="334.28783312545295" y="168" font-size="17" fill="#23364e" text-anchor="end">约 17</text>
+<text x="32" y="234" font-size="20" fill="#176951" font-weight="700">O(n)</text>
+<rect x="270" y="206" width="310.0" height="40" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="568.0" y="234" font-size="17" fill="#23364e" text-anchor="end">10^5</text>
+<text x="32" y="300" font-size="20" fill="#176951" font-weight="700">O(n log n)</text>
+<rect x="270" y="272" width="386.287833125453" height="40" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="644.2878331254531" y="300" font-size="17" fill="#23364e" text-anchor="end">约 1.7×10^6</text>
+<text x="32" y="366" font-size="20" fill="#285caa" font-weight="700">O(n√n)</text>
+<rect x="270" y="338" width="465.3192986558342" height="40" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="723.3192986558342" y="366" font-size="17" fill="#23364e" text-anchor="end">约 3.2×10^7</text>
+<text x="32" y="432" font-size="20" fill="#a33a3a" font-weight="700">O(n²)</text>
+<rect x="270" y="404" width="620.0" height="40" rx="6" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="878.0" y="432" font-size="17" fill="#23364e" text-anchor="end">10^10</text>
+<line x1="766" y1="112" x2="766" y2="480" stroke="#a33a3a" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="766" y="104" font-size="16" fill="#a33a3a" font-weight="700" text-anchor="middle">10^8</text>
+<text x="32" y="500" font-size="16" fill="#495b73">超过虚线（约 10^8）的写法，一秒内通常跑不完。</text>
+</g></svg>

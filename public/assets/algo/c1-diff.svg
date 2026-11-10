@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+<title id="title">差分：区间加变成两个端点的修改</title><desc id="desc">对 a[2..4] 全部加 3：d[2] += 3，d[5] -= 3，再做前缀和还原。。差分是前缀和的逆运算：区间 [l, r] 加 v 等价于 d[l] += v，d[r+1] -= v。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="440" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">差分：区间加变成两个端点的修改</text>
+<text x="32" y="77" font-size="17" fill="#495b73">对 a[2..4] 全部加 3：d[2] += 3，d[5] -= 3，再做前缀和还原。</text>
+<text x="32" y="150" font-size="18" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">d</text>
+<rect x="103.0" y="130.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="145.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="145.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="193.0" y="130.0" width="84" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="235.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="235.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="283.0" y="130.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="325.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="325.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="373.0" y="130.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="415.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="415.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="463.0" y="130.0" width="84" height="40" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="505.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">-3</text>
+<text x="505.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="553.0" y="130.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="595.0" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="595.0" y="124" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<text x="660" y="154" font-size="16" fill="#495b73">d[2] += 3，d[5] -= 3</text>
+<path d="M145 178L145 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M235 178L235 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M325 178L325 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M415 178L415 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M505 178L505 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M595 178L595 238" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="120" y="215" font-size="15" fill="#495b73">做前缀和</text>
+<text x="32" y="280" font-size="18" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="103.0" y="260.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="145.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="145.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="193.0" y="260.0" width="84" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="235.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="235.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="283.0" y="260.0" width="84" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="325.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="325.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="373.0" y="260.0" width="84" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="415.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="415.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="463.0" y="260.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="505.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="505.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="553.0" y="260.0" width="84" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="595.0" y="286.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<text x="595.0" y="254" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<text x="32" y="360" font-size="16" fill="#23364e">d[2] 的 +3 一路传到右边，d[5] 的 -3 在第 5 位把它抵消，</text>
+<text x="32" y="386" font-size="16" fill="#23364e">所以只有 a[2..4] 增加了 3。</text>
+<text x="32" y="420" font-size="16" fill="#495b73">差分是前缀和的逆运算：区间 [l, r] 加 v 等价于 d[l] += v，d[r+1] -= v。</text>
+</g></svg>

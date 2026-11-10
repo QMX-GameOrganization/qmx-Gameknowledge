@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">迭代中序遍历：栈里放“还没访问的祖先”</title><desc id="desc">一路向左入栈，弹出时访问，再转向右子树。。递归版本里的系统调用栈，在迭代版本里变成了自己的 stack。</desc>
+<defs></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">迭代中序遍历：栈里放“还没访问的祖先”</text>
+<text x="32" y="77" font-size="17" fill="#495b73">一路向左入栈，弹出时访问，再转向右子树。</text>
+<rect x="32" y="105" width="936" height="44" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="44" y="132.6" font-size="16" fill="#495b73" font-weight="700">步</text>
+<text x="104" y="132.6" font-size="16" fill="#495b73" font-weight="700">操作</text>
+<text x="574" y="132.6" font-size="16" fill="#495b73" font-weight="700">栈（底→顶）</text>
+<text x="734" y="132.6" font-size="16" fill="#495b73" font-weight="700">已输出</text>
+<text x="44" y="176.6" font-size="16" fill="#23364e">1</text>
+<text x="104" y="176.6" font-size="16" fill="#23364e">一路向左，1 2 4 入栈</text>
+<text x="574" y="176.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1 2 4</text>
+<text x="734" y="176.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">（空）</text>
+<rect x="32" y="193" width="936" height="44" rx="0" fill="#f0f3f9" stroke="#495b73" stroke-opacity="0"/>
+<text x="44" y="220.6" font-size="16" fill="#23364e">2</text>
+<text x="104" y="220.6" font-size="16" fill="#23364e">弹出 4 并访问，4 没有右子</text>
+<text x="574" y="220.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1 2</text>
+<text x="734" y="220.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<text x="44" y="264.6" font-size="16" fill="#23364e">3</text>
+<text x="104" y="264.6" font-size="16" fill="#23364e">弹出 2 并访问，右子 5 入栈</text>
+<text x="574" y="264.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1 5</text>
+<text x="734" y="264.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4 2</text>
+<rect x="32" y="281" width="936" height="44" rx="0" fill="#f0f3f9" stroke="#495b73" stroke-opacity="0"/>
+<text x="44" y="308.6" font-size="16" fill="#23364e">4</text>
+<text x="104" y="308.6" font-size="16" fill="#23364e">弹出 5 并访问</text>
+<text x="574" y="308.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<text x="734" y="308.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4 2 5</text>
+<text x="44" y="352.6" font-size="16" fill="#23364e">5</text>
+<text x="104" y="352.6" font-size="16" fill="#23364e">弹出 1 并访问，右子 3 与左链 6 入栈</text>
+<text x="574" y="352.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3 6</text>
+<text x="734" y="352.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4 2 5 1</text>
+<rect x="32" y="369" width="936" height="44" rx="0" fill="#f0f3f9" stroke="#495b73" stroke-opacity="0"/>
+<text x="44" y="396.6" font-size="16" fill="#23364e">6</text>
+<text x="104" y="396.6" font-size="16" fill="#23364e">弹出 6 并访问</text>
+<text x="574" y="396.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<text x="734" y="396.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4 2 5 1 6</text>
+<text x="44" y="440.6" font-size="16" fill="#23364e">7</text>
+<text x="104" y="440.6" font-size="16" fill="#23364e">弹出 3 并访问，栈空，结束</text>
+<text x="574" y="440.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">（空）</text>
+<text x="734" y="440.6" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4 2 5 1 6 3</text>
+<text x="32" y="480" font-size="16" fill="#495b73">递归版本里的系统调用栈，在迭代版本里变成了自己的 stack。</text>
+</g></svg>

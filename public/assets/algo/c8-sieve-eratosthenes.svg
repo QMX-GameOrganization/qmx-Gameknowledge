@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">埃氏筛：按最小质因子给 1 到 30 上色</title><desc id="desc">从 2 开始，把每个质数的倍数划掉；每个合数在它的最小质因子那一轮第一次被划掉。。同一个合数会被多个质数划到（如 30 被 2、3、5 都划到），线性筛的目标就是消除这种重复。</desc>
+<defs></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">埃氏筛：按最小质因子给 1 到 30 上色</text>
+<text x="32" y="77" font-size="17" fill="#495b73">从 2 开始，把每个质数的倍数划掉；每个合数在它的最小质因子那一轮第一次被划掉。</text>
+<rect x="145.0" y="111.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="180" y="147.7" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="235.0" y="111.0" width="70" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="270" y="147.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<rect x="325.0" y="111.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="360" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">4</text>
+<rect x="415.0" y="111.0" width="70" height="58" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="450" y="147.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<rect x="505.0" y="111.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="540" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">6</text>
+<rect x="595.0" y="111.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="630" y="147.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">7</text>
+<rect x="685.0" y="111.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="720" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">8</text>
+<rect x="775.0" y="111.0" width="70" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="810" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">9</text>
+<rect x="865.0" y="111.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="900" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">10</text>
+<rect x="55.0" y="191.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="90" y="227.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">11</text>
+<rect x="145.0" y="191.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="180" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">12</text>
+<rect x="235.0" y="191.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="270" y="227.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">13</text>
+<rect x="325.0" y="191.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="360" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">14</text>
+<rect x="415.0" y="191.0" width="70" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="450" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">15</text>
+<rect x="505.0" y="191.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="540" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">16</text>
+<rect x="595.0" y="191.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="630" y="227.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">17</text>
+<rect x="685.0" y="191.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="720" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">18</text>
+<rect x="775.0" y="191.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="810" y="227.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">19</text>
+<rect x="865.0" y="191.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="900" y="227.7" font-size="22" fill="#23364e" text-anchor="middle">20</text>
+<rect x="55.0" y="271.0" width="70" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="90" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">21</text>
+<rect x="145.0" y="271.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="180" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">22</text>
+<rect x="235.0" y="271.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="270" y="307.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">23</text>
+<rect x="325.0" y="271.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="360" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">24</text>
+<rect x="415.0" y="271.0" width="70" height="58" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="450" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">25</text>
+<rect x="505.0" y="271.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="540" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">26</text>
+<rect x="595.0" y="271.0" width="70" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="630" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">27</text>
+<rect x="685.0" y="271.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="720" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">28</text>
+<rect x="775.0" y="271.0" width="70" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="810" y="307.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">29</text>
+<rect x="865.0" y="271.0" width="70" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="900" y="307.7" font-size="22" fill="#23364e" text-anchor="middle">30</text>
+<rect x="55.0" y="111.0" width="70" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="90" y="147.7" font-size="22" fill="#23364e" text-anchor="middle">1</text>
+<rect x="74" y="372" width="30" height="24" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="112" y="391" font-size="15" fill="#23364e">最小质因子 2</text>
+<rect x="289" y="372" width="30" height="24" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="327" y="391" font-size="15" fill="#23364e">最小质因子 3</text>
+<rect x="504" y="372" width="30" height="24" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="542" y="391" font-size="15" fill="#23364e">最小质因子 5</text>
+<rect x="719" y="372" width="30" height="24" rx="6" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="757" y="391" font-size="15" fill="#23364e">7 及以上的质数</text>
+<text x="40" y="428" font-size="16" fill="#495b73">加粗的是质数本身。合数最小质因子不超过 √30 ≈ 5.5，所以只需处理 2、3、5。</text>
+<text x="32" y="480" font-size="16" fill="#495b73">同一个合数会被多个质数划到（如 30 被 2、3、5 都划到），线性筛的目标就是消除这种重复。</text>
+</g></svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">异或线性基：依次插入 5、3、6、1</title><desc id="desc">每个基向量占据一个二进制最高位；插入时用已有基向量把最高位消掉。。能凑出的异或值恰好有 2^3 = 8 个。6 = 5 ⊕ 3 已在张成空间中，所以插入失败。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">异或线性基：依次插入 5、3、6、1</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个基向量占据一个二进制最高位；插入时用已有基向量把最高位消掉。</text>
+<rect x="43.0" y="108.0" width="104" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="95.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">插入</text>
+<rect x="153.0" y="108.0" width="134" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="220.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">二进制</text>
+<rect x="293.0" y="108.0" width="324" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="455.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">过程</text>
+<rect x="623.0" y="108.0" width="244" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="745.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">结果</text>
+<rect x="43.0" y="158.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="153.0" y="158.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">101</text>
+<rect x="293.0" y="158.0" width="324" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="455.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">最高位 2 为空</text>
+<rect x="623.0" y="158.0" width="244" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="745.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">b2 = 101</text>
+<rect x="43.0" y="208.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="153.0" y="208.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">011</text>
+<rect x="293.0" y="208.0" width="324" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="455.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">最高位 1 为空</text>
+<rect x="623.0" y="208.0" width="244" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="745.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">b1 = 011</text>
+<rect x="43.0" y="258.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">6</text>
+<rect x="153.0" y="258.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">110</text>
+<rect x="293.0" y="258.0" width="324" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="455.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">⊕b2=011，⊕b1=000</text>
+<rect x="623.0" y="258.0" width="244" height="44" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="745.0" y="285.2" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">失败，不加入</text>
+<rect x="43.0" y="308.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="153.0" y="308.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">001</text>
+<rect x="293.0" y="308.0" width="324" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="455.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">最高位 0 为空</text>
+<rect x="623.0" y="308.0" width="244" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="745.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">b0 = 001</text>
+<text x="40" y="395" font-size="17" fill="#23364e">求最大异或和：从高位到低位，若 r ⊕ b[i] 比 r 大就异或进去。</text>
+<rect x="30.0" y="418.0" width="200" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130" y="445.9" font-size="17" fill="#23364e" text-anchor="middle">r = 000</text>
+<path d="M232 440L258 440" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="260.0" y="418.0" width="200" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="360" y="445.9" font-size="17" fill="#23364e" text-anchor="middle">⊕b2 → 101</text>
+<path d="M462 440L488 440" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="490.0" y="418.0" width="200" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="590" y="445.9" font-size="17" fill="#23364e" text-anchor="middle">⊕b1 → 110</text>
+<path d="M692 440L718 440" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="720.0" y="418.0" width="200" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="820" y="445.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">⊕b0 → 111 = 7</text>
+<text x="32" y="500" font-size="16" fill="#495b73">能凑出的异或值恰好有 2^3 = 8 个。6 = 5 ⊕ 3 已在张成空间中，所以插入失败。</text>
+</g></svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">数位 DP 的状态:pos、limit、lead</title><desc id="desc">n = 253 时,几个前缀对应的 limit 与 lead。。limit 一旦变成否就不会再变回来;lead 一旦变成否也一样。memo 只保存 limit 为否(且 lead 为否)的状态。</desc>
+<defs></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">数位 DP 的状态:pos、limit、lead</text>
+<text x="32" y="77" font-size="17" fill="#495b73">n = 253 时,几个前缀对应的 limit 与 lead。</text>
+<text x="60" y="130" font-size="17" fill="#495b73" font-weight="700">已填前缀</text>
+<text x="300" y="130" font-size="17" fill="#495b73" font-weight="700">limit</text>
+<text x="430" y="130" font-size="17" fill="#495b73" font-weight="700">lead</text>
+<text x="560" y="130" font-size="17" fill="#495b73" font-weight="700">含义</text>
+<rect x="32" y="156" width="936" height="56" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="60" y="188" font-size="20" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2 5 3</text>
+<text x="300" y="188" font-size="18" fill="#8c5315" font-weight="700">是</text>
+<text x="430" y="188" font-size="18" fill="#8c5315" font-weight="700">否</text>
+<text x="560" y="188" font-size="15" fill="#23364e">每一位都等于上界对应位:已经填满,只此一个数</text>
+<rect x="32" y="220" width="936" height="56" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="60" y="252" font-size="20" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2 5 _</text>
+<text x="300" y="252" font-size="18" fill="#8c5315" font-weight="700">是</text>
+<text x="430" y="252" font-size="18" fill="#8c5315" font-weight="700">否</text>
+<text x="560" y="252" font-size="15" fill="#23364e">前两位都贴着 2、5:下一位最大只能到 3</text>
+<rect x="32" y="284" width="936" height="56" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="60" y="316" font-size="20" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2 4 _</text>
+<text x="300" y="316" font-size="18" fill="#285caa" font-weight="700">否</text>
+<text x="430" y="316" font-size="18" fill="#285caa" font-weight="700">否</text>
+<text x="560" y="316" font-size="15" fill="#23364e">十位 4 &lt; 5,已经比 253 小:下一位可以填 0~9</text>
+<rect x="32" y="348" width="936" height="56" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="60" y="380" font-size="20" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1 _ _</text>
+<text x="300" y="380" font-size="18" fill="#285caa" font-weight="700">否</text>
+<text x="430" y="380" font-size="18" fill="#285caa" font-weight="700">否</text>
+<text x="560" y="380" font-size="15" fill="#23364e">百位 1 &lt; 2:后两位随便填,可以查 memo</text>
+<rect x="32" y="412" width="936" height="56" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="60" y="444" font-size="20" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0 0 7</text>
+<text x="300" y="444" font-size="18" fill="#176951" font-weight="700">否</text>
+<text x="430" y="444" font-size="18" fill="#176951" font-weight="700">是→否</text>
+<text x="560" y="444" font-size="15" fill="#23364e">前两位是前导零(lead = 是),填 7 之后 lead 变成否</text>
+<rect x="32" y="496" width="936" height="40" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="48" y="523" font-size="15" fill="#23364e">pos:还剩几位;pre:上一位数字(按题目需要);limit:是否贴着上界;lead:是否仍是前导零</text>
+<text x="32" y="580" font-size="16" fill="#495b73">limit 一旦变成否就不会再变回来;lead 一旦变成否也一样。memo 只保存 limit 为否(且 lead 为否)的状态。</text>
+</g></svg>

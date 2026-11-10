@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+<title id="title">树上启发式合并：一次 dfs 的四步</title><desc id="desc">dfs(u, keep)：keep = true 表示处理完后保留 u 子树的统计。。每个点被重新加入的次数等于它到根路径上的轻边数，而轻边不超过 log2 n 条，所以总复杂度 O(n log n)。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="620" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">树上启发式合并：一次 dfs 的四步</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dfs(u, keep)：keep = true 表示处理完后保留 u 子树的统计。</text>
+<rect x="25.0" y="122.0" width="210" height="96" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="130" y="164.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">① 递归轻儿子</text>
+<text x="130" y="187.0" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">算完就清空</text>
+<path d="M238 170L270 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="275.0" y="122.0" width="210" height="96" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="380" y="164.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">② 递归重儿子</text>
+<text x="380" y="187.0" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">保留它的统计</text>
+<path d="M488 170L520 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="525.0" y="122.0" width="210" height="96" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="630" y="164.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">③ 加入 u 自己</text>
+<text x="630" y="187.0" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">和所有轻子树的点</text>
+<path d="M738 170L770 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="775.0" y="122.0" width="210" height="96" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="880" y="164.9" font-size="17" fill="#5b3fa0" font-weight="700" text-anchor="middle">④ 记录 ans[u]</text>
+<text x="880" y="187.0" font-size="17" fill="#5b3fa0" font-weight="700" text-anchor="middle">keep 为假就清空</text>
+<text x="32" y="272" font-size="16" fill="#23364e">为什么重儿子的统计可以保留：重儿子的子树最大，留着它省掉最多的重复加入。</text>
+<text x="32" y="330" font-size="17" fill="#285caa" font-weight="700">每跨过一条轻边，子树大小至少减半：</text>
+<rect x="32" y="360" width="900" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="46" y="384" font-size="16" fill="#23364e">整棵树 n 个点</text>
+<rect x="32" y="406" width="450" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="494" y="430" font-size="16" fill="#23364e">跨 1 条轻边：子树 &lt;= n/2</text>
+<rect x="32" y="452" width="225" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="269" y="476" font-size="16" fill="#23364e">跨 2 条：&lt;= n/4</text>
+<rect x="32" y="498" width="112" height="34" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="156" y="522" font-size="16" fill="#23364e">跨 k 条：&lt;= n / 2^k</text>
+<text x="32" y="600" font-size="16" fill="#495b73">每个点被重新加入的次数等于它到根路径上的轻边数，而轻边不超过 log2 n 条，所以总复杂度 O(n log n)。</text>
+</g></svg>

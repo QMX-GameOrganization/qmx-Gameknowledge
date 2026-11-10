@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">SPFA 的队列变化</title><desc id="desc">只有距离刚变小的点才需要重新入队;一个点可能多次进出队列。。点 2、4、5 各入队两次:第一次拿到的不是最终距离,后来被更短的路改写。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">SPFA 的队列变化</text>
+<text x="32" y="77" font-size="17" fill="#495b73">只有距离刚变小的点才需要重新入队;一个点可能多次进出队列。</text>
+<path d="M86.1 285.0L191.7 187.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="129.0" y="224.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="140.0" y="240.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<path d="M86.1 315.0L191.7 413.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="129.0" y="354.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="140.0" y="370.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M210.0 408.0L210.0 195.0" fill="none" stroke="#8c5315" stroke-width="3" marker-end="url(#m8c5315)"/>
+<rect x="195.0" y="289.0" width="30.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="210.0" y="305.0" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<path d="M227.1 183.9L350.6 284.2" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="279.0" y="224.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="290.0" y="240.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M227.1 416.1L350.6 315.8" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="279.0" y="354.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="290.0" y="370.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">6</text>
+<path d="M392.0 300.0L465.0 300.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="419.0" y="289.0" width="22.0" height="22" rx="6" fill="#f6f8fc"/>
+<text x="430.0" y="305.0" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<circle cx="70" cy="300" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="70" y="306.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="210" cy="170" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="210" y="176.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="210" cy="430" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="210" y="436.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="370" cy="300" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="370" y="306.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<circle cx="490" cy="300" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="490" y="306.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="32" y="118" font-size="17" fill="#495b73" font-weight="700">有向图,起点 1,含一条负边 3→2</text>
+<rect x="530" y="125" width="66" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="563.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">取出</text>
+<rect x="596" y="125" width="108" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="650.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">队列(之后)</text>
+<rect x="704" y="125" width="48" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="728.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">d1</text>
+<rect x="752" y="125" width="48" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="776.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">d2</text>
+<rect x="800" y="125" width="48" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="824.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">d3</text>
+<rect x="848" y="125" width="48" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="872.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">d4</text>
+<rect x="896" y="125" width="48" height="34" fill="#eaf2ff" stroke="#c5cfdf"/>
+<text x="920.0" y="146.6" font-size="13" fill="#23364e" font-weight="700" text-anchor="middle">d5</text>
+<rect x="530" y="159" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="183.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">—</text>
+<rect x="596" y="159" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="182.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[1]</text>
+<rect x="704" y="159" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="159" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="800" y="159" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="848" y="159" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="896" y="159" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="530" y="197" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="221.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="596" y="197" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="220.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[2, 3]</text>
+<rect x="704" y="197" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="221.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="197" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="776.0" y="221.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="800" y="197" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="824.0" y="221.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="197" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="221.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="896" y="197" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="221.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="530" y="235" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="259.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="596" y="235" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="258.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[3, 4]</text>
+<rect x="704" y="235" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="259.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="235" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="259.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="800" y="235" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="259.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="235" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="872.0" y="259.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">8</text>
+<rect x="896" y="235" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="259.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="530" y="273" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="297.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="596" y="273" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="296.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[4, 2]</text>
+<rect x="704" y="273" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="297.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="273" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="776.0" y="297.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="273" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="297.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="273" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="297.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">8</text>
+<rect x="896" y="273" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="297.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">∞</text>
+<rect x="530" y="311" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="335.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="596" y="311" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="334.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[2, 5]</text>
+<rect x="704" y="311" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="311" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="311" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="311" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">8</text>
+<rect x="896" y="311" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="920.0" y="335.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">9</text>
+<rect x="530" y="349" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="373.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="596" y="349" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="372.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[5, 4]</text>
+<rect x="704" y="349" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="373.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="349" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="373.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="349" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="373.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="349" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="872.0" y="373.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="896" y="349" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="373.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">9</text>
+<rect x="530" y="387" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="411.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="596" y="387" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="410.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[4]</text>
+<rect x="704" y="387" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="411.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="387" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="411.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="387" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="411.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="387" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="411.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="896" y="387" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="411.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">9</text>
+<rect x="530" y="425" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="449.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="596" y="425" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="448.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[5]</text>
+<rect x="704" y="425" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="449.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="425" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="449.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="425" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="449.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="425" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="449.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="896" y="425" width="48" height="38" fill="#d9f0e4" stroke="#c5cfdf"/>
+<text x="920.0" y="449.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="530" y="463" width="66" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="563.0" y="487.2" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="596" y="463" width="108" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="650.0" y="486.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">[ ]</text>
+<rect x="704" y="463" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="728.0" y="487.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="752" y="463" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="776.0" y="487.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="800" y="463" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="824.0" y="487.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="848" y="463" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="872.0" y="487.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="896" y="463" width="48" height="38" fill="#ffffff" stroke="#c5cfdf"/>
+<text x="920.0" y="487.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<text x="530" y="529" font-size="16" fill="#176951" font-weight="700">最终:0 1 2 4 5</text>
+<text x="530" y="555" font-size="14" fill="#495b73">绿色格:本步被更新</text>
+<text x="32" y="620" font-size="16" fill="#495b73">点 2、4、5 各入队两次:第一次拿到的不是最终距离,后来被更短的路改写。</text>
+</g></svg>

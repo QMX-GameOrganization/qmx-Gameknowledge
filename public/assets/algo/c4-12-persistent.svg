@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">可持久化：每次修改只新建一条链</title><desc id="desc">在版本 i-1 的基础上把值 3 的个数加 1，得到版本 i。。新版本只新建根到叶的一条链（橙色，约 log n 个结点）；没动过的子树用指针指向旧版本，旧版本完全不受影响。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">可持久化：每次修改只新建一条链</text>
+<text x="32" y="77" font-size="17" fill="#495b73">在版本 i-1 的基础上把值 3 的个数加 1，得到版本 i。</text>
+<text x="190" y="112" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">版本 i-1</text>
+<text x="710" y="112" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">版本 i（插入值 3）</text>
+<line x1="190" y1="170" x2="120" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="190" y1="170" x2="260" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="120" y1="260" x2="85" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="120" y1="260" x2="155" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="260" y1="260" x2="225" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="260" y1="260" x2="295" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<rect x="159.0" y="153.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="190" y="175.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1~4</text>
+<rect x="89.0" y="243.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="265.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1~2</text>
+<rect x="229.0" y="243.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="260" y="265.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">3~4</text>
+<rect x="54.0" y="333.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="85" y="355.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="124.0" y="333.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="155" y="355.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="194.0" y="333.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="225" y="355.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<rect x="264.0" y="333.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="295" y="355.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">4</text>
+<line x1="710" y1="170" x2="640" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1" stroke-dasharray="6 5"/>
+<line x1="710" y1="170" x2="780" y2="260" stroke="#8c5315" stroke-width="2" stroke-opacity="1"/>
+<line x1="780" y1="260" x2="745" y2="350" stroke="#8c5315" stroke-width="2" stroke-opacity="1"/>
+<line x1="780" y1="260" x2="815" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1" stroke-dasharray="6 5"/>
+<rect x="679.0" y="153.0" width="62" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="710" y="175.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">1~4</text>
+<rect x="609" y="243" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="640" y="266" font-size="16" fill="#285caa" text-anchor="middle">1~2</text>
+<rect x="749.0" y="243.0" width="62" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="780" y="265.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">3~4</text>
+<rect x="714.0" y="333.0" width="62" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="745" y="355.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<rect x="784" y="333" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="815" y="356" font-size="16" fill="#285caa" text-anchor="middle">4</text>
+<text x="640" y="322" font-size="13" fill="#495b73" text-anchor="middle">共用旧结点，</text>
+<text x="640" y="338" font-size="13" fill="#495b73" text-anchor="middle">下面整棵子树也共用</text>
+<path d="M470 260L540 260" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="505" y="242" font-size="14" fill="#495b73" text-anchor="middle">update</text>
+<rect x="40" y="410" width="24" height="18" rx="5" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="74" y="425" font-size="16" fill="#23364e">新建的结点</text>
+<rect x="240" y="410" width="24" height="18" rx="5" fill="#eaf2ff" stroke="#285caa" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="274" y="425" font-size="16" fill="#23364e">指向旧版本的同一个结点（没有复制）</text>
+<text x="32" y="500" font-size="16" fill="#495b73">新版本只新建根到叶的一条链（橙色，约 log n 个结点）；没动过的子树用指针指向旧版本，旧版本完全不受影响。</text>
+</g></svg>

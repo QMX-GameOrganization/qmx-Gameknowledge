@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="505" viewBox="0 0 1000 505" role="img" aria-labelledby="title desc">
+<title id="title">组合总和 II：排序后的两种剪枝</title><desc id="desc">候选数排序为 1 1 2 5 6 7 10，目标 8，在第一层从左到右尝试。。排序让重复的数相邻、让大数集中在右边，这两个剪枝都依赖它。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="505" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">组合总和 II：排序后的两种剪枝</text>
+<text x="32" y="77" font-size="17" fill="#495b73">候选数排序为 1 1 2 5 6 7 10，目标 8，在第一层从左到右尝试。</text>
+<rect x="55.0" y="142.0" width="90" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100" y="178.4" font-size="24" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="45.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="100" y="265.2" font-size="15" fill="#23364e" text-anchor="middle">试</text>
+<path d="M100 200L100 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="185.0" y="142.0" width="90" height="56" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="230" y="178.4" font-size="24" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<rect x="175.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="255.5" font-size="15" fill="#23364e" text-anchor="middle">跳过</text>
+<text x="230" y="275.0" font-size="15" fill="#23364e" text-anchor="middle">与前一个相同</text>
+<path d="M230 200L230 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="315.0" y="142.0" width="90" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="360" y="178.4" font-size="24" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<rect x="305.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="360" y="265.2" font-size="15" fill="#23364e" text-anchor="middle">试</text>
+<path d="M360 200L360 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="445.0" y="142.0" width="90" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="490" y="178.4" font-size="24" fill="#176951" font-weight="700" text-anchor="middle">5</text>
+<rect x="435.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490" y="265.2" font-size="15" fill="#23364e" text-anchor="middle">试</text>
+<path d="M490 200L490 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="575.0" y="142.0" width="90" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="620" y="178.4" font-size="24" fill="#176951" font-weight="700" text-anchor="middle">6</text>
+<rect x="565.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="265.2" font-size="15" fill="#23364e" text-anchor="middle">试</text>
+<path d="M620 200L620 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="705.0" y="142.0" width="90" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750" y="178.4" font-size="24" fill="#176951" font-weight="700" text-anchor="middle">7</text>
+<rect x="695.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="750" y="265.2" font-size="15" fill="#23364e" text-anchor="middle">试</text>
+<path d="M750 200L750 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="835.0" y="142.0" width="90" height="56" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="880" y="178.4" font-size="24" fill="#a33a3a" font-weight="700" text-anchor="middle">10</text>
+<rect x="825.0" y="229.0" width="110" height="62" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="880" y="255.5" font-size="15" fill="#23364e" text-anchor="middle">10 &gt; 8</text>
+<text x="880" y="275.0" font-size="15" fill="#23364e" text-anchor="middle">停止</text>
+<path d="M880 200L880 227" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="32" y="330" width="470" height="110" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="48" y="362" font-size="19" fill="#8c5315" font-weight="700">去重剪枝</text>
+<text x="48" y="392" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i &gt; start 且 a[i] == a[i-1]：</text>
+<text x="48" y="420" font-size="16" fill="#23364e">同一层里，相同的数只让第一个出场。</text>
+<rect x="520" y="330" width="450" height="110" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="536" y="362" font-size="19" fill="#a33a3a" font-weight="700">可行性剪枝</text>
+<text x="536" y="392" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a[i] &gt; rest 时 break：</text>
+<text x="536" y="420" font-size="16" fill="#23364e">排序后右边更大，整层都不用再看。</text>
+<text x="32" y="485" font-size="16" fill="#495b73">排序让重复的数相邻、让大数集中在右边，这两个剪枝都依赖它。</text>
+</g></svg>

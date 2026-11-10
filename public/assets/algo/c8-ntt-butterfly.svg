@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">n = 8 的迭代 NTT：位反转后做 3 层蝶形运算</title><desc id="desc">每层把相距 len/2 的两个数做一次 (u + w·v, u − w·v)。。每层 n/2 次蝶形，共 log2(n) 层，总计 O(n log n)。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">n = 8 的迭代 NTT：位反转后做 3 层蝶形运算</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每层把相距 len/2 的两个数做一次 (u + w·v, u − w·v)。</text>
+<text x="60" y="108" font-size="15" fill="#495b73" font-weight="700">位反转后</text>
+<rect x="52.0" y="112.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="135.6" font-size="16" fill="#23364e" text-anchor="middle">a0</text>
+<rect x="52.0" y="164.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="187.6" font-size="16" fill="#23364e" text-anchor="middle">a4</text>
+<rect x="52.0" y="216.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="239.6" font-size="16" fill="#23364e" text-anchor="middle">a2</text>
+<rect x="52.0" y="268.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="291.6" font-size="16" fill="#23364e" text-anchor="middle">a6</text>
+<rect x="52.0" y="320.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="343.6" font-size="16" fill="#23364e" text-anchor="middle">a1</text>
+<rect x="52.0" y="372.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="395.6" font-size="16" fill="#23364e" text-anchor="middle">a5</text>
+<rect x="52.0" y="424.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="447.6" font-size="16" fill="#23364e" text-anchor="middle">a3</text>
+<rect x="52.0" y="476.0" width="56" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="80" y="499.6" font-size="16" fill="#23364e" text-anchor="middle">a7</text>
+<text x="280" y="108" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 1 层：len = 2</text>
+<line x1="180" y1="130" x2="340" y2="130" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="180" y1="182" x2="340" y2="182" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="210" y1="130" x2="310" y2="182" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<line x1="210" y1="182" x2="310" y2="130" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<circle cx="210" cy="130" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="210" cy="182" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="130" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="182" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<line x1="180" y1="234" x2="340" y2="234" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="180" y1="286" x2="340" y2="286" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="210" y1="234" x2="310" y2="286" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<line x1="210" y1="286" x2="310" y2="234" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<circle cx="210" cy="234" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="210" cy="286" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="234" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="286" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<line x1="180" y1="338" x2="340" y2="338" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="180" y1="390" x2="340" y2="390" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="210" y1="338" x2="310" y2="390" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<line x1="210" y1="390" x2="310" y2="338" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<circle cx="210" cy="338" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="210" cy="390" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="338" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="390" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<line x1="180" y1="442" x2="340" y2="442" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="180" y1="494" x2="340" y2="494" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="210" y1="442" x2="310" y2="494" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<line x1="210" y1="494" x2="310" y2="442" stroke="#285caa" stroke-width="2" stroke-linecap="round"/>
+<circle cx="210" cy="442" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="210" cy="494" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="442" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<circle cx="310" cy="494" r="5" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="480" y="108" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 2 层：len = 4</text>
+<line x1="380" y1="130" x2="540" y2="130" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="380" y1="234" x2="540" y2="234" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="410" y1="130" x2="510" y2="234" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<line x1="410" y1="234" x2="510" y2="130" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<circle cx="410" cy="130" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="410" cy="234" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="130" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="234" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<line x1="380" y1="182" x2="540" y2="182" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="380" y1="286" x2="540" y2="286" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="410" y1="182" x2="510" y2="286" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<line x1="410" y1="286" x2="510" y2="182" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<circle cx="410" cy="182" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="410" cy="286" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="182" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="286" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<line x1="380" y1="338" x2="540" y2="338" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="380" y1="442" x2="540" y2="442" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="410" y1="338" x2="510" y2="442" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<line x1="410" y1="442" x2="510" y2="338" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<circle cx="410" cy="338" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="410" cy="442" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="338" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="442" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<line x1="380" y1="390" x2="540" y2="390" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="380" y1="494" x2="540" y2="494" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="410" y1="390" x2="510" y2="494" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<line x1="410" y1="494" x2="510" y2="390" stroke="#176951" stroke-width="2" stroke-linecap="round"/>
+<circle cx="410" cy="390" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="410" cy="494" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="390" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="510" cy="494" r="5" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="680" y="108" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 3 层：len = 8</text>
+<line x1="580" y1="130" x2="740" y2="130" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="338" x2="740" y2="338" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="610" y1="130" x2="710" y2="338" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<line x1="610" y1="338" x2="710" y2="130" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<circle cx="610" cy="130" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="610" cy="338" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="130" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="338" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<line x1="580" y1="182" x2="740" y2="182" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="390" x2="740" y2="390" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="610" y1="182" x2="710" y2="390" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<line x1="610" y1="390" x2="710" y2="182" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<circle cx="610" cy="182" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="610" cy="390" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="182" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="390" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<line x1="580" y1="234" x2="740" y2="234" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="442" x2="740" y2="442" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="610" y1="234" x2="710" y2="442" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<line x1="610" y1="442" x2="710" y2="234" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<circle cx="610" cy="234" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="610" cy="442" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="234" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="442" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<line x1="580" y1="286" x2="740" y2="286" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="494" x2="740" y2="494" stroke="#c4ccda" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="610" y1="286" x2="710" y2="494" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<line x1="610" y1="494" x2="710" y2="286" stroke="#8c5315" stroke-width="2" stroke-linecap="round"/>
+<circle cx="610" cy="286" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="610" cy="494" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="286" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<circle cx="710" cy="494" r="5" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<rect x="812.0" y="112.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="135.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A0</text>
+<rect x="812.0" y="164.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="187.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A1</text>
+<rect x="812.0" y="216.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="239.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A2</text>
+<rect x="812.0" y="268.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="291.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A3</text>
+<rect x="812.0" y="320.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="343.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A4</text>
+<rect x="812.0" y="372.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="395.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A5</text>
+<rect x="812.0" y="424.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="447.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A6</text>
+<rect x="812.0" y="476.0" width="56" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="840" y="499.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">A7</text>
+<text x="32" y="540" font-size="16" fill="#495b73">每层 n/2 次蝶形，共 log2(n) 层，总计 O(n log n)。</text>
+</g></svg>

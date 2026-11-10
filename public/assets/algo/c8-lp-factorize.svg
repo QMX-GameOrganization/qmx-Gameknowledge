@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="340" viewBox="0 0 1000 340" role="img" aria-labelledby="title desc">
+<title id="title">用 lp 数组在 O(log n) 内分解质因数</title><desc id="desc">反复取最小质因子 lp[x]，除掉后继续。。每一步 x 至少减半，所以最多 log2 n 步；对多次查询比试除快得多。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker></defs>
+<rect width="1000" height="340" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">用 lp 数组在 O(log n) 内分解质因数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">反复取最小质因子 lp[x]，除掉后继续。</text>
+<rect x="70.0" y="140.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="177.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">x = 84</text>
+<path d="M172 170L258 170" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="215" y="150" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">÷ 2</text>
+<text x="215" y="202" font-size="14" fill="#495b73" text-anchor="middle">lp = 2</text>
+<rect x="260.0" y="140.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="310" y="177.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">x = 42</text>
+<path d="M362 170L448 170" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="405" y="150" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">÷ 2</text>
+<text x="405" y="202" font-size="14" fill="#495b73" text-anchor="middle">lp = 2</text>
+<rect x="450.0" y="140.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="500" y="177.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">x = 21</text>
+<path d="M552 170L638 170" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="595" y="150" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">÷ 3</text>
+<text x="595" y="202" font-size="14" fill="#495b73" text-anchor="middle">lp = 3</text>
+<rect x="640.0" y="140.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="690" y="177.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">x = 7</text>
+<path d="M742 170L828 170" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="785" y="150" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">÷ 7</text>
+<text x="785" y="202" font-size="14" fill="#495b73" text-anchor="middle">lp = 7</text>
+<rect x="830.0" y="140.0" width="100" height="60" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="880" y="177.0" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">x = 1</text>
+<text x="500" y="270" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">84 = 2² × 3 × 7</text>
+<text x="32" y="320" font-size="16" fill="#495b73">每一步 x 至少减半，所以最多 log2 n 步；对多次查询比试除快得多。</text>
+</g></svg>

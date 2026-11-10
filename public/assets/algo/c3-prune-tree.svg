@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">最优性剪枝：整棵子树被一刀切掉</title><desc id="desc">0-1 背包的 DFS：上界追不上当前最优，就不再往下搜。。上界用“可拆分背包”估计：把剩余容量按性价比从高到低装，最后一件按比例取。</desc>
+<defs></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">最优性剪枝：整棵子树被一刀切掉</text>
+<text x="32" y="77" font-size="17" fill="#495b73">0-1 背包的 DFS：上界追不上当前最优，就不再往下搜。</text>
+<line x1="500" y1="148" x2="260" y2="212" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="148" x2="740" y2="212" stroke="#66758d" stroke-width="2"/>
+<line x1="260" y1="248" x2="140" y2="312" stroke="#66758d" stroke-width="2"/>
+<line x1="260" y1="248" x2="380" y2="312" stroke="#66758d" stroke-width="2"/>
+<line x1="740" y1="248" x2="620" y2="312" stroke="#66758d" stroke-width="2"/>
+<line x1="740" y1="248" x2="860" y2="312" stroke="#66758d" stroke-width="2"/>
+<rect x="425.0" y="112.0" width="150" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="500" y="135.2" font-size="15" fill="#23364e" text-anchor="middle">拿 / 不拿 第 1 件</text>
+<rect x="185.0" y="212.0" width="150" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="260" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">拿，value=60</text>
+<rect x="645.0" y="212.0" width="190" height="36" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="740" y="234.9" font-size="14" fill="#23364e" text-anchor="middle">不拿，上界 58 ≤ 最优 61</text>
+<rect x="80.0" y="312.0" width="120" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="140" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">继续搜</text>
+<rect x="320.0" y="312.0" width="120" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="380" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">继续搜</text>
+<rect x="560.0" y="312.0" width="120" height="36" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="620" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">不再展开</text>
+<rect x="800.0" y="312.0" width="120" height="36" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="860" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">不再展开</text>
+<text x="500" y="410" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">红色节点：上界 ≤ 当前最优，整棵子树（灰色）不可能更好，直接返回。</text>
+<text x="500" y="446" font-size="17" fill="#23364e" text-anchor="middle">实测 26 件物品：无剪枝约 1455 万个节点，有剪枝只要 109 个。</text>
+<text x="32" y="520" font-size="16" fill="#495b73">上界用“可拆分背包”估计：把剩余容量按性价比从高到低装，最后一件按比例取。</text>
+</g></svg>

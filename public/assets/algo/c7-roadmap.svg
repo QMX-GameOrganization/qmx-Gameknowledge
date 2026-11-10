@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">第 7 章路线：先学三个基础工具，再按需补进阶</title><desc id="desc">哈希、KMP、Z 函数是主线；带 ★ 的进阶算法互相独立。。实线是必需的前置；虚线表示用到相近的思想，先学 KMP / Z 函数会更轻松。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">第 7 章路线：先学三个基础工具，再按需补进阶</text>
+<text x="32" y="77" font-size="17" fill="#495b73">哈希、KMP、Z 函数是主线；带 ★ 的进阶算法互相独立。</text>
+<rect x="32" y="108" width="284" height="124" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="46" y="138" font-size="19" fill="#285caa" font-weight="700">7.1 字符串哈希</text>
+<text x="46" y="166" font-size="16" fill="#23364e">把子串变成一个整数</text>
+<text x="46" y="191" font-size="16" fill="#23364e">O(1) 比较任意两个子串</text>
+<rect x="358" y="108" width="284" height="124" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="372" y="138" font-size="19" fill="#176951" font-weight="700">7.2 KMP</text>
+<text x="372" y="166" font-size="16" fill="#23364e">前缀函数 / border</text>
+<text x="372" y="191" font-size="16" fill="#23364e">线性时间做单模式匹配</text>
+<rect x="684" y="108" width="284" height="124" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="698" y="138" font-size="19" fill="#8c5315" font-weight="700">7.3 Z 函数</text>
+<text x="698" y="166" font-size="16" fill="#23364e">每个位置与整串的公共前缀</text>
+<text x="698" y="191" font-size="16" fill="#23364e">另一种线性匹配思路</text>
+<rect x="32" y="292" width="176" height="140" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="44" y="322" font-size="15" fill="#5b3fa0" font-weight="700">7.4</text>
+<text x="44" y="346" font-size="16" fill="#5b3fa0" font-weight="700">★Manacher</text>
+<text x="44" y="378" font-size="14" fill="#23364e">线性求所有</text>
+<text x="44" y="402" font-size="13" fill="#495b73">回文半径</text>
+<rect x="222" y="292" width="176" height="140" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="234" y="322" font-size="15" fill="#5b3fa0" font-weight="700">7.5</text>
+<text x="234" y="346" font-size="16" fill="#5b3fa0" font-weight="700">★AC 自动机</text>
+<text x="234" y="378" font-size="14" fill="#23364e">多模式匹配</text>
+<text x="234" y="402" font-size="13" fill="#495b73">（前置：KMP、Trie）</text>
+<rect x="412" y="292" width="176" height="140" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="424" y="322" font-size="15" fill="#5b3fa0" font-weight="700">7.6</text>
+<text x="424" y="346" font-size="16" fill="#5b3fa0" font-weight="700">★后缀数组</text>
+<text x="424" y="378" font-size="14" fill="#23364e">后缀排序 + LCP</text>
+<text x="424" y="402" font-size="13" fill="#495b73">子串问题通用工具</text>
+<rect x="602" y="292" width="176" height="140" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="614" y="322" font-size="15" fill="#5b3fa0" font-weight="700">7.7</text>
+<text x="614" y="346" font-size="16" fill="#5b3fa0" font-weight="700">★后缀自动机</text>
+<text x="614" y="378" font-size="14" fill="#23364e">与回文自动机</text>
+<text x="614" y="402" font-size="13" fill="#495b73">最强的子串结构</text>
+<rect x="792" y="292" width="176" height="140" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="804" y="322" font-size="15" fill="#5b3fa0" font-weight="700">7.8</text>
+<text x="804" y="346" font-size="16" fill="#5b3fa0" font-weight="700">★最小表示法</text>
+<text x="804" y="378" font-size="14" fill="#23364e">循环同构的</text>
+<text x="804" y="402" font-size="13" fill="#495b73">最小旋转</text>
+<path d="M440 232L330 290" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M520 232L500 290" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<path d="M826 232L700 290" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="32" y="480" font-size="16" fill="#495b73">实线是必需的前置；虚线表示用到相近的思想，先学 KMP / Z 函数会更轻松。</text>
+</g></svg>

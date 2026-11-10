@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="510" viewBox="0 0 1000 510" role="img" aria-labelledby="title desc">
+<title id="title">快速选择：只进入包含第 k 小的那一段</title><desc id="desc">a = [7,2,9,4,1,8,3,6]，求第 3 小，答案 3。。每轮平均丢掉一半元素，期望总代价 n + n/2 + n/4 + … = O(n)。</desc>
+<defs></defs>
+<rect width="1000" height="510" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">快速选择：只进入包含第 k 小的那一段</text>
+<text x="32" y="77" font-size="17" fill="#495b73">a = [7,2,9,4,1,8,3,6]，求第 3 小，答案 3。</text>
+<rect x="249.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="274.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="305.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="361.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="386.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="447.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="472.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="533.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="558.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="589.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="614.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<rect x="645.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="670.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="701.0" y="125.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="726.0" y="150.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<text x="32" y="112" font-size="16" fill="#285caa" font-weight="700">第 1 轮 基准 4</text>
+<text x="300" y="190" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">&lt; 4：3 个</text>
+<text x="500" y="190" font-size="15" fill="#495b73" text-anchor="middle">= 4</text>
+<text x="750" y="190" font-size="15" fill="#495b73" text-anchor="middle">&gt; 4：4 个</text>
+<text x="32" y="232" font-size="16" fill="#23364e">k = 3 ≤ 3，只留下左段</text>
+<rect x="389.0" y="285.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="414.0" y="310.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="475.0" y="285.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="500.0" y="310.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="561.0" y="285.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="586.0" y="310.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="32" y="272" font-size="16" fill="#285caa" font-weight="700">第 2 轮 基准 2</text>
+<text x="32" y="350" font-size="16" fill="#23364e">左段只有 1 个、等于 2 的有 1 个，合计 2 &lt; 3，所以答案在右段，且是右段的第 1 小</text>
+<rect x="430" y="385" width="140" height="46" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="500" y="416" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">答案 3</text>
+<text x="32" y="490" font-size="16" fill="#495b73">每轮平均丢掉一半元素，期望总代价 n + n/2 + n/4 + … = O(n)。</text>
+</g></svg>

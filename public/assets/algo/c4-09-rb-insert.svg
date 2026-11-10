@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="940" viewBox="0 0 1000 940" role="img" aria-labelledby="title desc">
+<title id="title">红黑树插入修复的三种情形</title><desc id="desc">新结点 z 是红色，父亲 p 也是红色时违反性质 3；看叔叔 u（祖父 g 的另一个孩子）的颜色。。情形 1 只染色，可能把问题上移到 g；情形 2、3 至多旋转两次就结束。图中只画了父亲在左边的情况，右边镜像处理。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="940" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">红黑树插入修复的三种情形</text>
+<text x="32" y="77" font-size="17" fill="#495b73">新结点 z 是红色，父亲 p 也是红色时违反性质 3；看叔叔 u（祖父 g 的另一个孩子）的颜色。</text>
+<text x="24" y="135" font-size="19" fill="#285caa" font-weight="700">情形 1：叔叔 u 是红色</text>
+<text x="24" y="371" font-size="15" fill="#495b73">p、u 染黑，g 染红；再把 g 当作新的 z，继续向上检查（g 是根就直接染黑）。</text>
+<line x1="220" y1="195" x2="170" y2="255" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="220" y1="195" x2="270" y2="255" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="170" y1="255" x2="130" y2="315" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="220" cy="195" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="220" y="200.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="170" cy="255" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="170" y="260.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<circle cx="270" cy="255" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="270" y="260.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<circle cx="130" cy="315" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="130" y="320.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<line x1="680" y1="195" x2="630" y2="255" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="680" y1="195" x2="730" y2="255" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="630" y1="255" x2="590" y2="315" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="680" cy="195" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="680" y="200.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="630" cy="255" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="630" y="260.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<circle cx="730" cy="255" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="730" y="260.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<circle cx="590" cy="315" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="590" y="320.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<path d="M410 245L540 245" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="24" y="395" font-size="19" fill="#285caa" font-weight="700">情形 2：叔叔 u 是黑色（或空），z 是 p 的右孩子</text>
+<text x="24" y="631" font-size="15" fill="#495b73">对 p 左旋，两个红结点排成一条左斜线（z 和 p 互换名字），变成情形 3。</text>
+<line x1="220" y1="455" x2="170" y2="515" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="220" y1="455" x2="270" y2="515" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="170" y1="515" x2="210" y2="575" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="220" cy="455" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="220" y="460.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="170" cy="515" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="170" y="520.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<circle cx="270" cy="515" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="270" y="520.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<circle cx="210" cy="575" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="210" y="580.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<line x1="680" y1="455" x2="630" y2="515" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="680" y1="455" x2="730" y2="515" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="630" y1="515" x2="590" y2="575" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="680" cy="455" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="680" y="460.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="630" cy="515" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="630" y="520.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<circle cx="730" cy="515" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="730" y="520.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<circle cx="590" cy="575" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="590" y="580.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<path d="M410 505L540 505" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="24" y="655" font-size="19" fill="#285caa" font-weight="700">情形 3：叔叔 u 是黑色（或空），z 是 p 的左孩子</text>
+<text x="24" y="891" font-size="15" fill="#495b73">p 染黑，g 染红，对 g 右旋。子树根变黑，黑高不变，修复结束。</text>
+<line x1="220" y1="715" x2="170" y2="775" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="220" y1="715" x2="270" y2="775" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="170" y1="775" x2="130" y2="835" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="220" cy="715" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="220" y="720.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="170" cy="775" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="170" y="780.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<circle cx="270" cy="775" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="270" y="780.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<circle cx="130" cy="835" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="130" y="840.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<line x1="680" y1="715" x2="630" y2="775" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="680" y1="715" x2="730" y2="775" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="730" y1="775" x2="780" y2="835" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="680" cy="715" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="680" y="720.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">p</text>
+<circle cx="630" cy="775" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="630" y="780.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">z</text>
+<circle cx="730" cy="775" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="730" y="780.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">g</text>
+<circle cx="780" cy="835" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="780" y="840.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">u</text>
+<path d="M410 765L540 765" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="920" font-size="16" fill="#495b73">情形 1 只染色，可能把问题上移到 g；情形 2、3 至多旋转两次就结束。图中只画了父亲在左边的情况，右边镜像处理。</text>
+</g></svg>

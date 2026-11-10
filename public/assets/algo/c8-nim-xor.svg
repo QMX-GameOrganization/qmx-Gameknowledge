@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+<title id="title">Nim 游戏：各堆大小异或不为 0，先手必胜</title><desc id="desc">三堆 3、4、5：二进制逐位异或，结果 010 ≠ 0。。必胜策略：找一堆 a，使 a ⊕ X &lt; a，把它减到 a ⊕ X。这里 3 ⊕ 2 = 1，从 3 那堆取走 2 个，局面变成 (1, 4, 5)，异或为 0。</desc>
+<defs></defs>
+<rect width="1000" height="440" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Nim 游戏：各堆大小异或不为 0，先手必胜</text>
+<text x="32" y="77" font-size="17" fill="#495b73">三堆 3、4、5：二进制逐位异或，结果 010 ≠ 0。</text>
+<rect x="123.0" y="113.0" width="134" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="190.0" y="140.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">堆</text>
+<rect x="263.0" y="113.0" width="134" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330.0" y="140.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">大小</text>
+<rect x="403.0" y="113.0" width="144" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="475.0" y="140.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 2 位</text>
+<rect x="553.0" y="113.0" width="144" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="625.0" y="140.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 1 位</text>
+<rect x="703.0" y="113.0" width="144" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="775.0" y="140.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">第 0 位</text>
+<rect x="123.0" y="163.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190.0" y="190.2" font-size="15" fill="#23364e" text-anchor="middle">A</text>
+<rect x="263.0" y="163.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="190.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="403.0" y="163.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="475.0" y="190.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="553.0" y="163.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="625.0" y="190.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="703.0" y="163.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="775.0" y="190.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="123.0" y="213.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190.0" y="240.2" font-size="15" fill="#23364e" text-anchor="middle">B</text>
+<rect x="263.0" y="213.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="240.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="403.0" y="213.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="475.0" y="240.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="553.0" y="213.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="625.0" y="240.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="703.0" y="213.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="775.0" y="240.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="123.0" y="263.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190.0" y="290.2" font-size="15" fill="#23364e" text-anchor="middle">C</text>
+<rect x="263.0" y="263.0" width="134" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="290.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="403.0" y="263.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="475.0" y="290.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="553.0" y="263.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="625.0" y="290.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="703.0" y="263.0" width="144" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="775.0" y="290.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="123.0" y="313.0" width="134" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="190.0" y="340.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">异或</text>
+<rect x="263.0" y="313.0" width="134" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="330.0" y="340.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<rect x="403.0" y="313.0" width="144" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="475.0" y="340.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="553.0" y="313.0" width="144" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="625.0" y="340.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="703.0" y="313.0" width="144" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="775.0" y="340.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<text x="120" y="395" font-size="17" fill="#23364e">取走后：(1, 4, 5) → 001 ⊕ 100 ⊕ 101 = 000，对手面对必败局面。</text>
+<text x="32" y="420" font-size="16" fill="#495b73">必胜策略：找一堆 a，使 a ⊕ X &lt; a，把它减到 a ⊕ X。这里 3 ⊕ 2 = 1，从 3 那堆取走 2 个，局面变成 (1, 4, 5)，异或为 0。</text>
+</g></svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+<title id="title">BFS 一层一层向外扩</title><desc id="desc">格子里的数字是从 S 出发的最少步数，同一步数的格子颜色相同。。第一次到达某格时的步数就是它的最短距离，所以入队时就可以标记 dist。</desc>
+<defs></defs>
+<rect width="1000" height="580" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">BFS 一层一层向外扩</text>
+<text x="32" y="77" font-size="17" fill="#495b73">格子里的数字是从 S 出发的最少步数，同一步数的格子颜色相同。</text>
+<rect x="50" y="120" width="80" height="80" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="90.0" y="167.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">S</text>
+<rect x="53" y="123" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="130" y="120" width="80" height="80" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="170.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle">1</text>
+<rect x="210" y="120" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="290" y="120" width="80" height="80" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="330.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle">7</text>
+<rect x="370" y="120" width="80" height="80" rx="4" fill="#fff2df" stroke="#8c5315" stroke-opacity=".5"/>
+<text x="410.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle">8</text>
+<rect x="50" y="200" width="80" height="80" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="90.0" y="247.7" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="53" y="203" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="130" y="200" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="210" y="200" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="290" y="200" width="80" height="80" rx="4" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".5"/>
+<text x="330.0" y="247.7" font-size="22" fill="#23364e" text-anchor="middle">6</text>
+<rect x="370" y="200" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="50" y="280" width="80" height="80" rx="4" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".5"/>
+<text x="90.0" y="327.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">2</text>
+<rect x="53" y="283" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="130" y="280" width="80" height="80" rx="4" fill="#fff2df" stroke="#8c5315" stroke-opacity=".5"/>
+<text x="170.0" y="327.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<rect x="133" y="283" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="210" y="280" width="80" height="80" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="250.0" y="327.7" font-size="22" fill="#23364e" text-anchor="middle">4</text>
+<rect x="290" y="280" width="80" height="80" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="330.0" y="327.7" font-size="22" fill="#23364e" text-anchor="middle">5</text>
+<rect x="370" y="280" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="50" y="360" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="130" y="360" width="80" height="80" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="170.0" y="407.7" font-size="22" fill="#495b73" font-weight="700" text-anchor="middle">4</text>
+<rect x="133" y="363" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="210" y="360" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="290" y="360" width="80" height="80" rx="4" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="370" y="360" width="80" height="80" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="410.0" y="407.7" font-size="22" fill="#23364e" text-anchor="middle">9</text>
+<rect x="50" y="440" width="80" height="80" rx="4" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".5"/>
+<text x="90.0" y="487.7" font-size="22" fill="#23364e" text-anchor="middle">6</text>
+<rect x="130" y="440" width="80" height="80" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="170.0" y="487.7" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">5</text>
+<rect x="133" y="443" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="210" y="440" width="80" height="80" rx="4" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".5"/>
+<text x="250.0" y="487.7" font-size="22" fill="#5b3fa0" font-weight="700" text-anchor="middle">6</text>
+<rect x="213" y="443" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="290" y="440" width="80" height="80" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="330.0" y="487.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">T</text>
+<rect x="293" y="443" width="74" height="74" rx="4" fill="none" stroke="#a33a3a" stroke-opacity="1"/>
+<rect x="370" y="440" width="80" height="80" rx="4" fill="#fff2df" stroke="#8c5315" stroke-opacity=".5"/>
+<text x="410.0" y="487.7" font-size="22" fill="#23364e" text-anchor="middle">8</text>
+<rect x="500" y="120" width="470" height="400" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="520" y="152" font-size="19" fill="#495b73" font-weight="700">队列里发生了什么</text>
+<text x="520" y="190" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">第 0 步：(0,0)</text>
+<text x="520" y="238" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">第 1 步：(0,1) (1,0)</text>
+<text x="520" y="286" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">第 2 步：(2,0)</text>
+<text x="520" y="334" font-size="15" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">第 3 步：(2,1)</text>
+<text x="520" y="382" font-size="16" fill="#495b73">……第 7 步到达 T</text>
+<text x="520" y="440" font-size="16" fill="#23364e">红框：从 T 沿 from[] 倒着走回 S，</text>
+<text x="520" y="468" font-size="16" fill="#23364e">再反转，就是一条最短路径。</text>
+<text x="520" y="496" font-size="16" fill="#285caa" font-weight="700">队列中任何时刻只有相邻两层的格子。</text>
+<text x="32" y="560" font-size="16" fill="#495b73">第一次到达某格时的步数就是它的最短距离，所以入队时就可以标记 dist。</text>
+</g></svg>

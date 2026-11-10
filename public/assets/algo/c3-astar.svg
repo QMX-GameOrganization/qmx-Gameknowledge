@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="595" viewBox="0 0 1000 595" role="img" aria-labelledby="title desc">
+<title id="title">A*：让搜索朝着终点的方向走</title><desc id="desc">有颜色的格子是被扩展（出队）的格子。同一张图，最短步数都是 15。。f = g + h：g 是已走步数，h 是到终点的估计（曼哈顿距离），堆按 f 从小到大取。</desc>
+<defs></defs>
+<rect width="1000" height="595" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">A*：让搜索朝着终点的方向走</text>
+<text x="32" y="77" font-size="17" fill="#495b73">有颜色的格子是被扩展（出队）的格子。同一张图，最短步数都是 15。</text>
+<text x="40" y="125" font-size="18" fill="#285caa" font-weight="700">无启发（Dijkstra）：扩展 64 个格子</text>
+<rect x="40" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="240" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="280" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="320" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="145" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="240" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="280" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="320" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="185" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="240" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="280" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="320" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="360" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="225" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="265" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="240" y="265" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="280" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="320" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="265" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="305" width="40" height="40" rx="4" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".5"/>
+<text x="60.0" y="331.3" font-size="18" fill="#a33a3a" font-weight="700" text-anchor="middle">S</text>
+<rect x="80" y="305" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="305" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="305" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="305" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="240" y="305" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="280" y="305" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="320" y="305" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="305" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="305" width="40" height="40" rx="4" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".5"/>
+<text x="420.0" y="331.3" font-size="18" fill="#a33a3a" font-weight="700" text-anchor="middle">T</text>
+<rect x="40" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="345" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="240" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="280" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="320" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="345" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="240" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="280" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="320" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="360" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="385" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="40" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="80" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="120" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="160" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="200" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="240" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="280" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="320" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="360" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<rect x="400" y="425" width="40" height="40" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="540" y="125" font-size="18" fill="#176951" font-weight="700">A*（h = 曼哈顿距离）：扩展 36 个格子</text>
+<rect x="540" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="580" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="620" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="660" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="700" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="740" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="780" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="820" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="860" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="900" y="145" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="540" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="580" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="740" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="780" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="820" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="860" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="900" y="185" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="540" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="580" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="740" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="780" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="820" y="225" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="860" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="900" y="225" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="540" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="580" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="265" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="740" y="265" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="780" y="265" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="820" y="265" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="860" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="900" y="265" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="540" y="305" width="40" height="40" rx="4" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".5"/>
+<text x="560.0" y="331.3" font-size="18" fill="#a33a3a" font-weight="700" text-anchor="middle">S</text>
+<rect x="580" y="305" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="305" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="305" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="305" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="740" y="305" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="780" y="305" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="820" y="305" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="860" y="305" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="900" y="305" width="40" height="40" rx="4" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".5"/>
+<text x="920.0" y="331.3" font-size="18" fill="#a33a3a" font-weight="700" text-anchor="middle">T</text>
+<rect x="540" y="345" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="580" y="345" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="345" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="345" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="345" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="740" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="780" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="820" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="860" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="900" y="345" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="540" y="385" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="580" y="385" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="620" y="385" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="660" y="385" width="40" height="40" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<rect x="700" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="740" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="780" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="820" y="385" width="40" height="40" rx="2" fill="#66758d" stroke="#495b73" stroke-opacity=".3"/>
+<rect x="860" y="385" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="900" y="385" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="540" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="580" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="620" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="660" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="700" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="740" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="780" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="820" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="860" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<rect x="900" y="425" width="40" height="40" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<text x="40" y="498" font-size="16" fill="#23364e">两者都保证最优，但 A* 只扩展了更少的格子；</text>
+<text x="40" y="524" font-size="16" fill="#23364e">h 越接近真实距离（又不高估），省得越多。</text>
+<text x="32" y="575" font-size="16" fill="#495b73">f = g + h：g 是已走步数，h 是到终点的估计（曼哈顿距离），堆按 f 从小到大取。</text>
+</g></svg>

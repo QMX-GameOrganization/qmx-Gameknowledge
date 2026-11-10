@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">N 皇后：逐行放置，三个数组判冲突</title><desc id="desc">左：一个皇后攻击到的格子。右：4 皇后的第一个解。。同列 c 相同；主对角线 r − c 相同；副对角线 r + c 相同。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">N 皇后：逐行放置，三个数组判冲突</text>
+<text x="32" y="77" font-size="17" fill="#495b73">左：一个皇后攻击到的格子。右：4 皇后的第一个解。</text>
+<rect x="70" y="130" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="140" y="130" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="210" y="130" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="280" y="130" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="70" y="200" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="140" y="200" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="210" y="200" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="280" y="200" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="70" y="270" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="140" y="270" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="210" y="270" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="280" y="270" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="70" y="340" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="140" y="340" width="70" height="70" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".4"/>
+<rect x="210" y="340" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="280" y="340" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<circle cx="175.0" cy="165.0" r="24" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<text x="175.0" y="173.0" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">Q</text>
+<text x="56" y="170.0" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="105.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="56" y="240.0" font-size="14" fill="#495b73" text-anchor="middle">1</text>
+<text x="175.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">1</text>
+<text x="56" y="310.0" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="245.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="56" y="380.0" font-size="14" fill="#495b73" text-anchor="middle">3</text>
+<text x="315.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">3</text>
+<text x="70" y="440" font-size="16" fill="#23364e">(0,1) 的皇后攻击红色格子：</text>
+<text x="70" y="468" font-size="15" fill="#495b73">同列 c = 1；主对角线 r − c = −1；副对角线 r + c = 1</text>
+<rect x="560" y="130" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="630" y="130" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="700" y="130" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="770" y="130" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="560" y="200" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="630" y="200" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="700" y="200" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="770" y="200" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="560" y="270" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="630" y="270" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="700" y="270" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="770" y="270" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="560" y="340" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="630" y="340" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<rect x="700" y="340" width="70" height="70" rx="0" fill="#ffffff" stroke="#66758d" stroke-opacity=".4"/>
+<rect x="770" y="340" width="70" height="70" rx="0" fill="#eef1f6" stroke="#495b73" stroke-opacity=".4"/>
+<circle cx="665.0" cy="165.0" r="24" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<text x="665.0" y="173.0" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">Q</text>
+<circle cx="805.0" cy="235.0" r="24" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<text x="805.0" y="243.0" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">Q</text>
+<circle cx="595.0" cy="305.0" r="24" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<text x="595.0" y="313.0" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">Q</text>
+<circle cx="735.0" cy="375.0" r="24" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<text x="735.0" y="383.0" font-size="22" fill="#285caa" font-weight="700" text-anchor="middle">Q</text>
+<text x="546" y="170.0" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="595.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="546" y="240.0" font-size="14" fill="#495b73" text-anchor="middle">1</text>
+<text x="665.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">1</text>
+<text x="546" y="310.0" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="735.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="546" y="380.0" font-size="14" fill="#495b73" text-anchor="middle">3</text>
+<text x="805.0" y="122" font-size="14" fill="#495b73" text-anchor="middle">3</text>
+<text x="560" y="440" font-size="16" fill="#23364e">解：pos = [1, 3, 0, 2]（每行皇后所在的列）</text>
+<text x="560" y="468" font-size="15" fill="#495b73">每行恰好一个，所以搜索深度就是行号。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">同列 c 相同；主对角线 r − c 相同；副对角线 r + c 相同。</text>
+</g></svg>

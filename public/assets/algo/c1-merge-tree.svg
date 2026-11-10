@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">归并排序：先拆到单个元素，再两两合并</title><desc id="desc">拆分 3 层，合并 3 层，每层的总工作量都是 n。。一共 log n 层，每层合并耗时 O(n)，所以总复杂度 O(n log n)。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">归并排序：先拆到单个元素，再两两合并</text>
+<text x="32" y="77" font-size="17" fill="#495b73">拆分 3 层，合并 3 层，每层的总工作量都是 n。</text>
+<text x="32" y="134" font-size="16" fill="#285caa" font-weight="700">拆分</text>
+<rect x="279.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="304.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="335.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="360.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="416.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="447.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="472.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="503.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="528.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="559.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="584.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="615.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="640.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="671.0" y="108.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="696.0" y="133.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="267.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="292.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="323.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="348.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="379.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="404.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="435.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="460.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="515.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="540.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="571.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="596.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="627.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="652.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="683.0" y="168.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="708.0" y="193.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="243.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="268.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="299.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="324.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="379.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="404.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="435.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="460.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="515.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="540.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="571.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="596.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="651.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="676.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="707.0" y="228.0" width="50" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="732.0" y="253.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<text x="32" y="314" font-size="16" fill="#495b73" font-weight="700">单个元素</text>
+<rect x="195.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="275.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="300.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="355.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="435.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="460.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="515.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="540.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="595.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="675.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="755.0" y="288.0" width="50" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="780.0" y="313.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<text x="32" y="374" font-size="16" fill="#285caa" font-weight="700">合并</text>
+<rect x="243.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="268.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="299.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="324.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="379.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="404.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="435.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="460.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="515.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="540.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="571.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="596.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="651.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="676.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="707.0" y="348.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="732.0" y="373.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="267.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="292.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="323.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="348.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="379.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="404.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="435.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="460.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="515.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="540.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="571.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="596.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="627.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="652.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="683.0" y="408.0" width="50" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="708.0" y="433.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="279.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="304.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="335.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="360.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="416.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="447.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="472.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="503.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="528.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="559.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="584.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="615.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="640.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="671.0" y="468.0" width="50" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="696.0" y="493.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<text x="32" y="540" font-size="16" fill="#495b73">一共 log n 层，每层合并耗时 O(n)，所以总复杂度 O(n log n)。</text>
+</g></svg>

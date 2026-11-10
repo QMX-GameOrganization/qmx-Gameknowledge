@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">数据范围反推算法</title><desc id="desc">看到 n 的大小，先想自己最多能承担多少次基本操作。。经验值：C++ 一秒内大约能执行 10^8 次简单运算。</desc>
+<defs></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">数据范围反推算法</text>
+<text x="32" y="77" font-size="17" fill="#495b73">看到 n 的大小，先想自己最多能承担多少次基本操作。</text>
+<rect x="32" y="108" width="936" height="48" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="56" y="139" font-size="19" fill="#a33a3a" font-weight="700">n ≤ 10</text>
+<text x="250" y="139" font-size="18" fill="#23364e">O(n!)  全排列枚举</text>
+<rect x="32" y="168" width="936" height="48" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="56" y="199" font-size="19" fill="#a33a3a" font-weight="700">n ≤ 20</text>
+<text x="250" y="199" font-size="18" fill="#23364e">O(2^n)  子集枚举、状压</text>
+<rect x="32" y="228" width="936" height="48" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="56" y="259" font-size="19" fill="#8c5315" font-weight="700">n ≤ 500</text>
+<text x="250" y="259" font-size="18" fill="#23364e">O(n³)  Floyd、区间 DP</text>
+<rect x="32" y="288" width="936" height="48" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="56" y="319" font-size="19" fill="#8c5315" font-weight="700">n ≤ 5000</text>
+<text x="250" y="319" font-size="18" fill="#23364e">O(n²)  朴素 DP、双重循环</text>
+<rect x="32" y="348" width="936" height="48" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="56" y="379" font-size="19" fill="#285caa" font-weight="700">n ≤ 10^5</text>
+<text x="250" y="379" font-size="18" fill="#23364e">O(n log n)  排序、二分、线段树</text>
+<rect x="32" y="408" width="936" height="48" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="56" y="439" font-size="19" fill="#176951" font-weight="700">n ≤ 10^6</text>
+<text x="250" y="439" font-size="18" fill="#23364e">O(n)，或小常数的 O(n log n)</text>
+<rect x="32" y="468" width="936" height="48" rx="12" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="56" y="499" font-size="19" fill="#5b3fa0" font-weight="700">n ≥ 10^9</text>
+<text x="250" y="499" font-size="18" fill="#23364e">O(log n) 或 O(1)  数学公式、二分</text>
+<text x="32" y="570" font-size="16" fill="#495b73">经验值：C++ 一秒内大约能执行 10^8 次简单运算。</text>
+</g></svg>

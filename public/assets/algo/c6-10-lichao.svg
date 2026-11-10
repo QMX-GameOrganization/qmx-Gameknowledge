@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="575" viewBox="0 0 1000 575" role="img" aria-labelledby="title desc">
+<title id="title">Li Chao 树：插入一条直线</title><desc id="desc">每个节点保存一条在区间中点处最优的直线，另一条最多只会在一侧更优。。插入、查询都是 O(log V)，直线可以任意顺序加入，查询 x 也可以任意顺序。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="575" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Li Chao 树：插入一条直线</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个节点保存一条在区间中点处最优的直线，另一条最多只会在一侧更优。</text>
+<rect x="32" y="105" width="480" height="400" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="135" font-size="18" fill="#285caa" font-weight="700">x ∈ [1, 8]，求最小值</text>
+<line x1="50" y1="460" x2="490" y2="460" stroke="#66758d" stroke-width="2"/>
+<polyline points="110,239.0 460,358" fill="none" stroke="#a33a3a" stroke-width="3"/>
+<polyline points="110,378.4 460,283.2" fill="none" stroke="#176951" stroke-width="3"/>
+<text x="116" y="227.0" font-size="16" fill="#a33a3a" font-weight="700">新直线 A</text>
+<text x="456" y="271.2" font-size="16" fill="#176951" font-weight="700" text-anchor="end">已有直线 B</text>
+<line x1="260" y1="205" x2="260" y2="460" stroke="#66758d" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="260" y="480" font-size="15" fill="#495b73" text-anchor="middle">mid = 4</text>
+<text x="48" y="160" font-size="15" fill="#23364e">mid 处 B 更低，B 留在节点；</text>
+<text x="48" y="184" font-size="15" fill="#23364e">A 只在右端更低，只需放进右子树。</text>
+<rect x="540" y="105" width="428" height="400" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="556" y="135" font-size="18" fill="#176951" font-weight="700">线段树结构</text>
+<rect x="679.0" y="165.0" width="150" height="60" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="754" y="190.2" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">[1, 8]</text>
+<text x="754" y="211.0" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">存 B</text>
+<rect x="585.0" y="312.0" width="130" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="650" y="335.2" font-size="16" fill="#23364e" text-anchor="middle">[1, 4]</text>
+<text x="650" y="356.0" font-size="16" fill="#23364e" text-anchor="middle">空</text>
+<rect x="795.0" y="312.0" width="130" height="56" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="860" y="335.2" font-size="16" fill="#a33a3a" font-weight="700" text-anchor="middle">[5, 8]</text>
+<text x="860" y="356.0" font-size="16" fill="#a33a3a" font-weight="700" text-anchor="middle">存 A</text>
+<path d="M730 228L665 310" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M780 228L845 310" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<text x="556" y="430" font-size="15" fill="#23364e">递归规则：在 mid 处比较并交换，</text>
+<text x="556" y="456" font-size="15" fill="#23364e">较差的那条直线只在左端更优就进左子树，</text>
+<text x="556" y="482" font-size="15" fill="#23364e">只在右端更优就进右子树，都不优则丢弃。</text>
+<text x="32" y="555" font-size="16" fill="#495b73">插入、查询都是 O(log V)，直线可以任意顺序加入，查询 x 也可以任意顺序。</text>
+</g></svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">Dinic：先分层，再只沿“层数加 1”的边推流</title><desc id="desc">每条边的标注是 已流量/容量，灰色虚线是不走的边。。两轮推流共 5，每轮之后用残量网络重新分层；反向边略去未画。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m9aa5b5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#9aa5b5"/></marker><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Dinic：先分层，再只沿“层数加 1”的边推流</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每条边的标注是 已流量/容量，灰色虚线是不走的边。</text>
+<rect x="32" y="105" width="468" height="370" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="18" fill="#285caa" font-weight="700">第 1 轮：BFS 分层，推流 4</text>
+<rect x="518" y="105" width="450" height="370" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="137" font-size="18" fill="#176951" font-weight="700">第 2 轮：重新分层，推流 1</text>
+<circle cx="100" cy="300" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="100" y="305.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<text x="100" y="344" font-size="14" fill="#495b73" text-anchor="middle">层 0</text>
+<circle cx="240" cy="210" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="240" y="215.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="240" y="178" font-size="14" fill="#495b73" text-anchor="middle">层 1</text>
+<circle cx="240" cy="390" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="240" y="395.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="240" y="434" font-size="14" fill="#495b73" text-anchor="middle">层 1</text>
+<circle cx="380" cy="300" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="380" y="305.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<text x="380" y="344" font-size="14" fill="#495b73" text-anchor="middle">层 2</text>
+<circle cx="586" cy="300" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="586" y="305.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<text x="586" y="344" font-size="14" fill="#495b73" text-anchor="middle">层 0</text>
+<circle cx="726" cy="210" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="726" y="215.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="726" y="178" font-size="14" fill="#495b73" text-anchor="middle">层 1</text>
+<circle cx="726" cy="390" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="726" y="395.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="726" y="434" font-size="14" fill="#495b73" text-anchor="middle">层 2</text>
+<circle cx="866" cy="300" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="866" y="305.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<text x="866" y="344" font-size="14" fill="#495b73" text-anchor="middle">层 3</text>
+<path d="M118.5 288.1L219.0 223.5" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<rect x="148.0" y="243.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170.0" y="259.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2/3</text>
+<path d="M258.5 221.9L359.0 286.5" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<rect x="288.0" y="243.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310.0" y="259.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2/2</text>
+<path d="M118.5 311.9L219.0 376.5" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<rect x="148.0" y="333.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170.0" y="349.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2/2</text>
+<path d="M258.5 378.1L359.0 313.5" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<rect x="288.0" y="333.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="310.0" y="349.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2/3</text>
+<path d="M240.0 232.0L240.0 365.0" fill="none" stroke="#9aa5b5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m9aa5b5)"/>
+<rect x="218.0" y="288.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="240.0" y="304.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0/1</text>
+<text x="278" y="305" font-size="13" fill="#495b73">同层，不走</text>
+<path d="M604.5 288.1L705.0 223.5" fill="none" stroke="#a33a3a" stroke-width="3" marker-end="url(#ma33a3a)"/>
+<rect x="636.0" y="243.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="656.0" y="259.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">余1</text>
+<path d="M726.0 232.0L726.0 365.0" fill="none" stroke="#a33a3a" stroke-width="3" marker-end="url(#ma33a3a)"/>
+<rect x="706.0" y="288.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="726.0" y="304.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">余1</text>
+<path d="M744.5 378.1L845.0 313.5" fill="none" stroke="#a33a3a" stroke-width="3" marker-end="url(#ma33a3a)"/>
+<rect x="776.0" y="333.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="796.0" y="349.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">余1</text>
+<path d="M604.5 311.9L705.0 376.5" fill="none" stroke="#9aa5b5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m9aa5b5)"/>
+<rect x="636.0" y="333.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="656.0" y="349.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">满</text>
+<path d="M744.5 221.9L845.0 286.5" fill="none" stroke="#9aa5b5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m9aa5b5)"/>
+<rect x="776.0" y="243.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="796.0" y="259.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">满</text>
+<text x="32" y="500" font-size="16" fill="#495b73">两轮推流共 5，每轮之后用残量网络重新分层；反向边略去未画。</text>
+</g></svg>

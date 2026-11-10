@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="400" viewBox="0 0 1000 400" role="img" aria-labelledby="title desc">
+<title id="title">解同余方程 6x ≡ 4 (mod 10)：把 x 从 0 试到 9</title><desc id="desc">g = gcd(6, 10) = 2，4 能被 2 整除，所以有解；解之间相隔 m/g = 5。。两个解 x = 4 和 x = 9，写成 x ≡ 4 (mod 5)。如果右边是 5（不被 2 整除），整行都不会出现 5。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="400" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">解同余方程 6x ≡ 4 (mod 10)：把 x 从 0 试到 9</text>
+<text x="32" y="77" font-size="17" fill="#495b73">g = gcd(6, 10) = 2，4 能被 2 整除，所以有解；解之间相隔 m/g = 5。</text>
+<text x="40" y="142" font-size="18" fill="#495b73" font-weight="700">x</text>
+<text x="40" y="214" font-size="18" fill="#495b73" font-weight="700">6x mod 10</text>
+<rect x="189.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">0</text>
+<rect x="189.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">0</text>
+<rect x="263.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="294" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">1</text>
+<rect x="263.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="294" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">6</text>
+<rect x="337.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="368" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">2</text>
+<rect x="337.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="368" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">2</text>
+<rect x="411.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="442" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">3</text>
+<rect x="411.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="442" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">8</text>
+<rect x="485.0" y="110.0" width="62" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="516" y="142.0" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<rect x="485.0" y="182.0" width="62" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="516" y="214.0" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<rect x="559.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="590" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">5</text>
+<rect x="559.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="590" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">0</text>
+<rect x="633.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="664" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">6</text>
+<rect x="633.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="664" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">6</text>
+<rect x="707.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="738" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">7</text>
+<rect x="707.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="738" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">2</text>
+<rect x="781.0" y="110.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="812" y="142.0" font-size="20" fill="#23364e" text-anchor="middle">8</text>
+<rect x="781.0" y="182.0" width="62" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="812" y="214.0" font-size="20" fill="#23364e" text-anchor="middle">8</text>
+<rect x="855.0" y="110.0" width="62" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="886" y="142.0" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">9</text>
+<rect x="855.0" y="182.0" width="62" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="886" y="214.0" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<path d="M516 164L516 180" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M886 164L886 180" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="485" y="262" width="432" height="58" rx="12" fill="#fff2df" stroke="#8c5315" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="701.0" y="298" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">相隔 5 = m / g，之后重复</text>
+<text x="32" y="380" font-size="16" fill="#495b73">两个解 x = 4 和 x = 9，写成 x ≡ 4 (mod 5)。如果右边是 5（不被 2 整除），整行都不会出现 5。</text>
+</g></svg>

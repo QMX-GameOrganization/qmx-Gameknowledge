@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">fib(5) 的递归树</title><desc id="desc">同一个子问题被重复计算：fib(3) 算了 2 次，fib(2) 算了 3 次。。每个节点是一次函数调用，共 15 个；n 增大时节点数按指数增长。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">fib(5) 的递归树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">同一个子问题被重复计算：fib(3) 算了 2 次，fib(2) 算了 3 次。</text>
+<line x1="129.0" y1="398" x2="70" y2="446" stroke="#66758d" stroke-width="2"/>
+<line x1="129.0" y1="398" x2="188" y2="446" stroke="#66758d" stroke-width="2"/>
+<line x1="217.5" y1="316" x2="129.0" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="217.5" y1="316" x2="306" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="483.0" y1="316" x2="424" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="483.0" y1="316" x2="542" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="350.25" y1="234" x2="217.5" y2="282" stroke="#66758d" stroke-width="2"/>
+<line x1="350.25" y1="234" x2="483.0" y2="282" stroke="#66758d" stroke-width="2"/>
+<line x1="719.0" y1="316" x2="660" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="719.0" y1="316" x2="778" y2="364" stroke="#66758d" stroke-width="2"/>
+<line x1="807.5" y1="234" x2="719.0" y2="282" stroke="#66758d" stroke-width="2"/>
+<line x1="807.5" y1="234" x2="896" y2="282" stroke="#66758d" stroke-width="2"/>
+<line x1="578.875" y1="152" x2="350.25" y2="200" stroke="#66758d" stroke-width="2"/>
+<line x1="578.875" y1="152" x2="807.5" y2="200" stroke="#66758d" stroke-width="2"/>
+<rect x="28.0" y="446.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="70" y="468.2" font-size="15" fill="#23364e" text-anchor="middle">fib(1)</text>
+<rect x="146.0" y="446.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="188" y="468.2" font-size="15" fill="#23364e" text-anchor="middle">fib(0)</text>
+<rect x="87.0" y="364.0" width="84" height="34" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="129.0" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(2)</text>
+<rect x="264.0" y="364.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="306" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(1)</text>
+<rect x="175.5" y="282.0" width="84" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="217.5" y="304.2" font-size="15" fill="#23364e" text-anchor="middle">fib(3)</text>
+<rect x="382.0" y="364.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="424" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(1)</text>
+<rect x="500.0" y="364.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="542" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(0)</text>
+<rect x="441.0" y="282.0" width="84" height="34" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="483.0" y="304.2" font-size="15" fill="#23364e" text-anchor="middle">fib(2)</text>
+<rect x="308.25" y="200.0" width="84" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="350.25" y="222.2" font-size="15" fill="#23364e" text-anchor="middle">fib(4)</text>
+<rect x="618.0" y="364.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="660" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(1)</text>
+<rect x="736.0" y="364.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="778" y="386.2" font-size="15" fill="#23364e" text-anchor="middle">fib(0)</text>
+<rect x="677.0" y="282.0" width="84" height="34" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="719.0" y="304.2" font-size="15" fill="#23364e" text-anchor="middle">fib(2)</text>
+<rect x="854.0" y="282.0" width="84" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="896" y="304.2" font-size="15" fill="#23364e" text-anchor="middle">fib(1)</text>
+<rect x="765.5" y="200.0" width="84" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="807.5" y="222.2" font-size="15" fill="#23364e" text-anchor="middle">fib(3)</text>
+<rect x="536.875" y="118.0" width="84" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="578.875" y="140.2" font-size="15" fill="#23364e" text-anchor="middle">fib(5)</text>
+<text x="32" y="540" font-size="16" fill="#495b73">每个节点是一次函数调用，共 15 个；n 增大时节点数按指数增长。</text>
+</g></svg>

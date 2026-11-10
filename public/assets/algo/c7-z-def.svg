@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">Z 函数：每个位置与整串的最长公共前缀</title><desc id="desc">s = aabxaab，z[4] = 3 表示 s[4..] 的前 3 个字符等于 s 的前 3 个字符。。z[0] 按约定取 n；用 z[i] == 模式串长度判断匹配，可以替代 KMP。</desc>
+<defs></defs>
+<rect width="1000" height="530" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Z 函数：每个位置与整串的最长公共前缀</text>
+<text x="32" y="77" font-size="17" fill="#495b73">s = aabxaab，z[4] = 3 表示 s[4..] 的前 3 个字符等于 s 的前 3 个字符。</text>
+<text x="32" y="118" font-size="16" fill="#495b73">字符串 s</text>
+<rect x="63.0" y="144.0" width="74" height="48" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="100.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="143.0" y="144.0" width="74" height="48" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="180.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="180.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="223.0" y="144.0" width="74" height="48" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="260.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="260.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="303.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">x</text>
+<text x="340.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="383.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="420.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="420.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="463.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="500.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="543.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="580.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="580.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<text x="32" y="262" font-size="16" fill="#8c5315" font-weight="700">从 i=4 开始的后缀 s[4..]，对齐到串首来比较</text>
+<rect x="63.0" y="288.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="100.0" y="320.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="143.0" y="288.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="180.0" y="320.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="223.0" y="288.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="260.0" y="320.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="314" y="318" font-size="16" fill="#23364e">与前缀 aab 完全相同，所以 z[4] = 3</text>
+<text x="32" y="392" font-size="16" fill="#495b73">z 数组</text>
+<rect x="63.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="100.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">7</text>
+<rect x="143.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="180.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="223.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="260.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="303.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="340.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="383.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="420.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="463.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="500.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="543.0" y="410.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="580.0" y="437.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="32" y="510" font-size="16" fill="#495b73">z[0] 按约定取 n；用 z[i] == 模式串长度判断匹配，可以替代 KMP。</text>
+</g></svg>

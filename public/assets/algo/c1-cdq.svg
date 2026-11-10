@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">CDQ 分治：先算左右内部，再统计左半对右半的贡献</title><desc id="desc">把“前面的元素影响后面的元素”转成一次跨区间的批量处理。。跨区间统计时左右两半各自按另一维排序，用双指针加数据结构完成，总复杂度 O(n log n · log n)。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">CDQ 分治：先算左右内部，再统计左半对右半的贡献</text>
+<text x="32" y="77" font-size="17" fill="#495b73">把“前面的元素影响后面的元素”转成一次跨区间的批量处理。</text>
+<rect x="103.0" y="120.0" width="94" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="150.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="203.0" y="120.0" width="94" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="250.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="303.0" y="120.0" width="94" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="350.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="403.0" y="120.0" width="94" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="450.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="503.0" y="120.0" width="94" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="550.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="603.0" y="120.0" width="94" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="650.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="703.0" y="120.0" width="94" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="803.0" y="120.0" width="94" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="850.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="100" y="215" width="380" height="70" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="114" y="245" font-size="19" fill="#285caa" font-weight="700">solve(l, mid)</text>
+<text x="114" y="273" font-size="15" fill="#23364e">左半内部的贡献，递归</text>
+<rect x="520" y="215" width="380" height="70" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="245" font-size="19" fill="#176951" font-weight="700">solve(mid+1, r)</text>
+<text x="534" y="273" font-size="15" fill="#23364e">右半内部的贡献，递归</text>
+<rect x="220" y="340" width="560" height="90" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="234" y="370" font-size="19" fill="#8c5315" font-weight="700">左半 → 右半 的贡献</text>
+<text x="234" y="398" font-size="15" fill="#23364e">左半元素只能影响右半元素（时间或下标在前）</text>
+<text x="234" y="423" font-size="15" fill="#23364e">在这一层一次性算完，不再往下递归</text>
+<path d="M290 285L400 338" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M710 285L600 338" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="32" y="500" font-size="16" fill="#495b73">跨区间统计时左右两半各自按另一维排序，用双指针加数据结构完成，总复杂度 O(n log n · log n)。</text>
+</g></svg>

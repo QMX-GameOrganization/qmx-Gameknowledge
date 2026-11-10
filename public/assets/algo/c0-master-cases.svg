@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">主定理的三种情形</title><desc id="desc">T(n) = a·T(n/b) + f(n)，看递归树每一层的代价是递增、持平还是递减。。令 c = log_b a。比较 f(n) 与 n^c 的大小，就能知道哪一端的代价占主导。</desc>
+<defs></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">主定理的三种情形</text>
+<text x="32" y="77" font-size="17" fill="#495b73">T(n) = a·T(n/b) + f(n)，看递归树每一层的代价是递增、持平还是递减。</text>
+<rect x="32" y="108" width="292" height="380" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="46" y="140" font-size="18" fill="#285caa" font-weight="700">f(n) 比 n^c 小</text>
+<text x="46" y="168" font-size="16" fill="#23364e">叶子占主导：每层代价递增</text>
+<rect x="46" y="190" width="60" height="28" rx="5" fill="#ffffff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="114" y="210" font-size="13" fill="#495b73">第 0 层</text>
+<rect x="46" y="228" width="100" height="28" rx="5" fill="#ffffff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="154" y="248" font-size="13" fill="#495b73">第 1 层</text>
+<rect x="46" y="266" width="140" height="28" rx="5" fill="#ffffff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="194" y="286" font-size="13" fill="#495b73">第 2 层</text>
+<rect x="46" y="304" width="180" height="28" rx="5" fill="#ffffff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="234" y="324" font-size="13" fill="#495b73">第 3 层</text>
+<rect x="46" y="342" width="220" height="28" rx="5" fill="#ffffff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="274" y="362" font-size="13" fill="#495b73">第 4 层</text>
+<text x="46" y="420" font-size="17" fill="#23364e" font-weight="700">T(n) = Θ(n^c)</text>
+<text x="46" y="450" font-size="16" fill="#495b73">例：T = 4T(n/2) + n</text>
+<text x="46" y="476" font-size="16" fill="#495b73">结果 Θ(n²)</text>
+<rect x="354" y="108" width="292" height="380" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="368" y="140" font-size="18" fill="#176951" font-weight="700">f(n) 与 n^c 同阶</text>
+<text x="368" y="168" font-size="16" fill="#23364e">每层一样：每层代价持平</text>
+<rect x="368" y="190" width="150" height="28" rx="5" fill="#ffffff" stroke="#176951" stroke-opacity=".3"/>
+<text x="526" y="210" font-size="13" fill="#495b73">第 0 层</text>
+<rect x="368" y="228" width="150" height="28" rx="5" fill="#ffffff" stroke="#176951" stroke-opacity=".3"/>
+<text x="526" y="248" font-size="13" fill="#495b73">第 1 层</text>
+<rect x="368" y="266" width="150" height="28" rx="5" fill="#ffffff" stroke="#176951" stroke-opacity=".3"/>
+<text x="526" y="286" font-size="13" fill="#495b73">第 2 层</text>
+<rect x="368" y="304" width="150" height="28" rx="5" fill="#ffffff" stroke="#176951" stroke-opacity=".3"/>
+<text x="526" y="324" font-size="13" fill="#495b73">第 3 层</text>
+<rect x="368" y="342" width="150" height="28" rx="5" fill="#ffffff" stroke="#176951" stroke-opacity=".3"/>
+<text x="526" y="362" font-size="13" fill="#495b73">第 4 层</text>
+<text x="368" y="420" font-size="17" fill="#23364e" font-weight="700">T(n) = Θ(n^c · log n)</text>
+<text x="368" y="450" font-size="16" fill="#495b73">例：T = 2T(n/2) + n</text>
+<text x="368" y="476" font-size="16" fill="#495b73">结果 Θ(n log n)</text>
+<rect x="676" y="108" width="292" height="380" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="690" y="140" font-size="18" fill="#8c5315" font-weight="700">f(n) 比 n^c 大</text>
+<text x="690" y="168" font-size="16" fill="#23364e">根占主导：每层代价递减</text>
+<rect x="690" y="190" width="220" height="28" rx="5" fill="#ffffff" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="918" y="210" font-size="13" fill="#495b73">第 0 层</text>
+<rect x="690" y="228" width="180" height="28" rx="5" fill="#ffffff" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="878" y="248" font-size="13" fill="#495b73">第 1 层</text>
+<rect x="690" y="266" width="140" height="28" rx="5" fill="#ffffff" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="838" y="286" font-size="13" fill="#495b73">第 2 层</text>
+<rect x="690" y="304" width="100" height="28" rx="5" fill="#ffffff" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="798" y="324" font-size="13" fill="#495b73">第 3 层</text>
+<rect x="690" y="342" width="60" height="28" rx="5" fill="#ffffff" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="758" y="362" font-size="13" fill="#495b73">第 4 层</text>
+<text x="690" y="420" font-size="17" fill="#23364e" font-weight="700">T(n) = Θ(f(n))</text>
+<text x="690" y="450" font-size="16" fill="#495b73">例：T = T(n/2) + n</text>
+<text x="690" y="476" font-size="16" fill="#495b73">结果 Θ(n)</text>
+<text x="32" y="520" font-size="16" fill="#495b73">令 c = log_b a。比较 f(n) 与 n^c 的大小，就能知道哪一端的代价占主导。</text>
+</g></svg>

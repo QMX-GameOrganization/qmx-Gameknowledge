@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">后缀数组与 height：banana 的 6 个后缀</title><desc id="desc">sa[i] 是排名第 i 的后缀的起点；height[i] 是它与前一名后缀的最长公共前缀。。本质不同的子串个数 = n(n+1)/2 - Σheight = 21 - 6 = 15。最长重复子串 = 最大的 height 对应的公共前缀 ana。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">后缀数组与 height：banana 的 6 个后缀</text>
+<text x="32" y="77" font-size="17" fill="#495b73">sa[i] 是排名第 i 的后缀的起点；height[i] 是它与前一名后缀的最长公共前缀。</text>
+<text x="40" y="122" font-size="16" fill="#495b73">排序前（按起点）</text>
+<rect x="40.0" y="149.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="177.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0   banana</text>
+<rect x="40.0" y="205.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="233.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1   anana</text>
+<rect x="40.0" y="261.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2   nana</text>
+<rect x="40.0" y="317.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="345.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3   ana</text>
+<rect x="40.0" y="373.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="401.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4   na</text>
+<rect x="40.0" y="429.0" width="220" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="150" y="457.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5   a</text>
+<path d="M280 300L400 300" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="340" y="286" font-size="14" fill="#495b73" text-anchor="middle">按字典序排序</text>
+<text x="450" y="122" font-size="15" fill="#495b73" text-anchor="middle">排名</text>
+<text x="530" y="122" font-size="15" fill="#495b73" text-anchor="middle">sa</text>
+<text x="620" y="122" font-size="15" fill="#495b73" text-anchor="middle">height</text>
+<text x="780" y="122" font-size="15" fill="#495b73">后缀（绿底=公共前缀）</text>
+<rect x="422.0" y="149.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="177.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="502.0" y="149.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="177.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="585.0" y="149.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="177.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="780" y="178" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="422.0" y="205.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="233.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="502.0" y="205.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="233.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="585.0" y="205.0" width="70" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="620" y="233.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="776" y="210" width="21.2" height="32" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="780" y="234" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">ana</text>
+<rect x="422.0" y="261.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="502.0" y="261.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="585.0" y="261.0" width="70" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="620" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="776" y="266" width="47.599999999999994" height="32" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="780" y="290" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">anana</text>
+<rect x="422.0" y="317.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="345.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="502.0" y="317.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="345.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="585.0" y="317.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="345.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="780" y="346" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">banana</text>
+<rect x="422.0" y="373.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="401.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="502.0" y="373.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="401.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="585.0" y="373.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="401.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="780" y="402" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">na</text>
+<rect x="422.0" y="429.0" width="56" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450" y="457.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5</text>
+<rect x="502.0" y="429.0" width="56" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="457.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="585.0" y="429.0" width="70" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="620" y="457.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="776" y="434" width="34.4" height="32" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="780" y="458" font-size="22" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">nana</text>
+<text x="40" y="540" font-size="15" fill="#23364e">height[2]=3：anana 和 ana 的公共前缀是 ana；height[5]=2：nana 和 na 的公共前缀是 na。</text>
+<text x="32" y="580" font-size="16" fill="#495b73">本质不同的子串个数 = n(n+1)/2 - Σheight = 21 - 6 = 15。最长重复子串 = 最大的 height 对应的公共前缀 ana。</text>
+</g></svg>

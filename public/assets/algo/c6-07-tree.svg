@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">数位 DP 的搜索树:n = 253</title><desc id="desc">从高位到低位逐位填数。只有「贴着上界」的那一条链需要继续展开,其余分支都是自由的。。自由分支的结果只取决于「还剩几位、上一位是什么」,可以直接查 memo;整棵树只有 3 层有效展开。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">数位 DP 的搜索树:n = 253</text>
+<text x="32" y="77" font-size="17" fill="#495b73">从高位到低位逐位填数。只有「贴着上界」的那一条链需要继续展开,其余分支都是自由的。</text>
+<text x="40" y="156" font-size="19" fill="#23364e" font-weight="700">百位</text>
+<rect x="255.0" y="124.0" width="150" height="52" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330" y="156.7" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">0 ~ 1</text>
+<rect x="485.0" y="124.0" width="90" height="52" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="530" y="157.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<text x="330" y="112" font-size="13" fill="#285caa" text-anchor="middle">自由(limit = 否)</text>
+<text x="530" y="112" font-size="13" fill="#8c5315" text-anchor="middle">贴上界(limit = 是)</text>
+<path d="M530 178L530 228" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="40" y="286" font-size="19" fill="#23364e" font-weight="700">十位</text>
+<rect x="255.0" y="254.0" width="150" height="52" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330" y="286.6" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">0 ~ 4</text>
+<rect x="485.0" y="254.0" width="90" height="52" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="530" y="287.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<text x="330" y="242" font-size="13" fill="#285caa" text-anchor="middle">自由(limit = 否)</text>
+<text x="530" y="242" font-size="13" fill="#8c5315" text-anchor="middle">贴上界(limit = 是)</text>
+<path d="M530 308L530 358" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="40" y="416" font-size="19" fill="#23364e" font-weight="700">个位</text>
+<rect x="255.0" y="384.0" width="150" height="52" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330" y="416.6" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">0 ~ 2</text>
+<rect x="485.0" y="384.0" width="90" height="52" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="530" y="417.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<text x="330" y="372" font-size="13" fill="#285caa" text-anchor="middle">自由(limit = 否)</text>
+<text x="530" y="372" font-size="13" fill="#8c5315" text-anchor="middle">贴上界(limit = 是)</text>
+<text x="640" y="156" font-size="15" fill="#23364e">自由:后两位任意,直接 memo[2][...]</text>
+<text x="640" y="286" font-size="15" fill="#23364e">自由:后一位任意,直接 memo[1][...]</text>
+<text x="640" y="416" font-size="15" fill="#23364e">自由:后面没有位了,直接计 1</text>
+<text x="640" y="186" font-size="15" fill="#8c5315" font-weight="700">贴上界:继续展开十位</text>
+<text x="640" y="316" font-size="15" fill="#8c5315" font-weight="700">贴上界:继续展开个位</text>
+<text x="640" y="446" font-size="15" fill="#8c5315" font-weight="700">贴上界:253 本身,结束</text>
+<text x="32" y="540" font-size="16" fill="#495b73">自由分支的结果只取决于「还剩几位、上一位是什么」,可以直接查 memo;整棵树只有 3 层有效展开。</text>
+</g></svg>

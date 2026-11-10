@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">重链剖分：重边连成链，链上 dfn 连续</title><desc id="desc">每个结点下面写着子树大小 sz 和 dfs 序 dfn。。dfs 时先走重儿子，所以每条重链的 dfn 连续；任意子树也是连续的一段 [dfn, dfn + sz - 1]。</desc>
+<defs></defs>
+<rect width="1000" height="650" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">重链剖分：重边连成链，链上 dfn 连续</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个结点下面写着子树大小 sz 和 dfs 序 dfn。</text>
+<line x1="500" y1="140" x2="280" y2="240" stroke="#285caa" stroke-width="5" stroke-opacity="1"/>
+<line x1="500" y1="140" x2="620" y2="240" stroke="#66758d" stroke-width="1.5" stroke-opacity="1" stroke-dasharray="6 5"/>
+<line x1="500" y1="140" x2="840" y2="240" stroke="#66758d" stroke-width="1.5" stroke-opacity="1" stroke-dasharray="6 5"/>
+<line x1="280" y1="240" x2="180" y2="340" stroke="#285caa" stroke-width="5" stroke-opacity="1"/>
+<line x1="280" y1="240" x2="380" y2="340" stroke="#66758d" stroke-width="1.5" stroke-opacity="1" stroke-dasharray="6 5"/>
+<line x1="620" y1="240" x2="620" y2="340" stroke="#176951" stroke-width="5" stroke-opacity="1"/>
+<line x1="180" y1="340" x2="110" y2="440" stroke="#285caa" stroke-width="5" stroke-opacity="1"/>
+<line x1="180" y1="340" x2="250" y2="440" stroke="#66758d" stroke-width="1.5" stroke-opacity="1" stroke-dasharray="6 5"/>
+<line x1="620" y1="340" x2="620" y2="440" stroke="#176951" stroke-width="5" stroke-opacity="1"/>
+<line x1="620" y1="440" x2="620" y2="540" stroke="#176951" stroke-width="5" stroke-opacity="1"/>
+<circle cx="500" cy="140" r="22" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="500" y="145.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="530" y="145" font-size="13" fill="#495b73">sz11 dfn1</text>
+<circle cx="280" cy="240" r="22" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="280" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="310" y="245" font-size="13" fill="#495b73">sz5 dfn2</text>
+<circle cx="620" cy="240" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="620" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="650" y="245" font-size="13" fill="#495b73">sz4 dfn7</text>
+<circle cx="840" cy="240" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="840" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="870" y="245" font-size="13" fill="#495b73">sz1 dfn11</text>
+<circle cx="180" cy="340" r="22" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="180" y="345.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="210" y="345" font-size="13" fill="#495b73">sz3 dfn3</text>
+<circle cx="380" cy="340" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="380" y="345.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<text x="410" y="345" font-size="13" fill="#495b73">sz1 dfn6</text>
+<circle cx="620" cy="340" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="620" y="345.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<text x="650" y="345" font-size="13" fill="#495b73">sz3 dfn8</text>
+<circle cx="110" cy="440" r="22" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="110" y="445.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">8</text>
+<text x="140" y="445" font-size="13" fill="#495b73">sz1 dfn4</text>
+<circle cx="250" cy="440" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="250" y="445.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">9</text>
+<text x="280" y="445" font-size="13" fill="#495b73">sz1 dfn5</text>
+<circle cx="620" cy="440" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="620" y="445.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">10</text>
+<text x="650" y="445" font-size="13" fill="#495b73">sz2 dfn9</text>
+<circle cx="620" cy="540" r="22" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="620" y="545.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">11</text>
+<text x="650" y="545" font-size="13" fill="#495b73">sz1 dfn10</text>
+<rect x="720" y="400" width="262" height="200" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="736" y="432" font-size="17" fill="#23364e" font-weight="700">图例</text>
+<text x="736" y="462" font-size="14" fill="#23364e">粗线：重边（连向最大的孩子）</text>
+<text x="736" y="488" font-size="14" fill="#23364e">虚线：轻边</text>
+<text x="736" y="520" font-size="14" fill="#285caa" font-weight="700">蓝色：重链 1-2-5-8</text>
+<text x="736" y="546" font-size="14" fill="#176951" font-weight="700">绿色：重链 3-7-10-11</text>
+<text x="736" y="572" font-size="14" fill="#8c5315" font-weight="700">橙色：只有一个点的链</text>
+<text x="32" y="630" font-size="16" fill="#495b73">dfs 时先走重儿子，所以每条重链的 dfn 连续；任意子树也是连续的一段 [dfn, dfn + sz - 1]。</text>
+</g></svg>

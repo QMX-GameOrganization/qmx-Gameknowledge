@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="725" viewBox="0 0 1000 725" role="img" aria-labelledby="title desc">
+<title id="title">插头 DP：一个格子的六种转移</title><desc id="desc">a 是左插头，b 是上插头，括号序列里只有这两位和它们的配对对象会变化。。只有 a=1,b=2 会形成回路，且必须发生在最后一个空格，否则丢弃。</desc>
+<defs></defs>
+<rect width="1000" height="725" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">插头 DP：一个格子的六种转移</text>
+<text x="32" y="77" font-size="17" fill="#495b73">a 是左插头，b 是上插头，括号序列里只有这两位和它们的配对对象会变化。</text>
+<rect x="32" y="105" width="460" height="172" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">a=0, b=0</text>
+<text x="192" y="137" font-size="17" fill="#23364e">新开路径</text>
+<rect x="82.0" y="187.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="222.9" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<text x="182" y="209" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">· ·  →  ( )</text>
+<text x="182" y="243" font-size="15" fill="#495b73">向下、向右各伸出一个插头</text>
+<rect x="508" y="105" width="460" height="172" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="524" y="137" font-size="19" fill="#285caa" font-weight="700">a 或 b 为 c</text>
+<text x="668" y="137" font-size="17" fill="#23364e">延伸</text>
+<rect x="558.0" y="187.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="588" y="222.9" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<line x1="538" y1="217" x2="558" y2="217" stroke="#285caa" stroke-width="5"/>
+<line x1="588" y1="171" x2="588" y2="187" stroke="#285caa" stroke-width="5"/>
+<text x="658" y="209" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c ·  →  · c  或  c ·</text>
+<text x="658" y="243" font-size="15" fill="#495b73">继续向下或向右</text>
+<rect x="32" y="295" width="460" height="172" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="327" font-size="19" fill="#176951" font-weight="700">a=1, b=1</text>
+<text x="192" y="327" font-size="17" fill="#23364e">两个左括号相接</text>
+<rect x="82.0" y="377.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="412.9" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<line x1="62" y1="407" x2="82" y2="407" stroke="#176951" stroke-width="5"/>
+<line x1="112" y1="361" x2="112" y2="377" stroke="#176951" stroke-width="5"/>
+<text x="182" y="399" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">( ( … ) )  →  · · ( … )</text>
+<text x="182" y="433" font-size="15" fill="#495b73">b 的配对右括号改成左括号</text>
+<rect x="508" y="295" width="460" height="172" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="524" y="327" font-size="19" fill="#176951" font-weight="700">a=2, b=2</text>
+<text x="668" y="327" font-size="17" fill="#23364e">两个右括号相接</text>
+<rect x="558.0" y="377.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="588" y="412.9" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<line x1="538" y1="407" x2="558" y2="407" stroke="#176951" stroke-width="5"/>
+<line x1="588" y1="361" x2="588" y2="377" stroke="#176951" stroke-width="5"/>
+<text x="658" y="399" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">( ( ) )  →  ( ) · ·</text>
+<text x="658" y="433" font-size="15" fill="#495b73">a 的配对左括号改成右括号</text>
+<rect x="32" y="485" width="460" height="172" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="48" y="517" font-size="19" fill="#8c5315" font-weight="700">a=2, b=1</text>
+<text x="192" y="517" font-size="17" fill="#23364e">不同路径相接</text>
+<rect x="82.0" y="567.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="603.0" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<line x1="62" y1="597" x2="82" y2="597" stroke="#8c5315" stroke-width="5"/>
+<line x1="112" y1="551" x2="112" y2="567" stroke="#8c5315" stroke-width="5"/>
+<text x="182" y="589" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">( ) ( )  →  ( · · )</text>
+<text x="182" y="623" font-size="15" fill="#495b73">两端自动配成一对，其余不变</text>
+<rect x="508" y="485" width="460" height="172" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="524" y="517" font-size="19" fill="#a33a3a" font-weight="700">a=1, b=2</text>
+<text x="668" y="517" font-size="17" fill="#23364e">同一路径首尾相接</text>
+<rect x="558.0" y="567.0" width="60" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="588" y="603.0" font-size="17" fill="#23364e" text-anchor="middle">格</text>
+<line x1="538" y1="597" x2="558" y2="597" stroke="#a33a3a" stroke-width="5"/>
+<line x1="588" y1="551" x2="588" y2="567" stroke="#a33a3a" stroke-width="5"/>
+<text x="658" y="589" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">( )  →  闭合成回路</text>
+<text x="658" y="623" font-size="15" fill="#495b73">只允许在最后一个空格</text>
+<text x="32" y="705" font-size="16" fill="#495b73">只有 a=1,b=2 会形成回路，且必须发生在最后一个空格，否则丢弃。</text>
+</g></svg>

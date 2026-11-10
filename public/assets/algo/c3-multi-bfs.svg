@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">多源 BFS：所有源点同时出发</title><desc id="desc">求每个格子到最近的 0 的距离。。等价于加一个超级源点连向所有 0，只扩展一次，复杂度仍是 O(格子数)。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">多源 BFS：所有源点同时出发</text>
+<text x="32" y="77" font-size="17" fill="#495b73">求每个格子到最近的 0 的距离。</text>
+<text x="70" y="130" font-size="18" fill="#285caa" font-weight="700">初始：所有 0 同时入队</text>
+<rect x="70" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="115.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="160" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="205.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="250" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="295.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="70" y="240" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="115.0" y="294.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="160" y="240" width="90" height="90" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<text x="205.0" y="294.8" font-size="28" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<rect x="250" y="240" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="295.0" y="294.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="70" y="330" width="90" height="90" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<text x="115.0" y="384.8" font-size="28" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<rect x="160" y="330" width="90" height="90" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<text x="205.0" y="384.8" font-size="28" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<rect x="250" y="330" width="90" height="90" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".5"/>
+<text x="295.0" y="384.8" font-size="28" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<text x="560" y="130" font-size="18" fill="#285caa" font-weight="700">结果：到最近 0 的距离</text>
+<rect x="560" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="605.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="650" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="695.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="740" y="150" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="785.0" y="204.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="560" y="240" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="605.0" y="294.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="650" y="240" width="90" height="90" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="695.0" y="294.8" font-size="28" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="740" y="240" width="90" height="90" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".5"/>
+<text x="785.0" y="294.8" font-size="28" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="560" y="330" width="90" height="90" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="605.0" y="384.8" font-size="28" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="650" y="330" width="90" height="90" rx="4" fill="#fff2df" stroke="#8c5315" stroke-opacity=".5"/>
+<text x="695.0" y="384.8" font-size="28" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<rect x="740" y="330" width="90" height="90" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".5"/>
+<text x="785.0" y="384.8" font-size="28" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<path d="M375 285L545 285" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="460" y="265" font-size="16" fill="#495b73" text-anchor="middle">一层层扩</text>
+<text x="70" y="450" font-size="16" fill="#23364e">绿色是距离 0 的源点；蓝色走 1 步到达；橙色走 2 步到达。</text>
+<text x="32" y="480" font-size="16" fill="#495b73">等价于加一个超级源点连向所有 0，只扩展一次，复杂度仍是 O(格子数)。</text>
+</g></svg>

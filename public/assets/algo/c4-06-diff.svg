@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">区间加：转成差分数组的两次单点修改</title><desc id="desc">给 [3, 6] 都加 2，只需改 d[3] 和 d[7]。。d[i] = a[i] - a[i-1]；a[i] 等于 d 的前缀和，所以“区间加、单点查”用树状数组维护 d。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">区间加：转成差分数组的两次单点修改</text>
+<text x="32" y="77" font-size="17" fill="#495b73">给 [3, 6] 都加 2，只需改 d[3] 和 d[7]。</text>
+<text x="32" y="172" font-size="17" fill="#495b73" font-weight="700">原数组 a</text>
+<rect x="190" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="225.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="225.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="260" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="295.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="295.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="330" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="365.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="365.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="400" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="435.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="435.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="470" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="505.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="505.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="540" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="575.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="575.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="610" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="645.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="645.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="680" y="150" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="715.0" y="178.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="715.0" y="142" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<text x="32" y="292" font-size="17" fill="#495b73" font-weight="700">差分 d</text>
+<rect x="190" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="225.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="225.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="260" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="295.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="295.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="330" y="270" width="70" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="365.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="365.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="400" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="435.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="435.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="470" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="505.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="505.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="540" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="575.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="575.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="610" y="270" width="70" height="44" rx="6" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".6"/>
+<text x="645.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">-2</text>
+<text x="645.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="680" y="270" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="715.0" y="298.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="715.0" y="262" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<text x="764" y="288" font-size="16" fill="#8c5315" font-weight="700">d[3] += 2</text>
+<text x="764" y="314" font-size="16" fill="#a33a3a" font-weight="700">d[7] -= 2</text>
+<text x="32" y="412" font-size="17" fill="#495b73" font-weight="700">新数组 a</text>
+<rect x="190" y="390" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="225.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="225.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="260" y="390" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="295.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="295.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="330" y="390" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="365.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="365.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="400" y="390" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="435.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="435.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="470" y="390" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="505.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="505.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="540" y="390" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="575.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="575.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="610" y="390" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="645.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="645.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="680" y="390" width="70" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="715.0" y="418.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">0</text>
+<text x="715.0" y="382" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<path d="M470 200L470 262" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M470 320L470 382" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="482" y="236" font-size="15" fill="#495b73">区间加 → 两个端点</text>
+<text x="482" y="358" font-size="15" fill="#495b73">前缀和还原出 a</text>
+<text x="32" y="490" font-size="16" fill="#23364e">区间求和：sum(1..x) = (x+1) * Σd[i] - Σ i*d[i]（i 从 1 到 x），用两个树状数组分别维护 d[i] 和 i*d[i]。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">d[i] = a[i] - a[i-1]；a[i] 等于 d 的前缀和，所以“区间加、单点查”用树状数组维护 d。</text>
+</g></svg>

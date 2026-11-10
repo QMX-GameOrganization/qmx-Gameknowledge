@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">LIS 的 O(n log n) 做法:维护 tail 数组</title><desc id="desc">tail[k] = 长度为 k+1 的递增子序列里,结尾元素的最小值。。tail 始终有序,所以每个新元素用 lower_bound 二分;最终长度就是 LIS 长度 4。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">LIS 的 O(n log n) 做法:维护 tail 数组</text>
+<text x="32" y="77" font-size="17" fill="#495b73">tail[k] = 长度为 k+1 的递增子序列里,结尾元素的最小值。</text>
+<text x="40" y="132" font-size="16" fill="#495b73">读入</text>
+<text x="180" y="132" font-size="16" fill="#495b73">tail 数组(橙色是本次写入的位置)</text>
+<text x="720" y="132" font-size="16" fill="#495b73">动作</text>
+<rect x="38.0" y="154.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="177.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">10</text>
+<rect x="184.0" y="154.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="220" y="177.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">10</text>
+<text x="720" y="178" font-size="16" fill="#23364e">追加到末尾</text>
+<rect x="38.0" y="200.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="223.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">9</text>
+<rect x="184.0" y="200.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="220" y="223.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">9</text>
+<text x="720" y="224" font-size="16" fill="#23364e">替换第 1 个</text>
+<rect x="38.0" y="246.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="269.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="184.0" y="246.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="220" y="269.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<text x="720" y="270" font-size="16" fill="#23364e">替换第 1 个</text>
+<rect x="38.0" y="292.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="315.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">5</text>
+<rect x="184.0" y="292.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="315.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="264.0" y="292.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="300" y="315.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<text x="720" y="316" font-size="16" fill="#23364e">追加到末尾</text>
+<rect x="38.0" y="338.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="361.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<rect x="184.0" y="338.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="361.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="264.0" y="338.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="300" y="361.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<text x="720" y="362" font-size="16" fill="#23364e">替换第 2 个</text>
+<rect x="38.0" y="384.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="407.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<rect x="184.0" y="384.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="407.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="264.0" y="384.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="300" y="407.9" font-size="17" fill="#23364e" text-anchor="middle">3</text>
+<rect x="344.0" y="384.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="380" y="407.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">7</text>
+<text x="720" y="408" font-size="16" fill="#23364e">追加到末尾</text>
+<rect x="38.0" y="430.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="453.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">101</text>
+<rect x="184.0" y="430.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="453.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="264.0" y="430.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="300" y="453.9" font-size="17" fill="#23364e" text-anchor="middle">3</text>
+<rect x="344.0" y="430.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380" y="453.9" font-size="17" fill="#23364e" text-anchor="middle">7</text>
+<rect x="424.0" y="430.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="460" y="453.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">101</text>
+<text x="720" y="454" font-size="16" fill="#23364e">追加到末尾</text>
+<rect x="38.0" y="476.0" width="64" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="70" y="499.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">18</text>
+<rect x="184.0" y="476.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220" y="499.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="264.0" y="476.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="300" y="499.9" font-size="17" fill="#23364e" text-anchor="middle">3</text>
+<rect x="344.0" y="476.0" width="72" height="36" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380" y="499.9" font-size="17" fill="#23364e" text-anchor="middle">7</text>
+<rect x="424.0" y="476.0" width="72" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="460" y="499.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">18</text>
+<text x="720" y="500" font-size="16" fill="#23364e">替换第 4 个</text>
+<text x="32" y="540" font-size="16" fill="#495b73">tail 始终有序,所以每个新元素用 lower_bound 二分;最终长度就是 LIS 长度 4。</text>
+</g></svg>

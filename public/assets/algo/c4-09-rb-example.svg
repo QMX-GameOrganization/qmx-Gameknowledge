@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">一棵合法的红黑树</title><desc id="desc">红色结点不相邻，每条根到空位置的路径上都恰好有 2 个黑结点（黑高 = 2）。。空指针（NIL）按黑色计。树高不超过 2·log2(n+1)，所以查找、插入、删除都是 O(log n)。</desc>
+<defs></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">一棵合法的红黑树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">红色结点不相邻，每条根到空位置的路径上都恰好有 2 个黑结点（黑高 = 2）。</text>
+<line x1="330" y1="150" x2="180" y2="250" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="330" y1="150" x2="480" y2="250" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="180" y1="250" x2="100" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="180" y1="250" x2="260" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="480" y1="250" x2="400" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="480" y1="250" x2="560" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="330" cy="150" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="330" y="155.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">8</text>
+<circle cx="180" cy="250" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="180" y="255.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">4</text>
+<circle cx="480" cy="250" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="480" y="255.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">12</text>
+<circle cx="100" cy="350" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="100" y="355.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
+<circle cx="260" cy="350" r="21" fill="#23364e" stroke="#0f1c2e" stroke-width="2"/>
+<text x="260" y="355.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">6</text>
+<circle cx="400" cy="350" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="400" y="355.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">10</text>
+<circle cx="560" cy="350" r="21" fill="#d9534f" stroke="#a33a3a" stroke-width="2"/>
+<text x="560" y="355.95" font-size="17" fill="#ffffff" font-weight="700" text-anchor="middle">14</text>
+<rect x="660" y="110" width="312" height="290" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="676" y="142" font-size="19" fill="#285caa" font-weight="700">红黑树的 4 条性质</text>
+<text x="676" y="182" font-size="16" fill="#23364e">1  每个结点非红即黑</text>
+<text x="676" y="216" font-size="16" fill="#23364e">2  根结点是黑色</text>
+<text x="676" y="250" font-size="16" fill="#23364e">3  红结点的孩子都是黑色</text>
+<text x="676" y="284" font-size="16" fill="#23364e">4  从任一结点到它下面的空位置，</text>
+<text x="676" y="318" font-size="16" fill="#23364e">    经过的黑结点数都相同</text>
+<text x="676" y="372" font-size="16" fill="#a33a3a" font-weight="700">新插入的结点先染红</text>
+<text x="32" y="450" font-size="16" fill="#495b73">空指针（NIL）按黑色计。树高不超过 2·log2(n+1)，所以查找、插入、删除都是 O(log n)。</text>
+</g></svg>

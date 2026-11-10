@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="400" viewBox="0 0 1000 400" role="img" aria-labelledby="title desc">
+<title id="title">x 与 ¬x 落进同一个强连通分量，就无解</title><desc id="desc">子句 (x ∨ x) 和 (¬x ∨ ¬x) 同时出现。。x→¬x 和 ¬x→x 形成环：既要 x 为真又要 x 为假。</desc>
+<defs></defs>
+<rect width="1000" height="400" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">x 与 ¬x 落进同一个强连通分量，就无解</text>
+<text x="32" y="77" font-size="17" fill="#495b73">子句 (x ∨ x) 和 (¬x ∨ ¬x) 同时出现。</text>
+<rect x="32" y="105" width="600" height="240" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<rect x="120" y="160" width="420" height="140" rx="12" fill="none" stroke="#a33a3a" stroke-dasharray="7 5" stroke-opacity="1"/>
+<path d="M217.9 219.0Q330.0 175.0 439.3 217.9" fill="none" stroke="#a33a3a" stroke-width="2"/>
+<polygon points="440.7,218.5 423.7,219.3 428.8,206.3" fill="#a33a3a"/>
+<path d="M442.1 241.0Q330.0 285.0 220.7 242.1" fill="none" stroke="#a33a3a" stroke-width="2"/>
+<polygon points="219.3,241.5 236.3,240.7 231.2,253.7" fill="#a33a3a"/>
+<circle cx="190" cy="230" r="30" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="237.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">x</text>
+<circle cx="470" cy="230" r="30" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="470" y="237.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">¬x</text>
+<text x="330" y="190" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">x → ¬x</text>
+<text x="330" y="288" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">¬x → x</text>
+<rect x="650" y="105" width="318" height="240" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="666" y="140" font-size="15" fill="#23364e">(x ∨ x)：¬x→x</text>
+<text x="666" y="176" font-size="15" fill="#23364e">(¬x ∨ ¬x)：x→¬x</text>
+<text x="666" y="212" font-size="15" fill="#23364e">comp[x] == comp[¬x]</text>
+<text x="666" y="248" font-size="15" fill="#23364e">程序输出 IMPOSSIBLE</text>
+<text x="32" y="380" font-size="16" fill="#495b73">x→¬x 和 ¬x→x 形成环：既要 x 为真又要 x 为假。</text>
+</g></svg>

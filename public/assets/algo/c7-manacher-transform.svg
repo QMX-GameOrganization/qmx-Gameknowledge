@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">插入分隔符，把偶回文变成奇回文</title><desc id="desc">s = abaaba → t = #a#b#a#a#b#a#；p[i] 是 t 中以 i 为中心的回文半径（含中心）。。原串回文长度 = p[i] - 1；起点 = (i - p[i] + 1) / 2。</desc>
+<defs></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">插入分隔符，把偶回文变成奇回文</text>
+<text x="32" y="77" font-size="17" fill="#495b73">s = abaaba → t = #a#b#a#a#b#a#；p[i] 是 t 中以 i 为中心的回文半径（含中心）。</text>
+<text x="36" y="118" font-size="16" fill="#495b73">变换串 t</text>
+<rect x="39.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="71.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="71.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="109.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="141.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="141.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="179.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="211.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="211.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="249.0" y="141.0" width="64" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="281.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="281.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="319.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="351.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="351.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="389.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="421.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="421.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="459.0" y="141.0" width="64" height="46" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="491.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="491.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="529.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="561.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="561.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="599.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="631.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="631.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<rect x="669.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="701.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="701.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">9</text>
+<rect x="739.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="771.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="771.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">10</text>
+<rect x="809.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="841.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="841.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">11</text>
+<rect x="879.0" y="141.0" width="64" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="911.0" y="171.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">#</text>
+<text x="911.0" y="206.0" font-size="13" fill="#495b73" text-anchor="middle">12</text>
+<text x="36" y="252" font-size="16" fill="#495b73">p 数组</text>
+<rect x="39.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="71.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="109.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="141.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="179.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="211.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="249.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="281.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="319.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="351.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="389.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="421.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="459.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="491.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">7</text>
+<rect x="529.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="561.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="599.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="631.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="669.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="701.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="739.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="771.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="809.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="841.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="879.0" y="272.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="911.0" y="299.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<text x="36" y="372" font-size="16" fill="#8c5315" font-weight="700">i=6（# 在两个 a 之间）：p=7，覆盖整个 t，原串长度 7-1 = 6，即 abaaba。</text>
+<text x="36" y="402" font-size="16" fill="#176951" font-weight="700">i=3（字符 b）：p=4，覆盖 t[0..6]，原串长度 3，即 aba。</text>
+<text x="32" y="450" font-size="16" fill="#495b73">原串回文长度 = p[i] - 1；起点 = (i - p[i] + 1) / 2。</text>
+</g></svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+<title id="title">线段树合并：两棵树按位置相加</title><desc id="desc">值域 [1, 4]，结点里写的是该区间内的个数。。绿色：只有一边有这个结点，整棵子树直接复用。橙色：两边都有，递归相加。</desc>
+<defs></defs>
+<rect width="1000" height="480" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">线段树合并：两棵树按位置相加</text>
+<text x="32" y="77" font-size="17" fill="#495b73">值域 [1, 4]，结点里写的是该区间内的个数。</text>
+<text x="170" y="112" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">树 A</text>
+<line x1="170" y1="170" x2="100" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="170" y1="170" x2="240" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="100" y1="260" x2="65" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="240" y1="260" x2="205" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<rect x="142.0" y="153.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="170" y="175.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<rect x="72.0" y="243.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="100" y="265.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="212.0" y="243.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="240" y="265.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="37.0" y="333.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="65" y="355.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="177.0" y="333.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="205" y="355.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<text x="65" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 1</text>
+<text x="135" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 2</text>
+<text x="205" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 3</text>
+<text x="275" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 4</text>
+<text x="500" y="112" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">树 B</text>
+<line x1="500" y1="170" x2="570" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="570" y1="260" x2="535" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="570" y1="260" x2="605" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<rect x="472.0" y="153.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="500" y="175.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="542.0" y="243.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="570" y="265.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="507.0" y="333.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="535" y="355.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="577.0" y="333.0" width="56" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="605" y="355.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<text x="395" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 1</text>
+<text x="465" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 2</text>
+<text x="535" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 3</text>
+<text x="605" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 4</text>
+<text x="830" y="112" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">合并结果（原地修改 A）</text>
+<line x1="830" y1="170" x2="760" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="830" y1="170" x2="900" y2="260" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="760" y1="260" x2="725" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="900" y1="260" x2="865" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="900" y1="260" x2="935" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<rect x="802.0" y="153.0" width="56" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="830" y="175.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<rect x="732.0" y="243.0" width="56" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="760" y="265.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="872.0" y="243.0" width="56" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="900" y="265.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<rect x="697.0" y="333.0" width="56" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="725" y="355.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="837.0" y="333.0" width="56" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="865" y="355.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<rect x="907.0" y="333.0" width="56" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="935" y="355.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<text x="725" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 1</text>
+<text x="795" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 2</text>
+<text x="865" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 3</text>
+<text x="935" y="392" font-size="14" fill="#495b73" text-anchor="middle">位置 4</text>
+<text x="332" y="262" font-size="34" fill="#495b73" font-weight="700" text-anchor="middle">+</text>
+<text x="662" y="262" font-size="34" fill="#495b73" font-weight="700" text-anchor="middle">=</text>
+<text x="32" y="440" font-size="16" fill="#23364e">合并只会遍历两棵树重叠的部分，每走一步都会少掉一个结点，所以总代价不超过创建过的结点总数。</text>
+<text x="32" y="460" font-size="16" fill="#495b73">绿色：只有一边有这个结点，整棵子树直接复用。橙色：两边都有，递归相加。</text>
+</g></svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">带权并查集：边上记录到父亲的距离</title><desc id="desc">d[x] 表示 x 到 parent[x] 的距离；路径压缩时把路径上的距离累加起来。。压缩后 d[x] 变成 x 到根的总距离，查询任意两点的差只需看 d。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="650" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">带权并查集：边上记录到父亲的距离</text>
+<text x="32" y="77" font-size="17" fill="#495b73">d[x] 表示 x 到 parent[x] 的距离；路径压缩时把路径上的距离累加起来。</text>
+<rect x="32" y="105" width="440" height="480" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<rect x="500" y="105" width="468" height="480" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="136" font-size="18" fill="#285caa" font-weight="700">压缩前：一条链</text>
+<text x="516" y="136" font-size="18" fill="#176951" font-weight="700">find(4) 之后：全部直连根 1</text>
+<rect x="208.0" y="171.0" width="44" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="230" y="195.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="208.0" y="281.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="305.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M230 281L230 210" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="248" y="250.0" font-size="16" fill="#285caa" font-weight="700">d[2] = 1</text>
+<rect x="208.0" y="391.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="415.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M230 391L230 320" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="248" y="360.0" font-size="16" fill="#285caa" font-weight="700">d[3] = 3</text>
+<rect x="208.0" y="501.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230" y="526.0" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M230 501L230 430" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="248" y="470.0" font-size="16" fill="#285caa" font-weight="700">d[4] = 2</text>
+<rect x="712.0" y="171.0" width="44" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="734" y="195.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="568.0" y="431.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="590" y="455.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M590 431L690.8 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="590" y="340" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">d[2] = 1</text>
+<rect x="712.0" y="431.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="734" y="455.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M734 431L734.0 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="746" y="340" font-size="16" fill="#176951" font-weight="700">d[3] = 4</text>
+<rect x="856.0" y="431.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="878" y="455.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M878 431L777.2 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="878" y="340" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">d[4] = 6</text>
+<text x="516" y="560" font-size="16" fill="#495b73">d[4] = 2 + 3 + 1 = 6</text>
+<text x="32" y="630" font-size="16" fill="#495b73">压缩后 d[x] 变成 x 到根的总距离，查询任意两点的差只需看 d。</text>
+</g></svg>

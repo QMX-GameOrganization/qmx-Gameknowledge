@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">路径压缩：find 时顺手把路径上的点直接挂到根上</title><desc id="desc">左边是一条长链，调用 find(5) 之后变成右边的菊花形。。压缩只改 parent，不改变谁和谁在同一个集合；之后再查这些点只要一步。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">路径压缩：find 时顺手把路径上的点直接挂到根上</text>
+<text x="32" y="77" font-size="17" fill="#495b73">左边是一条长链，调用 find(5) 之后变成右边的菊花形。</text>
+<rect x="32" y="105" width="440" height="490" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<rect x="500" y="105" width="468" height="490" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="136" font-size="18" fill="#a33a3a" font-weight="700">压缩前：find(5) 要走 4 步</text>
+<text x="516" y="136" font-size="18" fill="#176951" font-weight="700">压缩后：每个点直接指向根 1</text>
+<rect x="228.0" y="171.0" width="44" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="250" y="195.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="228.0" y="266.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="290.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<rect x="228.0" y="361.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="385.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<rect x="228.0" y="456.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="480.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<rect x="228.0" y="551.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="576.0" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<path d="M250 266L250 210" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M250 361L250 305" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M250 456L250 400" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M250 551L250 495" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="290" y="530" font-size="16" fill="#495b73">5 → 4 → 3 → 2 → 1</text>
+<rect x="712.0" y="171.0" width="44" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="734" y="195.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="558.0" y="381.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="580" y="405.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M580 381L695.5 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="648.0" y="381.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="670" y="405.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M670 381L718.0 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="738.0" y="381.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="760" y="405.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M760 381L740.5 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="828.0" y="381.0" width="44" height="38" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="850" y="405.9" font-size="17" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<path d="M850 381L763.0 212" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="32" y="620" font-size="16" fill="#495b73">压缩只改 parent，不改变谁和谁在同一个集合；之后再查这些点只要一步。</text>
+</g></svg>

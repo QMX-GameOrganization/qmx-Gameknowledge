@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">残量网络：每条边拆成“还能推多少”和“能退回多少”</title><desc id="desc">反向边让后面的增广路可以撤销之前走歪的决定。。两条增广路合起来，等价于 s→a→t 和 s→b→t 各一单位，反向边上的流量互相抵消。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m495b73" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#495b73"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">残量网络：每条边拆成“还能推多少”和“能退回多少”</text>
+<text x="32" y="77" font-size="17" fill="#495b73">反向边让后面的增广路可以撤销之前走歪的决定。</text>
+<rect x="32" y="105" width="468" height="170" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="135" font-size="17" fill="#285caa" font-weight="700">原网络：u→v 容量 5，已流 3</text>
+<path d="M132.0 215.0L375.0 215.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="233.0" y="203.0" width="44" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="255.0" y="219.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3/5</text>
+<circle cx="110" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="110" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">u</text>
+<circle cx="400" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="400" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">v</text>
+<rect x="518" y="105" width="450" height="170" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="135" font-size="17" fill="#176951" font-weight="700">残量网络：两条有向边</text>
+<path d="M611.7 211.1Q735.0 189.0 855.4 210.6" fill="none" stroke="#176951" stroke-width="2"/>
+<polygon points="856.9,210.9 840.4,215.0 842.8,201.2" fill="#176951"/>
+<path d="M858.3 218.9Q735.0 241.0 614.6 219.4" fill="none" stroke="#a33a3a" stroke-width="2" stroke-dasharray="6 5"/>
+<polygon points="613.1,219.1 629.6,215.0 627.2,228.8" fill="#a33a3a"/>
+<text x="735" y="178" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">正向：还能推 2</text>
+<text x="735" y="262" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="middle">反向：能退回 3</text>
+<circle cx="590" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="590" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">u</text>
+<circle cx="880" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="880" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">v</text>
+<path d="M500 190L518 190" fill="none" stroke="#495b73" stroke-width="2" marker-end="url(#m495b73)"/>
+<rect x="32" y="295" width="468" height="245" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="325" font-size="17" fill="#285caa" font-weight="700">第一条增广路：s→a→b→t</text>
+<path d="M110.4 411.8L216.8 369.3" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M260.4 368.2L366.8 410.7" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M110.4 428.2L216.8 470.7" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M260.4 471.8L366.8 429.3" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M240.0 382.0L240.0 455.0" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<path d="M110.4 411.8L216.8 369.3" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<path d="M260.4 471.8L366.8 429.3" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<circle cx="90" cy="420" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="90" y="425.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">s</text>
+<circle cx="240" cy="360" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="240" y="365.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a</text>
+<circle cx="240" cy="480" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="240" y="485.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">b</text>
+<circle cx="390" cy="420" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="390" y="425.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">t</text>
+<rect x="518" y="295" width="450" height="245" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="325" font-size="17" fill="#176951" font-weight="700">残量网络里再找：s→b→a→t</text>
+<path d="M628.4 428.2L734.8 470.7" fill="none" stroke="#a33a3a" stroke-width="3" marker-end="url(#ma33a3a)"/>
+<path d="M758.0 458.0L758.0 385.0" fill="none" stroke="#a33a3a" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ma33a3a)"/>
+<path d="M778.4 368.2L884.8 410.7" fill="none" stroke="#a33a3a" stroke-width="3" marker-end="url(#ma33a3a)"/>
+<text x="744" y="428" font-size="15" fill="#a33a3a" font-weight="700" text-anchor="end">反向边 b→a</text>
+<circle cx="608" cy="420" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="608" y="425.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">s</text>
+<circle cx="758" cy="360" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="758" y="365.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a</text>
+<circle cx="758" cy="480" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="758" y="485.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">b</text>
+<circle cx="908" cy="420" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="908" y="425.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">t</text>
+<text x="32" y="580" font-size="16" fill="#495b73">两条增广路合起来，等价于 s→a→t 和 s→b→t 各一单位，反向边上的流量互相抵消。</text>
+</g></svg>

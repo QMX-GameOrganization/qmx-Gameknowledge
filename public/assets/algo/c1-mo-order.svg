@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">莫队：按左端点所在块排序，块内按右端点升序</title><desc id="desc">n = 16，块长 4；右端点在同一块内只增不减。。总移动量约 O(n√n)：每块内 r 最多走 n 步，l 每次最多走一个块长。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">莫队：按左端点所在块排序，块内按右端点升序</text>
+<text x="32" y="77" font-size="17" fill="#495b73">n = 16，块长 4；右端点在同一块内只增不减。</text>
+<rect x="103.0" y="120.0" width="44" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="125.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="153.0" y="120.0" width="44" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="175.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="203.0" y="120.0" width="44" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="225.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="253.0" y="120.0" width="44" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="275.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="303.0" y="120.0" width="44" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="325.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="353.0" y="120.0" width="44" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="375.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="403.0" y="120.0" width="44" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="425.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">6</text>
+<rect x="453.0" y="120.0" width="44" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="475.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">7</text>
+<rect x="503.0" y="120.0" width="44" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="525.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">8</text>
+<rect x="553.0" y="120.0" width="44" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="575.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">9</text>
+<rect x="603.0" y="120.0" width="44" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="625.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">10</text>
+<rect x="653.0" y="120.0" width="44" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="675.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">11</text>
+<rect x="703.0" y="120.0" width="44" height="36" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="725.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">12</text>
+<rect x="753.0" y="120.0" width="44" height="36" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="775.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">13</text>
+<rect x="803.0" y="120.0" width="44" height="36" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="825.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">14</text>
+<rect x="853.0" y="120.0" width="44" height="36" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="875.0" y="143.2" font-size="15" fill="#23364e" text-anchor="middle">15</text>
+<rect x="103" y="195" width="344" height="26" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity="1"/>
+<text x="86" y="214" font-size="15" fill="#23364e" font-weight="700" text-anchor="end">q1</text>
+<rect x="203" y="239" width="394" height="26" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity="1"/>
+<text x="86" y="258" font-size="15" fill="#23364e" font-weight="700" text-anchor="end">q2</text>
+<rect x="253" y="283" width="544" height="26" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity="1"/>
+<text x="86" y="302" font-size="15" fill="#23364e" font-weight="700" text-anchor="end">q3</text>
+<rect x="353" y="327" width="194" height="26" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="86" y="346" font-size="15" fill="#23364e" font-weight="700" text-anchor="end">q4</text>
+<rect x="403" y="371" width="444" height="26" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="86" y="390" font-size="15" fill="#23364e" font-weight="700" text-anchor="end">q5</text>
+<text x="960" y="215" font-size="15" fill="#285caa" font-weight="700" text-anchor="end">块 0 内按 r 升序：6 → 9 → 13</text>
+<text x="960" y="347" font-size="15" fill="#176951" font-weight="700" text-anchor="end">块 1 内按 r 升序：8 → 14</text>
+<text x="32" y="450" font-size="17" fill="#23364e">处理顺序 q1, q2, q3 | q4, q5：r 在块内一路向右，不会来回跑。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">总移动量约 O(n√n)：每块内 r 最多走 n 步，l 每次最多走一个块长。</text>
+</g></svg>

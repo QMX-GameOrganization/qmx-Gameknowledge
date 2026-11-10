@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img" aria-labelledby="title desc">
+<title id="title">TSP 的状态:dp[mask][i]</title><desc id="desc">mask 是已访问的城市集合,i 是当前所在城市。4 个城市,从 0 出发。。距离矩阵 d 的四行:{0,10,15,20}  {10,0,35,25}  {15,35,0,30}  {20,25,30,0}。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="690" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">TSP 的状态:dp[mask][i]</text>
+<text x="32" y="77" font-size="17" fill="#495b73">mask 是已访问的城市集合,i 是当前所在城市。4 个城市,从 0 出发。</text>
+<text x="110" y="120" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">已访问 1 个</text>
+<rect x="35.0" y="145.0" width="150" height="50" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="110" y="165.8" font-size="14" fill="#23364e" text-anchor="middle">0001 @0</text>
+<text x="110" y="184.0" font-size="14" fill="#23364e" text-anchor="middle">= 0</text>
+<text x="370" y="120" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">已访问 2 个</text>
+<rect x="295.0" y="145.0" width="150" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="370" y="165.8" font-size="14" fill="#23364e" text-anchor="middle">0011 @1</text>
+<text x="370" y="184.0" font-size="14" fill="#23364e" text-anchor="middle">= 10</text>
+<rect x="295.0" y="213.0" width="150" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="370" y="233.8" font-size="14" fill="#23364e" text-anchor="middle">0101 @2</text>
+<text x="370" y="252.0" font-size="14" fill="#23364e" text-anchor="middle">= 15</text>
+<rect x="295.0" y="281.0" width="150" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="370" y="301.8" font-size="14" fill="#23364e" text-anchor="middle">1001 @3</text>
+<text x="370" y="320.0" font-size="14" fill="#23364e" text-anchor="middle">= 20</text>
+<text x="630" y="120" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">已访问 3 个</text>
+<rect x="555.0" y="145.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="165.8" font-size="14" fill="#23364e" text-anchor="middle">0111 @1</text>
+<text x="630" y="184.0" font-size="14" fill="#23364e" text-anchor="middle">= 50</text>
+<rect x="555.0" y="213.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="233.8" font-size="14" fill="#23364e" text-anchor="middle">0111 @2</text>
+<text x="630" y="252.0" font-size="14" fill="#23364e" text-anchor="middle">= 45</text>
+<rect x="555.0" y="281.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="301.8" font-size="14" fill="#23364e" text-anchor="middle">1011 @1</text>
+<text x="630" y="320.0" font-size="14" fill="#23364e" text-anchor="middle">= 45</text>
+<rect x="555.0" y="349.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="369.8" font-size="14" fill="#23364e" text-anchor="middle">1011 @3</text>
+<text x="630" y="388.0" font-size="14" fill="#23364e" text-anchor="middle">= 35</text>
+<rect x="555.0" y="417.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="437.8" font-size="14" fill="#23364e" text-anchor="middle">1101 @2</text>
+<text x="630" y="456.0" font-size="14" fill="#23364e" text-anchor="middle">= 50</text>
+<rect x="555.0" y="485.0" width="150" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="505.8" font-size="14" fill="#23364e" text-anchor="middle">1101 @3</text>
+<text x="630" y="524.0" font-size="14" fill="#23364e" text-anchor="middle">= 45</text>
+<text x="890" y="120" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">已访问 4 个</text>
+<rect x="815.0" y="145.0" width="150" height="50" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="890" y="165.8" font-size="14" fill="#23364e" text-anchor="middle">1111 @1</text>
+<text x="890" y="184.0" font-size="14" fill="#23364e" text-anchor="middle">= 70</text>
+<rect x="815.0" y="213.0" width="150" height="50" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="890" y="233.8" font-size="14" fill="#23364e" text-anchor="middle">1111 @2</text>
+<text x="890" y="252.0" font-size="14" fill="#23364e" text-anchor="middle">= 65</text>
+<rect x="815.0" y="281.0" width="150" height="50" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="890" y="301.8" font-size="14" fill="#23364e" text-anchor="middle">1111 @3</text>
+<text x="890" y="320.0" font-size="14" fill="#23364e" text-anchor="middle">= 75</text>
+<path d="M186 170L292 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M186 170L292 238" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M186 170L292 306" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 170L552 238" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 170L552 374" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 238L552 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 238L552 510" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 306L552 306" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M446 306L552 442" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M706 170L812 306" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M706 238L812 306" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M706 374L812 238" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M706 510L812 170" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="612" font-size="16" fill="#23364e">只画出了「真正取到最小值」的转移。</text>
+<text x="32" y="644" font-size="16" fill="#23364e" font-weight="700">最后一层再加回到 0 的路程:70+10 = 80,65+15 = 80,75+20 = 95,取最小得 80。</text>
+<text x="32" y="670" font-size="16" fill="#495b73">距离矩阵 d 的四行:{0,10,15,20}  {10,0,35,25}  {15,35,0,30}  {20,25,30,0}。</text>
+</g></svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">编辑距离:horse → ros</title><desc id="desc">dp[i][j] 是 s 前 i 个字符变成 t 前 j 个字符的最少操作数。。相同则继承左上角;不同则取三个方向的最小值 + 1,三个方向对应替换、删除、插入。</desc>
+<defs></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">编辑距离:horse → ros</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dp[i][j] 是 s 前 i 个字符变成 t 前 j 个字符的最少操作数。</text>
+<rect x="72.0" y="114.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="148.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle"></text>
+<rect x="156.0" y="114.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="196.0" y="148.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle"></text>
+<rect x="240.0" y="114.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="280.0" y="148.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">r</text>
+<rect x="324.0" y="114.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="364.0" y="148.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">o</text>
+<rect x="408.0" y="114.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="448.0" y="148.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">s</text>
+<rect x="72.0" y="172.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="206.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle"></text>
+<rect x="156.0" y="172.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="206.3" font-size="21" fill="#23364e" text-anchor="middle">0</text>
+<rect x="240.0" y="172.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="206.3" font-size="21" fill="#23364e" text-anchor="middle">1</text>
+<rect x="324.0" y="172.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364.0" y="206.3" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="408.0" y="172.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="448.0" y="206.3" font-size="21" fill="#23364e" text-anchor="middle">3</text>
+<rect x="72.0" y="230.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="264.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">h</text>
+<rect x="156.0" y="230.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="264.4" font-size="21" fill="#23364e" text-anchor="middle">1</text>
+<rect x="240.0" y="230.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="264.4" font-size="21" fill="#23364e" text-anchor="middle">1</text>
+<rect x="324.0" y="230.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364.0" y="264.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="408.0" y="230.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="448.0" y="264.4" font-size="21" fill="#23364e" text-anchor="middle">3</text>
+<rect x="72.0" y="288.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="322.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">o</text>
+<rect x="156.0" y="288.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="322.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="240.0" y="288.0" width="80" height="54" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="280.0" y="322.4" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<rect x="324.0" y="288.0" width="80" height="54" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="364.0" y="322.4" font-size="21" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="408.0" y="288.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="448.0" y="322.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="72.0" y="346.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="380.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">r</text>
+<rect x="156.0" y="346.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="380.4" font-size="21" fill="#23364e" text-anchor="middle">3</text>
+<rect x="240.0" y="346.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="380.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="324.0" y="346.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364.0" y="380.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="408.0" y="346.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="448.0" y="380.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="72.0" y="404.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="438.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">s</text>
+<rect x="156.0" y="404.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="438.4" font-size="21" fill="#23364e" text-anchor="middle">4</text>
+<rect x="240.0" y="404.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="438.4" font-size="21" fill="#23364e" text-anchor="middle">3</text>
+<rect x="324.0" y="404.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364.0" y="438.4" font-size="21" fill="#23364e" text-anchor="middle">3</text>
+<rect x="408.0" y="404.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="448.0" y="438.4" font-size="21" fill="#23364e" text-anchor="middle">2</text>
+<rect x="72.0" y="462.0" width="80" height="54" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="112.0" y="496.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">e</text>
+<rect x="156.0" y="462.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="196.0" y="496.4" font-size="21" fill="#23364e" text-anchor="middle">5</text>
+<rect x="240.0" y="462.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="496.4" font-size="21" fill="#23364e" text-anchor="middle">4</text>
+<rect x="324.0" y="462.0" width="80" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364.0" y="496.4" font-size="21" fill="#23364e" text-anchor="middle">4</text>
+<rect x="408.0" y="462.0" width="80" height="54" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="448.0" y="496.4" font-size="21" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<rect x="560" y="112" width="410" height="160" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="574" y="142" font-size="19" fill="#285caa" font-weight="700">三种操作对应三个方向</text>
+<text x="574" y="170" font-size="15" fill="#23364e">左上 dp[i-1][j-1]:替换(相同则免费)</text>
+<text x="574" y="195" font-size="15" fill="#23364e">上方 dp[i-1][j]:删除 s[i-1]</text>
+<text x="574" y="220" font-size="15" fill="#23364e">左方 dp[i][j-1]:插入 t[j-1]</text>
+<rect x="560" y="292" width="410" height="130" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="574" y="322" font-size="19" fill="#8c5315" font-weight="700">橙色:dp[2][1](ho → r)</text>
+<text x="574" y="350" font-size="15" fill="#23364e">o≠r,取 min(dp[1][0], dp[1][1], dp[2][0]) + 1</text>
+<text x="574" y="375" font-size="15" fill="#23364e">= min(1, 1, 2) + 1 = 2</text>
+<rect x="560" y="440" width="410" height="100" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="574" y="470" font-size="19" fill="#285caa" font-weight="700">蓝色:dp[2][2](ho → ro)</text>
+<text x="574" y="498" font-size="15" fill="#23364e">o = o,字符相同,直接继承左上角 dp[1][1] = 1</text>
+<text x="32" y="570" font-size="16" fill="#495b73">相同则继承左上角;不同则取三个方向的最小值 + 1,三个方向对应替换、删除、插入。</text>
+</g></svg>

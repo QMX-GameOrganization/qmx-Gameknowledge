@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">Miller-Rabin：把 n - 1 写成 d·2^s，看 a^d 反复平方的轨迹</title><desc id="desc">质数的轨迹要么一开始就是 1，要么在回到 1 之前经过 -1（即 n - 1）。。合数可能蒙混过关（强伪素数），所以换多个底数 a；前 12 个质数做底数可保证 64 位内无误判。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="ma33a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#a33a3a"/></marker></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Miller-Rabin：把 n - 1 写成 d·2^s，看 a^d 反复平方的轨迹</text>
+<text x="32" y="77" font-size="17" fill="#495b73">质数的轨迹要么一开始就是 1，要么在回到 1 之前经过 -1（即 n - 1）。</text>
+<rect x="32" y="105" width="936" height="150" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="46" y="135" font-size="19" fill="#176951" font-weight="700">n = 13（质数），a = 2：n - 1 = 12 = 3 · 2²，d = 3</text>
+<text x="46" y="163" font-size="17" fill="#23364e">a^d = 2^3 = 8</text>
+<text x="46" y="188" font-size="17" fill="#23364e">8² = 64 ≡ 12 ≡ -1 (mod 13)  → 出现 -1，通过</text>
+<rect x="560.0" y="168.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="196.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="720.0" y="168.0" width="120" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="780" y="196.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">12 = -1</text>
+<path d="M682 190L698 190" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="32" y="275" width="936" height="150" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="46" y="305" font-size="19" fill="#a33a3a" font-weight="700">n = 21（合数），a = 2：n - 1 = 20 = 5 · 2²，d = 5</text>
+<text x="46" y="333" font-size="17" fill="#23364e">a^d = 2^5 = 32 ≡ 11   不是 1 也不是 -1</text>
+<text x="46" y="358" font-size="17" fill="#23364e">11² = 121 ≡ 16   不是 -1，轨迹结束  → 判为合数</text>
+<rect x="560.0" y="338.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="620" y="366.3" font-size="18" fill="#23364e" text-anchor="middle">11</text>
+<rect x="720.0" y="338.0" width="120" height="44" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="780" y="366.3" font-size="18" fill="#a33a3a" font-weight="700" text-anchor="middle">16</text>
+<path d="M682 360L698 360" fill="none" stroke="#a33a3a" stroke-width="2" marker-end="url(#ma33a3a)"/>
+<text x="32" y="450" font-size="16" fill="#495b73">合数可能蒙混过关（强伪素数），所以换多个底数 a；前 12 个质数做底数可保证 64 位内无误判。</text>
+</g></svg>

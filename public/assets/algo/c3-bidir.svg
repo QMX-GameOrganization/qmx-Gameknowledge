@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">双向 BFS：两个小圆代替一个大圆</title><desc id="desc">状态数随半径指数增长，半径减半省得非常多。。八数码最难局面（31 步）实测：普通 BFS 出队 181440 个状态，双向 BFS 只有 12452 个。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">双向 BFS：两个小圆代替一个大圆</text>
+<text x="32" y="77" font-size="17" fill="#495b73">状态数随半径指数增长，半径减半省得非常多。</text>
+<rect x="32" y="105" width="460" height="330" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">单向 BFS</text>
+<circle cx="160" cy="300" r="110" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="160" y="290" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">S</text>
+<circle cx="270" cy="300" r="6" fill="#a33a3a" stroke="#a33a3a" stroke-width="2"/>
+<text x="278" y="285" font-size="18" fill="#a33a3a" font-weight="700">T</text>
+<text x="48" y="425" font-size="16" fill="#23364e">半径 d：约 b^d 个状态</text>
+<rect x="508" y="105" width="460" height="330" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="524" y="137" font-size="19" fill="#176951" font-weight="700">双向 BFS</text>
+<circle cx="640" cy="300" r="55" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<circle cx="750" cy="300" r="55" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="640" y="308" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">S</text>
+<text x="750" y="308" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">T</text>
+<text x="695" y="240" font-size="15" fill="#495b73" text-anchor="middle">相遇</text>
+<path d="M695 246L695 290" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="524" y="425" font-size="16" fill="#23364e">两个半径 d/2：约 2·b^(d/2) 个状态</text>
+<text x="32" y="480" font-size="16" fill="#495b73">八数码最难局面（31 步）实测：普通 BFS 出队 181440 个状态，双向 BFS 只有 12452 个。</text>
+</g></svg>

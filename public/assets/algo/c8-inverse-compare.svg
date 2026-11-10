@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="380" viewBox="0 0 1000 380" role="img" aria-labelledby="title desc">
+<title id="title">三种求逆元的方法</title><desc id="desc">逆元：满足 a·x ≡ 1 (mod m) 的 x。选哪种取决于模数和个数。。只求一两个数用前两种；要一次求出 1..n 的全部逆元用第三种。</desc>
+<defs></defs>
+<rect width="1000" height="380" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">三种求逆元的方法</text>
+<text x="32" y="77" font-size="17" fill="#495b73">逆元：满足 a·x ≡ 1 (mod m) 的 x。选哪种取决于模数和个数。</text>
+<rect x="32" y="105" width="300" height="210" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="46" y="135" font-size="19" fill="#285caa" font-weight="700">扩展欧几里得</text>
+<text x="46" y="163" font-size="16" fill="#23364e">解 a·x + m·y = 1</text>
+<text x="46" y="188" font-size="16" fill="#23364e">取 x mod m 即逆元</text>
+<text x="46" y="213" font-size="16" fill="#23364e">条件：gcd(a, m) = 1</text>
+<text x="46" y="238" font-size="16" fill="#23364e">m 可以不是质数</text>
+<text x="46" y="263" font-size="16" fill="#23364e">复杂度 O(log m)</text>
+<text x="46" y="288" font-size="16" fill="#23364e">不存在时能判断出来</text>
+<rect x="350" y="105" width="300" height="210" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="364" y="135" font-size="19" fill="#176951" font-weight="700">费马小定理</text>
+<text x="364" y="163" font-size="16" fill="#23364e">a^(p-1) ≡ 1 (mod p)</text>
+<text x="364" y="188" font-size="16" fill="#23364e">所以 a 的逆元 = a^(p-2)</text>
+<text x="364" y="213" font-size="16" fill="#23364e">条件：p 是质数</text>
+<text x="364" y="238" font-size="16" fill="#23364e">且 a 不是 p 的倍数</text>
+<text x="364" y="263" font-size="16" fill="#23364e">复杂度 O(log p)</text>
+<text x="364" y="288" font-size="16" fill="#23364e">写法最短</text>
+<rect x="668" y="105" width="300" height="210" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="682" y="135" font-size="19" fill="#8c5315" font-weight="700">线性递推</text>
+<text x="682" y="163" font-size="16" fill="#23364e">inv[1] = 1</text>
+<text x="682" y="188" font-size="16" fill="#23364e">inv[i] = (p - p/i)</text>
+<text x="682" y="213" font-size="16" fill="#23364e">         × inv[p mod i]</text>
+<text x="682" y="238" font-size="16" fill="#23364e">条件：p 是质数</text>
+<text x="682" y="263" font-size="16" fill="#23364e">一次求 1..n 全部</text>
+<text x="682" y="288" font-size="16" fill="#23364e">复杂度 O(n)</text>
+<text x="32" y="360" font-size="16" fill="#495b73">只求一两个数用前两种；要一次求出 1..n 的全部逆元用第三种。</text>
+</g></svg>

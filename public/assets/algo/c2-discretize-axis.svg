@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+<title id="title">离散化压缩的是间距</title><desc id="desc">值域很大但只有几个不同的数时，只保留它们的相对顺序。。差值、比例都不保留，所以只适用于只关心大小关系的题目。</desc>
+<defs></defs>
+<rect width="1000" height="420" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">离散化压缩的是间距</text>
+<text x="32" y="77" font-size="17" fill="#495b73">值域很大但只有几个不同的数时，只保留它们的相对顺序。</text>
+<line x1="60" y1="170" x2="940" y2="170" stroke="#66758d" stroke-width="2"/>
+<line x1="60" y1="330" x2="940" y2="330" stroke="#66758d" stroke-width="2"/>
+<text x="60" y="118" font-size="17" fill="#495b73" font-weight="700">原数值轴（点之间可能隔很远）</text>
+<text x="60" y="295" font-size="17" fill="#495b73" font-weight="700">压缩后的下标轴（编号连续）</text>
+<line x1="100" y1="178" x2="180" y2="322" stroke="#285caa" stroke-width="1" stroke-dasharray="6 5"/>
+<circle cx="100" cy="170" r="8" fill="#285caa"/>
+<circle cx="180" cy="330" r="8" fill="#176951"/>
+<text x="100" y="152" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">5</text>
+<text x="180" y="362" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<line x1="160" y1="178" x2="400" y2="322" stroke="#285caa" stroke-width="1" stroke-dasharray="6 5"/>
+<circle cx="160" cy="170" r="8" fill="#285caa"/>
+<circle cx="400" cy="330" r="8" fill="#176951"/>
+<text x="160" y="152" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">70</text>
+<text x="400" y="362" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<line x1="470" y1="178" x2="620" y2="322" stroke="#285caa" stroke-width="1" stroke-dasharray="6 5"/>
+<circle cx="470" cy="170" r="8" fill="#285caa"/>
+<circle cx="620" cy="330" r="8" fill="#176951"/>
+<text x="470" y="152" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1000</text>
+<text x="620" y="362" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<line x1="880" y1="178" x2="840" y2="322" stroke="#285caa" stroke-width="1" stroke-dasharray="6 5"/>
+<circle cx="880" cy="170" r="8" fill="#285caa"/>
+<circle cx="840" cy="330" r="8" fill="#176951"/>
+<text x="880" y="152" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">99999</text>
+<text x="840" y="362" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<text x="32" y="400" font-size="16" fill="#495b73">差值、比例都不保留，所以只适用于只关心大小关系的题目。</text>
+</g></svg>

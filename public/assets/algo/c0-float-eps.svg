@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460" role="img" aria-labelledby="title desc">
+<title id="title">浮点数比较要留容差</title><desc id="desc">0.1 + 0.2 在二进制里存不下精确的 0.3，用 == 会判成不相等。。误差只有约 5.5×10^-17，图中为了看清做了放大。</desc>
+<defs></defs>
+<rect width="1000" height="460" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">浮点数比较要留容差</text>
+<text x="32" y="77" font-size="17" fill="#495b73">0.1 + 0.2 在二进制里存不下精确的 0.3，用 == 会判成不相等。</text>
+<line x1="80" y1="270" x2="920" y2="270" stroke="#66758d" stroke-width="2"/>
+<rect x="380" y="210" width="150" height="120" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".5"/>
+<text x="455" y="198" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">容差区间 eps</text>
+<circle cx="425" cy="270" r="8" fill="#285caa"/>
+<text x="425" y="304" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">0.3</text>
+<circle cx="485" cy="270" r="8" fill="#176951"/>
+<text x="485" y="250" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">0.1 + 0.2</text>
+<circle cx="760" cy="270" r="8" fill="#a33a3a"/>
+<text x="760" y="304" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">0.31</text>
+<text x="485" y="150" font-size="15" fill="#176951" text-anchor="middle">绿点 0.1 + 0.2 实际存成 0.30000000000000004</text>
+<text x="760" y="334" font-size="15" fill="#a33a3a" text-anchor="middle">不在区间内：不相等</text>
+<text x="455" y="360" font-size="17" fill="#23364e" text-anchor="middle">|a - b| &lt; eps 就当作相等（常取 1e-9）</text>
+<text x="32" y="440" font-size="16" fill="#495b73">误差只有约 5.5×10^-17，图中为了看清做了放大。</text>
+</g></svg>

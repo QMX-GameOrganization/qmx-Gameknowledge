@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">单调队列维护滑动窗口最大值</title><desc id="desc">dp[i] = a[i] + max(dp[i-k..i-1])，k = 3，现在计算 dp[6]。。队列里存下标，对应 dp 值从队首到队尾严格递减，队首永远是窗口最大值。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">单调队列维护滑动窗口最大值</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dp[i] = a[i] + max(dp[i-k..i-1])，k = 3，现在计算 dp[6]。</text>
+<text x="48" y="125" font-size="17" fill="#495b73">dp 数组（下标 0 到 5 已算好，窗口是 [3, 5]）</text>
+<rect x="90.0" y="145.0" width="80" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130.0" y="175.6" font-size="16" fill="#23364e" text-anchor="middle">dp[0]=5</text>
+<rect x="190.0" y="145.0" width="80" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="230.0" y="175.6" font-size="16" fill="#23364e" text-anchor="middle">dp[1]=3</text>
+<rect x="290.0" y="145.0" width="80" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="175.6" font-size="16" fill="#23364e" text-anchor="middle">dp[2]=6</text>
+<rect x="390.0" y="145.0" width="80" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="430.0" y="175.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">dp[3]=2</text>
+<rect x="490.0" y="145.0" width="80" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="530.0" y="175.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">dp[4]=4</text>
+<rect x="590.0" y="145.0" width="80" height="50" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="630.0" y="175.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">dp[5]=1</text>
+<rect x="690.0" y="145.0" width="80" height="50" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="730.0" y="175.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">dp[6]=?</text>
+<line x1="400" y1="212" x2="680" y2="212" stroke="#176951" stroke-width="3"/>
+<text x="530.0" y="236" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">窗口 [3, 5]</text>
+<text x="48" y="296" font-size="17" fill="#a33a3a" font-weight="700">处理前的队列</text>
+<text x="48" y="322" font-size="14" fill="#495b73">(下标:dp)</text>
+<rect x="470.0" y="280.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="520" y="307.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2:6</text>
+<rect x="590.0" y="280.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="640" y="307.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4:4</text>
+<path d="M570 302L588 302" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="710.0" y="280.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="760" y="307.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5:1</text>
+<path d="M690 302L708 302" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="48" y="358" font-size="17" fill="#176951" font-weight="700">① 弹队首</text>
+<text x="48" y="384" font-size="14" fill="#495b73">下标 2 &lt; 6-3，已滑出窗口</text>
+<rect x="470.0" y="342.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="520" y="369.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4:4</text>
+<rect x="590.0" y="342.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="640" y="369.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5:1</text>
+<path d="M570 364L588 364" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="48" y="420" font-size="17" fill="#176951" font-weight="700">② 取队首</text>
+<text x="48" y="446" font-size="14" fill="#495b73">dp[6] = a[6] + 4 = 6（设 a[6]=2）</text>
+<rect x="470.0" y="404.0" width="100" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="520" y="431.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4:4</text>
+<rect x="590.0" y="404.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="640" y="431.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">5:1</text>
+<path d="M570 426L588 426" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="48" y="482" font-size="17" fill="#285caa" font-weight="700">③ 6 入队前先弹队尾</text>
+<text x="48" y="508" font-size="14" fill="#495b73">1 ≤ 6、4 ≤ 6 都弹掉，再放入 6</text>
+<rect x="470.0" y="466.0" width="100" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="520" y="493.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">6:6</text>
+<text x="520" y="272" font-size="14" fill="#66758d" text-anchor="middle">队首</text>
+<text x="880" y="272" font-size="14" fill="#66758d" text-anchor="end">队尾方向 →</text>
+<text x="32" y="570" font-size="16" fill="#495b73">队列里存下标，对应 dp 值从队首到队尾严格递减，队首永远是窗口最大值。</text>
+</g></svg>

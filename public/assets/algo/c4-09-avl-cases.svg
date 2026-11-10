@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">AVL 失衡的四种情形</title><desc id="desc">先找最低的失衡结点（红色），再看重的一侧和重孙在哪边：LL、RR、LR、RL。。单旋解决 LL 和 RR，双旋解决 LR 和 RL；每次插入最多修复一处，删除可能沿路径多处修复。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">AVL 失衡的四种情形</text>
+<text x="32" y="77" font-size="17" fill="#495b73">先找最低的失衡结点（红色），再看重的一侧和重孙在哪边：LL、RR、LR、RL。</text>
+<rect x="20" y="100" width="470" height="235" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="36" y="130" font-size="18" fill="#285caa" font-weight="700">LL（左左）</text>
+<text x="36" y="156" font-size="15" fill="#495b73">插入点在左孩子的左边：对 3 右旋</text>
+<line x1="135" y1="190" x2="95" y2="240" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="95" y1="240" x2="55" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="135" cy="190" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="135" y="195.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="95" cy="240" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="95" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="55" cy="290" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="55" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<line x1="395" y1="240" x2="355" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="395" y1="240" x2="435" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="395" cy="240" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="395" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="355" cy="290" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="355" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="435" cy="290" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="435" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<path d="M235 250L282 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="60" y="324" font-size="14" fill="#a33a3a" font-weight="700">3 的平衡因子 = +2</text>
+<rect x="510" y="100" width="470" height="235" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="526" y="130" font-size="18" fill="#285caa" font-weight="700">RR（右右）</text>
+<text x="526" y="156" font-size="15" fill="#495b73">插入点在右孩子的右边：对 1 左旋</text>
+<line x1="545" y1="190" x2="585" y2="240" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="585" y1="240" x2="625" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="545" cy="190" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="545" y="195.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="585" cy="240" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="585" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="625" cy="290" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="625" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<line x1="885" y1="240" x2="845" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="885" y1="240" x2="925" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="885" cy="240" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="885" y="245.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="845" cy="290" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="845" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="925" cy="290" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="925" y="295.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<path d="M725 250L772 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="550" y="324" font-size="14" fill="#a33a3a" font-weight="700">1 的平衡因子 = -2</text>
+<rect x="20" y="360" width="470" height="235" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="36" y="390" font-size="18" fill="#285caa" font-weight="700">LR（左右）</text>
+<text x="36" y="416" font-size="15" fill="#495b73">先对 1 左旋变成 LL，再对 3 右旋</text>
+<line x1="135" y1="450" x2="85" y2="500" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="85" y1="500" x2="125" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="135" cy="450" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="135" y="455.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="85" cy="500" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="85" y="505.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="125" cy="550" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="125" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<line x1="395" y1="500" x2="355" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="395" y1="500" x2="435" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="395" cy="500" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="395" y="505.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="355" cy="550" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="355" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="435" cy="550" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="435" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<path d="M235 510L282 510" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="60" y="584" font-size="14" fill="#a33a3a" font-weight="700">3 的平衡因子 = +2</text>
+<rect x="510" y="360" width="470" height="235" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="526" y="390" font-size="18" fill="#285caa" font-weight="700">RL（右左）</text>
+<text x="526" y="416" font-size="15" fill="#495b73">先对 3 右旋变成 RR，再对 1 左旋</text>
+<line x1="545" y1="450" x2="595" y2="500" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="595" y1="500" x2="565" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="545" cy="450" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="545" y="455.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="595" cy="500" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="595" y="505.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="565" cy="550" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="565" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<line x1="885" y1="500" x2="845" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="885" y1="500" x2="925" y2="550" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="885" cy="500" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="885" y="505.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="845" cy="550" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="845" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="925" cy="550" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="925" y="555.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<path d="M725 510L772 510" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="550" y="584" font-size="14" fill="#a33a3a" font-weight="700">1 的平衡因子 = -2</text>
+<text x="32" y="620" font-size="16" fill="#495b73">单旋解决 LL 和 RR，双旋解决 LR 和 RL；每次插入最多修复一处，删除可能沿路径多处修复。</text>
+</g></svg>

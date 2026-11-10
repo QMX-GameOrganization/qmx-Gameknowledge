@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+<title id="title">树形 DP 的计算顺序:后序</title><desc id="desc">先递归到叶子,回溯时才计算 dp[u];此时 u 的所有孩子都已经算完。。编号是 dp 被算出的先后顺序。dfs(u) 里先 dfs 每个孩子,再用孩子的结果更新 dp[u]。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="580" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">树形 DP 的计算顺序:后序</text>
+<text x="32" y="77" font-size="17" fill="#495b73">先递归到叶子,回溯时才计算 dp[u];此时 u 的所有孩子都已经算完。</text>
+<path d="M280 240L500 178" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M720 240L500 178" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M170 360L280 298" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M390 360L280 298" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M610 360L720 298" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M830 360L720 298" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<rect x="445.0" y="124.0" width="110" height="52" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="155.9" font-size="17" fill="#23364e" text-anchor="middle">人 5</text>
+<rect x="542.0" y="109.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="562" y="129.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">7</text>
+<rect x="225.0" y="244.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280" y="275.9" font-size="17" fill="#23364e" text-anchor="middle">人 4</text>
+<rect x="322.0" y="229.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="342" y="249.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<rect x="665.0" y="244.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="720" y="275.9" font-size="17" fill="#23364e" text-anchor="middle">人 3</text>
+<rect x="762.0" y="229.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="782" y="249.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">6</text>
+<rect x="115.0" y="364.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170" y="395.9" font-size="17" fill="#23364e" text-anchor="middle">人 6</text>
+<rect x="212.0" y="349.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="232" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="335.0" y="364.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="390" y="395.9" font-size="17" fill="#23364e" text-anchor="middle">人 7</text>
+<rect x="432.0" y="349.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="452" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<rect x="555.0" y="364.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="610" y="395.9" font-size="17" fill="#23364e" text-anchor="middle">人 1</text>
+<rect x="652.0" y="349.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="672" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<rect x="775.0" y="364.0" width="110" height="52" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="830" y="395.9" font-size="17" fill="#23364e" text-anchor="middle">人 2</text>
+<rect x="872.0" y="349.0" width="40" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="892" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">5</text>
+<text x="32" y="460" font-size="16" fill="#176951" font-weight="700">箭头方向:孩子的结果传给父亲。</text>
+<text x="32" y="496" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">对应代码:for (int v : son[u]) { dfs(v); dp[u][..] += ... }</text>
+<text x="32" y="560" font-size="16" fill="#495b73">编号是 dp 被算出的先后顺序。dfs(u) 里先 dfs 每个孩子,再用孩子的结果更新 dp[u]。</text>
+</g></svg>

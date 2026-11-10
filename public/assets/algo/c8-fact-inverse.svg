@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">阶乘逆元的反推：只做一次快速幂</title><desc id="desc">先求最大的 ifact[N]，再往小的方向乘回来。。之后 C(n, m) = fact[n] · ifact[m] · ifact[n-m]，每次查询 O(1)。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">阶乘逆元的反推：只做一次快速幂</text>
+<text x="32" y="77" font-size="17" fill="#495b73">先求最大的 ifact[N]，再往小的方向乘回来。</text>
+<rect x="33.0" y="172.0" width="134" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100" y="205.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">ifact[N]</text>
+<path d="M172 200L188 200" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="180" y="168" font-size="14" fill="#495b73" text-anchor="middle">× N</text>
+<rect x="193.0" y="172.0" width="134" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260" y="205.9" font-size="17" fill="#23364e" text-anchor="middle">ifact[N-1]</text>
+<path d="M332 200L348 200" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="340" y="168" font-size="14" fill="#495b73" text-anchor="middle">× (N-1)</text>
+<rect x="353.0" y="172.0" width="134" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="420" y="205.9" font-size="17" fill="#23364e" text-anchor="middle">ifact[N-2]</text>
+<path d="M492 200L508 200" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="500" y="168" font-size="14" fill="#495b73" text-anchor="middle">× …</text>
+<rect x="513.0" y="172.0" width="134" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="580" y="205.9" font-size="17" fill="#23364e" text-anchor="middle">…</text>
+<path d="M652 200L668 200" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="660" y="168" font-size="14" fill="#495b73" text-anchor="middle">× 2</text>
+<rect x="673.0" y="172.0" width="134" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="740" y="205.9" font-size="17" fill="#23364e" text-anchor="middle">ifact[1]</text>
+<path d="M812 200L828 200" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="820" y="168" font-size="14" fill="#495b73" text-anchor="middle">× 1</text>
+<rect x="833.0" y="172.0" width="134" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="900" y="205.9" font-size="17" fill="#23364e" text-anchor="middle">ifact[0]</text>
+<text x="100" y="262" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">快速幂：fact[N]^(p-2)</text>
+<rect x="32" y="310" width="936" height="110" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="52" y="346" font-size="18" fill="#23364e">为什么能这样推：ifact[i-1] = 1/(i-1)! = i/i! = i · ifact[i]</text>
+<text x="52" y="380" font-size="17" fill="#495b73">n! 的逆元乘上 n，恰好去掉分母里的一个因子 n，得到 (n-1)! 的逆元。</text>
+<text x="32" y="450" font-size="16" fill="#495b73">之后 C(n, m) = fact[n] · ifact[m] · ifact[n-m]，每次查询 O(1)。</text>
+</g></svg>

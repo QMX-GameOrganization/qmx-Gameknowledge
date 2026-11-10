@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">舞蹈链的核心：删除与恢复只改两个指针</title><desc id="desc">双向链表删除一个结点后，被删结点自己仍记得原来的左右邻居。。cover 和 uncover 严格按相反顺序执行，链表就能原样跳回来。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="530" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">舞蹈链的核心：删除与恢复只改两个指针</text>
+<text x="32" y="77" font-size="17" fill="#495b73">双向链表删除一个结点后，被删结点自己仍记得原来的左右邻居。</text>
+<text x="32" y="120" font-size="18" fill="#285caa" font-weight="700">删除前：A ⇄ B ⇄ C</text>
+<rect x="105.0" y="182.0" width="110" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="160" y="212.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">A</text>
+<rect x="445.0" y="182.0" width="110" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="500" y="212.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">B</text>
+<rect x="785.0" y="182.0" width="110" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="840" y="212.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">C</text>
+<path d="M222 197L438 197" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M438 213L222 213" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M562 197L778 197" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M778 213L562 213" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="32" y="320" font-size="18" fill="#285caa" font-weight="700">删除 B：A ⇄ C 直接相连，B 的指针（虚线）还指着 A 和 C</text>
+<rect x="105.0" y="382.0" width="110" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="160" y="412.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">A</text>
+<rect x="445.0" y="382.0" width="110" height="46" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="412.0" font-size="20" fill="#8c5315" font-weight="700" text-anchor="middle">B</text>
+<rect x="785.0" y="382.0" width="110" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="840" y="412.0" font-size="20" fill="#285caa" font-weight="700" text-anchor="middle">C</text>
+<path d="M215 381Q500 315 785 381" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M785 429Q500 495 215 429" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="500" y="339" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">R[A] = C</text>
+<text x="500" y="485" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">L[C] = A</text>
+<path d="M445 399L380 399" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<path d="M555 411L620 411" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<text x="380" y="437" font-size="14" fill="#8c5315" text-anchor="end">L[B] 仍是 A</text>
+<text x="620" y="437" font-size="14" fill="#8c5315">R[B] 仍是 C</text>
+<text x="32" y="510" font-size="16" fill="#495b73">cover 和 uncover 严格按相反顺序执行，链表就能原样跳回来。</text>
+</g></svg>

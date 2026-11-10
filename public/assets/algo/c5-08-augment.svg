@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">增广路：沿着“非匹配边、匹配边、非匹配边”换一遍，匹配数加 1</title><desc id="desc">a2 想要配对，但 b1 已经被 a1 占了。。增广路两端都是未匹配点，路上匹配边和非匹配边交替出现。</desc>
+<defs><marker id="m495b73" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#495b73"/></marker></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">增广路：沿着“非匹配边、匹配边、非匹配边”换一遍，匹配数加 1</text>
+<text x="32" y="77" font-size="17" fill="#495b73">a2 想要配对，但 b1 已经被 a1 占了。</text>
+<rect x="32" y="105" width="470" height="370" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="18" fill="#285caa" font-weight="700">增广前：已配 a1-b1、a3-b3</text>
+<path d="M174.0 200.0L366.0 200.0" fill="none" stroke="#176951" stroke-width="6"/>
+<path d="M172.2 209.2L367.8 290.8" fill="none" stroke="#a33a3a" stroke-width="3" stroke-dasharray="6 5"/>
+<path d="M172.2 290.8L367.8 209.2" fill="none" stroke="#a33a3a" stroke-width="3" stroke-dasharray="6 5"/>
+<path d="M174.0 400.0L366.0 400.0" fill="none" stroke="#176951" stroke-width="6"/>
+<circle cx="150" cy="200" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="150" y="205.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a1</text>
+<circle cx="150" cy="300" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="150" y="305.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a2</text>
+<circle cx="150" cy="400" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="150" y="405.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a3</text>
+<circle cx="390" cy="200" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="390" y="205.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b1</text>
+<circle cx="390" cy="300" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="390" y="305.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b2</text>
+<circle cx="390" cy="400" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="390" y="405.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b3</text>
+<text x="48" y="452" font-size="15" fill="#495b73">红色虚线：a2→b1→a1→b2 这条增广路</text>
+<rect x="530" y="105" width="438" height="370" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="546" y="137" font-size="18" fill="#176951" font-weight="700">增广后：已配 a2-b1、a1-b2、a3-b3</text>
+<path d="M644.0 200.0L856.0 200.0" fill="none" stroke="#66758d" stroke-width="2"/>
+<path d="M642.4 208.6L857.6 291.4" fill="none" stroke="#176951" stroke-width="6"/>
+<path d="M642.4 291.4L857.6 208.6" fill="none" stroke="#176951" stroke-width="6"/>
+<path d="M644.0 400.0L856.0 400.0" fill="none" stroke="#176951" stroke-width="6"/>
+<circle cx="620" cy="200" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="620" y="205.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a1</text>
+<circle cx="620" cy="300" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="620" y="305.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a2</text>
+<circle cx="620" cy="400" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="620" y="405.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a3</text>
+<circle cx="880" cy="200" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="880" y="205.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b1</text>
+<circle cx="880" cy="300" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="880" y="305.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b2</text>
+<circle cx="880" cy="400" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="880" y="405.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b3</text>
+<path d="M502 300L530 300" fill="none" stroke="#495b73" stroke-width="2" marker-end="url(#m495b73)"/>
+<text x="546" y="452" font-size="15" fill="#495b73">路上的边换了身份，匹配数从 2 变成 3</text>
+<text x="32" y="520" font-size="16" fill="#495b73">增广路两端都是未匹配点，路上匹配边和非匹配边交替出现。</text>
+</g></svg>

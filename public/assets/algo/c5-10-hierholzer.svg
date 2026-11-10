@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">Hierholzer：走进死胡同再回溯，遇到没走完的点就接上一个圈</title><desc id="desc">无向图，6 条边，从 1 出发。。回溯入栈序列反过来，就是一条欧拉回路。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Hierholzer：走进死胡同再回溯，遇到没走完的点就接上一个圈</text>
+<text x="32" y="77" font-size="17" fill="#495b73">无向图，6 条边，从 1 出发。</text>
+<rect x="32" y="105" width="600" height="420" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<path d="M190.0 237.0L190.0 415.0" fill="none" stroke="#285caa" stroke-width="3" marker-end="url(#m285caa)"/>
+<rect x="176.0" y="314.5" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190.0" y="332.8" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">1</text>
+<path d="M208.8 428.5L348.7 343.0" fill="none" stroke="#285caa" stroke-width="3" marker-end="url(#m285caa)"/>
+<rect x="266.0" y="372.0" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="390.2" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<path d="M351.5 318.2L211.1 228.5" fill="none" stroke="#285caa" stroke-width="3" marker-end="url(#m285caa)"/>
+<rect x="266.0" y="259.5" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280.0" y="277.8" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<path d="M388.5 318.2L528.9 228.5" fill="none" stroke="#8c5315" stroke-width="3" marker-end="url(#m8c5315)"/>
+<rect x="446.0" y="259.5" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="460.0" y="277.8" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">4</text>
+<path d="M550.0 237.0L550.0 415.0" fill="none" stroke="#8c5315" stroke-width="3" marker-end="url(#m8c5315)"/>
+<rect x="536.0" y="314.5" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="550.0" y="332.8" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<path d="M531.2 428.5L391.3 343.0" fill="none" stroke="#8c5315" stroke-width="3" marker-end="url(#m8c5315)"/>
+<rect x="446.0" y="372.0" width="28" height="26" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="460.0" y="390.2" font-size="15" fill="#66758d" font-weight="700" text-anchor="middle">6</text>
+<circle cx="190" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="190" cy="440" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="445.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="370" cy="330" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="370" y="335.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<circle cx="550" cy="215" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="550" y="220.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<circle cx="550" cy="440" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="550" y="445.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="48" y="140" font-size="15" fill="#495b73">边上的数字是实际走过的先后；蓝色：先走的路，橙色：回溯后接上的圈</text>
+<rect x="650" y="105" width="318" height="420" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="666" y="137" font-size="19" fill="#495b73" font-weight="700">过程</text>
+<text x="666" y="172" font-size="14" fill="#23364e">甲 1→2→3→1 走进死胡同，</text>
+<text x="666" y="202" font-size="14" fill="#23364e">   1 先入栈。</text>
+<text x="666" y="232" font-size="14" fill="#23364e">乙 回溯到 3，3 还有没走的</text>
+<text x="666" y="262" font-size="14" fill="#23364e">   边，走 3→4→5→3。</text>
+<text x="666" y="292" font-size="14" fill="#23364e">丙 圈走完，3、5、4 依次入栈。</text>
+<text x="666" y="322" font-size="14" fill="#23364e">丁 继续回溯，3、2、1 入栈。</text>
+<text x="666" y="352" font-size="14" fill="#23364e">入栈序列：1 3 5 4 3 2 1</text>
+<text x="666" y="382" font-size="14" fill="#23364e">反转：1 2 3 4 5 3 1</text>
+<text x="32" y="570" font-size="16" fill="#495b73">回溯入栈序列反过来，就是一条欧拉回路。</text>
+</g></svg>

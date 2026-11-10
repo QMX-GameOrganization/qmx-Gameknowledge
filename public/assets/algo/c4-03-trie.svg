@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">字典树：共用前缀的多叉树</title><desc id="desc">插入 to、tea、ted、ten、i、in、inn 七个单词。。te 这个前缀只存一份；绿色节点表示“走到这里恰好是一个单词”。</desc>
+<defs></defs>
+<rect width="1000" height="500" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">字典树：共用前缀的多叉树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">插入 to、tea、ted、ten、i、in、inn 七个单词。</text>
+<line x1="500" y1="130" x2="300" y2="215" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="130" x2="760" y2="215" stroke="#66758d" stroke-width="2"/>
+<line x1="300" y1="215" x2="190" y2="300" stroke="#66758d" stroke-width="2"/>
+<line x1="300" y1="215" x2="400" y2="300" stroke="#66758d" stroke-width="2"/>
+<line x1="400" y1="300" x2="310" y2="385" stroke="#66758d" stroke-width="2"/>
+<line x1="400" y1="300" x2="400" y2="385" stroke="#66758d" stroke-width="2"/>
+<line x1="400" y1="300" x2="490" y2="385" stroke="#66758d" stroke-width="2"/>
+<line x1="760" y1="215" x2="760" y2="300" stroke="#66758d" stroke-width="2"/>
+<line x1="760" y1="300" x2="760" y2="385" stroke="#66758d" stroke-width="2"/>
+<circle cx="500" cy="130" r="20" fill="#eef1f6" stroke="#495b73" stroke-width="2"/>
+<text x="500" y="135.9" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">根</text>
+<circle cx="300" cy="215" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="300" y="220.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">t</text>
+<circle cx="760" cy="215" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="760" y="220.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">i</text>
+<circle cx="190" cy="300" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="190" y="305.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">o</text>
+<circle cx="400" cy="300" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="400" y="305.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">e</text>
+<circle cx="310" cy="385" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="310" y="390.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">a</text>
+<circle cx="400" cy="385" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="400" y="390.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">d</text>
+<circle cx="490" cy="385" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="490" y="390.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">n</text>
+<circle cx="760" cy="300" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="760" y="305.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">n</text>
+<circle cx="760" cy="385" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="760" y="390.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">n</text>
+<text x="32" y="130" font-size="16" fill="#495b73">从根出发，沿着字符走：</text>
+<text x="32" y="156" font-size="16" fill="#23364e">t → e → a 就是 tea</text>
+<text x="32" y="182" font-size="16" fill="#23364e">i → n → n 就是 inn</text>
+<text x="540" y="432" font-size="16" fill="#495b73">t、te 不是单词（蓝色），</text>
+<text x="540" y="458" font-size="16" fill="#495b73">i 同时是单词和前缀（绿色）。</text>
+<text x="32" y="480" font-size="16" fill="#495b73">te 这个前缀只存一份；绿色节点表示“走到这里恰好是一个单词”。</text>
+</g></svg>

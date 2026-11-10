@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">戳气球:枚举「最后一个被戳」的气球</title><desc id="desc">nums = 3 1 5 8,两端补上虚拟的 1。区间 (l, r) 表示开区间,l 和 r 本身不戳。。k 最后被戳时,它左右的邻居一定是 l 和 r,左右两段互不影响,于是可以拆成两个独立子问题。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m5b3fa0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#5b3fa0"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">戳气球:枚举「最后一个被戳」的气球</text>
+<text x="32" y="77" font-size="17" fill="#495b73">nums = 3 1 5 8,两端补上虚拟的 1。区间 (l, r) 表示开区间,l 和 r 本身不戳。</text>
+<text x="130" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 0</text>
+<rect x="80.0" y="150.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="130" y="188.4" font-size="24" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<text x="278" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 1</text>
+<rect x="228.0" y="150.0" width="100" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="278" y="188.4" font-size="24" fill="#23364e" text-anchor="middle">3</text>
+<text x="426" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 2</text>
+<rect x="376.0" y="150.0" width="100" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="426" y="188.4" font-size="24" fill="#23364e" text-anchor="middle">1</text>
+<text x="574" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 3</text>
+<rect x="524.0" y="150.0" width="100" height="60" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="574" y="188.4" font-size="24" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<text x="722" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 4</text>
+<rect x="672.0" y="150.0" width="100" height="60" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="722" y="188.4" font-size="24" fill="#23364e" text-anchor="middle">8</text>
+<text x="870" y="136" font-size="14" fill="#495b73" text-anchor="middle">下标 5</text>
+<rect x="820.0" y="150.0" width="100" height="60" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="870" y="188.4" font-size="24" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<text x="130" y="268" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">l</text>
+<text x="574" y="268" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">k</text>
+<text x="870" y="268" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">r</text>
+<path d="M130 285C130 330 574 330 574 288" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="352" y="346" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">dp[0][3]:只戳 3 1 5 之间的 3、1</text>
+<path d="M574 285C574 330 870 330 870 288" fill="none" stroke="#5b3fa0" stroke-width="2" marker-end="url(#m5b3fa0)"/>
+<text x="722" y="346" font-size="15" fill="#5b3fa0" font-weight="700" text-anchor="middle">dp[3][5]:只戳 8</text>
+<rect x="32" y="420" width="936" height="90" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="48" y="452" font-size="18" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[l][r] = max( dp[l][k] + dp[k][r] + a[l] × a[k] × a[r] )</text>
+<text x="48" y="486" font-size="16" fill="#23364e">此例 k = 3:最后戳 5,得 1 × 5 × 1 = 5,加上左右两段各自的最大值。</text>
+<text x="32" y="570" font-size="16" fill="#495b73">k 最后被戳时,它左右的邻居一定是 l 和 r,左右两段互不影响,于是可以拆成两个独立子问题。</text>
+</g></svg>

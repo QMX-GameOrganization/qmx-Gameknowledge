@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">构建 pi：失配时沿 border 链往回退</title><desc id="desc">s = aabaaab，逐位算出 pi = 0 1 0 1 2 2 3，重点看 i=5 的回退。。每个位置只会让 j 增加 1，回退的总次数不超过增加的总次数，所以整个构建是 O(n)。</desc>
+<defs></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">构建 pi：失配时沿 border 链往回退</text>
+<text x="32" y="77" font-size="17" fill="#495b73">s = aabaaab，逐位算出 pi = 0 1 0 1 2 2 3，重点看 i=5 的回退。</text>
+<text x="32" y="118" font-size="16" fill="#495b73">下标 / 字符 / pi</text>
+<rect x="63.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="100.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="100.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="143.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="180.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="180.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="223.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="260.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="303.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="340.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="383.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="420.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="420.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="463.0" y="146.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="500.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="543.0" y="146.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="580.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="580.0" y="213.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="63.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="100.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="143.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="180.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="223.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="260.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="303.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="340.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="383.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="420.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="463.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="500.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="543.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="580.0" y="257.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<text x="32" y="330" font-size="18" fill="#8c5315" font-weight="700">i = 5 时发生了一次回退（s[5] = a）</text>
+<rect x="55.0" y="367.0" width="90" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="100" y="393.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">起点</text>
+<text x="170" y="394" font-size="16" fill="#23364e">j = pi[4] = 2：s[0,2)=aa 是 s[0,5) 的 border，试着把它延长一位</text>
+<rect x="55.0" y="429.0" width="90" height="42" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="100" y="455.9" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">失配</text>
+<text x="170" y="456" font-size="16" fill="#23364e">s[5]=a 对 s[2]=b：不相等，j = pi[j-1] = pi[1] = 1（换成更短的 border a）</text>
+<rect x="55.0" y="491.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100" y="518.0" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">匹配</text>
+<text x="170" y="518" font-size="16" fill="#23364e">s[5]=a 对 s[1]=a：相等，j++ 得 2，所以 pi[5] = 2</text>
+<text x="32" y="575" font-size="16" fill="#176951" font-weight="700">i = 6：j = pi[5] = 2，s[6]=b 对 s[2]=b 相等，j = 3，pi[6] = 3。</text>
+<text x="32" y="620" font-size="16" fill="#495b73">每个位置只会让 j 增加 1，回退的总次数不超过增加的总次数，所以整个构建是 O(n)。</text>
+</g></svg>

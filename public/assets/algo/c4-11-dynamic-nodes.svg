@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">动态开点：只创建用到的结点</title><desc id="desc">值域 [1, 8]，依次在位置 3 和 6 各加一个数。。完整的线段树有 15 个结点；这里只创建了 7 个。每次修改最多新建 log(值域) 个结点。</desc>
+<defs></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">动态开点：只创建用到的结点</text>
+<text x="32" y="77" font-size="17" fill="#495b73">值域 [1, 8]，依次在位置 3 和 6 各加一个数。</text>
+<line x1="145.0" y1="330" x2="90" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="145.0" y1="330" x2="200" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="365.0" y1="330" x2="310" y2="430" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<line x1="365.0" y1="330" x2="420" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="255.0" y1="230" x2="145.0" y2="330" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="255.0" y1="230" x2="365.0" y2="330" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<line x1="585.0" y1="330" x2="530" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="585.0" y1="330" x2="640" y2="430" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<line x1="805.0" y1="330" x2="750" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="805.0" y1="330" x2="860" y2="430" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="695.0" y1="230" x2="585.0" y2="330" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<line x1="695.0" y1="230" x2="805.0" y2="330" stroke="#66758d" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5"/>
+<line x1="475.0" y1="130" x2="255.0" y2="230" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<line x1="475.0" y1="130" x2="695.0" y2="230" stroke="#285caa" stroke-width="2" stroke-opacity="1"/>
+<rect x="59" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="90" y="436" font-size="15" fill="#66758d" text-anchor="middle">1</text>
+<rect x="169" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="200" y="436" font-size="15" fill="#66758d" text-anchor="middle">2</text>
+<rect x="114.0" y="313" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="145.0" y="336" font-size="15" fill="#66758d" text-anchor="middle">1~2</text>
+<rect x="279.0" y="413.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="310" y="435.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<rect x="389" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="420" y="436" font-size="15" fill="#66758d" text-anchor="middle">4</text>
+<rect x="334.0" y="313.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="365.0" y="335.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">3~4</text>
+<rect x="224.0" y="213.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="255.0" y="235.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1~4</text>
+<rect x="499" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="530" y="436" font-size="15" fill="#66758d" text-anchor="middle">5</text>
+<rect x="609.0" y="413.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="640" y="435.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<rect x="554.0" y="313.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="585.0" y="335.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">5~6</text>
+<rect x="719" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="750" y="436" font-size="15" fill="#66758d" text-anchor="middle">7</text>
+<rect x="829" y="413" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="860" y="436" font-size="15" fill="#66758d" text-anchor="middle">8</text>
+<rect x="774.0" y="313" width="62" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="805.0" y="336" font-size="15" fill="#66758d" text-anchor="middle">7~8</text>
+<rect x="664.0" y="213.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="695.0" y="235.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">5~8</text>
+<rect x="444.0" y="113.0" width="62" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="475.0" y="135.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">1~8</text>
+<rect x="32" y="480" width="24" height="18" rx="5" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="66" y="495" font-size="16" fill="#23364e">已创建（共 7 个）</text>
+<rect x="300" y="480" width="24" height="18" rx="5" fill="#eef1f6" stroke="#495b73" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="334" y="495" font-size="16" fill="#23364e">尚未创建：访问到它时，空指针 0 就表示这一段全是 0</text>
+<text x="32" y="550" font-size="16" fill="#495b73">完整的线段树有 15 个结点；这里只创建了 7 个。每次修改最多新建 log(值域) 个结点。</text>
+</g></svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">Pollard&#x27;s Rho：伪随机序列在模 p 下会先成环</title><desc id="desc">序列 x → x² + c 对 n 取模；对因子 p 取模后的序列更早出现重复。。两个下标 i、j 满足 x_i ≡ x_j (mod p) 但 x_i ≠ x_j (mod n)，则 gcd(|x_i - x_j|, n) 是 n 的非平凡因子。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Pollard&#x27;s Rho：伪随机序列在模 p 下会先成环</text>
+<text x="32" y="77" font-size="17" fill="#495b73">序列 x → x² + c 对 n 取模；对因子 p 取模后的序列更早出现重复。</text>
+<path d="M122 390L165 371" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M212 350L255 331" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M301 308L336 288" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M384 277L482 285" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M509 264L509 210" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M530 170L577 144" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M621 142L668 169" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M691 206L691 260" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M670 300L623 326" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<line x1="600" y1="340" x2="509" y2="288" stroke="#a33a3a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="100" cy="400" r="21" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="100" y="406" font-size="15" fill="#23364e" text-anchor="middle">x0</text>
+<circle cx="190" cy="360" r="21" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="190" y="366" font-size="15" fill="#23364e" text-anchor="middle">x1</text>
+<circle cx="280" cy="320" r="21" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="280" y="326" font-size="15" fill="#23364e" text-anchor="middle">x2</text>
+<circle cx="360" cy="275" r="21" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="360" y="281" font-size="15" fill="#23364e" text-anchor="middle">x3</text>
+<circle cx="509" cy="288" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="509" y="294" font-size="15" fill="#23364e" text-anchor="middle">x4</text>
+<circle cx="509" cy="182" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="509" y="188" font-size="15" fill="#23364e" text-anchor="middle">x5</text>
+<circle cx="600" cy="130" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="600" y="136" font-size="15" fill="#23364e" text-anchor="middle">x6</text>
+<circle cx="691" cy="182" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="691" y="188" font-size="15" fill="#23364e" text-anchor="middle">x7</text>
+<circle cx="691" cy="288" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="691" y="294" font-size="15" fill="#23364e" text-anchor="middle">x8</text>
+<circle cx="600" cy="340" r="21" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="600" y="346" font-size="15" fill="#23364e" text-anchor="middle">x9</text>
+<text x="60" y="450" font-size="17" fill="#285caa" font-weight="700">尾巴（rho 的柄）</text>
+<text x="520" y="410" font-size="17" fill="#a33a3a" font-weight="700">环：模 p 下 x9 与 x4 相同</text>
+<text x="60" y="150" font-size="16" fill="#23364e">快指针一步走两格，慢指针一步走一格，</text>
+<text x="60" y="178" font-size="16" fill="#23364e">进环后两者迟早在环里相遇，</text>
+<text x="60" y="206" font-size="16" fill="#23364e">此时差值是 p 的倍数。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">两个下标 i、j 满足 x_i ≡ x_j (mod p) 但 x_i ≠ x_j (mod n)，则 gcd(|x_i - x_j|, n) 是 n 的非平凡因子。</text>
+</g></svg>

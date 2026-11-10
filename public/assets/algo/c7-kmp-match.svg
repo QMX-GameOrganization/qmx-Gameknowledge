@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">KMP 匹配：失配后模式串右移，已匹配的部分不再比较</title><desc id="desc">text = abababcab，pat = ababc（pi = 0 0 1 2 0）。。文本指针 i 从不后退；失配时只改 j = pi[j-1]，相当于把模式串直接滑到下一个可能的位置。</desc>
+<defs></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">KMP 匹配：失配后模式串右移，已匹配的部分不再比较</text>
+<text x="32" y="77" font-size="17" fill="#495b73">text = abababcab，pat = ababc（pi = 0 0 1 2 0）。</text>
+<text x="32" y="118" font-size="16" fill="#495b73">文本</text>
+<rect x="43.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="72.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="72.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="107.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="136.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="136.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="171.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="200.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="200.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="235.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="264.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="264.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="299.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="328.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="328.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="363.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="392.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="392.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="427.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="456.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<text x="456.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<rect x="491.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="520.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="520.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">7</text>
+<rect x="555.0" y="137.0" width="58" height="46" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="584.0" y="167.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="584.0" y="202.0" font-size="13" fill="#495b73" text-anchor="middle">8</text>
+<text x="32" y="250" font-size="16" fill="#a33a3a" font-weight="700">第一次对齐（偏移 0）：比到 text[4] 失配</text>
+<rect x="43.0" y="277.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="72.0" y="307.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="107.0" y="277.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="136.0" y="307.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="171.0" y="277.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="200.0" y="307.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="235.0" y="277.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="264.0" y="307.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="299.0" y="277.0" width="58" height="46" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="328.0" y="307.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<text x="374" y="306" font-size="16" fill="#a33a3a" font-weight="700">a ≠ c</text>
+<text x="32" y="380" font-size="16" fill="#176951" font-weight="700">j=4 失配，j = pi[3] = 2：模式串右移 4-2 = 2 位</text>
+<rect x="171.0" y="407.0" width="58" height="46" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="200.0" y="437.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="235.0" y="407.0" width="58" height="46" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="264.0" y="437.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="299.0" y="407.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="328.0" y="437.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="363.0" y="407.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="392.0" y="437.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="427.0" y="407.0" width="58" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="456.0" y="437.7" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<text x="168" y="482" font-size="14" fill="#495b73">灰色两格 ab 已确认相等，从 pat[2] 接着比</text>
+<text x="502" y="436" font-size="16" fill="#176951" font-weight="700">完整匹配</text>
+<text x="502" y="460" font-size="15" fill="#23364e">起点 = 2</text>
+<text x="32" y="520" font-size="16" fill="#495b73">文本指针 i 从不后退；失配时只改 j = pi[j-1]，相当于把模式串直接滑到下一个可能的位置。</text>
+</g></svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">0-1 BFS：用双端队列代替优先队列</title><desc id="desc">边权只有 0 和 1 时，队列里始终只有距离 d 和 d+1 两种值。。出队后松弛邻居：权 0 放队头（同层），权 1 放队尾（下一层）。</desc>
+<defs><marker id="m495b73" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#495b73"/></marker><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">0-1 BFS：用双端队列代替优先队列</text>
+<text x="32" y="77" font-size="17" fill="#495b73">边权只有 0 和 1 时，队列里始终只有距离 d 和 d+1 两种值。</text>
+<rect x="250" y="230" width="74" height="56" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="287" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=2</text>
+<rect x="330" y="230" width="74" height="56" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="367" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=2</text>
+<rect x="410" y="230" width="74" height="56" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="447" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=2</text>
+<rect x="490" y="230" width="74" height="56" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="527" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=3</text>
+<rect x="570" y="230" width="74" height="56" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="607" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=3</text>
+<rect x="650" y="230" width="74" height="56" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="687" y="266" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">d=3</text>
+<text x="230" y="215" font-size="15" fill="#495b73" text-anchor="end">队头</text>
+<text x="738" y="215" font-size="15" fill="#495b73">队尾</text>
+<path d="M242 258L140 258" fill="none" stroke="#495b73" stroke-width="2" marker-end="url(#m495b73)"/>
+<text x="132" y="300" font-size="15" fill="#495b73">pop_front：取出当前最小的</text>
+<path d="M140 160L280 220" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="32" y="150" font-size="16" fill="#285caa" font-weight="700">权 0：push_front（距离不变）</text>
+<path d="M830 160L710 220" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="710" y="150" font-size="16" fill="#8c5315" font-weight="700">权 1：push_back（距离 +1）</text>
+<rect x="32" y="340" width="936" height="90" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="48" y="372" font-size="17" fill="#23364e">为什么对：每个点出队时距离最小，且队列从头到尾距离单调不降。</text>
+<text x="48" y="404" font-size="17" fill="#23364e">每次松弛最多入队一次，总复杂度 O(V + E)，比 Dijkstra 少一个 log。</text>
+<text x="32" y="450" font-size="16" fill="#495b73">出队后松弛邻居：权 0 放队头（同层），权 1 放队尾（下一层）。</text>
+</g></svg>

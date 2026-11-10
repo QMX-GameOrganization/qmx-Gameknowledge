@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">区间 DP 的填表顺序:按区间长度</title><desc id="desc">石子 3 4 5 2 1,dp[l][r] = 把第 l 到 r 堆合并成一堆的最小代价。。dp[0][4] 依赖更短的区间 dp[0][k] 与 dp[k+1][4],所以必须先填完所有较短的区间。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">区间 DP 的填表顺序:按区间长度</text>
+<text x="32" y="77" font-size="17" fill="#495b73">石子 3 4 5 2 1,dp[l][r] = 把第 l 到 r 堆合并成一堆的最小代价。</text>
+<rect x="42.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">l \ r</text>
+<rect x="126.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="166.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="210.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="250.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">1</text>
+<rect x="294.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="334.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">2</text>
+<rect x="378.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="418.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">3</text>
+<rect x="462.0" y="114.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="502.0" y="150.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">4</text>
+<rect x="42.0" y="176.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="212.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="126.0" y="176.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="166.0" y="212.3" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="210.0" y="176.0" width="80" height="58" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="250.0" y="212.3" font-size="21" fill="#a33a3a" font-weight="700" text-anchor="middle">7</text>
+<rect x="294.0" y="176.0" width="80" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="334.0" y="212.3" font-size="21" fill="#176951" font-weight="700" text-anchor="middle">19</text>
+<rect x="378.0" y="176.0" width="80" height="58" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="418.0" y="212.3" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">28</text>
+<rect x="462.0" y="176.0" width="80" height="58" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="502.0" y="212.3" font-size="21" fill="#5b3fa0" font-weight="700" text-anchor="middle">33</text>
+<rect x="42.0" y="238.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="274.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">1</text>
+<rect x="210.0" y="238.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="250.0" y="274.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="294.0" y="238.0" width="80" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="334.0" y="274.4" font-size="21" fill="#285caa" font-weight="700" text-anchor="middle">9</text>
+<rect x="378.0" y="238.0" width="80" height="58" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="418.0" y="274.4" font-size="21" fill="#176951" font-weight="700" text-anchor="middle">18</text>
+<rect x="462.0" y="238.0" width="80" height="58" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="502.0" y="274.4" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">23</text>
+<rect x="42.0" y="300.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="336.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">2</text>
+<rect x="294.0" y="300.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="334.0" y="336.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="378.0" y="300.0" width="80" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="418.0" y="336.4" font-size="21" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<rect x="462.0" y="300.0" width="80" height="58" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="502.0" y="336.4" font-size="21" fill="#a33a3a" font-weight="700" text-anchor="middle">11</text>
+<rect x="42.0" y="362.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="398.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">3</text>
+<rect x="378.0" y="362.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="418.0" y="398.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="462.0" y="362.0" width="80" height="58" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="502.0" y="398.4" font-size="21" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<rect x="42.0" y="424.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="82.0" y="460.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">4</text>
+<rect x="462.0" y="424.0" width="80" height="58" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="502.0" y="460.4" font-size="21" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="620.0" y="117.0" width="120" height="34" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="680" y="139.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">长度 1</text>
+<path d="M680 153L680 177" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="620.0" y="179.0" width="120" height="34" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="680" y="201.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">长度 2</text>
+<path d="M680 215L680 239" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="620.0" y="241.0" width="120" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="680" y="263.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">长度 3</text>
+<path d="M680 277L680 301" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="620.0" y="303.0" width="120" height="34" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="680" y="325.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">长度 4</text>
+<path d="M680 339L680 363" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="620.0" y="365.0" width="120" height="34" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="680" y="387.6" font-size="16" fill="#5b3fa0" font-weight="700" text-anchor="middle">长度 5</text>
+<rect x="780" y="112" width="190" height="300" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="794" y="146" font-size="16" fill="#a33a3a" font-weight="700">dp[0][4] 的</text>
+<text x="794" y="170" font-size="16" fill="#a33a3a" font-weight="700">最优分割</text>
+<text x="794" y="206" font-size="15" fill="#23364e">k = 1:</text>
+<text x="794" y="234" font-size="15" fill="#23364e">dp[0][1] = 7</text>
+<text x="794" y="262" font-size="15" fill="#23364e">+ dp[2][4] = 11</text>
+<text x="794" y="290" font-size="15" fill="#23364e">+ 区间和 15</text>
+<text x="794" y="328" font-size="20" fill="#a33a3a" font-weight="700">= 33</text>
+<text x="794" y="366" font-size="14" fill="#495b73">红色格子是这两项</text>
+<text x="32" y="570" font-size="16" fill="#495b73">dp[0][4] 依赖更短的区间 dp[0][k] 与 dp[k+1][4],所以必须先填完所有较短的区间。</text>
+</g></svg>

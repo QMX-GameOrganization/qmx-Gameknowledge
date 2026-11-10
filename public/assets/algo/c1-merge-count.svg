@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">合并时数逆序对：右边的数先出队，就和左边剩下的每个数构成逆序</title><desc id="desc">左 [3,5,8]，右 [2,4,9]，共 5 个逆序对。。每次右侧元素先出队，累加左侧剩余个数；每对元素只会在它们第一次处于不同半区的那次合并里被数到一次。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">合并时数逆序对：右边的数先出队，就和左边剩下的每个数构成逆序</text>
+<text x="32" y="77" font-size="17" fill="#495b73">左 [3,5,8]，右 [2,4,9]，共 5 个逆序对。</text>
+<text x="60" y="125" font-size="16" fill="#285caa" font-weight="700">左半（已排序）</text>
+<rect x="63.0" y="140.0" width="54" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="90.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="123.0" y="140.0" width="54" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="150.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="183.0" y="140.0" width="54" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="210.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<text x="560" y="125" font-size="16" fill="#176951" font-weight="700">右半（已排序）</text>
+<rect x="563.0" y="140.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="590.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="623.0" y="140.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="650.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="683.0" y="140.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="710.0" y="166.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<rect x="32" y="215" width="936" height="245" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="48" y="245" font-size="16" fill="#495b73" font-weight="700">步骤</text>
+<text x="130" y="245" font-size="16" fill="#495b73" font-weight="700">比较</text>
+<text x="300" y="245" font-size="16" fill="#495b73" font-weight="700">谁出队</text>
+<text x="470" y="245" font-size="16" fill="#495b73" font-weight="700">本步新增逆序对</text>
+<text x="760" y="245" font-size="16" fill="#495b73" font-weight="700">累计</text>
+<text x="56" y="275" font-size="16" fill="#23364e">1</text>
+<text x="130" y="275" font-size="16" fill="#23364e">3 与 2</text>
+<text x="300" y="275" font-size="16" fill="#176951" font-weight="700">右 2</text>
+<text x="470" y="275" font-size="16" fill="#23364e">左剩 3,5,8 → +3</text>
+<text x="775" y="275" font-size="16" fill="#23364e" font-weight="700">3</text>
+<text x="56" y="304" font-size="16" fill="#23364e">2</text>
+<text x="130" y="304" font-size="16" fill="#23364e">3 与 4</text>
+<text x="300" y="304" font-size="16" fill="#285caa" font-weight="700">左 3</text>
+<text x="470" y="304" font-size="16" fill="#23364e">+0</text>
+<text x="775" y="304" font-size="16" fill="#23364e" font-weight="700">3</text>
+<text x="56" y="333" font-size="16" fill="#23364e">3</text>
+<text x="130" y="333" font-size="16" fill="#23364e">5 与 4</text>
+<text x="300" y="333" font-size="16" fill="#176951" font-weight="700">右 4</text>
+<text x="470" y="333" font-size="16" fill="#23364e">左剩 5,8 → +2</text>
+<text x="775" y="333" font-size="16" fill="#23364e" font-weight="700">5</text>
+<text x="56" y="362" font-size="16" fill="#23364e">4</text>
+<text x="130" y="362" font-size="16" fill="#23364e">5 与 9</text>
+<text x="300" y="362" font-size="16" fill="#285caa" font-weight="700">左 5</text>
+<text x="470" y="362" font-size="16" fill="#23364e">+0</text>
+<text x="775" y="362" font-size="16" fill="#23364e" font-weight="700">5</text>
+<text x="56" y="391" font-size="16" fill="#23364e">5</text>
+<text x="130" y="391" font-size="16" fill="#23364e">8 与 9</text>
+<text x="300" y="391" font-size="16" fill="#285caa" font-weight="700">左 8</text>
+<text x="470" y="391" font-size="16" fill="#23364e">+0</text>
+<text x="775" y="391" font-size="16" fill="#23364e" font-weight="700">5</text>
+<text x="56" y="420" font-size="16" fill="#23364e">6</text>
+<text x="130" y="420" font-size="16" fill="#23364e">只剩 9</text>
+<text x="300" y="420" font-size="16" fill="#176951" font-weight="700">右 9</text>
+<text x="470" y="420" font-size="16" fill="#23364e">+0</text>
+<text x="775" y="420" font-size="16" fill="#23364e" font-weight="700">5</text>
+<text x="48" y="500" font-size="16" fill="#495b73" font-weight="700">合并结果：</text>
+<rect x="153.0" y="478.0" width="50" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="178.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="209.0" y="478.0" width="50" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="234.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="265.0" y="478.0" width="50" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="290.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="321.0" y="478.0" width="50" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="346.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="377.0" y="478.0" width="50" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="402.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="433.0" y="478.0" width="50" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="458.0" y="502.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<text x="32" y="540" font-size="16" fill="#495b73">每次右侧元素先出队，累加左侧剩余个数；每对元素只会在它们第一次处于不同半区的那次合并里被数到一次。</text>
+</g></svg>

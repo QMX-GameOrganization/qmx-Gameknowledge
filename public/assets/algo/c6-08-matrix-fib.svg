@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">斐波那契的转移矩阵与快速幂</title><desc id="desc">一步转移写成矩阵乘法，n 步转移就是矩阵的 n 次幂。。13 的二进制是 1101，所以只需要 3 次平方、2 次相乘，而不是 12 次乘法。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">斐波那契的转移矩阵与快速幂</text>
+<text x="32" y="77" font-size="17" fill="#495b73">一步转移写成矩阵乘法，n 步转移就是矩阵的 n 次幂。</text>
+<rect x="32" y="105" width="936" height="170" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">一步转移：从 (F(i), F(i-1)) 得到 (F(i+1), F(i))</text>
+<rect x="110.0" y="167.0" width="120" height="80" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170" y="201.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">F(i+1)</text>
+<text x="170" y="227.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">F(i)</text>
+<text x="255" y="214" font-size="28" fill="#23364e" font-weight="700" text-anchor="middle">=</text>
+<rect x="310.0" y="167.0" width="120" height="80" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="370" y="200.4" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1   1</text>
+<text x="370" y="229.0" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1   0</text>
+<text x="470" y="214" font-size="28" fill="#23364e" font-weight="700" text-anchor="middle">×</text>
+<rect x="510.0" y="167.0" width="120" height="80" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="570" y="201.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">F(i)</text>
+<text x="570" y="227.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">F(i-1)</text>
+<text x="660" y="190" font-size="16" fill="#23364e">第一行：F(i+1) = 1·F(i) + 1·F(i-1)</text>
+<text x="660" y="220" font-size="16" fill="#23364e">第二行：F(i)   = 1·F(i) + 0·F(i-1)</text>
+<text x="660" y="250" font-size="16" fill="#8c5315" font-weight="700">橙色的 M 不随 i 变化</text>
+<rect x="32" y="300" width="936" height="210" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="332" font-size="19" fill="#176951" font-weight="700">快速幂：反复平方，按二进制位取用（以 M^13 为例）</text>
+<rect x="80.0" y="364.0" width="120" height="56" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="140" y="399.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">M^1</text>
+<text x="140" y="444" font-size="15" fill="#23364e" text-anchor="middle">第 0 位 = 1，取</text>
+<path d="M202 392L278 392" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="240.0" y="378" font-size="15" fill="#176951" text-anchor="middle">平方</text>
+<rect x="280.0" y="364.0" width="120" height="56" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340" y="399.7" font-size="22" fill="#23364e" text-anchor="middle">M^2</text>
+<text x="340" y="444" font-size="15" fill="#66758d" text-anchor="middle">第 1 位 = 0，不取</text>
+<path d="M402 392L478 392" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="440.0" y="378" font-size="15" fill="#176951" text-anchor="middle">平方</text>
+<rect x="480.0" y="364.0" width="120" height="56" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="540" y="399.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">M^4</text>
+<text x="540" y="444" font-size="15" fill="#23364e" text-anchor="middle">第 2 位 = 1，取</text>
+<path d="M602 392L678 392" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<text x="640.0" y="378" font-size="15" fill="#176951" text-anchor="middle">平方</text>
+<rect x="680.0" y="364.0" width="120" height="56" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="740" y="399.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">M^8</text>
+<text x="740" y="444" font-size="15" fill="#23364e" text-anchor="middle">第 3 位 = 1，取</text>
+<text x="500" y="486" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">M^13 = M^8 · M^4 · M^1</text>
+<text x="32" y="550" font-size="16" fill="#495b73">13 的二进制是 1101，所以只需要 3 次平方、2 次相乘，而不是 12 次乘法。</text>
+</g></svg>

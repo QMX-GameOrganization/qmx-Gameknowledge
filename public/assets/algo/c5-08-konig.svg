@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">König 定理：最大匹配数等于最小点覆盖数</title><desc id="desc">从未匹配的左点出发走交错路，访问到的点决定覆盖集。。覆盖集 = 左部没访问到的 + 右部访问到的；最大独立集 = 总点数 - 最大匹配。</desc>
+<defs></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">König 定理：最大匹配数等于最小点覆盖数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">从未匹配的左点出发走交错路，访问到的点决定覆盖集。</text>
+<rect x="32" y="105" width="590" height="420" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<path d="M214.0 175.0L446.0 175.0" fill="none" stroke="#176951" stroke-width="6"/>
+<path d="M212.6 183.1L447.4 266.9" fill="none" stroke="#66758d" stroke-width="2"/>
+<path d="M214.0 275.0L446.0 275.0" fill="none" stroke="#176951" stroke-width="6"/>
+<path d="M212.6 366.9L447.4 283.1" fill="none" stroke="#a33a3a" stroke-width="3" stroke-dasharray="6 5"/>
+<path d="M214.0 375.0L446.0 375.0" fill="none" stroke="#a33a3a" stroke-width="3" stroke-dasharray="6 5"/>
+<path d="M212.6 466.9L447.4 383.1" fill="none" stroke="#176951" stroke-width="6"/>
+<circle cx="190" cy="175" r="24" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="190" y="180.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">a1</text>
+<circle cx="190" cy="275" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="280.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a2</text>
+<circle cx="190" cy="375" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="380.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a3</text>
+<circle cx="190" cy="475" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="190" y="480.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">a4</text>
+<circle cx="470" cy="175" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="470" y="180.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b1</text>
+<circle cx="470" cy="275" r="24" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="470" y="280.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">b2</text>
+<circle cx="470" cy="375" r="24" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="470" y="380.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">b3</text>
+<circle cx="470" cy="475" r="24" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="470" y="480.6" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">b4</text>
+<rect x="640" y="105" width="328" height="420" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="656" y="137" font-size="19" fill="#495b73" font-weight="700">步骤</text>
+<text x="656" y="172" font-size="14" fill="#23364e">① 最大匹配 3 条（粗绿线），</text>
+<text x="656" y="201" font-size="14" fill="#23364e">    a3 没有配上。</text>
+<text x="656" y="230" font-size="14" fill="#23364e">② 从 a3 出发走非匹配边</text>
+<text x="656" y="259" font-size="14" fill="#23364e">    到 b2、b3（红色虚线）。</text>
+<text x="656" y="288" font-size="14" fill="#23364e">③ 再沿匹配边回到 a2、a4。</text>
+<text x="656" y="317" font-size="14" fill="#23364e">④ 访问到：a3 a2 a4 b2 b3。</text>
+<text x="656" y="346" font-size="14" fill="#23364e">⑤ 覆盖集 = 左部没访问到的 a1</text>
+<text x="656" y="375" font-size="14" fill="#23364e">    + 右部访问到的 b2、b3。</text>
+<text x="656" y="404" font-size="14" fill="#23364e">⑥ 大小 3 = 最大匹配数，</text>
+<text x="656" y="433" font-size="14" fill="#23364e">    橙色点即覆盖集。</text>
+<text x="656" y="462" font-size="14" fill="#23364e">最大独立集：</text>
+<text x="656" y="491" font-size="14" fill="#23364e">    8 - 3 = 5，如 a2 a3 a4 b1 b4。</text>
+<text x="32" y="570" font-size="16" fill="#495b73">覆盖集 = 左部没访问到的 + 右部访问到的；最大独立集 = 总点数 - 最大匹配。</text>
+</g></svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">状态转移图与矩阵一一对应</title><desc id="desc">例：长度为 n、不含连续两个 1 的 01 串有多少个。。矩阵第 i 行第 j 列 = 从状态 j 走一步到状态 i 的方式数。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker></defs>
+<rect width="1000" height="530" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">状态转移图与矩阵一一对应</text>
+<text x="32" y="77" font-size="17" fill="#495b73">例：长度为 n、不含连续两个 1 的 01 串有多少个。</text>
+<rect x="32" y="105" width="450" height="360" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#285caa" font-weight="700">状态图</text>
+<circle cx="140" cy="290" r="52" fill="#ffffff" stroke="#285caa" stroke-width="2"/>
+<circle cx="360" cy="290" r="52" fill="#ffffff" stroke="#285caa" stroke-width="2"/>
+<text x="140" y="282" font-size="24" fill="#285caa" font-weight="700" text-anchor="middle">A</text>
+<text x="140" y="308" font-size="14" fill="#495b73" text-anchor="middle">末位是 0</text>
+<text x="360" y="282" font-size="24" fill="#285caa" font-weight="700" text-anchor="middle">B</text>
+<text x="360" y="308" font-size="14" fill="#495b73" text-anchor="middle">末位是 1</text>
+<path d="M120 240 C90 170 190 170 160 240" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="140" y="178" font-size="15" fill="#285caa" text-anchor="middle">追加 0</text>
+<path d="M192 268 C245 235 255 235 308 268" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="250" y="232" font-size="15" fill="#285caa" text-anchor="middle">追加 1</text>
+<path d="M312 316 C255 350 245 350 192 316" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<text x="250" y="372" font-size="15" fill="#285caa" text-anchor="middle">追加 0</text>
+<text x="48" y="430" font-size="16" fill="#23364e">B 后面不能再追加 1，所以没有 B→B。</text>
+<rect x="518" y="105" width="450" height="360" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="534" y="137" font-size="19" fill="#176951" font-weight="700">转移矩阵</text>
+<rect x="595.0" y="180.0" width="130" height="80" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="660" y="213.4" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a&#x27;</text>
+<text x="660" y="242.0" font-size="22" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b&#x27;</text>
+<text x="740" y="228" font-size="28" fill="#23364e" font-weight="700" text-anchor="middle">=</text>
+<rect x="770.0" y="180.0" width="120" height="80" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="830" y="213.4" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1  1</text>
+<text x="830" y="242.0" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1  0</text>
+<text x="534" y="290" font-size="16" fill="#23364e">a&#x27;、b&#x27; 是追加一个字符后以 0、1 结尾的串数。</text>
+<text x="534" y="320" font-size="16" fill="#23364e">a&#x27; = a + b（A、B 后面都能追加 0）</text>
+<text x="534" y="348" font-size="16" fill="#23364e">b&#x27; = a（只有 A 后面能追加 1）</text>
+<text x="534" y="392" font-size="16" fill="#176951" font-weight="700">初始 (a, b) = (1, 1)（长度 1），M^(n-1) 乘上去，</text>
+<text x="534" y="420" font-size="16" fill="#176951" font-weight="700">a + b 就是长度为 n 的合法串数，结果是斐波那契数。</text>
+<text x="32" y="510" font-size="16" fill="#495b73">矩阵第 i 行第 j 列 = 从状态 j 走一步到状态 i 的方式数。</text>
+</g></svg>

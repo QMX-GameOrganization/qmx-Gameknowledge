@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">高斯消元：先消成上三角，再回代</title><desc id="desc">方程组 x+y+z=6，y+2z=8，2x+5y−z=9，解为 (1, 2, 3)。。消元每一步用主元所在行去消掉下面各行同一列的数；复杂度 O(n³)。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">高斯消元：先消成上三角，再回代</text>
+<text x="32" y="77" font-size="17" fill="#495b73">方程组 x+y+z=6，y+2z=8，2x+5y−z=9，解为 (1, 2, 3)。</text>
+<text x="140" y="140" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">原始增广矩阵</text>
+<rect x="37.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="89.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="141.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="164" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="193.0" y="170.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="216" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">6</text>
+<rect x="37.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="89.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="141.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="164" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="193.0" y="220.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="216" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">8</text>
+<rect x="37.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="89.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="112" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">5</text>
+<rect x="141.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="164" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">-1</text>
+<rect x="193.0" y="270.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="216" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">9</text>
+<path d="M282 240L336 240" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="460" y="140" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">R3 ← R3 − 2·R1</text>
+<rect x="357.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="409.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="432" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="461.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="484" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="513.0" y="170.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="536" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">6</text>
+<rect x="357.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="409.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="432" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="461.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="484" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="513.0" y="220.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="536" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">8</text>
+<rect x="357.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="380" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="409.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="432" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">3</text>
+<rect x="461.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="484" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">-3</text>
+<rect x="513.0" y="270.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="536" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">-3</text>
+<path d="M602 240L656 240" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="780" y="140" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">R3 ← R3 − 3·R2</text>
+<rect x="677.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="729.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="752" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="781.0" y="170.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="804" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="833.0" y="170.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="856" y="195.9" font-size="17" fill="#23364e" text-anchor="middle">6</text>
+<rect x="677.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="700" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="729.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="752" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="781.0" y="220.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="804" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="833.0" y="220.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="856" y="245.9" font-size="17" fill="#23364e" text-anchor="middle">8</text>
+<rect x="677.0" y="270.0" width="46" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="729.0" y="270.0" width="46" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="752" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="781.0" y="270.0" width="46" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="804" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">-9</text>
+<rect x="833.0" y="270.0" width="46" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="856" y="295.9" font-size="17" fill="#23364e" text-anchor="middle">-27</text>
+<rect x="40" y="340" width="920" height="120" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="54" y="370" font-size="19" fill="#176951" font-weight="700">回代（从最后一行往上）</text>
+<text x="54" y="398" font-size="17" fill="#23364e">−9·z = −27  →  z = 3</text>
+<text x="54" y="423" font-size="17" fill="#23364e">y + 2z = 8  →  y = 8 − 6 = 2</text>
+<text x="54" y="448" font-size="17" fill="#23364e">x + y + z = 6  →  x = 6 − 2 − 3 = 1</text>
+<text x="32" y="500" font-size="16" fill="#495b73">消元每一步用主元所在行去消掉下面各行同一列的数；复杂度 O(n³)。</text>
+</g></svg>

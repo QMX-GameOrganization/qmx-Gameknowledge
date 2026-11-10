@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">对拍的流程</title><desc id="desc">随机生成数据，让快解法与暴力解法各算一遍，不一致就停下。。暴力解法慢但简单可靠，它是判断对错的标准答案。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">对拍的流程</text>
+<text x="32" y="77" font-size="17" fill="#495b73">随机生成数据，让快解法与暴力解法各算一遍，不一致就停下。</text>
+<rect x="25.0" y="215.0" width="170" height="70" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="110" y="245.2" font-size="16" fill="#23364e" text-anchor="middle">gen</text>
+<text x="110" y="266.0" font-size="16" fill="#23364e" text-anchor="middle">随机数据生成器</text>
+<rect x="215.0" y="225.0" width="130" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="280" y="255.6" font-size="16" fill="#23364e" text-anchor="middle">data.in</text>
+<rect x="385.0" y="129.0" width="170" height="62" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="470" y="155.2" font-size="16" fill="#23364e" text-anchor="middle">sol</text>
+<text x="470" y="176.0" font-size="16" fill="#23364e" text-anchor="middle">你的解法</text>
+<rect x="385.0" y="309.0" width="170" height="62" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="470" y="335.2" font-size="16" fill="#23364e" text-anchor="middle">brute</text>
+<text x="470" y="356.0" font-size="16" fill="#23364e" text-anchor="middle">暴力解法</text>
+<rect x="590.0" y="138.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="650" y="165.6" font-size="16" fill="#23364e" text-anchor="middle">sol.out</text>
+<rect x="590.0" y="318.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="650" y="345.6" font-size="16" fill="#23364e" text-anchor="middle">brute.out</text>
+<rect x="785.0" y="222.0" width="150" height="56" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="860" y="255.6" font-size="16" fill="#23364e" text-anchor="middle">比较输出</text>
+<rect x="440.0" y="386.0" width="300" height="52" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="590" y="417.6" font-size="16" fill="#23364e" text-anchor="middle">相同：再生成下一组数据</text>
+<rect x="755.0" y="386.0" width="230" height="52" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="870" y="417.6" font-size="16" fill="#23364e" text-anchor="middle">不同：保存 data.in 并停止</text>
+<path d="M196 250L213 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M345 240L383 185" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M345 262L383 325" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M556 160L588 160" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M556 340L588 340" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M710 175L795 235" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M710 340L795 268" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M830 280L830 340L728 340L728 384" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M880 280L880 386" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="450" font-size="16" fill="#495b73">暴力解法慢但简单可靠，它是判断对错的标准答案。</text>
+</g></svg>

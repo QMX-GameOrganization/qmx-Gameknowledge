@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">扩展欧几里得：先下潜求 gcd，再回溯还原 x、y</title><desc id="desc">以 exgcd(240, 46) 为例，目标是找到 240x + 46y = gcd。。回溯公式：x = y&#x27;，y = x&#x27; - (a/b)·y&#x27;（x&#x27;、y&#x27; 是下一层返回的值）。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">扩展欧几里得：先下潜求 gcd，再回溯还原 x、y</text>
+<text x="32" y="77" font-size="17" fill="#495b73">以 exgcd(240, 46) 为例，目标是找到 240x + 46y = gcd。</text>
+<rect x="43.0" y="108.0" width="64" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="75.0" y="134.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">层</text>
+<rect x="113.0" y="108.0" width="164" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="195.0" y="134.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">(a, b)</text>
+<rect x="283.0" y="108.0" width="114" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="340.0" y="134.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">商 a/b</text>
+<rect x="403.0" y="108.0" width="244" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="525.0" y="134.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">回溯得到 (x, y)</text>
+<rect x="653.0" y="108.0" width="304" height="42" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="805.0" y="134.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">验证 a·x + b·y</text>
+<rect x="43.0" y="156.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="182.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="113.0" y="156.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="182.2" font-size="15" fill="#23364e" text-anchor="middle">(2, 0)</text>
+<rect x="283.0" y="156.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="182.2" font-size="15" fill="#23364e" text-anchor="middle">-</text>
+<rect x="403.0" y="156.0" width="244" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="525.0" y="182.2" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">(1, 0)</text>
+<rect x="653.0" y="156.0" width="304" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="805.0" y="182.2" font-size="15" fill="#23364e" text-anchor="middle">2·1 + 0·0 = 2</text>
+<rect x="43.0" y="204.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="230.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="113.0" y="204.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="230.2" font-size="15" fill="#23364e" text-anchor="middle">(4, 2)</text>
+<rect x="283.0" y="204.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="230.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="403.0" y="204.0" width="244" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="525.0" y="230.2" font-size="15" fill="#23364e" text-anchor="middle">(0, 1)</text>
+<rect x="653.0" y="204.0" width="304" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="805.0" y="230.2" font-size="15" fill="#23364e" text-anchor="middle">4·0 + 2·1 = 2</text>
+<rect x="43.0" y="252.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="113.0" y="252.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">(6, 4)</text>
+<rect x="283.0" y="252.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="403.0" y="252.0" width="244" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="525.0" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">(1, -1)</text>
+<rect x="653.0" y="252.0" width="304" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="805.0" y="278.2" font-size="15" fill="#23364e" text-anchor="middle">6·1 + 4·(-1) = 2</text>
+<rect x="43.0" y="300.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="326.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="113.0" y="300.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="326.2" font-size="15" fill="#23364e" text-anchor="middle">(10, 6)</text>
+<rect x="283.0" y="300.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="326.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="403.0" y="300.0" width="244" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="525.0" y="326.2" font-size="15" fill="#23364e" text-anchor="middle">(-1, 2)</text>
+<rect x="653.0" y="300.0" width="304" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="805.0" y="326.2" font-size="15" fill="#23364e" text-anchor="middle">10·(-1) + 6·2 = 2</text>
+<rect x="43.0" y="348.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="374.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="113.0" y="348.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="374.2" font-size="15" fill="#23364e" text-anchor="middle">(46, 10)</text>
+<rect x="283.0" y="348.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="374.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="403.0" y="348.0" width="244" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="525.0" y="374.2" font-size="15" fill="#23364e" text-anchor="middle">(2, -9)</text>
+<rect x="653.0" y="348.0" width="304" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="805.0" y="374.2" font-size="15" fill="#23364e" text-anchor="middle">46·2 + 10·(-9) = 2</text>
+<rect x="43.0" y="396.0" width="64" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="75.0" y="422.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="113.0" y="396.0" width="164" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="195.0" y="422.2" font-size="15" fill="#23364e" text-anchor="middle">(240, 46)</text>
+<rect x="283.0" y="396.0" width="114" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="340.0" y="422.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="403.0" y="396.0" width="244" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="525.0" y="422.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">(-9, 47)</text>
+<rect x="653.0" y="396.0" width="304" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="805.0" y="422.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">240·(-9) + 46·47 = 2</text>
+<text x="40" y="480" font-size="16" fill="#495b73">上面从第 5 层（b = 0，gcd = a）开始往上读；递归时是从第 0 层往下走到第 5 层。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">回溯公式：x = y&#x27;，y = x&#x27; - (a/b)·y&#x27;（x&#x27;、y&#x27; 是下一层返回的值）。</text>
+</g></svg>

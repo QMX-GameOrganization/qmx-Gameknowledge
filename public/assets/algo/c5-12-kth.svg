@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="575" viewBox="0 0 1000 575" role="img" aria-labelledby="title desc">
+<title id="title">k 短路（A*）：用反图最短距离 h 当估价，f = g + h</title><desc id="desc">有向图，求 1 到 4 的前 3 短路径（允许重复经过点）。。每个点最多出队 k 次；第 j 次出队的终点对应第 j 短路径。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="575" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">k 短路（A*）：用反图最短距离 h 当估价，f = g + h</text>
+<text x="32" y="77" font-size="17" fill="#495b73">有向图，求 1 到 4 的前 3 短路径（允许重复经过点）。</text>
+<rect x="32" y="105" width="460" height="400" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<path d="M108.7 268.3L228.8 193.2" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="150.0" y="218.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170.0" y="234.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<path d="M108.1 292.5L229.4 375.8" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="150.0" y="323.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="170.0" y="339.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<path d="M268.7 191.7L388.8 266.8" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="310.0" y="218.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="234.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<path d="M268.1 377.5L389.4 294.2" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="310.0" y="323.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330.0" y="339.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<path d="M250.0 202.0L250.0 365.0" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="230.0" y="273.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250.0" y="289.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<circle cx="90" cy="280" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="90" y="285.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<text x="90" y="322" font-size="14" fill="#495b73" text-anchor="middle">h=3</text>
+<circle cx="250" cy="180" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="250" y="185.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="218" y="185" font-size="14" fill="#495b73" text-anchor="end">h=2</text>
+<circle cx="250" cy="390" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="250" y="395.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="250" y="432" font-size="14" fill="#495b73" text-anchor="middle">h=1</text>
+<circle cx="410" cy="280" r="22" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="410" y="285.95" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<text x="410" y="322" font-size="14" fill="#495b73" text-anchor="middle">h=0</text>
+<text x="48" y="140" font-size="15" fill="#495b73">h 来自在反图上从 4 出发的 Dijkstra</text>
+<rect x="510" y="105" width="458" height="400" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="526" y="137" font-size="19" fill="#495b73" font-weight="700">出队顺序 (f, g, 点)</text>
+<text x="526" y="178" font-size="15" fill="#495b73">1</text>
+<text x="556" y="178" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 0, 1)</text>
+<text x="700" y="178" font-size="16" fill="#23364e">展开 2、3</text>
+<text x="526" y="218" font-size="15" fill="#495b73">2</text>
+<text x="556" y="218" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 1, 2)</text>
+<text x="700" y="218" font-size="16" fill="#23364e">展开 4、3</text>
+<text x="526" y="258" font-size="15" fill="#495b73">3</text>
+<text x="556" y="258" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 2, 3)</text>
+<text x="700" y="258" font-size="16" fill="#23364e">展开 4</text>
+<text x="526" y="298" font-size="15" fill="#495b73">4</text>
+<text x="556" y="298" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 2, 3)</text>
+<text x="700" y="298" font-size="16" fill="#23364e">展开 4</text>
+<text x="526" y="338" font-size="15" fill="#495b73">5</text>
+<text x="556" y="338" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 3, 4)</text>
+<text x="700" y="338" font-size="16" fill="#176951" font-weight="700">第 1 短 = 3</text>
+<text x="526" y="378" font-size="15" fill="#495b73">6</text>
+<text x="556" y="378" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(3, 3, 4)</text>
+<text x="700" y="378" font-size="16" fill="#176951" font-weight="700">第 2 短 = 3</text>
+<text x="526" y="418" font-size="15" fill="#495b73">7</text>
+<text x="556" y="418" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">(4, 4, 4)</text>
+<text x="700" y="418" font-size="16" fill="#176951" font-weight="700">第 3 短 = 4</text>
+<text x="32" y="555" font-size="16" fill="#495b73">每个点最多出队 k 次；第 j 次出队的终点对应第 j 短路径。</text>
+</g></svg>

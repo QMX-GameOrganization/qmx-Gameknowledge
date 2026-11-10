@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-labelledby="title desc">
+<title id="title">线性筛：每个合数只被它的最小质因子标记一次</title><desc id="desc">筛到 30。对每个 i，依次用已找到的质数 p 标记 i·p，遇到 p = lp[i] 就停。。对比埃氏筛：30 只在 i = 15、p = 2 时被标记一次，其余质数轮到它之前已经 break。</desc>
+<defs></defs>
+<rect width="1000" height="660" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">线性筛：每个合数只被它的最小质因子标记一次</text>
+<text x="32" y="77" font-size="17" fill="#495b73">筛到 30。对每个 i，依次用已找到的质数 p 标记 i·p，遇到 p = lp[i] 就停。</text>
+<rect x="43.0" y="108.0" width="84" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="85.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">i</text>
+<rect x="133.0" y="108.0" width="104" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="185.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">lp[i]</text>
+<rect x="243.0" y="108.0" width="494" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="490.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">依次标记 i·p（括号里是 p）</text>
+<rect x="743.0" y="108.0" width="204" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="845.0" y="135.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">停止原因</text>
+<rect x="43.0" y="158.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="133.0" y="158.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="243.0" y="158.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">4（2）</text>
+<rect x="743.0" y="158.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="185.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="208.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="133.0" y="208.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="243.0" y="208.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">6（2）  9（3）</text>
+<rect x="743.0" y="208.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="235.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="258.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="133.0" y="258.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="243.0" y="258.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">8（2）</text>
+<rect x="743.0" y="258.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="285.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="308.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="133.0" y="308.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">5</text>
+<rect x="243.0" y="308.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">10（2）  15（3）  25（5）</text>
+<rect x="743.0" y="308.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="335.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="358.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="385.2" font-size="15" fill="#23364e" text-anchor="middle">6</text>
+<rect x="133.0" y="358.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="385.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="243.0" y="358.0" width="494" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="490.0" y="385.2" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">12（2）</text>
+<rect x="743.0" y="358.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="385.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="408.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="435.2" font-size="15" fill="#23364e" text-anchor="middle">7</text>
+<rect x="133.0" y="408.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="435.2" font-size="15" fill="#23364e" text-anchor="middle">7</text>
+<rect x="243.0" y="408.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="435.2" font-size="15" fill="#23364e" text-anchor="middle">14（2）  21（3）</text>
+<rect x="743.0" y="408.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="435.2" font-size="15" fill="#23364e" text-anchor="middle">35 &gt; 30</text>
+<rect x="43.0" y="458.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="485.2" font-size="15" fill="#23364e" text-anchor="middle">9</text>
+<rect x="133.0" y="458.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="485.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="243.0" y="458.0" width="494" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="490.0" y="485.2" font-size="15" fill="#23364e" text-anchor="middle">18（2）  27（3）</text>
+<rect x="743.0" y="458.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="485.2" font-size="15" fill="#23364e" text-anchor="middle">p = lp[i]</text>
+<rect x="43.0" y="508.0" width="84" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="85.0" y="535.2" font-size="15" fill="#23364e" text-anchor="middle">15</text>
+<rect x="133.0" y="508.0" width="104" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="185.0" y="535.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="243.0" y="508.0" width="494" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="490.0" y="535.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">30（2）</text>
+<rect x="743.0" y="508.0" width="204" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="845.0" y="535.2" font-size="15" fill="#23364e" text-anchor="middle">45 &gt; 30</text>
+<text x="40" y="590" font-size="16" fill="#495b73">i = 9 时不会再用 p = 5 标记 45：9 的最小质因子是 3，再往后用更大的 p 会让 lp 记错。</text>
+<text x="32" y="640" font-size="16" fill="#495b73">对比埃氏筛：30 只在 i = 15、p = 2 时被标记一次，其余质数轮到它之前已经 break。</text>
+</g></svg>

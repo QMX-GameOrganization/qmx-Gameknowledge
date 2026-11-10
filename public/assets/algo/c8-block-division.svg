@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460" role="img" aria-labelledby="title desc">
+<title id="title">整除分块：floor(12/d) 相同的 d 连成一段</title><desc id="desc">n = 12 时，d 从 1 到 12 只有 6 种不同的商。。对每段 [l, r]：商 q = n / l，右端点 r = n / q。总段数不超过 2√n，所以一次查询 O(√n)。</desc>
+<defs></defs>
+<rect width="1000" height="460" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">整除分块：floor(12/d) 相同的 d 连成一段</text>
+<text x="32" y="77" font-size="17" fill="#495b73">n = 12 时，d 从 1 到 12 只有 6 种不同的商。</text>
+<text x="40" y="140" font-size="18" fill="#495b73" font-weight="700">d</text>
+<text x="40" y="214" font-size="18" fill="#495b73" font-weight="700">12 / d</text>
+<rect x="89.0" y="110.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="89.0" y="184.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120" y="212.7" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">12</text>
+<rect x="89" y="262" width="62" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="120.0" y="289" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">[1]</text>
+<rect x="159.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="190" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">2</text>
+<rect x="159.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="190" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">6</text>
+<rect x="159" y="262" width="62" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="190.0" y="289" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">[2]</text>
+<rect x="229.0" y="110.0" width="62" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="260" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">3</text>
+<rect x="229.0" y="184.0" width="62" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="260" y="212.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<rect x="229" y="262" width="62" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="260.0" y="289" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">[3]</text>
+<rect x="299.0" y="110.0" width="62" height="44" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="330" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">4</text>
+<rect x="299.0" y="184.0" width="62" height="44" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="330" y="212.7" font-size="19" fill="#5b3fa0" font-weight="700" text-anchor="middle">3</text>
+<rect x="299" y="262" width="62" height="40" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="330.0" y="289" font-size="15" fill="#5b3fa0" font-weight="700" text-anchor="middle">[4]</text>
+<rect x="369.0" y="110.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="400" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">5</text>
+<rect x="369.0" y="184.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="400" y="212.7" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="439.0" y="110.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="470" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">6</text>
+<rect x="439.0" y="184.0" width="62" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="470" y="212.7" font-size="19" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<rect x="369" y="262" width="132" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="435.0" y="289" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">[5,6]</text>
+<rect x="509.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="540" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">7</text>
+<rect x="509.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="540" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="579.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="610" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">8</text>
+<rect x="579.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="610" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="649.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="680" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">9</text>
+<rect x="649.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="680" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="719.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">10</text>
+<rect x="719.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="789.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="820" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">11</text>
+<rect x="789.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="820" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="859.0" y="110.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="890" y="138.7" font-size="19" fill="#23364e" text-anchor="middle">12</text>
+<rect x="859.0" y="184.0" width="62" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="890" y="212.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="509" y="262" width="412" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="715.0" y="289" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">[7,12]</text>
+<text x="40" y="352" font-size="17" fill="#23364e">l = 5：q = 12 / 5 = 2，r = 12 / 2 = 6，这一段是 [5, 6]。</text>
+<text x="40" y="384" font-size="17" fill="#23364e">l = 7：q = 12 / 7 = 1，r = 12 / 1 = 12，这一段是 [7, 12]，直到 n 结束。</text>
+<text x="32" y="440" font-size="16" fill="#495b73">对每段 [l, r]：商 q = n / l，右端点 r = n / q。总段数不超过 2√n，所以一次查询 O(√n)。</text>
+</g></svg>

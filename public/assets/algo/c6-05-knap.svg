@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">树上背包:把孩子的表合并进父亲</title><desc id="desc">dp[u][j] = 在 u 的子树里选 j 个点(必须含 u)的最大学分。合并孩子 v 的方式和分组背包一样。。j 倒序枚举,k 是分给 v 的名额(至少 1,选了 v 才能选 v 下面的点);所有合并加起来总体 O(n²)。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">树上背包:把孩子的表合并进父亲</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dp[u][j] = 在 u 的子树里选 j 个点(必须含 u)的最大学分。合并孩子 v 的方式和分组背包一样。</text>
+<text x="60" y="128" font-size="18" fill="#285caa" font-weight="700">合并前 dp[u]</text>
+<text x="380" y="128" font-size="18" fill="#176951" font-weight="700">孩子 dp[v]</text>
+<text x="700" y="128" font-size="18" fill="#8c5315" font-weight="700">合并后 dp[u]</text>
+<rect x="65.0" y="166.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="100" y="195.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">j=1</text>
+<rect x="135.0" y="166.0" width="90" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="180" y="197.3" font-size="21" fill="#66758d" font-weight="700" text-anchor="middle">2</text>
+<rect x="385.0" y="166.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="420" y="195.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">k=1</text>
+<rect x="455.0" y="166.0" width="90" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500" y="197.3" font-size="21" fill="#66758d" font-weight="700" text-anchor="middle">3</text>
+<rect x="385.0" y="228.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="420" y="257.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">k=2</text>
+<rect x="455.0" y="228.0" width="90" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500" y="259.4" font-size="21" fill="#66758d" font-weight="700" text-anchor="middle">5</text>
+<rect x="705.0" y="166.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="740" y="195.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">j=1</text>
+<rect x="775.0" y="166.0" width="90" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="820" y="197.3" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<rect x="705.0" y="228.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="740" y="257.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">j=2</text>
+<rect x="775.0" y="228.0" width="90" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="820" y="259.4" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<rect x="705.0" y="290.0" width="70" height="48" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="740" y="319.6" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">j=3</text>
+<rect x="775.0" y="290.0" width="90" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="820" y="321.4" font-size="21" fill="#8c5315" font-weight="700" text-anchor="middle">7</text>
+<path d="M290 214L330 214" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M610 214L650 214" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="32" y="400" width="936" height="130" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="434" font-size="16" fill="#23364e">u 的学分 2,v 的学分 3,v 的孩子学分 2(选它必须先选 v)。</text>
+<text x="48" y="466" font-size="17" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[u][2] = dp[u][1] + dp[v][1] = 2 + 3 = 5</text>
+<text x="48" y="498" font-size="17" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">dp[u][3] = dp[u][1] + dp[v][2] = 2 + 5 = 7</text>
+<text x="32" y="580" font-size="16" fill="#495b73">j 倒序枚举,k 是分给 v 的名额(至少 1,选了 v 才能选 v 下面的点);所有合并加起来总体 O(n²)。</text>
+</g></svg>

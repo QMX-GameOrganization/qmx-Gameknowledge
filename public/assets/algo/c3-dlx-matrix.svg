@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="550" viewBox="0 0 1000 550" role="img" aria-labelledby="title desc">
+<title id="title">精确覆盖：选出若干行，使每一列恰好有一个 1</title><desc id="desc">Knuth 论文中的小例子：6 个集合 A–F，覆盖元素 1–7。。解是 B、D、F：每一列的 1 恰好出现一次。</desc>
+<defs></defs>
+<rect width="1000" height="550" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">精确覆盖：选出若干行，使每一列恰好有一个 1</text>
+<text x="32" y="77" font-size="17" fill="#495b73">Knuth 论文中的小例子：6 个集合 A–F，覆盖元素 1–7。</text>
+<text x="60" y="130" font-size="15" fill="#495b73">集合＼元素</text>
+<text x="178.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">1</text>
+<text x="234.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">2</text>
+<text x="290.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">3</text>
+<text x="346.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">4</text>
+<text x="402.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">5</text>
+<text x="458.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">6</text>
+<text x="514.0" y="130" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">7</text>
+<text x="100" y="184" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">A</text>
+<rect x="150" y="150" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="176.0" y="184" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="206" y="150" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="262" y="150" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="318" y="150" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="344.0" y="184" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="374" y="150" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="430" y="150" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="486" y="150" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="512.0" y="184" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="100" y="240" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">B</text>
+<rect x="150" y="206" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="176.0" y="240" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="206" y="206" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="262" y="206" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="318" y="206" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="344.0" y="240" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="374" y="206" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="430" y="206" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="486" y="206" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<text x="100" y="296" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">C</text>
+<rect x="150" y="262" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="206" y="262" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="262" y="262" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="318" y="262" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="344.0" y="296" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="374" y="262" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="400.0" y="296" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="430" y="262" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="486" y="262" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="512.0" y="296" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="100" y="352" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">D</text>
+<rect x="150" y="318" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="206" y="318" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="262" y="318" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="288.0" y="352" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="318" y="318" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="374" y="318" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="400.0" y="352" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="430" y="318" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="456.0" y="352" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="486" y="318" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<text x="100" y="408" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">E</text>
+<rect x="150" y="374" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="206" y="374" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="232.0" y="408" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="262" y="374" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="288.0" y="408" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="318" y="374" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="374" y="374" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="430" y="374" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="456.0" y="408" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="486" y="374" width="52" height="52" rx="4" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="512.0" y="408" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="100" y="464" font-size="20" fill="#176951" font-weight="700" text-anchor="middle">F</text>
+<rect x="150" y="430" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="206" y="430" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="232.0" y="464" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="262" y="430" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="318" y="430" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="374" y="430" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="430" y="430" width="52" height="52" rx="4" fill="#ffffff" stroke="#66758d" stroke-opacity=".25"/>
+<rect x="486" y="430" width="52" height="52" rx="4" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="512.0" y="464" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="580" y="130" width="390" height="330" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="596" y="162" font-size="19" fill="#495b73" font-weight="700">搜索的思路</text>
+<text x="596" y="198" font-size="16" fill="#23364e">1. 选 1 的个数最少的列（分支最少）</text>
+<text x="596" y="230" font-size="16" fill="#23364e">2. 逐行试：选中该行，</text>
+<text x="596" y="262" font-size="16" fill="#23364e">    删去它覆盖的所有列，</text>
+<text x="596" y="294" font-size="16" fill="#23364e">    以及与它冲突的所有行</text>
+<text x="596" y="326" font-size="16" fill="#23364e">3. 列全部删完 = 找到解</text>
+<text x="596" y="358" font-size="16" fill="#23364e">4. 失败就按相反顺序恢复，换下一行</text>
+<text x="32" y="530" font-size="16" fill="#495b73">解是 B、D、F：每一列的 1 恰好出现一次。</text>
+</g></svg>

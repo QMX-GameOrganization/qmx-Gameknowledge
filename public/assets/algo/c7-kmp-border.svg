@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">border：既是前缀又是后缀的真子串</title><desc id="desc">字符串 ababa 的 border 链：3 → 1 → 0。。pi[i] 取最长的 border；更短的 border 一定是最长 border 自己的 border，所以沿 pi 一路跳就能枚举全部。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">border：既是前缀又是后缀的真子串</text>
+<text x="32" y="77" font-size="17" fill="#495b73">字符串 ababa 的 border 链：3 → 1 → 0。</text>
+<text x="32" y="118" font-size="17" fill="#285caa" font-weight="700">s = ababa，最长 border 是 aba（长度 3）</text>
+<rect x="63.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="95.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="133.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="165.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="165.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="203.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="235.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="235.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="273.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="305.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="305.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="343.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="375.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="375.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<text x="32" y="258" font-size="15" fill="#176951" font-weight="700">前缀 s[0,3)</text>
+<rect x="63.0" y="262.0" width="64" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="95.0" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="133.0" y="262.0" width="64" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="165.0" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="203.0" y="262.0" width="64" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="235.0" y="289.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="32" y="336" font-size="15" fill="#8c5315" font-weight="700">后缀 s[2,5)</text>
+<rect x="203.0" y="340.0" width="64" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="235.0" y="367.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="273.0" y="340.0" width="64" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="305.0" y="367.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="343.0" y="340.0" width="64" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="375.0" y="367.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="430" y="300" font-size="16" fill="#23364e">两段内容都是 aba，</text>
+<text x="430" y="326" font-size="16" fill="#23364e">所以 border 长度 3。</text>
+<text x="32" y="424" font-size="16" fill="#23364e">border 链：对 aba 再找 border，就是 pi[2] = 1（a）；再往下 pi[0] = 0。</text>
+<rect x="65.0" y="446.0" width="110" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="120" y="473.6" font-size="16" fill="#23364e" text-anchor="middle">长度 3 aba</text>
+<rect x="345.0" y="446.0" width="110" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="400" y="473.6" font-size="16" fill="#23364e" text-anchor="middle">长度 1 a</text>
+<rect x="605.0" y="446.0" width="110" height="44" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="660" y="473.6" font-size="16" fill="#23364e" text-anchor="middle">长度 0 空</text>
+<path d="M176 468L344 468" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M456 468L604 468" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="260" y="456" font-size="13" fill="#495b73" text-anchor="middle">pi[3-1]=pi[2]=1</text>
+<text x="530" y="456" font-size="13" fill="#495b73" text-anchor="middle">pi[1-1]=pi[0]=0</text>
+<text x="32" y="550" font-size="16" fill="#495b73">pi[i] 取最长的 border；更短的 border 一定是最长 border 自己的 border，所以沿 pi 一路跳就能枚举全部。</text>
+</g></svg>

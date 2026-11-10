@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+<title id="title">用 NTT 做多项式乘法的流程</title><desc id="desc">把系数表示变成点值表示，逐点相乘，再变换回来。。朴素卷积 O(n²)；NTT 方案 O(n log n)。n 要补到不小于 deg(A) + deg(B) + 1 的 2 的幂。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="420" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">用 NTT 做多项式乘法的流程</text>
+<text x="32" y="77" font-size="17" fill="#495b73">把系数表示变成点值表示，逐点相乘，再变换回来。</text>
+<rect x="15.0" y="155.0" width="170" height="90" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="100" y="194.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">A(x)、B(x)</text>
+<text x="100" y="217.0" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">系数</text>
+<path d="M188 200L212 200" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="215.0" y="155.0" width="170" height="90" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="300" y="194.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">NTT</text>
+<text x="300" y="217.0" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">O(n log n)</text>
+<path d="M388 200L412 200" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="415.0" y="155.0" width="170" height="90" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="194.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">点值逐点相乘</text>
+<text x="500" y="217.0" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">O(n)</text>
+<path d="M588 200L612 200" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="615.0" y="155.0" width="170" height="90" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="194.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">逆 NTT</text>
+<text x="700" y="217.0" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">O(n log n)</text>
+<path d="M788 200L812 200" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="815.0" y="155.0" width="170" height="90" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="900" y="194.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">C(x) = A(x)B(x)</text>
+<text x="900" y="217.0" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">系数</text>
+<text x="40" y="320" font-size="17" fill="#23364e">n 个点的取值就足以确定一个次数小于 n 的多项式，逐点相乘不再需要卷积。</text>
+<text x="40" y="352" font-size="17" fill="#23364e">NTT 在模 998244353 下用单位根 3^((p−1)/len) 代替复数 FFT 的 e^(2πi/len)，结果是精确整数。</text>
+<text x="32" y="400" font-size="16" fill="#495b73">朴素卷积 O(n²)；NTT 方案 O(n log n)。n 要补到不小于 deg(A) + deg(B) + 1 的 2 的幂。</text>
+</g></svg>

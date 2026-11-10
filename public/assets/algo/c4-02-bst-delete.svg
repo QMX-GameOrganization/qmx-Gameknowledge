@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">删除节点的三种情况</title><desc id="desc">按被删节点有几个孩子分类处理。。两个孩子时，用右子树的最小值（中序后继）顶替，再删掉那个最小值。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">删除节点的三种情况</text>
+<text x="32" y="77" font-size="17" fill="#495b73">按被删节点有几个孩子分类处理。</text>
+<rect x="30" y="100" width="300" height="470" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="180" y="132" font-size="18" fill="#285caa" font-weight="700" text-anchor="middle">① 叶子：直接删</text>
+<rect x="350" y="100" width="300" height="470" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="500" y="132" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">② 一个孩子：孩子顶上去</text>
+<rect x="670" y="100" width="300" height="470" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="820" y="132" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">③ 两个孩子：用后继顶替</text>
+<line x1="180" y1="190" x2="120" y2="270" stroke="#66758d" stroke-width="2"/>
+<line x1="180" y1="190" x2="240" y2="270" stroke="#66758d" stroke-width="2"/>
+<circle cx="180" cy="190" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="180" y="195.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<circle cx="120" cy="270" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="120" y="275.9" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">4</text>
+<circle cx="240" cy="270" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="240" y="275.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<text x="180" y="315" font-size="15" fill="#495b73" text-anchor="middle">删 4</text>
+<line x1="180" y1="390" x2="240" y2="470" stroke="#66758d" stroke-width="2"/>
+<circle cx="180" cy="390" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="180" y="395.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<circle cx="240" cy="470" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="240" y="475.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<line x1="500" y1="190" x2="560" y2="270" stroke="#66758d" stroke-width="2"/>
+<line x1="560" y1="270" x2="500" y2="350" stroke="#66758d" stroke-width="2"/>
+<circle cx="500" cy="190" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="500" y="195.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">10</text>
+<circle cx="560" cy="270" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="560" y="275.9" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">14</text>
+<circle cx="500" cy="350" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="500" y="355.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">13</text>
+<text x="600" y="275" font-size="15" fill="#495b73">删 14</text>
+<line x1="500" y1="440" x2="560" y2="510" stroke="#66758d" stroke-width="2"/>
+<circle cx="500" cy="440" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="500" y="445.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">10</text>
+<circle cx="560" cy="510" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="560" y="516.0" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">13</text>
+<line x1="820" y1="180" x2="750" y2="250" stroke="#66758d" stroke-width="2"/>
+<line x1="820" y1="180" x2="880" y2="250" stroke="#66758d" stroke-width="2"/>
+<line x1="880" y1="250" x2="820" y2="320" stroke="#66758d" stroke-width="2"/>
+<line x1="880" y1="250" x2="940" y2="320" stroke="#66758d" stroke-width="2"/>
+<circle cx="820" cy="180" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="820" y="185.9" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">3</text>
+<circle cx="750" cy="250" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="750" y="255.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<circle cx="880" cy="250" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="880" y="255.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<circle cx="820" cy="320" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="820" y="325.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<circle cx="940" cy="320" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="940" y="325.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<text x="695" y="330" font-size="15" fill="#176951" font-weight="700">后继 = 4</text>
+<line x1="820" y1="400" x2="750" y2="470" stroke="#66758d" stroke-width="2"/>
+<line x1="820" y1="400" x2="880" y2="470" stroke="#66758d" stroke-width="2"/>
+<line x1="880" y1="470" x2="940" y2="530" stroke="#66758d" stroke-width="2"/>
+<circle cx="820" cy="400" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="820" y="405.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<circle cx="750" cy="470" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="750" y="475.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<circle cx="880" cy="470" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="880" y="475.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<circle cx="940" cy="530" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="940" y="536.0" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">7</text>
+<path d="M180 335L180 365" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M600 330L600 400" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M820 350L820 372" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="620" font-size="16" fill="#495b73">两个孩子时，用右子树的最小值（中序后继）顶替，再删掉那个最小值。</text>
+</g></svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">abaab 的回文自动机：5 个本质不同的回文串</title><desc id="desc">两个根：奇根（len=-1）和偶根（len=0）；实线是“两侧各加一个字符”，虚线是 link（最长回文真后缀）。。节点数 - 2 = 本质不同的回文子串个数；每个节点的出现次数沿 link 从长到短累加。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">abaab 的回文自动机：5 个本质不同的回文串</text>
+<text x="32" y="77" font-size="17" fill="#495b73">两个根：奇根（len=-1）和偶根（len=0）；实线是“两侧各加一个字符”，虚线是 link（最长回文真后缀）。</text>
+<rect x="235.0" y="139.0" width="130" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="300" y="165.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">奇根 len=-1</text>
+<rect x="635.0" y="139.0" width="130" height="42" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="700" y="165.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">偶根 len=0</text>
+<rect x="105.0" y="279.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="150" y="305.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="365.0" y="279.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="410" y="305.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="655.0" y="279.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="305.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">aa</text>
+<rect x="365.0" y="419.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="410" y="445.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">aba</text>
+<rect x="655.0" y="419.0" width="90" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="445.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">baab</text>
+<path d="M270 182L175 278" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="205" y="222" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">a</text>
+<path d="M325 182L385 278" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="369" y="222" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">b</text>
+<path d="M700 182L700 278" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="716" y="232" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">a</text>
+<path d="M410 322L410 418" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="426" y="372" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">a</text>
+<path d="M700 322L700 418" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="716" y="372" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">b</text>
+<path d="M370 424L185 322" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<path d="M660 424L440 322" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<path d="M680 322 Q440 700 160 322" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<text x="32" y="590" font-size="15" fill="#23364e">虚线 link：aba→a，aa→a，baab→b；a 和 b 的 link 是偶根（空串）。</text>
+<text x="32" y="620" font-size="16" fill="#495b73">节点数 - 2 = 本质不同的回文子串个数；每个节点的出现次数沿 link 从长到短累加。</text>
+</g></svg>

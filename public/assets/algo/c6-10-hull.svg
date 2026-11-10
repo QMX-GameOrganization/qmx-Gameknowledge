@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">把转移变成「找最低的切线」</title><desc id="desc">点 (X_j, Y_j) 是候选决策，斜率为 S[i] 的直线向上平移，第一个碰到的点最优。。只有下凸壳上的点可能成为最优决策，其余点可以直接丢掉。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">把转移变成「找最低的切线」</text>
+<text x="32" y="77" font-size="17" fill="#495b73">点 (X_j, Y_j) 是候选决策，斜率为 S[i] 的直线向上平移，第一个碰到的点最优。</text>
+<line x1="70" y1="480" x2="640" y2="480" stroke="#66758d" stroke-width="2"/>
+<line x1="90" y1="500" x2="90" y2="130" stroke="#66758d" stroke-width="2"/>
+<text x="640" y="505" font-size="15" fill="#495b73" text-anchor="end">X_j = 2·S[j]</text>
+<text x="104" y="128" font-size="15" fill="#495b73">Y_j = dp[j] + S[j]²</text>
+<polyline points="90,160 175,288 260,368.0 387.5,400.0 515,377.6" fill="none" stroke="#285caa" stroke-width="3"/>
+<circle cx="158.0" cy="217.60000000000002" r="7" fill="#eef1f6" stroke="#66758d" stroke-width="2"/>
+<circle cx="234.5" cy="278.4" r="7" fill="#eef1f6" stroke="#66758d" stroke-width="2"/>
+<circle cx="328.0" cy="320.0" r="7" fill="#eef1f6" stroke="#66758d" stroke-width="2"/>
+<circle cx="438.49999999999994" cy="332.8" r="7" fill="#eef1f6" stroke="#66758d" stroke-width="2"/>
+<circle cx="489.5" cy="288.0" r="7" fill="#eef1f6" stroke="#66758d" stroke-width="2"/>
+<circle cx="90" cy="160" r="8" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<circle cx="175" cy="288" r="8" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<circle cx="260" cy="368.0" r="8" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<circle cx="387.5" cy="400.0" r="8" fill="#fff2df" stroke="#8c5315" stroke-width="3"/>
+<circle cx="515" cy="377.6" r="8" fill="#eaf2ff" stroke="#285caa" stroke-width="3"/>
+<line x1="115.5" y1="420.48" x2="583.0" y2="385.28" stroke="#8c5315" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="381.5" y="432.0" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">最优决策 j*</text>
+<text x="583.0" y="411.28" font-size="15" fill="#8c5315" font-weight="700" text-anchor="end">斜率 S[i]</text>
+<rect x="660" y="105" width="308" height="395" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="676" y="138" font-size="19" fill="#285caa" font-weight="700">怎么用</text>
+<text x="676" y="172" font-size="16" fill="#23364e">凸壳上相邻线段的斜率</text>
+<text x="676" y="200" font-size="16" fill="#23364e">从左到右依次变大。</text>
+<text x="676" y="228" font-size="16" fill="#23364e"></text>
+<text x="676" y="256" font-size="16" fill="#23364e">斜率 S[i] 递增时，</text>
+<text x="676" y="284" font-size="16" fill="#23364e">最优点只会向右移，</text>
+<text x="676" y="312" font-size="16" fill="#23364e">队首斜率 ≤ S[i] 的点</text>
+<text x="676" y="340" font-size="16" fill="#23364e">可以永久弹出。</text>
+<text x="676" y="368" font-size="16" fill="#23364e"></text>
+<text x="676" y="396" font-size="16" fill="#23364e">新点 i 加入队尾前，</text>
+<text x="676" y="424" font-size="16" fill="#23364e">先弹掉不在凸壳上的点。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">只有下凸壳上的点可能成为最优决策，其余点可以直接丢掉。</text>
+</g></svg>

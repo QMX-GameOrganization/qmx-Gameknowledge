@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="575" viewBox="0 0 1000 575" role="img" aria-labelledby="title desc">
+<title id="title">严格次短路：每个点记两个值，最短 d1 和严格更长的最短 d2</title><desc id="desc">无向图，求 1 到 4，边可以重复走。。d2 可以来自“走到邻点再折返”，所以图里没有第二条简单路径时也可能有次短路。</desc>
+<defs></defs>
+<rect width="1000" height="575" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">严格次短路：每个点记两个值，最短 d1 和严格更长的最短 d2</text>
+<text x="32" y="77" font-size="17" fill="#495b73">无向图，求 1 到 4，边可以重复走。</text>
+<rect x="32" y="105" width="590" height="400" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<path d="M140.2 261.3L309.8 188.7" fill="none" stroke="#176951" stroke-width="4"/>
+<path d="M350.2 188.7L519.8 261.3" fill="none" stroke="#176951" stroke-width="4"/>
+<path d="M140.2 278.7L309.8 351.3" fill="none" stroke="#8c5315" stroke-width="4"/>
+<path d="M350.2 351.3L519.8 278.7" fill="none" stroke="#8c5315" stroke-width="4"/>
+<rect x="205.0" y="213.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="225.0" y="229.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="415.0" y="213.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="435.0" y="229.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="205.0" y="303.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="225.0" y="319.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="415.0" y="303.0" width="40" height="24" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="435.0" y="319.9" font-size="14" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<circle cx="120" cy="270" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="120" y="275.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<circle cx="330" cy="180" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="330" y="185.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<circle cx="330" cy="360" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="330" y="365.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<circle cx="540" cy="270" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="540" y="275.95" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="48" y="140" font-size="15" fill="#495b73">绿色：最短 1-2-4 = 5   橙色：次短 1-3-4 = 6</text>
+<rect x="640" y="105" width="328" height="400" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="656" y="137" font-size="19" fill="#495b73" font-weight="700">各点的 (d1, d2)</text>
+<text x="656" y="175" font-size="14" fill="#495b73">点</text>
+<text x="710" y="175" font-size="14" fill="#495b73">d1</text>
+<text x="770" y="175" font-size="14" fill="#495b73">d2</text>
+<text x="830" y="175" font-size="14" fill="#495b73">d2 的走法</text>
+<text x="656" y="210" font-size="17" fill="#23364e" font-weight="700">1</text>
+<text x="710" y="210" font-size="17" fill="#176951" font-weight="700">0</text>
+<text x="770" y="210" font-size="17" fill="#8c5315" font-weight="700">4</text>
+<text x="830" y="210" font-size="14" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1-2-1</text>
+<text x="656" y="252" font-size="17" fill="#23364e" font-weight="700">2</text>
+<text x="710" y="252" font-size="17" fill="#176951" font-weight="700">2</text>
+<text x="770" y="252" font-size="17" fill="#8c5315" font-weight="700">6</text>
+<text x="830" y="252" font-size="14" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1-2-1-2</text>
+<text x="656" y="294" font-size="17" fill="#23364e" font-weight="700">3</text>
+<text x="710" y="294" font-size="17" fill="#176951" font-weight="700">4</text>
+<text x="770" y="294" font-size="17" fill="#8c5315" font-weight="700">7</text>
+<text x="830" y="294" font-size="14" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1-2-4-3</text>
+<text x="656" y="336" font-size="17" fill="#23364e" font-weight="700">4</text>
+<text x="710" y="336" font-size="17" fill="#176951" font-weight="700">5</text>
+<text x="770" y="336" font-size="17" fill="#8c5315" font-weight="700">6</text>
+<text x="830" y="336" font-size="14" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1-3-4</text>
+<text x="656" y="410" font-size="14" fill="#23364e">松弛 nd = d + w：</text>
+<text x="656" y="436" font-size="14" fill="#23364e">nd &lt; d1 → 旧 d1 降为 d2</text>
+<text x="656" y="462" font-size="14" fill="#23364e">d1 &lt; nd &lt; d2 → 更新 d2</text>
+<text x="32" y="555" font-size="16" fill="#495b73">d2 可以来自“走到邻点再折返”，所以图里没有第二条简单路径时也可能有次短路。</text>
+</g></svg>

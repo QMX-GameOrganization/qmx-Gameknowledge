@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">最小表示法：两个候选起点 i、j，比较失败的一方被整段淘汰</title><desc id="desc">s = cabcab，把 s 看成环，求字典序最小的旋转。。每次比较失败，被淘汰的候选是 i..i+k 或 j..j+k 共 k+1 个起点，i+j 总共最多增长 2n，所以 O(n)。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">最小表示法：两个候选起点 i、j，比较失败的一方被整段淘汰</text>
+<text x="32" y="77" font-size="17" fill="#495b73">s = cabcab，把 s 看成环，求字典序最小的旋转。</text>
+<text x="60" y="122" font-size="16" fill="#495b73" text-anchor="middle">i</text>
+<text x="130" y="122" font-size="16" fill="#495b73" text-anchor="middle">j</text>
+<text x="200" y="122" font-size="16" fill="#495b73" text-anchor="middle">k</text>
+<text x="330" y="122" font-size="16" fill="#495b73" text-anchor="middle">比较的两个字符</text>
+<text x="700" y="122" font-size="16" fill="#495b73" text-anchor="middle">动作</text>
+<rect x="35.0" y="148.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="176.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="105.0" y="148.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130" y="176.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="175.0" y="148.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="200" y="176.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="235.0" y="148.0" width="190" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="174.9" font-size="14" fill="#23364e" text-anchor="middle">s[0]=c  对  s[1]=a</text>
+<rect x="525.0" y="148.0" width="400" height="44" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="725" y="174.6" font-size="13" fill="#23364e" text-anchor="middle">c &gt; a：i 出局，i = 1（与 j 相同，j 后移到 2）</text>
+<rect x="35.0" y="210.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="238.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="105.0" y="210.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130" y="238.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="175.0" y="210.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="200" y="238.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="235.0" y="210.0" width="190" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="236.9" font-size="14" fill="#23364e" text-anchor="middle">s[1]=a  对  s[2]=b</text>
+<rect x="525.0" y="210.0" width="400" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="725" y="236.6" font-size="13" fill="#23364e" text-anchor="middle">a &lt; b：j 出局，j = 3</text>
+<rect x="35.0" y="272.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="300.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="105.0" y="272.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130" y="300.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="175.0" y="272.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="200" y="300.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<rect x="235.0" y="272.0" width="190" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="298.9" font-size="14" fill="#23364e" text-anchor="middle">s[1]=a  对  s[3]=c</text>
+<rect x="525.0" y="272.0" width="400" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="725" y="298.6" font-size="13" fill="#23364e" text-anchor="middle">a &lt; c：j 出局，j = 4</text>
+<rect x="35.0" y="334.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="60" y="362.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="105.0" y="334.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="130" y="362.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">4</text>
+<rect x="175.0" y="334.0" width="50" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="200" y="361.6" font-size="16" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0→6</text>
+<rect x="235.0" y="334.0" width="190" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">连续 6 个字符都相等</text>
+<rect x="525.0" y="334.0" width="400" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="725" y="360.6" font-size="13" fill="#23364e" text-anchor="middle">k 涨到 6 = n，两个候选等价，结束，答案 min(1,4) = 1</text>
+<text x="32" y="440" font-size="17" fill="#176951" font-weight="700">答案：从下标 1 开始的旋转</text>
+<rect x="63.0" y="472.0" width="54" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="90.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<rect x="123.0" y="472.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="150.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="183.0" y="472.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="210.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<rect x="243.0" y="472.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="270.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<rect x="303.0" y="472.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="330.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="363.0" y="472.0" width="54" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="390.0" y="499.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="434" y="498" font-size="18" fill="#176951" font-weight="700">→ abcabc</text>
+<text x="32" y="540" font-size="16" fill="#495b73">每次比较失败，被淘汰的候选是 i..i+k 或 j..j+k 共 k+1 个起点，i+j 总共最多增长 2n，所以 O(n)。</text>
+</g></svg>

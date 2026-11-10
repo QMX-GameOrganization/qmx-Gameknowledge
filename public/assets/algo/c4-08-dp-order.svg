@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">树形 DP：先算孩子，再算父亲</title><desc id="desc">没有上司的舞会：f1[u] 表示 u 去，f0[u] 表示 u 不去，子树内的最大快乐值。。孩子的状态都算好后才能算父亲，所以按后序（回溯时）计算。</desc>
+<defs></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">树形 DP：先算孩子，再算父亲</text>
+<text x="32" y="77" font-size="17" fill="#495b73">没有上司的舞会：f1[u] 表示 u 去，f0[u] 表示 u 不去，子树内的最大快乐值。</text>
+<line x1="500" y1="150" x2="300" y2="260" stroke="#66758d" stroke-width="2"/>
+<line x1="500" y1="150" x2="700" y2="260" stroke="#66758d" stroke-width="2"/>
+<line x1="300" y1="260" x2="200" y2="370" stroke="#66758d" stroke-width="2"/>
+<line x1="300" y1="260" x2="400" y2="370" stroke="#66758d" stroke-width="2"/>
+<line x1="700" y1="260" x2="700" y2="370" stroke="#66758d" stroke-width="2"/>
+<circle cx="500" cy="150" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="500" y="155.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<circle cx="300" cy="260" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="300" y="265.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<circle cx="700" cy="260" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="700" y="265.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<circle cx="200" cy="370" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="200" y="375.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">4</text>
+<circle cx="400" cy="370" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="400" y="375.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">5</text>
+<circle cx="700" cy="370" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="700" y="375.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<text x="530" y="132" font-size="14" fill="#495b73">r=5</text>
+<text x="530" y="150" font-size="14" fill="#285caa" font-weight="700">f1=14 f0=12</text>
+<text x="270" y="258" font-size="14" fill="#495b73" text-anchor="end">r=3</text>
+<text x="270" y="276" font-size="14" fill="#285caa" font-weight="700" text-anchor="end">f1=3 f0=8</text>
+<text x="730" y="258" font-size="14" fill="#495b73">r=4</text>
+<text x="730" y="276" font-size="14" fill="#285caa" font-weight="700">f1=4 f0=1</text>
+<text x="170" y="368" font-size="14" fill="#495b73" text-anchor="end">r=2</text>
+<text x="170" y="386" font-size="14" fill="#285caa" font-weight="700" text-anchor="end">f1=2 f0=0</text>
+<text x="430" y="368" font-size="14" fill="#495b73">r=6</text>
+<text x="430" y="386" font-size="14" fill="#285caa" font-weight="700">f1=6 f0=0</text>
+<text x="730" y="368" font-size="14" fill="#495b73">r=1</text>
+<text x="730" y="386" font-size="14" fill="#285caa" font-weight="700">f1=1 f0=0</text>
+<text x="32" y="130" font-size="16" fill="#495b73">r[u]：快乐值；直接上下级不能同去。</text>
+<text x="32" y="160" font-size="16" fill="#495b73">计算顺序：4、5、2、6、3、1。</text>
+<text x="32" y="470" font-size="18" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">f1[u] = r[u] + Σ f0[孩子]</text>
+<text x="32" y="504" font-size="18" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">f0[u] = Σ max(f0[孩子], f1[孩子])</text>
+<text x="32" y="538" font-size="18" fill="#23364e" font-weight="700">答案 = max(f1[1], f0[1]) = max(14, 12) = 14</text>
+<text x="32" y="580" font-size="16" fill="#495b73">孩子的状态都算好后才能算父亲，所以按后序（回溯时）计算。</text>
+</g></svg>

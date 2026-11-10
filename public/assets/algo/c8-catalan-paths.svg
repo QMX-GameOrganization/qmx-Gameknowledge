@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+<title id="title">卡特兰数：从 (0,0) 走到 (3,3)，不越过对角线 y = x</title><desc id="desc">每步向右（R）或向上（U）。合法路径数 = C(6,3) − C(6,2) = 20 − 15 = 5，即第 3 个卡特兰数。。非法路径：第一次碰到 y = x + 1 之后，把剩余部分沿这条线对称，终点从 (3,3) 变成 (2,4)；这样的路径恰有 C(6,2) 条。</desc>
+<defs></defs>
+<rect width="1000" height="640" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">卡特兰数：从 (0,0) 走到 (3,3)，不越过对角线 y = x</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每步向右（R）或向上（U）。合法路径数 = C(6,3) − C(6,2) = 20 − 15 = 5，即第 3 个卡特兰数。</text>
+<text x="225.0" y="118" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">合法：RRURUU（始终 y ≤ x）</text>
+<line x1="90" y1="230" x2="90" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90" y1="230" x2="360" y2="230" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="180" y1="230" x2="180" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90" y1="320" x2="360" y2="320" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="270" y1="230" x2="270" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90" y1="410" x2="360" y2="410" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="360" y1="230" x2="360" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90" y1="500" x2="360" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="90" y1="500" x2="360" y2="230" stroke="#66758d" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="90" y1="500" x2="180" y2="500" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<line x1="180" y1="500" x2="270" y2="500" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<line x1="270" y1="500" x2="270" y2="410" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<line x1="270" y1="410" x2="360" y2="410" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<line x1="360" y1="410" x2="360" y2="320" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<line x1="360" y1="320" x2="360" y2="230" stroke="#176951" stroke-width="5" stroke-linecap="round"/>
+<text x="715.0" y="118" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">非法：RUURRU（碰到 y = x + 1）</text>
+<line x1="580" y1="230" x2="580" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="230" x2="850" y2="230" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="670" y1="230" x2="670" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="320" x2="850" y2="320" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="760" y1="230" x2="760" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="410" x2="850" y2="410" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="850" y1="230" x2="850" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="500" x2="850" y2="500" stroke="#d5dbe6" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="580" y1="500" x2="850" y2="230" stroke="#66758d" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="570" y1="500" x2="760" y2="230" stroke="#a33a3a" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="580" y1="500" x2="670" y2="500" stroke="#a33a3a" stroke-width="5" stroke-linecap="round"/>
+<line x1="670" y1="500" x2="670" y2="410" stroke="#a33a3a" stroke-width="5" stroke-linecap="round"/>
+<line x1="670" y1="410" x2="670" y2="320" stroke="#a33a3a" stroke-width="5" stroke-linecap="round"/>
+<line x1="670" y1="320" x2="760" y2="320" stroke="#8c5315" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="760" y1="320" x2="850" y2="320" stroke="#8c5315" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="850" y1="320" x2="850" y2="230" stroke="#8c5315" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="670" y1="320" x2="670" y2="230" stroke="#5b3fa0" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="670" y1="230" x2="670" y2="140" stroke="#5b3fa0" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<line x1="670" y1="140" x2="760" y2="140" stroke="#5b3fa0" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5"/>
+<text x="40" y="570" font-size="15" fill="#495b73">右图：虚线棕色是原路径碰线后的剩余部分 RRU；紫色是它沿 y = x + 1 对称后的 UUR，终点变成 (2,4)。</text>
+<text x="32" y="620" font-size="16" fill="#495b73">非法路径：第一次碰到 y = x + 1 之后，把剩余部分沿这条线对称，终点从 (3,3) 变成 (2,4)；这样的路径恰有 C(6,2) 条。</text>
+</g></svg>

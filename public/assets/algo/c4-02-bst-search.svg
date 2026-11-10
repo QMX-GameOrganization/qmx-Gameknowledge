@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">在二叉搜索树里查找 7</title><desc id="desc">每一步和当前节点比较，小了往左，大了往右。。左子树的所有值都小于根，右子树的所有值都大于根。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">在二叉搜索树里查找 7</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每一步和当前节点比较，小了往左，大了往右。</text>
+<line x1="500" y1="140" x2="280" y2="240" stroke="#8c5315" stroke-width="4"/>
+<line x1="500" y1="140" x2="720" y2="240" stroke="#66758d" stroke-width="2"/>
+<line x1="280" y1="240" x2="170" y2="340" stroke="#66758d" stroke-width="2"/>
+<line x1="280" y1="240" x2="390" y2="340" stroke="#8c5315" stroke-width="4"/>
+<line x1="720" y1="240" x2="830" y2="340" stroke="#66758d" stroke-width="2"/>
+<line x1="390" y1="340" x2="330" y2="440" stroke="#66758d" stroke-width="2"/>
+<line x1="390" y1="340" x2="450" y2="440" stroke="#8c5315" stroke-width="4"/>
+<line x1="830" y1="340" x2="770" y2="440" stroke="#66758d" stroke-width="2"/>
+<circle cx="500" cy="140" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="500" y="145.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">8</text>
+<circle cx="280" cy="240" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="280" y="245.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<circle cx="720" cy="240" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="720" y="245.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">10</text>
+<circle cx="170" cy="340" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="170" y="345.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<circle cx="390" cy="340" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="390" y="345.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">6</text>
+<circle cx="830" cy="340" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="830" y="345.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">14</text>
+<circle cx="330" cy="440" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="330" y="445.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">4</text>
+<circle cx="450" cy="440" r="20" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="450" y="445.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">7</text>
+<circle cx="770" cy="440" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="770" y="445.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">13</text>
+<text x="32" y="130" font-size="16" fill="#8c5315" font-weight="700">7 &lt; 8，向左</text>
+<text x="32" y="160" font-size="16" fill="#8c5315" font-weight="700">7 &gt; 3，向右</text>
+<text x="32" y="190" font-size="16" fill="#8c5315" font-weight="700">7 &gt; 6，向右</text>
+<text x="32" y="220" font-size="16" fill="#176951" font-weight="700">找到 7</text>
+<text x="640" y="130" font-size="16" fill="#495b73">只走一条根到叶的路径，</text>
+<text x="640" y="156" font-size="16" fill="#495b73">时间等于路径长度，即树高。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">左子树的所有值都小于根，右子树的所有值都大于根。</text>
+</g></svg>

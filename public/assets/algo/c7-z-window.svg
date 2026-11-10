@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">Z 算法的 [l, r) 窗口：先抄答案，再往右扩</title><desc id="desc">s = aabaaab 求 z[4]：此时最靠右的窗口是 [3, 5)，即 s[3,5) = s[0,2) = aa。。r 只增不减，往右扩的次数总共不超过 n，所以是 O(n)。</desc>
+<defs></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Z 算法的 [l, r) 窗口：先抄答案，再往右扩</text>
+<text x="32" y="77" font-size="17" fill="#495b73">s = aabaaab 求 z[4]：此时最靠右的窗口是 [3, 5)，即 s[3,5) = s[0,2) = aa。</text>
+<text x="32" y="118" font-size="16" fill="#495b73">下标 / 字符</text>
+<rect x="63.0" y="144.0" width="74" height="48" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="100.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="143.0" y="144.0" width="74" height="48" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="180.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="180.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="223.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="260.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="303.0" y="144.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="340.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="340.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="383.0" y="144.0" width="74" height="48" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="420.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="420.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="463.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="500.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="543.0" y="144.0" width="74" height="48" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="580.0" y="176.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="580.0" y="211.0" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<text x="60" y="230" font-size="14" fill="#176951" font-weight="700">前缀 aa</text>
+<text x="300" y="230" font-size="14" fill="#8c5315" font-weight="700">窗口 [3,5)</text>
+<text x="32" y="290" font-size="18" fill="#285caa" font-weight="700">求 z[4]（i=4 在窗口内，i - l = 1）</text>
+<rect x="55.0" y="326.0" width="90" height="40" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="100" y="351.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">抄</text>
+<text x="170" y="352" font-size="16" fill="#23364e">窗口内 s[3,5) 与 s[0,2) 相同，所以 s[4] 对应 s[1]，已知 z[1] = 1</text>
+<rect x="55.0" y="378.0" width="90" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="100" y="403.9" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">取小</text>
+<text x="170" y="404" font-size="16" fill="#23364e">z[4] 至少是 min(r - i, z[1]) = min(1, 1) = 1，不会超出窗口</text>
+<rect x="55.0" y="430.0" width="90" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="100" y="455.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">扩</text>
+<text x="170" y="456" font-size="16" fill="#23364e">窗口之外继续比：s[1]=a 对 s[5]=a 相等，s[2]=b 对 s[6]=b 相等，z[4] = 3</text>
+<rect x="55.0" y="482.0" width="90" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="100" y="507.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">更新</text>
+<text x="170" y="508" font-size="16" fill="#23364e">i + z[i] = 7 &gt; r，窗口改为 [4, 7)</text>
+<text x="32" y="570" font-size="16" fill="#495b73">r 只增不减，往右扩的次数总共不超过 n，所以是 O(n)。</text>
+</g></svg>

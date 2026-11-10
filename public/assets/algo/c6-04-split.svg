@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="610" viewBox="0 0 1000 610" role="img" aria-labelledby="title desc">
+<title id="title">枚举最后一次合并的位置 k</title><desc id="desc">区间 [0,4] 的最后一次合并,把前后两段各自合并好的两堆合到一起。。总代价 = 左段最小代价 + 右段最小代价 + 整段重量和 15;四种 k 里取最小。</desc>
+<defs></defs>
+<rect width="1000" height="610" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">枚举最后一次合并的位置 k</text>
+<text x="32" y="77" font-size="17" fill="#495b73">区间 [0,4] 的最后一次合并,把前后两段各自合并好的两堆合到一起。</text>
+<rect x="32" y="110" width="936" height="80" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="48" y="142" font-size="18" fill="#495b73" font-weight="700">k = 0</text>
+<rect x="143.0" y="128.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="170" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="205.0" y="128.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="232" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="267.0" y="128.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="294" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="329.0" y="128.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="356" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="128.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="418" y="156.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="500" y="142" font-size="16" fill="#23364e">左 dp[0][0] = 0</text>
+<text x="500" y="172" font-size="16" fill="#23364e">右 dp[1][4] = 23</text>
+<text x="720" y="156" font-size="22" fill="#23364e" font-weight="700">= 23</text>
+<rect x="32" y="202" width="936" height="80" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="234" font-size="18" fill="#176951" font-weight="700">k = 1</text>
+<rect x="143.0" y="220.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="170" y="248.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="205.0" y="220.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="232" y="248.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="267.0" y="220.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="294" y="248.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="329.0" y="220.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="356" y="248.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="220.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="418" y="248.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="500" y="234" font-size="16" fill="#23364e">左 dp[0][1] = 7</text>
+<text x="500" y="264" font-size="16" fill="#23364e">右 dp[2][4] = 11</text>
+<text x="720" y="248" font-size="22" fill="#176951" font-weight="700">= 18</text>
+<rect x="845.0" y="225.0" width="70" height="34" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="880" y="247.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">最小</text>
+<rect x="32" y="294" width="936" height="80" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="48" y="326" font-size="18" fill="#495b73" font-weight="700">k = 2</text>
+<rect x="143.0" y="312.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="170" y="340.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="205.0" y="312.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="232" y="340.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="267.0" y="312.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="294" y="340.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="329.0" y="312.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="356" y="340.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="312.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="418" y="340.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="500" y="326" font-size="16" fill="#23364e">左 dp[0][2] = 19</text>
+<text x="500" y="356" font-size="16" fill="#23364e">右 dp[3][4] = 3</text>
+<text x="720" y="340" font-size="22" fill="#23364e" font-weight="700">= 22</text>
+<rect x="32" y="386" width="936" height="80" rx="12" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="48" y="418" font-size="18" fill="#495b73" font-weight="700">k = 3</text>
+<rect x="143.0" y="404.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="170" y="432.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="205.0" y="404.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="232" y="432.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="267.0" y="404.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="294" y="432.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="329.0" y="404.0" width="54" height="44" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="356" y="432.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="391.0" y="404.0" width="54" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="418" y="432.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="500" y="418" font-size="16" fill="#23364e">左 dp[0][3] = 28</text>
+<text x="500" y="448" font-size="16" fill="#23364e">右 dp[4][4] = 0</text>
+<text x="720" y="432" font-size="22" fill="#23364e" font-weight="700">= 28</text>
+<text x="32" y="540" font-size="17" fill="#23364e" font-weight="700">dp[0][4] = 18 + 15 = 33。蓝色是左段,橙色是右段。</text>
+<text x="32" y="590" font-size="16" fill="#495b73">总代价 = 左段最小代价 + 右段最小代价 + 整段重量和 15;四种 k 里取最小。</text>
+</g></svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">区间第 k 小：两个版本相减</title><desc id="desc">数组 a = [3, 1, 4, 1, 5]，表里是每个版本中各个值出现的次数。。root[r] 的计数减去 root[l-1] 的计数，就是 a[l..r] 的值分布；在线段树上同时下降，不需要真的建出差。</desc>
+<defs></defs>
+<rect width="1000" height="650" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">区间第 k 小：两个版本相减</text>
+<text x="32" y="77" font-size="17" fill="#495b73">数组 a = [3, 1, 4, 1, 5]，表里是每个版本中各个值出现的次数。</text>
+<text x="32" y="128" font-size="16" fill="#495b73" font-weight="700">版本</text>
+<text x="330" y="128" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">值 1</text>
+<text x="430" y="128" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">值 3</text>
+<text x="530" y="128" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">值 4</text>
+<text x="630" y="128" font-size="16" fill="#495b73" font-weight="700" text-anchor="middle">值 5</text>
+<rect x="24" y="140" width="250" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="38" y="165" font-size="16" fill="#23364e">root[0]  空</text>
+<rect x="290.0" y="140.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="164.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="390.0" y="140.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="430" y="164.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="490.0" y="140.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="530" y="164.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="590.0" y="140.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="630" y="164.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="24" y="186" width="250" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="38" y="211" font-size="16" fill="#23364e" font-weight="700">root[1]  加入 3</text>
+<rect x="290.0" y="186.0" width="80" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="330" y="210.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">0</text>
+<rect x="390.0" y="186.0" width="80" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="430" y="210.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">1</text>
+<rect x="490.0" y="186.0" width="80" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="530" y="210.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">0</text>
+<rect x="590.0" y="186.0" width="80" height="38" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="630" y="210.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">0</text>
+<rect x="24" y="232" width="250" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="38" y="257" font-size="16" fill="#23364e">root[2]  加入 1</text>
+<rect x="290.0" y="232.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="256.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="390.0" y="232.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="430" y="256.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="490.0" y="232.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="530" y="256.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="590.0" y="232.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="630" y="256.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="24" y="278" width="250" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="38" y="303" font-size="16" fill="#23364e">root[3]  加入 4</text>
+<rect x="290.0" y="278.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="302.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="390.0" y="278.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="430" y="302.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="490.0" y="278.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="530" y="302.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="590.0" y="278.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="630" y="302.9" font-size="17" fill="#23364e" text-anchor="middle">0</text>
+<rect x="24" y="324" width="250" height="38" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="38" y="349" font-size="16" fill="#23364e" font-weight="700">root[4]  加入 1</text>
+<rect x="290.0" y="324.0" width="80" height="38" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="330" y="348.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<rect x="390.0" y="324.0" width="80" height="38" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="430" y="348.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<rect x="490.0" y="324.0" width="80" height="38" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="530" y="348.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">1</text>
+<rect x="590.0" y="324.0" width="80" height="38" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="630" y="348.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">0</text>
+<rect x="24" y="370" width="250" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="38" y="395" font-size="16" fill="#23364e">root[5]  加入 5</text>
+<rect x="290.0" y="370.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="394.9" font-size="17" fill="#23364e" text-anchor="middle">2</text>
+<rect x="390.0" y="370.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="430" y="394.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="490.0" y="370.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="530" y="394.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="590.0" y="370.0" width="80" height="38" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="630" y="394.9" font-size="17" fill="#23364e" text-anchor="middle">1</text>
+<rect x="24" y="428" width="250" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="38" y="453" font-size="16" fill="#23364e" font-weight="700">root[4] - root[1]</text>
+<rect x="290.0" y="428.0" width="80" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="330" y="452.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<rect x="390.0" y="428.0" width="80" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="430" y="452.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<rect x="490.0" y="428.0" width="80" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="530" y="452.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="590.0" y="428.0" width="80" height="38" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="630" y="452.9" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">0</text>
+<text x="32" y="505" font-size="16" fill="#23364e">查询区间 [2, 4] 的第 2 小：把 root[4] 和 root[1] 同时放到线段树根上。</text>
+<text x="32" y="535" font-size="16" fill="#23364e">左半边值 {1,3} 的个数 = 3 - 1 = 2，k = 2 &lt;= 2，进左半边；再看值 {1} 的个数 = 2 &gt;= 2，进左边。</text>
+<text x="32" y="565" font-size="16" fill="#176951" font-weight="700">到达叶子：值 1。a[2..4] = [1, 4, 1]，排序后的第 2 个数确实是 1。</text>
+<text x="32" y="630" font-size="16" fill="#495b73">root[r] 的计数减去 root[l-1] 的计数，就是 a[l..r] 的值分布；在线段树上同时下降，不需要真的建出差。</text>
+</g></svg>

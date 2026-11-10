@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">松弛(relaxation):用一条边尝试改进距离</title><desc id="desc">核心判断只有一句:dist[u] + w 是否小于 dist[v]。。各种最短路算法的区别,只在于按什么顺序做松弛、做多少次。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">松弛(relaxation):用一条边尝试改进距离</text>
+<text x="32" y="77" font-size="17" fill="#495b73">核心判断只有一句:dist[u] + w 是否小于 dist[v]。</text>
+<rect x="32" y="105" width="450" height="270" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="48" y="137" font-size="19" fill="#176951" font-weight="700">松弛成功</text>
+<rect x="518" y="105" width="450" height="270" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="534" y="137" font-size="19" fill="#8c5315" font-weight="700">松弛失败</text>
+<path d="M132.0 260.0L365.0 260.0" fill="none" stroke="#176951" stroke-width="3" marker-end="url(#m176951)"/>
+<rect x="238.9" y="225.0" width="22.2" height="22" rx="6" fill="#f6f8fc"/>
+<text x="250.0" y="241.0" font-size="17" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<circle cx="110" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="110" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">u</text>
+<circle cx="390" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="390" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">v</text>
+<text x="110" y="312" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">dist[u] = 3</text>
+<text x="390" y="312" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">dist[v] = 9</text>
+<text x="48" y="345" font-size="17" fill="#176951" font-weight="700">3 + 4 = 7 &lt; 9,更新 dist[v] = 7</text>
+<path d="M618.0 260.0L851.0 260.0" fill="none" stroke="#8c5315" stroke-width="3" marker-end="url(#m8c5315)"/>
+<rect x="724.9" y="225.0" width="22.2" height="22" rx="6" fill="#f6f8fc"/>
+<text x="736.0" y="241.0" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">4</text>
+<circle cx="596" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="596" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">u</text>
+<circle cx="876" cy="260" r="22" fill="#ffffff" stroke="#66758d" stroke-width="2"/>
+<text x="876" y="266.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">v</text>
+<text x="596" y="312" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">dist[u] = 3</text>
+<text x="876" y="312" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">dist[v] = 5</text>
+<text x="534" y="345" font-size="17" fill="#8c5315" font-weight="700">3 + 4 = 7 ≥ 5,不更新</text>
+<rect x="32" y="400" width="936" height="110" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="48" y="432" font-size="19" fill="#285caa" font-weight="700">收敛条件</text>
+<text x="48" y="464" font-size="17" fill="#23364e">当所有边都不能再松弛时,对每条边 (u, v, w) 都有 dist[v] ≤ dist[u] + w,</text>
+<text x="48" y="490" font-size="17" fill="#23364e">此时 dist 就是最短距离。松弛时 dist[u] 若是 INF 要先跳过,免得溢出。</text>
+<text x="32" y="570" font-size="16" fill="#495b73">各种最短路算法的区别,只在于按什么顺序做松弛、做多少次。</text>
+</g></svg>

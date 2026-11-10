@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">杨辉三角：每个数等于肩上两个数之和</title><desc id="desc">第 n 行第 m 个数就是 C(n, m)，从 0 开始编号。。递推式 C(n,m) = C(n-1,m-1) + C(n-1,m)：选或不选第 n 个元素。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">杨辉三角：每个数等于肩上两个数之和</text>
+<text x="32" y="77" font-size="17" fill="#495b73">第 n 行第 m 个数就是 C(n, m)，从 0 开始编号。</text>
+<rect x="465.0" y="109.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500.0" y="136.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="417.0" y="165.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="452.0" y="192.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="513.0" y="165.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="548.0" y="192.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="369.0" y="221.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="404.0" y="248.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="465.0" y="221.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500.0" y="248.7" font-size="19" fill="#23364e" text-anchor="middle">2</text>
+<rect x="561.0" y="221.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="596.0" y="248.7" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="321.0" y="277.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="356.0" y="304.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="417.0" y="277.0" width="70" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="452.0" y="304.6" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<rect x="513.0" y="277.0" width="70" height="42" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="548.0" y="304.6" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">3</text>
+<rect x="609.0" y="277.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="644.0" y="304.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="273.0" y="333.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="308.0" y="360.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="369.0" y="333.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="404.0" y="360.6" font-size="19" fill="#23364e" text-anchor="middle">4</text>
+<rect x="465.0" y="333.0" width="70" height="42" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="500.0" y="360.6" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">6</text>
+<rect x="561.0" y="333.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="596.0" y="360.6" font-size="19" fill="#23364e" text-anchor="middle">4</text>
+<rect x="657.0" y="333.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="692.0" y="360.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="225.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="321.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="356.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">5</text>
+<rect x="417.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="452.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">10</text>
+<rect x="513.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="548.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">10</text>
+<rect x="609.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="644.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">5</text>
+<rect x="705.0" y="389.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="740.0" y="416.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="177.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="212.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<rect x="273.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="308.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">6</text>
+<rect x="369.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="404.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">15</text>
+<rect x="465.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="500.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">20</text>
+<rect x="561.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="596.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">15</text>
+<rect x="657.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="692.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">6</text>
+<rect x="753.0" y="445.0" width="70" height="42" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="788.0" y="472.6" font-size="19" fill="#23364e" text-anchor="middle">1</text>
+<path d="M466.0 319L486.0 333" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<path d="M534.0 319L514.0 333" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="40" y="136" font-size="15" fill="#495b73">n = 0</text>
+<text x="40" y="192" font-size="15" fill="#495b73">n = 1</text>
+<text x="40" y="248" font-size="15" fill="#495b73">n = 2</text>
+<text x="40" y="304" font-size="15" fill="#495b73">n = 3</text>
+<text x="40" y="360" font-size="15" fill="#495b73">n = 4</text>
+<text x="40" y="416" font-size="15" fill="#495b73">n = 5</text>
+<text x="40" y="472" font-size="15" fill="#495b73">n = 6</text>
+<text x="690" y="200" font-size="18" fill="#176951" font-weight="700">C(4,2) = C(3,1) + C(3,2)</text>
+<text x="690" y="230" font-size="18" fill="#23364e">6 = 3 + 3</text>
+<text x="690" y="300" font-size="18" fill="#495b73">每行之和 = 2^n</text>
+<text x="32" y="550" font-size="16" fill="#495b73">递推式 C(n,m) = C(n-1,m-1) + C(n-1,m)：选或不选第 n 个元素。</text>
+</g></svg>

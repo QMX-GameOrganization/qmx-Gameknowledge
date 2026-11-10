@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
+<title id="title">AC 自动机 = Trie + fail 指针</title><desc id="desc">模式串 he、she、his、hers。绿色是某个模式串的结尾；橙色虚线是 fail 指针。。fail 指针指向“当前串的最长真后缀中，同样是 Trie 里某个节点”的那个节点；没画出的箭头都指向根。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="650" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">AC 自动机 = Trie + fail 指针</text>
+<text x="32" y="77" font-size="17" fill="#495b73">模式串 he、she、his、hers。绿色是某个模式串的结尾；橙色虚线是 fail 指针。</text>
+<rect x="432.0" y="130.0" width="96" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="480" y="155.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">根</text>
+<rect x="202.0" y="230.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="255.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s</text>
+<rect x="202.0" y="330.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="250" y="355.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">sh</text>
+<rect x="202.0" y="430.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="250" y="455.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">she</text>
+<rect x="662.0" y="230.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="710" y="255.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">h</text>
+<rect x="542.0" y="330.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="590" y="355.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">he</text>
+<rect x="782.0" y="330.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="830" y="355.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">hi</text>
+<rect x="542.0" y="430.0" width="96" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="590" y="455.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">her</text>
+<rect x="782.0" y="430.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="830" y="455.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">his</text>
+<rect x="542.0" y="530.0" width="96" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="590" y="556.0" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">hers</text>
+<path d="M456 160L278 238" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="340" y="190" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">s</text>
+<path d="M504 160L682 238" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="630" y="190" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">h</text>
+<path d="M250 276L250 320" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="232" y="305" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">h</text>
+<path d="M250 376L250 420" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="232" y="405" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">e</text>
+<path d="M690 267L613 331" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="640" y="300" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">e</text>
+<path d="M730 267L807 331" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="790" y="300" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">i</text>
+<path d="M590 376L590 420" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="574" y="405" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">r</text>
+<path d="M590 476L590 520" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="574" y="505" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">s</text>
+<path d="M830 376L830 420" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="814" y="405" font-size="15" fill="#23364e" font-weight="700" text-anchor="middle">s</text>
+<path d="M300 340L660 262" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<path d="M300 440L540 360" fill="none" stroke="#8c5315" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m8c5315)"/>
+<text x="470" y="282" font-size="14" fill="#8c5315" font-weight="700" text-anchor="middle">fail(sh)=h</text>
+<text x="400" y="440" font-size="14" fill="#8c5315" font-weight="700" text-anchor="middle">fail(she)=he</text>
+<text x="660" y="560" font-size="15" fill="#23364e">his、hers 的 fail 都是 s（图中省略），</text>
+<text x="660" y="586" font-size="15" fill="#23364e">其余节点的 fail 都是根。</text>
+<text x="32" y="630" font-size="16" fill="#495b73">fail 指针指向“当前串的最长真后缀中，同样是 Trie 里某个节点”的那个节点；没画出的箭头都指向根。</text>
+</g></svg>

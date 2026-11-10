@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+<title id="title">Treap 的 split：沿一条路径把树劈成两棵</title><desc id="desc">每个结点写着键值和优先级 p（大根堆）。split(root, 3)：键值 &lt;= 3 的归左树，其余归右树。。路径上 4 &gt; 3 归右，2 &lt;= 3 归左，3 &lt;= 3 归左；不在路径上的子树整棵保留。两棵结果仍满足堆序。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="480" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">Treap 的 split：沿一条路径把树劈成两棵</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个结点写着键值和优先级 p（大根堆）。split(root, 3)：键值 &lt;= 3 的归左树，其余归右树。</text>
+<line x1="250" y1="150" x2="130" y2="250" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="250" y1="150" x2="370" y2="250" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="130" y1="250" x2="70" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="130" y1="250" x2="190" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="370" y1="250" x2="310" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="370" y1="250" x2="430" y2="350" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="250" cy="150" r="26" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="250" y="148" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="250" y="165" font-size="12" fill="#495b73" text-anchor="middle">p=9</text>
+<circle cx="130" cy="250" r="26" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="130" y="248" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="130" y="265" font-size="12" fill="#495b73" text-anchor="middle">p=7</text>
+<circle cx="370" cy="250" r="26" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="370" y="248" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<text x="370" y="265" font-size="12" fill="#495b73" text-anchor="middle">p=8</text>
+<circle cx="70" cy="350" r="26" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="70" y="348" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="70" y="365" font-size="12" fill="#495b73" text-anchor="middle">p=3</text>
+<circle cx="190" cy="350" r="26" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="190" y="348" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="190" y="365" font-size="12" fill="#495b73" text-anchor="middle">p=5</text>
+<circle cx="310" cy="350" r="26" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="310" y="348" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="310" y="365" font-size="12" fill="#495b73" text-anchor="middle">p=2</text>
+<circle cx="430" cy="350" r="26" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="430" y="348" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<text x="430" y="365" font-size="12" fill="#495b73" text-anchor="middle">p=4</text>
+<path d="M500 250L545 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="522" y="232" font-size="15" fill="#495b73" text-anchor="middle">split</text>
+<line x1="620" y1="200" x2="570" y2="300" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="620" y1="200" x2="670" y2="300" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="620" cy="200" r="26" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="620" y="198" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="620" y="215" font-size="12" fill="#495b73" text-anchor="middle">p=7</text>
+<circle cx="570" cy="300" r="26" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="570" y="298" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="570" y="315" font-size="12" fill="#495b73" text-anchor="middle">p=3</text>
+<circle cx="670" cy="300" r="26" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="670" y="298" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<text x="670" y="315" font-size="12" fill="#495b73" text-anchor="middle">p=5</text>
+<text x="620" y="365" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">左树：键值 &lt;= 3</text>
+<line x1="800" y1="200" x2="870" y2="290" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="870" y1="290" x2="830" y2="380" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<line x1="870" y1="290" x2="930" y2="380" stroke="#66758d" stroke-width="2" stroke-opacity="1"/>
+<circle cx="800" cy="200" r="26" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="800" y="198" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="800" y="215" font-size="12" fill="#495b73" text-anchor="middle">p=9</text>
+<circle cx="870" cy="290" r="26" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="870" y="288" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<text x="870" y="305" font-size="12" fill="#495b73" text-anchor="middle">p=8</text>
+<circle cx="830" cy="380" r="26" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="830" y="378" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<text x="830" y="395" font-size="12" fill="#495b73" text-anchor="middle">p=2</text>
+<circle cx="930" cy="380" r="26" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="930" y="378" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<text x="930" y="395" font-size="12" fill="#495b73" text-anchor="middle">p=4</text>
+<text x="850" y="440" font-size="16" fill="#5b3fa0" font-weight="700" text-anchor="middle">右树：键值 &gt; 3</text>
+<text x="32" y="460" font-size="16" fill="#495b73">路径上 4 &gt; 3 归右，2 &lt;= 3 归左，3 &lt;= 3 归左；不在路径上的子树整棵保留。两棵结果仍满足堆序。</text>
+</g></svg>

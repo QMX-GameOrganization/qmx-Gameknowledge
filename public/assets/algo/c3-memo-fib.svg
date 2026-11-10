@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">斐波那契：重复子问题与记忆化</title><desc id="desc">左：fib(5) 的递归树，共 15 次调用。右：记忆化后 6 个状态各算一次。。橙色是被重复计算的状态：fib(3) 算了 2 次，fib(2) 算了 3 次。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">斐波那契：重复子问题与记忆化</text>
+<text x="32" y="77" font-size="17" fill="#495b73">左：fib(5) 的递归树，共 15 次调用。右：记忆化后 6 个状态各算一次。</text>
+<line x1="342.8125" y1="155" x2="216.875" y2="197" stroke="#66758d" stroke-width="2"/>
+<line x1="216.875" y1="227" x2="143.75" y2="269" stroke="#66758d" stroke-width="2"/>
+<line x1="143.75" y1="299" x2="95.0" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="95.0" y1="371" x2="62.5" y2="413" stroke="#66758d" stroke-width="2"/>
+<line x1="95.0" y1="371" x2="127.5" y2="413" stroke="#66758d" stroke-width="2"/>
+<line x1="143.75" y1="299" x2="192.5" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="216.875" y1="227" x2="290.0" y2="269" stroke="#66758d" stroke-width="2"/>
+<line x1="290.0" y1="299" x2="257.5" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="290.0" y1="299" x2="322.5" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="342.8125" y1="155" x2="468.75" y2="197" stroke="#66758d" stroke-width="2"/>
+<line x1="468.75" y1="227" x2="420.0" y2="269" stroke="#66758d" stroke-width="2"/>
+<line x1="420.0" y1="299" x2="387.5" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="420.0" y1="299" x2="452.5" y2="341" stroke="#66758d" stroke-width="2"/>
+<line x1="468.75" y1="227" x2="517.5" y2="269" stroke="#66758d" stroke-width="2"/>
+<rect x="315.8125" y="125.0" width="54" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="342.8125" y="144.9" font-size="14" fill="#23364e" text-anchor="middle">f(5)</text>
+<rect x="189.875" y="197.0" width="54" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="216.875" y="216.9" font-size="14" fill="#23364e" text-anchor="middle">f(4)</text>
+<rect x="116.75" y="269.0" width="54" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="143.75" y="288.9" font-size="14" fill="#23364e" text-anchor="middle">f(3)</text>
+<rect x="68.0" y="341.0" width="54" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="95.0" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(2)</text>
+<rect x="35.5" y="413.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="62.5" y="432.9" font-size="14" fill="#23364e" text-anchor="middle">f(1)</text>
+<rect x="100.5" y="413.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="127.5" y="432.9" font-size="14" fill="#23364e" text-anchor="middle">f(0)</text>
+<rect x="165.5" y="341.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="192.5" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(1)</text>
+<rect x="263.0" y="269.0" width="54" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="290.0" y="288.9" font-size="14" fill="#23364e" text-anchor="middle">f(2)</text>
+<rect x="230.5" y="341.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="257.5" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(1)</text>
+<rect x="295.5" y="341.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="322.5" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(0)</text>
+<rect x="441.75" y="197.0" width="54" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="468.75" y="216.9" font-size="14" fill="#23364e" text-anchor="middle">f(3)</text>
+<rect x="393.0" y="269.0" width="54" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="420.0" y="288.9" font-size="14" fill="#23364e" text-anchor="middle">f(2)</text>
+<rect x="360.5" y="341.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="387.5" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(1)</text>
+<rect x="425.5" y="341.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="452.5" y="360.9" font-size="14" fill="#23364e" text-anchor="middle">f(0)</text>
+<rect x="490.5" y="269.0" width="54" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="517.5" y="288.9" font-size="14" fill="#23364e" text-anchor="middle">f(1)</text>
+<text x="32" y="500" font-size="15" fill="#495b73">15 次调用：f(0)×3、f(1)×5、f(2)×3、f(3)×2、f(4)×1、f(5)×1</text>
+<rect x="590" y="105" width="385" height="380" rx="12" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="606" y="137" font-size="18" fill="#176951" font-weight="700">记忆化后：每个状态只算一次</text>
+<rect x="622.0" y="265.0" width="46" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="645" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(5)</text>
+<rect x="686.0" y="265.0" width="46" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="709" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(4)</text>
+<rect x="750.0" y="265.0" width="46" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="773" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(3)</text>
+<rect x="814.0" y="265.0" width="46" height="30" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="837" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(2)</text>
+<rect x="878.0" y="265.0" width="46" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="901" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(1)</text>
+<rect x="942.0" y="265.0" width="46" height="30" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="965" y="284.6" font-size="13" fill="#23364e" text-anchor="middle">f(0)</text>
+<path d="M645 297Q677.0 340 709 297" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M709 297Q741.0 340 773 297" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M773 297Q805.0 340 837 297" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M837 297Q869.0 340 901 297" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M901 297Q933.0 340 965 297" fill="none" stroke="#176951" stroke-width="2" marker-end="url(#m176951)"/>
+<path d="M645 263Q709.0 190 773 263" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<path d="M709 263Q773.0 190 837 263" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<path d="M773 263Q837.0 190 901 263" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<path d="M837 263Q901.0 190 965 263" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<text x="606" y="400" font-size="15" fill="#23364e">实线：f(n) 依赖 f(n−1)</text>
+<text x="606" y="426" font-size="15" fill="#23364e">虚线：f(n) 依赖 f(n−2)</text>
+<text x="606" y="458" font-size="16" fill="#176951" font-weight="700">fib(40)：3.3 亿次调用 → 79 次</text>
+<text x="32" y="520" font-size="16" fill="#495b73">橙色是被重复计算的状态：fib(3) 算了 2 次，fib(2) 算了 3 次。</text>
+</g></svg>

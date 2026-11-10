@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460" role="img" aria-labelledby="title desc">
+<title id="title">三分：比较两个三等分点，丢掉较差一侧的三分之一</title><desc id="desc">单峰函数求最大值：f(m1) &lt; f(m2) 时，最大值不在 [l, m1] 内。。每轮区间缩到原来的 2/3，需要 O(log 区间长度) 轮；函数必须严格单峰。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="460" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">三分：比较两个三等分点，丢掉较差一侧的三分之一</text>
+<text x="32" y="77" font-size="17" fill="#495b73">单峰函数求最大值：f(m1) &lt; f(m2) 时，最大值不在 [l, m1] 内。</text>
+<rect x="100" y="110" width="266.6666666666667" height="270" rx="0" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".15"/>
+<polyline points="100,380.0 108,372.7 116,365.5 124,358.4 132,351.4 140,344.5 148,337.7 156,331.1 164,324.6 172,318.1 180,311.8 188,305.6 196,299.6 204,293.6 212,287.7 220,282.0 228,276.4 236,270.9 244,265.5 252,260.2 260,255.0 268,250.0 276,245.0 284,240.2 292,235.5 300,230.9 308,226.4 316,222.0 324,217.8 332,213.6 340,209.6 348,205.7 356,201.9 364,198.2 372,194.6 380,191.1 388,187.8 396,184.5 404,181.4 412,178.4 420,175.5 428,172.7 436,170.0 444,167.5 452,165.1 460,162.7 468,160.5 476,158.4 484,156.4 492,154.5 500,152.8 508,151.1 516,149.6 524,148.2 532,146.9 540,145.7 548,144.6 556,143.6 564,142.8 572,142.0 580,141.4 588,140.9 596,140.5 604,140.2 612,140.1 620,140.0 628,140.1 636,140.2 644,140.5 652,140.9 660,141.4 668,142.0 676,142.8 684,143.6 692,144.6 700,145.7 708,146.9 716,148.2 724,149.6 732,151.1 740,152.8 748,154.5 756,156.4 764,158.4 772,160.5 780,162.7 788,165.1 796,167.5 804,170.0 812,172.7 820,175.5 828,178.4 836,181.4 844,184.5 852,187.8 860,191.1 868,194.6 876,198.2 884,201.9 892,205.7 900,209.6" fill="none" stroke="#285caa" stroke-width="3"/>
+<text x="100" y="404" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">l</text>
+<path d="M366.6666666666667 380L366.6666666666667 197.0" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="366.6666666666667" y="404" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">m1</text>
+<path d="M633.3333333333334 380L633.3333333333334 140.2" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="633.3333333333334" y="404" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">m2</text>
+<path d="M900 380L900 209.6" fill="none" stroke="#66758d" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m66758d)"/>
+<text x="900" y="404" font-size="16" fill="#23364e" font-weight="700" text-anchor="middle">r</text>
+<text x="233.33333333333334" y="140" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">丢弃</text>
+<text x="32" y="440" font-size="16" fill="#495b73">每轮区间缩到原来的 2/3，需要 O(log 区间长度) 轮；函数必须严格单峰。</text>
+</g></svg>

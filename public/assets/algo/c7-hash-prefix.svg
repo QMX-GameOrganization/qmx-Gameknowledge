@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">前缀哈希：用两个前缀值 O(1) 算出任意子串的哈希</title><desc id="desc">以十进制为例：a=1, b=2, c=3，底数取 10，字符串 abcab。。真实代码里底数是随机大数，模数取 2^61-1；除了不会进位，公式完全一样。</desc>
+<defs></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">前缀哈希：用两个前缀值 O(1) 算出任意子串的哈希</text>
+<text x="32" y="77" font-size="17" fill="#495b73">以十进制为例：a=1, b=2, c=3，底数取 10，字符串 abcab。</text>
+<text x="32" y="120" font-size="17" fill="#285caa" font-weight="700">字符串与编号</text>
+<rect x="63.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="95.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="95.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">0</text>
+<rect x="133.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="165.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="165.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="203.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="235.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">c</text>
+<text x="235.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="273.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="305.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<text x="305.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="343.0" y="145.0" width="64" height="50" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="375.0" y="178.4" font-size="24" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">b</text>
+<text x="375.0" y="214.0" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="63.0" y="216.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="95.0" y="243.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="133.0" y="216.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="165.0" y="243.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<rect x="203.0" y="216.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="235.0" y="243.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">3</text>
+<rect x="273.0" y="216.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="305.0" y="243.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<rect x="343.0" y="216.0" width="64" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="375.0" y="243.0" font-size="20" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">2</text>
+<text x="32" y="330" font-size="17" fill="#176951" font-weight="700">前缀哈希 H[i] = 前 i 个字符组成的数</text>
+<rect x="60.0" y="362.0" width="80" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="100" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0</text>
+<text x="100" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[0]</text>
+<rect x="148.0" y="362.0" width="80" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="188" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1</text>
+<text x="188" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[1]</text>
+<rect x="236.0" y="362.0" width="80" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="276" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">12</text>
+<text x="276" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[2]</text>
+<rect x="324.0" y="362.0" width="80" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="364" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">123</text>
+<text x="364" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[3]</text>
+<rect x="412.0" y="362.0" width="80" height="40" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="452" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1231</text>
+<text x="452" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[4]</text>
+<rect x="500.0" y="362.0" width="80" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="540" y="388.3" font-size="18" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">12312</text>
+<text x="540" y="416" font-size="13" fill="#495b73" text-anchor="middle">H[5]</text>
+<rect x="540" y="108" width="430" height="142" rx="12" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="556" y="138" font-size="17" fill="#8c5315" font-weight="700">取子串 s[2,5) = &quot;cab&quot;</text>
+<text x="556" y="168" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">get(l, r) = H[r] - H[l] × B^(r-l)</text>
+<text x="556" y="198" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">= 12312 - 12 × 10^3</text>
+<text x="556" y="226" font-size="16" fill="#23364e" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">= 312   （c=3, a=1, b=2 ✓）</text>
+<text x="32" y="470" font-size="16" fill="#23364e">H[2]=12 乘上 B^3 后，刚好对齐 H[5] 的前两位，相减就剩下后三位。</text>
+<text x="32" y="496" font-size="16" fill="#23364e">取模之后同样成立：H[r] - H[l]×B^(r-l)，结果再模 MOD。</text>
+<text x="32" y="550" font-size="16" fill="#495b73">真实代码里底数是随机大数，模数取 2^61-1；除了不会进位，公式完全一样。</text>
+</g></svg>

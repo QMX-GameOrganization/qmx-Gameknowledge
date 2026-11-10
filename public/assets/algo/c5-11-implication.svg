@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">蕴含图：一个子句拆成两条边</title><desc id="desc">子句 (a ∨ b) 等价于“a 为假则 b 为真”和“b 为假则 a 为真”。。橙色是分量 1，绿色是分量 2；Tarjan 编号小的在拓扑序更靠后。</desc>
+<defs><marker id="m285caa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#285caa"/></marker><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="590" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">蕴含图：一个子句拆成两条边</text>
+<text x="32" y="77" font-size="17" fill="#495b73">子句 (a ∨ b) 等价于“a 为假则 b 为真”和“b 为假则 a 为真”。</text>
+<rect x="32" y="105" width="640" height="420" rx="12" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<path d="M150.3 410.7L327.6 241.4" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M329.7 410.7L152.4 241.4" fill="none" stroke="#285caa" stroke-width="2" marker-end="url(#m285caa)"/>
+<path d="M157.0 212.6Q350.0 160.0 540.1 211.8" fill="none" stroke="#176951" stroke-width="2"/>
+<polygon points="541.5,212.2 524.7,214.9 528.4,201.4" fill="#176951"/>
+<path d="M543.0 437.4Q350.0 490.0 159.9 438.2" fill="none" stroke="#176951" stroke-width="2"/>
+<polygon points="158.5,437.8 175.3,435.1 171.6,448.6" fill="#176951"/>
+<path d="M370.3 239.3L547.6 408.6" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<path d="M549.7 239.3L372.4 408.6" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<circle cx="130" cy="220" r="28" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="130" y="226.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">x1</text>
+<circle cx="130" cy="430" r="28" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="130" y="436.3" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">¬x1</text>
+<circle cx="350" cy="220" r="28" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="350" y="226.3" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">x2</text>
+<circle cx="350" cy="430" r="28" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="350" y="436.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">¬x2</text>
+<circle cx="570" cy="220" r="28" fill="#e8f7f1" stroke="#176951" stroke-width="2"/>
+<text x="570" y="226.3" font-size="18" fill="#176951" font-weight="700" text-anchor="middle">x3</text>
+<circle cx="570" cy="430" r="28" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="570" y="436.3" font-size="18" fill="#8c5315" font-weight="700" text-anchor="middle">¬x3</text>
+<text x="48" y="140" font-size="15" fill="#495b73">蓝：来自 (x1∨x2)   绿：来自 (¬x1∨x3)   橙：来自 (¬x2∨¬x3)</text>
+<rect x="690" y="105" width="278" height="420" rx="12" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="706" y="137" font-size="19" fill="#495b73" font-weight="700">规则与结果</text>
+<text x="706" y="172" font-size="14" fill="#23364e">(a ∨ b)：¬a→b，¬b→a</text>
+<text x="706" y="202" font-size="14" fill="#23364e">本例三个子句共 6 条边。</text>
+<text x="706" y="232" font-size="14" fill="#23364e">两个强连通分量：</text>
+<text x="706" y="262" font-size="14" fill="#23364e">{¬x1, x2, ¬x3} 编号 1</text>
+<text x="706" y="292" font-size="14" fill="#23364e">{x1, ¬x2, x3} 编号 2</text>
+<text x="706" y="322" font-size="14" fill="#23364e">没有 x 与 ¬x 同组，有解。</text>
+<text x="706" y="352" font-size="14" fill="#23364e">取编号小的一侧为真：</text>
+<text x="706" y="382" font-size="14" fill="#23364e">x1=0, x2=1, x3=0</text>
+<text x="706" y="412" font-size="14" fill="#23364e">代回检查三个子句均成立。</text>
+<text x="32" y="570" font-size="16" fill="#495b73">橙色是分量 1，绿色是分量 2；Tarjan 编号小的在拓扑序更靠后。</text>
+</g></svg>

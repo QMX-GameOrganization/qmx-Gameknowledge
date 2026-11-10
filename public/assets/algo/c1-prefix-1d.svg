@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+<title id="title">一维前缀和：区间和 = 两个前缀和相减</title><desc id="desc">查询 a[2..4] 的和，只需要 s[4] - s[1]。。s[i] = a[1] + … + a[i]，s[0] = 0。预处理 O(n)，每次查询 O(1)。</desc>
+<defs></defs>
+<rect width="1000" height="420" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">一维前缀和：区间和 = 两个前缀和相减</text>
+<text x="32" y="77" font-size="17" fill="#495b73">查询 a[2..4] 的和，只需要 s[4] - s[1]。</text>
+<text x="32" y="140" font-size="18" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">a</text>
+<rect x="253.0" y="120.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="290.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<text x="290.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">1</text>
+<rect x="333.0" y="120.0" width="74" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="370.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="370.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">2</text>
+<rect x="413.0" y="120.0" width="74" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="450.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<text x="450.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">3</text>
+<rect x="493.0" y="120.0" width="74" height="40" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="530.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<text x="530.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">4</text>
+<rect x="573.0" y="120.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="610.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<text x="610.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">5</text>
+<rect x="653.0" y="120.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="690.0" y="146.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<text x="690.0" y="114" font-size="13" fill="#495b73" text-anchor="middle">6</text>
+<text x="32" y="250" font-size="18" fill="#23364e" font-weight="700" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s</text>
+<rect x="173.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="210.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">0</text>
+<rect x="253.0" y="230.0" width="74" height="40" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="290.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="333.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="370.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="413.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="450.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="493.0" y="230.0" width="74" height="40" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="530.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<rect x="573.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="610.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">14</text>
+<rect x="653.0" y="230.0" width="74" height="40" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="690.0" y="256.3" font-size="18" fill="#23364e" text-anchor="middle">23</text>
+<text x="210" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[0]</text>
+<text x="290" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[1]</text>
+<text x="370" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[2]</text>
+<text x="450" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[3]</text>
+<text x="530" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[4]</text>
+<text x="610" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[5]</text>
+<text x="690" y="224" font-size="13" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">s[6]</text>
+<text x="500" y="330" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">sum(2..4) = s[4] - s[1] = 9 - 3 = 6</text>
+<text x="500" y="362" font-size="17" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">= a[2] + a[3] + a[4] = 1 + 4 + 1</text>
+<text x="32" y="400" font-size="16" fill="#495b73">s[i] = a[1] + … + a[i]，s[0] = 0。预处理 O(n)，每次查询 O(1)。</text>
+</g></svg>

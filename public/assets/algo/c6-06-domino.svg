@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">铺骨牌:逐列转移,s 和 t 都是行集合</title><desc id="desc">n = 4 行。s = 从左边伸进本列的横牌所占的行,t = 本列伸向右边的横牌所占的行。。本列剩下的空格只能放竖牌,所以每一段连续空格的长度必须是偶数;s 与 t 还不能重叠。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">铺骨牌:逐列转移,s 和 t 都是行集合</text>
+<text x="32" y="77" font-size="17" fill="#495b73">n = 4 行。s = 从左边伸进本列的横牌所占的行,t = 本列伸向右边的横牌所占的行。</text>
+<text x="60" y="130" font-size="18" fill="#176951" font-weight="700">合法:s = {0},t = {3}</text>
+<text x="98.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i-1 列</text>
+<text x="174.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i 列</text>
+<text x="250.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i+1 列</text>
+<rect x="60" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="136" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="212" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="60" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="136" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="212" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="60" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="136" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="212" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="60" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="136" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="212" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="64" y="182" width="144" height="42" rx="10" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="136" y="210" font-size="14" fill="#285caa" font-weight="700" text-anchor="middle">横牌 s</text>
+<rect x="140" y="344" width="144" height="42" rx="10" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="212" y="372" font-size="14" fill="#8c5315" font-weight="700" text-anchor="middle">横牌 t</text>
+<rect x="142" y="234" width="64" height="100" rx="10" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="174.0" y="290" font-size="14" fill="#176951" font-weight="700" text-anchor="middle">竖牌</text>
+<text x="60" y="440" font-size="16" fill="#23364e">空格 = 行 1、2,长度 2(偶数),</text>
+<text x="60" y="468" font-size="16" fill="#23364e">刚好放一张竖牌。</text>
+<text x="530" y="130" font-size="18" fill="#a33a3a" font-weight="700">不合法:s = {0},t = {}</text>
+<text x="568.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i-1 列</text>
+<text x="644.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i 列</text>
+<text x="720.0" y="164" font-size="13" fill="#495b73" text-anchor="middle">第 i+1 列</text>
+<rect x="530" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="606" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="682" y="176" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="530" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="606" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="682" y="230" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="530" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="606" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="682" y="284" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="530" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="606" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="682" y="338" width="76" height="54" rx="4" fill="#eef1f6" stroke="#495b73" stroke-opacity="1"/>
+<rect x="534" y="182" width="144" height="42" rx="10" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="606" y="210" font-size="14" fill="#285caa" font-weight="700" text-anchor="middle">横牌 s</text>
+<text x="644.0" y="264" font-size="20" fill="#a33a3a" font-weight="700" text-anchor="middle">?</text>
+<text x="644.0" y="318" font-size="20" fill="#a33a3a" font-weight="700" text-anchor="middle">?</text>
+<text x="644.0" y="372" font-size="20" fill="#a33a3a" font-weight="700" text-anchor="middle">?</text>
+<text x="530" y="440" font-size="16" fill="#23364e">空格 = 行 1、2、3,长度 3(奇数),</text>
+<text x="530" y="468" font-size="16" fill="#a33a3a" font-weight="700">竖牌凑不齐,这个转移不成立。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">本列剩下的空格只能放竖牌,所以每一段连续空格的长度必须是偶数;s 与 t 还不能重叠。</text>
+</g></svg>

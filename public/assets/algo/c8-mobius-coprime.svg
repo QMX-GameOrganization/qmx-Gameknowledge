@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">莫比乌斯函数与互质对计数</title><desc id="desc">μ(d) 只取 0、1、-1。n = m = 4 时，互质的 (i, j) 对数等于 Σ μ(d)·(4 除以 d 取整)²。。验证：16 对里 gcd &gt; 1 的有 (2,2) (2,4) (4,2) (4,4) (3,3) 共 5 对，16 - 5 = 11。</desc>
+<defs></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">莫比乌斯函数与互质对计数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">μ(d) 只取 0、1、-1。n = m = 4 时，互质的 (i, j) 对数等于 Σ μ(d)·(4 除以 d 取整)²。</text>
+<text x="40" y="142" font-size="17" fill="#495b73" font-weight="700">d</text>
+<text x="40" y="202" font-size="17" fill="#495b73" font-weight="700">μ(d)</text>
+<rect x="91.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="120" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">1</text>
+<rect x="91.0" y="173.0" width="58" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="120" y="201.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="161.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">2</text>
+<rect x="161.0" y="173.0" width="58" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="190" y="201.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<rect x="231.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="260" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">3</text>
+<rect x="231.0" y="173.0" width="58" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="260" y="201.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<rect x="301.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="330" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">4</text>
+<rect x="301.0" y="173.0" width="58" height="44" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="330" y="201.7" font-size="19" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="371.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="400" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">5</text>
+<rect x="371.0" y="173.0" width="58" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="400" y="201.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<rect x="441.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="470" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">6</text>
+<rect x="441.0" y="173.0" width="58" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="470" y="201.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="511.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="540" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">7</text>
+<rect x="511.0" y="173.0" width="58" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="540" y="201.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<rect x="581.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="610" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">8</text>
+<rect x="581.0" y="173.0" width="58" height="44" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="610" y="201.7" font-size="19" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="651.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="680" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">9</text>
+<rect x="651.0" y="173.0" width="58" height="44" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="680" y="201.7" font-size="19" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<rect x="721.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="750" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">10</text>
+<rect x="721.0" y="173.0" width="58" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750" y="201.7" font-size="19" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<rect x="791.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="820" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">11</text>
+<rect x="791.0" y="173.0" width="58" height="44" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="820" y="201.7" font-size="19" fill="#8c5315" font-weight="700" text-anchor="middle">-1</text>
+<rect x="861.0" y="113.0" width="58" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="890" y="141.3" font-size="18" fill="#23364e" text-anchor="middle">12</text>
+<rect x="861.0" y="173.0" width="58" height="44" rx="8" fill="#eef1f6" stroke="#495b73" stroke-opacity=".3"/>
+<text x="890" y="201.7" font-size="19" fill="#495b73" font-weight="700" text-anchor="middle">0</text>
+<text x="40" y="262" font-size="15" fill="#495b73">μ(d) = 0：d 含平方因子（4、8、9、12）；否则 μ = (-1)^(质因子个数)，如 μ(6) = 1、μ(7) = -1。</text>
+<rect x="163.0" y="288.0" width="114" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="220.0" y="308.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">d</text>
+<rect x="283.0" y="288.0" width="144" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="355.0" y="308.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">μ(d)</text>
+<rect x="433.0" y="288.0" width="244" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="555.0" y="308.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">取整(4/d)的平方</text>
+<rect x="683.0" y="288.0" width="224" height="30" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="795.0" y="308.2" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">μ(d) 乘以左列</text>
+<rect x="163.0" y="324.0" width="114" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="344.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="283.0" y="324.0" width="144" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="355.0" y="344.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="433.0" y="324.0" width="244" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="555.0" y="344.2" font-size="15" fill="#23364e" text-anchor="middle">16</text>
+<rect x="683.0" y="324.0" width="224" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="795.0" y="344.2" font-size="15" fill="#23364e" text-anchor="middle">+16</text>
+<rect x="163.0" y="360.0" width="114" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="380.2" font-size="15" fill="#23364e" text-anchor="middle">2</text>
+<rect x="283.0" y="360.0" width="144" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="355.0" y="380.2" font-size="15" fill="#23364e" text-anchor="middle">-1</text>
+<rect x="433.0" y="360.0" width="244" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="555.0" y="380.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="683.0" y="360.0" width="224" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="795.0" y="380.2" font-size="15" fill="#23364e" text-anchor="middle">-4</text>
+<rect x="163.0" y="396.0" width="114" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="416.2" font-size="15" fill="#23364e" text-anchor="middle">3</text>
+<rect x="283.0" y="396.0" width="144" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="355.0" y="416.2" font-size="15" fill="#23364e" text-anchor="middle">-1</text>
+<rect x="433.0" y="396.0" width="244" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="555.0" y="416.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="683.0" y="396.0" width="224" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="795.0" y="416.2" font-size="15" fill="#23364e" text-anchor="middle">-1</text>
+<rect x="163.0" y="432.0" width="114" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="220.0" y="452.2" font-size="15" fill="#23364e" text-anchor="middle">4</text>
+<rect x="283.0" y="432.0" width="144" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="355.0" y="452.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="433.0" y="432.0" width="244" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="555.0" y="452.2" font-size="15" fill="#23364e" text-anchor="middle">1</text>
+<rect x="683.0" y="432.0" width="224" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="795.0" y="452.2" font-size="15" fill="#23364e" text-anchor="middle">0</text>
+<rect x="163.0" y="468.0" width="114" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="220.0" y="488.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">合计</text>
+<rect x="283.0" y="468.0" width="144" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="355.0" y="488.2" font-size="15" fill="#23364e" text-anchor="middle"></text>
+<rect x="433.0" y="468.0" width="244" height="30" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="555.0" y="488.2" font-size="15" fill="#23364e" text-anchor="middle"></text>
+<rect x="683.0" y="468.0" width="224" height="30" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="795.0" y="488.2" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">11</text>
+<text x="32" y="540" font-size="16" fill="#495b73">验证：16 对里 gcd &gt; 1 的有 (2,2) (2,4) (4,2) (4,4) (3,3) 共 5 对，16 - 5 = 11。</text>
+</g></svg>

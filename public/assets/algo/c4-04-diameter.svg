@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+<title id="title">两次搜索求树的直径</title><desc id="desc">第一次找到的最远点，一定是某条直径的端点。。此方法要求边权非负；含负权边时用树形 DP。</desc>
+<defs></defs>
+<rect width="1000" height="600" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">两次搜索求树的直径</text>
+<text x="32" y="77" font-size="17" fill="#495b73">第一次找到的最远点，一定是某条直径的端点。</text>
+<line x1="150" y1="180" x2="300" y2="180" stroke="#66758d" stroke-width="2"/>
+<line x1="300" y1="180" x2="450" y2="180" stroke="#8c5315" stroke-width="4"/>
+<line x1="450" y1="180" x2="600" y2="180" stroke="#8c5315" stroke-width="4"/>
+<line x1="600" y1="180" x2="750" y2="180" stroke="#8c5315" stroke-width="4"/>
+<line x1="300" y1="180" x2="300" y2="280" stroke="#8c5315" stroke-width="4"/>
+<line x1="300" y1="280" x2="300" y2="380" stroke="#8c5315" stroke-width="4"/>
+<line x1="600" y1="180" x2="600" y2="280" stroke="#66758d" stroke-width="2"/>
+<circle cx="150" cy="180" r="20" fill="#f0ecfb" stroke="#5b3fa0" stroke-width="2"/>
+<text x="150" y="185.9" font-size="17" fill="#5b3fa0" font-weight="700" text-anchor="middle">1</text>
+<circle cx="300" cy="180" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="300" y="185.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">2</text>
+<circle cx="450" cy="180" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="450" y="185.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">3</text>
+<circle cx="600" cy="180" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="600" y="185.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">4</text>
+<circle cx="750" cy="180" r="20" fill="#fff2df" stroke="#8c5315" stroke-width="2"/>
+<text x="750" y="185.9" font-size="17" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<circle cx="300" cy="280" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="300" y="285.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">6</text>
+<circle cx="300" cy="380" r="20" fill="#fdecec" stroke="#a33a3a" stroke-width="2"/>
+<text x="300" y="385.9" font-size="17" fill="#a33a3a" font-weight="700" text-anchor="middle">7</text>
+<circle cx="600" cy="280" r="20" fill="#eaf2ff" stroke="#285caa" stroke-width="2"/>
+<text x="600" y="285.9" font-size="17" fill="#285caa" font-weight="700" text-anchor="middle">8</text>
+<text x="32" y="470" font-size="18" fill="#23364e">第一次：从任意点 1 出发，最远的是 5（距离 4）。</text>
+<text x="32" y="504" font-size="18" fill="#23364e">第二次：从 5 出发，最远的是 7（距离 5）。</text>
+<text x="32" y="538" font-size="18" fill="#8c5315" font-weight="700">直径的长度是 5 条边，路径是 7-6-2-3-4-5（粗线）。</text>
+<text x="32" y="580" font-size="16" fill="#495b73">此方法要求边权非负；含负权边时用树形 DP。</text>
+</g></svg>

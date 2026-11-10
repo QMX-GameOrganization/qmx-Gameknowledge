@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-labelledby="title desc">
+<title id="title">LIS 的 O(n²) 做法</title><desc id="desc">dp[i] = 以 a[i] 结尾的最长严格递增子序列长度。。dp[6] = 4 来自 7 之前最优的结尾 7(dp=3) + 1;还原时沿着前驱往回找。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="470" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">LIS 的 O(n²) 做法</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dp[i] = 以 a[i] 结尾的最长严格递增子序列长度。</text>
+<text x="40" y="136" font-size="15" fill="#495b73">下标 i</text>
+<text x="40" y="206" font-size="17" fill="#23364e" font-weight="700">a[i]</text>
+<text x="40" y="296" font-size="17" fill="#176951" font-weight="700">dp[i]</text>
+<text x="190" y="136" font-size="15" fill="#495b73" text-anchor="middle">0</text>
+<rect x="149.0" y="173.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190" y="207.7" font-size="22" fill="#23364e" text-anchor="middle">10</text>
+<rect x="149.0" y="263.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="190" y="297.7" font-size="22" fill="#23364e" text-anchor="middle">1</text>
+<text x="285" y="136" font-size="15" fill="#495b73" text-anchor="middle">1</text>
+<rect x="244.0" y="173.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="285" y="207.7" font-size="22" fill="#23364e" text-anchor="middle">9</text>
+<rect x="244.0" y="263.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="285" y="297.7" font-size="22" fill="#23364e" text-anchor="middle">1</text>
+<text x="380" y="136" font-size="15" fill="#495b73" text-anchor="middle">2</text>
+<rect x="339.0" y="173.0" width="82" height="54" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="380" y="207.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">2</text>
+<rect x="339.0" y="263.0" width="82" height="54" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="380" y="297.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">1</text>
+<text x="475" y="136" font-size="15" fill="#495b73" text-anchor="middle">3</text>
+<rect x="434.0" y="173.0" width="82" height="54" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="475" y="207.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">5</text>
+<rect x="434.0" y="263.0" width="82" height="54" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="475" y="297.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">2</text>
+<text x="570" y="136" font-size="15" fill="#495b73" text-anchor="middle">4</text>
+<rect x="529.0" y="173.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="570" y="207.7" font-size="22" fill="#23364e" text-anchor="middle">3</text>
+<rect x="529.0" y="263.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="570" y="297.7" font-size="22" fill="#23364e" text-anchor="middle">2</text>
+<text x="665" y="136" font-size="15" fill="#495b73" text-anchor="middle">5</text>
+<rect x="624.0" y="173.0" width="82" height="54" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="665" y="207.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">7</text>
+<rect x="624.0" y="263.0" width="82" height="54" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="665" y="297.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">3</text>
+<text x="760" y="136" font-size="15" fill="#495b73" text-anchor="middle">6</text>
+<rect x="719.0" y="173.0" width="82" height="54" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="760" y="207.7" font-size="22" fill="#8c5315" font-weight="700" text-anchor="middle">101</text>
+<rect x="719.0" y="263.0" width="82" height="54" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="760" y="297.7" font-size="22" fill="#176951" font-weight="700" text-anchor="middle">4</text>
+<text x="855" y="136" font-size="15" fill="#495b73" text-anchor="middle">7</text>
+<rect x="814.0" y="173.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="855" y="207.7" font-size="22" fill="#23364e" text-anchor="middle">18</text>
+<rect x="814.0" y="263.0" width="82" height="54" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="855" y="297.7" font-size="22" fill="#23364e" text-anchor="middle">4</text>
+<path d="M380 172C380 142 475 142 475 172" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<path d="M475 172C475 142 665 142 665 172" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<path d="M665 172C665 142 760 142 760 172" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="40" y="372" font-size="16" fill="#23364e">橙色是一条最长序列 2 → 5 → 7 → 101;弧线表示「接在谁后面」。</text>
+<text x="40" y="404" font-size="16" fill="#23364e">转移:dp[i] = max(dp[j] + 1),其中 j &lt; i 且 a[j] &lt; a[i];没有这样的 j 就是 1。</text>
+<text x="32" y="450" font-size="16" fill="#495b73">dp[6] = 4 来自 7 之前最优的结尾 7(dp=3) + 1;还原时沿着前驱往回找。</text>
+</g></svg>

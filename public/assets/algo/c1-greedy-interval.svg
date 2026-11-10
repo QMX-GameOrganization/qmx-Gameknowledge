@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">区间调度：每次选结束最早且与已选不冲突的区间</title><desc id="desc">10 个区间，按右端点排序后依次检查，选出 3 个。。选 [1,4]；下一个起点 ≥ 4 的最早结束区间是 [5,7]；再选起点 ≥ 7 的 [8,11]。</desc>
+<defs><marker id="m176951" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#176951"/></marker></defs>
+<rect width="1000" height="540" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">区间调度：每次选结束最早且与已选不冲突的区间</text>
+<text x="32" y="77" font-size="17" fill="#495b73">10 个区间，按右端点排序后依次检查，选出 3 个。</text>
+<text x="70" y="112" font-size="14" fill="#495b73" text-anchor="middle">0</text>
+<text x="190" y="112" font-size="14" fill="#495b73" text-anchor="middle">2</text>
+<text x="310" y="112" font-size="14" fill="#495b73" text-anchor="middle">4</text>
+<text x="430" y="112" font-size="14" fill="#495b73" text-anchor="middle">6</text>
+<text x="550" y="112" font-size="14" fill="#495b73" text-anchor="middle">8</text>
+<text x="670" y="112" font-size="14" fill="#495b73" text-anchor="middle">10</text>
+<text x="790" y="112" font-size="14" fill="#495b73" text-anchor="middle">12</text>
+<text x="910" y="112" font-size="14" fill="#495b73" text-anchor="middle">14</text>
+<rect x="130" y="124" width="180" height="24" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="138" y="142" font-size="14" fill="#176951" font-weight="700">[1,4]</text>
+<rect x="250" y="158" width="120" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="258" y="176" font-size="14" fill="#495b73">[3,5]</text>
+<rect x="70" y="192" width="360" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="78" y="210" font-size="14" fill="#495b73">[0,6]</text>
+<rect x="370" y="226" width="120" height="24" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="378" y="244" font-size="14" fill="#176951" font-weight="700">[5,7]</text>
+<rect x="250" y="260" width="360" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="258" y="278" font-size="14" fill="#495b73">[3,9]</text>
+<rect x="370" y="294" width="240" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="378" y="312" font-size="14" fill="#495b73">[5,9]</text>
+<rect x="430" y="328" width="240" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="438" y="346" font-size="14" fill="#495b73">[6,10]</text>
+<rect x="550" y="362" width="180" height="24" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity="1"/>
+<text x="558" y="380" font-size="14" fill="#176951" font-weight="700">[8,11]</text>
+<rect x="550" y="396" width="240" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="558" y="414" font-size="14" fill="#495b73">[8,12]</text>
+<rect x="190" y="430" width="720" height="24" rx="6" fill="#eef1f6" stroke="#495b73" stroke-opacity=".5"/>
+<text x="198" y="448" font-size="14" fill="#495b73">[2,14]</text>
+<path d="M310 120L310 470" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<path d="M490 120L490 470" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<path d="M730 120L730 470" fill="none" stroke="#176951" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#m176951)"/>
+<text x="32" y="520" font-size="16" fill="#495b73">选 [1,4]；下一个起点 ≥ 4 的最早结束区间是 [5,7]；再选起点 ≥ 7 的 [8,11]。</text>
+</g></svg>

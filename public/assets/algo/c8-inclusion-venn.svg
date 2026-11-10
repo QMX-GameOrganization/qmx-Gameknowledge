@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">容斥原理：1..30 中与 30 互质的数</title><desc id="desc">A、B、C 分别是 2、3、5 的倍数。各区域的个数如图。。|A∪B∪C| = 15+10+6 − 5−3−2 + 1 = 22，所以互质的有 30 − 22 = 8 个（1, 7, 11, 13, 17, 19, 23, 29）。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">容斥原理：1..30 中与 30 互质的数</text>
+<text x="32" y="77" font-size="17" fill="#495b73">A、B、C 分别是 2、3、5 的倍数。各区域的个数如图。</text>
+<circle cx="360" cy="250" r="125" fill="#285caa" fill-opacity=".12" stroke="#285caa" stroke-width="2"/>
+<circle cx="500" cy="250" r="125" fill="#176951" fill-opacity=".12" stroke="#176951" stroke-width="2"/>
+<circle cx="430" cy="360" r="125" fill="#8c5315" fill-opacity=".12" stroke="#8c5315" stroke-width="2"/>
+<text x="190" y="128" font-size="16" fill="#285caa" font-weight="700">A：2 的倍数，15 个</text>
+<text x="640" y="128" font-size="16" fill="#176951" font-weight="700">B：3 的倍数，10 个</text>
+<text x="640" y="450" font-size="16" fill="#8c5315" font-weight="700">C：5 的倍数，6 个</text>
+<text x="300" y="220" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">8</text>
+<text x="570" y="220" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="430" y="430" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="430" y="205" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="365" y="330" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<text x="495" y="330" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<text x="430" y="285" font-size="24" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="740" y="205" width="200" height="80" rx="12" fill="#fdecec" stroke="#a33a3a" stroke-dasharray="7 5" stroke-opacity="1"/>
+<text x="840" y="255" font-size="20" fill="#a33a3a" font-weight="700" text-anchor="middle">圈外（互质）：8</text>
+<text x="32" y="500" font-size="16" fill="#495b73">|A∪B∪C| = 15+10+6 − 5−3−2 + 1 = 22，所以互质的有 30 − 22 = 8 个（1, 7, 11, 13, 17, 19, 23, 29）。</text>
+</g></svg>

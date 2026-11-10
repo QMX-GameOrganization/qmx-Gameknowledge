@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">决策单调性的分治：取中点，一分为二</title><desc id="desc">solve(l, r, optl, optr)：求 dp[mid] 的最优决策 bk，左半边只看 [optl, bk]，右半边只看 [bk, optr]。。每一层所有节点的决策区间加起来只有 O(n) 个，一共 log n 层，一层 DP 总共 O(n log n)。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">决策单调性的分治：取中点，一分为二</text>
+<text x="32" y="77" font-size="17" fill="#495b73">solve(l, r, optl, optr)：求 dp[mid] 的最优决策 bk，左半边只看 [optl, bk]，右半边只看 [bk, optr]。</text>
+<path d="M500 218L270 270" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M500 218L730 270" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M270 352L140 404" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M270 352L370 404" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M730 352L610 404" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M730 352L850 404" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="400.0" y="140.0" width="200" height="76" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="500" y="163.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i ∈ [1, 8]</text>
+<text x="500" y="183.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [0, 7]</text>
+<text x="500" y="202.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">mid=4 → bk=2</text>
+<rect x="170.0" y="274.0" width="200" height="76" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="270" y="297.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i ∈ [1, 3]</text>
+<text x="270" y="317.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [0, 2]</text>
+<text x="270" y="336.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">mid=2 → bk=1</text>
+<rect x="630.0" y="274.0" width="200" height="76" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="730" y="297.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i ∈ [5, 8]</text>
+<text x="730" y="317.2" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [2, 7]</text>
+<text x="730" y="336.8" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">mid=6 → bk=4</text>
+<rect x="40.0" y="408.0" width="200" height="76" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="140" y="441.5" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i = 1</text>
+<text x="140" y="461.0" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [0, 1]</text>
+<rect x="270.0" y="408.0" width="200" height="76" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="370" y="441.5" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i = 3</text>
+<text x="370" y="461.0" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [1, 2]</text>
+<rect x="510.0" y="408.0" width="200" height="76" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="610" y="441.5" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i = 5</text>
+<text x="610" y="461.0" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [2, 4]</text>
+<rect x="750.0" y="408.0" width="200" height="76" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="850" y="441.5" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">i ∈ [7, 8]</text>
+<text x="850" y="461.0" font-size="15" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">k ∈ [4, 7]</text>
+<text x="48" y="118" font-size="16" fill="#495b73">上层的 bk 把 k 的范围一分为二；左右两半的范围只在 bk 处重叠。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">每一层所有节点的决策区间加起来只有 O(n) 个，一共 log n 层，一层 DP 总共 O(n log n)。</text>
+</g></svg>

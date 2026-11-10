@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+<title id="title">树状数组：c[i] 管理 (i - lowbit(i), i]</title><desc id="desc">每个 c[i] 覆盖的长度恰好是 i 的 lowbit。。lowbit(i) = i &amp; -i，即 i 的二进制里最低位的 1 对应的数。</desc>
+<defs></defs>
+<rect width="1000" height="580" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">树状数组：c[i] 管理 (i - lowbit(i), i]</text>
+<text x="32" y="77" font-size="17" fill="#495b73">每个 c[i] 覆盖的长度恰好是 i 的 lowbit。</text>
+<rect x="104.0" y="396.0" width="92" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="150.0" y="419.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">c1</text>
+<rect x="104.0" y="346.0" width="192" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="200.0" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">c2: 1~2</text>
+<rect x="304.0" y="396.0" width="92" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="350.0" y="419.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">c3</text>
+<rect x="104.0" y="296.0" width="392" height="36" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="300.0" y="319.6" font-size="16" fill="#8c5315" font-weight="700" text-anchor="middle">c4: 1~4</text>
+<rect x="504.0" y="396.0" width="92" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="550.0" y="419.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">c5</text>
+<rect x="504.0" y="346.0" width="192" height="36" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="600.0" y="369.6" font-size="16" fill="#176951" font-weight="700" text-anchor="middle">c6: 5~6</text>
+<rect x="704.0" y="396.0" width="92" height="36" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="750.0" y="419.6" font-size="16" fill="#285caa" font-weight="700" text-anchor="middle">c7</text>
+<rect x="104.0" y="246.0" width="792" height="36" rx="8" fill="#f0ecfb" stroke="#5b3fa0" stroke-opacity=".3"/>
+<text x="500.0" y="269.6" font-size="16" fill="#5b3fa0" font-weight="700" text-anchor="middle">c8: 1~8</text>
+<rect x="100" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="150.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a1</text>
+<rect x="200" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="250.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a2</text>
+<rect x="300" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="350.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a3</text>
+<rect x="400" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="450.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a4</text>
+<rect x="500" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="550.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a5</text>
+<rect x="600" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="650.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a6</text>
+<rect x="700" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="750.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a7</text>
+<rect x="800" y="450" width="100" height="40" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="850.0" y="475.9" font-size="17" fill="#23364e" font-weight="700" text-anchor="middle">a8</text>
+<text x="150.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0001</text>
+<text x="250.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0010</text>
+<text x="350.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0011</text>
+<text x="450.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0100</text>
+<text x="550.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0101</text>
+<text x="650.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0110</text>
+<text x="750.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">0111</text>
+<text x="850.0" y="515" font-size="15" fill="#495b73" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">1000</text>
+<text x="24" y="420" font-size="13" fill="#285caa" font-weight="700">lowbit 1</text>
+<text x="24" y="370" font-size="13" fill="#176951" font-weight="700">lowbit 2</text>
+<text x="24" y="320" font-size="13" fill="#8c5315" font-weight="700">lowbit 4</text>
+<text x="24" y="270" font-size="13" fill="#5b3fa0" font-weight="700">lowbit 8</text>
+<text x="32" y="130" font-size="18" fill="#23364e" font-weight="700">c[i] 存的是 a[i - lowbit(i) + 1 .. i] 的和。</text>
+<text x="32" y="162" font-size="17" fill="#23364e">例：c6 管 a5~a6，c8 管 a1~a8，c7 只管 a7。</text>
+<text x="32" y="194" font-size="17" fill="#495b73">下方二进制是下标 i，最低位的 1 决定了它覆盖多长。</text>
+<text x="32" y="560" font-size="16" fill="#495b73">lowbit(i) = i &amp; -i，即 i 的二进制里最低位的 1 对应的数。</text>
+</g></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+<title id="title">由前序和中序重建二叉树</title><desc id="desc">前序给出根，中序用根把左右子树分开。。两段序列按同样的长度切分，再对左右各递归一次。</desc>
+<defs></defs>
+<rect width="1000" height="520" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">由前序和中序重建二叉树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">前序给出根，中序用根把左右子树分开。</text>
+<text x="32" y="143" font-size="18" fill="#495b73" font-weight="700">前序</text>
+<text x="32" y="243" font-size="18" fill="#495b73" font-weight="700">中序</text>
+<rect x="150" y="115" width="70" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="185.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="220" y="115" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="255.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<rect x="290" y="115" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="325.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<rect x="360" y="115" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="395.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<rect x="430" y="115" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="465.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<rect x="500" y="115" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="535.0" y="144.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="150" y="215" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="185.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<rect x="220" y="215" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="255.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<rect x="290" y="215" width="70" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="325.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">5</text>
+<rect x="360" y="215" width="70" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="395.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="430" y="215" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="465.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="500" y="215" width="70" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="535.0" y="244.0" font-size="20" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<path d="M150 179V185H216V179" fill="none" stroke="#8c5315" stroke-width="2"/>
+<text x="183.0" y="207" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">根</text>
+<path d="M220 179V185H426V179" fill="none" stroke="#285caa" stroke-width="2"/>
+<text x="323.0" y="207" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">左子树 3 个</text>
+<path d="M430 179V185H566V179" fill="none" stroke="#176951" stroke-width="2"/>
+<text x="498.0" y="207" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">右子树 2 个</text>
+<path d="M150 279V285H356V279" fill="none" stroke="#285caa" stroke-width="2"/>
+<text x="253.0" y="307" font-size="15" fill="#285caa" font-weight="700" text-anchor="middle">左子树</text>
+<path d="M360 279V285H426V279" fill="none" stroke="#8c5315" stroke-width="2"/>
+<text x="393.0" y="307" font-size="15" fill="#8c5315" font-weight="700" text-anchor="middle">根</text>
+<path d="M430 279V285H566V279" fill="none" stroke="#176951" stroke-width="2"/>
+<text x="498.0" y="307" font-size="15" fill="#176951" font-weight="700" text-anchor="middle">右子树</text>
+<text x="32" y="355" font-size="17" fill="#23364e">1. 前序第一个数 1 是根。</text>
+<text x="32" y="389" font-size="17" fill="#23364e">2. 在中序里找到 1，它左边有 3 个数，所以左子树大小是 3，右子树大小是 2。</text>
+<text x="32" y="423" font-size="17" fill="#23364e">3. 前序里根后面的 3 个数 2 4 5 属于左子树，再后面的 3 6 属于右子树。</text>
+<text x="32" y="457" font-size="17" fill="#23364e">4. 左右各取出一对（前序段，中序段），递归重建：左边 (2 4 5 | 4 2 5)，右边 (3 6 | 6 3)。</text>
+<text x="32" y="500" font-size="16" fill="#495b73">两段序列按同样的长度切分，再对左右各递归一次。</text>
+</g></svg>

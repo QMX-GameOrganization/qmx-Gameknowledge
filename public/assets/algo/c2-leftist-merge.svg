@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+<title id="title">左偏树合并：沿右链合并，必要时交换左右子树</title><desc id="desc">dist 表示到最近空位置的距离（空节点为 0，叶子为 1）；要求左儿子的 dist 不小于右儿子。。右链长度只有 O(log n)，所以合并是 O(log n)。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="560" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">左偏树合并：沿右链合并，必要时交换左右子树</text>
+<text x="32" y="77" font-size="17" fill="#495b73">dist 表示到最近空位置的距离（空节点为 0，叶子为 1）；要求左儿子的 dist 不小于右儿子。</text>
+<text x="130" y="128" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">堆 A</text>
+<text x="400" y="128" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">堆 B</text>
+<text x="780" y="128" font-size="17" fill="#495b73" font-weight="700" text-anchor="middle">合并后</text>
+<line x1="130" y1="213" x2="130" y2="267" stroke="#66758d" stroke-width="2"/>
+<line x1="400" y1="213" x2="350" y2="267" stroke="#66758d" stroke-width="2"/>
+<line x1="400" y1="213" x2="450" y2="267" stroke="#66758d" stroke-width="2"/>
+<line x1="780" y1="213" x2="700" y2="277" stroke="#66758d" stroke-width="2"/>
+<line x1="780" y1="213" x2="860" y2="277" stroke="#66758d" stroke-width="2"/>
+<line x1="700" y1="323" x2="650" y2="387" stroke="#66758d" stroke-width="2"/>
+<line x1="700" y1="323" x2="750" y2="387" stroke="#66758d" stroke-width="2"/>
+<rect x="99.0" y="167.0" width="62" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="130" y="185.8" font-size="14" fill="#23364e" text-anchor="middle">1</text>
+<text x="130" y="204.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="99.0" y="267.0" width="62" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="130" y="285.8" font-size="14" fill="#23364e" text-anchor="middle">6</text>
+<text x="130" y="304.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="369.0" y="167.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="400" y="185.8" font-size="14" fill="#23364e" text-anchor="middle">2</text>
+<text x="400" y="204.0" font-size="14" fill="#23364e" text-anchor="middle">d=2</text>
+<rect x="319.0" y="267.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="350" y="285.8" font-size="14" fill="#23364e" text-anchor="middle">7</text>
+<text x="350" y="304.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="419.0" y="267.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="450" y="285.8" font-size="14" fill="#23364e" text-anchor="middle">8</text>
+<text x="450" y="304.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="749.0" y="167.0" width="62" height="46" rx="8" fill="#fff2df" stroke="#8c5315" stroke-opacity=".3"/>
+<text x="780" y="185.8" font-size="14" fill="#23364e" text-anchor="middle">1</text>
+<text x="780" y="204.0" font-size="14" fill="#23364e" text-anchor="middle">d=2</text>
+<rect x="669.0" y="277.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="700" y="295.8" font-size="14" fill="#23364e" text-anchor="middle">2</text>
+<text x="700" y="314.0" font-size="14" fill="#23364e" text-anchor="middle">d=2</text>
+<rect x="829.0" y="277.0" width="62" height="46" rx="8" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".3"/>
+<text x="860" y="295.8" font-size="14" fill="#23364e" text-anchor="middle">6</text>
+<text x="860" y="314.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="619.0" y="387.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="650" y="405.8" font-size="14" fill="#23364e" text-anchor="middle">7</text>
+<text x="650" y="424.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<rect x="719.0" y="387.0" width="62" height="46" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="750" y="405.8" font-size="14" fill="#23364e" text-anchor="middle">8</text>
+<text x="750" y="424.0" font-size="14" fill="#23364e" text-anchor="middle">d=1</text>
+<text x="265" y="205" font-size="30" fill="#495b73" font-weight="700" text-anchor="middle">+</text>
+<path d="M500 250L600 250" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="470" font-size="15" fill="#23364e">1 比 2 小，1 当根；把 B 并进 1 的右子树。此时右子树 dist = 2，大于左子树 6 的 dist = 1，</text>
+<text x="32" y="496" font-size="15" fill="#23364e">违反左偏性质，于是交换左右子树：2 变成左儿子，6 变成右儿子，1 的 dist 更新为右儿子 dist + 1 = 2。</text>
+<text x="32" y="540" font-size="16" fill="#495b73">右链长度只有 O(log n)，所以合并是 O(log n)。</text>
+</g></svg>

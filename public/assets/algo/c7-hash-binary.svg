@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="510" viewBox="0 0 1000 510" role="img" aria-labelledby="title desc">
+<title id="title">二分答案 + 哈希：求最长重复子串</title><desc id="desc">banana：长度 L 可行（存在出现两次的子串）是单调的，L=3 有 &quot;ana&quot;。。每次探测 O(n)：把所有长度为 L 的子串哈希放进表，看有没有重复；二分共 O(log n) 次。</desc>
+<defs><marker id="m66758d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#66758d"/></marker></defs>
+<rect width="1000" height="510" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">二分答案 + 哈希：求最长重复子串</text>
+<text x="32" y="77" font-size="17" fill="#495b73">banana：长度 L 可行（存在出现两次的子串）是单调的，L=3 有 &quot;ana&quot;。</text>
+<text x="32" y="118" font-size="16" fill="#495b73">长度 L</text>
+<rect x="90.0" y="142.0" width="120" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="150" y="165.2" font-size="16" fill="#23364e" text-anchor="middle">L=1</text>
+<text x="150" y="186.0" font-size="16" fill="#23364e" text-anchor="middle">可行 a</text>
+<rect x="230.0" y="142.0" width="120" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="290" y="165.2" font-size="16" fill="#23364e" text-anchor="middle">L=2</text>
+<text x="290" y="186.0" font-size="16" fill="#23364e" text-anchor="middle">可行 an</text>
+<rect x="370.0" y="142.0" width="120" height="56" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="430" y="165.2" font-size="16" fill="#23364e" text-anchor="middle">L=3</text>
+<text x="430" y="186.0" font-size="16" fill="#23364e" text-anchor="middle">可行 ana</text>
+<rect x="510.0" y="142.0" width="120" height="56" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="570" y="165.2" font-size="16" fill="#23364e" text-anchor="middle">L=4</text>
+<text x="570" y="186.0" font-size="16" fill="#23364e" text-anchor="middle">不可行</text>
+<rect x="650.0" y="142.0" width="120" height="56" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="710" y="165.2" font-size="16" fill="#23364e" text-anchor="middle">L=5</text>
+<text x="710" y="186.0" font-size="16" fill="#23364e" text-anchor="middle">不可行</text>
+<text x="32" y="262" font-size="17" fill="#285caa" font-weight="700">二分过程（lo=0, hi=5，mid 取上中位数）</text>
+<rect x="50.0" y="290.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="317.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">mid=3</text>
+<rect x="255.0" y="290.0" width="250" height="44" rx="8" fill="#e8f7f1" stroke="#176951" stroke-opacity=".3"/>
+<text x="380" y="317.9" font-size="17" fill="#23364e" text-anchor="middle">存在重复 ana</text>
+<rect x="580.0" y="290.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="640" y="317.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">lo=3</text>
+<path d="M172 312L252 312" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M506 312L578 312" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<rect x="50.0" y="352.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="110" y="379.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">mid=4</text>
+<rect x="255.0" y="352.0" width="250" height="44" rx="8" fill="#fdecec" stroke="#a33a3a" stroke-opacity=".3"/>
+<text x="380" y="379.9" font-size="17" fill="#23364e" text-anchor="middle">没有重复</text>
+<rect x="580.0" y="352.0" width="120" height="44" rx="8" fill="#ffffff" stroke="#66758d" stroke-opacity=".3"/>
+<text x="640" y="379.9" font-size="17" fill="#23364e" text-anchor="middle" font-family="Consolas, Menlo, Noto Sans Mono CJK SC, monospace">hi=3</text>
+<path d="M172 374L252 374" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<path d="M506 374L578 374" fill="none" stroke="#66758d" stroke-width="2" marker-end="url(#m66758d)"/>
+<text x="32" y="440" font-size="17" fill="#176951" font-weight="700">lo == hi == 3，答案长度 3。</text>
+<text x="32" y="490" font-size="16" fill="#495b73">每次探测 O(n)：把所有长度为 L 的子串哈希放进表，看有没有重复；二分共 O(log n) 次。</text>
+</g></svg>
