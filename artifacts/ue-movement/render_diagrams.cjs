@@ -1,0 +1,4 @@
+/** 将全部解释图按两列渲染，供人工核对文字和箭头。 */
+const {chromium}=require('C:/Users/BlueDevil/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs');
+(async()=>{const b=await chromium.launch({channel:'msedge',headless:true});const p=await b.newPage({viewport:{width:1500,height:1540}});const files=['architecture.svg','prediction.svg','gasp-flow.svg','intent-state.svg','slide-transitions.svg'];await p.setContent('<html><body style="margin:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;background:#dce4ef">'+files.map(f=>'<div>'+fs.readFileSync('public/assets/ue-movement/'+f,'utf8').replace('<svg ','<svg style="width:100%;height:auto" ')+'</div>').join('')+'</body></html>');await p.screenshot({path:'artifacts/ue-movement/diagrams-review.png',fullPage:true});await b.close();console.log('Rendered five diagrams');})().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,2679 @@
+{
+  "engine": "5.8.4-58902052+++UE5+Release-5.8",
+  "method": "UE Python Commandlet; read-only queries; no asset save",
+  "assets": [
+    {
+      "path": "/Game/Blueprints/SandboxCharacter_CMC",
+      "parent": "/Script/Engine.Character",
+      "sha256": "26309aa15138a0ab5091e4f52fc26c7b95cc1b5cb8b3337a40eb4928a9ea83af",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "UpdateMovement_PreCMC",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "UpdateMovement_PreCMC"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_Knot_0",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_VariableSet_1",
+              "title": "Set Gait"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "GetDesiredGait"
+            },
+            {
+              "id": "K2Node_VariableGet_1",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableSet_0",
+              "title": "Set MaxWalkSpeed"
+            },
+            {
+              "id": "K2Node_VariableGet_3",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableSet_4",
+              "title": "Set MaxWalkSpeedCrouched"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "CalculateMaxSpeed"
+            },
+            {
+              "id": "K2Node_Knot_1",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_VariableGet_4",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableSet_2",
+              "title": "Set BrakingDecelerationWalking"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "CalculateBrakingDeceleration"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_CallFunction_3",
+              "title": "CalculateMaxAcceleration"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableSet_3",
+              "title": "Set MaxAcceleration"
+            },
+            {
+              "id": "K2Node_CallFunction_4",
+              "title": "CalculateGroundFriction"
+            },
+            {
+              "id": "K2Node_VariableSet_6",
+              "title": "Set GroundFriction"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "CalculateMaxCrouchSpeed"
+            }
+          ]
+        },
+        {
+          "name": "Get_PropertiesForAnimation",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "Get_PropertiesForAnimation"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            },
+            {
+              "id": "K2Node_MakeStruct_0",
+              "title": "Make S Character Properties for Animation"
+            },
+            {
+              "id": "K2Node_VariableGet_8",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get MovementMode"
+            },
+            {
+              "id": "K2Node_Select_3",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_VariableGet_10",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableGet_9",
+              "title": "Get bOrientRotationToMovement"
+            },
+            {
+              "id": "K2Node_Select_4",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_VariableGet_6",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "IsCrouching"
+            },
+            {
+              "id": "K2Node_Select_5",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_VariableGet_11",
+              "title": "Get Gait"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "Get Actor Transform"
+            },
+            {
+              "id": "K2Node_VariableGet_14",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableGet_13",
+              "title": "Get Velocity"
+            },
+            {
+              "id": "K2Node_VariableGet_12",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_CallFunction_3",
+              "title": "GetCurrentAcceleration"
+            },
+            {
+              "id": "K2Node_CallFunction_4",
+              "title": "GetMaxAcceleration"
+            },
+            {
+              "id": "K2Node_VariableGet_15",
+              "title": "Get BrakingDecelerationWalking"
+            },
+            {
+              "id": "K2Node_Select_0",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_CallFunction_5",
+              "title": "IsLocallyControlled"
+            },
+            {
+              "id": "K2Node_CallFunction_6",
+              "title": "GetControlRotation"
+            },
+            {
+              "id": "K2Node_CallFunction_7",
+              "title": "GetBaseAimRotation"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get CharacterInputState"
+            },
+            {
+              "id": "K2Node_VariableGet_1",
+              "title": "Get JustLanded"
+            },
+            {
+              "id": "K2Node_VariableGet_3",
+              "title": "Get LandVelocity"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "Get Actor Rotation"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get CharacterMovement"
+            },
+            {
+              "id": "K2Node_VariableGet_5",
+              "title": "Get CurrentFloor"
+            },
+            {
+              "id": "K2Node_BreakStruct_0",
+              "title": "Break Find Floor Result"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "BreakHitResult"
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "Default__SandboxCharacter_CMC_C",
+          "class": "/Game/Blueprints/SandboxCharacter_CMC.SandboxCharacter_CMC_C",
+          "properties": {
+            "replicate_movement": "True"
+          }
+        },
+        {
+          "name": "SpringArm_GEN_VARIABLE",
+          "class": "/Script/Engine.SpringArmComponent",
+          "properties": {}
+        },
+        {
+          "name": "GameplayCamera_GEN_VARIABLE",
+          "class": "/Script/GameplayCameras.GameplayCameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "VisualOverride_GEN_VARIABLE",
+          "class": "/Script/Engine.ChildActorComponent",
+          "properties": {}
+        },
+        {
+          "name": "Camera(NotUsedByDefault)_GEN_VARIABLE",
+          "class": "/Script/Engine.CameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "Camera(NotUsedByDefault)_GEN_VARIABLE",
+          "class": "/Script/Engine.CameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "CollisionCylinder",
+          "class": "/Script/Engine.CapsuleComponent",
+          "properties": {}
+        },
+        {
+          "name": "Arrow",
+          "class": "/Script/Engine.ArrowComponent",
+          "properties": {}
+        },
+        {
+          "name": "CharacterMesh0",
+          "class": "/Script/Engine.SkeletalMeshComponent",
+          "properties": {
+            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_CMC_ABP.SandboxCharacter_CMC_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
+          }
+        },
+        {
+          "name": "CharMoveComp",
+          "class": "/Script/Engine.CharacterMovementComponent",
+          "properties": {
+            "max_walk_speed": "500.0"
+          }
+        },
+        {
+          "name": "AC_PreCMCTick_GEN_VARIABLE",
+          "class": "/Game/Blueprints/AC_PreCMCTick.AC_PreCMCTick_C",
+          "properties": {}
+        },
+        {
+          "name": "AC_FoleyEvents_GEN_VARIABLE",
+          "class": "/Game/Audio/Foley/AC_FoleyEvents.AC_FoleyEvents_C",
+          "properties": {}
+        },
+        {
+          "name": "MotionWarping_GEN_VARIABLE",
+          "class": "/Script/MotionWarping.MotionWarpingComponent",
+          "properties": {}
+        },
+        {
+          "name": "AC_TraversalLogic_GEN_VARIABLE",
+          "class": "/Game/Blueprints/AC_TraversalLogic.AC_TraversalLogic_C",
+          "properties": {}
+        },
+        {
+          "name": "BP_VisualOverrideManager_GEN_VARIABLE",
+          "class": "/Game/Blueprints/AC_VisualOverrideManager.AC_VisualOverrideManager_C",
+          "properties": {}
+        },
+        {
+          "name": "AC_SmartObjectAnimation_GEN_VARIABLE",
+          "class": "/Game/Blueprints/SmartObjects/AC_SmartObjectAnimation.AC_SmartObjectAnimation_C",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "path": "/Game/Blueprints/SandboxCharacter_Mover",
+      "parent": "/Script/Engine.Pawn",
+      "sha256": "ec3f9762d715fb64638d9f79c1714dd59cb865107cc86d74b7a8efdbf6d2361d",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "CacheInputsFromMover",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "CacheInputsFromMover"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get CharacterMover"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "GetLastInputCmd"
+            },
+            {
+              "id": "K2Node_BreakStruct_1",
+              "title": "Break Mover Input Cmd Context"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "Get Data From Collection"
+            },
+            {
+              "id": "K2Node_VariableSet_0",
+              "title": "Set MoverDefaultInputs_PostSim"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "Get Data From Collection"
+            },
+            {
+              "id": "K2Node_VariableSet_1",
+              "title": "Set MoverCustomInputs_PostSim"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_VariableSet_2",
+              "title": "Set InputCollection"
+            },
+            {
+              "id": "K2Node_VariableGet_1",
+              "title": "Get InputCollection"
+            },
+            {
+              "id": "K2Node_IfThenElse_0",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_IfThenElse_1",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get InputCollection"
+            }
+          ]
+        },
+        {
+          "name": "ProduceInput",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "ProduceInput"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            },
+            {
+              "id": "K2Node_CallFunction_4",
+              "title": "Add Data To Collection"
+            },
+            {
+              "id": "K2Node_MakeStruct_1",
+              "title": "Make Mover Input Cmd Context"
+            },
+            {
+              "id": "K2Node_CallFunction_15",
+              "title": "Get_MoveInput"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_VariableGet_8",
+              "title": "Get MoverDefaultInputs_PreSim"
+            },
+            {
+              "id": "K2Node_SetFieldsInStruct_0",
+              "title": "Set members in Character Default Inputs"
+            },
+            {
+              "id": "K2Node_Knot_1",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get MoverDefaultInputs_PreSim"
+            },
+            {
+              "id": "K2Node_SetFieldsInStruct_2",
+              "title": "Set members in Character Default Inputs"
+            },
+            {
+              "id": "K2Node_CallFunction_10",
+              "title": "Get_OrientationIntent"
+            },
+            {
+              "id": "K2Node_Knot_2",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_VariableGet_12",
+              "title": "Get InputCollection"
+            },
+            {
+              "id": "K2Node_VariableGet_3",
+              "title": "Get InputCollection"
+            },
+            {
+              "id": "K2Node_VariableGet_6",
+              "title": "Get Jump_JustPressed"
+            },
+            {
+              "id": "K2Node_CallFunction_12",
+              "title": "Add Data To Collection"
+            },
+            {
+              "id": "K2Node_VariableGet_22",
+              "title": "Get InputCollection"
+            },
+            {
+              "id": "K2Node_VariableGet_14",
+              "title": "Get MoverCustomInputs_PreSim"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "Get_MovementDirectionAndOffset"
+            },
+            {
+              "id": "K2Node_VariableGet_11",
+              "title": "Get MoverCustomInputs_PreSim"
+            },
+            {
+              "id": "K2Node_SetFieldsInStruct_4",
+              "title": "Set members in S Mover Custom Inputs"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "Get_RotationMode"
+            },
+            {
+              "id": "K2Node_CallFunction_6",
+              "title": "Get_Gait"
+            },
+            {
+              "id": "K2Node_VariableGet_18",
+              "title": "Get MoverCustomInputs_PreSim"
+            },
+            {
+              "id": "K2Node_SetFieldsInStruct_7",
+              "title": "Set members in S Mover Custom Inputs"
+            },
+            {
+              "id": "K2Node_CallFunction_11",
+              "title": "SetDirectionalInput"
+            },
+            {
+              "id": "K2Node_VariableGet_5",
+              "title": "Get MoverDefaultInputs_PreSim"
+            },
+            {
+              "id": "K2Node_VariableGet_10",
+              "title": "Get MoverDefaultInputs_PreSim"
+            },
+            {
+              "id": "K2Node_SetFieldsInStruct_5",
+              "title": "Set members in S Mover Custom Inputs"
+            },
+            {
+              "id": "K2Node_VariableGet_15",
+              "title": "Get MoverCustomInputs_PreSim"
+            },
+            {
+              "id": "K2Node_CallFunction_5",
+              "title": "Get_AimingRotation"
+            },
+            {
+              "id": "K2Node_VariableGet_4",
+              "title": "Get ControlRotationRate"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get PlayerInputState"
+            },
+            {
+              "id": "K2Node_BreakStruct_1",
+              "title": "Break S Player Input State"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get CharacterMover"
+            },
+            {
+              "id": "K2Node_CallFunction_7",
+              "title": "GetLastInputCmd"
+            },
+            {
+              "id": "K2Node_BreakStruct_2",
+              "title": "Break Mover Input Cmd Context"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "Get Data From Collection"
+            },
+            {
+              "id": "K2Node_VariableSet_1",
+              "title": "Set MoverDefaultInputs_PreSim"
+            },
+            {
+              "id": "K2Node_Knot_3",
+              "title": "变更路线节点"
+            }
+          ]
+        },
+        {
+          "name": "Get_PropertiesForAnimation",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "Get_PropertiesForAnimation"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            },
+            {
+              "id": "K2Node_MakeStruct_0",
+              "title": "Make S Character Properties for Animation"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "Get Actor Transform"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get CharacterMover"
+            },
+            {
+              "id": "K2Node_CallFunction_11",
+              "title": "GetVelocity"
+            },
+            {
+              "id": "K2Node_CallFunction_15",
+              "title": "GetTargetOrientation"
+            },
+            {
+              "id": "K2Node_VariableGet_1",
+              "title": "Get"
+            },
+            {
+              "id": "K2Node_VariableGet_13",
+              "title": "Get CharacterMover"
+            },
+            {
+              "id": "K2Node_CallFunction_14",
+              "title": "IsCrouching"
+            },
+            {
+              "id": "K2Node_Select_4",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_BreakStruct_3",
+              "title": "Break S Mover Custom Inputs"
+            },
+            {
+              "id": "K2Node_VariableGet_11",
+              "title": "Get MoverCustomInputs_PostSim"
+            },
+            {
+              "id": "K2Node_VariableGet_6",
+              "title": "Get MoverDefaultInputs_PostSim"
+            },
+            {
+              "id": "K2Node_BreakStruct_1",
+              "title": "Break Character Default Inputs"
+            },
+            {
+              "id": "K2Node_VariableGet_12",
+              "title": "Get MoverDefaultInputs_PostSim"
+            },
+            {
+              "id": "K2Node_BreakStruct_0",
+              "title": "Break Character Default Inputs"
+            },
+            {
+              "id": "K2Node_VariableGet_4",
+              "title": "Get CharacterMover"
+            },
+            {
+              "id": "K2Node_CallFunction_13",
+              "title": "Get_CurrentMovementMode"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get FloorNormal"
+            },
+            {
+              "id": "K2Node_VariableGet_5",
+              "title": "Get FloorLocation"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get BasedMovementDelta"
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "Default__SandboxCharacter_Mover_C",
+          "class": "/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C",
+          "properties": {
+            "replicate_movement": "False"
+          }
+        },
+        {
+          "name": "GameplayCamera_GEN_VARIABLE",
+          "class": "/Script/GameplayCameras.GameplayCameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "SkeletalMesh_GEN_VARIABLE",
+          "class": "/Script/Engine.SkeletalMeshComponent",
+          "properties": {
+            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_Mover_ABP.SandboxCharacter_Mover_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
+          }
+        },
+        {
+          "name": "VisualOverride_GEN_VARIABLE",
+          "class": "/Script/Engine.ChildActorComponent",
+          "properties": {}
+        },
+        {
+          "name": "GameplayCamera_GEN_VARIABLE",
+          "class": "/Script/GameplayCameras.GameplayCameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "VisualOverride_GEN_VARIABLE",
+          "class": "/Script/Engine.ChildActorComponent",
+          "properties": {}
+        },
+        {
+          "name": "SkeletalMesh_GEN_VARIABLE",
+          "class": "/Script/Engine.SkeletalMeshComponent",
+          "properties": {
+            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_Mover_ABP.SandboxCharacter_Mover_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
+          }
+        },
+        {
+          "name": "SpringArm_GEN_VARIABLE",
+          "class": "/Script/Engine.SpringArmComponent",
+          "properties": {}
+        },
+        {
+          "name": "Camera_GEN_VARIABLE",
+          "class": "/Script/Engine.CameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "Camera_GEN_VARIABLE",
+          "class": "/Script/Engine.CameraComponent",
+          "properties": {}
+        },
+        {
+          "name": "SpringArm_GEN_VARIABLE",
+          "class": "/Script/Engine.SpringArmComponent",
+          "properties": {}
+        },
+        {
+          "name": "Capsule_GEN_VARIABLE",
+          "class": "/Script/Engine.CapsuleComponent",
+          "properties": {}
+        },
+        {
+          "name": "CharacterMover_GEN_VARIABLE",
+          "class": "/Script/Mover.CharacterMoverComponent",
+          "properties": {
+            "backend_class": "<Object '/Script/Mover.MoverNetworkPredictionLiaisonComponent' Class 'Class'>",
+            "starting_movement_mode": "Falling",
+            "movement_modes": "{\"Walking\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Walking.BP_MovementMode_Walking_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Walking_C_0'\", \"Falling\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Falling.BP_MovementMode_Falling_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Falling_C_0'\", \"Flying\": \"/Game/Blueprints/MovementModes/B_MovementMode_Flying.B_MovementMode_Flying_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.B_MovementMode_Flying_C_0'\", \"Sliding\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Slide.BP_MovementMode_Slide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Slide_C_0'\", \"Traversing\": \"/Script/Mover.FlyingMode'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.FlyingMode_0'\"}"
+          },
+          "mode_details": [
+            {
+              "name": "Walking",
+              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Walking.BP_MovementMode_Walking_C",
+              "properties": {
+                "transitions": "[\"/Game/Blueprints/MovementModes/BP_MovementTransition_ToSlide.BP_MovementTransition_ToSlide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Walking_C_0.BP_MovementTransition_ToSlide_C_0'\"]",
+                "supports_async": "False"
+              }
+            },
+            {
+              "name": "Falling",
+              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Falling.BP_MovementMode_Falling_C",
+              "properties": {
+                "transitions": "[]",
+                "supports_async": "False"
+              }
+            },
+            {
+              "name": "Flying",
+              "class": "/Game/Blueprints/MovementModes/B_MovementMode_Flying.B_MovementMode_Flying_C",
+              "properties": {
+                "transitions": "[]",
+                "supports_async": "False"
+              }
+            },
+            {
+              "name": "Sliding",
+              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Slide.BP_MovementMode_Slide_C",
+              "properties": {
+                "transitions": "[\"/Game/Blueprints/MovementModes/BP_MovementTransition_FromSlide.BP_MovementTransition_FromSlide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Slide_C_0.BP_MovementTransition_FromSlide_C_0'\"]",
+                "supports_async": "False"
+              }
+            },
+            {
+              "name": "Traversing",
+              "class": "/Script/Mover.FlyingMode",
+              "properties": {
+                "transitions": "[]",
+                "supports_async": "False"
+              }
+            }
+          ]
+        },
+        {
+          "name": "AC_TraversalLogic_GEN_VARIABLE",
+          "class": "/Game/Blueprints/AC_TraversalLogic.AC_TraversalLogic_C",
+          "properties": {}
+        },
+        {
+          "name": "MotionWarping_GEN_VARIABLE",
+          "class": "/Script/MotionWarping.MotionWarpingComponent",
+          "properties": {}
+        },
+        {
+          "name": "AC_FoleyEvents_GEN_VARIABLE",
+          "class": "/Game/Audio/Foley/AC_FoleyEvents.AC_FoleyEvents_C",
+          "properties": {}
+        },
+        {
+          "name": "AC_VisualOverrideManager_GEN_VARIABLE",
+          "class": "/Game/Blueprints/AC_VisualOverrideManager.AC_VisualOverrideManager_C",
+          "properties": {}
+        },
+        {
+          "name": "AC_SmartObjectAnimation_GEN_VARIABLE",
+          "class": "/Game/Blueprints/SmartObjects/AC_SmartObjectAnimation.AC_SmartObjectAnimation_C",
+          "properties": {}
+        },
+        {
+          "name": "NavMover_GEN_VARIABLE",
+          "class": "/Script/Mover.NavMoverComponent",
+          "properties": {}
+        }
+      ]
+    },
+    {
+      "path": "/Game/Blueprints/SandboxCharacter_CMC_ABP",
+      "parent": "/Script/Engine.AnimInstance",
+      "sha256": "2ce5cd694a3ecd6f26136191660c7e65e230a2d41f39d93f0865836f7989ef62",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "Update_Trajectory",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_1",
+              "title": "Update_Trajectory"
+            },
+            {
+              "id": "K2Node_VariableGet_4",
+              "title": "Get TrajectoryGenerationData_Moving"
+            },
+            {
+              "id": "K2Node_VariableGet_8",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_VariableGet_9",
+              "title": "Get PreviousDesiredControllerYaw"
+            },
+            {
+              "id": "K2Node_PropertyAccess_0",
+              "title": "属性存取"
+            },
+            {
+              "id": "K2Node_PropertyAccess_1",
+              "title": "属性存取"
+            },
+            {
+              "id": "K2Node_CallFunction_4",
+              "title": "Pose Search Generate Trajectory (for Character)"
+            },
+            {
+              "id": "K2Node_CallFunction_7",
+              "title": "HandleTrajectoryWorldCollisions"
+            },
+            {
+              "id": "K2Node_VariableSet_8",
+              "title": "Set Trajectory"
+            },
+            {
+              "id": "K2Node_Self_1",
+              "title": "自引用"
+            },
+            {
+              "id": "K2Node_Select_2",
+              "title": "选择"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get TrajectoryGenerationData_Idle"
+            },
+            {
+              "id": "K2Node_VariableGet_12",
+              "title": "Get Speed2D"
+            },
+            {
+              "id": "K2Node_PromotableOperator_2",
+              "title": "float > float"
+            },
+            {
+              "id": "K2Node_VariableSet_9",
+              "title": "Set TrajectoryCollision"
+            },
+            {
+              "id": "K2Node_VariableSet_10",
+              "title": "Set Trj_FutureVelocity"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableSet_11",
+              "title": "Set Trj_CurrentVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_10",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_9",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_11",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_10",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_13",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_VariableSet_12",
+              "title": "Set Trj_PastVelocity"
+            }
+          ]
+        },
+        {
+          "name": "Update_MotionMatching",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "Update_MotionMatching"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "Convert to Motion Matching Node"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "SetDatabasesToSearch"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "Get_MMInterruptMode"
+            },
+            {
+              "id": "K2Node_EvaluateChooser2_1",
+              "title": "评估选择器：CHT_PoseSearchDatabases"
+            },
+            {
+              "id": "K2Node_Self_0",
+              "title": "自引用"
+            },
+            {
+              "id": "K2Node_VariableSet_0",
+              "title": "Set ValidDatabases"
+            }
+          ]
+        }
+      ],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/SandboxCharacter_Mover_ABP",
+      "parent": "/Script/Engine.AnimInstance",
+      "sha256": "c4d374224a8030a5b4454eabac26c36e9eeaf4cd094ac459dafc296b06e1a701",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "Update_Trajectory",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_1",
+              "title": "Update_Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_14",
+              "title": "Pose Search Generate Trajectory (using Predictor)"
+            },
+            {
+              "id": "K2Node_PropertyAccess_2",
+              "title": "属性存取"
+            },
+            {
+              "id": "K2Node_VariableGet_6",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_VariableGet_3",
+              "title": "Get PreviousDesiredControllerYaw"
+            },
+            {
+              "id": "K2Node_VariableSet_5",
+              "title": "Set Trajectory"
+            },
+            {
+              "id": "K2Node_VariableSet_6",
+              "title": "Set Trj_FutureVelocity"
+            },
+            {
+              "id": "K2Node_CallFunction_12",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableSet_2",
+              "title": "Set Trj_NearFutureVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_0",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_4",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_4",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "GetTrajectoryVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_20",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_VariableSet_4",
+              "title": "Set Trj_PastVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_14",
+              "title": "Get Predictor"
+            },
+            {
+              "id": "K2Node_VariableSet_0",
+              "title": "Set FutureFacingDelta"
+            },
+            {
+              "id": "K2Node_CallFunction_29",
+              "title": "Get_TotalFacingDelta"
+            },
+            {
+              "id": "K2Node_MakeArray_0",
+              "title": "创建数组"
+            },
+            {
+              "id": "K2Node_VariableGet_8",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "GetTrajectorySampleAtTime"
+            },
+            {
+              "id": "K2Node_VariableSet_16",
+              "title": "Set Trj_FutureFacing"
+            },
+            {
+              "id": "K2Node_CallFunction_26",
+              "title": "ToRotator (Quat)"
+            },
+            {
+              "id": "K2Node_BreakStruct_1",
+              "title": "Break Transform Trajectory Sample"
+            },
+            {
+              "id": "K2Node_VariableSet_10",
+              "title": "Set Trj_PreviousFutureVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get Trj_FutureVelocity"
+            },
+            {
+              "id": "K2Node_VariableSet_15",
+              "title": "Set Trj_TurnAngle"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "Get_TrajectoryTurnAngle"
+            },
+            {
+              "id": "K2Node_VariableSet_11",
+              "title": "Set Trj_PastAngularVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_16",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_64",
+              "title": "GetTrajectoryAngularVelocity"
+            },
+            {
+              "id": "K2Node_VariableSet_8",
+              "title": "Set Trj_CurrentAngularVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_15",
+              "title": "Get Trajectory"
+            },
+            {
+              "id": "K2Node_CallFunction_61",
+              "title": "GetTrajectoryAngularVelocity"
+            },
+            {
+              "id": "K2Node_VariableGet_11",
+              "title": "Get"
+            },
+            {
+              "id": "K2Node_VariableGet_19",
+              "title": "Get"
+            },
+            {
+              "id": "K2Node_PromotableOperator_10",
+              "title": "float > float"
+            },
+            {
+              "id": "K2Node_PromotableOperator_9",
+              "title": "float > float"
+            },
+            {
+              "id": "K2Node_PromotableOperator_11",
+              "title": "float < float"
+            },
+            {
+              "id": "K2Node_PromotableOperator_12",
+              "title": "float < float"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_6",
+              "title": "AND Boolean"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_5",
+              "title": "OR Boolean"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_4",
+              "title": "AND Boolean"
+            },
+            {
+              "id": "K2Node_VariableSet_12",
+              "title": "Set Trj_IsCircling"
+            },
+            {
+              "id": "K2Node_IfThenElse_0",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_VariableSet_3",
+              "title": "Set Trj_CirclingTime"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get Trj_CirclingTime"
+            },
+            {
+              "id": "K2Node_PromotableOperator_1",
+              "title": "float + float"
+            },
+            {
+              "id": "K2Node_CallFunction_8",
+              "title": "GetDeltaSeconds"
+            },
+            {
+              "id": "K2Node_VariableSet_9",
+              "title": "Set Trj_CirclingTime"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_1",
+              "title": "AND Boolean"
+            },
+            {
+              "id": "K2Node_VariableGet_10",
+              "title": "Get Trj_TurnAngle"
+            },
+            {
+              "id": "K2Node_CallFunction_9",
+              "title": "Absolute (Float)"
+            },
+            {
+              "id": "K2Node_PromotableOperator_3",
+              "title": "float > float"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_VariableSet_17",
+              "title": "Set FutureFacingDelta_LastFrame"
+            },
+            {
+              "id": "K2Node_VariableGet_17",
+              "title": "Get FutureFacingDelta"
+            },
+            {
+              "id": "K2Node_CallFunction_6",
+              "title": "Absolute (Float)"
+            },
+            {
+              "id": "K2Node_PromotableOperator_5",
+              "title": "float > float"
+            },
+            {
+              "id": "K2Node_IfThenElse_2",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_VariableSet_14",
+              "title": "Set MovementDirection"
+            },
+            {
+              "id": "K2Node_VariableGet_5",
+              "title": "Get FutureFacingDelta"
+            },
+            {
+              "id": "K2Node_VariableGet_9",
+              "title": "Get FutureFacingDelta_LastFrame"
+            },
+            {
+              "id": "K2Node_PromotableOperator_0",
+              "title": "float - float"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_0",
+              "title": "AND Boolean"
+            },
+            {
+              "id": "K2Node_VariableGet_18",
+              "title": "Get RotationMode"
+            },
+            {
+              "id": "K2Node_EnumInequality_0",
+              "title": "不相等（枚举）"
+            },
+            {
+              "id": "K2Node_VariableSet_7",
+              "title": "Set MovementDirection_Recent"
+            },
+            {
+              "id": "K2Node_CallFunction_3",
+              "title": "BreakVector"
+            },
+            {
+              "id": "K2Node_CallFunction_5",
+              "title": "BreakVector"
+            }
+          ]
+        },
+        {
+          "name": "Update_MotionMatching",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "Update_MotionMatching"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "Convert to Motion Matching Node"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "SetDatabasesToSearch"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "Get_MMInterruptMode"
+            },
+            {
+              "id": "K2Node_EvaluateChooser2_0",
+              "title": "评估选择器：CHT_PoseSearchDatabases_Relaxed"
+            },
+            {
+              "id": "K2Node_VariableSet_1",
+              "title": "Set ValidDatabases"
+            }
+          ]
+        }
+      ],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/AC_TraversalLogic",
+      "parent": "/Script/Engine.ActorComponent",
+      "sha256": "e59d65511376e32b3dc4ef09a45b15f407a9b658ef015478ddc99b28c673f11b",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "SetWarpTargets",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "SetWarpTargets"
+            },
+            {
+              "id": "K2Node_CallFunction_1",
+              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
+            },
+            {
+              "id": "K2Node_VariableGet_1",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_0",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_CallFunction_32",
+              "title": "NegateVector"
+            },
+            {
+              "id": "K2Node_CallFunction_34",
+              "title": "MakeRotFromX"
+            },
+            {
+              "id": "K2Node_CallFunction_6",
+              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
+            },
+            {
+              "id": "K2Node_IfThenElse_5",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_VariableGet_19",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_8",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_EnumEquality_5",
+              "title": "等于（枚举）"
+            },
+            {
+              "id": "K2Node_ExecutionSequence_0",
+              "title": "序列"
+            },
+            {
+              "id": "K2Node_EnumEquality_6",
+              "title": "等于（枚举）"
+            },
+            {
+              "id": "K2Node_CommutativeAssociativeBinaryOperator_2",
+              "title": "OR Boolean"
+            },
+            {
+              "id": "K2Node_Knot_2",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_VariableGet_9",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_6",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_CallFunction_5",
+              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
+            },
+            {
+              "id": "K2Node_VariableGet_5",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_2",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_CallFunction_2",
+              "title": "RemoveWarpTarget"
+            },
+            {
+              "id": "K2Node_CallFunction_21",
+              "title": "GetMotionWarpingWindowsForWarpTargetFromAnimation"
+            },
+            {
+              "id": "K2Node_GetArrayItem_2",
+              "title": "Get（引用）"
+            },
+            {
+              "id": "K2Node_BreakStruct_9",
+              "title": "Break Motion Warping Window Data"
+            },
+            {
+              "id": "K2Node_CallArrayFunction_2",
+              "title": "Is Not Empty"
+            },
+            {
+              "id": "K2Node_IfThenElse_6",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_CallFunction_22",
+              "title": "GetCurveValueFromAnimation"
+            },
+            {
+              "id": "K2Node_VariableSet_6",
+              "title": "Set AnimatedDistanceFromFrontLedgeToBackLedge"
+            },
+            {
+              "id": "K2Node_PromotableOperator_2",
+              "title": "vector * vector"
+            },
+            {
+              "id": "K2Node_VariableGet_17",
+              "title": "Get AnimatedDistanceFromFrontLedgeToBackLedge"
+            },
+            {
+              "id": "K2Node_VariableGet_18",
+              "title": "Get AnimatedDistanceFromFrontLedgeToBackFloor"
+            },
+            {
+              "id": "K2Node_PromotableOperator_3",
+              "title": "float - float"
+            },
+            {
+              "id": "K2Node_CallFunction_12",
+              "title": "Absolute (Float)"
+            },
+            {
+              "id": "K2Node_PromotableOperator_5",
+              "title": "vector + vector"
+            },
+            {
+              "id": "K2Node_CallFunction_17",
+              "title": "MakeVector"
+            },
+            {
+              "id": "K2Node_CallFunction_18",
+              "title": "BreakVector"
+            },
+            {
+              "id": "K2Node_IfThenElse_2",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_VariableGet_2",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_1",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_EnumEquality_3",
+              "title": "等于（枚举）"
+            },
+            {
+              "id": "K2Node_Knot_1",
+              "title": "变更路线节点"
+            },
+            {
+              "id": "K2Node_CallFunction_7",
+              "title": "RemoveWarpTarget"
+            },
+            {
+              "id": "K2Node_CallFunction_10",
+              "title": "GetMotionWarpingWindowsForWarpTargetFromAnimation"
+            },
+            {
+              "id": "K2Node_GetArrayItem_0",
+              "title": "Get（引用）"
+            },
+            {
+              "id": "K2Node_BreakStruct_7",
+              "title": "Break Motion Warping Window Data"
+            },
+            {
+              "id": "K2Node_CallArrayFunction_1",
+              "title": "Is Not Empty"
+            },
+            {
+              "id": "K2Node_IfThenElse_4",
+              "title": "分支"
+            },
+            {
+              "id": "K2Node_CallFunction_11",
+              "title": "GetCurveValueFromAnimation"
+            },
+            {
+              "id": "K2Node_VariableSet_4",
+              "title": "Set AnimatedDistanceFromFrontLedgeToBackFloor"
+            },
+            {
+              "id": "K2Node_VariableGet_6",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_5",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_VariableGet_7",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_4",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_VariableGet_10",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_10",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_VariableGet_3",
+              "title": "Get TraversalResult"
+            },
+            {
+              "id": "K2Node_BreakStruct_3",
+              "title": "Break S Traversal Check Result"
+            },
+            {
+              "id": "K2Node_CallFunction_3",
+              "title": "RemoveWarpTarget"
+            },
+            {
+              "id": "K2Node_CallFunction_20",
+              "title": "RemoveWarpTarget"
+            },
+            {
+              "id": "K2Node_PromotableOperator_0",
+              "title": "vector + vector"
+            },
+            {
+              "id": "K2Node_VariableGet_15",
+              "title": "Get CharacterProperties"
+            },
+            {
+              "id": "K2Node_BreakStruct_11",
+              "title": "Break S Character Properties for Traversal"
+            },
+            {
+              "id": "K2Node_VariableSet_0",
+              "title": "Set MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_21",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_22",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_23",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_24",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_25",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_26",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_VariableGet_16",
+              "title": "Get MotionWarping"
+            },
+            {
+              "id": "K2Node_CallFunction_0",
+              "title": "BreakVector"
+            }
+          ]
+        }
+      ],
+      "montage_execution_edges": [
+        {
+          "name": "K2Node_CustomEvent_3",
+          "class": "K2Node_CustomEvent",
+          "title": "PerformTraversalAction_Mover",
+          "pins": [
+            {
+              "name": "OutputDelegate",
+              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+              "value": "",
+              "links": []
+            },
+            {
+              "name": "then",
+              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+              "value": "",
+              "links": [
+                {
+                  "node": "K2Node_PlayMontageOnMoverActor_0",
+                  "pin": "execute"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "K2Node_CustomEvent_4",
+          "class": "K2Node_CustomEvent",
+          "title": "PerformTraversalAction_CMC",
+          "pins": [
+            {
+              "name": "OutputDelegate",
+              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+              "value": "",
+              "links": []
+            },
+            {
+              "name": "then",
+              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+              "value": "",
+              "links": [
+                {
+                  "node": "K2Node_PlayMontage_0",
+                  "pin": "execute"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/BPI_SandboxCharacter_ABP",
+      "parent": "/Script/CoreUObject.Interface",
+      "sha256": "8e2635b18228c1e35266382789ce29f4481367b106ce8354944a475e17416f9b",
+      "original_bytes_unchanged": true,
+      "graphs": [],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/BPI_SandboxCharacter_Pawn",
+      "parent": "/Script/CoreUObject.Interface",
+      "sha256": "1ddf52b626b01d070f56e70065d12ab89006214037fe5bbc950cb665f444a1b8",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "Get_PropertiesForAnimation",
+          "nodes": [
+            {
+              "id": "K2Node_FunctionEntry_0",
+              "title": "Get_PropertiesForAnimation"
+            },
+            {
+              "id": "K2Node_FunctionResult_0",
+              "title": "返回节点"
+            }
+          ]
+        }
+      ],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Walking",
+      "parent": "/Script/Mover.SmoothWalkingMode",
+      "sha256": "922636eb5746126cbdc510f0b83791972544dd0e70e044b76648ece8cbd71d55",
+      "original_bytes_unchanged": true,
+      "graphs": [],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Falling",
+      "parent": "/Script/Mover.FallingMode",
+      "sha256": "e9fec2583720a7d207f751bc749d80c63b40415e5e40a2342b1462914122f306",
+      "original_bytes_unchanged": true,
+      "graphs": [],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Slide",
+      "parent": "/Script/Mover.SmoothWalkingMode",
+      "sha256": "df8b2bab74ef32d087789b1a178de33cef0c4b78572defe36e1ac98e22a9e5b2",
+      "original_bytes_unchanged": true,
+      "graphs": [],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/MovementModes/BP_MovementTransition_ToSlide",
+      "parent": "/Script/Mover.BaseMovementModeTransition",
+      "sha256": "706bbb3c8d8a8ff4fa393acea37b9b2c5083243ab8a8652c6c1e1c48e3344ce9",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "Evaluate",
+          "nodes": [
+            {
+              "name": "K2Node_FunctionEntry_0",
+              "class": "K2Node_FunctionEntry",
+              "title": "Evaluate",
+              "pins": [
+                {
+                  "name": "then",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "execute"
+                    }
+                  ]
+                },
+                {
+                  "name": "Params",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "SimulationTickParams"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_FunctionResult_1",
+              "class": "K2Node_FunctionResult",
+              "title": "返回节点",
+              "pins": [
+                {
+                  "name": "execute",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "then"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_MakeStruct_1",
+                      "pin": "TransitionEvalResult"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_MakeStruct_1",
+              "class": "K2Node_MakeStruct",
+              "title": "Make Transition Eval Result",
+              "pins": [
+                {
+                  "name": "NextMode",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "Sliding",
+                  "links": []
+                },
+                {
+                  "name": "TransitionEvalResult",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionResult_1",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_0",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Simulation Tick Params",
+              "pins": [
+                {
+                  "name": "SimulationTickParams",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionEntry_0",
+                      "pin": "Params"
+                    }
+                  ]
+                },
+                {
+                  "name": "SimContext",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MovingComps",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_18",
+                      "pin": "MovingComponentSet"
+                    }
+                  ]
+                },
+                {
+                  "name": "SimBlackboard",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "StartState",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "TimeStep",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "ProposedMove",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_6",
+                      "pin": "ProposedMove"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_IfThenElse_0",
+              "class": "K2Node_IfThenElse",
+              "title": "分支",
+              "pins": [
+                {
+                  "name": "execute",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionEntry_0",
+                      "pin": "then"
+                    }
+                  ]
+                },
+                {
+                  "name": "Condition",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "true",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "then",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionResult_1",
+                      "pin": "execute"
+                    }
+                  ]
+                },
+                {
+                  "name": "else",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CommutativeAssociativeBinaryOperator_0",
+              "class": "K2Node_CommutativeAssociativeBinaryOperator",
+              "title": "AND Boolean",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_PromotableOperator_1",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "B",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_2",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "Condition"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_6",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Proposed Move",
+              "pins": [
+                {
+                  "name": "ProposedMove",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "ProposedMove"
+                    }
+                  ]
+                },
+                {
+                  "name": "PreferredMode",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "DirectionIntent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "LinearVelocity",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_0",
+                      "pin": "A"
+                    }
+                  ]
+                },
+                {
+                  "name": "AngularVelocityDegrees",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "bHasDirIntent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MixMode",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CallFunction_0",
+              "class": "K2Node_CallFunction",
+              "title": "Vector Length XY",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "0, 0, 0",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_6",
+                      "pin": "LinearVelocity"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "0.0",
+                  "links": [
+                    {
+                      "node": "K2Node_PromotableOperator_1",
+                      "pin": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_PromotableOperator_1",
+              "class": "K2Node_PromotableOperator",
+              "title": "float > float",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_0",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "B",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "380.000000",
+                  "links": []
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_18",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Moving Component Set",
+              "pins": [
+                {
+                  "name": "MovingComponentSet",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "MovingComps"
+                    }
+                  ]
+                },
+                {
+                  "name": "UpdatedComponent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "UpdatedPrimitive",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MoverComponent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_2",
+                      "pin": "self"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CallFunction_2",
+              "class": "K2Node_CallFunction",
+              "title": "HasGameplayTag",
+              "pins": [
+                {
+                  "name": "self",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_18",
+                      "pin": "MoverComponent"
+                    }
+                  ]
+                },
+                {
+                  "name": "TagToFind",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "(TagName=\"Mover.Stance.IsCrouching\")",
+                  "links": []
+                },
+                {
+                  "name": "bExactMatch",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": []
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": []
+    },
+    {
+      "path": "/Game/Blueprints/MovementModes/BP_MovementTransition_FromSlide",
+      "parent": "/Script/Mover.BaseMovementModeTransition",
+      "sha256": "dd7e26f00fd25a1582541ec1cc050300279fc2709fbc1e987c8ef9ed3851b049",
+      "original_bytes_unchanged": true,
+      "graphs": [
+        {
+          "name": "Evaluate",
+          "nodes": [
+            {
+              "name": "K2Node_FunctionEntry_0",
+              "class": "K2Node_FunctionEntry",
+              "title": "Evaluate",
+              "pins": [
+                {
+                  "name": "then",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "execute"
+                    }
+                  ]
+                },
+                {
+                  "name": "Params",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "SimulationTickParams"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_FunctionResult_1",
+              "class": "K2Node_FunctionResult",
+              "title": "返回节点",
+              "pins": [
+                {
+                  "name": "execute",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "then"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_MakeStruct_1",
+                      "pin": "TransitionEvalResult"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_MakeStruct_1",
+              "class": "K2Node_MakeStruct",
+              "title": "Make Transition Eval Result",
+              "pins": [
+                {
+                  "name": "NextMode",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "Walking",
+                  "links": []
+                },
+                {
+                  "name": "TransitionEvalResult",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionResult_1",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_0",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Simulation Tick Params",
+              "pins": [
+                {
+                  "name": "SimulationTickParams",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionEntry_0",
+                      "pin": "Params"
+                    }
+                  ]
+                },
+                {
+                  "name": "SimContext",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MovingComps",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_18",
+                      "pin": "MovingComponentSet"
+                    }
+                  ]
+                },
+                {
+                  "name": "SimBlackboard",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "StartState",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_1",
+                      "pin": "MoverTickStartData"
+                    }
+                  ]
+                },
+                {
+                  "name": "TimeStep",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "ProposedMove",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_6",
+                      "pin": "ProposedMove"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_1",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Mover Tick Start Data",
+              "pins": [
+                {
+                  "name": "MoverTickStartData",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "StartState"
+                    }
+                  ]
+                },
+                {
+                  "name": "InputCmd",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "SyncState",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "AuxState",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_IfThenElse_0",
+              "class": "K2Node_IfThenElse",
+              "title": "分支",
+              "pins": [
+                {
+                  "name": "execute",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionEntry_0",
+                      "pin": "then"
+                    }
+                  ]
+                },
+                {
+                  "name": "Condition",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "true",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "then",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_FunctionResult_1",
+                      "pin": "execute"
+                    }
+                  ]
+                },
+                {
+                  "name": "else",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_6",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Proposed Move",
+              "pins": [
+                {
+                  "name": "ProposedMove",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "ProposedMove"
+                    }
+                  ]
+                },
+                {
+                  "name": "PreferredMode",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "DirectionIntent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "LinearVelocity",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_0",
+                      "pin": "A"
+                    }
+                  ]
+                },
+                {
+                  "name": "AngularVelocityDegrees",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "bHasDirIntent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MixMode",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CallFunction_0",
+              "class": "K2Node_CallFunction",
+              "title": "Vector Length XY",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "0, 0, 0",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_6",
+                      "pin": "LinearVelocity"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "0.0",
+                  "links": [
+                    {
+                      "node": "K2Node_PromotableOperator_1",
+                      "pin": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CallFunction_1",
+              "class": "K2Node_CallFunction",
+              "title": "NOT Boolean",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_9",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CommutativeAssociativeBinaryOperator_0",
+              "class": "K2Node_CommutativeAssociativeBinaryOperator",
+              "title": "OR Boolean",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_1",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "B",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_PromotableOperator_1",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_IfThenElse_0",
+                      "pin": "Condition"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_DynamicCast_0",
+              "class": "K2Node_DynamicCast",
+              "title": "Cast To CharacterMoverComponent",
+              "pins": [
+                {
+                  "name": "Object",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_18",
+                      "pin": "MoverComponent"
+                    }
+                  ]
+                },
+                {
+                  "name": "As角色移动器组件",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_9",
+                      "pin": "self"
+                    }
+                  ]
+                },
+                {
+                  "name": "bSuccess",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                }
+              ]
+            },
+            {
+              "name": "K2Node_CallFunction_9",
+              "class": "K2Node_CallFunction",
+              "title": "IsCrouching",
+              "pins": [
+                {
+                  "name": "self",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_DynamicCast_0",
+                      "pin": "As角色移动器组件"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "false",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_1",
+                      "pin": "A"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_BreakStruct_18",
+              "class": "K2Node_BreakStruct",
+              "title": "Break Moving Component Set",
+              "pins": [
+                {
+                  "name": "MovingComponentSet",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_BreakStruct_0",
+                      "pin": "MovingComps"
+                    }
+                  ]
+                },
+                {
+                  "name": "UpdatedComponent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "UpdatedPrimitive",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": []
+                },
+                {
+                  "name": "MoverComponent",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_DynamicCast_0",
+                      "pin": "Object"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "K2Node_PromotableOperator_1",
+              "class": "K2Node_PromotableOperator",
+              "title": "float <= float",
+              "pins": [
+                {
+                  "name": "A",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CallFunction_0",
+                      "pin": "ReturnValue"
+                    }
+                  ]
+                },
+                {
+                  "name": "B",
+                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
+                  "value": "200.000000",
+                  "links": []
+                },
+                {
+                  "name": "ReturnValue",
+                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
+                  "value": "",
+                  "links": [
+                    {
+                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
+                      "pin": "B"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": []
+    }
+  ]
+}

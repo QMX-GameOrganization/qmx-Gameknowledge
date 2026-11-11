@@ -1,0 +1,3520 @@
+diff --git a/src/components/HomeOverview.astro b/src/components/HomeOverview.astro
+index 3b07a9e..09ef56d 100644
+--- a/src/components/HomeOverview.astro
++++ b/src/components/HomeOverview.astro
+@@ -8,12 +8,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+ const categories = [
+   { id: 'language', title: '语言与内存', description: 'C#、面向对象、运行时与内存管理。', folders: ['csharp速通', 'csharp与unity内存基础', 'csharp底层专栏', '面向对象串讲'] },
+   { id: 'unity', title: 'Unity 与 ECS', description: '编辑器基础、Job、Burst、Entities 与工厂游戏实现。', folders: ['unity-job与burst', 'ecs学习', '认识unity'] },
++  { id: 'unreal', title: 'Unreal Engine', description: '从引擎源码到 GASP 蓝图，研究 CMC、Mover 与角色运动动画。', folders: ['ue专栏'] },
+   { id: 'source', title: '源码研究', description: 'Minecraft 世界生成与消失的光芒系统拆解。', folders: ['minecraft源码学习', '消失的光芒逆向学习'] },
+   { id: 'engineering', title: '热更新与工程', description: '资源管理、AssetBundle、Addressables 与代码热更。', folders: ['unity热更新专栏'] },
+   { id: 'reference', title: '工具与知识速查', description: 'Git 协作、开发工具、基础知识与学习记录。', folders: ['git使用指南', '工具', '八股', '自我忏悔'] },
+   { id: 'projects', title: '项目与使用指南', description: '项目介绍、实践记录以及知识库的使用与维护。', folders: ['projects', 'guide'] },
+ ];
+ const labels: Record<string, string> = {
++  'ue专栏': 'UE 专栏 · 运动系统',
+   'csharp速通': 'C# 速通', 'csharp与unity内存基础': 'C# 与 Unity 内存基础', 'csharp底层专栏': 'C# 底层专栏',
+   'unity-job与burst': 'Unity Job、Burst 与 Entities', 'ecs学习': 'ECS 学习与工厂游戏',
+   '认识unity': '认识 Unity', 'minecraft源码学习': 'Minecraft 源码学习',
+@@ -30,7 +32,7 @@ for (const doc of docs) {
+ }
+ // 未登记的新专题放入速查区，保证首页覆盖全部文档。
+ const assigned = new Set(categories.flatMap((category) => category.folders));
+-for (const folder of buckets.keys()) if (!assigned.has(folder)) categories[4].folders.push(folder);
++for (const folder of buckets.keys()) if (!assigned.has(folder)) categories.find((category) => category.id === 'reference')!.folders.push(folder);
+ const sections = categories.map((category) => ({
+   ...category,
+   topics: category.folders.filter((folder) => buckets.has(folder)).map((folder) => {
+diff --git a/src/content/docs/knowledge/UE专栏/目录.md b/src/content/docs/knowledge/UE专栏/目录.md
+new file mode 100644
+index 0000000..976fa4f
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/目录.md
+@@ -0,0 +1,20 @@
++---
++title: "UE 专栏"
++description: "结合本机 Unreal Engine 源码与 Game Animation Sample，理解角色移动、动画和工程边界。"
++sidebar:
++  order: 0
++---
++
++这里从能在项目中找到的对象出发研究 Unreal Engine：先解释职责和数据流，再追源码，最后回到蓝图验证。首个专题是 [运动系统：CMC、Mover 与 GASP](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/目录/)。
++
++## 当前研究版本
++
++本系列基于本机引擎 `5.8.4-58902052+++UE5+Release-5.8`，以及本地“游戏动画示例”工程中的 Game Animation Sample（下文简称 GASP）。这是本地样本的研究记录，不代表所有 GASP 版本的实现。Mover 在这套引擎中仍位于 `Plugins/Experimental`；升级时优先核对接口和蓝图默认值。
++
++## 阅读方式
++
++- **引擎机制**：给出源码相对路径、具体类型和函数，便于在自己安装的同版本引擎中查找。
++- **样例实现**：使用 `/Game/...` 资源路径定位蓝图，区分组件默认配置、图节点连接与运行表现。
++- **练习**：说明如何在复制的工程中验证；未执行的 PIE、联网和性能实验不会写成已验证结论。
++
++从 Unity 转来，可以先阅读专题中的对象与职责，再研究 CMC。`Pawn` 不是 Unity `GameObject` 的严格等价物，AnimBP 也不只是 Animator Controller；这里采用职责对照，不把两套引擎逐项硬映射。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/01-foundations.md b/src/content/docs/knowledge/UE专栏/运动系统/01-foundations.md
+new file mode 100644
+index 0000000..0babb19
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/01-foundations.md
+@@ -0,0 +1,50 @@
++---
++title: "1. 对象、组件与最终移动权"
++description: "先明确 Actor、Pawn、Character、碰撞体、Mesh、移动组件与动画的职责。"
++sidebar:
++  order: 1
++---
++
++## 谁在移动角色
++
++`Actor` 提供世界对象的基础；`Pawn` 增加可被 Controller 控制的语义；`Character` 是带角色胶囊体、骨骼网格和 CharacterMovement 等约定的 Pawn。Controller 表达控制关系，输入系统生成操作信息，移动组件把意图转成受约束的运动。
++
++| 对象 | 核心职责 | 不应默认承担的职责 |
++| --- | --- | --- |
++| Controller / 输入逻辑 | 按键、视角、控制权、意图转换 | 绕过碰撞每帧直接写角色位置 |
++| Capsule 等碰撞组件 | 定义实际移动与碰撞的空间形状 | 自动选择匹配动作 |
++| CMC / Mover | 根据输入、状态和环境推进运动 | 替代全部动画与技能架构 |
++| SkeletalMesh / AnimInstance | 计算、播放和呈现骨骼姿态 | 私自维护第二套权威移动状态 |
++| SpringArm / Camera | 组织镜头与跟随表现 | 与角色碰撞体争夺移动权 |
++
++骨骼脚底的位置、Mesh 的世界位置、胶囊体中心不是同一个量。动画可以让身体前倾而胶囊体不变；网络平滑也可以修饰视觉呈现。排查“角色在滑”时，先确认滑的是骨骼、Mesh 还是实际碰撞体。
++
++## 组件组合不等于多个系统一起写 Transform
++
++典型 CMC 角色以 `ACharacter + UCharacterMovementComponent` 为基础；Mover 的 `UMoverComponent` 自身继承 `UActorComponent`，并非 CMC 的子类。面向常规角色的 `UCharacterMoverComponent` 则继承 `UMoverComponent`。
++
++```text
++UActorComponent
++└─ UMoverComponent
++   └─ UCharacterMoverComponent
++```
++
++因此通常使用一个 CharacterMover 实例即可，而不是再额外挂一个核心 Mover 实例。Mode 是 `UObject`，也不是每个模式都要作为 ActorComponent 挂到角色上。
++
++移动系统需要知道它驱动哪个 UpdatedComponent，并通过合适的后端推进。动画、摄像机、导航和玩法组件可以读写各自接口，但不应让 CMC、Mover、物理模拟、每帧 SetActorLocation 无约束地同时驱动同一对象。
++
++## 三个量分别记录
++
++- **输入意图**：玩家想向哪里走、以什么方式朝向。
++- **模拟状态**：实际位置、速度、移动模式、基座等。
++- **表现状态**：选择的动画、混合权重、IK 调整、镜头偏移。
++
++向墙输入时，意图可以非零，实际位移却接近零。用输入长度直接冒充移动速度，会导致顶墙时跑步动画仍然高速播放。反过来，只用实际速度也不够表达启动意图；动画系统可能同时需要两者。
++
++## 自测
++
++**问：换成 Mover 后是否就不需要 AnimBP？** 仍然需要姿态计算系统。Mover 负责运动，AnimBP 负责骨骼姿态，两者通过状态和根运动等接口协作。
++
++**问：组件多是否天然更慢？** 不能根据结构数量判断。需要测量 Tick、碰撞查询、动画更新、网络开销及等待时间。
++
++下一章：[CMC 的一次地面移动](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/02-cmc/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/02-cmc.md b/src/content/docs/knowledge/UE专栏/运动系统/02-cmc.md
+new file mode 100644
+index 0000000..6728502
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/02-cmc.md
+@@ -0,0 +1,65 @@
++---
++title: "2. CMC：从输入到地面移动"
++description: "追踪 TickComponent、PerformMovement、StartNewPhysics 与 PhysWalking 的职责和边界。"
++sidebar:
++  order: 2
++---
++
++## 先看调用骨架
++
++源码：`Engine/Source/Runtime/Engine/Private/Components/CharacterMovementComponent.cpp`。注意本版本实现位于 `Private/Components`，不要照旧文章在 `Private` 根目录找。
++
++```text
++TickComponent
++  ├─ 消费输入、检查组件和网络角色
++  ├─ 本地预测路径 → ReplicateMoveToServer → PerformMovement
++  ├─ 权威控制路径 → ControlledCharacterMove → PerformMovement
++  └─ 模拟代理等路径 → SimulatedTick / SimulateMovement 等
++
++PerformMovement
++  → 处理移动前状态、外力与根运动等
++  → StartNewPhysics
++      → PhysWalking / PhysFalling / PhysFlying / PhysSwimming / PhysCustom
++  → 收尾与移动后状态更新
++```
++
++这是职责骨架，省略了条件分支。`TickComponent` 不是每次都走同一条链；暂停、无效数据、网络角色、根运动和异步配置都会影响路径。本机 CMC 还包含 `CharacterMovementComponentAsync.cpp`，不能将它描述为“完全没有异步支持”。
++
++## PerformMovement 是一次运动的协调入口
++
++它不只是计算 `Location += Velocity * DeltaTime`。角色还可能站在移动平台上、处于蹲伏姿态、受外力影响、播放根运动 Montage，或者在本次更新中途离开地面。外部修改位置也可能影响地面缓存是否仍有效。
++
++读这个函数时，可用四个问题做笔记：起始状态从哪里来？哪些输入会改变速度？哪个函数实际移动碰撞体？结束时哪些状态必须更新？不要一开始就逐行记所有参数。
++
++## StartNewPhysics 是模式分派
++
++本版函数按 `MovementMode` 调用 `PhysWalking`、`PhysFalling`、`PhysNavWalking` 等。它先检查最小时间步、迭代上限和组件有效性；如果 UpdatedComponent 正在模拟物理，还会提前退出。
++
++自定义模式常用 `MOVE_Custom + CustomMovementMode`，由 `PhysCustom` 承接扩展。增加一个枚举或切换模式，不会自动获得攀爬碰撞、联网状态与动画衔接。
++
++## PhysWalking 的关键不是“水平移动”
++
++本机源码可以观察到以下步骤：
++
++1. 用 `GetSimulationTimeStep` 从剩余时间中取出子步，并限制模拟迭代次数。
++2. 保存旧位置、旧地面和基座信息，恢复叠加根运动前的速度。
++3. 在重力方向定义的平面上处理水平速度和加速度。
++4. 在没有动画根运动或覆盖速度的根运动源等条件下调用 `CalcVelocity`。
++5. 调用 `ApplyRootMotionToVelocity`，处理可能由根运动触发的模式变化。
++6. 通过地面移动、台阶和碰撞处理得到实际结果，继续检查地面和下落条件。
++
++**坡面上的期望速度、碰撞前的位移、实际完成的位移可能不同。** `MaxWalkSpeed` 是运动规则中的速度限制，不是每帧实际位移的保证；根运动等路径还需要单独检查。
++
++## 从 Walking 进入 Falling
++
++本步中途失去地面时，需要将未消耗时间交给新的物理模式继续计算。否则“前半帧走到边缘，后半帧下落”会被错误地推迟或重复计算。
++
++`PhysFalling` 则处理重力、空中控制、碰撞和落地等。跳跃上升通常也属于 Falling 模式：Falling 表示没有依托地面的运动状态，不等于竖直速度一定向下。
++
++## 如何扩展
++
++简单调整优先使用现有参数和公开接口；持续改变运动规则时，再考虑 CMC 子类与自定义模式。若技能状态会影响预测，还必须研究 SavedMove 和网络移动数据，不能只让本地 `PhysCustom` 表现正确。
++
++**自测：** 为什么设置 `MaxWalkSpeed=600` 后，顶墙也不可能每秒前进 600 单位？因为速度规则仍要经过碰撞和实际移动约束。
++
++下一章：[CMC 网络预测](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/03-cmc-network/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/03-cmc-network.md b/src/content/docs/knowledge/UE专栏/运动系统/03-cmc-network.md
+new file mode 100644
+index 0000000..5edcc05
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/03-cmc-network.md
+@@ -0,0 +1,53 @@
++---
++title: "3. CMC：网络预测、校正与重放"
++description: "用同一条输入时间线解释 SavedMove、服务器验证、确认、纠正与客户端重放。"
++sidebar:
++  order: 3
++---
++
++## 为什么客户端先走
++
++等待服务器往返后再响应输入，会把网络延迟直接变成操控迟钝。CMC 让自主代理先预测，并保留足够的历史，供服务器确认或客户端纠正。
++
++![客户端预测、服务器确认或校正，以及未确认输入重放的时间线](/qmx-Gameknowledge/assets/ue-movement/prediction.svg)
++
++这不是“客户端说自己到哪里，服务器就相信”。输入、时间、状态以及校验逻辑共同决定服务器接受什么。
++
++## 四个核心对象与入口
++
++| 源码符号 | 研究重点 |
++| --- | --- |
++| `FSavedMove_Character` | 保存哪些预测相关输入与起始信息，怎样重放 |
++| `FNetworkPredictionData_Client_Character` | 未确认历史、待发送和待合并移动如何组织 |
++| `ReplicateMoveToServer` | 本地预测与移动数据发送的衔接 |
++| `ServerMove_PerformMovement` | 服务器如何使用收到的移动数据推进角色 |
++| `ClientUpdatePositionAfterServerUpdate` | 在服务器更新后重放哪些未确认移动 |
++
++本版本还有打包的网络移动数据通路；旧文章中的单个 ServerMove RPC 名称不能替代当前实现的完整调用链。
++
++## 一个简化例子
++
++客户端已经执行输入 100、101、102；服务器返回输入 100 对应的权威状态。如果需要纠正，客户端恢复到这个基准，再按顺序重放 101、102，推导出新的“现在”。已确认输入的清理、误差容差和移动合并等细节依实际实现而定。
++
++普通位置平滑只是在表现层过渡误差；重放则重新计算后续模拟。两者目的不同，不能只靠插值解决错误的预测状态。
++
++## 为什么自定义冲刺容易出错
++
++假设冲刺期间提高最大速度，本地只改一个 `bIsDashing` 成员：服务器如果不知道冲刺输入，或客户端重放时读到“当前冲刺状态”而不是历史状态，双方计算就可能不同。
++
++设计时需要回答：
++
++- 冲刺请求属于输入还是权威结果？如何传送？
++- 持续时间、冷却、方向如何恢复？
++- 哪些移动可合并，哪些必须保留边界？
++- 重放时能否重复触发音效、扣费或生成物体？
++
++`FSavedMove_Character` 的扩展与自定义网络移动数据是相关入口，但具体方案需要结合技能架构，不能照抄几个压缩标志就认为所有状态都已同步。
++
++## 自主代理与模拟代理不同
++
++控制自己角色的客户端需要即时输入响应；观察其他角色的客户端通常依赖服务器状态和插值/平滑。不能要求所有网络角色都按本地输入预测，也不能用单机 PIE 的顺滑程度评价联机表现。
++
++**自测：** 服务器位置正确，客户端为什么还反复拉回？检查影响模拟的状态是否完整、时间与模式是否一致，再看碰撞环境和移动基座等条件，而不是首先增大平滑参数掩盖误差。
++
++下一章：[Mover 的职责拆分](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/04-mover/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/04-mover.md b/src/content/docs/knowledge/UE专栏/运动系统/04-mover.md
+new file mode 100644
+index 0000000..5e6604f
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/04-mover.md
+@@ -0,0 +1,53 @@
++---
++title: "4. Mover：输入、状态与可组合行为"
++description: "从数据边界理解 Mode、Layered Move、Movement Modifier 与 Instant Movement Effect。"
++sidebar:
++  order: 4
++---
++
++## 核心组件与后端分开
++
++`UMoverComponent` 连接游戏对象、输入生产者、可用模式和模拟结果。`UCharacterMoverComponent` 在它之上提供常规角色的跳跃、姿态处理与 Montage 状态相关支持。
++
++本机 `UMoverComponent` 构造函数默认设置 `UMoverNetworkPredictionLiaisonComponent` 为后端；这只是默认值，蓝图可以覆盖。启用 ChaosMover 插件，并不能证明某个角色实例真的使用 ChaosMover 后端。
++
++## 输入是命令，状态是模拟事实
++
++| 类型 | 用途 |
++| --- | --- |
++| `FMoverInputCmdContext` | 一个模拟步要使用的输入集合 |
++| `FCharacterDefaultInputs` | 常规角色的移动输入、朝向意图与跳跃等字段 |
++| `FMoverSyncState` | 移动模式及可扩展的同步状态集合等 |
++| `FMoverDefaultSyncState` | 常用的变换、速度、移动基座等状态 |
++| `FMoverAuxStateContext` | 后端契约中的辅助状态上下文，具体内容由实现决定 |
++
++数据集合允许扩展，不代表向集合放入任意变量就自动获得正确的序列化、比较、插值和回滚语义。自定义数据必须符合所使用接口的复制、网络序列化和协调契约。
++
++不要把 Input / Sync / Aux 误解成“输入 / 必须联网 / 不用联网”。它们是模拟接口中的职责划分，是否传输、如何保存与使用依赖后端和类型实现。
++
++## 四种行为的边界
++
++| 机制 | 适合表达 | 设计时要检查 |
++| --- | --- | --- |
++| Movement Mode | 一套持续的运动规则，如行走、下落、攀爬 | 激活/退出、环境检测、状态转换、剩余时间 |
++| Layered Move | 一段有生命周期的运动贡献，如冲刺或根运动 | 持续时间、混合模式、优先级、结束后的速度 |
++| Movement Modifier | 在移动生命周期中施加修饰，如姿态处理 | 开始/结束、设置恢复、同步状态 |
++| Instant Movement Effect | 在模拟中应用一次性运动效果 | 应用时机、位置/速度/模式变化与恢复 |
++
++“跳跃一定是 Layered Move”是错误概括。本机 `UCharacterMoverComponent::Jump()` 创建 `FJumpImpulseEffect` 并调用 `QueueInstantMovementEffect`。插件也有其他跳跃相关 Layered Move，说明同一玩法可以按不同需求实现。
++
++## Mode 不直接等于技能
++
++持续沿墙移动，可能需要独立 WallRun Mode；短暂向前冲刺，可能用 Layered Move；如果冲刺需要独特碰撞、转向和地面规则，也可能需要独立 Mode。
++
++判断标准是：它改了基础运动规则，还是只贡献一段速度？什么状态必须参与恢复？它与其他行为发生冲突时谁优先？先回答这些问题，再选机制。
++
++## 混合不是简单相加
++
++`MovementModeStateMachine.cpp` 将 Layered Move 的贡献交给 `MovementMixer`，并结合模式生成的提案。不同混合方式可以叠加、覆盖，或保留部分速度分量；源码甚至包含被完全覆盖时跳过模式 GenerateMove 的条件优化。
++
++因此“基础跑速 + 冲刺速度 + 根运动速度”不是固定公式。应沿 Mixer 的具体策略确认结果，尤其注意竖直分量和行为结束后的残余速度。
++
++**自测：** 为什么不能将“输入事件触发一次”直接等同于“模拟效果只执行一次”？网络重放可能重新执行模拟；效果的排队、消费与状态必须符合模拟契约。
++
++下一章：[模拟与后端](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/05-mover-simulation/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/05-mover-simulation.md b/src/content/docs/knowledge/UE专栏/运动系统/05-mover-simulation.md
+new file mode 100644
+index 0000000..906e102
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/05-mover-simulation.md
+@@ -0,0 +1,57 @@
++---
++title: "5. Mover：模拟步、模式转换与后端"
++description: "追踪 KinematicActorSimulation、状态机、Movement Mode 与 NetworkPrediction 的衔接。"
++sidebar:
++  order: 5
++---
++
++## 不要只盯 Actor Tick
++
++Mover 的一次模拟由后端驱动。以本机 NetworkPrediction 运动学路径为例，Liaison 的 `ProduceInput` 转发到 Mover；`SimulationTick` 衔接运动学模拟；`FinalizeFrame` 将同步状态交回组件；`RestoreFrame` 处理恢复。
++
++```text
++NetworkPrediction 后端
++  → ProduceInput → UMoverComponent → 输入生产者
++  → SimulationTick → UKinematicActorSimulation::DoSimulationTick
++      → 准备本步状态
++      → 移动前处理
++      → 推进 MovementModeStateMachine
++      → 移动后处理与结果保存
++  → FinalizeFrame → UMoverComponent
++```
++
++这是同步运动学路径的阅读图，不是所有后端的统一实现。`UMoverSimulation` 是基础类，不能只读它就认为已经读到完整角色模拟。
++
++## GenerateMove 与 SimulationTick
++
++`UBaseMovementMode` 暴露两个主要蓝图原生事件：`GenerateMove` 和 `SimulationTick`。C++ 覆盖常见对应实现名为 `GenerateMove_Implementation`、`SimulationTick_Implementation`，旧版本教程可能使用不同名字。
++
++`UWalkingMode::GenerateMove_Implementation` 从输入和起始同步状态构建 `FGroundMoveParams`，考虑地面法线、朝向、前速度、加减速、摩擦等，再调用 `ComputeControlledGroundMove` 生成 `FProposedMove`。
++
++`SimulationTick_Implementation` 则处理实际移动所需组件、基座变化、地面查询和运动结果。**提案描述希望如何运动，实际模拟决定能实现多少。**
++
++## 一步中可以发生模式切换
++
++状态机协调 Mode、Transitions、Layered Moves、Modifiers 和 Instant Effects。Transition 不是 Animator 的动画过渡，它决定运动规则如何改变。
++
++比如 Walking 走到边缘后，余下的模拟时间需要由 Falling 继续处理。状态机同时要防止无进展的反复切换和过量迭代。阅读源码时，追踪剩余时间、当前模式和输出状态，比只找一个 SetMode 调用更重要。
++
++## 回滚恢复什么
++
++`UKinematicActorSimulation::RollbackToPriorState` 可以看到：通知状态机、使普通黑板相关缓存失效、开始/结束回滚黑板处理、恢复上一模拟状态和时间记录，并标记接下来进入重模拟。
++
++这说明黑板不是“随便存数据就永远有效的字典”。例如地面查询缓存依赖此前的位置和环境，恢复旧状态后可能需要重新计算；需要历史语义的数据应遵循回滚黑板或同步状态的相应契约。
++
++## Fixed 与 Independent
++
++本地 GASP 的 `Config/DefaultNetworkPrediction.ini` 指定 `PreferredTickingPolicy=Independent`，模拟代理 LOD 配置为 `Interpolated`。文件中同时存在 `FixedTickFrameRate=60`，但不能据此断言项目当前按固定 60 Hz 推进运动。
++
++配置值只是已读取的默认设置，仍需运行时确认覆盖与实际角色后端。也不能把“模拟可重放”称为跨平台位级确定性保证；碰撞环境、外部依赖和浮点行为仍需验证。
++
++## ChaosMover 与线程边界
++
++`UBaseMovementMode` 有 `bSupportsAsync`。其源码注释明确提醒：某些模拟方法在异步移动时可能运行于工作线程，不安全地访问外部对象会出问题。把同步蓝图搬到异步后端，不会自动满足线程安全要求。
++
++选择后端时要验证模式支持、输入快照、事件提交、动画时序和网络物理需求；不能把“使用 Mover”直接解释成“所有移动和蓝图都在异步线程”。
++
++下一章：[GASP 实现地图](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/06-gasp-map/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/06-gasp-map.md b/src/content/docs/knowledge/UE专栏/运动系统/06-gasp-map.md
+new file mode 100644
+index 0000000..d3052ec
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/06-gasp-map.md
+@@ -0,0 +1,60 @@
++---
++title: "6. GASP：两套角色的实现地图"
++description: "根据实际蓝图父类、组件默认值与图入口，对照 CMC 与 Mover 两套 GASP 角色。"
++sidebar:
++  order: 6
++---
++
++## 从真实资源开始
++
++以下信息由 UE 5.8.4 无界面 Python Commandlet 读取本地 `.uasset` 得到，不是根据文件名推测。资源路径相对于 `/Game/Blueprints`。
++
++| 项目 | `SandboxCharacter_CMC` | `SandboxCharacter_Mover` |
++| --- | --- | --- |
++| 直接父类 | `/Script/Engine.Character` | `/Script/Engine.Pawn` |
++| 运动组件 | `CharMoveComp`：CharacterMovementComponent | `CharacterMover`：CharacterMoverComponent |
++| 骨骼动画类 | `SandboxCharacter_CMC_ABP` | `SandboxCharacter_Mover_ABP` |
++| Actor 默认 Replicate Movement | true | false |
++| Mover 后端 | 不适用 | `MoverNetworkPredictionLiaisonComponent` |
++| Mover 起始模式 | 不适用 | `Falling` |
++| 共享配套组件 | MotionWarping、AC_TraversalLogic、Foley、视觉覆盖、SmartObject 等 | 同类配套，另外包含 NavMover |
++
++这些是资产默认配置，不是 PIE 中每个实例的最终状态。CMC 组件读取到 `MaxWalkSpeed=500`，但角色图会动态计算并写入速度限制，因此 500 不能作为所有步态的固定运行速度。
++
++Mover 角色关闭 Actor 级移动复制，与使用专门后端管理运动同步的设计一致；这不表示它“关闭了所有网络复制”。本机虽然启用了 ChaosMover 插件，此角色默认使用的却是 **NetworkPrediction Liaison**。
++
++![GASP 中两套运动实现、公共属性接口、动画与翻越组件的关系](/qmx-Gameknowledge/assets/ue-movement/gasp-flow.svg)
++
++## Mover 模式表不是只有默认三种
++
++`SandboxCharacter_Mover` 中 CharacterMover 的 MovementModes 默认映射为：
++
++| 注册名 | 实现 | 研究重点 |
++| --- | --- | --- |
++| `Walking` | `BP_MovementMode_Walking` | 父类是 `SmoothWalkingMode`，不是直接使用 UWalkingMode |
++| `Falling` | `BP_MovementMode_Falling` | 父类 FallingMode，覆盖 GenerateMove |
++| `Flying` | `B_MovementMode_Flying` | 资源存在并已注册；本轮未单独导出它的图逻辑 |
++| `Sliding` | `BP_MovementMode_Slide` | 同样继承 SmoothWalkingMode，覆盖 GenerateWalkMove |
++| `Traversing` | 原生 `FlyingMode` 实例 | 注册名表达玩法用途，不等于存在 TraversingMode 原生类型 |
++
++这说明“模式名”和“实现类”是两个维度。同一个原生模式可以被配置为不同用途；自定义蓝图也可以在父类基础上扩展，而不是从零实现碰撞。
++
++进一步读取模式实例配置可以确认：Walking 的 Transitions 中配置了 `BP_MovementTransition_ToSlide`，Sliding 中配置了 `BP_MovementTransition_FromSlide`；这五个模式实例的 `bSupportsAsync` 均为 false。因此本文样例不能直接作为“异步移动模式已就绪”的例子。
++
++## 两套角色在哪里承接玩法
++
++CMC 角色有 `UpdateMovement_PreCMC` 和 `UpdateRotation_PreCMC`：前者设置速度、加速度、制动和地面摩擦；后者配置朝向规则。Mover 角色则有 `ProduceInput`、`CacheInputsFromMover`、`On_PreSimulateTick`、`On_MovementPostFinalize` 等入口。
++
++迁移时应该迁移这些入口承接的职责，而不是把所有 CMC 参数名机械复制到 Mover Tick。
++
++## 通过接口向动画提供属性
++
++两套角色都实现 `Get_PropertiesForAnimation`，对应的两个 AnimBP 在 `Update_PropertiesFromCharacter` 中通过 `GetOwningActor → Get_PropertiesForAnimation` 获取并缓存角色属性。这形成了一个适配边界：动画无需把所有底层查询硬编码成某一种移动组件。
++
++接口还能提供 Camera、Traversal、Ragdoll 等不同用途的数据。不过两个 AnimBP 本身仍是不同资产，存在不同的轨迹与动画处理图；不能将其说成“同一个 AnimBP 完全无改动复用”。
++
++## 建议打开的顺序
++
++先看两个角色的组件配置，再看 `Get_PropertiesForAnimation`，之后对照两个 AnimBP 的 `Update_PropertiesFromCharacter` 和 `Update_Trajectory`，最后进入 `AC_TraversalLogic`。这样每一层都知道自己在消费什么，而不是在一张大 EventGraph 中迷路。
++
++下一章：[输入与模式扩展](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/07-gasp-input/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/07-gasp-input.md b/src/content/docs/knowledge/UE专栏/运动系统/07-gasp-input.md
+new file mode 100644
+index 0000000..706a523
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/07-gasp-input.md
+@@ -0,0 +1,75 @@
++---
++title: "7. GASP：追踪输入与移动配置"
++description: "从 CMC 参数更新到 Mover 输入集合、Walking 扩展与滑行转换，追踪真实节点连接。"
++sidebar:
++  order: 7
++---
++
++## CMC：在运动前准备参数
++
++`SandboxCharacter_CMC.UpdateMovement_PreCMC` 中可以读到 `GetDesiredGait` 和一系列 Calculate 函数，并连接到 `MaxWalkSpeed`、`MaxWalkSpeedCrouched`、`MaxAcceleration`、`BrakingDecelerationWalking`、`GroundFriction` 的设置节点。
++
++其设计是先将步态与玩法状态转成 CMC 参数，再由 CMC 完成运动计算。`UpdateRotation_PreCMC` 则存在对 `bUseControllerDesiredRotation`、`bOrientRotationToMovement`、`RotationRate` 的不同设置分支。
++
++这里的参数更新职责已经从最终位移中分离，但“PreCMC”这个名字本身不构成 Tick 顺序的证明。精确顺序还需要检查注册的 Tick 依赖和运行时执行情况；本轮未单独导出 `AC_PreCMCTick` 的图。
++
++## Mover：ProduceInput 构建两类输入
++
++在 `SandboxCharacter_Mover.ProduceInput` 中，实际节点包括：
++
++- `Get_MoveInput → SetDirectionalInput`，构建默认方向输入。
++- `Get_OrientationIntent`、`Get_AimingRotation`，参与默认输入字段设置。
++- `Get_RotationMode`、`Get_Gait`、`Get_MovementDirectionAndOffset`，参与 `S_MoverCustomInputs` 字段设置。
++- 默认输入和自定义输入分别通过 `Add Data To Collection` 加入集合。
++
++自定义字段还包括蹲伏意图、转向速率等。字段出现在输入结构中，不等于它们都影响所有模式；继续查模式实际读取哪些字段，才能确认作用范围。
++
++![输入意图、模拟状态与动画表现需要分别观察](/qmx-Gameknowledge/assets/ue-movement/intent-state.svg)
++
++## 模拟前与提交后的数据不能混用
++
++`CacheInputsFromMover` 从 `GetLastInputCmd` 的集合读取默认与自定义输入，缓存为 `MoverDefaultInputs_PostSim`、`MoverCustomInputs_PostSim`。`On_PreSimulateTick` 图中则有从输入集合读取数据并调用 Crouch/UnCrouch 的分支。
++
++`On_MovementPostFinalize` 查询模式名，与缓存模式比较后调用 `On_MovementModeChanged_PostFinalize` 并更新缓存。这解释了为什么观察移动结果的玩法逻辑，应有明确的提交后入口。
++
++EventGraph 中的 Create Delegate 和绑定节点已核实：`On_PreSimulateTick` 绑定到 `On Pre Simulation Tick`，`On_MovementPostFinalize` 绑定到 `On Post Finalize`，`On_BasedMovementApplied` 绑定到 `On Based Movement Applied`。这比只根据函数名判断时序更可靠，但实际调用次数仍取决于后端和运行场景，不能假设逐渲染帧恰好一次。
++
++## Walking：复用父类，再定制手感
++
++`BP_MovementMode_Walking` 继承 `SmoothWalkingMode`。其 `GenerateWalkMove` 图读取默认/自定义输入，计算或设置 `MaxSpeedOverride`、Acceleration、Deceleration、TurningStrength、FacingSmoothingTime、期望朝向和速度等，并有父类 `Generate Simple Walk Move` 调用。
++
++这是“在既有模式扩展点配置运动提案”的例子。它不意味着该蓝图自行重写了整个 Floor Sweep 或台阶处理。研究具体公式时，应沿每个输入引脚追值，而不是只看参数设置节点。
++
++`BP_MovementMode_Falling.GenerateMove` 同样存在父类调用，并计算角速度、设置 Proposed Move 的字段。这说明可以保留父类的基础下落行为，同时扩展空中转向。
++
++## Sliding：从真实引脚读出条件
++
++![GASP 滑行转换：大于 380 且蹲伏进入，小于等于 200 或不再蹲伏退出](/qmx-Gameknowledge/assets/ue-movement/slide-transitions.svg)
++
++`BP_MovementTransition_ToSlide.Evaluate` 的连线为：
++
++```text
++Params.ProposedMove.LinearVelocity
++  → Vector Length XY
++  → > 380
++       AND HasGameplayTag("Mover.Stance.IsCrouching")
++  → 条件成立时返回 NextMode = Sliding
++```
++
++`BP_MovementTransition_FromSlide.Evaluate` 的连线为：
++
++```text
++Vector Length XY(Params.ProposedMove.LinearVelocity) <= 200
++  OR NOT CharacterMover.IsCrouching()
++  → 条件成立时返回 NextMode = Walking
++```
++
++进入阈值高、退出阈值低形成迟滞区，避免在同一个阈值附近反复切换。数值单位跟随 UE 项目的长度/时间约定，常规厘米制下速度为 cm/s。
++
++尤其注意这里比较的是 **ProposedMove 的水平速度**，不是未经核实的胶囊体最终实测速率。角色默认配置也已核实：Walking 的 Transitions 包含 ToSlide，Sliding 包含 FromSlide。默认注册证明这些转换有实际接入位置；运行时是否被覆盖、何时触发仍需要实验确认。
++
++## 最小练习
++
++在复制工程里，只调整进入阈值，保持退出阈值不动，观察同样的助跑和蹲伏输入下何时进入滑行。然后同时记录模式名、提案速度、实际速度、蹲伏状态。该实验尚未在本文执行，不把静态条件当作已测运行表现。
++
++下一章：[翻越和动画实现](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/08-gasp-animation/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/08-gasp-animation.md b/src/content/docs/knowledge/UE专栏/运动系统/08-gasp-animation.md
+new file mode 100644
+index 0000000..ea6a68f
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/08-gasp-animation.md
+@@ -0,0 +1,72 @@
++---
++title: "8. GASP：翻越、根运动与动画"
++description: "沿实际 GASP 蓝图区分翻越检测、Chooser、Motion Matching、Warp Targets 和两种 Montage 执行路径。"
++sidebar:
++  order: 8
++---
++
++## 翻越是一条跨系统链
++
++`AC_TraversalLogic` 不只是播放动画。其 `TryTraversalAction` 图包含环境查询、翻越结果构造、角色属性获取、动作选择与执行入口。
++
++```text
++角色提供 Traversal 属性
++  → 环境检测与障碍信息
++  → Chooser 选择动作及相关结果
++  → 配置 Warp Targets
++  → 按 CMC / Mover 执行动作
++  → 回调中恢复运动与碰撞相关状态
++```
++
++这是对图中阶段的归纳，不表示每个分支都完整执行所有阶段。检测失败、没有选到 Montage 和正常执行是不同结果，图中也有不同的返回节点。
++
++## 检测：动作能否成立
++
++`TryTraversalAction` 可见 Capsule Trace、对 `LevelBlock_Traversable` 的 Cast、`GetLedgeTransforms` 以及后续空间检测。结果字段包括前缘、后缘、后方地面是否存在，以及障碍高度、深度等。
++
++样例依赖它支持的可翻越场景对象和几何约定。不能因为它有胶囊体扫描，就认为任意网格、任意可动物体都能直接获得稳定翻越。
++
++调试时先检查环境结果，再查动画选择。角色根本没有检测到有效前缘时，反复调整 Montage 混合时间不会解决问题。
++
++## 选择：Chooser 不等于 Motion Matching
++
++该图中存在 `CHT_TraversalMontages_CMC` 与 `CHT_TraversalMontages_Mover` 的 Evaluate Chooser 节点，表明样例为不同运动路径配置了动作选择。
++
++Chooser 根据配置的条件和上下文选择结果；Pose Search / Motion Matching 使用姿态和轨迹等特征进行匹配。它们可以配合，但不能将“运行 Chooser”直接称为“执行一次运动匹配”。具体表格条件和数据库 Schema 本轮未逐行导出。
++
++## 对齐：Warp Target 是空间约束
++
++`SetWarpTargets` 中可读到三个命名目标：`FrontLedge`、`BackLedge`、`BackFloor`。图中调用 `AddOrUpdateWarpTargetFromLocationAndRotation`，也会按分支移除不适用的目标。
++
++还可见按 Warp Target 查询动画窗口，以及读取 `Distance_From_Ledge` 曲线的逻辑。这说明对齐不仅需要“有一个目标点”，还依赖动作窗口、动画数据和障碍几何。
++
++Motion Warping 修正受支持窗口内的根运动以对齐目标，不会自动保证碰撞可行，也不是脚部 IK 的替代品。手穿墙、胶囊体穿障碍、落脚偏差分别需要从约束、运动与姿态层排查。
++
++## 执行：两条实际连线
++
++`AC_TraversalLogic.EventGraph` 中已核对以下直接执行引脚：
++
++| 事件 | then 连接到 |
++| --- | --- |
++| `PerformTraversalAction_CMC` | `K2Node_PlayMontage_0`：普通播放 Montage 节点 |
++| `PerformTraversalAction_Mover` | `K2Node_PlayMontageOnMoverActor_0`：Mover Actor 播放 Montage 节点 |
++
++Mover 分支还有请求 `Traversing` 模式以及条件恢复 `Walking` 的节点；角色模式表里 `Traversing` 映射原生 FlyingMode。这是用现有运动规则承接翻越阶段的具体配置。
++
++CMC 分支则有设置 CMC 移动模式、调整碰撞响应和复制行为的节点。复制相关函数还包括服务器/客户端事件入口，但单凭静态图不能证明各网络角色、打断路径和异常路径都正确恢复。
++
++因此迁移时不能把普通 Montage 播放节点原封不动替换后就结束。必须检查根运动如何进入模拟、模式何时改变、打断时恢复哪些状态，以及网络重复执行时副作用如何处理。
++
++## 动画：共同接口，不同轨迹入口
++
++| 图 | CMC AnimBP | Mover AnimBP |
++| --- | --- | --- |
++| `Update_PropertiesFromCharacter` | GetOwningActor → Get_PropertiesForAnimation | 同样通过接口读取，并另取 Ragdoll 属性 |
++| `Update_Trajectory` | `Pose Search Generate Trajectory (for Character)`，并有 `HandleTrajectoryWorldCollisions` | `Pose Search Generate Trajectory (using Predictor)` |
++| `Update_MotionMatching` | Chooser `CHT_PoseSearchDatabases` → ValidDatabases / SetDatabasesToSearch | Chooser `CHT_PoseSearchDatabases_Relaxed` → 对应数据库设置 |
++
++Mover 的轨迹调用使用 Predictor 接口；具体 Predictor 对象的创建与参数需要沿配置和调用继续确认，不能仅由节点名认定全部设置。数据库选择之后如何采样和混合姿态，还要继续看 AnimGraph 与动画节点本身。
++
++**自测：** 翻越播放了正确动画却落在错误位置，应先检查什么？先比对检测出的边缘变换、Warp Target 名称、Montage 窗口和根运动执行路径；不要先换一套 Pose Search 数据库。
++
++下一章：[调试实验与迁移](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/09-labs/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/09-labs.md b/src/content/docs/knowledge/UE专栏/运动系统/09-labs.md
+new file mode 100644
+index 0000000..57feaf8
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/09-labs.md
+@@ -0,0 +1,58 @@
++---
++title: "9. 调试实验与迁移取舍"
++description: "用同输入实验区分运动与动画问题，并按实际需求评估 CMC 到 Mover 的迁移成本。"
++sidebar:
++  order: 9
++---
++
++## 实验前保留什么
++
++以下是可执行的学习实验设计，**本专题尚未进行 PIE、多人联机或性能实测**。先复制工程或建立版本控制检查点，记录引擎版本、角色蓝图、后端、关卡、网络模式与输入方法；每次只改变一个变量。
++
++不要在两套角色使用不同动画、不同碰撞和不同网络配置时，用肉眼比较帧率后就归因于移动框架。
++
++## 实验矩阵
++
++| 实验 | 控制输入/环境 | 记录 | 判断目的 |
++| --- | --- | --- | --- |
++| 平地启动与制动 | 同位置、同按键时长、相同帧率设置 | 意图、实际速度、位移、模式 | 分离加速度、制动和动画过渡 |
++| 持续顶墙 | 同墙面、同前进输入 | 实际位移、输入幅值、姿态 | 区分“有意图”与“实际移动” |
++| 走出边缘后落地 | 同边缘、同速度 | 模式变化、竖直速度、落地时刻 | 理解模式转换与地面检测 |
++| 滑行临界区 | 同助跑、蹲伏时机与坡度 | 提案速度、实际速度、蹲伏、模式 | 观察 380/200 条件与迟滞 |
++| 翻越与中断 | 同障碍、同起点 | Trace、Chooser、Warp Targets、Montage 回调 | 检查选择、对齐和状态恢复 |
++| 延迟与丢包 | 明确服务器/客户端数量及网络模拟配置 | 校正次数、误差、重放步数 | 验证自定义状态与预测 |
++
++网络模拟设置随工具与版本变化，使用当前编辑器支持的 Network Emulation 配置，并记录具体值。先确认故障来自哪里，再决定是否调整平滑或容差。
++
++## 出现问题时按层定位
++
++1. **输入**：控制权正确吗？世界/局部方向转换对吗？输入是否被清空或重复消费？
++2. **规则**：当前模式、速度限制、姿态和提案是否正确？
++3. **环境**：碰撞通道、地面坡度、台阶、移动基座是否符合预期？
++4. **同步**：服务器和客户端是否拥有重算所需的相同状态？
++5. **表现**：实际运动正确后，再检查轨迹、动画数据库、根运动、IK 与相机。
++
++调试输出也可能引入额外成本。先开足够定位问题的日志，测性能时再固定日志级别，避免比较不同观测开销。
++
++## 什么情况下保留 CMC
++
++已上线或接近交付、现有预测扩展成熟、技能依赖 CMC 语义、团队工具链围绕 Character 搭建时，保留 CMC 往往更可控。Mover 的结构变化不自动抵消迁移成本，也不提供未经测量的性能优势。
++
++## 什么情况下适合试用 Mover
++
++新项目需要多种运动规则组合，希望显式组织输入/状态/模拟边界，或者确有特定后端与网络物理需求时，可以用隔离原型验证。优先实现一个有代表性的动作链：移动 → 起跳 → 冲刺/击退 → 碰撞 → 落地 → 联网纠正。
++
++## 迁移检查表
++
++| 旧职责 | 在 Mover 中寻找的位置 |
++| --- | --- |
++| CMC 参数与 PhysCustom 中的规则 | 模式、共享设置、运动工具与扩展点 |
++| SavedMove / 自定义移动数据 | 输入与同步状态类型、后端序列化与恢复契约 |
++| 冲刺或 Root Motion Source | 评估 Layered Move / Effect / Mode，不做机械一对一映射 |
++| Character 直接查询 | 玩法/动画接口与 CharacterMover 查询 |
++| 普通 Montage 与根运动 | 支持 Mover 的播放与适配路径 |
++| Tick 顺序假设 | ProduceInput、模拟、Finalize、动画更新之间的实际依赖 |
++
++迁移验收应同时覆盖成功、拒绝、打断、死亡、瞬移、控制权变化与网络纠正，而不仅是“单机能跑”。最终选择以项目需求和验证结果为依据。
++
++继续：[源码索引与证据范围](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/10-sources/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/10-sources.md b/src/content/docs/knowledge/UE专栏/运动系统/10-sources.md
+new file mode 100644
+index 0000000..d4ea45a
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/10-sources.md
+@@ -0,0 +1,98 @@
++---
++title: "10. 源码索引与证据范围"
++description: "记录本系列使用的引擎版本、源码入口、蓝图读取方法及尚未执行的运行验证。"
++sidebar:
++  order: 10
++---
++
++## 研究对象与版本
++
++- 引擎：`5.8.4-58902052+++UE5+Release-5.8`，从本机 `Engine/Build/Build.version` 读取。
++- 工程：本地“游戏动画示例”的 GASP 内容；不是从最新线上版本反推。
++- 日期：2026 年 11 月 11 日。
++- 范围：源码静态阅读、蓝图结构与引脚连接读取、知识库构建。未进行 PIE、联机正确性或性能实测。
++
++工程自定义 C++ 模块目前是模板 Actor，不包含本专题讨论的移动实现。重点对象是引擎模块和 `/Game/Blueprints` 中的蓝图。
++
++## CMC 索引
++
++以下路径相对引擎安装根目录。行号用于本机本版快速定位；换版本时以符号名为准。
++
++| 文件 | 符号 | 本版行号 |
++| --- | --- | --- |
++| `Engine/Source/Runtime/Engine/Private/Components/CharacterMovementComponent.cpp` | TickComponent | 1650 |
++| 同上 | PerformMovement | 2772 |
++| 同上 | StartNewPhysics | 3531 |
++| 同上 | PhysFalling | 4887 |
++| 同上 | PhysWalking | 5653 |
++| 同上 | ClientUpdatePositionAfterServerUpdate | 8606 |
++| 同上 | ReplicateMoveToServer | 8907 |
++
++对应头文件：`Engine/Source/Runtime/Engine/Classes/GameFramework/CharacterMovementComponent.h`。继续搜索 `FSavedMove_Character`、`FCharacterNetworkMoveData`、`ServerMove_PerformMovement` 和根运动处理，而不是只阅读 Tick。
++
++## Mover 索引
++
++以下路径相对 `Engine/Plugins/Experimental/Mover/Source/Mover/`。
++
++| 文件 | 重点 |
++| --- | --- |
++| `Public/MoverComponent.h`、`Private/MoverComponent.cpp` | 输入生产、模式表、后端、Finalize 与回滚通知 |
++| `Public/MoverDataModelTypes.h` | FCharacterDefaultInputs / FMoverDefaultSyncState |
++| `Public/MoverSimulationTypes.h` | 模拟时间步、输入与状态上下文 |
++| `Private/KinematicActorSimulation.cpp` | DoSimulationTick / RollbackToPriorState |
++| `Private/MovementModeStateMachine.cpp` | 子步、行为混合、转换与模式执行 |
++| `Public/MovementMode.h` | GenerateMove / SimulationTick / 异步能力约束 |
++| `Private/DefaultMovementSet/CharacterMoverComponent.cpp` | 默认模式与 Jump 的 Instant Effect 路径 |
++| `Private/DefaultMovementSet/Modes/WalkingMode.cpp` | 通用 Walking 的提案与实际模拟 |
++| `Private/DefaultMovementSet/Modes/SmoothWalkingMode.cpp` | GASP Walking/Slide 蓝图父类的具体扩展机制 |
++| `Private/Backends/MoverNetworkPredictionLiaison.cpp` | ProduceInput / RestoreFrame / FinalizeFrame |
++| `Private/MoveLibrary/MovementMixer.cpp` | 多种移动贡献如何混合 |
++| `Public/MoverPoseSearchTrajectoryPredictor.h` | Mover 与 Pose Search 轨迹预测接口 |
++
++MoverExamples 的原生示例位于独立插件 `Engine/Plugins/Experimental/MoverExamples/`；不要把它的 `AMoverExamplesCharacter` 自动当作 GASP Mover 蓝图的父类。已导出的 GASP 角色直接父类是 Pawn。
++
++## 蓝图怎样读取
++
++本轮使用临时查看工程：保留样例插件配置，去掉不兼容的模板 C++ 模块，并让 Content 映射到原资源目录。脚本只加载和查询，没有保存、重编译或修改原蓝图资源。
++
++```text
++UnrealEditor-Cmd.exe GaspInspection.uproject
++  -run=pythonscript -script=inspect_gasp.py
++  -unattended -nullrhi -nosound
++```
++
++实际使用的读取接口：
++
++1. `BlueprintEditorLibrary.get_blueprint_parent_class` 和 `list_graphs` 读取父类与图。
++2. 直接读取 EdGraph 的 nodes 属性受到 protected 限制，首次尝试未获得节点；修正为 `ObjectIterator(EdGraphNode)` 按 Outer 筛选。
++3. 对支持的 K2 节点使用公开节点标题与引脚接口，读取引脚名称、方向、连接和常量。
++4. 使用 `SubobjectDataSubsystem` 读取蓝图组件模板及后端、模式和动画类默认配置。
++
++共读取 **12 个蓝图、5,490 个节点对象**，其中 **5,033 个节点**成功取得公开引脚列表。部分注释、动画专用节点不适用 K2 接口；本系列没有宣称完整反编译全部 AnimGraph 内部数据。
++
++:::note[不要误读导出结果]
++连接中的引脚即使有默认值，运行时也通常由连线供值，不能把其默认值当作真实输出。例如一个连接着 CalculateMaxSpeed 的引脚写着 0，并不表示角色最大速度恒为 0。节点枚举顺序也不是执行顺序，应追踪执行引脚和数据依赖。
++:::
++
++## 已核实与尚未覆盖
++
++| 内容 | 证据级别 |
++| --- | --- |
++| 角色父类、组件类型、Mover 后端与模式表 | 蓝图资产默认配置 |
++| 输入集合、属性接口、轨迹节点与翻越双路径 | 指定图内节点及连接 |
++| 滑行 380/200 条件、蹲伏判断和 NextMode | Evaluate 图的实际引脚连接与常量 |
++| ToSlide/FromSlide 注册位置、五种模式的异步支持标志 | 角色蓝图内模式实例的默认配置 |
++| 模拟前、Finalize 后和基座移动回调的绑定 | Create Delegate 指定函数与绑定节点连接 |
++| CMC 模式分派、Walking 处理、Mover 后端恢复 | 本机源码静态阅读 |
++| 帧率、耗时、实际调用次数、网络误差和中断恢复 | 本轮未测，需要实验验证 |
++
++图示是为解释职责重新绘制的 SVG，不是编辑器截图。蓝图摘录与阅读定位可下载：[GASP 蓝图证据摘要](/qmx-Gameknowledge/assets/ue-movement/blueprint-evidence.json)。本地还保留完整导出、原资源哈希和构建记录，便于继续研究。
++
++## 官方资料入口
++
++- [Epic：Character Movement Component](https://dev.epicgames.com/documentation/en-us/unreal-engine/character-movement-component-in-unreal-engine)
++- [Epic：Mover](https://dev.epicgames.com/documentation/en-us/unreal-engine/mover-in-unreal-engine)
++- [Epic：Game Animation Sample](https://dev.epicgames.com/documentation/en-us/unreal-engine/game-animation-sample-project-in-unreal-engine)
++- [EpicGames/UnrealEngine 源码仓库](https://github.com/EpicGames/UnrealEngine)：需要对应访问权限。
++
++官方文档用于继续查阅；本文的版本特定结论以本机源码和样本读取为依据。回到 [专题目录](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/目录/)。
+diff --git a/src/content/docs/knowledge/UE专栏/运动系统/目录.md b/src/content/docs/knowledge/UE专栏/运动系统/目录.md
+new file mode 100644
+index 0000000..4a9137a
+--- /dev/null
++++ b/src/content/docs/knowledge/UE专栏/运动系统/目录.md
+@@ -0,0 +1,33 @@
++---
++title: "运动系统：CMC、Mover 与 GASP"
++description: "围绕一次输入如何成为实际位移，串起 CMC、Mover、网络预测和 GASP 动画实现。"
++sidebar:
++  order: 0
++---
++
++角色能跑起来，不代表运动系统已经讲清楚。这个专题围绕四个问题展开：**谁提供意图、谁计算位移、谁决定动画、谁处理网络误差？**
++
++![CMC 集中式角色移动与 Mover 分层模拟的职责对照](/qmx-Gameknowledge/assets/ue-movement/architecture.svg)
++
++## 阅读路线
++
++| 顺序 | 章节 | 要能回答的问题 |
++| --- | --- | --- |
++| 1 | [对象、组件与最终移动权](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/01-foundations/) | Pawn、Character、碰撞体、移动组件和动画分别负责什么？ |
++| 2 | [CMC：从输入到地面移动](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/02-cmc/) | PerformMovement 为什么不能简化成位置加速度？ |
++| 3 | [CMC：网络预测、校正与重放](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/03-cmc-network/) | 为什么客户端已经走过的输入还要再执行？ |
++| 4 | [Mover：输入、状态与可组合行为](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/04-mover/) | Mode、Layered Move、Modifier、Instant Effect 怎样区分？ |
++| 5 | [Mover：模拟步、模式转换与后端](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/05-mover-simulation/) | 网络预测如何驱动模拟？异步意味着什么？ |
++| 6 | [GASP：两套角色的实现地图](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/06-gasp-map/) | 同一套角色需求如何由 CMC 与 Mover 分别承接？ |
++| 7 | [GASP：追踪输入与移动配置](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/07-gasp-input/) | 输入缓存、移动意图和最终速度为什么不同？ |
++| 8 | [GASP：翻越、根运动与动画](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/08-gasp-animation/) | Chooser、Pose Search、Motion Warping 和移动系统如何分工？ |
++| 9 | [调试实验与迁移取舍](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/09-labs/) | 如何用可观察的数据决定是否迁移？ |
++| 10 | [源码索引与证据范围](/qmx-Gameknowledge/knowledge/ue专栏/运动系统/10-sources/) | 哪些结论来自源码、蓝图读取，哪些仍需运行验证？ |
++
++## 先记住三个结论
++
++1. CMC 同样支持客户端预测和重放，Mover 的价值不能概括为“首次支持预测”。
++2. Mover 将移动模式、可组合行为和后端连接显式分开；自定义状态仍需正确参与同步与恢复。
++3. GASP 是运动与动画协作的样例。看到流畅动画，并不能推导出网络可靠性、性能优势或通用的游戏架构。
++
++版本、导出方法和已执行检查统一记录在最后的证据章节。图示均为阅读源码后绘制的解释图，不冒充编辑器截图。
+diff --git a/public/assets/ue-movement/architecture.svg b/public/assets/ue-movement/architecture.svg
+new file mode 100644
+index 0000000..ea0d93a
+--- /dev/null
++++ b/public/assets/ue-movement/architecture.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720" role="img" aria-labelledby="title desc"><title id="title">CMC 与 Mover：职责如何组织</title><desc id="desc">源码机制示意 · 省略网络角色分支与具体碰撞细节</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536d88"/></marker></defs><rect width="1120" height="720" rx="18" fill="#f4f7fc"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#16314d"><text x="42" y="54" font-size="28" font-weight="700">CMC 与 Mover：职责如何组织</text><text x="42" y="88" font-size="17" fill="#4f657c">源码机制示意 · 省略网络角色分支与具体碰撞细节</text><rect x="40" y="125" width="490" height="86" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="159" font-size="21" font-weight="700">CMC：以角色组件协调运动</text><text x="60" y="190" font-size="17">ACharacter + UCharacterMovementComponent</text><rect x="590" y="125" width="490" height="86" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="159" font-size="21" font-weight="700">Mover：组件 + 模拟 + 后端</text><text x="610" y="190" font-size="17">Pawn + CharacterMover（继承 Mover）</text><rect x="40" y="250" width="490" height="110" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="284" font-size="21" font-weight="700">PerformMovement</text><text x="60" y="315" font-size="17">输入 / 外力 / 根运动 / 状态协调</text><rect x="590" y="250" width="490" height="110" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="284" font-size="21" font-weight="700">Backend → KinematicActorSimulation</text><text x="610" y="315" font-size="17">输入命令 + 起始状态 → 推进一个模拟步</text><rect x="40" y="400" width="490" height="110" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="434" font-size="21" font-weight="700">StartNewPhysics → Phys*</text><text x="60" y="465" font-size="17">Walking / Falling / Custom 等运动分支</text><rect x="590" y="400" width="490" height="110" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="434" font-size="21" font-weight="700">MovementModeStateMachine</text><text x="610" y="465" font-size="17">Mode + Layered Move + Modifier / Effect</text><rect x="40" y="550" width="490" height="110" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="60" y="584" font-size="21" font-weight="700">实际运动与状态更新</text><text x="60" y="615" font-size="17">碰撞 / 地面 / 基座 / 网络预测重放</text><rect x="590" y="550" width="490" height="110" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="610" y="584" font-size="21" font-weight="700">同步状态 → FinalizeFrame</text><text x="610" y="615" font-size="17">实际运动 / 回滚恢复 / 游戏世界结果提交</text><path d="M285,211 L285,250" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M285,360 L285,400" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M285,510 L285,550" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M835,211 L835,250" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M835,360 L835,400" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M835,510 L835,550" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/></g></svg>
+\ No newline at end of file
+diff --git a/public/assets/ue-movement/blueprint-evidence.json b/public/assets/ue-movement/blueprint-evidence.json
+new file mode 100644
+index 0000000..0e59da8
+--- /dev/null
++++ b/public/assets/ue-movement/blueprint-evidence.json
+@@ -0,0 +1,2679 @@
++{
++  "engine": "5.8.4-58902052+++UE5+Release-5.8",
++  "method": "UE Python Commandlet; read-only queries; no asset save",
++  "assets": [
++    {
++      "path": "/Game/Blueprints/SandboxCharacter_CMC",
++      "parent": "/Script/Engine.Character",
++      "sha256": "26309aa15138a0ab5091e4f52fc26c7b95cc1b5cb8b3337a40eb4928a9ea83af",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "UpdateMovement_PreCMC",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "UpdateMovement_PreCMC"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_Knot_0",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_VariableSet_1",
++              "title": "Set Gait"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "GetDesiredGait"
++            },
++            {
++              "id": "K2Node_VariableGet_1",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableSet_0",
++              "title": "Set MaxWalkSpeed"
++            },
++            {
++              "id": "K2Node_VariableGet_3",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableSet_4",
++              "title": "Set MaxWalkSpeedCrouched"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "CalculateMaxSpeed"
++            },
++            {
++              "id": "K2Node_Knot_1",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_VariableGet_4",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableSet_2",
++              "title": "Set BrakingDecelerationWalking"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "CalculateBrakingDeceleration"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_CallFunction_3",
++              "title": "CalculateMaxAcceleration"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableSet_3",
++              "title": "Set MaxAcceleration"
++            },
++            {
++              "id": "K2Node_CallFunction_4",
++              "title": "CalculateGroundFriction"
++            },
++            {
++              "id": "K2Node_VariableSet_6",
++              "title": "Set GroundFriction"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "CalculateMaxCrouchSpeed"
++            }
++          ]
++        },
++        {
++          "name": "Get_PropertiesForAnimation",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "Get_PropertiesForAnimation"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            },
++            {
++              "id": "K2Node_MakeStruct_0",
++              "title": "Make S Character Properties for Animation"
++            },
++            {
++              "id": "K2Node_VariableGet_8",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get MovementMode"
++            },
++            {
++              "id": "K2Node_Select_3",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_VariableGet_10",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableGet_9",
++              "title": "Get bOrientRotationToMovement"
++            },
++            {
++              "id": "K2Node_Select_4",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_VariableGet_6",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "IsCrouching"
++            },
++            {
++              "id": "K2Node_Select_5",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_VariableGet_11",
++              "title": "Get Gait"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "Get Actor Transform"
++            },
++            {
++              "id": "K2Node_VariableGet_14",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableGet_13",
++              "title": "Get Velocity"
++            },
++            {
++              "id": "K2Node_VariableGet_12",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_CallFunction_3",
++              "title": "GetCurrentAcceleration"
++            },
++            {
++              "id": "K2Node_CallFunction_4",
++              "title": "GetMaxAcceleration"
++            },
++            {
++              "id": "K2Node_VariableGet_15",
++              "title": "Get BrakingDecelerationWalking"
++            },
++            {
++              "id": "K2Node_Select_0",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_CallFunction_5",
++              "title": "IsLocallyControlled"
++            },
++            {
++              "id": "K2Node_CallFunction_6",
++              "title": "GetControlRotation"
++            },
++            {
++              "id": "K2Node_CallFunction_7",
++              "title": "GetBaseAimRotation"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get CharacterInputState"
++            },
++            {
++              "id": "K2Node_VariableGet_1",
++              "title": "Get JustLanded"
++            },
++            {
++              "id": "K2Node_VariableGet_3",
++              "title": "Get LandVelocity"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "Get Actor Rotation"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get CharacterMovement"
++            },
++            {
++              "id": "K2Node_VariableGet_5",
++              "title": "Get CurrentFloor"
++            },
++            {
++              "id": "K2Node_BreakStruct_0",
++              "title": "Break Find Floor Result"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "BreakHitResult"
++            }
++          ]
++        }
++      ],
++      "components": [
++        {
++          "name": "Default__SandboxCharacter_CMC_C",
++          "class": "/Game/Blueprints/SandboxCharacter_CMC.SandboxCharacter_CMC_C",
++          "properties": {
++            "replicate_movement": "True"
++          }
++        },
++        {
++          "name": "SpringArm_GEN_VARIABLE",
++          "class": "/Script/Engine.SpringArmComponent",
++          "properties": {}
++        },
++        {
++          "name": "GameplayCamera_GEN_VARIABLE",
++          "class": "/Script/GameplayCameras.GameplayCameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "VisualOverride_GEN_VARIABLE",
++          "class": "/Script/Engine.ChildActorComponent",
++          "properties": {}
++        },
++        {
++          "name": "Camera(NotUsedByDefault)_GEN_VARIABLE",
++          "class": "/Script/Engine.CameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "Camera(NotUsedByDefault)_GEN_VARIABLE",
++          "class": "/Script/Engine.CameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "CollisionCylinder",
++          "class": "/Script/Engine.CapsuleComponent",
++          "properties": {}
++        },
++        {
++          "name": "Arrow",
++          "class": "/Script/Engine.ArrowComponent",
++          "properties": {}
++        },
++        {
++          "name": "CharacterMesh0",
++          "class": "/Script/Engine.SkeletalMeshComponent",
++          "properties": {
++            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_CMC_ABP.SandboxCharacter_CMC_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
++          }
++        },
++        {
++          "name": "CharMoveComp",
++          "class": "/Script/Engine.CharacterMovementComponent",
++          "properties": {
++            "max_walk_speed": "500.0"
++          }
++        },
++        {
++          "name": "AC_PreCMCTick_GEN_VARIABLE",
++          "class": "/Game/Blueprints/AC_PreCMCTick.AC_PreCMCTick_C",
++          "properties": {}
++        },
++        {
++          "name": "AC_FoleyEvents_GEN_VARIABLE",
++          "class": "/Game/Audio/Foley/AC_FoleyEvents.AC_FoleyEvents_C",
++          "properties": {}
++        },
++        {
++          "name": "MotionWarping_GEN_VARIABLE",
++          "class": "/Script/MotionWarping.MotionWarpingComponent",
++          "properties": {}
++        },
++        {
++          "name": "AC_TraversalLogic_GEN_VARIABLE",
++          "class": "/Game/Blueprints/AC_TraversalLogic.AC_TraversalLogic_C",
++          "properties": {}
++        },
++        {
++          "name": "BP_VisualOverrideManager_GEN_VARIABLE",
++          "class": "/Game/Blueprints/AC_VisualOverrideManager.AC_VisualOverrideManager_C",
++          "properties": {}
++        },
++        {
++          "name": "AC_SmartObjectAnimation_GEN_VARIABLE",
++          "class": "/Game/Blueprints/SmartObjects/AC_SmartObjectAnimation.AC_SmartObjectAnimation_C",
++          "properties": {}
++        }
++      ]
++    },
++    {
++      "path": "/Game/Blueprints/SandboxCharacter_Mover",
++      "parent": "/Script/Engine.Pawn",
++      "sha256": "ec3f9762d715fb64638d9f79c1714dd59cb865107cc86d74b7a8efdbf6d2361d",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "CacheInputsFromMover",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "CacheInputsFromMover"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get CharacterMover"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "GetLastInputCmd"
++            },
++            {
++              "id": "K2Node_BreakStruct_1",
++              "title": "Break Mover Input Cmd Context"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "Get Data From Collection"
++            },
++            {
++              "id": "K2Node_VariableSet_0",
++              "title": "Set MoverDefaultInputs_PostSim"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "Get Data From Collection"
++            },
++            {
++              "id": "K2Node_VariableSet_1",
++              "title": "Set MoverCustomInputs_PostSim"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_VariableSet_2",
++              "title": "Set InputCollection"
++            },
++            {
++              "id": "K2Node_VariableGet_1",
++              "title": "Get InputCollection"
++            },
++            {
++              "id": "K2Node_IfThenElse_0",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_IfThenElse_1",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get InputCollection"
++            }
++          ]
++        },
++        {
++          "name": "ProduceInput",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "ProduceInput"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            },
++            {
++              "id": "K2Node_CallFunction_4",
++              "title": "Add Data To Collection"
++            },
++            {
++              "id": "K2Node_MakeStruct_1",
++              "title": "Make Mover Input Cmd Context"
++            },
++            {
++              "id": "K2Node_CallFunction_15",
++              "title": "Get_MoveInput"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_VariableGet_8",
++              "title": "Get MoverDefaultInputs_PreSim"
++            },
++            {
++              "id": "K2Node_SetFieldsInStruct_0",
++              "title": "Set members in Character Default Inputs"
++            },
++            {
++              "id": "K2Node_Knot_1",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get MoverDefaultInputs_PreSim"
++            },
++            {
++              "id": "K2Node_SetFieldsInStruct_2",
++              "title": "Set members in Character Default Inputs"
++            },
++            {
++              "id": "K2Node_CallFunction_10",
++              "title": "Get_OrientationIntent"
++            },
++            {
++              "id": "K2Node_Knot_2",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_VariableGet_12",
++              "title": "Get InputCollection"
++            },
++            {
++              "id": "K2Node_VariableGet_3",
++              "title": "Get InputCollection"
++            },
++            {
++              "id": "K2Node_VariableGet_6",
++              "title": "Get Jump_JustPressed"
++            },
++            {
++              "id": "K2Node_CallFunction_12",
++              "title": "Add Data To Collection"
++            },
++            {
++              "id": "K2Node_VariableGet_22",
++              "title": "Get InputCollection"
++            },
++            {
++              "id": "K2Node_VariableGet_14",
++              "title": "Get MoverCustomInputs_PreSim"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "Get_MovementDirectionAndOffset"
++            },
++            {
++              "id": "K2Node_VariableGet_11",
++              "title": "Get MoverCustomInputs_PreSim"
++            },
++            {
++              "id": "K2Node_SetFieldsInStruct_4",
++              "title": "Set members in S Mover Custom Inputs"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "Get_RotationMode"
++            },
++            {
++              "id": "K2Node_CallFunction_6",
++              "title": "Get_Gait"
++            },
++            {
++              "id": "K2Node_VariableGet_18",
++              "title": "Get MoverCustomInputs_PreSim"
++            },
++            {
++              "id": "K2Node_SetFieldsInStruct_7",
++              "title": "Set members in S Mover Custom Inputs"
++            },
++            {
++              "id": "K2Node_CallFunction_11",
++              "title": "SetDirectionalInput"
++            },
++            {
++              "id": "K2Node_VariableGet_5",
++              "title": "Get MoverDefaultInputs_PreSim"
++            },
++            {
++              "id": "K2Node_VariableGet_10",
++              "title": "Get MoverDefaultInputs_PreSim"
++            },
++            {
++              "id": "K2Node_SetFieldsInStruct_5",
++              "title": "Set members in S Mover Custom Inputs"
++            },
++            {
++              "id": "K2Node_VariableGet_15",
++              "title": "Get MoverCustomInputs_PreSim"
++            },
++            {
++              "id": "K2Node_CallFunction_5",
++              "title": "Get_AimingRotation"
++            },
++            {
++              "id": "K2Node_VariableGet_4",
++              "title": "Get ControlRotationRate"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get PlayerInputState"
++            },
++            {
++              "id": "K2Node_BreakStruct_1",
++              "title": "Break S Player Input State"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get CharacterMover"
++            },
++            {
++              "id": "K2Node_CallFunction_7",
++              "title": "GetLastInputCmd"
++            },
++            {
++              "id": "K2Node_BreakStruct_2",
++              "title": "Break Mover Input Cmd Context"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "Get Data From Collection"
++            },
++            {
++              "id": "K2Node_VariableSet_1",
++              "title": "Set MoverDefaultInputs_PreSim"
++            },
++            {
++              "id": "K2Node_Knot_3",
++              "title": "变更路线节点"
++            }
++          ]
++        },
++        {
++          "name": "Get_PropertiesForAnimation",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "Get_PropertiesForAnimation"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            },
++            {
++              "id": "K2Node_MakeStruct_0",
++              "title": "Make S Character Properties for Animation"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "Get Actor Transform"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get CharacterMover"
++            },
++            {
++              "id": "K2Node_CallFunction_11",
++              "title": "GetVelocity"
++            },
++            {
++              "id": "K2Node_CallFunction_15",
++              "title": "GetTargetOrientation"
++            },
++            {
++              "id": "K2Node_VariableGet_1",
++              "title": "Get"
++            },
++            {
++              "id": "K2Node_VariableGet_13",
++              "title": "Get CharacterMover"
++            },
++            {
++              "id": "K2Node_CallFunction_14",
++              "title": "IsCrouching"
++            },
++            {
++              "id": "K2Node_Select_4",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_BreakStruct_3",
++              "title": "Break S Mover Custom Inputs"
++            },
++            {
++              "id": "K2Node_VariableGet_11",
++              "title": "Get MoverCustomInputs_PostSim"
++            },
++            {
++              "id": "K2Node_VariableGet_6",
++              "title": "Get MoverDefaultInputs_PostSim"
++            },
++            {
++              "id": "K2Node_BreakStruct_1",
++              "title": "Break Character Default Inputs"
++            },
++            {
++              "id": "K2Node_VariableGet_12",
++              "title": "Get MoverDefaultInputs_PostSim"
++            },
++            {
++              "id": "K2Node_BreakStruct_0",
++              "title": "Break Character Default Inputs"
++            },
++            {
++              "id": "K2Node_VariableGet_4",
++              "title": "Get CharacterMover"
++            },
++            {
++              "id": "K2Node_CallFunction_13",
++              "title": "Get_CurrentMovementMode"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get FloorNormal"
++            },
++            {
++              "id": "K2Node_VariableGet_5",
++              "title": "Get FloorLocation"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get BasedMovementDelta"
++            }
++          ]
++        }
++      ],
++      "components": [
++        {
++          "name": "Default__SandboxCharacter_Mover_C",
++          "class": "/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C",
++          "properties": {
++            "replicate_movement": "False"
++          }
++        },
++        {
++          "name": "GameplayCamera_GEN_VARIABLE",
++          "class": "/Script/GameplayCameras.GameplayCameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "SkeletalMesh_GEN_VARIABLE",
++          "class": "/Script/Engine.SkeletalMeshComponent",
++          "properties": {
++            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_Mover_ABP.SandboxCharacter_Mover_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
++          }
++        },
++        {
++          "name": "VisualOverride_GEN_VARIABLE",
++          "class": "/Script/Engine.ChildActorComponent",
++          "properties": {}
++        },
++        {
++          "name": "GameplayCamera_GEN_VARIABLE",
++          "class": "/Script/GameplayCameras.GameplayCameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "VisualOverride_GEN_VARIABLE",
++          "class": "/Script/Engine.ChildActorComponent",
++          "properties": {}
++        },
++        {
++          "name": "SkeletalMesh_GEN_VARIABLE",
++          "class": "/Script/Engine.SkeletalMeshComponent",
++          "properties": {
++            "anim_class": "<Object '/Game/Blueprints/SandboxCharacter_Mover_ABP.SandboxCharacter_Mover_ABP_C' Class 'AnimBlueprintGeneratedClass'>"
++          }
++        },
++        {
++          "name": "SpringArm_GEN_VARIABLE",
++          "class": "/Script/Engine.SpringArmComponent",
++          "properties": {}
++        },
++        {
++          "name": "Camera_GEN_VARIABLE",
++          "class": "/Script/Engine.CameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "Camera_GEN_VARIABLE",
++          "class": "/Script/Engine.CameraComponent",
++          "properties": {}
++        },
++        {
++          "name": "SpringArm_GEN_VARIABLE",
++          "class": "/Script/Engine.SpringArmComponent",
++          "properties": {}
++        },
++        {
++          "name": "Capsule_GEN_VARIABLE",
++          "class": "/Script/Engine.CapsuleComponent",
++          "properties": {}
++        },
++        {
++          "name": "CharacterMover_GEN_VARIABLE",
++          "class": "/Script/Mover.CharacterMoverComponent",
++          "properties": {
++            "backend_class": "<Object '/Script/Mover.MoverNetworkPredictionLiaisonComponent' Class 'Class'>",
++            "starting_movement_mode": "Falling",
++            "movement_modes": "{\"Walking\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Walking.BP_MovementMode_Walking_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Walking_C_0'\", \"Falling\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Falling.BP_MovementMode_Falling_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Falling_C_0'\", \"Flying\": \"/Game/Blueprints/MovementModes/B_MovementMode_Flying.B_MovementMode_Flying_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.B_MovementMode_Flying_C_0'\", \"Sliding\": \"/Game/Blueprints/MovementModes/BP_MovementMode_Slide.BP_MovementMode_Slide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Slide_C_0'\", \"Traversing\": \"/Script/Mover.FlyingMode'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.FlyingMode_0'\"}"
++          },
++          "mode_details": [
++            {
++              "name": "Walking",
++              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Walking.BP_MovementMode_Walking_C",
++              "properties": {
++                "transitions": "[\"/Game/Blueprints/MovementModes/BP_MovementTransition_ToSlide.BP_MovementTransition_ToSlide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Walking_C_0.BP_MovementTransition_ToSlide_C_0'\"]",
++                "supports_async": "False"
++              }
++            },
++            {
++              "name": "Falling",
++              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Falling.BP_MovementMode_Falling_C",
++              "properties": {
++                "transitions": "[]",
++                "supports_async": "False"
++              }
++            },
++            {
++              "name": "Flying",
++              "class": "/Game/Blueprints/MovementModes/B_MovementMode_Flying.B_MovementMode_Flying_C",
++              "properties": {
++                "transitions": "[]",
++                "supports_async": "False"
++              }
++            },
++            {
++              "name": "Sliding",
++              "class": "/Game/Blueprints/MovementModes/BP_MovementMode_Slide.BP_MovementMode_Slide_C",
++              "properties": {
++                "transitions": "[\"/Game/Blueprints/MovementModes/BP_MovementTransition_FromSlide.BP_MovementTransition_FromSlide_C'/Game/Blueprints/SandboxCharacter_Mover.SandboxCharacter_Mover_C:CharacterMover_GEN_VARIABLE.BP_MovementMode_Slide_C_0.BP_MovementTransition_FromSlide_C_0'\"]",
++                "supports_async": "False"
++              }
++            },
++            {
++              "name": "Traversing",
++              "class": "/Script/Mover.FlyingMode",
++              "properties": {
++                "transitions": "[]",
++                "supports_async": "False"
++              }
++            }
++          ]
++        },
++        {
++          "name": "AC_TraversalLogic_GEN_VARIABLE",
++          "class": "/Game/Blueprints/AC_TraversalLogic.AC_TraversalLogic_C",
++          "properties": {}
++        },
++        {
++          "name": "MotionWarping_GEN_VARIABLE",
++          "class": "/Script/MotionWarping.MotionWarpingComponent",
++          "properties": {}
++        },
++        {
++          "name": "AC_FoleyEvents_GEN_VARIABLE",
++          "class": "/Game/Audio/Foley/AC_FoleyEvents.AC_FoleyEvents_C",
++          "properties": {}
++        },
++        {
++          "name": "AC_VisualOverrideManager_GEN_VARIABLE",
++          "class": "/Game/Blueprints/AC_VisualOverrideManager.AC_VisualOverrideManager_C",
++          "properties": {}
++        },
++        {
++          "name": "AC_SmartObjectAnimation_GEN_VARIABLE",
++          "class": "/Game/Blueprints/SmartObjects/AC_SmartObjectAnimation.AC_SmartObjectAnimation_C",
++          "properties": {}
++        },
++        {
++          "name": "NavMover_GEN_VARIABLE",
++          "class": "/Script/Mover.NavMoverComponent",
++          "properties": {}
++        }
++      ]
++    },
++    {
++      "path": "/Game/Blueprints/SandboxCharacter_CMC_ABP",
++      "parent": "/Script/Engine.AnimInstance",
++      "sha256": "2ce5cd694a3ecd6f26136191660c7e65e230a2d41f39d93f0865836f7989ef62",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "Update_Trajectory",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_1",
++              "title": "Update_Trajectory"
++            },
++            {
++              "id": "K2Node_VariableGet_4",
++              "title": "Get TrajectoryGenerationData_Moving"
++            },
++            {
++              "id": "K2Node_VariableGet_8",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_VariableGet_9",
++              "title": "Get PreviousDesiredControllerYaw"
++            },
++            {
++              "id": "K2Node_PropertyAccess_0",
++              "title": "属性存取"
++            },
++            {
++              "id": "K2Node_PropertyAccess_1",
++              "title": "属性存取"
++            },
++            {
++              "id": "K2Node_CallFunction_4",
++              "title": "Pose Search Generate Trajectory (for Character)"
++            },
++            {
++              "id": "K2Node_CallFunction_7",
++              "title": "HandleTrajectoryWorldCollisions"
++            },
++            {
++              "id": "K2Node_VariableSet_8",
++              "title": "Set Trajectory"
++            },
++            {
++              "id": "K2Node_Self_1",
++              "title": "自引用"
++            },
++            {
++              "id": "K2Node_Select_2",
++              "title": "选择"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get TrajectoryGenerationData_Idle"
++            },
++            {
++              "id": "K2Node_VariableGet_12",
++              "title": "Get Speed2D"
++            },
++            {
++              "id": "K2Node_PromotableOperator_2",
++              "title": "float > float"
++            },
++            {
++              "id": "K2Node_VariableSet_9",
++              "title": "Set TrajectoryCollision"
++            },
++            {
++              "id": "K2Node_VariableSet_10",
++              "title": "Set Trj_FutureVelocity"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableSet_11",
++              "title": "Set Trj_CurrentVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_10",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_9",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_11",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_10",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_13",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_VariableSet_12",
++              "title": "Set Trj_PastVelocity"
++            }
++          ]
++        },
++        {
++          "name": "Update_MotionMatching",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "Update_MotionMatching"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "Convert to Motion Matching Node"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "SetDatabasesToSearch"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "Get_MMInterruptMode"
++            },
++            {
++              "id": "K2Node_EvaluateChooser2_1",
++              "title": "评估选择器：CHT_PoseSearchDatabases"
++            },
++            {
++              "id": "K2Node_Self_0",
++              "title": "自引用"
++            },
++            {
++              "id": "K2Node_VariableSet_0",
++              "title": "Set ValidDatabases"
++            }
++          ]
++        }
++      ],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/SandboxCharacter_Mover_ABP",
++      "parent": "/Script/Engine.AnimInstance",
++      "sha256": "c4d374224a8030a5b4454eabac26c36e9eeaf4cd094ac459dafc296b06e1a701",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "Update_Trajectory",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_1",
++              "title": "Update_Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_14",
++              "title": "Pose Search Generate Trajectory (using Predictor)"
++            },
++            {
++              "id": "K2Node_PropertyAccess_2",
++              "title": "属性存取"
++            },
++            {
++              "id": "K2Node_VariableGet_6",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_VariableGet_3",
++              "title": "Get PreviousDesiredControllerYaw"
++            },
++            {
++              "id": "K2Node_VariableSet_5",
++              "title": "Set Trajectory"
++            },
++            {
++              "id": "K2Node_VariableSet_6",
++              "title": "Set Trj_FutureVelocity"
++            },
++            {
++              "id": "K2Node_CallFunction_12",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableSet_2",
++              "title": "Set Trj_NearFutureVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_0",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_4",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_4",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "GetTrajectoryVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_20",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_VariableSet_4",
++              "title": "Set Trj_PastVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_14",
++              "title": "Get Predictor"
++            },
++            {
++              "id": "K2Node_VariableSet_0",
++              "title": "Set FutureFacingDelta"
++            },
++            {
++              "id": "K2Node_CallFunction_29",
++              "title": "Get_TotalFacingDelta"
++            },
++            {
++              "id": "K2Node_MakeArray_0",
++              "title": "创建数组"
++            },
++            {
++              "id": "K2Node_VariableGet_8",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "GetTrajectorySampleAtTime"
++            },
++            {
++              "id": "K2Node_VariableSet_16",
++              "title": "Set Trj_FutureFacing"
++            },
++            {
++              "id": "K2Node_CallFunction_26",
++              "title": "ToRotator (Quat)"
++            },
++            {
++              "id": "K2Node_BreakStruct_1",
++              "title": "Break Transform Trajectory Sample"
++            },
++            {
++              "id": "K2Node_VariableSet_10",
++              "title": "Set Trj_PreviousFutureVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get Trj_FutureVelocity"
++            },
++            {
++              "id": "K2Node_VariableSet_15",
++              "title": "Set Trj_TurnAngle"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "Get_TrajectoryTurnAngle"
++            },
++            {
++              "id": "K2Node_VariableSet_11",
++              "title": "Set Trj_PastAngularVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_16",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_64",
++              "title": "GetTrajectoryAngularVelocity"
++            },
++            {
++              "id": "K2Node_VariableSet_8",
++              "title": "Set Trj_CurrentAngularVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_15",
++              "title": "Get Trajectory"
++            },
++            {
++              "id": "K2Node_CallFunction_61",
++              "title": "GetTrajectoryAngularVelocity"
++            },
++            {
++              "id": "K2Node_VariableGet_11",
++              "title": "Get"
++            },
++            {
++              "id": "K2Node_VariableGet_19",
++              "title": "Get"
++            },
++            {
++              "id": "K2Node_PromotableOperator_10",
++              "title": "float > float"
++            },
++            {
++              "id": "K2Node_PromotableOperator_9",
++              "title": "float > float"
++            },
++            {
++              "id": "K2Node_PromotableOperator_11",
++              "title": "float < float"
++            },
++            {
++              "id": "K2Node_PromotableOperator_12",
++              "title": "float < float"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_6",
++              "title": "AND Boolean"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_5",
++              "title": "OR Boolean"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_4",
++              "title": "AND Boolean"
++            },
++            {
++              "id": "K2Node_VariableSet_12",
++              "title": "Set Trj_IsCircling"
++            },
++            {
++              "id": "K2Node_IfThenElse_0",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_VariableSet_3",
++              "title": "Set Trj_CirclingTime"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get Trj_CirclingTime"
++            },
++            {
++              "id": "K2Node_PromotableOperator_1",
++              "title": "float + float"
++            },
++            {
++              "id": "K2Node_CallFunction_8",
++              "title": "GetDeltaSeconds"
++            },
++            {
++              "id": "K2Node_VariableSet_9",
++              "title": "Set Trj_CirclingTime"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_1",
++              "title": "AND Boolean"
++            },
++            {
++              "id": "K2Node_VariableGet_10",
++              "title": "Get Trj_TurnAngle"
++            },
++            {
++              "id": "K2Node_CallFunction_9",
++              "title": "Absolute (Float)"
++            },
++            {
++              "id": "K2Node_PromotableOperator_3",
++              "title": "float > float"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_VariableSet_17",
++              "title": "Set FutureFacingDelta_LastFrame"
++            },
++            {
++              "id": "K2Node_VariableGet_17",
++              "title": "Get FutureFacingDelta"
++            },
++            {
++              "id": "K2Node_CallFunction_6",
++              "title": "Absolute (Float)"
++            },
++            {
++              "id": "K2Node_PromotableOperator_5",
++              "title": "float > float"
++            },
++            {
++              "id": "K2Node_IfThenElse_2",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_VariableSet_14",
++              "title": "Set MovementDirection"
++            },
++            {
++              "id": "K2Node_VariableGet_5",
++              "title": "Get FutureFacingDelta"
++            },
++            {
++              "id": "K2Node_VariableGet_9",
++              "title": "Get FutureFacingDelta_LastFrame"
++            },
++            {
++              "id": "K2Node_PromotableOperator_0",
++              "title": "float - float"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_0",
++              "title": "AND Boolean"
++            },
++            {
++              "id": "K2Node_VariableGet_18",
++              "title": "Get RotationMode"
++            },
++            {
++              "id": "K2Node_EnumInequality_0",
++              "title": "不相等（枚举）"
++            },
++            {
++              "id": "K2Node_VariableSet_7",
++              "title": "Set MovementDirection_Recent"
++            },
++            {
++              "id": "K2Node_CallFunction_3",
++              "title": "BreakVector"
++            },
++            {
++              "id": "K2Node_CallFunction_5",
++              "title": "BreakVector"
++            }
++          ]
++        },
++        {
++          "name": "Update_MotionMatching",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "Update_MotionMatching"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "Convert to Motion Matching Node"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "SetDatabasesToSearch"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "Get_MMInterruptMode"
++            },
++            {
++              "id": "K2Node_EvaluateChooser2_0",
++              "title": "评估选择器：CHT_PoseSearchDatabases_Relaxed"
++            },
++            {
++              "id": "K2Node_VariableSet_1",
++              "title": "Set ValidDatabases"
++            }
++          ]
++        }
++      ],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/AC_TraversalLogic",
++      "parent": "/Script/Engine.ActorComponent",
++      "sha256": "e59d65511376e32b3dc4ef09a45b15f407a9b658ef015478ddc99b28c673f11b",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "SetWarpTargets",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "SetWarpTargets"
++            },
++            {
++              "id": "K2Node_CallFunction_1",
++              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
++            },
++            {
++              "id": "K2Node_VariableGet_1",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_0",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_CallFunction_32",
++              "title": "NegateVector"
++            },
++            {
++              "id": "K2Node_CallFunction_34",
++              "title": "MakeRotFromX"
++            },
++            {
++              "id": "K2Node_CallFunction_6",
++              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
++            },
++            {
++              "id": "K2Node_IfThenElse_5",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_VariableGet_19",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_8",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_EnumEquality_5",
++              "title": "等于（枚举）"
++            },
++            {
++              "id": "K2Node_ExecutionSequence_0",
++              "title": "序列"
++            },
++            {
++              "id": "K2Node_EnumEquality_6",
++              "title": "等于（枚举）"
++            },
++            {
++              "id": "K2Node_CommutativeAssociativeBinaryOperator_2",
++              "title": "OR Boolean"
++            },
++            {
++              "id": "K2Node_Knot_2",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_VariableGet_9",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_6",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_CallFunction_5",
++              "title": "AddOrUpdateWarpTargetFromLocationAndRotation"
++            },
++            {
++              "id": "K2Node_VariableGet_5",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_2",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_CallFunction_2",
++              "title": "RemoveWarpTarget"
++            },
++            {
++              "id": "K2Node_CallFunction_21",
++              "title": "GetMotionWarpingWindowsForWarpTargetFromAnimation"
++            },
++            {
++              "id": "K2Node_GetArrayItem_2",
++              "title": "Get（引用）"
++            },
++            {
++              "id": "K2Node_BreakStruct_9",
++              "title": "Break Motion Warping Window Data"
++            },
++            {
++              "id": "K2Node_CallArrayFunction_2",
++              "title": "Is Not Empty"
++            },
++            {
++              "id": "K2Node_IfThenElse_6",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_CallFunction_22",
++              "title": "GetCurveValueFromAnimation"
++            },
++            {
++              "id": "K2Node_VariableSet_6",
++              "title": "Set AnimatedDistanceFromFrontLedgeToBackLedge"
++            },
++            {
++              "id": "K2Node_PromotableOperator_2",
++              "title": "vector * vector"
++            },
++            {
++              "id": "K2Node_VariableGet_17",
++              "title": "Get AnimatedDistanceFromFrontLedgeToBackLedge"
++            },
++            {
++              "id": "K2Node_VariableGet_18",
++              "title": "Get AnimatedDistanceFromFrontLedgeToBackFloor"
++            },
++            {
++              "id": "K2Node_PromotableOperator_3",
++              "title": "float - float"
++            },
++            {
++              "id": "K2Node_CallFunction_12",
++              "title": "Absolute (Float)"
++            },
++            {
++              "id": "K2Node_PromotableOperator_5",
++              "title": "vector + vector"
++            },
++            {
++              "id": "K2Node_CallFunction_17",
++              "title": "MakeVector"
++            },
++            {
++              "id": "K2Node_CallFunction_18",
++              "title": "BreakVector"
++            },
++            {
++              "id": "K2Node_IfThenElse_2",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_VariableGet_2",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_1",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_EnumEquality_3",
++              "title": "等于（枚举）"
++            },
++            {
++              "id": "K2Node_Knot_1",
++              "title": "变更路线节点"
++            },
++            {
++              "id": "K2Node_CallFunction_7",
++              "title": "RemoveWarpTarget"
++            },
++            {
++              "id": "K2Node_CallFunction_10",
++              "title": "GetMotionWarpingWindowsForWarpTargetFromAnimation"
++            },
++            {
++              "id": "K2Node_GetArrayItem_0",
++              "title": "Get（引用）"
++            },
++            {
++              "id": "K2Node_BreakStruct_7",
++              "title": "Break Motion Warping Window Data"
++            },
++            {
++              "id": "K2Node_CallArrayFunction_1",
++              "title": "Is Not Empty"
++            },
++            {
++              "id": "K2Node_IfThenElse_4",
++              "title": "分支"
++            },
++            {
++              "id": "K2Node_CallFunction_11",
++              "title": "GetCurveValueFromAnimation"
++            },
++            {
++              "id": "K2Node_VariableSet_4",
++              "title": "Set AnimatedDistanceFromFrontLedgeToBackFloor"
++            },
++            {
++              "id": "K2Node_VariableGet_6",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_5",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_VariableGet_7",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_4",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_VariableGet_10",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_10",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_VariableGet_3",
++              "title": "Get TraversalResult"
++            },
++            {
++              "id": "K2Node_BreakStruct_3",
++              "title": "Break S Traversal Check Result"
++            },
++            {
++              "id": "K2Node_CallFunction_3",
++              "title": "RemoveWarpTarget"
++            },
++            {
++              "id": "K2Node_CallFunction_20",
++              "title": "RemoveWarpTarget"
++            },
++            {
++              "id": "K2Node_PromotableOperator_0",
++              "title": "vector + vector"
++            },
++            {
++              "id": "K2Node_VariableGet_15",
++              "title": "Get CharacterProperties"
++            },
++            {
++              "id": "K2Node_BreakStruct_11",
++              "title": "Break S Character Properties for Traversal"
++            },
++            {
++              "id": "K2Node_VariableSet_0",
++              "title": "Set MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_21",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_22",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_23",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_24",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_25",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_26",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_VariableGet_16",
++              "title": "Get MotionWarping"
++            },
++            {
++              "id": "K2Node_CallFunction_0",
++              "title": "BreakVector"
++            }
++          ]
++        }
++      ],
++      "montage_execution_edges": [
++        {
++          "name": "K2Node_CustomEvent_3",
++          "class": "K2Node_CustomEvent",
++          "title": "PerformTraversalAction_Mover",
++          "pins": [
++            {
++              "name": "OutputDelegate",
++              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++              "value": "",
++              "links": []
++            },
++            {
++              "name": "then",
++              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++              "value": "",
++              "links": [
++                {
++                  "node": "K2Node_PlayMontageOnMoverActor_0",
++                  "pin": "execute"
++                }
++              ]
++            }
++          ]
++        },
++        {
++          "name": "K2Node_CustomEvent_4",
++          "class": "K2Node_CustomEvent",
++          "title": "PerformTraversalAction_CMC",
++          "pins": [
++            {
++              "name": "OutputDelegate",
++              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++              "value": "",
++              "links": []
++            },
++            {
++              "name": "then",
++              "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++              "value": "",
++              "links": [
++                {
++                  "node": "K2Node_PlayMontage_0",
++                  "pin": "execute"
++                }
++              ]
++            }
++          ]
++        }
++      ],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/BPI_SandboxCharacter_ABP",
++      "parent": "/Script/CoreUObject.Interface",
++      "sha256": "8e2635b18228c1e35266382789ce29f4481367b106ce8354944a475e17416f9b",
++      "original_bytes_unchanged": true,
++      "graphs": [],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/BPI_SandboxCharacter_Pawn",
++      "parent": "/Script/CoreUObject.Interface",
++      "sha256": "1ddf52b626b01d070f56e70065d12ab89006214037fe5bbc950cb665f444a1b8",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "Get_PropertiesForAnimation",
++          "nodes": [
++            {
++              "id": "K2Node_FunctionEntry_0",
++              "title": "Get_PropertiesForAnimation"
++            },
++            {
++              "id": "K2Node_FunctionResult_0",
++              "title": "返回节点"
++            }
++          ]
++        }
++      ],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Walking",
++      "parent": "/Script/Mover.SmoothWalkingMode",
++      "sha256": "922636eb5746126cbdc510f0b83791972544dd0e70e044b76648ece8cbd71d55",
++      "original_bytes_unchanged": true,
++      "graphs": [],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Falling",
++      "parent": "/Script/Mover.FallingMode",
++      "sha256": "e9fec2583720a7d207f751bc749d80c63b40415e5e40a2342b1462914122f306",
++      "original_bytes_unchanged": true,
++      "graphs": [],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/MovementModes/BP_MovementMode_Slide",
++      "parent": "/Script/Mover.SmoothWalkingMode",
++      "sha256": "df8b2bab74ef32d087789b1a178de33cef0c4b78572defe36e1ac98e22a9e5b2",
++      "original_bytes_unchanged": true,
++      "graphs": [],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/MovementModes/BP_MovementTransition_ToSlide",
++      "parent": "/Script/Mover.BaseMovementModeTransition",
++      "sha256": "706bbb3c8d8a8ff4fa393acea37b9b2c5083243ab8a8652c6c1e1c48e3344ce9",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "Evaluate",
++          "nodes": [
++            {
++              "name": "K2Node_FunctionEntry_0",
++              "class": "K2Node_FunctionEntry",
++              "title": "Evaluate",
++              "pins": [
++                {
++                  "name": "then",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "execute"
++                    }
++                  ]
++                },
++                {
++                  "name": "Params",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "SimulationTickParams"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_FunctionResult_1",
++              "class": "K2Node_FunctionResult",
++              "title": "返回节点",
++              "pins": [
++                {
++                  "name": "execute",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "then"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_MakeStruct_1",
++                      "pin": "TransitionEvalResult"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_MakeStruct_1",
++              "class": "K2Node_MakeStruct",
++              "title": "Make Transition Eval Result",
++              "pins": [
++                {
++                  "name": "NextMode",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "Sliding",
++                  "links": []
++                },
++                {
++                  "name": "TransitionEvalResult",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionResult_1",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_0",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Simulation Tick Params",
++              "pins": [
++                {
++                  "name": "SimulationTickParams",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionEntry_0",
++                      "pin": "Params"
++                    }
++                  ]
++                },
++                {
++                  "name": "SimContext",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MovingComps",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_18",
++                      "pin": "MovingComponentSet"
++                    }
++                  ]
++                },
++                {
++                  "name": "SimBlackboard",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "StartState",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "TimeStep",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "ProposedMove",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_6",
++                      "pin": "ProposedMove"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_IfThenElse_0",
++              "class": "K2Node_IfThenElse",
++              "title": "分支",
++              "pins": [
++                {
++                  "name": "execute",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionEntry_0",
++                      "pin": "then"
++                    }
++                  ]
++                },
++                {
++                  "name": "Condition",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "true",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "then",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionResult_1",
++                      "pin": "execute"
++                    }
++                  ]
++                },
++                {
++                  "name": "else",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CommutativeAssociativeBinaryOperator_0",
++              "class": "K2Node_CommutativeAssociativeBinaryOperator",
++              "title": "AND Boolean",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_PromotableOperator_1",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "B",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_2",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "Condition"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_6",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Proposed Move",
++              "pins": [
++                {
++                  "name": "ProposedMove",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "ProposedMove"
++                    }
++                  ]
++                },
++                {
++                  "name": "PreferredMode",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "DirectionIntent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "LinearVelocity",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_0",
++                      "pin": "A"
++                    }
++                  ]
++                },
++                {
++                  "name": "AngularVelocityDegrees",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "bHasDirIntent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MixMode",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CallFunction_0",
++              "class": "K2Node_CallFunction",
++              "title": "Vector Length XY",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "0, 0, 0",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_6",
++                      "pin": "LinearVelocity"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "0.0",
++                  "links": [
++                    {
++                      "node": "K2Node_PromotableOperator_1",
++                      "pin": "A"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_PromotableOperator_1",
++              "class": "K2Node_PromotableOperator",
++              "title": "float > float",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_0",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "B",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "380.000000",
++                  "links": []
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "A"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_18",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Moving Component Set",
++              "pins": [
++                {
++                  "name": "MovingComponentSet",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "MovingComps"
++                    }
++                  ]
++                },
++                {
++                  "name": "UpdatedComponent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "UpdatedPrimitive",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MoverComponent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_2",
++                      "pin": "self"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CallFunction_2",
++              "class": "K2Node_CallFunction",
++              "title": "HasGameplayTag",
++              "pins": [
++                {
++                  "name": "self",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_18",
++                      "pin": "MoverComponent"
++                    }
++                  ]
++                },
++                {
++                  "name": "TagToFind",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "(TagName=\"Mover.Stance.IsCrouching\")",
++                  "links": []
++                },
++                {
++                  "name": "bExactMatch",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": []
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "B"
++                    }
++                  ]
++                }
++              ]
++            }
++          ]
++        }
++      ],
++      "components": []
++    },
++    {
++      "path": "/Game/Blueprints/MovementModes/BP_MovementTransition_FromSlide",
++      "parent": "/Script/Mover.BaseMovementModeTransition",
++      "sha256": "dd7e26f00fd25a1582541ec1cc050300279fc2709fbc1e987c8ef9ed3851b049",
++      "original_bytes_unchanged": true,
++      "graphs": [
++        {
++          "name": "Evaluate",
++          "nodes": [
++            {
++              "name": "K2Node_FunctionEntry_0",
++              "class": "K2Node_FunctionEntry",
++              "title": "Evaluate",
++              "pins": [
++                {
++                  "name": "then",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "execute"
++                    }
++                  ]
++                },
++                {
++                  "name": "Params",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "SimulationTickParams"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_FunctionResult_1",
++              "class": "K2Node_FunctionResult",
++              "title": "返回节点",
++              "pins": [
++                {
++                  "name": "execute",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "then"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_MakeStruct_1",
++                      "pin": "TransitionEvalResult"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_MakeStruct_1",
++              "class": "K2Node_MakeStruct",
++              "title": "Make Transition Eval Result",
++              "pins": [
++                {
++                  "name": "NextMode",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "Walking",
++                  "links": []
++                },
++                {
++                  "name": "TransitionEvalResult",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionResult_1",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_0",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Simulation Tick Params",
++              "pins": [
++                {
++                  "name": "SimulationTickParams",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionEntry_0",
++                      "pin": "Params"
++                    }
++                  ]
++                },
++                {
++                  "name": "SimContext",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MovingComps",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_18",
++                      "pin": "MovingComponentSet"
++                    }
++                  ]
++                },
++                {
++                  "name": "SimBlackboard",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "StartState",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_1",
++                      "pin": "MoverTickStartData"
++                    }
++                  ]
++                },
++                {
++                  "name": "TimeStep",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "ProposedMove",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_6",
++                      "pin": "ProposedMove"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_1",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Mover Tick Start Data",
++              "pins": [
++                {
++                  "name": "MoverTickStartData",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "StartState"
++                    }
++                  ]
++                },
++                {
++                  "name": "InputCmd",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "SyncState",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "AuxState",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_IfThenElse_0",
++              "class": "K2Node_IfThenElse",
++              "title": "分支",
++              "pins": [
++                {
++                  "name": "execute",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionEntry_0",
++                      "pin": "then"
++                    }
++                  ]
++                },
++                {
++                  "name": "Condition",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "true",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "then",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_FunctionResult_1",
++                      "pin": "execute"
++                    }
++                  ]
++                },
++                {
++                  "name": "else",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_6",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Proposed Move",
++              "pins": [
++                {
++                  "name": "ProposedMove",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "ProposedMove"
++                    }
++                  ]
++                },
++                {
++                  "name": "PreferredMode",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "DirectionIntent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "LinearVelocity",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_0",
++                      "pin": "A"
++                    }
++                  ]
++                },
++                {
++                  "name": "AngularVelocityDegrees",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "bHasDirIntent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MixMode",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CallFunction_0",
++              "class": "K2Node_CallFunction",
++              "title": "Vector Length XY",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "0, 0, 0",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_6",
++                      "pin": "LinearVelocity"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "0.0",
++                  "links": [
++                    {
++                      "node": "K2Node_PromotableOperator_1",
++                      "pin": "A"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CallFunction_1",
++              "class": "K2Node_CallFunction",
++              "title": "NOT Boolean",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_9",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "A"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CommutativeAssociativeBinaryOperator_0",
++              "class": "K2Node_CommutativeAssociativeBinaryOperator",
++              "title": "OR Boolean",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_1",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "B",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_PromotableOperator_1",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_IfThenElse_0",
++                      "pin": "Condition"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_DynamicCast_0",
++              "class": "K2Node_DynamicCast",
++              "title": "Cast To CharacterMoverComponent",
++              "pins": [
++                {
++                  "name": "Object",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_18",
++                      "pin": "MoverComponent"
++                    }
++                  ]
++                },
++                {
++                  "name": "As角色移动器组件",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_9",
++                      "pin": "self"
++                    }
++                  ]
++                },
++                {
++                  "name": "bSuccess",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                }
++              ]
++            },
++            {
++              "name": "K2Node_CallFunction_9",
++              "class": "K2Node_CallFunction",
++              "title": "IsCrouching",
++              "pins": [
++                {
++                  "name": "self",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_DynamicCast_0",
++                      "pin": "As角色移动器组件"
++                    }
++                  ]
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "false",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_1",
++                      "pin": "A"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_BreakStruct_18",
++              "class": "K2Node_BreakStruct",
++              "title": "Break Moving Component Set",
++              "pins": [
++                {
++                  "name": "MovingComponentSet",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_BreakStruct_0",
++                      "pin": "MovingComps"
++                    }
++                  ]
++                },
++                {
++                  "name": "UpdatedComponent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "UpdatedPrimitive",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": []
++                },
++                {
++                  "name": "MoverComponent",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_DynamicCast_0",
++                      "pin": "Object"
++                    }
++                  ]
++                }
++              ]
++            },
++            {
++              "name": "K2Node_PromotableOperator_1",
++              "class": "K2Node_PromotableOperator",
++              "title": "float <= float",
++              "pins": [
++                {
++                  "name": "A",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CallFunction_0",
++                      "pin": "ReturnValue"
++                    }
++                  ]
++                },
++                {
++                  "name": "B",
++                  "direction": "<EdGraphPinDirection.EGPD_INPUT: 0>",
++                  "value": "200.000000",
++                  "links": []
++                },
++                {
++                  "name": "ReturnValue",
++                  "direction": "<EdGraphPinDirection.EGPD_OUTPUT: 1>",
++                  "value": "",
++                  "links": [
++                    {
++                      "node": "K2Node_CommutativeAssociativeBinaryOperator_0",
++                      "pin": "B"
++                    }
++                  ]
++                }
++              ]
++            }
++          ]
++        }
++      ],
++      "components": []
++    }
++  ]
++}
+\ No newline at end of file
+diff --git a/public/assets/ue-movement/gasp-flow.svg b/public/assets/ue-movement/gasp-flow.svg
+new file mode 100644
+index 0000000..50d9c21
+--- /dev/null
++++ b/public/assets/ue-movement/gasp-flow.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="770" viewBox="0 0 1120 770" role="img" aria-labelledby="title desc"><title id="title">GASP：运动、动画与翻越的连接</title><desc id="desc">蓝图路径均相对于 /Game/Blueprints · 阅读图，不是编辑器截图</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536d88"/></marker></defs><rect width="1120" height="770" rx="18" fill="#f4f7fc"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#16314d"><text x="42" y="54" font-size="28" font-weight="700">GASP：运动、动画与翻越的连接</text><text x="42" y="88" font-size="17" fill="#4f657c">蓝图路径均相对于 /Game/Blueprints · 阅读图，不是编辑器截图</text><rect x="40" y="125" width="490" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="159" font-size="21" font-weight="700">SandboxCharacter_CMC</text><text x="60" y="190" font-size="17">Character / CharMoveComp / CMC_ABP</text><rect x="590" y="125" width="490" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="159" font-size="21" font-weight="700">SandboxCharacter_Mover</text><text x="610" y="190" font-size="17">Pawn / CharacterMover / Mover_ABP</text><rect x="40" y="275" width="490" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="309" font-size="21" font-weight="700">CMC 配置更新</text><text x="60" y="340" font-size="17">UpdateMovement_PreCMC / Rotation_PreCMC</text><rect x="590" y="275" width="490" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="309" font-size="21" font-weight="700">Mover 输入与模拟</text><text x="610" y="340" font-size="17">ProduceInput / 自定义 Modes / PostFinalize</text><path d="M285,230 L285,275" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M835,230 L835,275" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="285" y="425" width="550" height="105" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="305" y="459" font-size="21" font-weight="700">角色接口：表达玩法和动画需要的属性</text><text x="305" y="490" font-size="17">BPI_SandboxCharacter_Pawn / ABP</text><path d="M285,380 L430,425" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M835,380 L690,425" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="40" y="580" width="490" height="120" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="614" font-size="21" font-weight="700">动画：姿态选择与修正</text><text x="60" y="645" font-size="17">Motion Matching / Pose Search</text><text x="60" y="672" font-size="17">IK / Orientation 与其他 Warping</text><rect x="590" y="580" width="490" height="120" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="610" y="614" font-size="21" font-weight="700">翻越：AC_TraversalLogic</text><text x="610" y="645" font-size="17">检查环境 / 选择 Montage / Warp Targets</text><text x="610" y="672" font-size="17">分别衔接 CMC 与 Mover 的执行路径</text><path d="M430,530 L285,580" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M690,530 L835,580" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/></g></svg>
+\ No newline at end of file
+diff --git a/public/assets/ue-movement/intent-state.svg b/public/assets/ue-movement/intent-state.svg
+new file mode 100644
+index 0000000..f47bf92
+--- /dev/null
++++ b/public/assets/ue-movement/intent-state.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc"><title id="title">同一输入，为什么得到不同结果？</title><desc id="desc">把意图、模拟事实与表现分开观察</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536d88"/></marker></defs><rect width="1120" height="620" rx="18" fill="#f4f7fc"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#16314d"><text x="42" y="54" font-size="28" font-weight="700">同一输入，为什么得到不同结果？</text><text x="42" y="88" font-size="17" fill="#4f657c">把意图、模拟事实与表现分开观察</text><rect x="40" y="140" width="300" height="150" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="174" font-size="21" font-weight="700">输入意图</text><text x="60" y="205" font-size="17">向前输入 = 1</text><text x="60" y="232" font-size="17">希望冲刺 / 希望跳跃</text><text x="60" y="259" font-size="17">属于命令</text><rect x="410" y="140" width="300" height="150" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="430" y="174" font-size="21" font-weight="700">实际模拟状态</text><text x="430" y="205" font-size="17">碰撞后速度可能为 0</text><text x="430" y="232" font-size="17">地面 / 基座 / 移动模式</text><text x="430" y="259" font-size="17">属于运动事实</text><rect x="780" y="140" width="300" height="150" rx="12" fill="#fff0d9" stroke="#b9cbdf"/><text x="800" y="174" font-size="21" font-weight="700">动画表现</text><text x="800" y="205" font-size="17">选择姿态与混合权重</text><text x="800" y="232" font-size="17">脚部 IK / 身体朝向</text><text x="800" y="259" font-size="17">属于骨骼呈现</text><path d="M340,205 L410,205" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M710,205 L780,205" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="40" y="365" width="1040" height="140" rx="12" fill="#ffffff" stroke="#b9cbdf"/><text x="60" y="399" font-size="21" font-weight="700">例子：持续顶墙</text><text x="60" y="430" font-size="17">输入仍然非零，但胶囊体实际位移接近零。</text><text x="60" y="457" font-size="17">动画既可能需要“启动意图”，也需要“真实速度”；不要用一个变量替代全部状态。</text></g></svg>
+\ No newline at end of file
+diff --git a/public/assets/ue-movement/prediction.svg b/public/assets/ue-movement/prediction.svg
+new file mode 100644
+index 0000000..f79b17f
+--- /dev/null
++++ b/public/assets/ue-movement/prediction.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="680" viewBox="0 0 1120 680" role="img" aria-labelledby="title desc"><title id="title">预测、确认与重放</title><desc id="desc">以自主代理为例 · 校正只恢复基准，后续未确认输入还要重算</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536d88"/></marker></defs><rect width="1120" height="680" rx="18" fill="#f4f7fc"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#16314d"><text x="42" y="54" font-size="28" font-weight="700">预测、确认与重放</text><text x="42" y="88" font-size="17" fill="#4f657c">以自主代理为例 · 校正只恢复基准，后续未确认输入还要重算</text><rect x="45" y="135" width="450" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="65" y="169" font-size="21" font-weight="700">客户端：立即响应输入</text><text x="65" y="200" font-size="17">执行 100 → 101 → 102，保留历史</text><rect x="625" y="135" width="450" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="645" y="169" font-size="21" font-weight="700">服务器：权威模拟</text><text x="645" y="200" font-size="17">接收输入，推进并验证状态</text><path d="M495,180 L625,180" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="570.0" y="172.0" font-size="16">输入</text><rect x="625" y="300" width="450" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="645" y="334" font-size="21" font-weight="700">确认或返回权威状态</text><text x="645" y="365" font-size="17">例如返回输入 100 对应的基准</text><path d="M850,240 L850,300" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="45" y="300" width="450" height="105" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="65" y="334" font-size="21" font-weight="700">客户端：需要纠正时恢复 100</text><text x="65" y="365" font-size="17">不是从服务器位置直接跳过历史</text><path d="M625,353 L495,353" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="570.0" y="345.0" font-size="16">校正</text><rect x="45" y="465" width="450" height="105" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="65" y="499" font-size="21" font-weight="700">重放 101 → 102</text><text x="65" y="530" font-size="17">按历史输入推导修正后的“现在”</text><path d="M270,405 L270,465" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="625" y="465" width="450" height="105" rx="12" fill="#fff0d9" stroke="#b9cbdf"/><text x="645" y="499" font-size="21" font-weight="700">表现层平滑</text><text x="645" y="530" font-size="17">视觉过渡不替代运动重模拟</text><path d="M495,515 L625,515" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><text x="45" y="625" font-size="18">适用于理解 CMC 与预测后端；两者历史数据结构和具体调用实现不同。</text></g></svg>
+\ No newline at end of file
+diff --git a/public/assets/ue-movement/slide-transitions.svg b/public/assets/ue-movement/slide-transitions.svg
+new file mode 100644
+index 0000000..7fdf89b
+--- /dev/null
++++ b/public/assets/ue-movement/slide-transitions.svg
+@@ -0,0 +1 @@
++<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="670" viewBox="0 0 1120 670" role="img" aria-labelledby="title desc"><title id="title">GASP 滑行转换：迟滞区避免反复切换</title><desc id="desc">按实际 Evaluate 引脚绘制 · 比较的是 ProposedMove 的水平速度</desc><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#536d88"/></marker></defs><rect width="1120" height="670" rx="18" fill="#f4f7fc"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#16314d"><text x="42" y="54" font-size="28" font-weight="700">GASP 滑行转换：迟滞区避免反复切换</text><text x="42" y="88" font-size="17" fill="#4f657c">按实际 Evaluate 引脚绘制 · 比较的是 ProposedMove 的水平速度</text><rect x="40" y="140" width="460" height="125" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="60" y="174" font-size="21" font-weight="700">Walking → Sliding</text><text x="60" y="205" font-size="17">水平提案速度 &gt; 380</text><text x="60" y="232" font-size="17">AND 蹲伏 Gameplay Tag 为真</text><rect x="620" y="140" width="460" height="125" rx="12" fill="#e1edff" stroke="#b9cbdf"/><text x="640" y="174" font-size="21" font-weight="700">Sliding → Walking</text><text x="640" y="205" font-size="17">水平提案速度 &lt;= 200</text><text x="640" y="232" font-size="17">OR CharacterMover.IsCrouching() 为假</text><path d="M500,200 L620,200" stroke="#536d88" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="40" y="330" width="1040" height="120" rx="12" fill="#e1f2eb" stroke="#b9cbdf"/><text x="60" y="364" font-size="21" font-weight="700">200 &lt; 速度 &lt;= 380：进入和退出不是同一个阈值</text><text x="60" y="395" font-size="17">保持蹲伏时，刚进入这个区间不会仅因速度条件立即触发相反转换。</text><text x="60" y="422" font-size="17">转换是否被调用，还取决于模式实例的 Transitions 配置和状态机执行。</text><rect x="40" y="490" width="1040" height="115" rx="12" fill="#ffffff" stroke="#b9cbdf"/><text x="60" y="524" font-size="21" font-weight="700">蓝图定位</text><text x="60" y="555" font-size="17">BP_MovementTransition_ToSlide.Evaluate / BP_MovementTransition_FromSlide.Evaluate</text><text x="60" y="582" font-size="17">阈值来自未连接的常量引脚；连接引脚上的默认值不代表运行时输入。</text></g></svg>
+\ No newline at end of file

@@ -8,12 +8,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const categories = [
   { id: 'language', title: '语言与内存', description: 'C#、面向对象、运行时与内存管理。', folders: ['csharp速通', 'csharp与unity内存基础', 'csharp底层专栏', '面向对象串讲'] },
   { id: 'unity', title: 'Unity 与 ECS', description: '编辑器基础、Job、Burst、Entities 与工厂游戏实现。', folders: ['unity-job与burst', 'ecs学习', '认识unity'] },
+  { id: 'unreal', title: 'Unreal Engine', description: '从引擎源码到 GASP 蓝图，研究 CMC、Mover 与角色运动动画。', folders: ['ue专栏'] },
   { id: 'source', title: '源码研究', description: 'Minecraft 世界生成与消失的光芒系统拆解。', folders: ['minecraft源码学习', '消失的光芒逆向学习'] },
   { id: 'engineering', title: '热更新与工程', description: '资源管理、AssetBundle、Addressables 与代码热更。', folders: ['unity热更新专栏'] },
   { id: 'reference', title: '工具与知识速查', description: 'Git 协作、开发工具、基础知识与学习记录。', folders: ['git使用指南', '工具', '八股', '自我忏悔'] },
   { id: 'projects', title: '项目与使用指南', description: '项目介绍、实践记录以及知识库的使用与维护。', folders: ['projects', 'guide'] },
 ];
 const labels: Record<string, string> = {
+  'ue专栏': 'UE 专栏 · 运动系统',
   'csharp速通': 'C# 速通', 'csharp与unity内存基础': 'C# 与 Unity 内存基础', 'csharp底层专栏': 'C# 底层专栏',
   'unity-job与burst': 'Unity Job、Burst 与 Entities', 'ecs学习': 'ECS 学习与工厂游戏',
   '认识unity': '认识 Unity', 'minecraft源码学习': 'Minecraft 源码学习',
@@ -30,7 +32,7 @@ for (const doc of docs) {
 }
 // 未登记的新专题放入速查区，保证首页覆盖全部文档。
 const assigned = new Set(categories.flatMap((category) => category.folders));
-for (const folder of buckets.keys()) if (!assigned.has(folder)) categories[4].folders.push(folder);
+for (const folder of buckets.keys()) if (!assigned.has(folder)) categories.find((category) => category.id === 'reference')!.folders.push(folder);
 const sections = categories.map((category) => ({
   ...category,
   topics: category.folders.filter((folder) => buckets.has(folder)).map((folder) => {

@@ -1,0 +1,90 @@
+[
+  {
+    "label": "INITIAL_PATCH_VERIFY_ERROR",
+    "command": [
+      "python",
+      "artifacts/ue-movement/verify_transaction.py"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "Git apply check/apply returned 0 but skipped paths outside its repository subdirectory.",
+    "stderr": "FileNotFoundError while reopening reconstructed UE专栏/目录.md; verification process exit 1. Corrected by applying from repository root with --directory.",
+    "exit": 1
+  },
+  {
+    "label": "SECOND_PATCH_VERIFY_ERROR",
+    "command": [
+      "python",
+      "artifacts/ue-movement/verify_transaction.py"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "Git patch reconstructed all paths; byte comparison detected LF/CRLF conversion.",
+    "stderr": "AssertionError for UE专栏/目录.md; exit 1. Aligned final text artifacts with repository Windows CRLF checkout policy before third verification.",
+    "exit": 1
+  },
+  {
+    "label": "BASELINE",
+    "command": [
+      "python",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\probe_home.py",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\homepage-baseline.html",
+      "unreal"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "category=unreal; links=0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  {
+    "label": "MODIFIED",
+    "command": [
+      "python",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\probe_home.py",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\dist\\index.html",
+      "unreal"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "category=unreal; links=1\n",
+    "stderr": "",
+    "exit": 0
+  },
+  {
+    "label": "ROLLBACK",
+    "command": [
+      "python",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\probe_home.py",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\work\\ue-rollback-verification\\dist\\index.html",
+      "unreal"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "category=unreal; links=0\n",
+    "stderr": "",
+    "exit": 0
+  },
+  {
+    "label": "PATCH_CHECK",
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "--directory=work/ue-patch-verification-v3",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\DIFF_FILE.patch"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "",
+    "stderr": "",
+    "exit": 0
+  },
+  {
+    "label": "PATCH_APPLY",
+    "command": [
+      "git",
+      "apply",
+      "--directory=work/ue-patch-verification-v3",
+      "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\ue-movement\\DIFF_FILE.patch"
+    ],
+    "cwd": "D:\\QMX-Studio\\qmx-Gameknowledge",
+    "stdout": "",
+    "stderr": "",
+    "exit": 0
+  }
+]
