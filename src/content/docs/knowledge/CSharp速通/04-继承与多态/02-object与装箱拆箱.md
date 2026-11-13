@@ -109,6 +109,8 @@ sealed class FinalBoss : Enemy
 
 ## 动手试试
 
+> **代码归属**：`【实验代码】`。本段只放进 `Assets/Speedrun/Labs/` 临时验证；要进入小游戏主线，请跟随后文或目录中的 `【主线实践】` 文章，在 `Assets/Speedrun/Game/` 重新接入并完成验收。
+
 ```csharp
 using UnityEngine;
 
@@ -133,6 +135,12 @@ public class BoxDemo : MonoBehaviour
 ```
 
 先把最后一行注释掉运行，再取消注释，看拆箱类型不匹配时的报错，并改成 `(long)(int)boxed` 修复。
+
+## 项目应用决策：object 是边界工具，不是游戏数据模型
+
+日志、编辑器工具或需要接收任意值的基础设施可能使用 `object`；战斗、库存和状态逻辑应保持明确类型，避免装箱、拆箱和运行时类型判断。`UnityEngine.Object` 还带有引擎生命周期语义，不能和普通 C# `object` 混为一谈。
+
+验收时在 Profiler 中观察把结构体放进非泛型集合的分配，再改为泛型集合；比较一个已销毁 Unity 对象和普通 null 的行为，确认判断方式来自对象所属运行时，而不是凭经验套用。
 
 ## 常见坑
 

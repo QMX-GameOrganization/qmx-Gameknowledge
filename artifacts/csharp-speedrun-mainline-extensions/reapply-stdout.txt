@@ -1,0 +1,14 @@
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\csharp-speedrun-mainline-extensions\\rollback-copy",
+  "extension_count": 7,
+  "missing_extension_labels": [],
+  "missing_original_markers": [],
+  "missing_links": [],
+  "checks": {
+    "seven_extension_pages": true,
+    "extension_labels": true,
+    "original_markers": true,
+    "links": true
+  },
+  "passed": true
+}

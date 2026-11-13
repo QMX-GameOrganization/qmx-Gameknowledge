@@ -1,0 +1,23 @@
+{
+  "files": [
+    {
+      "path": "03-封装\\04-静态成员与扩展方法.md",
+      "baseline": "f091d3dafa53793f367d4a534e165129e34d6ca5d3c9f0bf09e0445d5f28a078",
+      "rollback": "964ebd0ec91a0f43b955bbe70e0d5ced1aaa98121e08f08f2deba87311392439",
+      "equal": false
+    },
+    {
+      "path": "06-通向Unity\\01-综合练习方块人.md",
+      "baseline": "e72184cba3ddaede207caf073352cb85c4f226de855c308aaca23c2d98cf9c19",
+      "rollback": "99784949dcabab8a2890aa87be58abb52f433e53fd9306dfa655aae36a9f450f",
+      "equal": false
+    },
+    {
+      "path": "目录.md",
+      "baseline": "26717076efc028cd8fca11cf210ac3f5038dd179cca4c925128e08c219610daf",
+      "rollback": "7c9437eab514cfba2655d82bf4ac2db2693231b485682430b6d83b19ee4235d8",
+      "equal": false
+    }
+  ],
+  "all_equal": false
+}

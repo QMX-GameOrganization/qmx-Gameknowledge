@@ -1,0 +1,29 @@
+本轮目标：为“C# 语法主线”和“可玩的 Unity 小游戏”之间增加明确的主线支撑文章，并给原文章和代码加入主线标记。
+
+标记约定：
+- 【主线必做】：直接决定玩家、敌人、数据或胜负的内容。
+- 【主线支撑】：Unity 场景、组件、输入、镜头、UI、对象池和构建等工程内容。
+- 【可选扩展】：不阻塞小游戏通关的深入内容。
+
+实际改动：
+- 新增 7 篇按章节承接的主线支撑文章：项目启动、玩家移动、玩家数据、状态边界、攻击目标、事件/冷却/对象池、完整关卡装配。
+- 在目录中增加标记规范和章节承接表。
+- 在 14 篇原文章和关键代码入口处加入“本篇主线标记”。
+
+验证命令：
+- 基线：python artifacts/csharp-speedrun-mainline-extensions/verify_mainline_extensions.py artifacts/csharp-speedrun-mainline-extensions/baseline
+  - EXIT 1；基线没有扩展文章和原文章标记。
+- 修改后：python artifacts/csharp-speedrun-mainline-extensions/verify_mainline_extensions.py src/content/docs/knowledge/CSharp速通
+  - EXIT 0；7 篇扩展文章、14 个原文章标记和链接全部通过。
+- 回滚：bash artifacts/csharp-speedrun-mainline-extensions/ROLLBACK.sh artifacts/csharp-speedrun-mainline-extensions/rollback-copy
+  - 脚本 EXIT 0；回滚后同一验证 EXIT 1，恢复到基线行为。
+- 回滚哈希：EXIT 0；15 个原有文件哈希全部恢复。
+- 重新应用：同一验证 EXIT 0。
+- git diff --check：EXIT 0。
+- npm run build：EXIT 0；构建 372 个页面。
+
+证据角色：
+- MODIFIED_FILE.json：本轮修改文件和哈希。
+- DIFF_FILE.patch：从当前基线重建候选的补丁。
+- VERIFICATION.txt：本记录。
+- ROLLBACK.sh：接受目标副本、恢复原有文件并删除新增扩展页的回滚脚本。

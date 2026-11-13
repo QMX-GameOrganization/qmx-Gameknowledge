@@ -1,0 +1,65 @@
+{
+  "all_equal": true,
+  "files": [
+    {
+      "path": "00-先认识Unity\\00-主线项目与Unity运行逻辑.md",
+      "equal": true
+    },
+    {
+      "path": "00-先认识Unity\\01-游戏是怎么跑起来的.md",
+      "equal": true
+    },
+    {
+      "path": "00-先认识Unity\\02-场景物体与组件.md",
+      "equal": true
+    },
+    {
+      "path": "00-先认识Unity\\03-脚本就是组件.md",
+      "equal": true
+    },
+    {
+      "path": "00-先认识Unity\\04-在Unity里学CSharp.md",
+      "equal": true
+    },
+    {
+      "path": "01-入门\\05-位运算.md",
+      "equal": true
+    },
+    {
+      "path": "02-基础\\01-枚举.md",
+      "equal": true
+    },
+    {
+      "path": "02-基础\\03-值类型和引用类型.md",
+      "equal": true
+    },
+    {
+      "path": "03-封装\\03-属性与索引器.md",
+      "equal": true
+    },
+    {
+      "path": "03-封装\\04-静态成员与扩展方法.md",
+      "equal": true
+    },
+    {
+      "path": "04-继承与多态\\03-多态抽象类接口.md",
+      "equal": true
+    },
+    {
+      "path": "05-进阶\\01-泛型与集合.md",
+      "equal": true
+    },
+    {
+      "path": "05-进阶\\02-委托与事件.md",
+      "equal": true
+    },
+    {
+      "path": "06-通向Unity\\01-综合练习方块人.md",
+      "equal": true
+    },
+    {
+      "path": "目录.md",
+      "equal": true
+    }
+  ]
+}

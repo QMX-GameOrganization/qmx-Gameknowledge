@@ -1,0 +1,443 @@
+C# 速通应用性重构验证记录
+
+TARGET
+- D:\QMX-Studio\qmx-Gameknowledge\src\content\docs\knowledge\CSharp速通
+- 本轮审查对象保持稳定，新增/修改的是文章中的“项目应用决策”与总目录规则。
+
+GOAL
+- 每篇正文都回答：真实问题、为什么选、相近方案区别、使用边界、可观察验收。
+- 将孤立语法练习绑定到方块地牢的 Unity 场景、组件、生命周期和状态闭环。
+
+OBSERVED COVERAGE
+- 正文数量：33
+- 含“项目应用决策”段落：33
+- 目录“五个问题”规则：存在
+- 应用性链接检查：通过
+
+BASELINE COMMAND
+python artifacts/csharp-speedrun-application-audit/verify_application.py artifacts/csharp-speedrun-application-audit/baseline
+EXIT: 1
+STDOUT:
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\csharp-speedrun-application-audit\\baseline",
+  "page_count": 33,
+  "missing_sections": [
+    "00-����ʶUnity\\00-������Ŀ��Unity�����߼�.md",
+    "00-����ʶUnity\\01-��Ϸ����ô��������.md",
+    "00-����ʶUnity\\02-�������������.md",
+    "00-����ʶUnity\\03-�ű��������.md",
+    "00-����ʶUnity\\04-��Unity��ѧCSharp.md",
+    "01-����\\01-��Cpp��CSharp�ĵ�һӡ��.md",
+    "01-����\\02-����ת��.md",
+    "01-����\\03-�쳣����.md",
+    "01-����\\04-�ַ�����ƴ��.md",
+    "01-����\\05-λ����.md",
+    "02-����\\01-ö��.md",
+    "02-����\\02-����.md",
+    "02-����\\03-ֵ���ͺ���������.md",
+    "02-����\\04-����.md",
+    "02-����\\05-�ṹ��.md",
+    "03-��װ\\01-��Ͷ���.md",
+    "03-��װ\\02-��Ա�����빹�캯��.md",
+    "03-��װ\\03-������������.md",
+    "03-��װ\\04-��̬��Ա����չ����.md",
+    "03-��װ\\05-����������ڲ���ֲ���.md",
+    "04-�̳����̬\\01-�̳л���.md",
+    "04-�̳����̬\\02-object��װ�����.md",
+    "04-�̳����̬\\03-��̬������ӿ�.md",
+    "04-�̳����̬\\04-������ӿ������������ռ�.md",
+    "05-����\\01-�����뼯��.md",
+    "05-����\\02-ί�����¼�.md",
+    "05-����\\03-������Э�����.md",
+    "05-����\\04-��������Ԥ����.md",
+    "05-����\\05-���߳�.md",
+    "06-ͨ��Unity\\01-�ۺ���ϰ������.md",
+    "06-ͨ��Unity\\02-��������Э��.md",
+    "06-ͨ��Unity\\03-�ٲ����ѧϰ·��.md",
+    "06-ͨ��Unity\\04-����С��Ϸ����.md"
+  ],
+  "missing_links": [
+    "01-��Ϸ����ô��������.md -> ../02-�������������/",
+    "02-�������������.md -> ../03-�ű��������/",
+    "03-�ű��������.md -> ../04-��Unity��ѧCSharp/",
+    "04-��Unity��ѧCSharp.md -> ../../01-����/01-��Cpp��CSharp�ĵ�һӡ��/",
+    "01-��Cpp��CSharp�ĵ�һӡ��.md -> ../02-����ת��/",
+    "02-����ת��.md -> ../03-�쳣����/",
+    "03-�쳣����.md -> ../04-�ַ�����ƴ��/",
+    "04-�ַ�����ƴ��.md -> ../05-λ����/",
+    "05-λ����.md -> ../../02-����/01-ö��/",
+    "01-ö��.md -> ../02-����/",
+    "02-����.md -> ../03-ֵ���ͺ���������/",
+    "03-ֵ���ͺ���������.md -> ../04-����/",
+    "04-����.md -> ../05-�ṹ��/",
+    "05-�ṹ��.md -> ../../03-��װ/01-��Ͷ���/",
+    "01-��Ͷ���.md -> ../02-��Ա�����빹�캯��/",
+    "02-��Ա�����빹�캯��.md -> ../03-������������/",
+    "03-������������.md -> ../04-��̬��Ա����չ����/",
+    "05-����������ڲ���ֲ���.md -> ../../04-�̳����̬/01-�̳л���/",
+    "01-�̳л���.md -> ../02-object��װ�����/",
+    "02-object��װ�����.md -> ../03-��̬������ӿ�/",
+    "03-��̬������ӿ�.md -> ../04-������ӿ������������ռ�/",
+    "04-������ӿ������������ռ�.md -> ../../05-����/01-�����뼯��/",
+    "01-�����뼯��.md -> ../02-ί�����¼�/",
+    "02-ί�����¼�.md -> ../03-������Э�����/",
+    "03-������Э�����.md -> ../04-��������Ԥ����/",
+    "04-��������Ԥ����.md -> ../05-���߳�/",
+    "05-���߳�.md -> ../../06-ͨ��Unity/01-�ۺ���ϰ������/",
+    "02-��������Э��.md -> ../03-�ٲ����ѧϰ·��/",
+    "03-�ٲ����ѧϰ·��.md -> int x"
+  ],
+  "checks": {
+    "all_pages_have_application_decision": false,
+    "index_has_five_question_rubric": false,
+    "application_links_resolve": false
+  },
+  "passed": false
+}
+
+MODIFIED COMMAND
+python artifacts/csharp-speedrun-application-audit/verify_application.py src/content/docs/knowledge/CSharp速通
+EXIT: 0
+STDOUT:
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp��ͨ",
+  "page_count": 33,
+  "missing_sections": [],
+  "missing_links": [],
+  "checks": {
+    "all_pages_have_application_decision": true,
+    "index_has_five_question_rubric": true,
+    "application_links_resolve": true
+  },
+  "passed": true
+}
+
+ROLLBACK COMMAND
+bash artifacts/csharp-speedrun-application-audit/ROLLBACK.sh artifacts/csharp-speedrun-application-audit/rollback-copy
+SCRIPT EXIT: 0
+Same verifier on rollback-copy: EXIT 1 (基线没有本轮应用决策段落，符合预期)
+STDOUT:
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\csharp-speedrun-application-audit\\rollback-copy-final",
+  "page_count": 33,
+  "missing_sections": [
+    "00-����ʶUnity\\00-������Ŀ��Unity�����߼�.md",
+    "00-����ʶUnity\\01-��Ϸ����ô��������.md",
+    "00-����ʶUnity\\02-�������������.md",
+    "00-����ʶUnity\\03-�ű��������.md",
+    "00-����ʶUnity\\04-��Unity��ѧCSharp.md",
+    "01-����\\01-��Cpp��CSharp�ĵ�һӡ��.md",
+    "01-����\\02-����ת��.md",
+    "01-����\\03-�쳣����.md",
+    "01-����\\04-�ַ�����ƴ��.md",
+    "01-����\\05-λ����.md",
+    "02-����\\01-ö��.md",
+    "02-����\\02-����.md",
+    "02-����\\03-ֵ���ͺ���������.md",
+    "02-����\\04-����.md",
+    "02-����\\05-�ṹ��.md",
+    "03-��װ\\01-��Ͷ���.md",
+    "03-��װ\\02-��Ա�����빹�캯��.md",
+    "03-��װ\\03-������������.md",
+    "03-��װ\\04-��̬��Ա����չ����.md",
+    "03-��װ\\05-����������ڲ���ֲ���.md",
+    "04-�̳����̬\\01-�̳л���.md",
+    "04-�̳����̬\\02-object��װ�����.md",
+    "04-�̳����̬\\03-��̬������ӿ�.md",
+    "04-�̳����̬\\04-������ӿ������������ռ�.md",
+    "05-����\\01-�����뼯��.md",
+    "05-����\\02-ί�����¼�.md",
+    "05-����\\03-������Э�����.md",
+    "05-����\\04-��������Ԥ����.md",
+    "05-����\\05-���߳�.md",
+    "06-ͨ��Unity\\01-�ۺ���ϰ������.md",
+    "06-ͨ��Unity\\02-��������Э��.md",
+    "06-ͨ��Unity\\03-�ٲ����ѧϰ·��.md",
+    "06-ͨ��Unity\\04-����С��Ϸ����.md"
+  ],
+  "missing_links": [],
+  "checks": {
+    "all_pages_have_application_decision": false,
+    "index_has_five_question_rubric": false,
+    "application_links_resolve": true
+  },
+  "passed": false
+}
+
+HASH RESTORATION
+Rollback hash comparison EXIT: 0
+{
+  "files": [
+    {
+      "path": "00-先认识Unity\\00-主线项目与Unity运行逻辑.md",
+      "equal": true,
+      "baseline": "b707c8602936c430ab822eee49faf49fd4b73ce21a795d6ccbe70ef55999cac1",
+      "rollback": "b707c8602936c430ab822eee49faf49fd4b73ce21a795d6ccbe70ef55999cac1"
+    },
+    {
+      "path": "00-先认识Unity\\01-游戏是怎么跑起来的.md",
+      "equal": true,
+      "baseline": "6d70ba48e73a2d1881822897f34112d3694d8077cf5e80c46e8cdf936280ea77",
+      "rollback": "6d70ba48e73a2d1881822897f34112d3694d8077cf5e80c46e8cdf936280ea77"
+    },
+    {
+      "path": "00-先认识Unity\\02-场景物体与组件.md",
+      "equal": true,
+      "baseline": "37405781b068e7b3a15cd6871bead5bdc6a59afe4b93ec2d662472c43f213846",
+      "rollback": "37405781b068e7b3a15cd6871bead5bdc6a59afe4b93ec2d662472c43f213846"
+    },
+    {
+      "path": "00-先认识Unity\\03-脚本就是组件.md",
+      "equal": true,
+      "baseline": "54ac7328af789496bf0a349d84ef152a38d6772e6fd3b9df1980f0d303206d91",
+      "rollback": "54ac7328af789496bf0a349d84ef152a38d6772e6fd3b9df1980f0d303206d91"
+    },
+    {
+      "path": "00-先认识Unity\\04-在Unity里学CSharp.md",
+      "equal": true,
+      "baseline": "753e70db35f464d92324c0f1d8f226c2818ffcc990f55101eafc1c34044970e8",
+      "rollback": "753e70db35f464d92324c0f1d8f226c2818ffcc990f55101eafc1c34044970e8"
+    },
+    {
+      "path": "01-入门\\01-从Cpp到CSharp的第一印象.md",
+      "equal": true,
+      "baseline": "967d7876a6c57797e0de5b99622454f980ba26c25bceb859e754cdb277d0c1f4",
+      "rollback": "967d7876a6c57797e0de5b99622454f980ba26c25bceb859e754cdb277d0c1f4"
+    },
+    {
+      "path": "01-入门\\02-类型转换.md",
+      "equal": true,
+      "baseline": "4b66299af9c32fb13f3fb11c02dbe94fe299f903d71c98f8fee491e16f18505f",
+      "rollback": "4b66299af9c32fb13f3fb11c02dbe94fe299f903d71c98f8fee491e16f18505f"
+    },
+    {
+      "path": "01-入门\\03-异常捕获.md",
+      "equal": true,
+      "baseline": "bbf199d4eb882cc6d8e5dc0808767e64f22b7af0463ca39f1db930ec9dc404de",
+      "rollback": "bbf199d4eb882cc6d8e5dc0808767e64f22b7af0463ca39f1db930ec9dc404de"
+    },
+    {
+      "path": "01-入门\\04-字符串与拼接.md",
+      "equal": true,
+      "baseline": "d697904de9d322b20a22f0e696e121df8aaef6a0760b885519135b419c4a941c",
+      "rollback": "d697904de9d322b20a22f0e696e121df8aaef6a0760b885519135b419c4a941c"
+    },
+    {
+      "path": "01-入门\\05-位运算.md",
+      "equal": true,
+      "baseline": "d2b08801ac33f77d8bc136484674df0eca34b7dba59932289f7cbaa3376e3994",
+      "rollback": "d2b08801ac33f77d8bc136484674df0eca34b7dba59932289f7cbaa3376e3994"
+    },
+    {
+      "path": "02-基础\\01-枚举.md",
+      "equal": true,
+      "baseline": "634a22b2311b544b848e8f15a61fa371469426391c7422dc5f4eb45bc712cea6",
+      "rollback": "634a22b2311b544b848e8f15a61fa371469426391c7422dc5f4eb45bc712cea6"
+    },
+    {
+      "path": "02-基础\\02-数组.md",
+      "equal": true,
+      "baseline": "45a6f403d3a454d6e8c15af7fb1d0037f487deaa65496cd458263060aeb17727",
+      "rollback": "45a6f403d3a454d6e8c15af7fb1d0037f487deaa65496cd458263060aeb17727"
+    },
+    {
+      "path": "02-基础\\03-值类型和引用类型.md",
+      "equal": true,
+      "baseline": "92f15f69d7386fd509dbad03cc7cb1641f89486f48799735f6e257e0b27e5d69",
+      "rollback": "92f15f69d7386fd509dbad03cc7cb1641f89486f48799735f6e257e0b27e5d69"
+    },
+    {
+      "path": "02-基础\\04-函数.md",
+      "equal": true,
+      "baseline": "025fac133068dc9f07b45ea9a1e82eb0d8997ea091701abf9623d11e2df5257d",
+      "rollback": "025fac133068dc9f07b45ea9a1e82eb0d8997ea091701abf9623d11e2df5257d"
+    },
+    {
+      "path": "02-基础\\05-结构体.md",
+      "equal": true,
+      "baseline": "f1c363497af771b5ae0cbbe3d0ef48b36f24ea44293b5d059eea4a46f85f22ae",
+      "rollback": "f1c363497af771b5ae0cbbe3d0ef48b36f24ea44293b5d059eea4a46f85f22ae"
+    },
+    {
+      "path": "03-封装\\01-类和对象.md",
+      "equal": true,
+      "baseline": "bf843b6eec6d21a891ad0a1013599d105413f393cb36e2ac7259ebb99981183c",
+      "rollback": "bf843b6eec6d21a891ad0a1013599d105413f393cb36e2ac7259ebb99981183c"
+    },
+    {
+      "path": "03-封装\\02-成员方法与构造函数.md",
+      "equal": true,
+      "baseline": "2a9ae93ebe478bf161371f37884d570eece1ba9cfed3155760a8a17657ee56d7",
+      "rollback": "2a9ae93ebe478bf161371f37884d570eece1ba9cfed3155760a8a17657ee56d7"
+    },
+    {
+      "path": "03-封装\\03-属性与索引器.md",
+      "equal": true,
+      "baseline": "617c1fb02e2c1dd44dbfc0b4ff07f4d08103821bd833a8e69a30a72f97e49b1a",
+      "rollback": "617c1fb02e2c1dd44dbfc0b4ff07f4d08103821bd833a8e69a30a72f97e49b1a"
+    },
+    {
+      "path": "03-封装\\04-静态成员与扩展方法.md",
+      "equal": true,
+      "baseline": "964ebd0ec91a0f43b955bbe70e0d5ced1aaa98121e08f08f2deba87311392439",
+      "rollback": "964ebd0ec91a0f43b955bbe70e0d5ced1aaa98121e08f08f2deba87311392439"
+    },
+    {
+      "path": "03-封装\\05-运算符重载内部类分部类.md",
+      "equal": true,
+      "baseline": "11de4bd35d6feeebfc1784a326f925c909f7eedc594a9fbcaf14bddcf359ed15",
+      "rollback": "11de4bd35d6feeebfc1784a326f925c909f7eedc594a9fbcaf14bddcf359ed15"
+    },
+    {
+      "path": "04-继承与多态\\01-继承基础.md",
+      "equal": true,
+      "baseline": "4f221aaa2ef56839dd169b5a0ab52cdfc6796d1ea3d149ca15de6aa16d107d1f",
+      "rollback": "4f221aaa2ef56839dd169b5a0ab52cdfc6796d1ea3d149ca15de6aa16d107d1f"
+    },
+    {
+      "path": "04-继承与多态\\02-object与装箱拆箱.md",
+      "equal": true,
+      "baseline": "668e7f850911d18cb9e6a52946db3b55df159c1a4515ba071246d710fa655d99",
+      "rollback": "668e7f850911d18cb9e6a52946db3b55df159c1a4515ba071246d710fa655d99"
+    },
+    {
+      "path": "04-继承与多态\\03-多态抽象类接口.md",
+      "equal": true,
+      "baseline": "b1739e3156289500e621c801790fe190a9685850aff648b7479f2fcd87b0fbe1",
+      "rollback": "b1739e3156289500e621c801790fe190a9685850aff648b7479f2fcd87b0fbe1"
+    },
+    {
+      "path": "04-继承与多态\\04-抽象类接口区别与命名空间.md",
+      "equal": true,
+      "baseline": "e8b20db1745bba121a40da2c113eeba44d25829929df39b41a6ca3df72b036dd",
+      "rollback": "e8b20db1745bba121a40da2c113eeba44d25829929df39b41a6ca3df72b036dd"
+    },
+    {
+      "path": "05-进阶\\01-泛型与集合.md",
+      "equal": true,
+      "baseline": "ac9eb90734fc1625328580c10272d8f7b45cb01cd844961e35fe9c094ef2dbd1",
+      "rollback": "ac9eb90734fc1625328580c10272d8f7b45cb01cd844961e35fe9c094ef2dbd1"
+    },
+    {
+      "path": "05-进阶\\02-委托与事件.md",
+      "equal": true,
+      "baseline": "975d70194aa7b52d482e8941a601b33f05486c004cc63d4dad0bb61a520b1ed6",
+      "rollback": "975d70194aa7b52d482e8941a601b33f05486c004cc63d4dad0bb61a520b1ed6"
+    },
+    {
+      "path": "05-进阶\\03-排序与协变逆变.md",
+      "equal": true,
+      "baseline": "927cbeaf9321928b7e920cdf44d9d93322e1d89a8314692c4af9096fa1ceb4df",
+      "rollback": "927cbeaf9321928b7e920cdf44d9d93322e1d89a8314692c4af9096fa1ceb4df"
+    },
+    {
+      "path": "05-进阶\\04-反射特性预处理.md",
+      "equal": true,
+      "baseline": "678ae14c7c8794b1b986c917b265936e224f85acfa838768f5a19021ce3d2530",
+      "rollback": "678ae14c7c8794b1b986c917b265936e224f85acfa838768f5a19021ce3d2530"
+    },
+    {
+      "path": "05-进阶\\05-多线程.md",
+      "equal": true,
+      "baseline": "f1941c94ccdbe198d11f3e0f8c8ce6344809617eaedecb40614ffbbd0d0810af",
+      "rollback": "f1941c94ccdbe198d11f3e0f8c8ce6344809617eaedecb40614ffbbd0d0810af"
+    },
+    {
+      "path": "06-通向Unity\\01-综合练习方块人.md",
+      "equal": true,
+      "baseline": "99784949dcabab8a2890aa87be58abb52f433e53fd9306dfa655aae36a9f450f",
+      "rollback": "99784949dcabab8a2890aa87be58abb52f433e53fd9306dfa655aae36a9f450f"
+    },
+    {
+      "path": "06-通向Unity\\02-迭代器与协程.md",
+      "equal": true,
+      "baseline": "41fd6292940eb787cb95b60688f173e112499c4c4102d3dd208bc89c99f0f188",
+      "rollback": "41fd6292940eb787cb95b60688f173e112499c4c4102d3dd208bc89c99f0f188"
+    },
+    {
+      "path": "06-通向Unity\\03-速查表与学习路线.md",
+      "equal": true,
+      "baseline": "254bb181b7ac9fe5bbf3fc16769aadc340a632307d76aca033db4f93dc99d68f",
+      "rollback": "254bb181b7ac9fe5bbf3fc16769aadc340a632307d76aca033db4f93dc99d68f"
+    },
+    {
+      "path": "06-通向Unity\\04-完整小游戏验收.md",
+      "equal": true,
+      "baseline": "8615ad86ed2019f2a8723f84923c024da1eadfb620d3011ff1c0822195b5cea6",
+      "rollback": "8615ad86ed2019f2a8723f84923c024da1eadfb620d3011ff1c0822195b5cea6"
+    },
+    {
+      "path": "目录.md",
+      "equal": true,
+      "baseline": "7c9437eab514cfba2655d82bf4ac2db2693231b485682430b6d83b19ee4235d8",
+      "rollback": "7c9437eab514cfba2655d82bf4ac2db2693231b485682430b6d83b19ee4235d8"
+    }
+  ],
+  "all_equal": true
+}
+
+REAPPLY
+This batch restored all 34 recorded paths from the candidate source after rollback.
+Same verifier on rollback-copy after reapply: EXIT 0
+STDOUT:
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\artifacts\\csharp-speedrun-application-audit\\rollback-copy-final",
+  "page_count": 33,
+  "missing_sections": [],
+  "missing_links": [],
+  "checks": {
+    "all_pages_have_application_decision": true,
+    "index_has_five_question_rubric": true,
+    "application_links_resolve": true
+  },
+  "passed": true
+}
+
+BUILD
+Command: npm run build
+EXIT: 0
+Astro built 365 pages. Existing repository warnings remain for duplicate Starlight IDs and filenames containing '#'; they did not stop the build.
+
+MODIFIED HASHES
+{
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\目录.md": "410fb24648b370017bd365ac23324bc3cb39c64b91ebfd0202de7d778d80d40b",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\00-先认识Unity\\00-主线项目与Unity运行逻辑.md": "0bcd43fce873cf3f9b92aa9ca54cdcba3b76606d09c7d24ab855044eb9a833cf",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\00-先认识Unity\\01-游戏是怎么跑起来的.md": "49ae2ca12108000e566292f236e8c070b23f37d8556b08f60cb2da9705c611e2",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\00-先认识Unity\\02-场景物体与组件.md": "c25887867bc03fbdbe9ba1af77602c91efecd0ff0b5e13e1d489b725353a312d",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\00-先认识Unity\\03-脚本就是组件.md": "ed1f54fe73f09633be3ac629bd56b5fb748cbed6c8d0895af96844fe553814d4",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\00-先认识Unity\\04-在Unity里学CSharp.md": "5f8819477b7ca2dfa7e0bf3d9e255b07e5f7e2bf4d637f8dd3b5609c0d3f23a3",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\01-入门\\01-从Cpp到CSharp的第一印象.md": "0146f5e775a8b081945c15216aee6845c837adb982e91632247fa92390fdd6d7",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\01-入门\\02-类型转换.md": "972acdd54ba875652168be1739c0a6b42786c2ac3f90be4b12b0fafd2764b4d9",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\01-入门\\03-异常捕获.md": "929ab96bc93b442d1bb1b4bc2ba301ccb91f4b8ee8d755caa537e3e0caa50166",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\01-入门\\04-字符串与拼接.md": "9c698a9c26f65c75589756226f737ccbd30d67a755e4de3568f41ad7836ce587",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\01-入门\\05-位运算.md": "4aaa07ba5257e5099dbc150fc9ed6e359f0dd27ad8ba40dd9318e0e4715ec05a",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\02-基础\\01-枚举.md": "e40c936db79cf90649bbd93d7a063e07a81f49b7d7121e3ff67528916040bd61",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\02-基础\\02-数组.md": "1c70e84c612fdbf613b8586b11ab35853c8006a014c8aed2d3dfb66206d04c8a",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\02-基础\\03-值类型和引用类型.md": "a10a63eea5df4f93856a056ec6839c9607ce067f39550c820397f37c3978a2dc",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\02-基础\\04-函数.md": "b8c5de0bc0f2cff82293c57e98e4dad40065f40aeac60c0875b1f5fb3916c28c",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\02-基础\\05-结构体.md": "92b4bd4cedaf548e7797ee8427fe9f0b42b0495bc9aa82095f563a77df08de5f",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\03-封装\\01-类和对象.md": "bf6881c42855137ae47128241f42f7828e18ecea35ea8f778f27efd2cad24160",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\03-封装\\02-成员方法与构造函数.md": "5f231faf1554393bcfffee796d687098e1e80b64937156285f7607d83fc5a61c",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\03-封装\\03-属性与索引器.md": "f73b2436f032e3cb69ba821862a77d3b11b83ea79c59621d0a8c790b3df44132",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\03-封装\\04-静态成员与扩展方法.md": "ad65d29ab1ef5b8105a113f3b5be5d0762fa38b3057cb35724785c50f472c66c",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\03-封装\\05-运算符重载内部类分部类.md": "71ae5b0fbdbe9596f888ffc3eb4a7932811f2d5989c426da93db338b2cc1885f",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\04-继承与多态\\01-继承基础.md": "6b2d533f3c64777d52a069657778c9a09977f4233324b1a085765b3ba1b35553",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\04-继承与多态\\02-object与装箱拆箱.md": "4f4e1f6fe841010ba81e95876407ad8b1c908e730fb136ea4a32f64674b52ddb",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\04-继承与多态\\03-多态抽象类接口.md": "5ad250e8d526a297bfb071e58666de1ac5f32b8af98e73ed4563bbb52d5ea0b6",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\04-继承与多态\\04-抽象类接口区别与命名空间.md": "169c0baca69fdd0355b92fbe270fe732486f1cef1e3d28490cd1a462c969a403",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\05-进阶\\01-泛型与集合.md": "d6abb950df6e24e02528ebf1c595d8c0b9abb7b797cc4c73eecd59afa96f589c",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\05-进阶\\02-委托与事件.md": "1a09842cd510a5b99cfe4cb412418f08cabe9a9013e80f421e9ee5d376588b4b",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\05-进阶\\03-排序与协变逆变.md": "6a45482cfb76649bccea3964040ab51e5604f76f0bceb1faec5343996a95b907",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\05-进阶\\04-反射特性预处理.md": "ca74275e017e32018d3164f16767a8ce459e6f51f112e595ddde1b6d8daf7cde",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\05-进阶\\05-多线程.md": "ac840cc3bb6f4b52e87e04d210856975f8abb14dca58601ecaca34969a447143",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\06-通向Unity\\01-综合练习方块人.md": "b9e2c66d7e9c021098062cc0a2a795a52edd29929cf95455fa8f60aba9d10d58",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\06-通向Unity\\02-迭代器与协程.md": "7e6db8f1b134c17df4a3ad343cdf65b7f95785f78241892b9eea31155acf710f",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\06-通向Unity\\03-速查表与学习路线.md": "7e1cd8b78b342a798d5904633e18064f9ec5af15c920ee5e3f833547b5a01146",
+  "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp速通\\06-通向Unity\\04-完整小游戏验收.md": "fd80ba09ad529b2eff55b7d0f347d4638e7beb10332beb23ec64c72f5ef38503"
+}
+
+ROLE PATHS (reopened)
+- MODIFIED_FILE: D:\QMX-Studio\qmx-Gameknowledge\artifacts\csharp-speedrun-application-audit\MODIFIED_FILE.json
+- DIFF_FILE: D:\QMX-Studio\qmx-Gameknowledge\artifacts\csharp-speedrun-application-audit\DIFF_FILE.patch
+- VERIFICATION.txt: D:\QMX-Studio\qmx-Gameknowledge\artifacts\csharp-speedrun-application-audit\VERIFICATION.txt
+- ROLLBACK.sh: D:\QMX-Studio\qmx-Gameknowledge\artifacts\csharp-speedrun-application-audit\ROLLBACK.sh

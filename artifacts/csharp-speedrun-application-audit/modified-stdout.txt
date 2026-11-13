@@ -1,0 +1,12 @@
+{
+  "root": "D:\\QMX-Studio\\qmx-Gameknowledge\\src\\content\\docs\\knowledge\\CSharp��ͨ",
+  "page_count": 33,
+  "missing_sections": [],
+  "missing_links": [],
+  "checks": {
+    "all_pages_have_application_decision": true,
+    "index_has_five_question_rubric": true,
+    "application_links_resolve": true
+  },
+  "passed": true
+}
