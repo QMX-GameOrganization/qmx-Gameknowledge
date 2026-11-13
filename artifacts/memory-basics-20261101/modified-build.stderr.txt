@@ -1,9 +1,0 @@
-16:05:47 [ERROR] [starlight-docs-loader] Error reading knowledge/八股/c#.md: ENOENT: no such file or directory, open 'D:\QMX-Studio\qmx-Gameknowledge\src\content\docs\knowledge\八股\c'
-16:05:47 [ERROR] [starlight-docs-loader] Error reading knowledge/Unity-Job与Burst/02-Burst/02-支持的C#子集.md: ENOENT: no such file or directory, open 'D:\QMX-Studio\qmx-Gameknowledge\src\content\docs\knowledge\Unity-Job与Burst\02-Burst\02-支持的C'
-Entry docs → 404 was not found.
-(node:65948) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
-(Use `node --trace-deprecation ...` to show where the warning was created)
-Note: Pagefind doesn't support stemming for the language zh-cn. 
-Search will still work, but will not match across root words.
-Note: Pagefind doesn't support stemming for the language zh-cn. 
-Search will still work, but will not match across root words.

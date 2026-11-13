@@ -1,8 +1,0 @@
-baseline_exit=1
-modified_exit=0
-rollback_script_exit=0
-rollback_hash_exit=0
-rollback_verifier_exit=1 (baseline feature checks expected false)
-reapply_exit=0
-build_exit=0
-diff_check_exit=0
