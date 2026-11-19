@@ -1,7 +1,44 @@
-/* 双层顶栏分别承载站点身份和页面功能，避免文章页继续显示首页锚点。 */
-:root { --sl-nav-height: 7.2rem; }
-.page > .header { height: var(--sl-nav-height); }
+/* Starlight 的 Header 是固定定位，父容器高度必须覆盖自定义两行导航的真实高度。 */
+:root { --sl-nav-height: 8.75rem; }
+.page > .header {
+  height: var(--sl-nav-height);
+  box-sizing: border-box;
+  padding: .5rem 1.5rem;
+  border-bottom: 1px solid var(--qmx-border);
+  background: color-mix(in srgb, var(--qmx-nav) 94%, transparent);
+  backdrop-filter: blur(18px);
+}
 
-@media (max-width: 50rem) {
-  :root { --sl-nav-height: 6.6rem; }
+/* 首页和专题页使用自有全宽布局，文章页单独接管主列与本页目录的网格。 */
+.main-frame:has(.qmx-home) .right-sidebar-container,
+.main-frame:has(.qmx-series-page) .right-sidebar-container { display: none !important; }
+.main-frame:has(.qmx-home) .content-panel:first-of-type,
+.main-frame:has(.qmx-series-page) .content-panel:first-of-type { display: none; }
+.main-frame:has(.qmx-home) .main-pane,
+.main-frame:has(.qmx-series-page) .main-pane { width: 100%; }
+.main-frame:has(.qmx-home) .content-panel { padding: 0 !important; }
+.main-frame:has(.qmx-series-page) .content-panel { padding: 2rem 3rem 3rem !important; }
+.main-frame:has(.qmx-home) .sl-container,
+.main-frame:has(.qmx-series-page) .sl-container { width: auto !important; max-width: none !important; margin-inline: 0 !important; }
+.main-frame:has(.qmx-home) .sl-markdown-content,
+.main-frame:has(.qmx-series-page) .sl-markdown-content { width: auto !important; max-width: none !important; margin-inline: 0 !important; }
+.qmx-home, .qmx-series-page { width: min(100% - 3rem, 1240px); margin-inline: auto; }
+
+/* 无图片封面时给首页、专题页和文章页提供一致的主题渐变。 */
+.cover-unity { --cover-a: #3264c2; --cover-b: #51b5a6; }
+.cover-language { --cover-a: #392f68; --cover-b: #bf6f8f; }
+.cover-unreal { --cover-a: #12243b; --cover-b: #4e82bd; }
+.cover-source { --cover-a: #17281d; --cover-b: #5f8e68; }
+.cover-project { --cover-a: #9b4d39; --cover-b: #dfb35b; }
+.cover-reference { --cover-a: #3c4654; --cover-b: #8d9ba9; }
+
+@media (max-width: 55rem) {
+  :root { --sl-nav-height: 7.6rem; }
+  .page > .header { padding-inline: 1rem; }
+  .qmx-home, .qmx-series-page { width: min(100% - 2rem, 1240px); }
+}
+@media (max-width: 40rem) {
+  :root { --sl-nav-height: 6.4rem; }
+  .page > .header { padding: .4rem .75rem; }
+  .qmx-home, .qmx-series-page { width: calc(100% - 1.25rem); }
 }

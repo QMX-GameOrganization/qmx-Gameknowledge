@@ -1,5 +1,5 @@
 ---
-import { getDocSeries, getDocVisualKey } from '../lib/content';
+import { getDocCollectionKey, getDocSeries, getDocVisualKey } from '../lib/content';
 
 const entry = Astro.locals.starlightRoute.entry;
 const data = entry.data as typeof entry.data & {
@@ -8,19 +8,44 @@ const data = entry.data as typeof entry.data & {
   series?: string;
 };
 const series = data.series ?? getDocSeries(entry as never);
+const seriesLabels: Record<string, string> = {
+  'csharp与unity内存基础': 'C# 与 Unity 内存基础',
+  'csharp速通': 'C# 速通',
+  'csharp底层专栏': 'C# 底层专栏',
+  'unity-job与burst': 'Unity Job、Burst 与 Entities',
+  'ecs学习': 'ECS 学习与工厂游戏',
+  认识unity: '认识 Unity',
+  ue专栏: 'UE 专栏 · 运动系统',
+  minecraft源码学习: 'Minecraft 源码学习',
+};
+const displaySeries = seriesLabels[series.toLowerCase()] ?? series;
+const collectionKey = getDocCollectionKey(entry as never);
 const visualKey = getDocVisualKey(entry as never);
 const date = data.date instanceof Date ? data.date : undefined;
-const coverStyle = data.cover ? '--qmx-cover-image: url("' + data.cover + '")' : undefined;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const coverStyle = data.cover ? `--qmx-cover-image: url("${data.cover}")` : undefined;
+const pathParts = entry.id.split('/').slice(2, -1);
 ---
 
-<header class="qmx-article-header">
-  <div class:list={['qmx-article-cover', 'cover-' + visualKey]} style={coverStyle}>
-    {data.cover ? <img src={data.cover} alt={data.coverAlt ?? ''} /> : <span aria-hidden="true">{series}</span>}
+<header class:list={['qmx-article-header', 'cover-' + visualKey]} style={coverStyle}>
+  <div class="qmx-article-header__backdrop" aria-hidden="true">
+    {data.cover ? <img src={data.cover} alt="" /> : <span>{displaySeries}</span>}
   </div>
-  <div class="qmx-article-heading">
-    <div class="qmx-article-kicker"><span>{series}</span>{date && <time datetime={date.toISOString()}>{date.toLocaleDateString('zh-CN')}</time>}</div>
+  <div class="qmx-article-header__content">
+    <div class="qmx-article-breadcrumb">
+      <a href={base + '/'}>知识库</a><span aria-hidden="true">/</span><a href={`${base}/series/${encodeURIComponent(collectionKey)}/`}>{displaySeries}</a>
+      {pathParts.map((part) => <><span aria-hidden="true">/</span><span>{part}</span></>)}
+    </div>
+    <div class="qmx-article-labels">
+      <span class="qmx-article-labels__origin">原创整理</span>
+      {data.tags?.slice(0, 4).map((tag) => <span>#{tag}</span>)}
+    </div>
     <h1 id="starlight__page-title">{data.title}</h1>
     {data.description && <p>{data.description}</p>}
-    {data.tags?.length > 0 && <ul class="qmx-article-tags" aria-label="文章标签">{data.tags.map((tag) => <li>#{tag}</li>)}</ul>}
+    <div class="qmx-article-meta">
+      {date && <time datetime={date.toISOString()}>发布于 {date.toLocaleDateString('zh-CN')}</time>}
+      <span>专题 · {displaySeries}</span>
+      <span>持续维护</span>
+    </div>
   </div>
 </header>

@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import config from 'virtual:starlight/user-config';
 import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
 import Search from 'virtual:starlight/components/Search';
-import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
 import {
@@ -68,120 +67,157 @@ const pageTitle = isHome
       : currentEntry.data.title;
 
 const homeNav = [
-  { index: '01', label: '知识专题', hint: '按主题浏览', href: `${base}/#knowledge-overview` },
-  { index: '02', label: '精选内容', hint: '从这里开始', href: `${base}/#featured-title` },
-  { index: '03', label: '最近整理', hint: '查看新内容', href: `${base}/#latest-title` },
-  { index: '04', label: '使用指南', hint: '了解阅读方式', href: `${base}/series/guide/` },
+  { label: '专题', hint: '按主题进入', href: `${base}/#home-panel-topics` },
+  { label: '精选', hint: '从这里开始', href: `${base}/#home-panel-featured` },
+  { label: '最近整理', hint: '查看新内容', href: `${base}/#home-panel-latest` },
+  { label: '随机跳转', hint: '随机打开一篇', href: `${base}/#home-panel-random` },
 ];
 const seriesNav = currentSeriesHref ? [
-  { index: '01', label: '专题首页', hint: '回到专题介绍', href: currentSeriesHref },
-  { index: '02', label: '阅读路径', hint: '从导读开始', href: `${currentSeriesHref}#reading-path` },
-  { index: '03', label: '全部文章', hint: `${seriesDocs.length} 篇内容`, href: `${currentSeriesHref}#all-articles` },
-  { index: '04', label: '返回主页', hint: '继续浏览其他专题', href: `${base}/` },
+  { label: '专题首页', hint: '概览与说明', href: currentSeriesHref },
+  { label: '阅读路径', hint: '从导读开始', href: `${currentSeriesHref}#reading-path` },
+  { label: '全部文章', hint: `${seriesDocs.length} 篇内容`, href: `${currentSeriesHref}#all-articles` },
+  { label: '回到首页', hint: '继续浏览其他专题', href: `${base}/` },
 ] : homeNav;
 const articleNav = currentSeriesHref ? [
-  { index: '01', label: '返回专题', hint: currentSeriesLabel ?? '当前专题', href: currentSeriesHref },
-  { index: '02', label: '专题目录', hint: `${seriesDocs.length} 篇文章`, href: `${currentSeriesHref}#all-articles` },
-  { index: '03', label: '上一篇', hint: previousDoc?.data.title ?? '已经是第一篇', href: previousDoc ? getDocHref(previousDoc, base) : undefined, disabled: !previousDoc },
-  { index: '04', label: '下一篇', hint: nextDoc?.data.title ?? '已经是最后一篇', href: nextDoc ? getDocHref(nextDoc, base) : undefined, disabled: !nextDoc },
+  { label: '返回专题', hint: currentSeriesLabel ?? '当前专题', href: currentSeriesHref },
+  { label: '文章目录', hint: `${seriesDocs.length} 篇文章`, href: `${currentSeriesHref}#all-articles` },
+  { label: '上一篇', hint: previousDoc?.data.title ?? '已经是第一篇', href: previousDoc ? getDocHref(previousDoc, base) : undefined, disabled: !previousDoc },
+  { label: '下一篇', hint: nextDoc?.data.title ?? '已经是最后一篇', href: nextDoc ? getDocHref(nextDoc, base) : undefined, disabled: !nextDoc },
 ] : homeNav;
 const navItems = isArticle ? articleNav : isSeriesPage ? seriesNav : homeNav;
+
+const menuGroups = [
+  {
+    title: '知识库',
+    items: [
+      { label: '首页概览', href: `${base}/` },
+      { label: '按专题浏览', href: `${base}/#knowledge-overview` },
+      { label: '精选内容', href: `${base}/#featured-title` },
+      { label: '最近整理', href: `${base}/#latest-title` },
+    ],
+  },
+  {
+    title: '当前页面',
+    items: isArticle
+      ? [
+          { label: '返回当前专题', href: currentSeriesHref },
+          { label: '打开文章目录', href: currentSeriesHref ? `${currentSeriesHref}#all-articles` : undefined },
+        ]
+      : isSeriesPage
+        ? [
+            { label: '专题首页', href: currentSeriesHref },
+            { label: '全部文章', href: currentSeriesHref ? `${currentSeriesHref}#all-articles` : undefined },
+          ]
+        : [{ label: '使用指南', href: `${base}/series/guide/` }],
+  },
+  {
+    title: '外部入口',
+    items: [
+      { label: 'GitHub 仓库', href: 'https://github.com/QMX-GameOrganization/qmx-Gameknowledge', external: true },
+    ],
+  },
+];
 ---
 
 <div class="qmx-header">
-  <div class="qmx-header__top">
-    <div class="title-wrapper sl-flex">
-      <SiteTitle />
+  <div class="qmx-header__bar">
+    <div class="qmx-header__brand">
+      <details class="qmx-site-switcher">
+        <summary aria-label="打开站点菜单"><span class="qmx-site-switcher__icon" aria-hidden="true">☷</span><span>站点</span></summary>
+        <div class="qmx-site-switcher__panel">
+          {menuGroups.map((group) => <section>
+            <span class="qmx-site-switcher__title">{group.title}</span>
+            <div class="qmx-site-switcher__items">
+              {group.items.map((item) => item.href && <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noreferrer' : undefined}>{item.label}<span aria-hidden="true">↗</span></a>)}
+            </div>
+          </section>)}
+        </div>
+      </details>
+      <a class="qmx-brand" href={base + '/'}>
+        <span class="qmx-brand__name">游戏知识库</span>
+        <small>QMX / GAME KNOWLEDGE</small>
+      </a>
     </div>
-    <div class="qmx-header__page-context" aria-label="当前页面">
+
+    <a class="qmx-page-identity" href={isArticle && currentSeriesHref ? currentSeriesHref : undefined} aria-label="当前页面">
       <span>{pageKind}</span>
       <strong>{pageTitle}</strong>
-    </div>
-    <div class="qmx-header__tools sl-flex print:hidden">
+    </a>
+
+    <div class="qmx-header__tools print:hidden">
       {shouldRenderSearch && <Search />}
-      <div class="qmx-header__desktop-tools sl-hidden md:sl-flex print:hidden">
-        <div class="social-icons"><SocialIcons /></div>
+      <div class="qmx-header__tool-links sl-hidden md:sl-flex">
+        <div class="qmx-header__social"><SocialIcons /></div>
         <ThemeSelect />
         <LanguageSelect />
       </div>
     </div>
   </div>
 
-  <div class="qmx-header__content-row">
-    <div class="qmx-header__section-label"><span>{isArticle ? '阅读' : isSeriesPage ? '专题' : '浏览'}</span><small>{pageKind.toUpperCase()}</small></div>
-    <nav class="qmx-content-nav" aria-label={`${pageKind}功能导航`}>
-      {navItems.map((item) => <a class:list={['qmx-content-nav__item', { 'is-disabled': item.disabled }]} href={item.href} aria-disabled={item.disabled ? 'true' : undefined}>
-        <span class="qmx-content-nav__index">{item.index}</span>
-        <span><strong>{item.label}</strong><small>{item.hint}</small></span>
+  <div class="qmx-header__context">
+    <div class="qmx-context-label">
+      <span>{isArticle ? '正在阅读' : isSeriesPage ? '专题空间' : '内容导航'}</span>
+      <small>{isArticle ? currentSeriesLabel : pageKind}</small>
+    </div>
+    <nav class="qmx-page-nav" aria-label={`${pageKind}功能导航`}>
+      {navItems.map((item) => <a class:list={['qmx-page-nav__item', { 'is-disabled': item.disabled }]} href={item.href} aria-disabled={item.disabled ? 'true' : undefined}>
+        <strong>{item.label}</strong>
+        <small>{item.hint}</small>
       </a>)}
     </nav>
-    {isArticle && currentSeriesHref && <a class="qmx-reading-context" href={currentSeriesHref}><small>当前专题</small><strong>{currentSeriesLabel}</strong><span aria-hidden="true">↗</span></a>}
+    {isArticle && currentSeriesHref && <a class="qmx-series-chip" href={currentSeriesHref}><small>当前专题</small><strong>{currentSeriesLabel}</strong><span aria-hidden="true">↗</span></a>}
   </div>
 </div>
 
 <style>
   @layer starlight.core {
-    .qmx-header {
-      display: grid;
-      gap: .65rem;
-      width: 100%;
-    }
-
-    .qmx-header__top,
-    .qmx-header__content-row {
-      display: flex;
-      align-items: center;
-      min-width: 0;
-    }
-
-    .qmx-header__top { justify-content: space-between; gap: var(--sl-nav-gap); }
-    .qmx-header__tools { gap: 1rem; min-width: 0; }
-    .qmx-header__desktop-tools { gap: 1rem; align-items: center; }
-    .qmx-header__desktop-tools .social-icons { display: flex; gap: 1rem; align-items: center; }
-    .qmx-header__desktop-tools .social-icons:empty { display: none; }
-    .qmx-header__desktop-tools .social-icons:not(:empty)::after { content: ''; height: 2rem; border-inline-end: 1px solid var(--sl-color-gray-5); }
-
-    .qmx-header__page-context { display: grid; flex: 0 1 27rem; gap: .08rem; min-width: 0; padding-inline: .9rem; border-inline-start: 1px solid var(--qmx-border); }
-    .qmx-header__page-context span { color: var(--qmx-link); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; }
-    .qmx-header__page-context strong { overflow: hidden; color: var(--qmx-strong); font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
-
-    .qmx-header__content-row { gap: .9rem; padding-top: .55rem; border-top: 1px solid var(--sl-color-gray-5); }
-    .qmx-header__section-label { display: grid; flex: 0 0 auto; gap: .08rem; color: var(--qmx-link); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .qmx-header__section-label small { color: var(--qmx-muted); font-size: .58rem; font-weight: 500; letter-spacing: .12em; }
-    .qmx-content-nav { display: flex; flex: 1; gap: .45rem; min-width: 0; }
-    .qmx-content-nav__item { display: inline-flex; flex: 1 1 0; gap: .55rem; align-items: center; min-width: 0; padding: .35rem .55rem; border: 1px solid transparent; border-radius: .55rem; color: var(--qmx-muted); text-decoration: none; transition: border-color .18s ease, background .18s ease, color .18s ease; }
-    .qmx-content-nav__item:hover:not(.is-disabled) { border-color: var(--qmx-border); background: color-mix(in srgb, var(--qmx-link) 9%, transparent); color: var(--qmx-strong); }
-    .qmx-content-nav__item.is-disabled { opacity: .48; cursor: default; pointer-events: none; }
-    .qmx-content-nav__index { color: var(--qmx-link); font-family: ui-monospace, monospace; font-size: .65rem; }
-    .qmx-content-nav__item strong, .qmx-content-nav__item small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .qmx-content-nav__item strong { font-size: .76rem; line-height: 1.2; }
-    .qmx-content-nav__item small { margin-top: .14rem; color: var(--qmx-muted); font-size: .62rem; }
-    .qmx-reading-context { display: inline-flex; flex: 0 1 13rem; gap: .4rem; align-items: center; min-width: 0; padding: .35rem .55rem; border-inline-start: 1px solid var(--qmx-border); color: var(--qmx-link); text-decoration: none; }
-    .qmx-reading-context small, .qmx-reading-context strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .qmx-reading-context small { color: var(--qmx-muted); font-size: .62rem; }
-    .qmx-reading-context strong { font-size: .72rem; }
-    .qmx-reading-context span { margin-inline-start: auto; }
-
-    @media (max-width: 70rem) {
-      .qmx-header__page-context { flex-basis: 18rem; }
-      .qmx-reading-context { display: none; }
-    }
-    @media (max-width: 55rem) {
-      .qmx-header__page-context { display: none; }
-      .qmx-header__section-label { display: none; }
-      .qmx-content-nav { overflow-x: auto; scrollbar-width: none; }
-      .qmx-content-nav::-webkit-scrollbar { display: none; }
-      .qmx-content-nav__item { flex: 0 0 auto; }
-    }
-    @media (max-width: 40rem) {
-      .qmx-header { gap: .5rem; }
-      .qmx-header__content-row { padding-top: .42rem; }
-      .qmx-content-nav__item { padding-inline: .45rem; }
-      .qmx-content-nav__item small { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) { .qmx-content-nav__item { transition: none; } }
+    /* Header 固定为两行，第一行承担站点级工具，第二行只承担当前页面功能。 */
+    .qmx-header { display: grid; width: 100%; height: 100%; align-content: start; }
+    .qmx-header__bar, .qmx-header__context { display: flex; align-items: center; min-width: 0; }
+    .qmx-header__bar { min-height: 4.25rem; justify-content: space-between; gap: 1.25rem; border-bottom: 1px solid var(--qmx-border); }
+    .qmx-header__brand { display: flex; align-items: center; gap: .8rem; min-width: 0; }
+    .qmx-site-switcher { position: relative; flex: 0 0 auto; }
+    .qmx-site-switcher summary { display: inline-flex; gap: .45rem; align-items: center; min-height: 2.1rem; padding: .4rem .65rem; border: 1px solid var(--qmx-border); border-radius: 999px; color: var(--qmx-muted); cursor: pointer; font-size: .72rem; list-style: none; }
+    .qmx-site-switcher summary::-webkit-details-marker { display: none; }
+    .qmx-site-switcher summary:hover { border-color: var(--qmx-link); color: var(--qmx-strong); }
+    .qmx-site-switcher__icon { color: var(--qmx-link); font-size: 1rem; line-height: 1; }
+    .qmx-site-switcher__panel { position: absolute; z-index: 20; top: calc(100% + .75rem); left: 0; display: grid; gap: 1rem; width: min(18rem, 80vw); padding: 1rem; border: 1px solid var(--qmx-border); border-radius: .9rem; background: color-mix(in srgb, var(--qmx-panel) 96%, transparent); box-shadow: 0 1.5rem 3rem #0003; }
+    .qmx-site-switcher__panel section { display: grid; gap: .35rem; }
+    .qmx-site-switcher__title { color: var(--qmx-link); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; }
+    .qmx-site-switcher__items { display: grid; gap: .2rem; }
+    .qmx-site-switcher__items a { display: flex; justify-content: space-between; gap: .5rem; padding: .42rem .45rem; border-radius: .45rem; color: var(--qmx-text); font-size: .8rem; text-decoration: none; }
+    .qmx-site-switcher__items a:hover { background: color-mix(in srgb, var(--qmx-link) 10%, transparent); color: var(--qmx-strong); }
+    .qmx-site-switcher__items a span { color: var(--qmx-link); }
+    .qmx-brand { display: grid; gap: .12rem; min-width: 0; color: var(--qmx-strong); text-decoration: none; }
+    .qmx-brand__name { overflow: hidden; font-size: 1rem; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-brand small { color: var(--qmx-muted); font-size: .55rem; letter-spacing: .18em; }
+    .qmx-page-identity { display: grid; flex: 1 1 auto; gap: .15rem; min-width: 10rem; padding-inline: 1.1rem; border-inline-start: 1px solid var(--qmx-border); color: var(--qmx-strong); text-decoration: none; }
+    .qmx-page-identity span { color: var(--qmx-link); font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; }
+    .qmx-page-identity strong { overflow: hidden; font-size: .86rem; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-header__tools { display: flex; flex: 0 0 auto; gap: .8rem; align-items: center; }
+    .qmx-header__tool-links { gap: .7rem; align-items: center; }
+    .qmx-header__social { display: flex; align-items: center; }
+    .qmx-header__social:empty { display: none; }
+    .qmx-header__context { min-height: 3.2rem; gap: 1rem; }
+    .qmx-context-label { display: grid; flex: 0 0 6.4rem; gap: .12rem; }
+    .qmx-context-label span { color: var(--qmx-strong); font-size: .78rem; font-weight: 700; }
+    .qmx-context-label small { color: var(--qmx-muted); font-size: .62rem; letter-spacing: .1em; }
+    .qmx-page-nav { display: flex; flex: 1 1 auto; gap: .35rem; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+    .qmx-page-nav::-webkit-scrollbar { display: none; }
+    .qmx-page-nav__item { display: grid; flex: 0 0 auto; gap: .12rem; min-width: 7rem; padding: .38rem .7rem; border-radius: .45rem; color: var(--qmx-muted); text-decoration: none; transition: background .18s ease, color .18s ease; }
+    .qmx-page-nav__item:hover:not(.is-disabled) { background: color-mix(in srgb, var(--qmx-link) 10%, transparent); color: var(--qmx-strong); }
+    .qmx-page-nav__item.is-disabled { opacity: .42; pointer-events: none; }
+    .qmx-page-nav__item strong, .qmx-page-nav__item small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-page-nav__item strong { font-size: .76rem; line-height: 1.2; }
+    .qmx-page-nav__item small { color: var(--qmx-muted); font-size: .6rem; }
+    .qmx-series-chip { display: inline-flex; flex: 0 1 14rem; gap: .45rem; align-items: center; min-width: 0; padding-inline: .8rem; border-inline-start: 1px solid var(--qmx-border); color: var(--qmx-link); text-decoration: none; }
+    .qmx-series-chip small, .qmx-series-chip strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-series-chip small { color: var(--qmx-muted); font-size: .6rem; }
+    .qmx-series-chip strong { font-size: .7rem; }
+    .qmx-series-chip span { margin-inline-start: auto; }
+    @media (max-width: 70rem) { .qmx-page-identity { min-width: 8rem; } .qmx-series-chip { display: none; } }
+    @media (max-width: 55rem) { .qmx-page-identity { display: none; } .qmx-context-label { display: none; } .qmx-page-nav__item { min-width: 6.5rem; } }
+    @media (max-width: 40rem) { .qmx-brand small { display: none; } .qmx-header__bar { gap: .6rem; } .qmx-header__tools { gap: .45rem; } .qmx-page-nav__item { min-width: auto; padding-inline: .5rem; } .qmx-page-nav__item small { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .qmx-page-nav__item { transition: none; } }
   }
 </style>
-
-
-

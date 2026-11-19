@@ -1,8 +1,5 @@
-/* 文章页默认进入阅读状态，完整专题导航通过 Starlight 菜单按钮按需打开。 */
-:root[data-has-sidebar]:not([data-has-hero]) {
-  --sl-content-inline-start: 0px;
-}
-
+/* 文章页默认进入沉浸阅读状态，完整专题树通过 Starlight 菜单按钮按需打开。 */
+:root[data-has-sidebar]:not([data-has-hero]) { --sl-content-inline-start: 0px; }
 :root[data-has-sidebar]:not([data-has-hero]) .sidebar-pane {
   width: min(23rem, 88vw);
   visibility: hidden;
@@ -11,132 +8,100 @@
   box-shadow: 1.5rem 0 3rem #0003;
   transition: transform .22s ease, visibility .22s ease;
 }
+:root[data-has-sidebar]:not([data-has-hero]) starlight-menu-button button { display: flex; }
+:root[data-has-sidebar]:not([data-has-hero]) starlight-menu-button[aria-expanded='true'] ~ .sidebar-pane { visibility: visible !important; transform: translateX(0) !important; }
+:root[data-has-sidebar]:not([data-has-hero]) .sidebar-content { padding: 1rem 1.25rem 2rem; }
+:root[data-has-sidebar]:not([data-has-hero]) .main-frame { padding-inline-start: 0; }
 
-:root[data-has-sidebar]:not([data-has-hero]) starlight-menu-button button {
-  display: flex;
+/* 文章桌面布局由主列和本页目录组成，目录固定为窄列，正文拥有剩余空间。 */
+.main-frame:has(.qmx-article-header) > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 20rem);
+  align-items: start;
 }
-
-:root[data-has-sidebar]:not([data-has-hero]) starlight-menu-button[aria-expanded='true'] ~ .sidebar-pane {
-  visibility: visible;
-  transform: translateX(0);
+.main-frame:has(.qmx-article-header) .main-pane {
+  grid-column: 1;
+  width: auto;
+  min-width: 0;
 }
-
-:root[data-has-sidebar]:not([data-has-hero]) .sidebar-content {
-  padding: 1rem 1.25rem 2rem;
-}
-
-:root[data-has-sidebar]:not([data-has-hero]) .main-frame {
-  padding-inline-start: 0;
-}
-
-/* 桌面端保留右侧本页目录，左侧抽屉只负责跨文章导航。 */
-:root[data-has-sidebar]:not([data-has-hero]) .right-sidebar-container {
+.main-frame:has(.qmx-article-header) .right-sidebar-container {
   display: block;
+  grid-column: 2;
+  width: auto;
+  min-width: 0;
+  padding: 2rem 1.5rem 0 0;
+}
+.main-frame:has(.qmx-article-header) .right-sidebar {
+  width: auto;
+  min-width: 0;
+}
+.main-frame:has(.qmx-article-header) .content-panel {
+  width: auto;
+  padding: 2rem clamp(1.5rem, 4vw, 4rem) 4rem;
+}
+.main-frame:has(.qmx-article-header) .sl-container {
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+}
+.main-frame:has(.qmx-article-header) .sl-markdown-content {
+  width: min(100%, 68rem) !important;
+  max-width: none !important;
+  margin-inline: auto !important;
 }
 
 .qmx-article-header {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.qmx-article-cover {
   position: relative;
   display: flex;
-  min-height: clamp(10rem, 24vw, 17rem);
+  width: min(100%, 68rem);
+  min-height: clamp(24rem, 42vw, 35rem);
   align-items: end;
   overflow: hidden;
-  padding: clamp(1.25rem, 4vw, 2.25rem);
+  margin: 0 auto 3rem;
   border-radius: var(--qmx-radius);
   background: var(--qmx-cover-image, linear-gradient(135deg, var(--cover-a), var(--cover-b)));
   color: #fff;
+  isolation: isolate;
 }
+.qmx-article-header__backdrop { position: absolute; inset: 0; z-index: -1; }
+.qmx-article-header__backdrop::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, #09111c1a 12%, #09111c55 45%, #09111cdd 100%); }
+.qmx-article-header__backdrop img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.92); }
+.qmx-article-header__backdrop span { position: absolute; right: 8%; bottom: 12%; color: #fff4; font-size: clamp(2rem, 10vw, 8rem); font-weight: 800; letter-spacing: .08em; transform: rotate(-8deg); }
+.qmx-article-header__content { display: grid; gap: 1rem; width: min(100%, 62rem); padding: clamp(2rem, 5vw, 4.5rem); }
+.qmx-article-breadcrumb { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; color: #fffc; font-size: .74rem; }
+.qmx-article-breadcrumb a { color: #fff; text-decoration: none; }
+.qmx-article-breadcrumb a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.qmx-article-labels { display: flex; flex-wrap: wrap; gap: .45rem; }
+.qmx-article-labels span { padding: .28rem .55rem; border: 1px solid #fff5; border-radius: 999px; background: #05101c44; color: #fff; font-size: .68rem; backdrop-filter: blur(8px); }
+.qmx-article-labels__origin { border-color: color-mix(in srgb, var(--qmx-link) 70%, white); background: color-mix(in srgb, var(--qmx-link) 48%, transparent); }
+.qmx-article-header h1 { max-width: 56rem; margin: 0; color: #fff; font-size: clamp(2.25rem, 5vw, 4.8rem); line-height: 1.1; letter-spacing: -.03em; text-shadow: 0 .15rem 1.25rem #0005; }
+.qmx-article-header p { max-width: 48rem; margin: 0; color: #fffd; font-size: 1rem; line-height: 1.8; }
+.qmx-article-meta { display: flex; flex-wrap: wrap; gap: .6rem 1rem; color: #fffb; font-size: .75rem; }
+.qmx-article-meta span + span, .qmx-article-meta time + span { padding-inline-start: 1rem; border-inline-start: 1px solid #fff5; }
 
-.qmx-article-cover::after {
-  position: absolute;
-  inset: 0;
-  content: '';
-  background: linear-gradient(180deg, transparent 25%, #000a);
+/* 右侧本页目录继续保留，使用自己的窄容器，不让空白吞掉主阅读区。 */
+.main-frame:has(.qmx-article-header) .right-sidebar-container { border-inline-start: 1px solid var(--qmx-border); }
+.main-frame:has(.qmx-article-header) .right-sidebar .sl-container { padding-inline: 1rem; }
+
+@media (max-width: 70rem) {
+  .main-frame:has(.qmx-article-header) > div { grid-template-columns: minmax(0, 1fr) minmax(15rem, 17rem); }
+  .main-frame:has(.qmx-article-header) .content-panel { padding-inline: 2rem; }
+  .qmx-article-header { width: 100%; }
 }
-
-.qmx-article-cover img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+@media (max-width: 50rem) {
+  :root[data-has-sidebar]:not([data-has-hero]) .sidebar-pane { inset-inline-start: 0; }
+  .main-frame:has(.qmx-article-header) > div { display: block; }
+  .main-frame:has(.qmx-article-header) .content-panel { padding: 1rem 1rem 3rem; }
+  .main-frame:has(.qmx-article-header) .right-sidebar-container { border-inline-start: 0; border-block-start: 1px solid var(--qmx-border); padding: 1.5rem 1rem 2rem; }
+  .qmx-article-header { min-height: 23rem; margin-bottom: 2rem; border-radius: .8rem; }
+  .qmx-article-header__content { padding: 2.4rem 1.25rem 2.6rem; }
+  .qmx-article-header h1 { font-size: clamp(2rem, 10vw, 3.2rem); }
+  .qmx-article-meta { gap: .5rem .75rem; }
 }
-
-.qmx-article-cover span {
-  position: relative;
-  z-index: 1;
-  font-size: clamp(1.1rem, 3vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-shadow: 0 2px 10px #0008;
-}
-
-.qmx-article-heading {
-  display: grid;
-  gap: .8rem;
-}
-
-.qmx-article-kicker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  align-items: center;
-  color: var(--qmx-muted);
-  font-size: .82rem;
-}
-
-.qmx-article-kicker span {
-  color: var(--qmx-link);
-  font-weight: 650;
-}
-
-.qmx-article-heading h1 {
-  margin: 0;
-  color: var(--qmx-strong);
-  font-size: clamp(2rem, 5vw, 3.3rem);
-  line-height: 1.16;
-}
-
-.qmx-article-heading p {
-  max-width: 52rem;
-  margin: 0;
-  color: var(--qmx-muted);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-.qmx-article-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .45rem;
-  list-style: none;
-  margin: .2rem 0 0;
-  padding: 0;
-}
-
-.qmx-article-tags li {
-  padding: .28rem .55rem;
-  border: 1px solid var(--qmx-border);
-  border-radius: 999px;
-  color: var(--qmx-muted);
-  font-size: .75rem;
-}
-
-@media (min-width: 50rem) {
-  :root[data-has-sidebar]:not([data-has-hero]) .sidebar-pane {
-    inset-inline-start: 0;
-  }
-}
-
 @media (max-width: 40rem) {
-  .qmx-article-cover { min-height: 10rem; }
-  .qmx-article-heading h1 { font-size: 2rem; }
+  .qmx-article-breadcrumb { font-size: .68rem; }
+  .qmx-article-header p { font-size: .88rem; }
+  .qmx-article-meta { display: grid; gap: .35rem; }
+  .qmx-article-meta span + span, .qmx-article-meta time + span { padding-inline-start: 0; border-inline-start: 0; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  :root[data-has-sidebar]:not([data-has-hero]) .sidebar-pane { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { :root[data-has-sidebar]:not([data-has-hero]) .sidebar-pane { transition: none; } }
