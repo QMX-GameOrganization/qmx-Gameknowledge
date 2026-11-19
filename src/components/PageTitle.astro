@@ -1,0 +1,26 @@
+---
+import { getDocSeries, getDocVisualKey } from '../lib/content';
+
+const entry = Astro.locals.starlightRoute.entry;
+const data = entry.data as typeof entry.data & {
+  cover?: string;
+  coverAlt?: string;
+  series?: string;
+};
+const series = data.series ?? getDocSeries(entry as never);
+const visualKey = getDocVisualKey(entry as never);
+const date = data.date instanceof Date ? data.date : undefined;
+const coverStyle = data.cover ? '--qmx-cover-image: url("' + data.cover + '")' : undefined;
+---
+
+<header class="qmx-article-header">
+  <div class:list={['qmx-article-cover', 'cover-' + visualKey]} style={coverStyle}>
+    {data.cover ? <img src={data.cover} alt={data.coverAlt ?? ''} /> : <span aria-hidden="true">{series}</span>}
+  </div>
+  <div class="qmx-article-heading">
+    <div class="qmx-article-kicker"><span>{series}</span>{date && <time datetime={date.toISOString()}>{date.toLocaleDateString('zh-CN')}</time>}</div>
+    <h1 id="starlight__page-title">{data.title}</h1>
+    {data.description && <p>{data.description}</p>}
+    {data.tags?.length > 0 && <ul class="qmx-article-tags" aria-label="文章标签">{data.tags.map((tag) => <li>#{tag}</li>)}</ul>}
+  </div>
+</header>

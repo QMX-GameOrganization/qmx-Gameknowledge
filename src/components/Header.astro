@@ -1,0 +1,187 @@
+---
+import { getCollection } from 'astro:content';
+import config from 'virtual:starlight/user-config';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import {
+  getDocCollectionKey,
+  getDocHref,
+  getDocSeries,
+  isPublicDoc,
+} from '../lib/content';
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rawPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentPath = decodeURIComponent(rawPath);
+const currentEntry = Astro.locals.starlightRoute.entry;
+const allDocs = (await getCollection('docs')).filter(isPublicDoc);
+const currentDoc = allDocs.find((doc) => doc.id === currentEntry.id);
+const isHome = currentPath === base || currentPath === '/';
+const seriesMatch = currentPath.match(new RegExp(`^${base}/series/([^/]+)$`));
+const seriesKeyFromPath = seriesMatch?.[1];
+const isSeriesPage = Boolean(seriesKeyFromPath);
+const isArticle = Boolean(currentDoc);
+
+const labels: Record<string, string> = {
+  'ue专栏': 'UE 专栏 · 运动系统',
+  'csharp速通': 'C# 速通',
+  'csharp与unity内存基础': 'C# 与 Unity 内存基础',
+  'csharp底层专栏': 'C# 底层专栏',
+  'unity-job与burst': 'Unity Job、Burst 与 Entities',
+  'ecs学习': 'ECS 学习与工厂游戏',
+  '认识unity': '认识 Unity',
+  'minecraft源码学习': 'Minecraft 源码学习',
+  '游戏框架设计专栏': '游戏框架设计专栏',
+  'unity热更新专栏': 'Unity 热更新专栏',
+  'git使用指南': 'Git 使用指南',
+  八股: '基础知识速查',
+  自我忏悔: '学习规划与复盘',
+  projects: '项目文章',
+  guide: '使用指南',
+};
+
+const getLabel = (key: string | undefined) => key ? labels[key.toLowerCase()] ?? key : undefined;
+const currentSeriesKey = currentDoc ? getDocCollectionKey(currentDoc) : seriesKeyFromPath;
+const currentSeriesLabel = getLabel(currentSeriesKey) ?? (currentDoc ? getDocSeries(currentDoc) : undefined) ?? getLabel(seriesKeyFromPath);
+const currentSeriesHref = currentSeriesKey ? `${base}/series/${encodeURIComponent(currentSeriesKey)}/` : undefined;
+const seriesDocs = currentSeriesKey
+  ? allDocs
+      .filter((doc) => getDocCollectionKey(doc) === currentSeriesKey)
+      .sort((a, b) => (a.data.sidebar.order ?? 999) - (b.data.sidebar.order ?? 999) || a.id.localeCompare(b.id, 'zh-CN', { numeric: true }))
+  : [];
+const currentIndex = currentDoc ? seriesDocs.findIndex((doc) => doc.id === currentDoc.id) : -1;
+const previousDoc = currentIndex > 0 ? seriesDocs[currentIndex - 1] : undefined;
+const nextDoc = currentIndex >= 0 && currentIndex < seriesDocs.length - 1 ? seriesDocs[currentIndex + 1] : undefined;
+
+const pageKind = isHome ? '首页' : isArticle ? '文章' : isSeriesPage ? '专题' : '页面';
+const pageTitle = isHome
+  ? '游戏知识库'
+  : isArticle
+    ? currentDoc.data.title
+    : isSeriesPage
+      ? getLabel(seriesKeyFromPath) ?? seriesKeyFromPath
+      : currentEntry.data.title;
+
+const homeNav = [
+  { index: '01', label: '知识专题', hint: '按主题浏览', href: `${base}/#knowledge-overview` },
+  { index: '02', label: '精选内容', hint: '从这里开始', href: `${base}/#featured-title` },
+  { index: '03', label: '最近整理', hint: '查看新内容', href: `${base}/#latest-title` },
+  { index: '04', label: '使用指南', hint: '了解阅读方式', href: `${base}/series/guide/` },
+];
+const seriesNav = currentSeriesHref ? [
+  { index: '01', label: '专题首页', hint: '回到专题介绍', href: currentSeriesHref },
+  { index: '02', label: '阅读路径', hint: '从导读开始', href: `${currentSeriesHref}#reading-path` },
+  { index: '03', label: '全部文章', hint: `${seriesDocs.length} 篇内容`, href: `${currentSeriesHref}#all-articles` },
+  { index: '04', label: '返回主页', hint: '继续浏览其他专题', href: `${base}/` },
+] : homeNav;
+const articleNav = currentSeriesHref ? [
+  { index: '01', label: '返回专题', hint: currentSeriesLabel ?? '当前专题', href: currentSeriesHref },
+  { index: '02', label: '专题目录', hint: `${seriesDocs.length} 篇文章`, href: `${currentSeriesHref}#all-articles` },
+  { index: '03', label: '上一篇', hint: previousDoc?.data.title ?? '已经是第一篇', href: previousDoc ? getDocHref(previousDoc, base) : undefined, disabled: !previousDoc },
+  { index: '04', label: '下一篇', hint: nextDoc?.data.title ?? '已经是最后一篇', href: nextDoc ? getDocHref(nextDoc, base) : undefined, disabled: !nextDoc },
+] : homeNav;
+const navItems = isArticle ? articleNav : isSeriesPage ? seriesNav : homeNav;
+---
+
+<div class="qmx-header">
+  <div class="qmx-header__top">
+    <div class="title-wrapper sl-flex">
+      <SiteTitle />
+    </div>
+    <div class="qmx-header__page-context" aria-label="当前页面">
+      <span>{pageKind}</span>
+      <strong>{pageTitle}</strong>
+    </div>
+    <div class="qmx-header__tools sl-flex print:hidden">
+      {shouldRenderSearch && <Search />}
+      <div class="qmx-header__desktop-tools sl-hidden md:sl-flex print:hidden">
+        <div class="social-icons"><SocialIcons /></div>
+        <ThemeSelect />
+        <LanguageSelect />
+      </div>
+    </div>
+  </div>
+
+  <div class="qmx-header__content-row">
+    <div class="qmx-header__section-label"><span>{isArticle ? '阅读' : isSeriesPage ? '专题' : '浏览'}</span><small>{pageKind.toUpperCase()}</small></div>
+    <nav class="qmx-content-nav" aria-label={`${pageKind}功能导航`}>
+      {navItems.map((item) => <a class:list={['qmx-content-nav__item', { 'is-disabled': item.disabled }]} href={item.href} aria-disabled={item.disabled ? 'true' : undefined}>
+        <span class="qmx-content-nav__index">{item.index}</span>
+        <span><strong>{item.label}</strong><small>{item.hint}</small></span>
+      </a>)}
+    </nav>
+    {isArticle && currentSeriesHref && <a class="qmx-reading-context" href={currentSeriesHref}><small>当前专题</small><strong>{currentSeriesLabel}</strong><span aria-hidden="true">↗</span></a>}
+  </div>
+</div>
+
+<style>
+  @layer starlight.core {
+    .qmx-header {
+      display: grid;
+      gap: .65rem;
+      width: 100%;
+    }
+
+    .qmx-header__top,
+    .qmx-header__content-row {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .qmx-header__top { justify-content: space-between; gap: var(--sl-nav-gap); }
+    .qmx-header__tools { gap: 1rem; min-width: 0; }
+    .qmx-header__desktop-tools { gap: 1rem; align-items: center; }
+    .qmx-header__desktop-tools .social-icons { display: flex; gap: 1rem; align-items: center; }
+    .qmx-header__desktop-tools .social-icons:empty { display: none; }
+    .qmx-header__desktop-tools .social-icons:not(:empty)::after { content: ''; height: 2rem; border-inline-end: 1px solid var(--sl-color-gray-5); }
+
+    .qmx-header__page-context { display: grid; flex: 0 1 27rem; gap: .08rem; min-width: 0; padding-inline: .9rem; border-inline-start: 1px solid var(--qmx-border); }
+    .qmx-header__page-context span { color: var(--qmx-link); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; }
+    .qmx-header__page-context strong { overflow: hidden; color: var(--qmx-strong); font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
+
+    .qmx-header__content-row { gap: .9rem; padding-top: .55rem; border-top: 1px solid var(--sl-color-gray-5); }
+    .qmx-header__section-label { display: grid; flex: 0 0 auto; gap: .08rem; color: var(--qmx-link); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .qmx-header__section-label small { color: var(--qmx-muted); font-size: .58rem; font-weight: 500; letter-spacing: .12em; }
+    .qmx-content-nav { display: flex; flex: 1; gap: .45rem; min-width: 0; }
+    .qmx-content-nav__item { display: inline-flex; flex: 1 1 0; gap: .55rem; align-items: center; min-width: 0; padding: .35rem .55rem; border: 1px solid transparent; border-radius: .55rem; color: var(--qmx-muted); text-decoration: none; transition: border-color .18s ease, background .18s ease, color .18s ease; }
+    .qmx-content-nav__item:hover:not(.is-disabled) { border-color: var(--qmx-border); background: color-mix(in srgb, var(--qmx-link) 9%, transparent); color: var(--qmx-strong); }
+    .qmx-content-nav__item.is-disabled { opacity: .48; cursor: default; pointer-events: none; }
+    .qmx-content-nav__index { color: var(--qmx-link); font-family: ui-monospace, monospace; font-size: .65rem; }
+    .qmx-content-nav__item strong, .qmx-content-nav__item small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-content-nav__item strong { font-size: .76rem; line-height: 1.2; }
+    .qmx-content-nav__item small { margin-top: .14rem; color: var(--qmx-muted); font-size: .62rem; }
+    .qmx-reading-context { display: inline-flex; flex: 0 1 13rem; gap: .4rem; align-items: center; min-width: 0; padding: .35rem .55rem; border-inline-start: 1px solid var(--qmx-border); color: var(--qmx-link); text-decoration: none; }
+    .qmx-reading-context small, .qmx-reading-context strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .qmx-reading-context small { color: var(--qmx-muted); font-size: .62rem; }
+    .qmx-reading-context strong { font-size: .72rem; }
+    .qmx-reading-context span { margin-inline-start: auto; }
+
+    @media (max-width: 70rem) {
+      .qmx-header__page-context { flex-basis: 18rem; }
+      .qmx-reading-context { display: none; }
+    }
+    @media (max-width: 55rem) {
+      .qmx-header__page-context { display: none; }
+      .qmx-header__section-label { display: none; }
+      .qmx-content-nav { overflow-x: auto; scrollbar-width: none; }
+      .qmx-content-nav::-webkit-scrollbar { display: none; }
+      .qmx-content-nav__item { flex: 0 0 auto; }
+    }
+    @media (max-width: 40rem) {
+      .qmx-header { gap: .5rem; }
+      .qmx-header__content-row { padding-top: .42rem; }
+      .qmx-content-nav__item { padding-inline: .45rem; }
+      .qmx-content-nav__item small { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .qmx-content-nav__item { transition: none; } }
+  }
+</style>
+
+
+

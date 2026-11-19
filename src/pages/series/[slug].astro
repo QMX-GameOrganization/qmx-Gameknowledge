@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import {
+  getDocCollectionKey,
+  getDocDate,
+  getDocHref,
+  getDocSeries,
+  getDocVisualKey,
+  isPublicDoc,
+} from '../../lib/content';
+
+const labels: Record<string, string> = {
+  'ue专栏': 'UE 专栏 · 运动系统',
+  'csharp速通': 'C# 速通',
+  'csharp与unity内存基础': 'C# 与 Unity 内存基础',
+  'csharp底层专栏': 'C# 底层专栏',
+  'unity-job与burst': 'Unity Job、Burst 与 Entities',
+  'ecs学习': 'ECS 学习与工厂游戏',
+  '认识unity': '认识 Unity',
+  'minecraft源码学习': 'Minecraft 源码学习',
+  '游戏框架设计专栏': '游戏框架设计专栏',
+  'unity热更新专栏': 'Unity 热更新专栏',
+  'git使用指南': 'Git 使用指南',
+  八股: '基础知识速查',
+  自我忏悔: '学习规划与复盘',
+  projects: '项目文章',
+  guide: '使用指南',
+};
+
+export async function getStaticPaths() {
+  const allDocs = (await getCollection('docs')).filter(isPublicDoc);
+  const keys = [...new Set(allDocs.map(getDocCollectionKey))];
+  return keys.map((slug) => ({ params: { slug }, props: { slug } }));
+}
+
+const slug = Astro.props.slug as string;
+const allDocs = (await getCollection('docs')).filter(isPublicDoc);
+const docs = allDocs.filter((doc) => getDocCollectionKey(doc) === slug).sort((a, b) => (a.data.sidebar.order ?? 999) - (b.data.sidebar.order ?? 999) || a.id.localeCompare(b.id, 'zh-CN', { numeric: true }));
+const title = labels[slug] ?? getDocSeries(docs[0] as never) ?? slug;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const lead = docs.find((doc) => doc.data.cover) ?? docs[0];
+const description = lead?.data.description ?? '按阅读路径整理的专题文章。';
+const frontmatter = {
+  title,
+  description,
+  template: 'doc',
+  sidebar: { hidden: true },
+  prev: false,
+  next: false,
+};
+
+function dateLabel(doc: (typeof docs)[number]) {
+  const date = getDocDate(doc);
+  return date ? date.toLocaleDateString('zh-CN') : '长期维护';
+}
+---
+
+<StarlightPage frontmatter={frontmatter}>
+  <div class="qmx-series-page">
+    <nav class="series-quick-nav" aria-label="专题导航">
+      <a href={base + '/'}>返回首页</a>
+      <a href="#reading-path">阅读路径</a>
+      <a href="#all-articles">全部文章 <span>{docs.length}</span></a>
+    </nav>
+
+    <header class="series-hero">
+      <div class:list={['series-hero__cover', 'cover-' + getDocVisualKey(lead as never)]}>
+        {lead?.data.cover ? <img src={lead.data.cover} alt={lead.data.coverAlt ?? ''} /> : <span>{title}</span>}
+      </div>
+      <div class="series-hero__body">
+        <span class="eyebrow">SERIES / 专题</span>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <div class="series-stats"><span><strong>{docs.length}</strong> 篇文章</span><span>适合按顺序阅读</span></div>
+      </div>
+    </header>
+
+    <section id="reading-path" class="series-section" aria-labelledby="reading-path-title">
+      <div class="section-heading"><div><span class="eyebrow">READING PATH / 阅读路径</span><h2 id="reading-path-title">从导读开始</h2></div><p>文章页默认进入沉浸阅读，切换其他文章时打开顶部专栏目录。</p></div>
+      <div class="series-path-grid">
+        {docs.slice(0, 4).map((doc, index) => <a href={getDocHref(doc, base)} class="series-path-card">
+          <span>0{index + 1}</span>
+          <strong>{doc.data.title}</strong>
+          <small>{doc.data.description ?? '进入文章查看详细内容。'}</small>
+        </a>)}
+      </div>
+    </section>
+
+    <section id="all-articles" class="series-section" aria-labelledby="all-articles-title">
+      <div class="section-heading"><div><span class="eyebrow">ALL ARTICLES / 全部文章</span><h2 id="all-articles-title">专题文章</h2></div><p>按当前专题目录顺序排列。</p></div>
+      <div class="series-article-list">
+        {docs.map((doc, index) => <a class="series-article-item" href={getDocHref(doc, base)}>
+          <span class="series-article-item__index">{String(index + 1).padStart(2, '0')}</span>
+          <span class="series-article-item__main"><strong>{doc.data.title}</strong><small>{doc.data.description ?? '查看文章内容。'}</small></span>
+          <time datetime={getDocDate(doc)?.toISOString()}>{dateLabel(doc)}</time>
+          <span aria-hidden="true">↗</span>
+        </a>)}
+      </div>
+    </section>
+  </div>
+</StarlightPage>

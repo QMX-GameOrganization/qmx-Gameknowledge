@@ -1,10 +1,33 @@
 ---
 import { getCollection } from 'astro:content';
+import {
+  getDocDate,
+  getDocHref,
+  getDocSeries,
+  getDocVisualKey,
+  isPublicDoc,
+} from '../lib/content';
 import '../styles/home.css';
 
-// 直接按真实目录生成预览，新增文章无需维护第二份首页链接清单。
-const docs = (await getCollection('docs')).filter((doc) => /^(knowledge|projects|guide)\//.test(doc.id));
+const docs = (await getCollection('docs')).filter(isPublicDoc);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const labels: Record<string, string> = {
+  'ue专栏': 'UE 专栏 · 运动系统',
+  'csharp速通': 'C# 速通',
+  'csharp与unity内存基础': 'C# 与 Unity 内存基础',
+  'csharp底层专栏': 'C# 底层专栏',
+  'unity-job与burst': 'Unity Job、Burst 与 Entities',
+  'ecs学习': 'ECS 学习与工厂游戏',
+  '认识unity': '认识 Unity',
+  'minecraft源码学习': 'Minecraft 源码学习',
+  '游戏框架设计专栏': '游戏框架设计专栏',
+  'unity热更新专栏': 'Unity 热更新专栏',
+  'git使用指南': 'Git 使用指南',
+  '八股': '基础知识速查',
+  '自我忏悔': '学习规划与复盘',
+  projects: '项目文章',
+  guide: '使用指南',
+};
 const categories = [
   { id: 'language', title: '语言与内存', description: 'C#、面向对象、运行时与内存管理。', folders: ['csharp速通', 'csharp与unity内存基础', 'csharp底层专栏', '面向对象串讲'] },
   { id: 'unity', title: 'Unity 与 ECS', description: '编辑器基础、Job、Burst、Entities 与工厂游戏实现。', folders: ['unity-job与burst', 'ecs学习', '认识unity'] },
@@ -15,15 +38,7 @@ const categories = [
   { id: 'reference', title: '工具与知识速查', description: 'Git 协作、开发工具、基础知识与学习记录。', folders: ['git使用指南', '工具', '八股', '自我忏悔'] },
   { id: 'projects', title: '项目与使用指南', description: '项目介绍、实践记录以及知识库的使用与维护。', folders: ['projects', 'guide'] },
 ];
-const labels: Record<string, string> = {
-  'ue专栏': 'UE 专栏 · 运动系统',
-  'csharp速通': 'C# 速通', 'csharp与unity内存基础': 'C# 与 Unity 内存基础', 'csharp底层专栏': 'C# 底层专栏',
-  'unity-job与burst': 'Unity Job、Burst 与 Entities', 'ecs学习': 'ECS 学习与工厂游戏',
-  '认识unity': '认识 Unity', 'minecraft源码学习': 'Minecraft 源码学习',
-  '游戏框架设计专栏': '游戏框架设计专栏',
-  'unity热更新专栏': 'Unity 热更新专栏', 'git使用指南': 'Git 使用指南',
-  '八股': '基础知识速查', '自我忏悔': '学习规划与复盘', projects: '项目文章', guide: '使用指南',
-};
+
 const buckets = new Map<string, typeof docs>();
 for (const doc of docs) {
   const parts = doc.id.split('/');
@@ -32,31 +47,98 @@ for (const doc of docs) {
   entries.push(doc);
   buckets.set(folder, entries);
 }
-// 未登记的新专题放入速查区，保证首页覆盖全部文档。
+
+// 新专题自动进入速查区，新增文章无需同步维护另一份首页目录。
 const assigned = new Set(categories.flatMap((category) => category.folders));
-for (const folder of buckets.keys()) if (!assigned.has(folder)) categories.find((category) => category.id === 'reference')!.folders.push(folder);
+for (const folder of buckets.keys()) {
+  if (!assigned.has(folder)) categories.find((category) => category.id === 'reference')!.folders.push(folder);
+}
+
+const displaySeries = (doc: (typeof docs)[number]) => {
+  const series = getDocSeries(doc);
+  return labels[series.toLowerCase()] ?? labels[series] ?? series;
+};
+const sortByDate = (a: (typeof docs)[number], b: (typeof docs)[number]) => {
+  const dateA = getDocDate(a)?.getTime() ?? 0;
+  const dateB = getDocDate(b)?.getTime() ?? 0;
+  return dateB - dateA || a.id.localeCompare(b.id, 'zh-CN', { numeric: true });
+};
+const fallbackFeatured = docs.filter((doc) => doc.id.startsWith('projects/') || doc.id.includes('/目录'));
+const featured = [...docs.filter((doc) => doc.data.featured).sort(sortByDate), ...fallbackFeatured.sort(sortByDate)]
+  .filter((doc, index, entries) => entries.findIndex((item) => item.id === doc.id) === index)
+  .slice(0, 4);
+const latest = [...docs].sort(sortByDate).slice(0, 6);
 const sections = categories.map((category) => ({
   ...category,
   topics: category.folders.filter((folder) => buckets.has(folder)).map((folder) => {
     const entries = buckets.get(folder)!.sort((a, b) => (a.data.sidebar.order ?? 999) - (b.data.sidebar.order ?? 999) || a.id.localeCompare(b.id, 'zh-CN', { numeric: true }));
-    return { title: labels[folder] ?? folder, entries: entries.map((entry) => ({ title: entry.data.title, href: `${base}/${entry.id}/` })) };
+    return { title: labels[folder] ?? folder, collectionKey: folder, entries: entries.map((entry) => ({ title: entry.data.title, href: getDocHref(entry, base) })) };
   }),
 }));
+
+function coverStyle(doc: (typeof docs)[number]) {
+  return doc.data.cover ? '--qmx-cover-image: url("' + doc.data.cover + '")' : undefined;
+}
+
+function formatDate(doc: (typeof docs)[number]) {
+  const date = getDocDate(doc);
+  return date ? date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '持续整理';
+}
 ---
 
 <div class="qmx-home">
-  <div class="home-summary" aria-label="知识库概况">
-    <span><strong>{docs.length}</strong> 篇文档</span><span><strong>{buckets.size}</strong> 个专题</span>
-    <span class="summary-note">按分类浏览 · 预览文章 · 直接跳转</span>
-  </div>
-  <section id="knowledge-overview" aria-labelledby="overview-title">
-    <div class="section-heading"><div><span class="eyebrow">BROWSE / 内容导航</span><h2 id="overview-title">知识库里有什么？</h2></div><p>点击文章直接阅读，展开列表查看专题全部内容。</p></div>
-    <nav class="category-nav" aria-label="知识分类">{sections.map((section) => <a href={`#${section.id}`}>{section.title}<span>{section.topics.reduce((count, topic) => count + topic.entries.length, 0)}</span></a>)}</nav>
-    {sections.map((section, index) => <section class="topic-section" id={section.id} aria-labelledby={`${section.id}-title`}>
-      <div class="section-heading"><div><span class="eyebrow">0{index + 1} /</span><h2 id={`${section.id}-title`}>{section.title}</h2></div><p>{section.description}</p></div>
+  <section class="home-summary" aria-label="知识库概况">
+    <div><strong>{docs.length}</strong><span>篇文档</span></div>
+    <div><strong>{buckets.size}</strong><span>个专题</span></div>
+    <div><strong>{featured.length}</strong><span>个精选入口</span></div>
+    <p>先按主题进入，再按阅读路径深入。</p>
+  </section>
+
+  <section class="home-block home-featured" aria-labelledby="featured-title">
+    <div class="section-heading">
+      <div><span class="eyebrow">START HERE / 从这里开始</span><h2 id="featured-title">精选内容</h2></div>
+      <p>把项目实践、专题导读和适合先读的文章放在同一层。</p>
+    </div>
+    <div class="featured-grid">
+      {featured.map((doc) => <a class="feature-card" href={getDocHref(doc, base)}>
+        <div class:list={['content-cover', 'cover-' + getDocVisualKey(doc)]} style={coverStyle(doc)}>
+          {doc.data.cover ? <img src={doc.data.cover} alt={doc.data.coverAlt ?? ''} loading="lazy" /> : <span aria-hidden="true">{displaySeries(doc)}</span>}
+        </div>
+        <div class="feature-card__body">
+          <div class="card-meta"><span>{displaySeries(doc)}</span><span>{formatDate(doc)}</span></div>
+          <h3>{doc.data.title}</h3>
+          {doc.data.description && <p>{doc.data.description}</p>}
+          <span class="card-link">开始阅读 <span aria-hidden="true">↗</span></span>
+        </div>
+      </a>)}
+    </div>
+  </section>
+
+  <section class="home-block home-latest" aria-labelledby="latest-title">
+    <div class="section-heading">
+      <div><span class="eyebrow">LATEST / 最近整理</span><h2 id="latest-title">最近值得继续读的内容</h2></div>
+      <p>按文章日期排序，没有日期的旧文章保留在专题索引中。</p>
+    </div>
+    <div class="latest-list">
+      {latest.map((doc) => <a class="latest-item" href={getDocHref(doc, base)}>
+        <span class:list={['latest-item__mark', 'cover-' + getDocVisualKey(doc)]} aria-hidden="true"></span>
+        <span class="latest-item__main"><strong>{doc.data.title}</strong><small>{displaySeries(doc)} · {doc.data.description ?? '查看文章内容与相关资料。'}</small></span>
+        <time datetime={getDocDate(doc)?.toISOString()}>{formatDate(doc)}</time>
+      </a>)}
+    </div>
+  </section>
+
+  <section class="home-block" id="knowledge-overview" aria-labelledby="overview-title">
+    <div class="section-heading">
+      <div><span class="eyebrow">BROWSE / 内容导航</span><h2 id="overview-title">按专题浏览</h2></div>
+      <p>进入专题后再选择文章，阅读时保持页面干净。</p>
+    </div>
+    <nav class="category-nav" aria-label="知识分类">{sections.map((section) => <a href={'#' + section.id}>{section.title}<span>{section.topics.reduce((count, topic) => count + topic.entries.length, 0)}</span></a>)}</nav>
+    {sections.map((section, index) => <section class="topic-section" id={section.id} aria-labelledby={section.id + '-title'}>
+      <div class="section-heading"><div><span class="eyebrow">0{index + 1} /</span><h2 id={section.id + '-title'}>{section.title}</h2></div><p>{section.description}</p></div>
       <div class="knowledge-grid">{section.topics.map((topic) => <article class="knowledge-card">
         <div class="card-meta"><span>专题</span><span>{topic.entries.length} 篇文章</span></div>
-        <h3><a href={topic.entries[0].href}>{topic.title}</a></h3>
+        <h3><a href={base + "/series/" + encodeURIComponent(topic.collectionKey) + "/"}>{topic.title}</a></h3>
         <ul class="article-preview">{topic.entries.slice(0, 3).map((entry) => <li><a href={entry.href}><span>{entry.title}</span><span aria-hidden="true">↗</span></a></li>)}</ul>
         {topic.entries.length > 3 && <details class="article-list"><summary>查看其余 {topic.entries.length - 3} 篇文章</summary><ul>{topic.entries.slice(3).map((entry) => <li><a href={entry.href}>{entry.title}</a></li>)}</ul></details>}
       </article>)}</div>

@@ -1,0 +1,7 @@
+/* 双层顶栏分别承载站点身份和页面功能，避免文章页继续显示首页锚点。 */
+:root { --sl-nav-height: 7.2rem; }
+.page > .header { height: var(--sl-nav-height); }
+
+@media (max-width: 50rem) {
+  :root { --sl-nav-height: 6.6rem; }
+}

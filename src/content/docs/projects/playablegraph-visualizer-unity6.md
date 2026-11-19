@@ -1,6 +1,9 @@
 ---
 title: "PlayableGraph Visualizer for Unity 6：让动画播放图调试跟上引擎版本"
+series: 项目文章
+featured: true
 ---
+
 
 在 Unity 项目中使用 PlayableGraph 构建动画、Timeline 或自定义播放逻辑时，调试播放图往往比编写逻辑本身更困难。节点之间如何连接、当前有哪些输出、图是否正确运行，这些问题如果只能依靠代码和日志排查，会明显增加开发成本。
 
