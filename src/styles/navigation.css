@@ -1,5 +1,8 @@
 /* Starlight 的 Header 是固定定位，父容器高度必须覆盖自定义两行导航的真实高度。 */
-:root { --sl-nav-height: 8.75rem; }
+:root {
+  --sl-nav-height: 8.75rem;
+  scroll-padding-top: var(--sl-nav-height);
+}
 .page > .header {
   height: var(--sl-nav-height);
   box-sizing: border-box;
@@ -10,8 +13,18 @@
 }
 
 /* 首页和专题页使用自有全宽布局，文章页单独接管主列与本页目录的网格。 */
+:root:has(.qmx-home) .sidebar-pane,
+:root:has(.qmx-series-page) .sidebar-pane {
+  display: none !important;
+}
+:root:has(.qmx-home) .main-frame,
+:root:has(.qmx-series-page) .main-frame {
+  padding-inline-start: 0 !important;
+}
 .main-frame:has(.qmx-home) .right-sidebar-container,
 .main-frame:has(.qmx-series-page) .right-sidebar-container { display: none !important; }
+.main-frame:has(.qmx-home) [class~="lg:sl-flex"],
+.main-frame:has(.qmx-series-page) [class~="lg:sl-flex"] { grid-template-columns: minmax(0, 1fr) !important; }
 .main-frame:has(.qmx-home) .content-panel:first-of-type,
 .main-frame:has(.qmx-series-page) .content-panel:first-of-type { display: none; }
 .main-frame:has(.qmx-home) .main-pane,
@@ -22,7 +35,7 @@
 .main-frame:has(.qmx-series-page) .sl-container { width: auto !important; max-width: none !important; margin-inline: 0 !important; }
 .main-frame:has(.qmx-home) .sl-markdown-content,
 .main-frame:has(.qmx-series-page) .sl-markdown-content { width: auto !important; max-width: none !important; margin-inline: 0 !important; }
-.qmx-home, .qmx-series-page { width: min(100% - 3rem, 1240px); margin-inline: auto; }
+.qmx-home, .qmx-series-page { width: min(calc(100% - 2 * var(--qmx-layout-gutter)), var(--qmx-layout-width)); margin-inline: auto; }
 
 /* 无图片封面时给首页、专题页和文章页提供一致的主题渐变。 */
 .cover-unity { --cover-a: #3264c2; --cover-b: #51b5a6; }
@@ -35,7 +48,7 @@
 @media (max-width: 55rem) {
   :root { --sl-nav-height: 7.6rem; }
   .page > .header { padding-inline: 1rem; }
-  .qmx-home, .qmx-series-page { width: min(100% - 2rem, 1240px); }
+  .qmx-home, .qmx-series-page { width: min(calc(100% - 2rem), var(--qmx-layout-width)); }
 }
 @media (max-width: 40rem) {
   :root { --sl-nav-height: 6.4rem; }

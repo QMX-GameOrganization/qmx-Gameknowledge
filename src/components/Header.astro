@@ -172,7 +172,7 @@ const menuGroups = [
 <style>
   @layer starlight.core {
     /* Header 固定为两行，第一行承担站点级工具，第二行只承担当前页面功能。 */
-    .qmx-header { display: grid; width: 100%; height: 100%; align-content: start; }
+    .qmx-header { display: grid; width: min(100%, var(--qmx-layout-width)); height: 100%; margin-inline: auto; align-content: start; }
     .qmx-header__bar, .qmx-header__context { display: flex; align-items: center; min-width: 0; }
     .qmx-header__bar { min-height: 4.25rem; justify-content: space-between; gap: 1.25rem; border-bottom: 1px solid var(--qmx-border); }
     .qmx-header__brand { display: flex; align-items: center; gap: .8rem; min-width: 0; }

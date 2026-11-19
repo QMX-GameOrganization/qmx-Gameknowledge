@@ -19,6 +19,10 @@
 :root {
   --sl-font: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
   --qmx-radius: 14px;
+  --qmx-layout-width: 1240px;
+  --qmx-layout-gutter: 1.5rem;
+  --qmx-reading-width: 68rem;
+  --qmx-toc-width: 20rem;
 
   /* 映射到 Starlight。这里是未分层样式，会覆盖 Starlight 在亮 / 暗两种模式下的默认值。 */
   --sl-color-white: var(--qmx-strong);
@@ -45,6 +49,8 @@
   --sl-color-accent-high: var(--qmx-link);
   --sl-color-accent-low: color-mix(in srgb, var(--qmx-accent) 16%, var(--qmx-bg));
 }
+
+* , *::before, *::after { box-sizing: border-box; }
 
 body {
   background-color: var(--qmx-bg);

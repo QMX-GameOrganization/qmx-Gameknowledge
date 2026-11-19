@@ -66,17 +66,24 @@ const featured = [...docs.filter((doc) => doc.data.featured).sort(sortByDate), .
   .filter((doc, index, entries) => entries.findIndex((item) => item.id === doc.id) === index)
   .slice(0, 4);
 const latest = [...docs].sort(sortByDate).slice(0, 6);
-const sections = categories.map((category) => ({
-  ...category,
-  topics: category.folders.filter((folder) => buckets.has(folder)).map((folder) => {
+const sections = categories.map((category) => {
+  const topics = category.folders.filter((folder) => buckets.has(folder)).map((folder) => {
     const entries = buckets.get(folder)!.sort((a, b) => (a.data.sidebar.order ?? 999) - (b.data.sidebar.order ?? 999) || a.id.localeCompare(b.id, 'zh-CN', { numeric: true }));
     return {
       title: labels[folder] ?? folder,
       collectionKey: folder,
-      entries: entries.map((entry) => ({ title: entry.data.title, href: getDocHref(entry, base) })),
+      entries: entries.map((entry) => ({
+        title: entry.data.title,
+        href: getDocHref(entry, base),
+        cover: entry.data.cover,
+        coverAlt: entry.data.coverAlt ?? '',
+        visualKey: getDocVisualKey(entry),
+      })),
     };
-  }),
-}));
+  });
+  return { ...category, topics, articleCount: topics.reduce((count, topic) => count + topic.entries.length, 0) };
+});
+const topicCards = sections.flatMap((section) => section.topics.map((topic) => ({ ...topic, sectionId: section.id, sectionTitle: section.title })));
 const randomLinks = docs.map((doc) => ({ href: getDocHref(doc, base), title: doc.data.title, series: displaySeries(doc) }));
 
 function coverStyle(doc: (typeof docs)[number]) {
@@ -99,64 +106,61 @@ function formatDate(doc: (typeof docs)[number]) {
       <div><strong>{docs.length}</strong><span>篇文章</span></div>
       <div><strong>{buckets.size}</strong><span>个专题</span></div>
       <div><strong>{featured.length}</strong><span>精选入口</span></div>
-      <p>选择分区<br />再开始阅读</p>
+      <p>先选择内容入口，再向下浏览</p>
     </div>
   </section>
 
-  <section class="home-workspace" id="home-workspace" aria-labelledby="workspace-title">
+  <section class="home-discover" aria-labelledby="workspace-title">
     <div class="workspace-heading">
       <div><span class="eyebrow">DISCOVER / 内容入口</span><h2 id="workspace-title">选择一个入口开始</h2></div>
-      <p>首页只负责分区和跳转，文章细节进入专题后再展开。</p>
+      <p>四个入口对应四种阅读方式。选择后这里只显示对应内容，列表内部再进行滚动和分页。</p>
     </div>
-    <div class="workspace-layout">
-      <nav class="workspace-tabs" aria-label="首页内容分区">
-        <button type="button" data-home-tab="topics" aria-controls="home-panel-topics" aria-selected="true"><strong>专题</strong><small>按主题浏览</small><span>08</span></button>
-        <button type="button" data-home-tab="featured" aria-controls="home-panel-featured" aria-selected="false"><strong>精选</strong><small>适合先读</small><span>{featured.length.toString().padStart(2, '0')}</span></button>
-        <button type="button" data-home-tab="latest" aria-controls="home-panel-latest" aria-selected="false"><strong>最近整理</strong><small>查看新内容</small><span>06</span></button>
-        <button type="button" data-home-tab="random" aria-controls="home-panel-random" aria-selected="false"><strong>随机跳转</strong><small>换一篇阅读</small><span>↗</span></button>
-      </nav>
+    <nav class="home-section-nav" aria-label="首页内容入口" role="tablist">
+      <button type="button" role="tab" data-home-tab="topics" aria-controls="home-panel-topics" aria-selected="true" class="is-active"><strong>专题</strong><small>分类浏览全部专题</small><span>{topicCards.length.toString().padStart(2, '0')}</span></button>
+      <button type="button" role="tab" data-home-tab="featured" aria-controls="home-panel-featured" aria-selected="false"><strong>精选</strong><small>适合从这里开始</small><span>{featured.length.toString().padStart(2, '0')}</span></button>
+      <button type="button" role="tab" data-home-tab="latest" aria-controls="home-panel-latest" aria-selected="false"><strong>最近整理</strong><small>查看近期内容</small><span>{latest.length.toString().padStart(2, '0')}</span></button>
+      <button type="button" role="tab" data-home-tab="random" aria-controls="home-panel-random" aria-selected="false"><strong>随机跳转</strong><small>换一篇继续阅读</small><span>↗</span></button>
+    </nav>
 
-      <div class="workspace-panels">
-        <section class="workspace-panel is-active" id="home-panel-topics" data-home-panel="topics" aria-labelledby="topics-panel-title">
-          <div class="panel-heading"><div><span class="eyebrow">TOPICS / 专题地图</span><h3 id="topics-panel-title">先选内容区域</h3></div><span>{buckets.size} 个专题</span></div>
-          <div class="topic-category-grid">
-            {sections.map((section, index) => <article class="topic-category-card">
-              <div class="topic-category-card__top"><span>0{index + 1}</span><strong>{section.topics.reduce((count, topic) => count + topic.entries.length, 0)} 篇</strong></div>
-              <h4>{section.title}</h4>
-              <p>{section.description}</p>
-              <div class="topic-category-card__details">
-                {section.topics.slice(0, 3).map((topic) => <a href={base + '/series/' + encodeURIComponent(topic.collectionKey) + '/'}><strong>{topic.title}</strong><small>{topic.entries[0]?.title ?? '进入专题查看章节'}</small></a>)}
-              </div>
-            </article>)}
-          </div>
-        </section>
-
-        <section class="workspace-panel" id="home-panel-featured" data-home-panel="featured" aria-labelledby="featured-panel-title" hidden>
-          <div class="panel-heading"><div><span class="eyebrow">START HERE / 从这里开始</span><h3 id="featured-panel-title">精选内容</h3></div><span>适合首次进入</span></div>
-          <div class="featured-grid">
-            {featured.map((doc, index) => <a class:list={['feature-card', { 'feature-card--lead': index === 0 }]} href={getDocHref(doc, base)}>
-              <div class:list={['content-cover', 'cover-' + getDocVisualKey(doc)]} style={coverStyle(doc)}>
-                {doc.data.cover ? <img src={doc.data.cover} alt={doc.data.coverAlt ?? ''} loading="lazy" /> : <span aria-hidden="true">{displaySeries(doc)}</span>}
-                <span class="content-cover__label">{index === 0 ? '编辑推荐' : '精选入口'}</span>
-              </div>
-              <div class="feature-card__body"><div class="card-meta"><span>{displaySeries(doc)}</span><span>{formatDate(doc)}</span></div><h4>{doc.data.title}</h4>{doc.data.description && <p>{doc.data.description}</p>}<span class="card-link">开始阅读 <span aria-hidden="true">↗</span></span></div>
-            </a>)}
-          </div>
-        </section>
-
-        <section class="workspace-panel" id="home-panel-latest" data-home-panel="latest" aria-labelledby="latest-panel-title" hidden>
-          <div class="panel-heading"><div><span class="eyebrow">LATEST / 最近整理</span><h3 id="latest-panel-title">最近值得继续读的内容</h3></div><span>按日期排序</span></div>
-          <div class="latest-list">
-            {latest.map((doc) => <a class="latest-item" href={getDocHref(doc, base)}><span class:list={['latest-item__mark', 'cover-' + getDocVisualKey(doc)]} aria-hidden="true"></span><span class="latest-item__main"><strong>{doc.data.title}</strong><small>{displaySeries(doc)} · {doc.data.description ?? '查看文章内容与相关资料。'}</small></span><time datetime={getDocDate(doc)?.toISOString()}>{formatDate(doc)}</time></a>)}
-          </div>
-        </section>
-
-        <section class="workspace-panel random-panel" id="home-panel-random" data-home-panel="random" aria-labelledby="random-panel-title" hidden>
-          <div class="random-panel__copy"><span class="eyebrow">RANDOM / 随机跳转</span><h3 id="random-panel-title">让知识库替你选一篇</h3><p>适合不知道从哪里开始时使用。每次点击都会从现有文章中换一个入口。</p><div class="random-panel__actions"><a id="random-target" class="random-panel__target" href={featured[0] ? getDocHref(featured[0], base) : base + '/'}><strong>{featured[0]?.data.title ?? '打开一篇文章'}</strong><small>{featured[0] ? displaySeries(featured[0]) : '知识库'}</small></a><button type="button" id="random-again">换一篇 <span aria-hidden="true">↗</span></button></div></div>
-          <div class="random-panel__mark" aria-hidden="true">↗</div>
-        </section>
+    <section class="home-section" id="home-panel-topics" data-home-section="topics" aria-labelledby="topics-panel-title">
+      <div class="section-heading"><div><span class="eyebrow">TOPICS / 专题地图</span><h3 id="topics-panel-title">按内容区域浏览</h3></div><span>{topicCards.length} 个专题</span></div>
+      <div class="topic-filter" role="group" aria-label="专题分类">
+        <button type="button" data-topic-filter="all" class="is-active"><strong>全部专题</strong><small>{topicCards.length} 个</small></button>
+        {sections.map((section) => <button type="button" data-topic-filter={section.id}><strong>{section.title}</strong><small>{section.topics.length} 个</small></button>)}
       </div>
-    </div>
+      <div class="section-scroll-frame topic-scroll-frame">
+        <div class="topic-card-grid" data-topic-items>
+          {topicCards.map((topic) => <article class="topic-card" data-topic-card data-topic-section={topic.sectionId}>
+            <a class:list={['topic-card__cover', 'cover-' + (topic.entries[0]?.visualKey ?? 'default')]} href={base + '/series/' + encodeURIComponent(topic.collectionKey) + '/'} aria-label={`进入${topic.title}`}>
+              {topic.entries[0]?.cover ? <img src={topic.entries[0].cover} alt={topic.entries[0].coverAlt} loading="lazy" /> : <span>{topic.title}</span>}
+            </a>
+            <div class="topic-card__body"><div class="topic-card__meta"><span>{topic.sectionTitle}</span><span>{topic.entries.length} 篇</span></div><h4>{topic.title}</h4><ol>{topic.entries.slice(0, 4).map((entry) => <li><a href={entry.href}>{entry.title}</a></li>)}</ol><a class="topic-card__cta" href={base + '/series/' + encodeURIComponent(topic.collectionKey) + '/'}>进入完整专题 <span aria-hidden="true">↗</span></a></div>
+          </article>)}
+        </div>
+      </div>
+      <div class="section-pagination" data-topic-pagination><button type="button" data-topic-prev disabled>上一页</button><span data-topic-page>第 1 / 1 页</span><button type="button" data-topic-next>下一页</button></div>
+    </section>
+
+    <section class="home-section" id="home-panel-featured" hidden data-home-section="featured" aria-labelledby="featured-panel-title">
+      <div class="section-heading"><div><span class="eyebrow">START HERE / 从这里开始</span><h3 id="featured-panel-title">精选内容</h3></div><span>适合首次进入</span></div>
+      <div class="section-scroll-frame"><div class="featured-grid">
+        {featured.map((doc, index) => <a class:list={['feature-card', { 'feature-card--lead': index === 0 }]} href={getDocHref(doc, base)}>
+          <div class:list={['content-cover', 'cover-' + getDocVisualKey(doc)]} style={coverStyle(doc)}>{doc.data.cover ? <img src={doc.data.cover} alt={doc.data.coverAlt ?? ''} loading="lazy" /> : <span aria-hidden="true">{displaySeries(doc)}</span>}<span class="content-cover__label">{index === 0 ? '编辑推荐' : '精选入口'}</span></div>
+          <div class="feature-card__body"><div class="card-meta"><span>{displaySeries(doc)}</span><span>{formatDate(doc)}</span></div><h4>{doc.data.title}</h4>{doc.data.description && <p>{doc.data.description}</p>}<span class="card-link">开始阅读 <span aria-hidden="true">↗</span></span></div>
+        </a>)}
+      </div></div>
+    </section>
+
+    <section class="home-section" id="home-panel-latest" hidden data-home-section="latest" aria-labelledby="latest-panel-title">
+      <div class="section-heading"><div><span class="eyebrow">LATEST / 最近整理</span><h3 id="latest-panel-title">最近值得继续读的内容</h3></div><span>按日期排序</span></div>
+      <div class="section-scroll-frame"><div class="latest-list">
+        {latest.map((doc) => <a class="latest-item" href={getDocHref(doc, base)}><span class:list={['latest-item__mark', 'cover-' + getDocVisualKey(doc)]} aria-hidden="true"></span><span class="latest-item__main"><strong>{doc.data.title}</strong><small>{displaySeries(doc)} · {doc.data.description ?? '查看文章内容与相关资料。'}</small></span><time datetime={getDocDate(doc)?.toISOString()}>{formatDate(doc)}</time></a>)}
+      </div></div>
+    </section>
+
+    <section class="home-section random-section" id="home-panel-random" hidden data-home-section="random" aria-labelledby="random-panel-title">
+      <div class="random-panel"><div class="random-panel__copy"><span class="eyebrow">RANDOM / 随机跳转</span><h3 id="random-panel-title">让知识库替你选一篇</h3><p>适合不知道从哪里开始时使用。每次点击都会从现有文章中换一个入口。</p><div class="random-panel__actions"><a id="random-target" class="random-panel__target" href={featured[0] ? getDocHref(featured[0], base) : base + '/'}><strong>{featured[0]?.data.title ?? '打开一篇文章'}</strong><small>{featured[0] ? displaySeries(featured[0]) : '知识库'}</small></a><button type="button" id="random-again">换一篇 <span aria-hidden="true">↗</span></button></div></div><div class="random-panel__mark" aria-hidden="true">↗</div></div>
+    </section>
   </section>
 </div>
 
@@ -164,23 +168,57 @@ function formatDate(doc: (typeof docs)[number]) {
   const shell = document.querySelector('[data-home-shell]');
   if (shell) {
     const tabs = [...shell.querySelectorAll('[data-home-tab]')];
-    const panels = [...shell.querySelectorAll('[data-home-panel]')];
-    const selectPanel = (key, updateHash = true) => {
-      tabs.forEach((tab) => tab.setAttribute('aria-selected', String(tab.dataset.homeTab === key)));
+    const panels = [...shell.querySelectorAll('[data-home-section]')];
+    const validKeys = ['topics', 'featured', 'latest', 'random'];
+    const selectPanel = (key, updateHash = true, scroll = false) => {
+      if (!validKeys.includes(key)) return;
+      tabs.forEach((tab) => {
+        const active = tab.dataset.homeTab === key;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
       panels.forEach((panel) => {
-        const active = panel.dataset.homePanel === key;
+        const active = panel.dataset.homeSection === key;
         panel.classList.toggle('is-active', active);
         panel.toggleAttribute('hidden', !active);
       });
       if (updateHash) history.replaceState(null, '', `${location.pathname}${location.search}#home-panel-${key}`);
+      if (scroll) document.querySelector('.home-discover')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     const hashKey = location.hash.match(/^#home-panel-(topics|featured|latest|random)$/)?.[1] ?? 'topics';
-    selectPanel(hashKey, false);
-    tabs.forEach((tab) => tab.addEventListener('click', () => selectPanel(tab.dataset.homeTab)));
+    selectPanel(hashKey, false, Boolean(location.hash));
+    shell.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target.closest('[data-home-tab]') : null;
+      if (target) selectPanel(target.dataset.homeTab, true, true);
+    });
     window.addEventListener('hashchange', () => {
       const key = location.hash.match(/^#home-panel-(topics|featured|latest|random)$/)?.[1];
-      if (key) selectPanel(key, false);
+      if (key) selectPanel(key, false, true);
     });
+
+    const topicCards = [...shell.querySelectorAll('[data-topic-card]')];
+    const topicFilters = [...shell.querySelectorAll('[data-topic-filter]')];
+    const topicPage = shell.querySelector('[data-topic-page]');
+    const topicPrev = shell.querySelector('[data-topic-prev]');
+    const topicNext = shell.querySelector('[data-topic-next]');
+    let activeTopicFilter = 'all';
+    let activeTopicPage = 1;
+    const pageSize = 4;
+    const updateTopicPage = () => {
+      const filtered = topicCards.filter((card) => activeTopicFilter === 'all' || card.dataset.topicSection === activeTopicFilter);
+      const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+      activeTopicPage = Math.min(activeTopicPage, pageCount);
+      const visible = new Set(filtered.slice((activeTopicPage - 1) * pageSize, activeTopicPage * pageSize));
+      topicCards.forEach((card) => card.toggleAttribute('hidden', !visible.has(card)));
+      topicFilters.forEach((filter) => filter.classList.toggle('is-active', filter.dataset.topicFilter === activeTopicFilter));
+      if (topicPage) topicPage.textContent = `第 ${activeTopicPage} / ${pageCount} 页`;
+      if (topicPrev) topicPrev.disabled = activeTopicPage <= 1;
+      if (topicNext) topicNext.disabled = activeTopicPage >= pageCount;
+    };
+    topicFilters.forEach((filter) => filter.addEventListener('click', () => { activeTopicFilter = filter.dataset.topicFilter; activeTopicPage = 1; updateTopicPage(); }));
+    topicPrev?.addEventListener('click', () => { activeTopicPage -= 1; updateTopicPage(); });
+    topicNext?.addEventListener('click', () => { activeTopicPage += 1; updateTopicPage(); });
+    updateTopicPage();
 
     const links = JSON.parse(shell.dataset.randomLinks ?? '[]');
     const target = shell.querySelector('#random-target');
