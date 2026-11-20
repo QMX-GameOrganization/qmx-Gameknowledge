@@ -1,4 +1,4 @@
-"""4.8 树形 DP 入门 的配图。"""
+"""树形 DP 的配图。"""
 from s4a_common import *
 
 

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">插入 2 后向上调整</title><desc id="desc">新元素先放在末尾，再沿父链交换直到恢复小根堆。。每次交换上移一层，复杂度是 O(log n)。</desc>
+<defs><marker id="m8c5315" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#8c5315"/></marker></defs>
+<rect width="1000" height="570" rx="18" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="32" y="44" font-size="27" font-weight="700" fill="#15263e">插入 2 后向上调整</text>
+<text x="32" y="77" font-size="17" fill="#495b73">新元素先放在末尾，再沿父链交换直到恢复小根堆。</text>
+<text x="32" y="143" font-size="17" fill="#23364e" font-weight="700">① 放到末尾</text>
+<rect x="220" y="115" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="266.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="312" y="115" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="358.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<rect x="404" y="115" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="450.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<rect x="496" y="115" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="542.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<rect x="588" y="115" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="634.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="680" y="115" width="92" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="726.0" y="143.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<path d="M805 170L805 197" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="32" y="248" font-size="17" fill="#23364e" font-weight="700">② 2 &lt; 4，交换</text>
+<rect x="220" y="220" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="266.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="312" y="220" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="358.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<rect x="404" y="220" width="92" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="450.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<rect x="496" y="220" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="542.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<rect x="588" y="220" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="634.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="680" y="220" width="92" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="726.0" y="248.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<path d="M805 275L805 302" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="32" y="353" font-size="17" fill="#23364e" font-weight="700">③ 2 &lt; 3，交换</text>
+<rect x="220" y="325" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="266.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="312" y="325" width="92" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="358.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<rect x="404" y="325" width="92" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="450.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<rect x="496" y="325" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="542.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<rect x="588" y="325" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="634.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="680" y="325" width="92" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="726.0" y="353.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<path d="M805 380L805 407" fill="none" stroke="#8c5315" stroke-width="2" marker-end="url(#m8c5315)"/>
+<text x="32" y="458" font-size="17" fill="#23364e" font-weight="700">④ 2 ≥ 1，停止</text>
+<rect x="220" y="430" width="92" height="44" rx="6" fill="#e8f7f1" stroke="#176951" stroke-opacity=".6"/>
+<text x="266.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">1</text>
+<rect x="312" y="430" width="92" height="44" rx="6" fill="#fff2df" stroke="#8c5315" stroke-opacity=".6"/>
+<text x="358.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">2</text>
+<rect x="404" y="430" width="92" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="450.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">3</text>
+<rect x="496" y="430" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="542.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">7</text>
+<rect x="588" y="430" width="92" height="44" rx="6" fill="#ffffff" stroke="#66758d" stroke-opacity=".6"/>
+<text x="634.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">6</text>
+<rect x="680" y="430" width="92" height="44" rx="6" fill="#eaf2ff" stroke="#285caa" stroke-opacity=".6"/>
+<text x="726.0" y="458.3" font-size="18" fill="#23364e" font-weight="700" text-anchor="middle">4</text>
+<text x="32" y="550" font-size="16" fill="#495b73">每次交换上移一层，复杂度是 O(log n)。</text>
+</g></svg>

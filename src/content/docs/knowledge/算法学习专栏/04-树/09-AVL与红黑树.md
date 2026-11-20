@@ -1,8 +1,8 @@
 ---
-title: "4.9 ⭐AVL 与红黑树"
+title: "4.11 ⭐AVL 与红黑树"
 description: "为什么二叉搜索树需要自平衡，旋转如何不破坏中序，AVL 的四种失衡情形，以及红黑树的性质和插入修复。"
 sidebar:
-  order: 409
+  order: 411
   badge:
     text: 进阶
     variant: caution
@@ -461,4 +461,4 @@ int main() {
 - 给上面的红黑树补全删除操作，并用 `std::set` 随机对拍；每次操作后检查四条性质。
 - 阅读 libstdc++ 的 `_Rb_tree` 实现，对照本篇的三种插入情形。
 
-下一篇：4.10 ⭐Treap 与 Splay。
+下一篇：4.12 ⭐Treap 与 Splay。

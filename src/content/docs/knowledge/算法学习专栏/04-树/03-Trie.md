@@ -1,12 +1,13 @@
 ---
-title: "4.3 Trie：字典树"
+title: "4.4 Trie：字典树"
 description: "用多叉树存字符串集合：插入、查找、前缀统计，以及 01 字典树求最大异或。"
 sidebar:
-  order: 403
+  order: 404
 ---
 
 > 适用版本：C++17。前置知识：4.1 二叉树遍历，会用数组表示树。
 
+> 所属部分：第一部分，二叉树与常用树形容器。
 ## 要点
 
 - Trie（字典树，前缀树）把一组字符串按字符逐层存进一棵多叉树，**有公共前缀的字符串共用同一条路径**。
@@ -209,15 +210,14 @@ OK
 **进阶**
 
 - [LeetCode 648 单词替换](https://leetcode.cn/problems/replace-words/)（中等）。
-- LeetCode 211 添加与搜索单词 - 数据结构设计：带通配符 `.` 的查找，用 DFS 加 Trie。
+- [LeetCode 211 添加与搜索单词 - 数据结构设计](https://leetcode.cn/problems/design-add-and-search-words-data-structure/)：带通配符 `.` 的查找，用 DFS 加 Trie。
 - [LeetCode 421 数组中两个数的最大异或值](https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/)（中等）：01 Trie。
-- 洛谷 P2580 于是他错误的点名开始了。
+- [洛谷 P2580 于是他错误的点名开始了](https://www.luogu.com.cn/problem/P2580)。
 
 **挑战**
 
-- LeetCode 212 单词搜索 II：Trie 加回溯。
-- 洛谷 P4551 最长异或路径：先用 4.4 的 DFS 算出每个点到根的异或值，再套 01 Trie。
-- LeetCode 1707 与数组中元素的最大异或值：离线排序后分批插入。
+- [LeetCode 212 单词搜索 II](https://leetcode.cn/problems/word-search-ii/)：Trie 加回溯。
+- [洛谷 P4551 最长异或路径](https://www.luogu.com.cn/problem/P4551)：先用 4.5 的 DFS 算出每个点到根的异或值，再套 01 Trie。
+- [LeetCode 1707 与数组中元素的最大异或值](https://leetcode.cn/problems/maximum-xor-with-an-element-from-array/)：离线排序后分批插入。
 
-下一篇：4.4 一般树与树的直径。
-
+下一篇：4.5 一般树与树的直径。
