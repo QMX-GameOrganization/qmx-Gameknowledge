@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-labelledby="title desc">
+<title id="title">从玩法问题到游戏算法方案</title>
+<desc id="desc">游戏算法从输入和状态开始，经过候选查询、算法计算、预算调度和结果提交，形成可测量的运行时管线。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4773a9"/></marker></defs>
+<rect width="1000" height="430" rx="20" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="40" y="48" font-size="28" font-weight="700" fill="#15263e">游戏算法不是单个公式，而是一条运行时管线</text>
+<text x="40" y="80" font-size="16" fill="#52657d">先缩小候选，再计算结果，最后用预算和生命周期把结果交给玩法系统。</text>
+<g stroke="#4773a9" stroke-width="3" fill="none" marker-end="url(#arrow)">
+<path d="M185 190H238"/><path d="M385 190H438"/><path d="M585 190H638"/><path d="M785 190H838"/>
+</g>
+<g>
+<rect x="40" y="135" width="145" height="110" rx="14" fill="#eaf2ff" stroke="#4773a9"/>
+<text x="112" y="172" text-anchor="middle" font-size="18" font-weight="700" fill="#1d4f86">玩法问题</text><text x="112" y="202" text-anchor="middle" font-size="14" fill="#52657d">找目标、寻路、</text><text x="112" y="224" text-anchor="middle" font-size="14" fill="#52657d">更新 AI</text>
+<rect x="240" y="135" width="145" height="110" rx="14" fill="#edf8f4" stroke="#3d8a72"/>
+<text x="312" y="172" text-anchor="middle" font-size="18" font-weight="700" fill="#216b56">候选查询</text><text x="312" y="202" text-anchor="middle" font-size="14" fill="#52657d">空间网格、AABB、</text><text x="312" y="224" text-anchor="middle" font-size="14" fill="#52657d">标签和状态过滤</text>
+<rect x="440" y="135" width="145" height="110" rx="14" fill="#fff3df" stroke="#b4772f"/>
+<text x="512" y="172" text-anchor="middle" font-size="18" font-weight="700" fill="#8c5315">算法计算</text><text x="512" y="202" text-anchor="middle" font-size="14" fill="#52657d">A*、排序、评分、</text><text x="512" y="224" text-anchor="middle" font-size="14" fill="#52657d">几何判定</text>
+<rect x="640" y="135" width="145" height="110" rx="14" fill="#f1ecff" stroke="#7259a8"/>
+<text x="712" y="172" text-anchor="middle" font-size="18" font-weight="700" fill="#5b458c">预算调度</text><text x="712" y="202" text-anchor="middle" font-size="14" fill="#52657d">分帧、优先级、</text><text x="712" y="224" text-anchor="middle" font-size="14" fill="#52657d">取消和缓存</text>
+<rect x="840" y="135" width="120" height="110" rx="14" fill="#ffecef" stroke="#b25570"/>
+<text x="900" y="172" text-anchor="middle" font-size="18" font-weight="700" fill="#933a59">提交结果</text><text x="900" y="202" text-anchor="middle" font-size="14" fill="#52657d">移动、动画、</text><text x="900" y="224" text-anchor="middle" font-size="14" fill="#52657d">表现和网络</text>
+</g>
+<path d="M900 285V330H112V285" fill="none" stroke="#95a7bc" stroke-width="2" stroke-dasharray="7 7"/>
+<text x="500" y="355" text-anchor="middle" font-size="16" font-weight="700" fill="#52657d">每一层都要定义数据所有权、失效条件、最坏预算和失败行为</text>
+<text x="500" y="385" text-anchor="middle" font-size="14" fill="#718198">同一个算法，放进不同的查询频率、对象规模和生命周期，工程方案会不同。</text>
+</g></svg>

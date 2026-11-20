@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">A* 搜索和分帧预算</title>
+<desc id="desc">网格地图上展示 A* 的路径和搜索边界，右侧展示把节点展开预算分配到多帧。</desc>
+<rect width="1000" height="590" rx="20" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="36" y="45" font-size="27" font-weight="700" fill="#15263e">A* 的搜索结果还要经过预算调度</text>
+<text x="36" y="77" font-size="16" fill="#52657d">搜索负责找到路径，调度负责让大量请求不会集中挤爆同一帧。</text>
+<g transform="translate(44,112)">
+<rect width="440" height="420" rx="16" fill="#fff" stroke="#c7d3e1"/>
+<text x="22" y="31" font-size="18" font-weight="700" fill="#285caa">地图与搜索状态</text>
+<g transform="translate(34,58)" stroke="#c7d3e1" stroke-width="1">
+<g fill="#eef3f8"><rect x="0" y="0" width="42" height="42"/><rect x="42" y="0" width="42" height="42"/><rect x="84" y="0" width="42" height="42"/><rect x="126" y="0" width="42" height="42"/><rect x="168" y="0" width="42" height="42"/><rect x="210" y="0" width="42" height="42"/><rect x="252" y="0" width="42" height="42"/><rect x="294" y="0" width="42" height="42"/><rect x="336" y="0" width="42" height="42"/></g>
+<g fill="#66758d"><rect x="126" y="42" width="42" height="42"/><rect x="168" y="42" width="42" height="42"/><rect x="210" y="42" width="42" height="42"/><rect x="210" y="84" width="42" height="42"/><rect x="210" y="126" width="42" height="42"/></g>
+<g fill="#eaf2ff"><rect x="0" y="42" width="42" height="42"/><rect x="42" y="42" width="42" height="42"/><rect x="84" y="42" width="42" height="42"/><rect x="252" y="42" width="42" height="42"/><rect x="294" y="42" width="42" height="42"/><rect x="336" y="42" width="42" height="42"/><rect x="0" y="84" width="42" height="42"/><rect x="42" y="84" width="42" height="42"/><rect x="84" y="84" width="42" height="42"/><rect x="126" y="84" width="42" height="42"/><rect x="168" y="84" width="42" height="42"/><rect x="252" y="84" width="42" height="42"/><rect x="294" y="84" width="42" height="42"/><rect x="336" y="84" width="42" height="42"/><rect x="0" y="126" width="42" height="42"/><rect x="42" y="126" width="42" height="42"/><rect x="84" y="126" width="42" height="42"/><rect x="126" y="126" width="42" height="42"/><rect x="168" y="126" width="42" height="42"/><rect x="252" y="126" width="42" height="42"/><rect x="294" y="126" width="42" height="42"/><rect x="336" y="126" width="42" height="42"/></g>
+<polyline points="21,147 63,147 105,147 147,147 189,147 189,105 189,63 231,63 273,63 315,63" fill="none" stroke="#d86a45" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="21" cy="147" r="12" fill="#3d8a72" stroke="#fff" stroke-width="3"/><circle cx="315" cy="63" r="12" fill="#b25570" stroke="#fff" stroke-width="3"/>
+</g>
+<text x="28" y="340" font-size="14" fill="#52657d">绿色：起点　红色：终点　灰色：障碍</text>
+<text x="28" y="370" font-size="14" fill="#52657d">开放表按 f = g + h 取出候选节点。</text>
+<text x="28" y="397" font-size="14" fill="#52657d">路径重建依赖 cameFrom，不能只保存终点。</text>
+</g>
+<g transform="translate(540,126)">
+<text x="0" y="20" font-size="18" font-weight="700" fill="#15263e">分帧请求队列</text>
+<g stroke="#95a7bc" stroke-width="2"><line x1="0" y1="88" x2="380" y2="88"/><line x1="0" y1="190" x2="380" y2="190"/><line x1="0" y1="292" x2="380" y2="292"/></g>
+<g fill="#eaf2ff" stroke="#4773a9"><rect x="0" y="48" width="104" height="36" rx="8"/><rect x="116" y="48" width="82" height="36" rx="8"/><rect x="210" y="48" width="126" height="36" rx="8"/></g>
+<g fill="#edf8f4" stroke="#3d8a72"><rect x="0" y="150" width="72" height="36" rx="8"/><rect x="84" y="150" width="130" height="36" rx="8"/></g>
+<g fill="#fff3df" stroke="#b4772f"><rect x="0" y="252" width="116" height="36" rx="8"/><rect x="128" y="252" width="92" height="36" rx="8"/><rect x="232" y="252" width="78" height="36" rx="8"/></g>
+<text x="52" y="71" text-anchor="middle" font-size="14" fill="#1d4f86">高优先级</text><text x="157" y="71" text-anchor="middle" font-size="14" fill="#1d4f86">普通</text><text x="273" y="71" text-anchor="middle" font-size="14" fill="#1d4f86">远处单位</text>
+<text x="36" y="173" text-anchor="middle" font-size="14" fill="#216b56">本帧</text><text x="149" y="173" text-anchor="middle" font-size="14" fill="#216b56">继续搜索</text>
+<text x="58" y="275" text-anchor="middle" font-size="14" fill="#8c5315">下一帧</text><text x="174" y="275" text-anchor="middle" font-size="14" fill="#8c5315">取消</text><text x="271" y="275" text-anchor="middle" font-size="14" fill="#8c5315">完成</text>
+<text x="0" y="356" font-size="15" font-weight="700" fill="#52657d">每帧限制节点展开数或时间预算</text>
+<text x="0" y="383" font-size="14" fill="#52657d">请求要有版本号，目标销毁后回调必须失效。</text>
+</g></g></svg>

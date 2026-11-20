@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">空间网格缩小范围查询</title>
+<desc id="desc">左侧展示世界被划分为网格，查询圆覆盖若干格子，右侧展示先取候选再用平方距离精确过滤的流程。</desc>
+<rect width="1000" height="590" rx="20" fill="#f6f8fc"/>
+<g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="36" y="45" font-size="27" font-weight="700" fill="#15263e">空间网格：先找附近格子，再过滤对象</text>
+<text x="36" y="77" font-size="16" fill="#52657d">全表遍历关心所有对象，空间索引只把局部候选交给后续规则。</text>
+<g transform="translate(48,112)">
+<rect width="510" height="410" rx="16" fill="#fff" stroke="#c7d3e1"/>
+<text x="24" y="32" font-size="18" font-weight="700" fill="#285caa">世界空间</text>
+<g stroke="#b8c7d8" stroke-width="1">
+<path d="M80 55V375M150 55V375M220 55V375M290 55V375M360 55V375M430 55V375"/>
+<path d="M40 95H470M40 165H470M40 235H470M40 305H470"/>
+</g>
+<circle cx="255" cy="235" r="108" fill="#7aa7de" fill-opacity=".18" stroke="#285caa" stroke-width="3" stroke-dasharray="8 6"/>
+<g fill="#dbeafe" stroke="#285caa" stroke-width="2"><circle cx="220" cy="205" r="9"/><circle cx="275" cy="190" r="9"/><circle cx="310" cy="235" r="9"/><circle cx="245" cy="275" r="9"/><circle cx="185" cy="245" r="9"/></g>
+<g fill="#ffe5e8" stroke="#b25570" stroke-width="2"><circle cx="100" cy="120" r="9"/><circle cx="410" cy="330" r="9"/><circle cx="440" cy="150" r="9"/></g>
+<circle cx="255" cy="235" r="12" fill="#e68b38" stroke="#8c5315" stroke-width="3"/>
+<text x="274" y="229" font-size="15" fill="#8c5315">查询中心</text>
+<text x="55" y="397" font-size="14" fill="#52657d">蓝色：候选对象　红色：距离范围外　橙色：查询中心</text>
+</g>
+<g transform="translate(600,132)">
+<text x="0" y="20" font-size="18" font-weight="700" fill="#15263e">查询步骤</text>
+<g stroke="#4773a9" stroke-width="3" fill="none"><path d="M68 56V102"/><path d="M68 158V204"/><path d="M68 260V306"/></g>
+<g>
+<rect y="38" width="260" height="56" rx="12" fill="#eaf2ff" stroke="#4773a9"/><text x="130" y="72" text-anchor="middle" font-size="16" fill="#1d4f86">世界坐标 → 网格坐标</text>
+<rect y="140" width="260" height="56" rx="12" fill="#edf8f4" stroke="#3d8a72"/><text x="130" y="174" text-anchor="middle" font-size="16" fill="#216b56">读取覆盖范围内的格子</text>
+<rect y="242" width="260" height="56" rx="12" fill="#fff3df" stroke="#b4772f"/><text x="130" y="276" text-anchor="middle" font-size="16" fill="#8c5315">平方距离 + 业务规则过滤</text>
+<rect y="344" width="260" height="56" rx="12" fill="#f1ecff" stroke="#7259a8"/><text x="130" y="378" text-anchor="middle" font-size="16" fill="#5b458c">复用结果缓冲区</text>
+</g>
+<text x="0" y="446" font-size="14" fill="#52657d">格子大小影响候选数量、移动更新次数</text>
+<text x="0" y="470" font-size="14" fill="#52657d">和查询要遍历的格子数量，需要实测选择。</text>
+</g></g></svg>
