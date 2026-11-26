@@ -40,7 +40,7 @@ export default defineConfig({
       locales: {
         root: { label: "简体中文", lang: "zh-CN" }
       },
-      customCss: ["./src/styles/custom.css", "./src/styles/themes.css", "./src/styles/fx.css", "./src/styles/ai.css", "./src/styles/lightbox.css", "./src/styles/navigation.css", "./src/styles/article.css", "./src/styles/series.css"],
+      customCss: ["./src/styles/custom.css", "./src/styles/themes.css", "./src/styles/fx.css", "./src/styles/ai.css", "./src/styles/lightbox.css", "./src/styles/navigation.css", "./src/styles/article.css", "./src/styles/series.css", "./src/styles/exams.css"],
       head: [
         { tag: "script", content: themeBootstrap },
         { tag: "style", content: themeAssets }
