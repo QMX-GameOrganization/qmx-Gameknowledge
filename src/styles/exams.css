@@ -147,8 +147,9 @@ body:has(.exam-review-marker) {
 /* 表格承担“过程记录”的角色，强调列头、行序和结果列。 */
 .sl-markdown-content:has(.exam-review-marker) table {
   display: table !important;
-  width: 100% !important;
-  max-width: 100%;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0;
   table-layout: auto;
   border-spacing: 0;
   overflow: visible !important;
